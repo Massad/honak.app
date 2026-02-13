@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 import 'post_card_helpers.dart';
 
@@ -53,25 +53,10 @@ class OfferCardBody extends StatelessWidget {
                                 width: 1.5,
                               ),
                             ),
-                            child: CircleAvatar(
+                            child: AppImage.avatar(
+                              url: post.page.avatarUrl,
+                              name: post.page.name,
                               radius: 10,
-                              backgroundColor:
-                                  Colors.white.withValues(alpha: 0.2),
-                              backgroundImage: post.page.avatarUrl != null
-                                  ? NetworkImage(post.page.avatarUrl!)
-                                  : null,
-                              child: post.page.avatarUrl == null
-                                  ? Text(
-                                      post.page.name.isNotEmpty
-                                          ? post.page.name[0]
-                                          : '',
-                                      style: context.textTheme.labelSmall
-                                          ?.copyWith(
-                                        fontSize: 8,
-                                        color: Colors.white,
-                                      ),
-                                    )
-                                  : null,
                             ),
                           ),
                           SizedBox(width: AppSpacing.xs),
@@ -192,10 +177,9 @@ class OfferCardBody extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned.fill(
-                      child: CachedImage(
-                        imageUrl: post.media.first.url,
+                      child: AppImage(
+                        url: post.media.first.url,
                         width: 120,
-                        fit: BoxFit.cover,
                       ),
                     ),
                     // Gradient overlay for blending

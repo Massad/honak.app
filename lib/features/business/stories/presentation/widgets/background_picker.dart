@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/features/business/stories/presentation/providers/story_creator_provider.dart';
 import 'package:honak/features/stories/presentation/widgets/story_canvas.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Step 1: Dark immersive background picker — gradient / solid / image.
 /// Canvas preview on top, picker panel on bottom with rounded top corners.
@@ -282,13 +283,11 @@ class _ImageSwatches extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () => onSelect(_samples[index]),
-          child: ClipRRect(
+          child: AppImage(
+            url: _samples[index],
+            width: 64,
+            height: 64,
             borderRadius: BorderRadius.circular(12),
-            child: SizedBox(
-              width: 64,
-              height: 64,
-              child: Image.network(_samples[index], fit: BoxFit.cover),
-            ),
           ),
         );
       },

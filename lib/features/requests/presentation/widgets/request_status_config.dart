@@ -85,6 +85,32 @@ const requestStatusStyles = <String, StatusStyle>{
     Color(0xFFB7791F),
     Color(0xFFFEFCBF),
   ),
+  // Queue-specific statuses
+  'waiting': StatusStyle(
+    'بالانتظار',
+    Color(0xFF2B6CB0),
+    Color(0xFFBEE3F8),
+  ),
+  'on_the_way': StatusStyle(
+    'في الطريق',
+    Color(0xFF276749),
+    Color(0xFFC6F6D5),
+  ),
+  'in_progress_queue': StatusStyle(
+    'قيد الخدمة',
+    Color(0xFF2B6CB0),
+    Color(0xFFBEE3F8),
+  ),
+  'ready_for_pickup': StatusStyle(
+    'جاهز للاستلام',
+    Color(0xFF276749),
+    Color(0xFFC6F6D5),
+  ),
+  'no_show': StatusStyle(
+    'لم يتم الحضور',
+    Color(0xFFB7791F),
+    Color(0xFFFEFCBF),
+  ),
 };
 
 const requestTypeIcons = <String, IconData>{
@@ -93,6 +119,7 @@ const requestTypeIcons = <String, IconData>{
   'quote': Icons.build_outlined,
   'inquiry': Icons.camera_alt_outlined,
   'reservation': Icons.calendar_today_outlined,
+  'queue_service': Icons.queue,
 };
 
 const requestTypeLabels = <String, String>{
@@ -101,4 +128,5 @@ const requestTypeLabels = <String, String>{
   'quote': '\u0637\u0644\u0628 \u0645\u0639\u0627\u064a\u0646\u0629',
   'inquiry': '\u0627\u0633\u062a\u0641\u0633\u0627\u0631',
   'reservation': '\u062d\u062c\u0632',
+  'queue_service': '\u062f\u0648\u0631',
 };

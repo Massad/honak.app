@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
@@ -57,11 +56,6 @@ class PageAvatar extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.md),
         hasStories: hasStories,
         onTap: hasStories ? onOpenStories : null,
-        placeholder: Icon(
-          Icons.storefront,
-          color: context.colorScheme.outline,
-          size: 28,
-        ),
       ),
     );
   }

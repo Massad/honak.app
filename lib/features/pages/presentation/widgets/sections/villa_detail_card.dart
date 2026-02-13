@@ -4,7 +4,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/shared/entities/money.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Detailed card for villa/chalet reservation pages.
 /// Shows gallery, pricing, info, amenities, house rules, and CTA.
@@ -33,8 +33,8 @@ class VillaDetailCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: SizedBox(
                   width: 280,
-                  child: CachedImage(
-                    imageUrl: page.galleryImages[index],
+                  child: AppImage(
+                    url: page.galleryImages[index],
                     fit: BoxFit.cover,
                   ),
                 ),

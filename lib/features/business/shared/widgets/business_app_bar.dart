@@ -7,7 +7,7 @@ import 'package:honak/features/business/shared/widgets/page_selector_sheet.dart'
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const BusinessAppBar({super.key});
@@ -123,18 +123,10 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         color: Colors.grey.shade200,
                       ),
                     ),
-                    child: ClipOval(
-                      child: page.avatarUrl != null
-                          ? CachedImage(
-                              imageUrl: page.avatarUrl,
-                              width: 36,
-                              height: 36,
-                            )
-                          : Icon(
-                              Icons.store,
-                              size: 20,
-                              color: Colors.grey.shade400,
-                            ),
+                    child: AppImage.avatar(
+                      url: page.avatarUrl,
+                      name: page.name,
+                      radius: 18,
                     ),
                   ),
                 ],

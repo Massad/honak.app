@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_shadows.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
 import 'package:honak/features/home/presentation/widgets/post_card_bodies/post_card_helpers.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Uniform activity post card for the page detail ActivityTab.
 ///
@@ -113,21 +114,10 @@ class ActivityPostCard extends StatelessWidget {
 
             // Image (if applicable)
             if (post.media.isNotEmpty)
-              SizedBox(
+              AppImage(
+                url: post.media.first.url,
                 height: 176,
                 width: double.infinity,
-                child: Image.network(
-                  post.media.first.url,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    color: Colors.grey.shade100,
-                    child: Icon(
-                      Icons.image_outlined,
-                      color: Colors.grey.shade300,
-                      size: 32,
-                    ),
-                  ),
-                ),
               ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/entities.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Card for a completed/cancelled order.
 class HistoryCard extends StatelessWidget {
@@ -109,22 +110,10 @@ class _HistoryAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CircleAvatar(
+        AppImage.avatar(
+          url: request.businessAvatarUrl,
+          name: request.businessName,
           radius: 22,
-          backgroundColor: Colors.grey.shade200,
-          backgroundImage: request.businessAvatarUrl != null
-              ? NetworkImage(request.businessAvatarUrl!)
-              : null,
-          child: request.businessAvatarUrl == null
-              ? Text(
-                  request.businessName.isNotEmpty
-                      ? request.businessName[0]
-                      : '?',
-                  style: context.textTheme.titleSmall?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                )
-              : null,
         ),
         if (isCompleted)
           Positioned(

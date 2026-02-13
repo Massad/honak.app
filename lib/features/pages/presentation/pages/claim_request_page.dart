@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 // ── Constants ────────────────────────────────────────────────
 
@@ -251,7 +252,10 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                 onTap: _handleBack,
                 child: Padding(
                   padding: const EdgeInsets.all(4),
-                  child: Icon(Icons.arrow_back, size: 20, color: Colors.grey.shade600),
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Icon(Icons.arrow_back_ios_new, size: 20, color: Colors.grey.shade600),
+                  ),
                 ),
               ),
               const Expanded(
@@ -444,26 +448,12 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                   child: Row(
                     children: [
                       // Avatar
-                      Container(
+                      AppImage(
+                        url: widget.page.avatarUrl,
                         width: 40,
                         height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: widget.page.avatarUrl != null
-                              ? Image.network(
-                                  widget.page.avatarUrl!,
-                                  width: 40,
-                                  height: 40,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) =>
-                                      const Icon(Icons.storefront, size: 20, color: Colors.grey),
-                                )
-                              : const Icon(Icons.storefront, size: 20, color: Colors.grey),
-                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        placeholderIcon: Icons.storefront,
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -584,18 +574,12 @@ class _StepIntro extends StatelessWidget {
                       BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 4),
                     ],
                   ),
-                  child: ClipRRect(
+                  child: AppImage(
+                    url: page.avatarUrl,
+                    width: 56,
+                    height: 56,
                     borderRadius: BorderRadius.circular(12),
-                    child: page.avatarUrl != null
-                        ? Image.network(
-                            page.avatarUrl!,
-                            width: 56,
-                            height: 56,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) =>
-                                const Icon(Icons.storefront, size: 24, color: Colors.grey),
-                          )
-                        : const Icon(Icons.storefront, size: 24, color: Colors.grey),
+                    placeholderIcon: Icons.storefront,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -1499,20 +1483,12 @@ class _StepReview extends StatelessWidget {
                   hasBorder: true,
                   child: Row(
                     children: [
-                      Container(
+                      AppImage(
+                        url: page.avatarUrl,
                         width: 40,
                         height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: page.avatarUrl != null
-                              ? Image.network(page.avatarUrl!, width: 40, height: 40, fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) => const Icon(Icons.storefront, size: 20))
-                              : const Icon(Icons.storefront, size: 20),
-                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        placeholderIcon: Icons.storefront,
                       ),
                       const SizedBox(width: 12),
                       Expanded(

@@ -60,7 +60,10 @@ mixin _$QueueEntry {
   @JsonKey(name: 'completed_at')
   int? get completedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'estimated_ready_at')
-  int? get estimatedReadyAt => throw _privateConstructorUsedError; // Extras
+  int? get estimatedReadyAt => throw _privateConstructorUsedError; // Discount (manual override by business)
+  QueueDiscount? get discount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'price_before_discount_cents')
+  int? get priceBeforeDiscount => throw _privateConstructorUsedError; // Extras
   String? get notes => throw _privateConstructorUsedError;
   @JsonKey(name: 'photos_before')
   List<String> get photosBefore => throw _privateConstructorUsedError;
@@ -109,11 +112,15 @@ abstract class $QueueEntryCopyWith<$Res> {
     @JsonKey(name: 'started_at') int? startedAt,
     @JsonKey(name: 'completed_at') int? completedAt,
     @JsonKey(name: 'estimated_ready_at') int? estimatedReadyAt,
+    QueueDiscount? discount,
+    @JsonKey(name: 'price_before_discount_cents') int? priceBeforeDiscount,
     String? notes,
     @JsonKey(name: 'photos_before') List<String> photosBefore,
     @JsonKey(name: 'photos_after') List<String> photosAfter,
     @JsonKey(name: 'subscription_plan') String? subscriptionPlan,
   });
+
+  $QueueDiscountCopyWith<$Res>? get discount;
 }
 
 /// @nodoc
@@ -153,6 +160,8 @@ class _$QueueEntryCopyWithImpl<$Res, $Val extends QueueEntry>
     Object? startedAt = freezed,
     Object? completedAt = freezed,
     Object? estimatedReadyAt = freezed,
+    Object? discount = freezed,
+    Object? priceBeforeDiscount = freezed,
     Object? notes = freezed,
     Object? photosBefore = null,
     Object? photosAfter = null,
@@ -248,6 +257,14 @@ class _$QueueEntryCopyWithImpl<$Res, $Val extends QueueEntry>
                 ? _value.estimatedReadyAt
                 : estimatedReadyAt // ignore: cast_nullable_to_non_nullable
                       as int?,
+            discount: freezed == discount
+                ? _value.discount
+                : discount // ignore: cast_nullable_to_non_nullable
+                      as QueueDiscount?,
+            priceBeforeDiscount: freezed == priceBeforeDiscount
+                ? _value.priceBeforeDiscount
+                : priceBeforeDiscount // ignore: cast_nullable_to_non_nullable
+                      as int?,
             notes: freezed == notes
                 ? _value.notes
                 : notes // ignore: cast_nullable_to_non_nullable
@@ -267,6 +284,20 @@ class _$QueueEntryCopyWithImpl<$Res, $Val extends QueueEntry>
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of QueueEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $QueueDiscountCopyWith<$Res>? get discount {
+    if (_value.discount == null) {
+      return null;
+    }
+
+    return $QueueDiscountCopyWith<$Res>(_value.discount!, (value) {
+      return _then(_value.copyWith(discount: value) as $Val);
+    });
   }
 }
 
@@ -302,11 +333,16 @@ abstract class _$$QueueEntryImplCopyWith<$Res>
     @JsonKey(name: 'started_at') int? startedAt,
     @JsonKey(name: 'completed_at') int? completedAt,
     @JsonKey(name: 'estimated_ready_at') int? estimatedReadyAt,
+    QueueDiscount? discount,
+    @JsonKey(name: 'price_before_discount_cents') int? priceBeforeDiscount,
     String? notes,
     @JsonKey(name: 'photos_before') List<String> photosBefore,
     @JsonKey(name: 'photos_after') List<String> photosAfter,
     @JsonKey(name: 'subscription_plan') String? subscriptionPlan,
   });
+
+  @override
+  $QueueDiscountCopyWith<$Res>? get discount;
 }
 
 /// @nodoc
@@ -345,6 +381,8 @@ class __$$QueueEntryImplCopyWithImpl<$Res>
     Object? startedAt = freezed,
     Object? completedAt = freezed,
     Object? estimatedReadyAt = freezed,
+    Object? discount = freezed,
+    Object? priceBeforeDiscount = freezed,
     Object? notes = freezed,
     Object? photosBefore = null,
     Object? photosAfter = null,
@@ -440,6 +478,14 @@ class __$$QueueEntryImplCopyWithImpl<$Res>
             ? _value.estimatedReadyAt
             : estimatedReadyAt // ignore: cast_nullable_to_non_nullable
                   as int?,
+        discount: freezed == discount
+            ? _value.discount
+            : discount // ignore: cast_nullable_to_non_nullable
+                  as QueueDiscount?,
+        priceBeforeDiscount: freezed == priceBeforeDiscount
+            ? _value.priceBeforeDiscount
+            : priceBeforeDiscount // ignore: cast_nullable_to_non_nullable
+                  as int?,
         notes: freezed == notes
             ? _value.notes
             : notes // ignore: cast_nullable_to_non_nullable
@@ -487,6 +533,8 @@ class _$QueueEntryImpl implements _QueueEntry {
     @JsonKey(name: 'started_at') this.startedAt,
     @JsonKey(name: 'completed_at') this.completedAt,
     @JsonKey(name: 'estimated_ready_at') this.estimatedReadyAt,
+    this.discount,
+    @JsonKey(name: 'price_before_discount_cents') this.priceBeforeDiscount,
     this.notes,
     @JsonKey(name: 'photos_before') final List<String> photosBefore = const [],
     @JsonKey(name: 'photos_after') final List<String> photosAfter = const [],
@@ -570,6 +618,12 @@ class _$QueueEntryImpl implements _QueueEntry {
   @override
   @JsonKey(name: 'estimated_ready_at')
   final int? estimatedReadyAt;
+  // Discount (manual override by business)
+  @override
+  final QueueDiscount? discount;
+  @override
+  @JsonKey(name: 'price_before_discount_cents')
+  final int? priceBeforeDiscount;
   // Extras
   @override
   final String? notes;
@@ -597,7 +651,7 @@ class _$QueueEntryImpl implements _QueueEntry {
 
   @override
   String toString() {
-    return 'QueueEntry(id: $id, position: $position, status: $status, source: $source, customerName: $customerName, customerPhone: $customerPhone, customerAvatar: $customerAvatar, isSubscriber: $isSubscriber, vehicleType: $vehicleType, vehicleColor: $vehicleColor, plateNumber: $plateNumber, vehicleLabel: $vehicleLabel, packageId: $packageId, packageName: $packageName, packagePrice: $packagePrice, addOns: $addOns, totalPrice: $totalPrice, estimatedDurationMin: $estimatedDurationMin, checkedInAt: $checkedInAt, startedAt: $startedAt, completedAt: $completedAt, estimatedReadyAt: $estimatedReadyAt, notes: $notes, photosBefore: $photosBefore, photosAfter: $photosAfter, subscriptionPlan: $subscriptionPlan)';
+    return 'QueueEntry(id: $id, position: $position, status: $status, source: $source, customerName: $customerName, customerPhone: $customerPhone, customerAvatar: $customerAvatar, isSubscriber: $isSubscriber, vehicleType: $vehicleType, vehicleColor: $vehicleColor, plateNumber: $plateNumber, vehicleLabel: $vehicleLabel, packageId: $packageId, packageName: $packageName, packagePrice: $packagePrice, addOns: $addOns, totalPrice: $totalPrice, estimatedDurationMin: $estimatedDurationMin, checkedInAt: $checkedInAt, startedAt: $startedAt, completedAt: $completedAt, estimatedReadyAt: $estimatedReadyAt, discount: $discount, priceBeforeDiscount: $priceBeforeDiscount, notes: $notes, photosBefore: $photosBefore, photosAfter: $photosAfter, subscriptionPlan: $subscriptionPlan)';
   }
 
   @override
@@ -645,6 +699,10 @@ class _$QueueEntryImpl implements _QueueEntry {
                 other.completedAt == completedAt) &&
             (identical(other.estimatedReadyAt, estimatedReadyAt) ||
                 other.estimatedReadyAt == estimatedReadyAt) &&
+            (identical(other.discount, discount) ||
+                other.discount == discount) &&
+            (identical(other.priceBeforeDiscount, priceBeforeDiscount) ||
+                other.priceBeforeDiscount == priceBeforeDiscount) &&
             (identical(other.notes, notes) || other.notes == notes) &&
             const DeepCollectionEquality().equals(
               other._photosBefore,
@@ -684,6 +742,8 @@ class _$QueueEntryImpl implements _QueueEntry {
     startedAt,
     completedAt,
     estimatedReadyAt,
+    discount,
+    priceBeforeDiscount,
     notes,
     const DeepCollectionEquality().hash(_photosBefore),
     const DeepCollectionEquality().hash(_photosAfter),
@@ -729,6 +789,9 @@ abstract class _QueueEntry implements QueueEntry {
     @JsonKey(name: 'started_at') final int? startedAt,
     @JsonKey(name: 'completed_at') final int? completedAt,
     @JsonKey(name: 'estimated_ready_at') final int? estimatedReadyAt,
+    final QueueDiscount? discount,
+    @JsonKey(name: 'price_before_discount_cents')
+    final int? priceBeforeDiscount,
     final String? notes,
     @JsonKey(name: 'photos_before') final List<String> photosBefore,
     @JsonKey(name: 'photos_after') final List<String> photosAfter,
@@ -799,7 +862,12 @@ abstract class _QueueEntry implements QueueEntry {
   int? get completedAt;
   @override
   @JsonKey(name: 'estimated_ready_at')
-  int? get estimatedReadyAt; // Extras
+  int? get estimatedReadyAt; // Discount (manual override by business)
+  @override
+  QueueDiscount? get discount;
+  @override
+  @JsonKey(name: 'price_before_discount_cents')
+  int? get priceBeforeDiscount; // Extras
   @override
   String? get notes;
   @override

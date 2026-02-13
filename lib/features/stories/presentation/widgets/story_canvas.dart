@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:honak/features/stories/domain/entities/story_slide.dart';
 import 'package:honak/features/stories/domain/entities/text_layer.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Renders a story slide: background (gradient/solid/image) + text overlay.
 ///
@@ -52,17 +52,11 @@ class StoryCanvas extends StatelessWidget {
           children: [
             // Background image
             if (_resolveImage() != null)
-              CachedNetworkImage(
-                imageUrl: _resolveImage()!,
-                fit: BoxFit.cover,
-                fadeInDuration: const Duration(milliseconds: 200),
-                fadeOutDuration: Duration.zero,
-                placeholder: (_, __) => Container(color: Colors.black),
-                errorWidget: (_, __, ___) => Container(
-                  color: Colors.black,
-                  child: const Center(
-                    child: Icon(Icons.broken_image, color: Colors.white24, size: 32),
-                  ),
+              Positioned.fill(
+                child: AppImage(
+                  url: _resolveImage(),
+                  fit: BoxFit.cover,
+                  placeholderIcon: Icons.broken_image,
                 ),
               ),
 

@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/notifications/domain/entities/app_notification.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NotificationCard extends StatelessWidget {
@@ -121,18 +122,9 @@ class _NotificationAvatar extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          CircleAvatar(
+          AppImage.avatar(
+            url: imageUrl,
             radius: 20,
-            backgroundColor: const Color(0xFFE5E7EB),
-            backgroundImage:
-                imageUrl != null ? NetworkImage(imageUrl!) : null,
-            child: imageUrl == null
-                ? Icon(
-                    Icons.storefront,
-                    size: 20,
-                    color: AppColors.textHint,
-                  )
-                : null,
           ),
           PositionedDirectional(
             bottom: -2,

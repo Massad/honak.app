@@ -9,6 +9,9 @@ import 'package:honak/features/business/queue/domain/entities/queue_status.dart'
 import 'package:honak/features/business/queue/presentation/widgets/queue_entry_card.dart';
 import 'package:honak/shared/entities/money.dart';
 
+import 'queue_activity_utils.dart';
+import 'queue_detail_view.dart';
+
 part 'queue_board_sections.dart';
 
 /// The main kanban-style queue board for queue-based businesses.
@@ -31,10 +34,13 @@ class QueueBoard extends StatefulWidget {
   State<QueueBoard> createState() => _QueueBoardState();
 }
 
+enum _QueueFilter { waiting, inProgress, completed }
+
 class _QueueBoardState extends State<QueueBoard> {
   late List<QueueEntry> _queue;
   bool _showCompleted = false;
   bool _pauseQueue = false;
+  _QueueFilter? _activeFilter;
 
   @override
   void initState() {
@@ -141,6 +147,53 @@ class _QueueBoardState extends State<QueueBoard> {
     _showToast('تمت الإضافة للدور');
   }
 
+  void _changeStatus(String entryId, QueueStatus newStatus) {
+    setState(() {
+      _queue = _queue.map((e) {
+        if (e.id != entryId) return e;
+        final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+        return switch (newStatus) {
+          QueueStatus.inProgress =>
+            e.copyWith(status: newStatus, startedAt: now),
+          QueueStatus.completed ||
+          QueueStatus.noShow =>
+            e.copyWith(status: newStatus, completedAt: now),
+          _ => e.copyWith(status: newStatus),
+        };
+      }).toList();
+    });
+    _showToast('تم تحديث الحالة');
+  }
+
+  void _openDetailView(QueueEntry entry) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => QueueDetailView(
+        entry: entry,
+        onChangeStatus: (newStatus) {
+          setState(() {
+            _queue = _queue.map((e) {
+              if (e.id != entry.id) return e;
+              final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+              return switch (newStatus) {
+                QueueStatus.inProgress =>
+                  e.copyWith(status: newStatus, startedAt: now),
+                QueueStatus.completed ||
+                QueueStatus.noShow =>
+                  e.copyWith(status: newStatus, completedAt: now),
+                _ => e.copyWith(status: newStatus),
+              };
+            }).toList();
+          });
+          Navigator.of(context).pop();
+          _showToast('تم تحديث الحالة');
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final waiting = _waiting;
@@ -166,6 +219,13 @@ class _QueueBoardState extends State<QueueBoard> {
               onTogglePause: () =>
                   setState(() => _pauseQueue = !_pauseQueue),
               onAdd: widget.onAdd,
+              activeFilter: _activeFilter,
+              onFilterChanged: (filter) => setState(() {
+                _activeFilter = _activeFilter == filter ? null : filter;
+                if (_activeFilter == _QueueFilter.completed) {
+                  _showCompleted = true;
+                }
+              }),
             ),
           ),
 
@@ -184,67 +244,92 @@ class _QueueBoardState extends State<QueueBoard> {
                 ],
 
                 // ── Waiting column ──
-                const SizedBox(height: AppSpacing.md),
-                _QueueColumn(
-                  label: 'في الانتظار',
-                  count: waiting.length,
-                  color: AppColors.secondary,
-                  bgColor: const Color(0xFFFFF8E1),
-                  borderColor: const Color(0xFFFFE082),
-                  icon: Icons.schedule_rounded,
-                  emptyText: 'لا يوجد أحد بالانتظار',
-                  entries: waiting,
-                  advanceLabel: 'ابدأ الخدمة',
-                  advanceColor: AppColors.primary,
-                  showNoShow: true,
-                  onAdvance: _advanceStatus,
-                  onNoShow: _markNoShow,
-                  onRemove: _removeEntry,
-                ),
+                if (_activeFilter == null ||
+                    _activeFilter == _QueueFilter.waiting) ...[
+                  const SizedBox(height: AppSpacing.md),
+                  _QueueColumn(
+                    label: 'في الانتظار',
+                    count: waiting.length,
+                    color: AppColors.secondary,
+                    bgColor: const Color(0xFFFFF8E1),
+                    borderColor: const Color(0xFFFFE082),
+                    icon: Icons.schedule_rounded,
+                    emptyText: 'لا يوجد أحد بالانتظار',
+                    entries: waiting,
+                    advanceLabel: 'ابدأ الخدمة',
+                    advanceIcon: Icons.play_arrow_rounded,
+                    advanceColor: AppColors.primary,
+                    showNoShow: true,
+                    onAdvance: _advanceStatus,
+                    onNoShow: _markNoShow,
+                    onRemove: _removeEntry,
+                    onOpenDetail: _openDetailView,
+                    onChangeStatus: _changeStatus,
+                    onOpenChat: () => _showToast('المحادثة قريباً'),
+                  ),
+                ],
 
                 // ── In Progress column ──
-                const SizedBox(height: AppSpacing.lg),
-                _QueueColumn(
-                  label: 'قيد الخدمة',
-                  count: inProgress.length,
-                  color: AppColors.primary,
-                  bgColor: const Color(0xFFEFF6FF),
-                  borderColor: const Color(0xFFBFDBFE),
-                  icon: Icons.play_arrow_rounded,
-                  emptyText: 'لا توجد سيارات قيد الخدمة',
-                  entries: inProgress,
-                  advanceLabel: 'جاهز ✓',
-                  advanceColor: AppColors.success,
-                  showTimer: true,
-                  onAdvance: _advanceStatus,
-                  onRemove: _removeEntry,
-                ),
+                if (_activeFilter == null ||
+                    _activeFilter == _QueueFilter.inProgress) ...[
+                  const SizedBox(height: AppSpacing.lg),
+                  _QueueColumn(
+                    label: 'قيد الخدمة',
+                    count: inProgress.length,
+                    color: AppColors.primary,
+                    bgColor: const Color(0xFFEFF6FF),
+                    borderColor: const Color(0xFFBFDBFE),
+                    icon: Icons.play_arrow_rounded,
+                    emptyText: 'لا توجد سيارات قيد الخدمة',
+                    entries: inProgress,
+                    advanceLabel: 'جاهز ✓',
+                    advanceIcon: Icons.check_circle_outline_rounded,
+                    advanceColor: AppColors.success,
+                    showTimer: true,
+                    onAdvance: _advanceStatus,
+                    onRemove: _removeEntry,
+                    onOpenDetail: _openDetailView,
+                    onChangeStatus: _changeStatus,
+                    onOpenChat: () => _showToast('المحادثة قريباً'),
+                  ),
+                ],
 
                 // ── Ready column ──
-                const SizedBox(height: AppSpacing.lg),
-                _QueueColumn(
-                  label: 'جاهز للاستلام',
-                  count: ready.length,
-                  color: AppColors.success,
-                  bgColor: const Color(0xFFF0FDF4),
-                  borderColor: const Color(0xFFBBF7D0),
-                  icon: Icons.check_circle_outline_rounded,
-                  emptyText: 'لا توجد سيارات جاهزة',
-                  entries: ready,
-                  advanceLabel: 'تم الاستلام',
-                  advanceColor: const Color(0xFF616161),
-                  onAdvance: _advanceStatus,
-                  onRemove: _removeEntry,
-                ),
+                if (_activeFilter == null ||
+                    _activeFilter == _QueueFilter.inProgress) ...[
+                  const SizedBox(height: AppSpacing.lg),
+                  _QueueColumn(
+                    label: 'جاهز للاستلام',
+                    count: ready.length,
+                    color: AppColors.success,
+                    bgColor: const Color(0xFFF0FDF4),
+                    borderColor: const Color(0xFFBBF7D0),
+                    icon: Icons.check_circle_outline_rounded,
+                    emptyText: 'لا توجد سيارات جاهزة',
+                    entries: ready,
+                    advanceLabel: 'تم الاستلام',
+                    advanceIcon: Icons.local_shipping_rounded,
+                    advanceColor: const Color(0xFF616161),
+                    onAdvance: _advanceStatus,
+                    onRemove: _removeEntry,
+                    onOpenDetail: _openDetailView,
+                    onChangeStatus: _changeStatus,
+                    onOpenChat: () => _showToast('المحادثة قريباً'),
+                  ),
+                ],
 
                 // ── Completed section (collapsible) ──
-                const SizedBox(height: AppSpacing.lg),
-                _CompletedSection(
-                  entries: completed,
-                  isExpanded: _showCompleted,
-                  onToggle: () =>
-                      setState(() => _showCompleted = !_showCompleted),
-                ),
+                if (_activeFilter == null ||
+                    _activeFilter == _QueueFilter.completed) ...[
+                  const SizedBox(height: AppSpacing.lg),
+                  _CompletedSection(
+                    entries: completed,
+                    isExpanded:
+                        _showCompleted || _activeFilter == _QueueFilter.completed,
+                    onToggle: () =>
+                        setState(() => _showCompleted = !_showCompleted),
+                  ),
+                ],
 
                 // ── Revenue summary ──
                 const SizedBox(height: AppSpacing.lg),

@@ -34,6 +34,11 @@ _$QueueEntryImpl _$$QueueEntryImplFromJson(Map<String, dynamic> json) =>
       startedAt: (json['started_at'] as num?)?.toInt(),
       completedAt: (json['completed_at'] as num?)?.toInt(),
       estimatedReadyAt: (json['estimated_ready_at'] as num?)?.toInt(),
+      discount: json['discount'] == null
+          ? null
+          : QueueDiscount.fromJson(json['discount'] as Map<String, dynamic>),
+      priceBeforeDiscount: (json['price_before_discount_cents'] as num?)
+          ?.toInt(),
       notes: json['notes'] as String?,
       photosBefore:
           (json['photos_before'] as List<dynamic>?)
@@ -72,6 +77,8 @@ Map<String, dynamic> _$$QueueEntryImplToJson(_$QueueEntryImpl instance) =>
       'started_at': instance.startedAt,
       'completed_at': instance.completedAt,
       'estimated_ready_at': instance.estimatedReadyAt,
+      'discount': instance.discount,
+      'price_before_discount_cents': instance.priceBeforeDiscount,
       'notes': instance.notes,
       'photos_before': instance.photosBefore,
       'photos_after': instance.photosAfter,

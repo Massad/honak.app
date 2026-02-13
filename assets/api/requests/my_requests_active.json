@@ -165,6 +165,103 @@
         { "status": "accepted", "label": "تم تأكيد الحجز", "timestamp": 1770603600, "actor": "business", "detail": "يرجى تحويل العربون ٥٠ د.أ خلال ٤٨ ساعة", "done": true },
         { "status": "completed", "label": "مكتمل", "timestamp": 0, "actor": "system", "done": false }
       ]
+    },
+    {
+      "id": "req_009",
+      "type": "booking",
+      "status": "in_progress",
+      "business_page_id": "clean-express-laundry",
+      "business_name": "كلين إكسبرس",
+      "business_avatar_url": "https://picsum.photos/seed/clean-express/200",
+      "business_slug": "clean-express-laundry",
+      "summary": "3 قطع ملابس — قيد الغسيل",
+      "items_count": 3,
+      "total_cents": 850,
+      "created_at": 1770766000,
+      "can_cancel": false,
+      "items": [
+        { "id": "svc_wash1", "name": "غسيل وكوي قميص", "quantity": 2, "price_cents": 200 },
+        { "id": "svc_wash2", "name": "غسيل جاف بنطلون", "quantity": 1, "price_cents": 450 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770766000, "actor": "customer", "done": true },
+        { "status": "accepted", "label": "تم الاستلام", "timestamp": 1770769600, "actor": "business", "detail": "تم استلام القطع — جاهزة خلال يومين", "done": true },
+        { "status": "in_progress", "label": "قيد الغسيل", "timestamp": 1770773200, "actor": "business", "done": false },
+        { "status": "completed", "label": "جاهز للاستلام", "timestamp": 0, "actor": "system", "done": false }
+      ]
+    },
+    {
+      "id": "req_010",
+      "type": "booking",
+      "status": "accepted",
+      "business_page_id": "alnajjar-tailor",
+      "business_name": "خياط النجار",
+      "business_avatar_url": "https://picsum.photos/seed/alnajjar/200",
+      "business_slug": "alnajjar-tailor",
+      "summary": "بدلة رجالية — تفصيل",
+      "items_count": 1,
+      "total_cents": 12000,
+      "created_at": 1770680000,
+      "preferred_date": "2026-02-20",
+      "can_cancel": true,
+      "items": [
+        { "id": "svc_suit", "name": "بدلة رجالية تفصيل", "quantity": 1, "price_cents": 12000 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770680000, "actor": "customer", "done": true },
+        { "status": "accepted", "label": "تم القبول", "timestamp": 1770683600, "actor": "business", "detail": "موعد القياس يوم الخميس — جاهزة خلال أسبوع", "done": true },
+        { "status": "completed", "label": "جاهز للاستلام", "timestamp": 0, "actor": "system", "done": false }
+      ]
+    },
+    {
+      "id": "req_007",
+      "type": "queue_service",
+      "status": "waiting",
+      "business_page_id": "pg_sparkle_car_wash",
+      "business_name": "Sparkle مغسلة",
+      "business_avatar_url": "https://picsum.photos/seed/sparkle-cw/200",
+      "business_slug": "sparkle-car-wash",
+      "summary": "غسيل داخلي وخارجي",
+      "items_count": 1,
+      "total_cents": 650,
+      "created_at": 1739450000,
+      "queue_position": 3,
+      "estimated_wait_min": 20,
+      "queue_status": "waiting",
+      "can_cancel": true,
+      "items": [
+        { "id": "pkg_premium", "name": "غسيل داخلي وخارجي", "quantity": 1, "price_cents": 500 },
+        { "id": "ao_tires", "name": "تلميع الإطارات", "quantity": 1, "price_cents": 150 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الانضمام للدور", "timestamp": 1739450000, "actor": "customer", "done": true },
+        { "status": "waiting", "label": "بالانتظار", "timestamp": 1739450000, "actor": "system", "done": false }
+      ]
+    },
+    {
+      "id": "req_008",
+      "type": "queue_service",
+      "status": "in_progress",
+      "business_page_id": "pg_fast_oil",
+      "business_name": "فاست أويل",
+      "business_avatar_url": "https://picsum.photos/seed/fast-oil/200",
+      "business_slug": "fast-oil",
+      "summary": "زيت صناعي كامل",
+      "items_count": 1,
+      "total_cents": 3500,
+      "created_at": 1739448000,
+      "queue_position": 1,
+      "estimated_wait_min": 0,
+      "queue_status": "in_progress",
+      "can_cancel": false,
+      "items": [
+        { "id": "pkg_full_synthetic", "name": "زيت صناعي كامل", "quantity": 1, "price_cents": 3500 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الانضمام للدور", "timestamp": 1739448000, "actor": "customer", "done": true },
+        { "status": "waiting", "label": "بالانتظار", "timestamp": 1739448000, "actor": "system", "done": true },
+        { "status": "in_progress", "label": "قيد الخدمة", "timestamp": 1739449500, "actor": "business", "done": false }
+      ]
     }
   ]
 }

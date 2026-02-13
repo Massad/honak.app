@@ -202,6 +202,8 @@ class _RequestList extends ConsumerWidget {
     const s = {
       'pending', 'pending_review', 'accepted', 'in_progress',
       'preparing', 'suggested', 'pending_reschedule', 'rescheduled',
+      // Queue statuses
+      'waiting', 'on_the_way', 'in_progress_queue', 'ready_for_pickup',
     };
     return s.contains(status);
   }
@@ -210,6 +212,7 @@ class _RequestList extends ConsumerWidget {
     const s = {
       'completed', 'delivered', 'declined',
       'cancelled_by_customer', 'cancelled_by_business',
+      'no_show', // queue no-show
     };
     return s.contains(status);
   }

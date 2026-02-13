@@ -4,7 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/user.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Profile card showing user avatar, name, and phone.
 class AccountProfileCard extends StatelessWidget {
@@ -55,26 +55,10 @@ class AccountProfileCard extends StatelessWidget {
             ],
           ),
           const SizedBox(width: AppSpacing.md),
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey.shade100,
-            ),
-            child: user.avatarUrl != null
-                ? ClipOval(
-                    child: CachedImage(
-                      imageUrl: user.avatarUrl!,
-                      width: 44,
-                      height: 44,
-                    ),
-                  )
-                : Icon(
-                    Icons.person,
-                    size: 22,
-                    color: Colors.grey.shade400,
-                  ),
+          AppImage.avatar(
+            url: user.avatarUrl,
+            name: user.name,
+            radius: 22,
           ),
         ],
       ),
@@ -178,27 +162,12 @@ class AccountPageItem extends StatelessWidget {
                 ],
               ),
               const SizedBox(width: AppSpacing.sm),
-              Container(
+              AppImage(
+                url: page.avatarUrl,
                 width: 32,
                 height: 32,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.grey.shade100,
-                ),
-                child: page.avatarUrl != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: CachedImage(
-                          imageUrl: page.avatarUrl!,
-                          width: 32,
-                          height: 32,
-                        ),
-                      )
-                    : Icon(
-                        Icons.store,
-                        size: 16,
-                        color: Colors.grey.shade400,
-                      ),
+                borderRadius: BorderRadius.circular(8),
+                placeholderIcon: Icons.store,
               ),
             ],
           ),

@@ -75,6 +75,7 @@ flutter:
     - assets/api/chat/messages/
     - assets/api/notifications/
     - assets/api/common/
+    - assets/api/generated/
     - assets/api/business/
     - assets/api/business/dashboard/
     - assets/api/requests/
@@ -84,3 +85,4 @@ flutter:
     - assets/api/stories/
     - assets/api/locations/
     - assets/api/subscriptions/
+    - assets/api/queue/

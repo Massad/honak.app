@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:honak/core/extensions/context_ext.dart';
@@ -9,6 +8,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/renewal_request_sheet.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/subscription_menu_sheet.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class SubscriptionCard extends StatelessWidget {
   final Subscription subscription;
@@ -61,34 +61,12 @@ class _CardHeader extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Row(
         children: [
-          ClipRRect(
+          AppImage(
+            url: subscription.pageLogo,
+            width: 48,
+            height: 48,
             borderRadius: BorderRadius.circular(AppRadius.md),
-            child: CachedNetworkImage(
-              imageUrl: subscription.pageLogo ?? '',
-              width: 48,
-              height: 48,
-              fit: BoxFit.cover,
-              placeholder: (_, __) => Container(
-                width: 48,
-                height: 48,
-                color: Colors.grey.shade100,
-                child: Icon(
-                  Icons.storefront,
-                  size: 24,
-                  color: Colors.grey.shade300,
-                ),
-              ),
-              errorWidget: (_, __, ___) => Container(
-                width: 48,
-                height: 48,
-                color: Colors.grey.shade100,
-                child: Icon(
-                  Icons.storefront,
-                  size: 24,
-                  color: Colors.grey.shade300,
-                ),
-              ),
-            ),
+            placeholderIcon: Icons.storefront,
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(

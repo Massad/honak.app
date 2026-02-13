@@ -3,10 +3,10 @@
   "data": {
     "id": "hara-coffee",
     "owner_id": "usr_001",
-    "business_type_id": "coffee_shop",
+    "business_type_id": "cafe",
     "business_type_name": "مقهى",
     "category_name": "طعام",
-    "explore_category": "cat_grocery",
+    "explore_category": "cat_food",
     "name": "قهوة الحارة",
     "name_en": "Hara Coffee",
     "slug": "hara-coffee",

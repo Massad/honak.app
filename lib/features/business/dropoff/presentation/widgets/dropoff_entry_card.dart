@@ -836,7 +836,7 @@ class DropoffEntryCard extends StatelessWidget {
       ticket: ticket,
       activityLog: activityLog,
       onViewFullLog: activityLog.isNotEmpty
-          ? () => showActivityLogSheet(
+          ? () => showDropoffActivityLogSheet(
                 context,
                 ticket: ticket,
                 activityLog: activityLog,

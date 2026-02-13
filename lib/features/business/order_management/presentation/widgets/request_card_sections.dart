@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/entities.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 // ===============================================================
 // Status helpers
@@ -132,19 +133,10 @@ class RequestCardHeader extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.md),
           // Avatar
-          CircleAvatar(
+          AppImage.avatar(
+            url: request.customer.avatarUrl,
+            name: request.customer.name,
             radius: 20,
-            backgroundColor: Colors.grey.shade100,
-            backgroundImage: request.customer.avatarUrl != null
-                ? NetworkImage(request.customer.avatarUrl!)
-                : null,
-            child: request.customer.avatarUrl == null
-                ? Icon(
-                    Icons.person,
-                    size: 20,
-                    color: Colors.grey.shade400,
-                  )
-                : null,
           ),
         ],
       ),

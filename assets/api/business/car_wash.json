@@ -65,6 +65,12 @@
       "features": ["4 غسلات كاملة شهرياً", "أولوية بالدور", "تفصيلي مجاني كل شهرين", "خصم 20% على الإضافات"]
     }
   ],
+  "available_add_ons": [
+    { "id": "ao_leather", "name_ar": "تنظيف جلد المقاعد", "price": 3.0 },
+    { "id": "ao_tires", "name_ar": "تلميع الإطارات", "price": 1.5 },
+    { "id": "ao_freshener", "name_ar": "معطر فاخر", "price": 1.0 },
+    { "id": "ao_wax", "name_ar": "طبقة شمع حماية", "price": 5.0 }
+  ],
   "queue": [
     {
       "id": "q-001",
@@ -98,7 +104,14 @@
       "package_name": "تفصيلي كامل",
       "package_price": 12.0,
       "add_ons": [{"name": "تنظيف جلد المقاعد", "price": 3.0}],
-      "total_price": 15.0,
+      "total_price": 13.5,
+      "price_before_discount": 15.0,
+      "discount": {
+        "type": "percentage",
+        "value": 10,
+        "amount": 1.5,
+        "reason": "اشتراك"
+      },
       "estimated_duration_min": 60,
       "checked_in_at": "2026-02-12T08:40:00",
       "started_at": "2026-02-12T08:50:00",
@@ -135,7 +148,14 @@
       "package_id": "premium",
       "package_name": "غسيل داخلي وخارجي",
       "package_price": 5.0,
-      "total_price": 5.0,
+      "total_price": 3.0,
+      "price_before_discount": 5.0,
+      "discount": {
+        "type": "fixed",
+        "value": 2.0,
+        "amount": 2.0,
+        "reason": "أول زيارة"
+      },
       "estimated_duration_min": 35,
       "checked_in_at": "2026-02-12T09:10:00",
       "notes": "أرجو تنظيف صندوق السيارة كمان"

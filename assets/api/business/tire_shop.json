@@ -57,6 +57,11 @@
       "color": "bg-purple-50"
     }
   ],
+  "available_add_ons": [
+    { "id": "ao_valve", "name_ar": "تبديل بلف", "price": 1.0 },
+    { "id": "ao_weight", "name_ar": "أوزان موازنة إضافية", "price": 2.0 },
+    { "id": "ao_disposal", "name_ar": "التخلص من الإطار القديم", "price": 1.5 }
+  ],
   "queue": [
     {
       "id": "q-201",

@@ -47,6 +47,10 @@ class CustomerRequest with _$CustomerRequest {
     @JsonKey(name: 'delivery_address') String? deliveryAddress,
     @JsonKey(name: 'payment_method') String? paymentMethod,
     @JsonKey(name: 'decline_reason') String? declineReason,
+    // Queue-specific fields
+    @JsonKey(name: 'queue_position') int? queuePosition,
+    @JsonKey(name: 'estimated_wait_min') int? estimatedWaitMin,
+    @JsonKey(name: 'queue_status') String? queueStatus,
   }) = _CustomerRequest;
 
   factory CustomerRequest.fromJson(Map<String, dynamic> json) =>
@@ -64,8 +68,15 @@ class CustomerRequest with _$CustomerRequest {
   /// Whether this is a reservation (as opposed to a booking).
   bool get isReservation => type == 'reservation';
 
+  /// Whether this is a queue-type request (car wash, oil change, etc.).
+  bool get isQueueType => type == 'queue_service';
+
   /// Short summary text for list cards — config-driven, no widget-level switch.
   String get summaryText {
+    if (isQueueType) {
+      if (queuePosition != null) return 'رقمك $queuePosition';
+      return 'في الدور';
+    }
     if (isOrderType) {
       final count = itemsCount > 0 ? itemsCount : items.length;
       return '$count أصناف';

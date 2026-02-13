@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/features/business/stories/presentation/providers/story_creator_provider.dart';
 import 'package:honak/features/stories/domain/entities/text_layer.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Unified dark toolbar — background, text, font, color in one compact panel.
 /// Context-aware: hints when actions need text selection first.
@@ -461,16 +462,11 @@ class _ImageSwatches extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () => onSelect(_BgPanel._sampleImages[index]),
-          child: ClipRRect(
+          child: AppImage(
+            url: _BgPanel._sampleImages[index],
+            width: 56,
+            height: 56,
             borderRadius: BorderRadius.circular(10),
-            child: SizedBox(
-              width: 56,
-              height: 56,
-              child: Image.network(
-                _BgPanel._sampleImages[index],
-                fit: BoxFit.cover,
-              ),
-            ),
           ),
         );
       },

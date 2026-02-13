@@ -7,6 +7,7 @@ import 'package:honak/features/stories/domain/entities/text_layer.dart';
 import 'package:honak/features/stories/presentation/widgets/story_canvas.dart';
 import 'package:honak/features/stories/presentation/widgets/story_reply_input.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Step 2: Dark immersive canvas with inline text editing.
 /// Business avatar overlay, contextual hints, interactive layers.
@@ -115,35 +116,12 @@ class _TextLayerEditorState extends ConsumerState<TextLayerEditor> {
                                         border: Border.all(
                                           color: Colors.white38,
                                         ),
-                                        image: bizContext.page.avatarUrl !=
-                                                null
-                                            ? DecorationImage(
-                                                image: NetworkImage(
-                                                  bizContext
-                                                      .page.avatarUrl!,
-                                                ),
-                                                fit: BoxFit.cover,
-                                              )
-                                            : null,
-                                        color: Colors.white24,
                                       ),
-                                      child:
-                                          bizContext.page.avatarUrl == null
-                                              ? Center(
-                                                  child: Text(
-                                                    bizContext.page.name
-                                                            .characters
-                                                            .firstOrNull ??
-                                                        '',
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                )
-                                              : null,
+                                      child: AppImage.avatar(
+                                        url: bizContext.page.avatarUrl,
+                                        name: bizContext.page.name,
+                                        radius: 14,
+                                      ),
                                     ),
                                   ],
                                 ),

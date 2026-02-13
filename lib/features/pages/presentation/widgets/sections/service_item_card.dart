@@ -5,12 +5,22 @@ import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/shared/widgets/money_text.dart';
 
 /// Card for a service item in the service booking section.
-/// Shows name, description, duration badge, price, and action buttons.
+/// Compact row layout: name + description + duration + price + book button.
+/// Matches Figma queue/service page design.
 class ServiceItemCard extends StatelessWidget {
   final Item item;
   final VoidCallback? onBook;
 
-  const ServiceItemCard({super.key, required this.item, this.onBook});
+  /// Optional badge widget shown in place of the book button
+  /// (e.g. "✓ اختيارك" when customer is in queue).
+  final Widget? trailingBadge;
+
+  const ServiceItemCard({
+    super.key,
+    required this.item,
+    this.onBook,
+    this.trailingBadge,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,128 +29,164 @@ class ServiceItemCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
+        padding: const EdgeInsetsDirectional.fromSTEB(
+          AppSpacing.lg,
+          AppSpacing.md,
+          AppSpacing.md,
+          AppSpacing.md,
+        ),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
+            // ── Book button or trailing badge (leading in RTL) ──
+            if (trailingBadge != null)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(end: AppSpacing.md),
+                child: trailingBadge!,
+              )
+            else if (item.inStock && onBook != null)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(end: AppSpacing.md),
+                child: _CompactBookButton(onPressed: onBook!),
+              ),
+
+            // ── Content ──
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  // Service name
+                  Text(
                     item.nameAr,
                     style: context.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.end,
                   ),
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                // Duration badge
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sm,
-                    vertical: AppSpacing.xxs,
-                  ),
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.secondaryContainer,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.schedule,
-                        size: 12,
-                        color: context.colorScheme.onSecondaryContainer,
+                  if (item.descriptionAr != null &&
+                      item.descriptionAr!.isNotEmpty) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      item.descriptionAr!,
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
-                      const SizedBox(width: AppSpacing.xxs),
-                      Text(
-                        '$durationMinutes د',
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: context.colorScheme.onSecondaryContainer,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.end,
+                    ),
+                  ],
+                  const SizedBox(height: AppSpacing.xs),
+                  // Price + duration row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      // Duration badge
+                      _DurationBadge(
+                        minutes: durationMinutes,
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      // Price
+                      MoneyText(
+                        money: item.price,
+                        style: context.textTheme.labelMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.colorScheme.primary,
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            if (item.descriptionAr != null &&
-                item.descriptionAr!.isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                item.descriptionAr!,
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-            const SizedBox(height: AppSpacing.sm),
-            // Price row
-            Row(
-              children: [
-                MoneyText(
-                  money: item.price,
-                  style: context.textTheme.labelMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: context.colorScheme.primary,
-                  ),
-                ),
-                if (item.optionGroups.isNotEmpty) ...[
-                  const SizedBox(width: AppSpacing.sm),
-                  Text(
-                    '(${item.optionGroups.length} خيارات)',
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-                if (!item.inStock) ...[
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.sm,
-                      vertical: AppSpacing.xxs,
-                    ),
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.errorContainer,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      'غير متاح',
-                      style: context.textTheme.labelSmall?.copyWith(
-                        color: context.colorScheme.onErrorContainer,
+                  if (!item.inStock) ...[
+                    const SizedBox(height: AppSpacing.xs),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.sm,
+                        vertical: AppSpacing.xxs,
+                      ),
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.errorContainer,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        'غير متاح',
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: context.colorScheme.onErrorContainer,
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ],
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            // Action buttons
-            Row(
-              textDirection: TextDirection.ltr,
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: item.inStock ? () {} : null,
-                    child: const Text('تواصل'),
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: item.inStock ? onBook : null,
-                    child: const Text('احجز'),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Compact "حجز" button matching Figma design — small filled button
+/// with calendar icon, aligned at the start of the card.
+class _CompactBookButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const _CompactBookButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 36,
+      child: FilledButton.icon(
+        onPressed: onPressed,
+        icon: const Icon(Icons.calendar_today, size: 14),
+        label: const Text('حجز'),
+        style: FilledButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+          textStyle: context.textTheme.labelMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+          visualDensity: VisualDensity.compact,
+        ),
+      ),
+    );
+  }
+}
+
+/// Duration badge using neutral surface colors (not yellow/amber).
+class _DurationBadge extends StatelessWidget {
+  final int minutes;
+
+  const _DurationBadge({required this.minutes});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xxs,
+      ),
+      decoration: BoxDecoration(
+        color: context.colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.schedule,
+            size: 12,
+            color: context.colorScheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: AppSpacing.xxs),
+          Text(
+            '$minutes د',
+            style: context.textTheme.labelSmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
       ),
     );
   }

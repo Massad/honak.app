@@ -4,7 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Card displaying a single tenant in the directory listing.
 class DirectoryTenantCard extends StatelessWidget {
@@ -27,8 +27,8 @@ class DirectoryTenantCard extends StatelessWidget {
                 child: SizedBox(
                   width: 56,
                   height: 56,
-                  child: CachedImage(
-                    imageUrl:
+                  child: AppImage(
+                    url:
                         item.images.isNotEmpty ? item.images.first : null,
                     fit: BoxFit.cover,
                     placeholderIcon: Icons.storefront,
@@ -57,7 +57,7 @@ class DirectoryTenantCard extends StatelessWidget {
                               vertical: AppSpacing.xxs,
                             ),
                             decoration: BoxDecoration(
-                              color: context.colorScheme.secondaryContainer,
+                              color: context.colorScheme.surfaceContainerHighest,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Row(
@@ -67,7 +67,7 @@ class DirectoryTenantCard extends StatelessWidget {
                                   Icons.layers_outlined,
                                   size: 12,
                                   color: context
-                                      .colorScheme.onSecondaryContainer,
+                                      .colorScheme.onSurfaceVariant,
                                 ),
                                 const SizedBox(width: AppSpacing.xxs),
                                 Text(
@@ -75,7 +75,7 @@ class DirectoryTenantCard extends StatelessWidget {
                                   style:
                                       context.textTheme.labelSmall?.copyWith(
                                     color: context
-                                        .colorScheme.onSecondaryContainer,
+                                        .colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                               ],

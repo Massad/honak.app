@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Cover image with gradient overlay and glass-morphic action buttons.
 class PageCover extends StatelessWidget {
@@ -24,8 +24,8 @@ class PageCover extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           // Cover image
-          CachedImage(
-            imageUrl: coverUrl,
+          AppImage(
+            url: coverUrl,
             width: double.infinity,
             height: 208,
             fit: BoxFit.cover,

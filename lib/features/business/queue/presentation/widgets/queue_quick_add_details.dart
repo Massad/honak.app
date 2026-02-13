@@ -59,15 +59,33 @@ class _DetailsStep extends StatefulWidget {
   State<_DetailsStep> createState() => _DetailsStepState();
 }
 
+const _kDiscountReasons = [
+  'عميل مميز',
+  'تعويض عن خدمة سابقة',
+  'عرض خاص',
+  'اشتراك',
+  'أول زيارة',
+  'أخرى',
+];
+
 class _DetailsStepState extends State<_DetailsStep> {
   final _nameCtrl = TextEditingController();
   final _phoneCtrl = TextEditingController();
   final _plateCtrl = TextEditingController();
   final _notesCtrl = TextEditingController();
+  final _discountValueCtrl = TextEditingController();
+  final _discountNoteCtrl = TextEditingController();
+  final _vehicleTypeOtherCtrl = TextEditingController();
+  final _vehicleColorOtherCtrl = TextEditingController();
 
   String? _vehicleType;
   String? _vehicleColor;
   final Set<int> _selectedAddOns = {};
+
+  // Discount state
+  bool _discountOpen = false;
+  String _discountType = 'percentage'; // 'percentage' or 'fixed'
+  String? _discountReason;
 
   @override
   void dispose() {
@@ -75,17 +93,50 @@ class _DetailsStepState extends State<_DetailsStep> {
     _phoneCtrl.dispose();
     _plateCtrl.dispose();
     _notesCtrl.dispose();
+    _discountValueCtrl.dispose();
+    _discountNoteCtrl.dispose();
+    _vehicleTypeOtherCtrl.dispose();
+    _vehicleColorOtherCtrl.dispose();
     super.dispose();
   }
 
   bool get _canSubmit => _nameCtrl.text.trim().isNotEmpty;
 
-  Money get _totalPrice {
+  /// Subtotal before discount (package + add-ons).
+  Money get _subtotal {
     var total = Money(widget.package.price);
     for (final i in _selectedAddOns) {
       total = total + Money(_kAddOns[i].priceCents);
     }
     return total;
+  }
+
+  /// Calculated discount amount in piasters.
+  int get _discountAmountCents {
+    if (!_discountOpen) return 0;
+    final raw = double.tryParse(_discountValueCtrl.text) ?? 0;
+    if (raw <= 0) return 0;
+    if (_discountType == 'percentage') {
+      return (_subtotal.cents * raw / 100).round().clamp(0, _subtotal.cents);
+    } else {
+      // Fixed amount in JOD → piasters
+      return (raw * 100).round().clamp(0, _subtotal.cents);
+    }
+  }
+
+  Money get _totalPrice {
+    return Money(_subtotal.cents - _discountAmountCents);
+  }
+
+  bool get _hasDiscount => _discountOpen && _discountAmountCents > 0;
+
+  void _clearDiscount() {
+    setState(() {
+      _discountOpen = false;
+      _discountValueCtrl.clear();
+      _discountReason = null;
+      _discountNoteCtrl.clear();
+    });
   }
 
   List<QueueAddOn> get _addOnEntities => _selectedAddOns
@@ -98,6 +149,25 @@ class _DetailsStepState extends State<_DetailsStep> {
   void _submit() {
     if (!_canSubmit) return;
     final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
+    QueueDiscount? discount;
+    int? priceBeforeDiscount;
+    if (_hasDiscount) {
+      final rawValue = double.tryParse(_discountValueCtrl.text) ?? 0;
+      discount = QueueDiscount(
+        type: _discountType,
+        value: _discountType == 'percentage'
+            ? rawValue.round()
+            : (rawValue * 100).round(),
+        amount: _discountAmountCents,
+        reason: _discountReason ?? 'أخرى',
+        reasonNote: _discountReason == 'أخرى'
+            ? _discountNoteCtrl.text.trim()
+            : null,
+      );
+      priceBeforeDiscount = _subtotal.cents;
+    }
+
     final entry = QueueEntry(
       id: 'q-${DateTime.now().millisecondsSinceEpoch}',
       position: 0, // caller assigns actual position
@@ -106,8 +176,16 @@ class _DetailsStepState extends State<_DetailsStep> {
       customerName: _nameCtrl.text.trim(),
       customerPhone:
           _phoneCtrl.text.trim().isEmpty ? null : _phoneCtrl.text.trim(),
-      vehicleType: _vehicleType,
-      vehicleColor: _vehicleColor,
+      vehicleType: _vehicleType == _kOtherValue
+          ? _vehicleTypeOtherCtrl.text.trim().isEmpty
+              ? null
+              : _vehicleTypeOtherCtrl.text.trim()
+          : _vehicleType,
+      vehicleColor: _vehicleColor == _kOtherValue
+          ? _vehicleColorOtherCtrl.text.trim().isEmpty
+              ? null
+              : _vehicleColorOtherCtrl.text.trim()
+          : _vehicleColor,
       plateNumber:
           _plateCtrl.text.trim().isEmpty ? null : _plateCtrl.text.trim(),
       packageId: widget.package.id,
@@ -116,6 +194,8 @@ class _DetailsStepState extends State<_DetailsStep> {
       addOns: _addOnEntities,
       totalPrice: _totalPrice.cents,
       estimatedDurationMin: widget.package.durationMin,
+      discount: discount,
+      priceBeforeDiscount: priceBeforeDiscount,
       checkedInAt: now,
     );
     widget.onSubmit(entry);
@@ -166,10 +246,19 @@ class _DetailsStepState extends State<_DetailsStep> {
         _ChipGroup(
           items: _kVehicleTypes,
           selected: _vehicleType,
-          onSelected: (v) => setState(
-            () => _vehicleType = _vehicleType == v ? null : v,
-          ),
+          showOther: true,
+          onSelected: (v) => setState(() {
+            _vehicleType = _vehicleType == v ? null : v;
+            if (v != _kOtherValue) _vehicleTypeOtherCtrl.clear();
+          }),
         ),
+        if (_vehicleType == _kOtherValue) ...[
+          const SizedBox(height: AppSpacing.sm),
+          TextField(
+            controller: _vehicleTypeOtherCtrl,
+            decoration: _inputDecoration(hint: 'أدخل نوع السيارة...'),
+          ),
+        ],
         const SizedBox(height: AppSpacing.lg),
 
         // ── Vehicle color chips ──
@@ -178,10 +267,19 @@ class _DetailsStepState extends State<_DetailsStep> {
         _ChipGroup(
           items: _kVehicleColors,
           selected: _vehicleColor,
-          onSelected: (v) => setState(
-            () => _vehicleColor = _vehicleColor == v ? null : v,
-          ),
+          showOther: true,
+          onSelected: (v) => setState(() {
+            _vehicleColor = _vehicleColor == v ? null : v;
+            if (v != _kOtherValue) _vehicleColorOtherCtrl.clear();
+          }),
         ),
+        if (_vehicleColor == _kOtherValue) ...[
+          const SizedBox(height: AppSpacing.sm),
+          TextField(
+            controller: _vehicleColorOtherCtrl,
+            decoration: _inputDecoration(hint: 'أدخل لون السيارة...'),
+          ),
+        ],
         const SizedBox(height: AppSpacing.lg),
 
         // ── Plate number (optional, LTR) ──
@@ -265,6 +363,10 @@ class _DetailsStepState extends State<_DetailsStep> {
         }),
         const SizedBox(height: AppSpacing.sm),
 
+        // ── Discount section (collapsible) ──
+        _buildDiscountSection(),
+        const SizedBox(height: AppSpacing.sm),
+
         // ── Notes ──
         _FieldLabel('ملاحظات (اختياري)'),
         const SizedBox(height: AppSpacing.xs),
@@ -278,25 +380,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         // ── Total + Submit ──
         const Divider(),
         const SizedBox(height: AppSpacing.md),
-        Row(
-          children: [
-            Text(
-              'الإجمالي',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey.shade500,
-              ),
-            ),
-            const Spacer(),
-            Text(
-              _totalPrice.toFormattedArabic(),
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
+        _buildTotalSection(),
         const SizedBox(height: AppSpacing.md),
         SizedBox(
           width: double.infinity,
@@ -321,6 +405,399 @@ class _DetailsStepState extends State<_DetailsStep> {
         ),
         const SizedBox(height: AppSpacing.lg),
       ],
+    );
+  }
+
+  Widget _buildDiscountSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header (tap to expand/collapse)
+        GestureDetector(
+          onTap: () => setState(() => _discountOpen = !_discountOpen),
+          behavior: HitTestBehavior.opaque,
+          child: Container(
+            padding: const EdgeInsetsDirectional.symmetric(
+              vertical: AppSpacing.sm,
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.local_offer_rounded,
+                  size: 16,
+                  color: _hasDiscount
+                      ? const Color(0xFFFF9800)
+                      : Colors.grey.shade400,
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Text(
+                    'إضافة خصم',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: _hasDiscount
+                          ? const Color(0xFFFF9800)
+                          : Colors.grey.shade700,
+                    ),
+                  ),
+                ),
+                if (_hasDiscount)
+                  Container(
+                    padding: const EdgeInsetsDirectional.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFF8E1),
+                      borderRadius: AppRadius.pill,
+                    ),
+                    child: Text(
+                      _discountType == 'percentage'
+                          ? '-${_discountValueCtrl.text}%'
+                          : '-${Money(_discountAmountCents).toFormattedArabic()}',
+                      style: const TextStyle(
+                        fontSize: 10,
+                        color: Color(0xFFFF9800),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                const SizedBox(width: AppSpacing.sm),
+                Icon(
+                  _discountOpen
+                      ? Icons.keyboard_arrow_up_rounded
+                      : Icons.keyboard_arrow_down_rounded,
+                  size: 18,
+                  color: Colors.grey.shade400,
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        if (_discountOpen) ...[
+          const SizedBox(height: AppSpacing.sm),
+
+          // Type toggle: fixed vs percentage
+          Row(
+            children: [
+              _DiscountTypeChip(
+                label: 'مبلغ ثابت (د.أ)',
+                selected: _discountType == 'fixed',
+                onTap: () => setState(() => _discountType = 'fixed'),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              _DiscountTypeChip(
+                label: 'نسبة مئوية (%)',
+                selected: _discountType == 'percentage',
+                onTap: () => setState(() => _discountType = 'percentage'),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+
+          // Value input
+          TextField(
+            controller: _discountValueCtrl,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            onChanged: (_) => setState(() {}),
+            textDirection: TextDirection.ltr,
+            decoration: _inputDecoration(
+              hint: _discountType == 'percentage' ? '10' : '1.5',
+              prefixIcon: _discountType == 'percentage'
+                  ? Icons.percent
+                  : Icons.payments_outlined,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+
+          // Reason chips
+          _FieldLabel('سبب الخصم'),
+          const SizedBox(height: AppSpacing.sm),
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: _kDiscountReasons.map((reason) {
+              final selected = _discountReason == reason;
+              return GestureDetector(
+                onTap: () => setState(() {
+                  _discountReason = selected ? null : reason;
+                }),
+                child: Container(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? const Color(0xFFFFF8E1)
+                        : Colors.grey.shade50,
+                    border: Border.all(
+                      color: selected
+                          ? const Color(0xFFFF9800)
+                          : Colors.grey.shade200,
+                    ),
+                    borderRadius: AppRadius.pill,
+                  ),
+                  child: Text(
+                    reason,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: selected
+                          ? const Color(0xFFFF9800)
+                          : Colors.grey.shade600,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+
+          // Free-text note if "أخرى" selected
+          if (_discountReason == 'أخرى') ...[
+            const SizedBox(height: AppSpacing.sm),
+            TextField(
+              controller: _discountNoteCtrl,
+              decoration: _inputDecoration(hint: 'سبب الخصم...'),
+            ),
+          ],
+          const SizedBox(height: AppSpacing.md),
+
+          // Live calculation preview
+          if (_discountAmountCents > 0)
+            Container(
+              padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF8E1),
+                borderRadius: AppRadius.cardInner,
+                border: Border.all(color: const Color(0xFFFFE0B2)),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'المجموع قبل الخصم',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        _subtotal.toFormattedArabic(),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.grey.shade500,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Text(
+                        'الخصم',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFFFF9800),
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        '-${Money(_discountAmountCents).toFormattedArabic()}',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFFFF9800),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(height: 12),
+                  Row(
+                    children: [
+                      const Text(
+                        'بعد الخصم',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        _totalPrice.toFormattedArabic(),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF43A047),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+          const SizedBox(height: AppSpacing.sm),
+
+          // Remove discount button
+          if (_hasDiscount)
+            GestureDetector(
+              onTap: _clearDiscount,
+              child: Center(
+                child: Text(
+                  'إزالة الخصم',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: AppColors.error,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildTotalSection() {
+    return Column(
+      children: [
+        // Subtotal (if discount active)
+        if (_hasDiscount) ...[
+          Row(
+            children: [
+              Text(
+                'المجموع قبل الخصم',
+                style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+              ),
+              const Spacer(),
+              Text(
+                _subtotal.toFormattedArabic(),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.grey.shade400,
+                  decoration: TextDecoration.lineThrough,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'خصم ',
+                    style: TextStyle(fontSize: 11, color: Color(0xFFFF9800)),
+                  ),
+                  if (_discountReason != null)
+                    Container(
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 6,
+                        vertical: 1,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFF3E0),
+                        borderRadius: AppRadius.pill,
+                      ),
+                      child: Text(
+                        _discountReason!,
+                        style: const TextStyle(
+                          fontSize: 9,
+                          color: Color(0xFFFF9800),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              const Spacer(),
+              Text(
+                '-${Money(_discountAmountCents).toFormattedArabic()}',
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFFFF9800),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+        ],
+
+        // Final total
+        Row(
+          children: [
+            Text(
+              'الإجمالي',
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey.shade500,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              _totalPrice.toFormattedArabic(),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: _hasDiscount ? const Color(0xFF43A047) : null,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+// ═════════════════════════════════════════════════════════════════
+// Discount type toggle chip
+// ═════════════════════════════════════════════════════════════════
+
+class _DiscountTypeChip extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _DiscountTypeChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsetsDirectional.symmetric(vertical: 8),
+          decoration: BoxDecoration(
+            color: selected ? const Color(0xFFFFF8E1) : Colors.grey.shade50,
+            border: Border.all(
+              color: selected
+                  ? const Color(0xFFFF9800)
+                  : Colors.grey.shade200,
+            ),
+            borderRadius: AppRadius.cardInner,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
+              color: selected
+                  ? const Color(0xFFFF9800)
+                  : Colors.grey.shade600,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

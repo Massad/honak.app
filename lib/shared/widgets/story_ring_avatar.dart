@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Avatar with gradient ring for stories.
 ///
@@ -30,10 +30,6 @@ class StoryRingAvatar extends StatelessWidget {
   final bool allSeen;
   final VoidCallback? onTap;
 
-  /// Custom placeholder widget when [imageUrl] is null.
-  /// Falls back to a letter avatar.
-  final Widget? placeholder;
-
   const StoryRingAvatar({
     super.key,
     this.imageUrl,
@@ -44,7 +40,6 @@ class StoryRingAvatar extends StatelessWidget {
     this.hasStories = true,
     this.allSeen = false,
     this.onTap,
-    this.placeholder,
   });
 
   bool get _isRoundedRect => borderRadius != null;
@@ -68,20 +63,10 @@ class StoryRingAvatar extends StatelessWidget {
   // ─── Circle mode ────────────────────────────────────────────
 
   Widget _buildCircleAvatar(BuildContext context) {
-    return CircleAvatar(
+    return AppImage.avatar(
+      url: imageUrl,
+      name: name,
       radius: radius,
-      backgroundColor: context.colorScheme.surfaceContainerHighest,
-      backgroundImage:
-          imageUrl != null ? CachedNetworkImageProvider(imageUrl!) : null,
-      child: imageUrl == null
-          ? (placeholder ??
-              Text(
-                name.isNotEmpty ? name[0] : '',
-                style: context.textTheme.titleSmall?.copyWith(
-                  fontSize: radius * 0.65,
-                ),
-              ))
-          : null,
     );
   }
 
@@ -126,37 +111,12 @@ class StoryRingAvatar extends StatelessWidget {
 
   Widget _buildRectAvatar(BuildContext context) {
     final s = size ?? radius * 2;
-    final br = borderRadius!;
-
-    return ClipRRect(
-      borderRadius: br,
-      child: imageUrl != null
-          ? CachedNetworkImage(
-              imageUrl: imageUrl!,
-              width: s,
-              height: s,
-              fit: BoxFit.cover,
-              errorWidget: (_, __, ___) =>
-                  _rectPlaceholder(context, s),
-            )
-          : _rectPlaceholder(context, s),
-    );
-  }
-
-  Widget _rectPlaceholder(BuildContext context, double s) {
-    return Container(
+    return AppImage(
+      url: imageUrl,
       width: s,
       height: s,
-      color: context.colorScheme.surfaceContainerHighest,
-      child: placeholder ??
-          Center(
-            child: Text(
-              name.isNotEmpty ? name[0] : '',
-              style: context.textTheme.titleSmall?.copyWith(
-                fontSize: s * 0.35,
-              ),
-            ),
-          ),
+      borderRadius: borderRadius,
+      placeholderIcon: Icons.storefront_outlined,
     );
   }
 

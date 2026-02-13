@@ -8,7 +8,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/nearby_page.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/follow_button.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class NearbyPagesCard extends StatelessWidget {
   final List<NearbyPage> pages;
@@ -145,23 +145,12 @@ class _NearbyPageCard extends ConsumerWidget {
               child: Stack(
                 children: [
                   // Image
-                  if (page.coverUrl != null)
-                    CachedImage(
-                      imageUrl: page.coverUrl!,
-                      width: 155,
-                      height: 90,
-                      fit: BoxFit.cover,
-                    )
-                  else
-                    Container(
-                      width: 155,
-                      height: 90,
-                      color: context.colorScheme.surfaceContainerHighest,
-                      child: Icon(
-                        Icons.storefront,
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
+                  AppImage(
+                    url: page.coverUrl,
+                    width: 155,
+                    height: 90,
+                    placeholderIcon: Icons.storefront,
+                  ),
                   // Open badge - top end
                   PositionedDirectional(
                     top: 8,

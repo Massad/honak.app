@@ -5,7 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
 import 'package:honak/features/home/presentation/providers/post_detail_provider.dart';
 import 'package:honak/features/home/presentation/providers/share_provider.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
@@ -75,11 +75,10 @@ class _PostDetailContent extends StatelessWidget {
           ...post.media.map(
             (media) => Padding(
               padding: EdgeInsets.only(bottom: AppSpacing.sm),
-              child: CachedImage(
-                imageUrl: media.url,
+              child: AppImage(
+                url: media.url,
                 width: double.infinity,
                 height: 300,
-                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -127,17 +126,10 @@ class _PostPageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
+        AppImage.avatar(
+          url: page.avatarUrl,
+          name: page.name,
           radius: 24,
-          backgroundColor: context.colorScheme.surfaceContainerHighest,
-          backgroundImage:
-              page.avatarUrl != null ? NetworkImage(page.avatarUrl!) : null,
-          child: page.avatarUrl == null
-              ? Text(
-                  page.name.isNotEmpty ? page.name[0] : '',
-                  style: context.textTheme.titleMedium,
-                )
-              : null,
         ),
         SizedBox(width: AppSpacing.md),
         Expanded(

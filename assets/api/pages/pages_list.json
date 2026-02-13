@@ -3,591 +3,1978 @@
   "data": [
     {
       "id": "beit-sitti",
-      "business_type_id": "restaurant",
-      "explore_category": "cat_food",
-      "business_type_name": "مطعم",
       "name": "بيت ستي",
-      "name_en": "Beit Sitti",
       "slug": "beit-sitti",
-      "archetype": "menu_order",
       "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
       "cover_url": "https://images.unsplash.com/photo-1705768300072-bb6a0cbb0e73?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "عبدون", "city": "عمّان"},
+      "business_type_name": "مطعم",
+      "business_type_id": "restaurant",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "showcase",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
+      "is_following": false,
       "followers_count": 2400,
-      "items_count": 5,
-      "trust_score": 92
+      "trust_metrics": [
+        {
+          "label": "طلبات أسبوعياً",
+          "value": "٥٣٠",
+          "icon": "shopping_bag"
+        },
+        {
+          "label": "الأكثر طلباً",
+          "value": "منسف أردني",
+          "icon": "star"
+        },
+        {
+          "label": "معدل التحضير",
+          "value": "١٨ دقيقة",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
     },
     {
-      "id": "abu-ahmad-water",
-      "business_type_id": "water_delivery",
-      "explore_category": "cat_delivery",
-      "business_type_name": "توصيل مياه",
-      "name": "مياه أبو أحمد",
-      "name_en": "Abu Ahmad Water",
-      "slug": "abu-ahmad-water",
+      "id": "abu-mahmoud-veggies",
+      "name": "خضار أبو محمود",
+      "slug": "abu-mahmoud-veggies",
+      "avatar_url": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "خضار وفواكه",
+      "business_type_id": "produce",
+      "explore_category": "cat_food",
       "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1644061798186-96785723f563?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "عبدون", "city": "عمّان"},
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
-      "followers_count": 1200,
-      "items_count": 3,
-      "trust_score": 95
+      "is_following": false,
+      "followers_count": 280,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٨٢٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "تسليم يومياً",
+          "value": "٢٥",
+          "icon": "local_shipping"
+        },
+        {
+          "label": "منتجات طازجة",
+          "value": "يومياً",
+          "icon": "eco"
+        }
+      ],
+      "location": {
+        "area": "خلدا",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
     },
     {
-      "id": "abu-sulaiman-gas",
-      "business_type_id": "gas_delivery",
-      "explore_category": "cat_delivery",
-      "business_type_name": "توصيل غاز",
-      "name": "غاز أبو سليمان",
-      "name_en": "Abu Sulaiman Gas",
-      "slug": "abu-sulaiman-gas",
-      "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1585011664466-b7bbe92f34ef?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1504711434969-e33886168d5c?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "ماركا الشمالية", "city": "عمّان"},
+      "id": "tazej-juice",
+      "name": "عصائر الطازج",
+      "slug": "tazej-juice",
+      "avatar_url": "https://picsum.photos/seed/tazej-juice/200",
+      "cover_url": "https://picsum.photos/seed/tazej-cover/800/400",
+      "business_type_name": "عصائر",
+      "business_type_id": "juice_bar",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
-      "followers_count": 850,
-      "items_count": 2,
-      "trust_score": 90
+      "is_following": false,
+      "followers_count": 3400,
+      "trust_metrics": [
+        {
+          "label": "طلبات أسبوعياً",
+          "value": "٢٤٠",
+          "icon": "shopping_bag"
+        },
+        {
+          "label": "الأكثر طلباً",
+          "value": "عصير برتقال",
+          "icon": "star"
+        },
+        {
+          "label": "معدل التحضير",
+          "value": "٥ دقائق",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "الجبيهة",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
     },
     {
-      "id": "salon-rania",
-      "business_type_id": "salon",
-      "explore_category": "cat_beauty",
-      "business_type_name": "صالون تجميل",
-      "name": "صالون رانية",
-      "name_en": "Salon Rania",
-      "slug": "salon-rania",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1626383120723-2a941488860d?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "الصويفية", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 890,
-      "items_count": 10,
-      "trust_score": 88
+      "id": "fresh-juice-bar",
+      "name": "عصير فريش",
+      "slug": "fresh-juice-bar",
+      "avatar_url": "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "عصائر",
+      "business_type_id": "juice_bar",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "خلدا",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
     },
     {
-      "id": "ahmad-plumbing",
-      "business_type_id": "plumber",
-      "explore_category": "cat_home_services",
-      "business_type_name": "سباك",
-      "name": "سباكة أحمد",
-      "name_en": "Ahmad Plumbing",
-      "slug": "ahmad-plumbing",
-      "archetype": "quote_request",
-      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "جبل الحسين", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 340,
-      "items_count": 5,
-      "trust_score": 82
-    },
-    {
-      "id": "sara-photography",
-      "business_type_id": "photographer",
-      "explore_category": "cat_creative",
-      "business_type_name": "مصورة",
-      "name": "تصوير سارة",
-      "name_en": "Sara Photography",
-      "slug": "sara-photography",
-      "archetype": "portfolio_inquiry",
-      "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1769230385107-bc6eaa7a123e?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "الصويفية", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 560,
-      "items_count": 6,
-      "trust_score": 80
-    },
-    {
-      "id": "royal-events",
-      "business_type_id": "event_venue",
-      "explore_category": "cat_entertainment",
-      "business_type_name": "قاعة مناسبات",
-      "name": "رويال للمناسبات",
-      "name_en": "Royal Events",
-      "slug": "royal-events",
-      "archetype": "reservation",
-      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1762765684665-6b6855bb6fe6?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "ماركا", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 1800,
-      "items_count": 3,
-      "trust_score": 90
-    },
-    {
-      "id": "nour-fashion",
-      "business_type_id": "clothes_store",
-      "explore_category": "cat_retail",
-      "business_type_name": "متجر ملابس",
-      "name": "نور فاشن",
-      "name_en": "Nour Fashion",
-      "slug": "nour-fashion",
-      "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1770226415002-dbbd40327ec7?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "عبدون", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 3200,
-      "items_count": 12,
-      "trust_score": 85
-    },
-    {
-      "id": "dr-khaled-clinic",
-      "business_type_id": "clinic",
-      "explore_category": "cat_health",
-      "business_type_name": "عيادة / طبيب",
-      "name": "عيادة د. خالد",
-      "name_en": "Dr. Khaled Clinic",
-      "slug": "dr-khaled-clinic",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1548694942-fd9fa307bd9a?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "الشميساني", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 520,
-      "items_count": 11,
-      "trust_score": 91
-    },
-    {
-      "id": "villa-dead-sea",
-      "business_type_id": "villa_rental",
-      "explore_category": "cat_stays",
-      "business_type_name": "تأجير فلل",
-      "name": "فيلا البحر الميت",
-      "name_en": "Dead Sea Villa",
-      "slug": "villa-dead-sea",
-      "archetype": "reservation",
-      "avatar_url": "https://images.unsplash.com/photo-1758612853656-def5033bccb5?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1759256243437-9c8f7238c42b?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "شاطئ عمّان", "city": "البحر الميت"},
-      "is_verified": true,
-      "followers_count": 890,
-      "items_count": 1,
-      "trust_score": 87
+      "id": "furna-alhara",
+      "name": "فرن الحارة",
+      "slug": "furna-alhara",
+      "avatar_url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مخبز",
+      "business_type_id": "bakery",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "تلاع العلي",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
     },
     {
       "id": "hara-coffee",
-      "business_type_id": "coffee_shop",
-      "explore_category": "cat_food",
-      "business_type_name": "مقهى",
       "name": "قهوة الحارة",
-      "name_en": "Hara Coffee",
       "slug": "hara-coffee",
-      "archetype": "menu_order",
       "avatar_url": "https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=200&q=80",
       "cover_url": "https://images.unsplash.com/photo-1709276351463-fc72a6d00b3a?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "جبل عمّان", "city": "عمّان"},
+      "business_type_name": "مقهى",
+      "business_type_id": "cafe",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "showcase",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
+      "is_following": false,
       "followers_count": 980,
-      "items_count": 8,
-      "trust_score": 86
+      "trust_metrics": [
+        {
+          "label": "أكواب يومياً",
+          "value": "٢٥٠",
+          "icon": "coffee"
+        },
+        {
+          "label": "الأكثر طلباً",
+          "value": "قهوة عربية",
+          "icon": "star"
+        },
+        {
+          "label": "عملاء يعودون",
+          "value": "٨٥٪",
+          "icon": "repeat"
+        }
+      ],
+      "location": {
+        "area": "جبل عمّان",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
     },
     {
-      "id": "amman-municipality",
-      "business_type_id": "municipality",
-      "explore_category": "cat_government",
-      "business_type_name": "جهة حكومية",
-      "name": "أمانة عمّان الكبرى",
-      "name_en": "Amman Municipality",
-      "slug": "amman-municipality",
-      "archetype": "follow_only",
-      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "وسط عمّان", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 120000,
-      "items_count": 0,
-      "trust_score": 99
-    },
-    {
-      "id": "dukkaneh-store",
-      "business_type_id": "online_store",
-      "explore_category": "cat_retail",
-      "business_type_name": "متجر أونلاين",
-      "name": "دُكّانة",
-      "name_en": "Dukkaneh",
-      "slug": "dukkaneh-store",
-      "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1636100232064-0dcec9d3f291?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1702737806973-22324ac61a62?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "أونلاين", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 4500,
-      "items_count": 8,
-      "trust_score": 83
-    }
-    ,
-    {
-      "id": "abukhaled-garage",
-      "business_type_id": "car_mechanic",
-      "explore_category": "cat_auto",
-      "business_type_name": "ميكانيكي سيارات",
-      "name": "كراج أبو خالد للسيارات",
-      "name_en": "Abu Khaled Car Garage",
-      "slug": "abukhaled-garage",
+      "id": "layal-catering",
+      "name": "ليال للتموين",
+      "slug": "layal-catering",
+      "avatar_url": "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "تموين وضيافة",
+      "business_type_id": "catering",
+      "explore_category": "cat_food",
       "archetype": "quote_request",
-      "avatar_url": "https://picsum.photos/seed/abukhaled/200",
-      "cover_url": "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "الزرقاء", "city": "الزرقاء"},
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": false,
+      "is_following": false,
       "followers_count": 0,
-      "items_count": 0,
-      "trust_score": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الرابية",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "golden-oven-bakery",
+      "name": "مخبز الفرن الذهبي",
+      "slug": "golden-oven-bakery",
+      "avatar_url": "https://picsum.photos/seed/golden-oven/200",
+      "cover_url": "https://picsum.photos/seed/golden-oven-cover/800/400",
+      "business_type_name": "مخبز",
+      "business_type_id": "bakery",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 2800,
+      "trust_metrics": [
+        {
+          "label": "طلبات أسبوعياً",
+          "value": "٣٨٠",
+          "icon": "shopping_bag"
+        },
+        {
+          "label": "الأكثر طلباً",
+          "value": "مناقيش زعتر",
+          "icon": "star"
+        },
+        {
+          "label": "معدل التحضير",
+          "value": "١٠ دقائق",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "جبل الحسين",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "alkaram-rest",
+      "name": "مطعم الكرم",
+      "slug": "alkaram-rest",
+      "avatar_url": "https://picsum.photos/seed/alkaram/200",
+      "cover_url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مطعم",
+      "business_type_id": "restaurant",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "وسط إربد",
+        "city": "إربد"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "alkheir-butcher",
+      "name": "ملحمة الخير",
+      "slug": "alkheir-butcher",
+      "avatar_url": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "ملحمة",
+      "business_type_id": "butcher",
+      "explore_category": "cat_food",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 450,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٩٠٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "ذبح يومي",
+          "value": "طازج",
+          "icon": "verified"
+        },
+        {
+          "label": "نشط منذ",
+          "value": "٢٠٢٠",
+          "icon": "calendar_today"
+        }
+      ],
+      "location": {
+        "area": "جبل الحسين",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "abu-sulaiman-gas",
+      "name": "غاز أبو سليمان",
+      "slug": "abu-sulaiman-gas",
+      "avatar_url": "https://images.unsplash.com/photo-1585011664466-b7bbe92f34ef?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1504711434969-e33886168d5c?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "توصيل غاز",
+      "business_type_id": "gas_delivery",
+      "explore_category": "cat_delivery",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "hybrid",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 850,
+      "trust_metrics": [
+        {
+          "label": "يطلبون شهرياً",
+          "value": "٨٨٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "اسطوانات شهرياً",
+          "value": "٨٠٠",
+          "icon": "local_fire_department"
+        },
+        {
+          "label": "معدل التوصيل",
+          "value": "٤٥ دقيقة",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "ماركا الشمالية",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "abu-ahmad-water",
+      "name": "مياه أبو أحمد",
+      "slug": "abu-ahmad-water",
+      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1644061798186-96785723f563?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "توصيل مياه",
+      "business_type_id": "water_delivery",
+      "explore_category": "cat_delivery",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "hybrid",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 1200,
+      "trust_metrics": [
+        {
+          "label": "يعيدون الطلب أسبوعياً",
+          "value": "٩٢٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "قوارير شهرياً",
+          "value": "٢,٠٠٠",
+          "icon": "water_drop"
+        },
+        {
+          "label": "معدل التوصيل",
+          "value": "٣٥ دقيقة",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "barber-fadi",
+      "name": "حلاق فادي",
+      "slug": "barber-fadi",
+      "avatar_url": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1585747860182-ee6d3a2e5a47?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "حلاق رجالي",
+      "business_type_id": "barber",
+      "explore_category": "cat_beauty",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الدوار السابع",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "serenity-spa",
+      "name": "سيرينيتي سبا",
+      "slug": "serenity-spa",
+      "avatar_url": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1540555700478-4be289fbec6e?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "سبا",
+      "business_type_id": "spa",
+      "explore_category": "cat_beauty",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "salon-rania",
+      "name": "صالون رانية",
+      "slug": "salon-rania",
+      "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1626383120723-2a941488860d?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "صالون تجميل",
+      "business_type_id": "salon",
+      "explore_category": "cat_beauty",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 890,
+      "trust_metrics": [
+        {
+          "label": "حجوزات مكتملة",
+          "value": "٤,٥٠٠",
+          "icon": "check_circle"
+        },
+        {
+          "label": "اشتروا باقات",
+          "value": "٧٨٪",
+          "icon": "loyalty"
+        },
+        {
+          "label": "زبائن يعودون",
+          "value": "٨٥٪",
+          "icon": "repeat"
+        }
+      ],
+      "location": {
+        "area": "الصويفية",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "glamour-cosmetics",
+      "name": "غلامور لمستحضرات التجميل",
+      "slug": "glamour-cosmetics",
+      "avatar_url": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مستحضرات تجميل",
+      "business_type_id": "cosmetics_store",
+      "explore_category": "cat_beauty",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "تلاع العلي",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "vet-amman",
+      "name": "بيطري عمّان",
+      "slug": "vet-amman",
+      "avatar_url": "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "عيادة بيطرية",
+      "business_type_id": "vet_clinic",
+      "explore_category": "cat_health",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الجبيهة",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "hayat-pharmacy",
+      "name": "صيدلية الحياة",
+      "slug": "hayat-pharmacy",
+      "avatar_url": "https://picsum.photos/seed/hayat-pharmacy/200",
+      "cover_url": "https://picsum.photos/seed/hayat-pharm-cover/800/400",
+      "business_type_name": "صيدلية",
+      "business_type_id": "pharmacy",
+      "explore_category": "cat_health",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 3100,
+      "trust_metrics": [
+        {
+          "label": "طلبات أسبوعياً",
+          "value": "٢٤٠",
+          "icon": "shopping_bag"
+        },
+        {
+          "label": "الأكثر طلباً",
+          "value": "فيتامين D3",
+          "icon": "star"
+        },
+        {
+          "label": "معدل التوصيل",
+          "value": "٣٠ دقيقة",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "الصويفية",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "sahha-pharmacy",
+      "name": "صيدلية صحة",
+      "slug": "sahha-pharmacy",
+      "avatar_url": "https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "صيدلية",
+      "business_type_id": "pharmacy",
+      "explore_category": "cat_health",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "خلدا",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "dr-khaled-clinic",
+      "name": "عيادة د. خالد",
+      "slug": "dr-khaled-clinic",
+      "avatar_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1548694942-fd9fa307bd9a?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "عيادة / طبيب",
+      "business_type_id": "clinic",
+      "explore_category": "cat_health",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 520,
+      "trust_metrics": [
+        {
+          "label": "مواعيد مكتملة",
+          "value": "+٨٠٠",
+          "icon": "check_circle"
+        },
+        {
+          "label": "نسبة الحضور",
+          "value": "٨٨٪",
+          "icon": "people"
+        },
+        {
+          "label": "مرضى نشطين",
+          "value": "١٢٥",
+          "icon": "person"
+        }
+      ],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "physio-care",
+      "name": "فيزيو كير",
+      "slug": "physio-care",
+      "avatar_url": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "علاج طبيعي",
+      "business_type_id": "physiotherapy",
+      "explore_category": "cat_health",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الرابية",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
       "claim_status": "unclaimed"
     },
     {
       "id": "power-fitness",
-      "business_type_id": "gym",
-      "explore_category": "cat_fitness",
-      "business_type_name": "نادي رياضي",
       "name": "نادي القوة للياقة",
-      "name_en": "Power Fitness Club",
       "slug": "power-fitness",
-      "archetype": "service_booking",
       "avatar_url": "https://picsum.photos/seed/powerfitness/200",
       "cover_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "عبدون", "city": "عمّان"},
+      "business_type_name": "نادي رياضي",
+      "business_type_id": "gym",
+      "explore_category": "cat_fitness",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": false,
+      "is_following": false,
       "followers_count": 0,
-      "items_count": 0,
-      "trust_score": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
       "claim_status": "unclaimed"
-    },
-    {
-      "id": "alkaram-rest",
-      "business_type_id": "restaurant",
-      "explore_category": "cat_food",
-      "business_type_name": "مطعم",
-      "name": "مطعم الكرم",
-      "name_en": "Al Karam Restaurant",
-      "slug": "alkaram-rest",
-      "archetype": "menu_order",
-      "avatar_url": "https://picsum.photos/seed/alkaram/200",
-      "cover_url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "وسط إربد", "city": "إربد"},
-      "is_verified": false,
-      "followers_count": 0,
-      "items_count": 0,
-      "trust_score": 0,
-      "claim_status": "unclaimed"
-    },
-    {
-      "id": "sparkle-car-wash",
-      "business_type_id": "car_wash",
-      "explore_category": "cat_auto",
-      "business_type_name": "مغسلة سيارات",
-      "name": "سباركل لغسيل السيارات",
-      "name_en": "Sparkle Car Wash",
-      "slug": "sparkle-car-wash",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1657368567304-5a2644b6052e?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1680533749371-59c49b31fd74?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "عبدون", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 820,
-      "items_count": 4,
-      "trust_score": 84
-    },
-    {
-      "id": "clean-express-laundry",
-      "business_type_id": "laundry",
-      "explore_category": "cat_home_services",
-      "business_type_name": "مغسلة ملابس",
-      "name": "كلين إكسبرس",
-      "name_en": "Clean Express",
-      "slug": "clean-express-laundry",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "خلدا", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 680,
-      "items_count": 10,
-      "trust_score": 88
-    },
-    {
-      "id": "alnajjar-tailor",
-      "business_type_id": "tailor",
-      "explore_category": "cat_services",
-      "business_type_name": "خياط",
-      "name": "خياط النجار",
-      "name_en": "Al Najjar Tailor",
-      "slug": "alnajjar-tailor",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "جبل الحسين", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 420,
-      "items_count": 13,
-      "trust_score": 91
-    },
-    {
-      "id": "alaseel-shoe-repair",
-      "business_type_id": "shoe_repair",
-      "explore_category": "cat_services",
-      "business_type_name": "إسكافي",
-      "name": "إسكافي الأصيل",
-      "name_en": "Al Aseel Shoe Repair",
-      "slug": "alaseel-shoe-repair",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "وسط البلد", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 290,
-      "items_count": 11,
-      "trust_score": 85
-    },
-    {
-      "id": "smart-fix-phones",
-      "business_type_id": "mobile_repair",
-      "explore_category": "cat_electronics",
-      "business_type_name": "صيانة موبايلات",
-      "name": "سمارت فيكس",
-      "name_en": "Smart Fix",
-      "slug": "smart-fix-phones",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1580910051074-3eb694886571?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "الشميساني", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 1100,
-      "items_count": 12,
-      "trust_score": 90
-    },
-    {
-      "id": "precision-watches",
-      "business_type_id": "watch_repair",
-      "explore_category": "cat_services",
-      "business_type_name": "صيانة ساعات",
-      "name": "ساعات بريسيجن",
-      "name_en": "Precision Watches",
-      "slug": "precision-watches",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "جبل عمّان", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 350,
-      "items_count": 14,
-      "trust_score": 93
-    },
-    {
-      "id": "quick-lube-amman",
-      "business_type_id": "oil_change",
-      "explore_category": "cat_auto",
-      "business_type_name": "تغيير زيت",
-      "name": "تغيير زيت سريع",
-      "name_en": "Quick Lube Amman",
-      "slug": "quick-lube-amman",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1600861194802-a928b3f07c36?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "طبربور", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 560,
-      "items_count": 3,
-      "trust_score": 87
-    },
-    {
-      "id": "aljazeera-tires",
-      "business_type_id": "tire_shop",
-      "explore_category": "cat_auto",
-      "business_type_name": "محل إطارات",
-      "name": "إطارات الجزيرة",
-      "name_en": "Al Jazeera Tires",
-      "slug": "aljazeera-tires",
-      "archetype": "service_booking",
-      "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "المقابلين", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 440,
-      "items_count": 5,
-      "trust_score": 86
-    },
-    {
-      "id": "maktabet-alnoor",
-      "business_type_id": "bookstore",
-      "explore_category": "cat_retail",
-      "business_type_name": "مكتبة / قرطاسية",
-      "name": "مكتبة النور",
-      "name_en": "Maktabet Al-Noor",
-      "slug": "maktabet-alnoor",
-      "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1545028651-723b70d2a2ff?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://picsum.photos/seed/maktabet-cover/800/400",
-      "location": {"area": "الجبيهة", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 1800,
-      "items_count": 10,
-      "trust_score": 82
-    },
-    {
-      "id": "traffic-department",
-      "business_type_id": "government",
-      "explore_category": "cat_government",
-      "business_type_name": "جهة حكومية",
-      "name": "إدارة السير",
-      "name_en": "Traffic Department",
-      "slug": "traffic-department",
-      "archetype": "follow_only",
-      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://picsum.photos/seed/traffic-dept-cover/800/400",
-      "location": {"area": "وسط عمّان", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 85000,
-      "items_count": 0,
-      "trust_score": 98
     },
     {
       "id": "city-mall",
+      "name": "City Mall",
+      "slug": "city-mall",
+      "avatar_url": "https://images.unsplash.com/photo-1770023895508-ac4a715e7a43?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1763663501401-00c4f2704dc4?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "دليل مجمع",
       "business_type_id": "directory",
       "explore_category": "cat_retail",
-      "business_type_name": "مراكز تجارية",
-      "name": "City Mall",
-      "name_en": "City Mall",
-      "slug": "city-mall",
       "archetype": "directory",
-      "avatar_url": "https://images.unsplash.com/photo-1770023895508-ac4a715e7a43?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://picsum.photos/seed/city-mall-cover/800/400",
-      "location": {"area": "السابع", "city": "عمّان"},
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
-      "followers_count": 15000,
-      "items_count": 26,
-      "trust_score": 95
+      "is_following": false,
+      "followers_count": 2300,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "٢٦",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "٢٦",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٤",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
     },
     {
-      "id": "golden-oven-bakery",
-      "business_type_id": "bakery",
-      "explore_category": "cat_food",
-      "business_type_name": "مخبز",
-      "name": "مخبز الفرن الذهبي",
-      "name_en": "Golden Oven Bakery",
-      "slug": "golden-oven-bakery",
-      "archetype": "menu_order",
-      "avatar_url": "https://picsum.photos/seed/golden-oven/200",
-      "cover_url": "https://picsum.photos/seed/golden-oven-cover/800/400",
-      "location": {"area": "جبل الحسين", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 2800,
-      "items_count": 15,
-      "trust_score": 85
-    },
-    {
-      "id": "hayat-pharmacy",
-      "business_type_id": "pharmacy",
-      "explore_category": "cat_health",
-      "business_type_name": "صيدلية",
-      "name": "صيدلية الحياة",
-      "name_en": "Al-Hayat Pharmacy",
-      "slug": "hayat-pharmacy",
+      "id": "tiny-tots",
+      "name": "تايني توتس",
+      "slug": "tiny-tots",
+      "avatar_url": "https://images.unsplash.com/photo-1566454419290-57a0589c9b17?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "أطفال",
+      "business_type_id": "kids_store",
+      "explore_category": "cat_retail",
       "archetype": "catalog_order",
-      "avatar_url": "https://picsum.photos/seed/hayat-pharmacy/200",
-      "cover_url": "https://picsum.photos/seed/hayat-pharm-cover/800/400",
-      "location": {"area": "الصويفية", "city": "عمّان"},
-      "is_verified": true,
-      "followers_count": 3100,
-      "items_count": 15,
-      "trust_score": 90
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الجبيهة",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
     },
     {
-      "id": "tazej-juice",
-      "business_type_id": "juice_bar",
-      "explore_category": "cat_food",
-      "business_type_name": "عصائر",
-      "name": "عصائر الطازج",
-      "name_en": "Al-Tazej Fresh Juice",
-      "slug": "tazej-juice",
-      "archetype": "menu_order",
-      "avatar_url": "https://picsum.photos/seed/tazej-juice/200",
-      "cover_url": "https://picsum.photos/seed/tazej-cover/800/400",
-      "location": {"area": "الجبيهة", "city": "عمّان"},
+      "id": "gadget-zone",
+      "name": "جادجت زون",
+      "slug": "gadget-zone",
+      "avatar_url": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "إلكترونيات",
+      "business_type_id": "electronics_store",
+      "explore_category": "cat_retail",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "مرج الحمام",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "dukkaneh-store",
+      "name": "دُكّانة",
+      "slug": "dukkaneh-store",
+      "avatar_url": "https://images.unsplash.com/photo-1636100232064-0dceb9d3f291?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1702737806973-22324ac61a62?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "متجر أونلاين",
+      "business_type_id": "online_store",
+      "explore_category": "cat_retail",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "online",
       "is_verified": true,
-      "followers_count": 3400,
-      "items_count": 14,
-      "trust_score": 88
+      "is_following": false,
+      "followers_count": 4500,
+      "trust_metrics": [
+        {
+          "label": "طلب هذا الشهر",
+          "value": "٣٨٠",
+          "icon": "local_shipping"
+        },
+        {
+          "label": "عملاء يعودون",
+          "value": "٦٨٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "منتجات متوفرة",
+          "value": "٨",
+          "icon": "inventory"
+        }
+      ],
+      "location": {
+        "area": "أونلاين",
+        "city": "الأردن"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "atr-oud",
+      "name": "عطر وعود",
+      "slug": "atr-oud",
+      "avatar_url": "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "عطور",
+      "business_type_id": "perfume_shop",
+      "explore_category": "cat_retail",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "farah-bridal",
+      "name": "فرح لفساتين الزفاف",
+      "slug": "farah-bridal",
+      "avatar_url": "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "فساتين زفاف",
+      "business_type_id": "bridal_shop",
+      "explore_category": "cat_retail",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الصويفية",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "maktabet-alnoor",
+      "name": "مكتبة النور",
+      "slug": "maktabet-alnoor",
+      "avatar_url": "https://images.unsplash.com/photo-1545028651-723b70d2a2ff?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1725781761544-ffeec5eafcc9?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مكتبة / قرطاسية",
+      "business_type_id": "bookstore",
+      "explore_category": "cat_retail",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "hybrid",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 1100,
+      "trust_metrics": [
+        {
+          "label": "كتاب بيع هذا الشهر",
+          "value": "١٥٠",
+          "icon": "menu_book"
+        },
+        {
+          "label": "عملاء يعودون",
+          "value": "٦٥٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "منتجات متوفرة",
+          "value": "١٠",
+          "icon": "inventory"
+        }
+      ],
+      "location": {
+        "area": "جبل عمّان",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
     },
     {
       "id": "mini-market-ahmad",
+      "name": "ميني ماركت أحمد",
+      "slug": "mini-market-ahmad",
+      "avatar_url": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "ميني ماركت",
       "business_type_id": "mini_market",
       "explore_category": "cat_retail",
-      "business_type_name": "ميني ماركت",
-      "name": "ميني ماركت أحمد",
-      "name_en": "Ahmad Mini Market",
-      "slug": "mini-market-ahmad",
       "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "الجبيهة", "city": "عمّان"},
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
-      "followers_count": 450,
-      "items_count": 12,
-      "trust_score": 82
+      "is_following": false,
+      "followers_count": 320,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٨٥٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "طلب يومياً",
+          "value": "٣٠",
+          "icon": "shopping_cart"
+        },
+        {
+          "label": "منتجات متوفرة",
+          "value": "٩٥٪",
+          "icon": "inventory"
+        }
+      ],
+      "location": {
+        "area": "تلاع العلي",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
     },
     {
-      "id": "alkheir-butcher",
-      "business_type_id": "butcher",
-      "explore_category": "cat_food",
-      "business_type_name": "ملحمة",
-      "name": "ملحمة الخير",
-      "name_en": "Al Khair Butcher",
-      "slug": "alkheir-butcher",
+      "id": "nour-fashion",
+      "name": "نور فاشن",
+      "slug": "nour-fashion",
+      "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1770226415002-dbbd40327ec7?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "متجر ملابس",
+      "business_type_id": "clothes_store",
+      "explore_category": "cat_retail",
       "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "طبربور", "city": "عمّان"},
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "hybrid",
       "is_verified": true,
+      "is_following": false,
+      "followers_count": 3200,
+      "trust_metrics": [
+        {
+          "label": "قطع بيعت هذا الشهر",
+          "value": "٢,٠٠٠",
+          "icon": "sell"
+        },
+        {
+          "label": "عملاء يعودون",
+          "value": "٧٢٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "منتجات متوفرة",
+          "value": "٣٤٠",
+          "icon": "inventory"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "ahmad-plumbing",
+      "name": "سباكة أحمد",
+      "slug": "ahmad-plumbing",
+      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "سباك",
+      "business_type_id": "plumber",
+      "explore_category": "cat_home_services",
+      "archetype": "quote_request",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 340,
+      "trust_metrics": [
+        {
+          "label": "أعمال مكتملة",
+          "value": "٣٤٠",
+          "icon": "check_circle"
+        },
+        {
+          "label": "يرد خلال",
+          "value": "ساعة واحدة",
+          "icon": "schedule"
+        },
+        {
+          "label": "عضو منذ",
+          "value": "٢٠٢٣",
+          "icon": "calendar_today"
+        }
+      ],
+      "location": {
+        "area": "جبل الحسين",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "clean-express-laundry",
+      "name": "كلين إكسبرس",
+      "slug": "clean-express-laundry",
+      "avatar_url": "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مغسلة ملابس",
+      "business_type_id": "laundry",
+      "explore_category": "cat_home_services",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
       "followers_count": 680,
-      "items_count": 12,
-      "trust_score": 88
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون شهرياً",
+          "value": "٨٥٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "قطعة شهرياً",
+          "value": "٤٥٠",
+          "icon": "dry_cleaning"
+        },
+        {
+          "label": "معدل التجهيز",
+          "value": "يوم واحد",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "خلدا",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
     },
     {
-      "id": "abu-mahmoud-veggies",
-      "business_type_id": "produce",
-      "explore_category": "cat_food",
-      "business_type_name": "خضار وفواكه",
-      "name": "خضار أبو محمود",
-      "name_en": "Abu Mahmoud Veggies",
-      "slug": "abu-mahmoud-veggies",
-      "archetype": "catalog_order",
-      "avatar_url": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "ماركا", "city": "عمّان"},
+      "id": "kahraba-express",
+      "name": "كهربا إكسبرس",
+      "slug": "kahraba-express",
+      "avatar_url": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "كهربائي",
+      "business_type_id": "electrician",
+      "explore_category": "cat_home_services",
+      "archetype": "quote_request",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "تلاع العلي",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "cool-ac",
+      "name": "كول لتكييف الهواء",
+      "slug": "cool-ac",
+      "avatar_url": "https://images.unsplash.com/photo-1631545806609-30ee9a05a509?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "تكييف وتبريد",
+      "business_type_id": "ac_repair",
+      "explore_category": "cat_home_services",
+      "archetype": "quote_request",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "مرج الحمام",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "no-bugs",
+      "name": "لا حشرات",
+      "slug": "no-bugs",
+      "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مكافحة حشرات",
+      "business_type_id": "pest_control",
+      "explore_category": "cat_home_services",
+      "archetype": "quote_request",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الدوار السابع",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "aljazeera-tires",
+      "name": "إطارات الجزيرة",
+      "slug": "aljazeera-tires",
+      "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "محل إطارات",
+      "business_type_id": "tire_shop",
+      "explore_category": "cat_auto",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
-      "followers_count": 520,
-      "items_count": 12,
-      "trust_score": 85
+      "is_following": false,
+      "followers_count": 440,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٧٥٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "سيارة يومياً",
+          "value": "٨",
+          "icon": "directions_car"
+        },
+        {
+          "label": "معدل الانتظار",
+          "value": "١٠ دقائق",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "المقابلين",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "quick-lube-amman",
+      "name": "تغيير زيت سريع",
+      "slug": "quick-lube-amman",
+      "avatar_url": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1600861194802-a928b3f07c36?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "تغيير زيت",
+      "business_type_id": "oil_change",
+      "explore_category": "cat_auto",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 560,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٨٠٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "سيارة يومياً",
+          "value": "١٢",
+          "icon": "directions_car"
+        },
+        {
+          "label": "معدل الانتظار",
+          "value": "١٥ دقيقة",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "طبربور",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "sparkle-car-wash",
+      "name": "سباركل لغسيل السيارات",
+      "slug": "sparkle-car-wash",
+      "avatar_url": "https://images.unsplash.com/photo-1657368567304-5a2644b6052e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1680533749371-59c49b31fd74?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مغسلة سيارات",
+      "business_type_id": "car_wash",
+      "explore_category": "cat_auto",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 820,
+      "trust_metrics": [
+        {
+          "label": "سيارات تم غسلها",
+          "value": "٣,٢٠٠",
+          "icon": "check_circle"
+        },
+        {
+          "label": "مشتركين شهرياً",
+          "value": "٤٥",
+          "icon": "loyalty"
+        },
+        {
+          "label": "زبائن يعودون",
+          "value": "٧٢٪",
+          "icon": "repeat"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "abukhaled-garage",
+      "name": "كراج أبو خالد للسيارات",
+      "slug": "abukhaled-garage",
+      "avatar_url": "https://picsum.photos/seed/abukhaled/200",
+      "cover_url": "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "ميكانيكي سيارات",
+      "business_type_id": "car_mechanic",
+      "explore_category": "cat_auto",
+      "archetype": "quote_request",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الزرقاء",
+        "city": "الزرقاء"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "grand-palace-hotel",
+      "name": "فندق القصر الكبير",
+      "slug": "grand-palace-hotel",
+      "avatar_url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "فندق",
+      "business_type_id": "hotel",
+      "explore_category": "cat_stays",
+      "archetype": "reservation",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "villa-dead-sea",
+      "name": "فيلا البحر الميت",
+      "slug": "villa-dead-sea",
+      "avatar_url": "https://images.unsplash.com/photo-1758612853656-def5033bccb5?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1759256243437-9c8f7238c42b?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "تأجير فلل",
+      "business_type_id": "villa_rental",
+      "explore_category": "cat_stays",
+      "archetype": "reservation",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 890,
+      "trust_metrics": [
+        {
+          "label": "حجوزات مكتملة",
+          "value": "٣٤٠",
+          "icon": "check_circle"
+        },
+        {
+          "label": "نشط منذ",
+          "value": "٢٠٢٢",
+          "icon": "calendar_today"
+        },
+        {
+          "label": "نسبة الحجز المتكرر",
+          "value": "٧٥٪",
+          "icon": "repeat"
+        }
+      ],
+      "location": {
+        "area": "شاطئ عمّان",
+        "city": "البحر الميت"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "wadi-camp",
+      "name": "مخيم الوادي",
+      "slug": "wadi-camp",
+      "avatar_url": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1537905569824-f89f14cceb68?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "تخييم",
+      "business_type_id": "camping",
+      "explore_category": "cat_stays",
+      "archetype": "reservation",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "وادي رم",
+        "city": "العقبة"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "royal-events",
+      "name": "رويال للمناسبات",
+      "slug": "royal-events",
+      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1762765684665-6b6855bb6fe6?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "قاعة مناسبات",
+      "business_type_id": "event_venue",
+      "explore_category": "cat_entertainment",
+      "archetype": "reservation",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 1800,
+      "trust_metrics": [
+        {
+          "label": "حجوزات مكتملة",
+          "value": "٢,٣٠٠",
+          "icon": "check_circle"
+        },
+        {
+          "label": "نشط منذ",
+          "value": "٢٠١٩",
+          "icon": "calendar_today"
+        },
+        {
+          "label": "مناسبات هذا العام",
+          "value": "١٨٠",
+          "icon": "celebration"
+        }
+      ],
+      "location": {
+        "area": "ماركا",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "sara-photography",
+      "name": "تصوير سارة",
+      "slug": "sara-photography",
+      "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1769230385107-bc6eaa7a123e?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "مصورة",
+      "business_type_id": "photographer",
+      "explore_category": "cat_creative",
+      "archetype": "portfolio_inquiry",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "online",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 560,
+      "trust_metrics": [
+        {
+          "label": "مشاريع مكتملة",
+          "value": "١٢٠",
+          "icon": "camera"
+        },
+        {
+          "label": "متاحة",
+          "value": "هذا الشهر",
+          "icon": "calendar_today"
+        },
+        {
+          "label": "نشطة منذ",
+          "value": "+٣ سنوات",
+          "icon": "history"
+        }
+      ],
+      "location": {
+        "area": "الصويفية",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "amman-municipality",
+      "name": "أمانة عمّان الكبرى",
+      "slug": "amman-municipality",
+      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "جهة حكومية",
+      "business_type_id": "municipality",
+      "explore_category": "cat_government",
+      "archetype": "follow_only",
+      "engagement_level": "visibility",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 120000,
+      "trust_metrics": [
+        {
+          "label": "حساب رسمي",
+          "value": "✓",
+          "icon": "verified"
+        },
+        {
+          "label": "تنبيهات نشطة",
+          "value": "يومياً",
+          "icon": "notifications"
+        },
+        {
+          "label": "المتابعون",
+          "value": "١٢٠,٠٠٠+",
+          "icon": "people"
+        }
+      ],
+      "location": {
+        "area": "وسط عمّان",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "platform_managed"
+    },
+    {
+      "id": "traffic-department",
+      "name": "إدارة السير",
+      "slug": "traffic-department",
+      "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "جهة حكومية",
+      "business_type_id": "government",
+      "explore_category": "cat_government",
+      "archetype": "follow_only",
+      "engagement_level": "visibility",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 45000,
+      "trust_metrics": [
+        {
+          "label": "حساب رسمي",
+          "value": "✓",
+          "icon": "verified"
+        },
+        {
+          "label": "تنبيهات نشطة",
+          "value": "يومياً",
+          "icon": "notifications"
+        }
+      ],
+      "location": {
+        "area": "وسط عمّان",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "platform_managed"
+    },
+    {
+      "id": "moe-jordan",
+      "name": "وزارة التربية والتعليم",
+      "slug": "moe-jordan",
+      "avatar_url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "جهة حكومية",
+      "business_type_id": "government",
+      "explore_category": "cat_government",
+      "archetype": "follow_only",
+      "engagement_level": "visibility",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "العبدلي",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "social-development",
+      "name": "وزارة التنمية الاجتماعية",
+      "slug": "social-development",
+      "avatar_url": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "جهة حكومية",
+      "business_type_id": "government",
+      "explore_category": "cat_government",
+      "archetype": "follow_only",
+      "engagement_level": "visibility",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": false,
+      "is_following": false,
+      "followers_count": 0,
+      "trust_metrics": [],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "alaseel-shoe-repair",
+      "name": "إسكافي الأصيل",
+      "slug": "alaseel-shoe-repair",
+      "avatar_url": "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "إسكافي",
+      "business_type_id": "shoe_repair",
+      "explore_category": "cat_services",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 290,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٨٨٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "قطعة شهرياً",
+          "value": "٨٠",
+          "icon": "handyman"
+        },
+        {
+          "label": "خبرة",
+          "value": "١٥ سنة",
+          "icon": "workspace_premium"
+        }
+      ],
+      "location": {
+        "area": "وسط البلد",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "alnajjar-tailor",
+      "name": "خياط النجار",
+      "slug": "alnajjar-tailor",
+      "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "خياط",
+      "business_type_id": "tailor",
+      "explore_category": "cat_services",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 420,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٩٠٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "قطعة شهرياً",
+          "value": "١٢٠",
+          "icon": "content_cut"
+        },
+        {
+          "label": "خبرة",
+          "value": "٢٠ سنة",
+          "icon": "workspace_premium"
+        }
+      ],
+      "location": {
+        "area": "جبل الحسين",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "precision-watches",
+      "name": "ساعات بريسيجن",
+      "slug": "precision-watches",
+      "avatar_url": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "صيانة ساعات",
+      "business_type_id": "watch_repair",
+      "explore_category": "cat_services",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 350,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٩٢٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "ساعة شهرياً",
+          "value": "٦٠",
+          "icon": "watch"
+        },
+        {
+          "label": "خبرة",
+          "value": "٢٥ سنة",
+          "icon": "workspace_premium"
+        }
+      ],
+      "location": {
+        "area": "جبل عمّان",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "smart-fix-phones",
+      "name": "سمارت فيكس",
+      "slug": "smart-fix-phones",
+      "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1580910051074-3eb694886571?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "صيانة موبايلات",
+      "business_type_id": "mobile_repair",
+      "explore_category": "cat_electronics",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 1100,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٧٨٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "جهاز شهرياً",
+          "value": "٢٠٠",
+          "icon": "phone_android"
+        },
+        {
+          "label": "ضمان",
+          "value": "٣٠ يوم",
+          "icon": "verified"
+        }
+      ],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
     },
     {
       "id": "smart-fix-mobiles",
-      "business_type_id": "mobile_repair",
-      "explore_category": "cat_services",
-      "business_type_name": "صيانة موبايلات",
       "name": "سمارت فيكس",
-      "name_en": "Smart Fix Mobiles",
       "slug": "smart-fix-mobiles",
-      "archetype": "service_booking",
       "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=800&q=80",
-      "location": {"area": "الزرقاء", "city": "عمّان"},
+      "cover_url": "https://images.unsplash.com/photo-1580910051074-3eb694886571?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "صيانة موبايلات",
+      "business_type_id": "mobile_repair",
+      "explore_category": "cat_electronics",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
       "is_verified": true,
-      "followers_count": 390,
-      "items_count": 12,
-      "trust_score": 84
+      "is_following": false,
+      "followers_count": 520,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٧٥٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "جهاز شهرياً",
+          "value": "١٥٠",
+          "icon": "phone_android"
+        },
+        {
+          "label": "ضمان",
+          "value": "٣٠ يوم",
+          "icon": "verified"
+        }
+      ],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "dukkaneh-jabal",
+      "name": "دكانة الجبل",
+      "slug": "dukkaneh-jabal",
+      "avatar_url": "https://picsum.photos/seed/dukkanehjabal/200",
+      "cover_url": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "دكانة / بقالة",
+      "business_type_id": "grocery",
+      "explore_category": "cat_grocery",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 350,
+      "trust_metrics": [
+        {
+          "label": "طلبات أسبوعياً",
+          "value": "١٢٠",
+          "icon": "shopping_bag"
+        },
+        {
+          "label": "زبائن يعودون",
+          "value": "٩٠٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "معدل التوصيل",
+          "value": "١٥ دقيقة",
+          "icon": "schedule"
+        }
+      ],
+      "location": {
+        "area": "جبل الحسين",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
     }
-  ],
-  "meta": {
-    "page": 1,
-    "per_page": 40,
-    "total": 33,
-    "total_pages": 1
-  }
+  ]
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// 3-column grid showing team member avatars, names, and roles.
 class TeamMemberGrid extends StatelessWidget {
@@ -71,24 +71,10 @@ class _TeamMemberTile extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Avatar
-        SizedBox(
-          width: 48,
-          height: 48,
-          child: CircleAvatar(
-            radius: 24,
-            backgroundColor: context.colorScheme.surfaceContainerHighest,
-            child: avatarUrl != null
-                ? ClipOval(
-                    child: CachedImage(
-                      imageUrl: avatarUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                : Icon(
-                    Icons.person,
-                    color: context.colorScheme.onSurfaceVariant,
-                  ),
-          ),
+        AppImage.avatar(
+          url: avatarUrl,
+          name: name,
+          radius: 24,
         ),
         const SizedBox(height: AppSpacing.xs),
         // Name
@@ -110,14 +96,14 @@ class _TeamMemberTile extends StatelessWidget {
               vertical: 1,
             ),
             decoration: BoxDecoration(
-              color: context.colorScheme.secondaryContainer,
+              color: context.colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
               role,
               style: context.textTheme.labelSmall?.copyWith(
                 fontSize: 10,
-                color: context.colorScheme.onSecondaryContainer,
+                color: context.colorScheme.onSurfaceVariant,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

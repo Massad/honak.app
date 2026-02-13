@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/entities.dart';
 import 'package:honak/features/requests/presentation/widgets/request_status_config.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Reusable request card for the customer's orders page.
 ///
@@ -98,6 +99,18 @@ class RequestListCard extends StatelessWidget {
   }
 
   String get _summaryText {
+    // For queue_service, build a summary with position + wait time
+    if (request.isQueueType) {
+      final parts = <String>[];
+      if (request.queuePosition != null) {
+        parts.add('رقمك ${request.queuePosition}');
+      }
+      if (request.estimatedWaitMin != null && request.estimatedWaitMin! > 0) {
+        parts.add('~${request.estimatedWaitMin} دقيقة');
+      }
+      if (parts.isNotEmpty) return parts.join(' — ');
+      return 'في الدور';
+    }
     if (request.summary != null && request.summary!.isNotEmpty) {
       return request.summary!;
     }
@@ -125,22 +138,10 @@ class _BusinessRow extends StatelessWidget {
         Stack(
           clipBehavior: Clip.none,
           children: [
-            CircleAvatar(
+            AppImage.avatar(
+              url: request.businessAvatarUrl,
+              name: request.businessName,
               radius: 20,
-              backgroundColor: Colors.grey.shade200,
-              backgroundImage: request.businessAvatarUrl != null
-                  ? NetworkImage(request.businessAvatarUrl!)
-                  : null,
-              child: request.businessAvatarUrl == null
-                  ? Text(
-                      request.businessName.isNotEmpty
-                          ? request.businessName[0]
-                          : '?',
-                      style: context.textTheme.titleSmall?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    )
-                  : null,
             ),
             PositionedDirectional(
               bottom: -2,

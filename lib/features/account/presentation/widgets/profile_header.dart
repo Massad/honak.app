@@ -6,7 +6,7 @@ import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class ProfileHeader extends ConsumerWidget {
   const ProfileHeader({super.key});
@@ -77,18 +77,10 @@ class ProfileHeader extends ConsumerWidget {
                 ),
               ],
             ),
-            child: ClipOval(
-              child: user?.avatarUrl != null
-                  ? CachedImage(
-                      imageUrl: user!.avatarUrl,
-                      width: 64,
-                      height: 64,
-                    )
-                  : Icon(
-                      Icons.person,
-                      size: 32,
-                      color: Colors.grey.shade400,
-                    ),
+            child: AppImage.avatar(
+              url: user?.avatarUrl,
+              name: user?.name,
+              radius: 32,
             ),
           ),
         ],

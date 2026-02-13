@@ -8,6 +8,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/orders/presentation/widgets/orders_history_card.dart';
 import 'package:honak/features/requests/domain/entities/entities.dart';
 import 'package:honak/features/requests/presentation/widgets/request_list_card.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Active orders tab — shows live order cards with tracking.
 class OrdersActiveTab extends StatelessWidget {
@@ -207,20 +208,10 @@ class _BusinessRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
+        AppImage.avatar(
+          url: request.businessAvatarUrl,
+          name: request.businessName,
           radius: 16,
-          backgroundColor: Colors.grey.shade200,
-          backgroundImage: request.businessAvatarUrl != null
-              ? NetworkImage(request.businessAvatarUrl!)
-              : null,
-          child: request.businessAvatarUrl == null
-              ? Text(
-                  request.businessName.isNotEmpty
-                      ? request.businessName[0]
-                      : '?',
-                  style: const TextStyle(fontSize: 11),
-                )
-              : null,
         ),
         const SizedBox(width: AppSpacing.sm),
         Expanded(

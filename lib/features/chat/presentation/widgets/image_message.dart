@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class ImageMessage extends StatelessWidget {
   final Message message;
@@ -40,8 +40,8 @@ class ImageMessage extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: Stack(
               children: [
-                CachedImage(
-                  imageUrl: message.imageUrl,
+                AppImage(
+                  url: message.imageUrl,
                   width: 200,
                   height: 200,
                   fit: BoxFit.cover,
@@ -91,8 +91,8 @@ class ImageMessage extends StatelessWidget {
             ),
             Center(
               child: InteractiveViewer(
-                child: CachedImage(
-                  imageUrl: message.imageUrl,
+                child: AppImage(
+                  url: message.imageUrl,
                   fit: BoxFit.contain,
                 ),
               ),

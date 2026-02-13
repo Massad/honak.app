@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Container for action buttons at the bottom of request detail page.
 class DetailActionBar extends StatelessWidget {
@@ -141,15 +142,10 @@ class DetailBusinessCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CircleAvatar(
+          AppImage.avatar(
+            url: businessAvatarUrl,
+            name: businessName,
             radius: 24,
-            backgroundColor: AppColors.surfaceVariant,
-            backgroundImage: businessAvatarUrl != null
-                ? NetworkImage(businessAvatarUrl!)
-                : null,
-            child: businessAvatarUrl == null
-                ? const Icon(Icons.store, color: AppColors.textHint)
-                : null,
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(

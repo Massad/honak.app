@@ -5,7 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
 import 'package:honak/features/requests/presentation/widgets/inquiry_request_sheet.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
@@ -315,8 +315,8 @@ class _PortfolioThumbnail extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: CachedImage(
-        imageUrl: item.images.isNotEmpty ? item.images.first : null,
+      child: AppImage(
+        url: item.images.isNotEmpty ? item.images.first : null,
         fit: BoxFit.cover,
         placeholderIcon: Icons.photo_outlined,
       ),
@@ -351,8 +351,8 @@ class _PortfolioImageViewer extends StatelessWidget {
             constraints: BoxConstraints(
               maxHeight: MediaQuery.of(context).size.height * 0.6,
             ),
-            child: CachedImage(
-              imageUrl:
+            child: AppImage(
+              url:
                   item.images.isNotEmpty ? item.images.first : null,
               fit: BoxFit.contain,
             ),

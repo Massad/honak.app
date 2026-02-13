@@ -31,6 +31,9 @@ flutter analyze
 
 # Generate l10n files (auto-runs on build, but can force)
 flutter gen-l10n
+
+# Regenerate fixture files (after adding/editing page_*.json files)
+dart run tool/generate_fixtures.dart
 ```
 
 ## Architecture
@@ -77,11 +80,35 @@ Two-tier fixtures:
 - `assets/api/{domain}/*.json` — detailed responses organized by domain
 
 `MockApiClient` in `shared/api/mock_api_client.dart`:
-- Routes API paths to fixture files
-- Phone-based user switching (e.g. `0791000001` → customer, `0791000003` → business owner)
-- OTP code is always `123456` in mock mode
-- Simulated delays (300-800ms)
+- Routes API paths to fixture files via **generated manifest** (`assets/api/generated/manifest.json`)
+- Sub-resources (items, dashboard, etc.) resolved by **convention**: `products/items_{business_type_id}.json`, `business/dashboard/{business_type_id}.json`
+- Phone-based user switching (e.g. `0790000001` → Sara, `0790000002` → Ahmad)
+- OTP code is always `123456` in mock mode (or per-account codes: Sara=111111, Ahmad=222222)
 - `ApiClient` interface swaps between `MockApiClient` and `DioApiClient` via `envConfigProvider`
+
+### Adding a New Business Page
+
+**`page_*.json` files are the source of truth.** Never manually edit `pages_list.json`, `manifest.json`, or `categories.json` — they are auto-generated.
+
+```bash
+# 1. Create the page fixture
+#    Required fields: id, name, slug, business_type_id, business_type_name,
+#    explore_category, archetype, avatar_url, cover_url, location, is_verified
+cp assets/api/pages/page_restaurant.json assets/api/pages/page_newbiz.json
+# Edit page_newbiz.json with your page data
+
+# 2. (If new business TYPE) Create items/dashboard fixtures:
+#    assets/api/products/items_{business_type_id}.json
+#    assets/api/business/items_{business_type_id}.json
+#    assets/api/business/dashboard/{business_type_id}.json
+
+# 3. Regenerate derived files
+dart run tool/generate_fixtures.dart
+
+# 4. If owned by a demo account, update the user fixture's pages array
+```
+
+This generates `pages_list.json` (explore/search), `generated/manifest.json` (page routing), and `categories.json` (explore categories). Empty categories are auto-hidden.
 
 ### Theme System
 

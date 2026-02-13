@@ -2,21 +2,96 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_source.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
+import 'package:honak/features/business/queue/presentation/widgets/queue_activity_log.dart';
+import 'package:honak/features/business/queue/presentation/widgets/queue_activity_utils.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 part 'queue_entry_card_widgets.dart';
 
-/// Individual card for each queue entry.
-///
-/// Shows customer info, vehicle details, package, timer, and action buttons.
-/// Supports compact mode for completed entries.
+// ═══════════════════════════════════════════════════════════════════════════
+// Status display config — colors, icons, labels for each queue status.
+// ═══════════════════════════════════════════════════════════════════════════
+
+class _StatusConfig {
+  const _StatusConfig({
+    required this.color,
+    required this.bgColor,
+    required this.borderColor,
+    required this.icon,
+    required this.label,
+  });
+
+  final Color color;
+  final Color bgColor;
+  final Color borderColor;
+  final IconData icon;
+  final String label;
+
+  static _StatusConfig of(QueueStatus status) => switch (status) {
+        QueueStatus.waiting => const _StatusConfig(
+            color: Color(0xFFFF9800),
+            bgColor: Color(0xFFFFF8E1),
+            borderColor: Color(0xFFFF9800),
+            icon: Icons.schedule_rounded,
+            label: 'في الانتظار',
+          ),
+        QueueStatus.onTheWay => const _StatusConfig(
+            color: Color(0xFF43A047),
+            bgColor: Color(0xFFF0FDF4),
+            borderColor: Color(0xFF43A047),
+            icon: Icons.navigation_rounded,
+            label: 'في الطريق',
+          ),
+        QueueStatus.inProgress => const _StatusConfig(
+            color: Color(0xFF1A73E8),
+            bgColor: Color(0xFFEFF6FF),
+            borderColor: Color(0xFF1A73E8),
+            icon: Icons.play_arrow_rounded,
+            label: 'قيد الخدمة',
+          ),
+        QueueStatus.ready => const _StatusConfig(
+            color: Color(0xFF43A047),
+            bgColor: Color(0xFFF0FDF4),
+            borderColor: Color(0xFF43A047),
+            icon: Icons.check_circle_outline_rounded,
+            label: 'جاهز للاستلام',
+          ),
+        QueueStatus.completed => const _StatusConfig(
+            color: Color(0xFF6B7280),
+            bgColor: Color(0xFFF9FAFB),
+            borderColor: Color(0xFF9CA3AF),
+            icon: Icons.local_shipping_rounded,
+            label: 'مكتمل',
+          ),
+        QueueStatus.noShow => const _StatusConfig(
+            color: Color(0xFFE53935),
+            bgColor: Color(0xFFFEF2F2),
+            borderColor: Color(0xFFE53935),
+            icon: Icons.block_rounded,
+            label: 'لم يحضر',
+          ),
+      };
+}
+
+const _statusOrder = [
+  QueueStatus.waiting,
+  QueueStatus.onTheWay,
+  QueueStatus.inProgress,
+  QueueStatus.ready,
+  QueueStatus.completed,
+  QueueStatus.noShow,
+];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// QueueEntryCard — matches Figma QueueEntryCard.tsx
+// ═══════════════════════════════════════════════════════════════════════════
+
 class QueueEntryCard extends StatefulWidget {
   const QueueEntryCard({
     super.key,
@@ -24,7 +99,12 @@ class QueueEntryCard extends StatefulWidget {
     this.onAdvance,
     this.onNoShow,
     this.onRemove,
+    this.onOpenDetail,
+    this.onOpenChat,
+    this.onChangeStatus,
+    this.activityLog,
     this.advanceLabel,
+    this.advanceIcon,
     this.advanceColor,
     this.showTimer = false,
     this.compact = false,
@@ -34,7 +114,12 @@ class QueueEntryCard extends StatefulWidget {
   final VoidCallback? onAdvance;
   final VoidCallback? onNoShow;
   final VoidCallback? onRemove;
+  final VoidCallback? onOpenDetail;
+  final VoidCallback? onOpenChat;
+  final ValueChanged<QueueStatus>? onChangeStatus;
+  final List<QueueActivityEntry>? activityLog;
   final String? advanceLabel;
+  final IconData? advanceIcon;
   final Color? advanceColor;
   final bool showTimer;
   final bool compact;
@@ -45,6 +130,20 @@ class QueueEntryCard extends StatefulWidget {
 
 class _QueueEntryCardState extends State<QueueEntryCard> {
   bool _expanded = false;
+
+  static const _cardBorder = Color(0xFFF3F4F6); // gray-100
+  static const _gray50 = Color(0xFFF9FAFB);
+  static const _gray100 = Color(0xFFF3F4F6);
+  static const _gray300 = Color(0xFFD1D5DB);
+  static const _gray400 = Color(0xFF9CA3AF);
+  static const _gray500 = Color(0xFF6B7280);
+  static const _gray600 = Color(0xFF4B5563);
+  static const _gray700 = Color(0xFF374151);
+  static const _gray900 = Color(0xFF111827);
+  static const _blue = Color(0xFF1A73E8);
+  static const _blue50 = Color(0xFFEFF6FF);
+  static const _amber = Color(0xFFFF9800);
+  static const _green = Color(0xFF43A047);
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +159,12 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Colors.white,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: _cardBorder),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0D000000),
-            blurRadius: 2,
-            offset: Offset(0, 1),
-          ),
+              color: Color(0x0D000000), blurRadius: 2, offset: Offset(0, 1)),
         ],
       ),
       child: Opacity(
@@ -77,78 +173,71 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           padding: const EdgeInsetsDirectional.all(AppSpacing.md),
           child: Row(
             children: [
-              // Vehicle icon
               Container(
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: _gray100,
                   borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
-                child: Icon(
-                  Icons.directions_car_rounded,
-                  size: 14,
-                  color: Colors.grey.shade400,
-                ),
+                child: const Icon(Icons.directions_car_rounded,
+                    size: 14, color: _gray400),
               ),
               const SizedBox(width: AppSpacing.md),
-
-              // Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(
-                          entry.customerName,
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: Colors.grey.shade700,
-                          ),
-                        ),
+                        Text(entry.customerName,
+                            style: context.textTheme.bodySmall
+                                ?.copyWith(color: _gray700)),
                         const SizedBox(width: AppSpacing.sm),
                         _SourceBadge(source: entry.source),
                         if (entry.status == QueueStatus.noShow) ...[
                           const SizedBox(width: AppSpacing.xs),
                           Container(
                             padding: const EdgeInsetsDirectional.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
+                                horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFEF2F2), // red-50
+                              color: const Color(0xFFFEF2F2),
                               borderRadius: AppRadius.pill,
                             ),
-                            child: Text(
-                              'لم يحضر',
-                              style: context.textTheme.labelSmall?.copyWith(
-                                color: AppColors.error,
-                                fontSize: 10,
-                              ),
-                            ),
+                            child: Text('لم يحضر',
+                                style: context.textTheme.labelSmall?.copyWith(
+                                    color: const Color(0xFFE53935),
+                                    fontSize: 10)),
                           ),
                         ],
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.xxs),
+                    const SizedBox(height: 2),
                     Text(
-                      '${entry.packageName} · ${price.toFormattedArabic()}',
-                      style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
-                        fontSize: 10,
-                      ),
-                    ),
+                        '${entry.packageName} · ${price.toFormattedArabic()}',
+                        style: context.textTheme.labelSmall
+                            ?.copyWith(color: _gray400, fontSize: 10)),
                   ],
                 ),
               ),
-
-              // Completed icon
               if (entry.status == QueueStatus.completed)
-                Icon(
-                  Icons.check_circle,
-                  size: 16,
-                  color: AppColors.success,
+                const Icon(Icons.check_circle, size: 16, color: _green),
+              if (widget.onChangeStatus != null) ...[
+                const SizedBox(width: 6),
+                GestureDetector(
+                  onTap: () => _showStatusPickerSheet(context),
+                  child: Container(
+                    width: 28,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      color: _gray100,
+                      borderRadius: BorderRadius.circular(AppRadius.sm),
+                    ),
+                    child: const Icon(Icons.swap_horiz_rounded,
+                        size: 11, color: _gray400),
+                  ),
                 ),
+              ],
             ],
           ),
         ),
@@ -163,32 +252,37 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Colors.white,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: _cardBorder),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0D000000),
-            blurRadius: 2,
-            offset: Offset(0, 1),
-          ),
+              color: Color(0x0D000000), blurRadius: 2, offset: Offset(0, 1)),
         ],
       ),
       child: ClipRRect(
         borderRadius: AppRadius.cardInner,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Main content
-            _buildMainRow(context, entry),
+            // 1. Header zone — activity log + chat + spacer + timer
+            _buildHeaderZone(context, entry),
 
-            // Notes preview (only when not expanded)
-            if (entry.notes != null && !_expanded)
-              _buildNotesPreview(context, entry.notes!),
+            // 2. Info zone (tappable → detail view)
+            GestureDetector(
+              onTap: widget.onOpenDetail,
+              behavior: HitTestBehavior.opaque,
+              child: _buildInfoZone(context, entry),
+            ),
 
-            // Expanded details
+            // 3. Photo buttons (waiting / in_progress / ready)
+            if (_shouldShowPhotos(entry.status))
+              _buildPhotoButtons(context, entry),
+
+            // 4. Expanded details
             if (_expanded) _buildExpandedDetails(context, entry),
 
-            // Action buttons
+            // 5. Action buttons
             if (widget.onAdvance != null) _buildActionButtons(context),
           ],
         ),
@@ -196,157 +290,446 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
     );
   }
 
-  Widget _buildMainRow(BuildContext context, QueueEntry entry) {
+  bool _shouldShowPhotos(QueueStatus status) =>
+      status == QueueStatus.waiting ||
+      status == QueueStatus.inProgress ||
+      status == QueueStatus.ready;
+
+  // ── Header zone: activity log + chat + spacer + timer ──
+
+  Widget _buildHeaderZone(BuildContext context, QueueEntry entry) {
+    final hasActivity =
+        widget.activityLog != null && widget.activityLog!.isNotEmpty;
+
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(12, 10, 12, 0),
+      child: Row(
+        children: [
+          if (hasActivity)
+            GestureDetector(
+              onTap: () => showQueueActivityLogSheet(
+                context,
+                entry: entry,
+                activityLog: widget.activityLog!,
+              ),
+              child: Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: _blue50,
+                  borderRadius: BorderRadius.circular(AppRadius.sm),
+                ),
+                child: const Icon(Icons.receipt_long_rounded,
+                    size: 13, color: _blue),
+              ),
+            ),
+          if (widget.onOpenChat != null) ...[
+            if (hasActivity) const SizedBox(width: AppSpacing.sm),
+            GestureDetector(
+              onTap: widget.onOpenChat,
+              child: Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: _gray100,
+                  borderRadius: BorderRadius.circular(AppRadius.sm),
+                ),
+                child: const Icon(Icons.chat_bubble_outline_rounded,
+                    size: 13, color: _gray500),
+              ),
+            ),
+          ],
+          const Spacer(),
+          if (widget.showTimer && entry.startedAt != null)
+            _LiveTimer(
+                startedAt: entry.startedAt!,
+                durationMin: entry.estimatedDurationMin)
+          else
+            Text('~${entry.estimatedDurationMin} د',
+                style: context.textTheme.labelSmall
+                    ?.copyWith(color: _gray400, fontSize: 10)),
+        ],
+      ),
+    );
+  }
+
+  // ── Info zone (tappable → detail view) ──
+
+  Widget _buildInfoZone(BuildContext context, QueueEntry entry) {
     final price = Money(entry.totalPrice);
 
     return Padding(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
-      child: Row(
+      padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 12, 12),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Vehicle icon + subscriber badge
-          _buildVehicleIcon(entry),
-          const SizedBox(width: AppSpacing.md),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Vehicle icon + subscriber crown
+              _buildVehicleIcon(entry),
+              const SizedBox(width: AppSpacing.md),
 
-          // Info column
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Name + source + on_the_way badge
-                Row(
+              // Info column
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Flexible(
-                      child: Text(
-                        entry.customerName,
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          color: context.colorScheme.onSurface,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacing.sm),
-                    _SourceBadge(source: entry.source),
-                    if (entry.status == QueueStatus.onTheWay) ...[
-                      const SizedBox(width: AppSpacing.xs),
-                      _OnTheWayBadge(),
-                    ],
-                  ],
-                ),
-                const SizedBox(height: AppSpacing.xxs),
-
-                // Vehicle details
-                if (_hasVehicleInfo(entry))
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      bottom: AppSpacing.xs,
-                    ),
-                    child: _buildVehicleDetails(context, entry),
-                  ),
-
-                // Package + price + add-ons
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsetsDirectional.symmetric(
-                        horizontal: AppSpacing.sm,
-                        vertical: AppSpacing.xxs,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: AppRadius.pill,
-                      ),
-                      child: Text(
-                        entry.packageName,
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade600,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacing.sm),
-                    Text(
-                      price.toFormattedArabic(),
-                      style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade500,
-                        fontSize: 10,
-                      ),
-                    ),
-                    if (entry.addOns.isNotEmpty) ...[
-                      const SizedBox(width: AppSpacing.sm),
-                      Text(
-                        '+${entry.addOns.length} إضافة',
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: AppColors.primary,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-
-                // Subscription badge
-                if (entry.subscriptionPlan != null)
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      top: AppSpacing.xs,
-                    ),
-                    child: Row(
+                    // Name + badges
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: AppSpacing.sm,
+                      runSpacing: 2,
                       children: [
-                        Icon(
-                          Icons.workspace_premium_rounded,
-                          size: 10,
-                          color: AppColors.secondary,
-                        ),
-                        const SizedBox(width: AppSpacing.xs),
-                        Text(
-                          entry.subscriptionPlan!,
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: AppColors.secondary,
-                            fontSize: 10,
-                          ),
-                        ),
+                        Text(entry.customerName,
+                            style: context.textTheme.bodySmall
+                                ?.copyWith(color: _gray900, fontSize: 14)),
+                        _SourceBadge(source: entry.source),
+                        if (entry.status == QueueStatus.onTheWay)
+                          _OnTheWayBadge(),
                       ],
                     ),
-                  ),
-              ],
-            ),
-          ),
+                    const SizedBox(height: 2),
 
-          // Timer / expand toggle
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              if (widget.showTimer && entry.startedAt != null)
-                _LiveTimer(
-                  startedAt: entry.startedAt!,
-                  durationMin: entry.estimatedDurationMin,
-                )
-              else
-                Text(
-                  '~${entry.estimatedDurationMin} د',
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: Colors.grey.shade400,
-                    fontSize: 10,
-                  ),
-                ),
-              const SizedBox(height: AppSpacing.xs),
-              GestureDetector(
-                onTap: () => setState(() => _expanded = !_expanded),
-                child: Icon(
-                  _expanded
-                      ? Icons.keyboard_arrow_up_rounded
-                      : Icons.keyboard_arrow_down_rounded,
-                  size: 14,
-                  color: Colors.grey.shade300,
+                    // Vehicle details
+                    if (_hasVehicleInfo(entry))
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.only(bottom: 4),
+                        child: _buildVehicleDetails(context, entry),
+                      ),
+
+                    // Package + price + discount + add-ons
+                    _buildPackageRow(context, entry, price),
+
+                    // Subscription
+                    if (entry.subscriptionPlan != null)
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.only(top: 4),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.workspace_premium_rounded,
+                                size: 10, color: _amber),
+                            const SizedBox(width: AppSpacing.xs),
+                            Text(entry.subscriptionPlan!,
+                                style: context.textTheme.labelSmall
+                                    ?.copyWith(
+                                        color: _amber, fontSize: 10)),
+                          ],
+                        ),
+                      ),
+                  ],
                 ),
               ),
+
+              // Status badge + expand chevron
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  if (widget.onChangeStatus != null)
+                    _StatusBadge(
+                      status: entry.status,
+                      onTap: () => _showStatusPickerSheet(context),
+                    ),
+                  const SizedBox(height: 4),
+                  GestureDetector(
+                    onTap: () => setState(() => _expanded = !_expanded),
+                    child: Icon(
+                      _expanded
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded,
+                      size: 14,
+                      color: _gray300,
+                    ),
+                  ),
+                ],
+              ),
             ],
+          ),
+
+          // Notes preview (not expanded)
+          if (entry.notes != null && !_expanded)
+            Padding(
+              padding: const EdgeInsetsDirectional.only(top: 8),
+              child: Container(
+                padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: _gray50,
+                  borderRadius: BorderRadius.circular(AppRadius.sm),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.sticky_note_2_outlined,
+                        size: 10, color: _gray400),
+                    const SizedBox(width: AppSpacing.xs),
+                    Expanded(
+                      child: Text(entry.notes!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(color: _gray400, fontSize: 10)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPackageRow(
+      BuildContext context, QueueEntry entry, Money price) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: AppSpacing.sm,
+      runSpacing: 2,
+      children: [
+        Container(
+          padding:
+              const EdgeInsetsDirectional.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+              color: _gray100, borderRadius: AppRadius.pill),
+          child: Text(entry.packageName,
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _gray600, fontSize: 10)),
+        ),
+        if (entry.discount != null && entry.priceBeforeDiscount != null) ...[
+          Text(Money(entry.priceBeforeDiscount!).toFormattedArabic(),
+              style: context.textTheme.labelSmall?.copyWith(
+                  color: _gray300,
+                  fontSize: 10,
+                  decoration: TextDecoration.lineThrough)),
+          Text(price.toFormattedArabic(),
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _green, fontSize: 10)),
+          Container(
+            padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 4, vertical: 2),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF7ED),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              entry.discount!.type == 'percentage'
+                  ? 'خصم ${(entry.discount!.value / 100).round()}%'
+                  : 'خصم ${Money(entry.discount!.amount).toFormattedArabic()}',
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _amber, fontSize: 9),
+            ),
+          ),
+        ] else
+          Text(price.toFormattedArabic(),
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _gray500, fontSize: 10)),
+        if (entry.addOns.isNotEmpty)
+          Text('+${entry.addOns.length} إضافة',
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _blue, fontSize: 10)),
+      ],
+    );
+  }
+
+  // ── Photo buttons ──
+
+  Widget _buildPhotoButtons(BuildContext context, QueueEntry entry) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: _PhotoToggle(
+              label: 'صورة قبل',
+              icon: Icons.camera_alt_outlined,
+              active: entry.photosBefore.isNotEmpty,
+            ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: _PhotoToggle(
+              label: 'صورة بعد',
+              icon: Icons.image_outlined,
+              active: entry.photosAfter.isNotEmpty,
+            ),
           ),
         ],
       ),
     );
   }
+
+  // ── Expanded details ──
+
+  Widget _buildExpandedDetails(BuildContext context, QueueEntry entry) {
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 12),
+      padding: const EdgeInsetsDirectional.only(top: 8),
+      decoration: const BoxDecoration(
+        border: Border(top: BorderSide(color: _gray50)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (entry.customerPhone != null) ...[
+            Row(
+              children: [
+                const Icon(Icons.phone_outlined, size: 12, color: _gray400),
+                const SizedBox(width: AppSpacing.sm),
+                Text(entry.customerPhone!,
+                    textDirection: TextDirection.ltr,
+                    style: context.textTheme.bodySmall
+                        ?.copyWith(color: _gray600)),
+                const Spacer(),
+                Text('اتصال',
+                    style: context.textTheme.labelSmall
+                        ?.copyWith(color: _blue, fontSize: 10)),
+              ],
+            ),
+            const SizedBox(height: 8),
+          ],
+          if (entry.notes != null) ...[
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF8E1),
+                borderRadius: BorderRadius.circular(AppRadius.sm),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.sticky_note_2_outlined,
+                          size: 10, color: _amber),
+                      const SizedBox(width: AppSpacing.xs),
+                      Text('ملاحظات',
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(color: _amber, fontSize: 10)),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(entry.notes!,
+                      style: context.textTheme.bodySmall
+                          ?.copyWith(color: _gray700)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+          if (entry.addOns.isNotEmpty) ...[
+            Text('إضافات:',
+                style: context.textTheme.labelSmall
+                    ?.copyWith(color: _gray400, fontSize: 10)),
+            const SizedBox(height: AppSpacing.xs),
+            for (final addon in entry.addOns)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(bottom: 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(addon.name,
+                        style: context.textTheme.labelSmall
+                            ?.copyWith(fontSize: 10)),
+                    Text('+${Money(addon.price).toFormattedArabic()}',
+                        style: context.textTheme.labelSmall
+                            ?.copyWith(color: _gray500, fontSize: 10)),
+                  ],
+                ),
+              ),
+            const SizedBox(height: 8),
+          ],
+          Text(
+              'وقت الوصول: ${_formatCheckinTime(entry.checkedInAt)}',
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _gray400, fontSize: 10)),
+        ],
+      ),
+    );
+  }
+
+  // ── Action buttons ──
+
+  Widget _buildActionButtons(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        border: Border(top: BorderSide(color: _gray50)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Material(
+              color: widget.advanceColor ?? _blue,
+              child: InkWell(
+                onTap: widget.onAdvance,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (widget.advanceIcon != null) ...[
+                        Icon(widget.advanceIcon,
+                            size: 14, color: Colors.white),
+                        const SizedBox(width: 6),
+                      ],
+                      Text(widget.advanceLabel ?? '',
+                          style: context.textTheme.bodySmall
+                              ?.copyWith(color: Colors.white, fontSize: 12)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          if (widget.onNoShow != null)
+            Container(
+              decoration: const BoxDecoration(
+                color: _gray50,
+                border:
+                    BorderDirectional(start: BorderSide(color: _gray100)),
+              ),
+              child: InkWell(
+                onTap: widget.onNoShow,
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                      horizontal: 16, vertical: 10),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.block_rounded,
+                          size: 12, color: _gray400),
+                      const SizedBox(width: AppSpacing.xs),
+                      Text('لم يحضر',
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(color: _gray400, fontSize: 10)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          if (widget.onRemove != null && widget.onNoShow == null)
+            Container(
+              decoration: const BoxDecoration(
+                color: _gray50,
+                border:
+                    BorderDirectional(start: BorderSide(color: _gray100)),
+              ),
+              child: InkWell(
+                onTap: widget.onRemove,
+                child: const Padding(
+                  padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: 16, vertical: 10),
+                  child: Icon(Icons.close_rounded,
+                      size: 12, color: _gray400),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  // ── Helpers ──
 
   Widget _buildVehicleIcon(QueueEntry entry) {
     return Stack(
@@ -356,30 +739,24 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
+            color: _gray50,
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
-          child: Icon(
-            Icons.directions_car_rounded,
-            size: 18,
-            color: Colors.grey.shade600,
-          ),
+          child: const Icon(Icons.directions_car_rounded,
+              size: 18, color: _gray600),
         ),
         if (entry.isSubscriber)
-          PositionedDirectional(
+          const PositionedDirectional(
             top: -4,
             end: -4,
-            child: Container(
-              width: 16,
-              height: 16,
-              decoration: const BoxDecoration(
-                color: AppColors.secondary,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.workspace_premium_rounded,
-                size: 9,
-                color: AppColors.white,
+            child: DecoratedBox(
+              decoration:
+                  BoxDecoration(color: _amber, shape: BoxShape.circle),
+              child: SizedBox(
+                width: 16,
+                height: 16,
+                child: Icon(Icons.workspace_premium_rounded,
+                    size: 9, color: Colors.white),
               ),
             ),
           ),
@@ -387,11 +764,10 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
     );
   }
 
-  bool _hasVehicleInfo(QueueEntry entry) {
-    return entry.vehicleType != null ||
-        entry.vehicleColor != null ||
-        entry.plateNumber != null;
-  }
+  bool _hasVehicleInfo(QueueEntry entry) =>
+      entry.vehicleType != null ||
+      entry.vehicleColor != null ||
+      entry.plateNumber != null;
 
   Widget _buildVehicleDetails(BuildContext context, QueueEntry entry) {
     final parts = <String>[
@@ -401,297 +777,20 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
     return Row(
       children: [
         if (parts.isNotEmpty)
-          Text(
-            parts.join(' · '),
-            style: context.textTheme.labelSmall?.copyWith(
-              color: Colors.grey.shade500,
-              fontSize: 10,
-            ),
-          ),
+          Text(parts.join(' · '),
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _gray500, fontSize: 10)),
         if (entry.plateNumber != null) ...[
           if (parts.isNotEmpty)
-            Text(
-              ' · ',
-              style: context.textTheme.labelSmall?.copyWith(
-                color: Colors.grey.shade500,
-                fontSize: 10,
-              ),
-            ),
-          Text(
-            entry.plateNumber!,
-            textDirection: TextDirection.ltr,
-            style: context.textTheme.labelSmall?.copyWith(
-              color: Colors.grey.shade600,
-              fontSize: 10,
-            ),
-          ),
+            Text(' · ',
+                style: context.textTheme.labelSmall
+                    ?.copyWith(color: _gray500, fontSize: 10)),
+          Text(entry.plateNumber!,
+              textDirection: TextDirection.ltr,
+              style: context.textTheme.labelSmall
+                  ?.copyWith(color: _gray600, fontSize: 10)),
         ],
       ],
-    );
-  }
-
-  Widget _buildNotesPreview(BuildContext context, String notes) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.md,
-        0,
-        AppSpacing.md,
-        AppSpacing.md,
-      ),
-      child: Container(
-        padding: const EdgeInsetsDirectional.symmetric(
-          horizontal: AppSpacing.sm,
-          vertical: AppSpacing.xs,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade50,
-          borderRadius: BorderRadius.circular(AppRadius.sm),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.sticky_note_2_outlined, size: 10, color: Colors.grey.shade400),
-            const SizedBox(width: AppSpacing.xs),
-            Expanded(
-              child: Text(
-                notes,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: context.textTheme.labelSmall?.copyWith(
-                  color: Colors.grey.shade400,
-                  fontSize: 10,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildExpandedDetails(BuildContext context, QueueEntry entry) {
-    return Container(
-      margin: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.md,
-        0,
-        AppSpacing.md,
-        AppSpacing.md,
-      ),
-      padding: const EdgeInsetsDirectional.only(top: AppSpacing.sm),
-      decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.grey.shade50)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Phone
-          if (entry.customerPhone != null) ...[
-            Row(
-              children: [
-                Icon(Icons.phone_outlined, size: 12, color: Colors.grey.shade400),
-                const SizedBox(width: AppSpacing.sm),
-                Text(
-                  entry.customerPhone!,
-                  textDirection: TextDirection.ltr,
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade600,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  'اتصال',
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: AppColors.primary,
-                    fontSize: 10,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.sm),
-          ],
-
-          // Full notes
-          if (entry.notes != null) ...[
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsetsDirectional.all(AppSpacing.md),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFF8E1), // amber-50
-                borderRadius: BorderRadius.circular(AppRadius.sm),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.sticky_note_2_outlined,
-                        size: 10,
-                        color: AppColors.secondary,
-                      ),
-                      const SizedBox(width: AppSpacing.xs),
-                      Text(
-                        'ملاحظات',
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: AppColors.secondary,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(
-                    entry.notes!,
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: Colors.grey.shade700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-          ],
-
-          // Add-ons
-          if (entry.addOns.isNotEmpty) ...[
-            Text(
-              'إضافات:',
-              style: context.textTheme.labelSmall?.copyWith(
-                color: Colors.grey.shade400,
-                fontSize: 10,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.xs),
-            for (final addon in entry.addOns)
-              Padding(
-                padding: const EdgeInsetsDirectional.only(
-                  bottom: AppSpacing.xxs,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      addon.name,
-                      style: context.textTheme.labelSmall?.copyWith(
-                        fontSize: 10,
-                      ),
-                    ),
-                    Text(
-                      '+${Money(addon.price).toFormattedArabic()}',
-                      style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade500,
-                        fontSize: 10,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            const SizedBox(height: AppSpacing.sm),
-          ],
-
-          // Check-in time
-          Text(
-            'وقت الوصول: ${_formatCheckinTime(entry.checkedInAt)}',
-            style: context.textTheme.labelSmall?.copyWith(
-              color: Colors.grey.shade400,
-              fontSize: 10,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActionButtons(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.grey.shade50)),
-      ),
-      child: Row(
-        children: [
-          // Primary action
-          Expanded(
-            child: Material(
-              color: widget.advanceColor ?? AppColors.primary,
-              child: InkWell(
-                onTap: widget.onAdvance,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.advanceLabel ?? '',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.white,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          // No-show button (for waiting entries)
-          if (widget.onNoShow != null)
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                border: BorderDirectional(
-                  start: BorderSide(color: Colors.grey.shade100),
-                ),
-              ),
-              child: InkWell(
-                onTap: widget.onNoShow,
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.lg,
-                    vertical: 10,
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.block_rounded, size: 12, color: Colors.grey.shade400),
-                      const SizedBox(width: AppSpacing.xs),
-                      Text(
-                        'لم يحضر',
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade400,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-          // Remove button (for non-waiting entries without no-show)
-          if (widget.onRemove != null && widget.onNoShow == null)
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                border: BorderDirectional(
-                  start: BorderSide(color: Colors.grey.shade100),
-                ),
-              ),
-              child: InkWell(
-                onTap: widget.onRemove,
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.lg,
-                    vertical: 10,
-                  ),
-                  child: Icon(
-                    Icons.close_rounded,
-                    size: 12,
-                    color: Colors.grey.shade400,
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
     );
   }
 
@@ -699,5 +798,21 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
     final dt = DateTime.fromMillisecondsSinceEpoch(epochSeconds * 1000);
     return DateFormat.jm('ar').format(dt);
   }
-}
 
+  void _showStatusPickerSheet(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _StatusPickerSheet(
+        currentStatus: widget.entry.status,
+        customerName: widget.entry.customerName,
+        packageName: widget.entry.packageName,
+        onSelect: (status) {
+          Navigator.pop(context);
+          widget.onChangeStatus?.call(status);
+        },
+      ),
+    );
+  }
+}

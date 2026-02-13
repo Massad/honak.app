@@ -5,7 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/money_text.dart';
 
 import 'post_card_helpers.dart';
@@ -40,11 +40,10 @@ class ProductCardBody extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned.fill(
-                  child: CachedImage(
-                    imageUrl: post.media.first.url,
+                  child: AppImage(
+                    url: post.media.first.url,
                     width: 130,
                     height: 140,
-                    fit: BoxFit.cover,
                   ),
                 ),
                 // Price badge overlay
@@ -94,22 +93,10 @@ class ProductCardBody extends StatelessWidget {
                   onTap: onPageTap,
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      AppImage.avatar(
+                        url: post.page.avatarUrl,
+                        name: post.page.name,
                         radius: 12,
-                        backgroundColor:
-                            context.colorScheme.surfaceContainerHighest,
-                        backgroundImage: post.page.avatarUrl != null
-                            ? NetworkImage(post.page.avatarUrl!)
-                            : null,
-                        child: post.page.avatarUrl == null
-                            ? Text(
-                                post.page.name.isNotEmpty
-                                    ? post.page.name[0]
-                                    : '',
-                                style: context.textTheme.labelSmall
-                                    ?.copyWith(fontSize: 10),
-                              )
-                            : null,
                       ),
                       SizedBox(width: AppSpacing.xs),
                       Flexible(

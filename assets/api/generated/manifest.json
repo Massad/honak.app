@@ -1,0 +1,280 @@
+{
+  "_generated": "2026-02-13T19:53:05.821675Z",
+  "pages": {
+    "abu-ahmad-water": {
+      "fixture": "pages/page_water",
+      "business_type_id": "water_delivery",
+      "archetype": "catalog_order"
+    },
+    "abu-mahmoud-veggies": {
+      "fixture": "pages/page_produce",
+      "business_type_id": "produce",
+      "archetype": "catalog_order"
+    },
+    "abu-sulaiman-gas": {
+      "fixture": "pages/page_gas",
+      "business_type_id": "gas_delivery",
+      "archetype": "catalog_order"
+    },
+    "abukhaled-garage": {
+      "fixture": "pages/page_garage",
+      "business_type_id": "car_mechanic",
+      "archetype": "quote_request"
+    },
+    "ahmad-plumbing": {
+      "fixture": "pages/page_plumber",
+      "business_type_id": "plumber",
+      "archetype": "quote_request"
+    },
+    "alaseel-shoe-repair": {
+      "fixture": "pages/page_shoe_repair",
+      "business_type_id": "shoe_repair",
+      "archetype": "service_booking"
+    },
+    "aljazeera-tires": {
+      "fixture": "pages/page_tire_shop",
+      "business_type_id": "tire_shop",
+      "archetype": "service_booking"
+    },
+    "alkaram-rest": {
+      "fixture": "pages/page_alkaram",
+      "business_type_id": "restaurant",
+      "archetype": "menu_order"
+    },
+    "alkheir-butcher": {
+      "fixture": "pages/page_butcher",
+      "business_type_id": "butcher",
+      "archetype": "catalog_order"
+    },
+    "alnajjar-tailor": {
+      "fixture": "pages/page_tailor",
+      "business_type_id": "tailor",
+      "archetype": "service_booking"
+    },
+    "amman-municipality": {
+      "fixture": "pages/page_municipality",
+      "business_type_id": "municipality",
+      "archetype": "follow_only"
+    },
+    "atr-oud": {
+      "fixture": "pages/page_perfume",
+      "business_type_id": "perfume_shop",
+      "archetype": "catalog_order"
+    },
+    "barber-fadi": {
+      "fixture": "pages/page_barber",
+      "business_type_id": "barber",
+      "archetype": "service_booking"
+    },
+    "beit-sitti": {
+      "fixture": "pages/page_restaurant",
+      "business_type_id": "restaurant",
+      "archetype": "menu_order"
+    },
+    "city-mall": {
+      "fixture": "pages/page_directory",
+      "business_type_id": "directory",
+      "archetype": "directory"
+    },
+    "clean-express-laundry": {
+      "fixture": "pages/page_laundry",
+      "business_type_id": "laundry",
+      "archetype": "service_booking"
+    },
+    "cool-ac": {
+      "fixture": "pages/page_ac_repair",
+      "business_type_id": "ac_repair",
+      "archetype": "quote_request"
+    },
+    "dr-khaled-clinic": {
+      "fixture": "pages/page_doctor",
+      "business_type_id": "clinic",
+      "archetype": "service_booking"
+    },
+    "dukkaneh-jabal": {
+      "fixture": "pages/page_dukkaneh",
+      "business_type_id": "grocery",
+      "archetype": "catalog_order"
+    },
+    "dukkaneh-store": {
+      "fixture": "pages/page_online_store",
+      "business_type_id": "online_store",
+      "archetype": "catalog_order"
+    },
+    "farah-bridal": {
+      "fixture": "pages/page_bridal",
+      "business_type_id": "bridal_shop",
+      "archetype": "catalog_order"
+    },
+    "fresh-juice-bar": {
+      "fixture": "pages/page_juice_fresh",
+      "business_type_id": "juice_bar",
+      "archetype": "menu_order"
+    },
+    "furna-alhara": {
+      "fixture": "pages/page_bakery_hara",
+      "business_type_id": "bakery",
+      "archetype": "menu_order"
+    },
+    "gadget-zone": {
+      "fixture": "pages/page_electronics",
+      "business_type_id": "electronics_store",
+      "archetype": "catalog_order"
+    },
+    "glamour-cosmetics": {
+      "fixture": "pages/page_cosmetics",
+      "business_type_id": "cosmetics_store",
+      "archetype": "catalog_order"
+    },
+    "golden-oven-bakery": {
+      "fixture": "pages/page_bakery",
+      "business_type_id": "bakery",
+      "archetype": "menu_order"
+    },
+    "grand-palace-hotel": {
+      "fixture": "pages/page_hotel",
+      "business_type_id": "hotel",
+      "archetype": "reservation"
+    },
+    "hara-coffee": {
+      "fixture": "pages/page_grocery",
+      "business_type_id": "cafe",
+      "archetype": "menu_order"
+    },
+    "hayat-pharmacy": {
+      "fixture": "pages/page_pharmacy",
+      "business_type_id": "pharmacy",
+      "archetype": "catalog_order"
+    },
+    "kahraba-express": {
+      "fixture": "pages/page_electrician",
+      "business_type_id": "electrician",
+      "archetype": "quote_request"
+    },
+    "layal-catering": {
+      "fixture": "pages/page_catering",
+      "business_type_id": "catering",
+      "archetype": "quote_request"
+    },
+    "maktabet-alnoor": {
+      "fixture": "pages/page_bookstore",
+      "business_type_id": "bookstore",
+      "archetype": "catalog_order"
+    },
+    "mini-market-ahmad": {
+      "fixture": "pages/page_mini_market",
+      "business_type_id": "mini_market",
+      "archetype": "catalog_order"
+    },
+    "moe-jordan": {
+      "fixture": "pages/page_moe",
+      "business_type_id": "government",
+      "archetype": "follow_only"
+    },
+    "no-bugs": {
+      "fixture": "pages/page_pest_control",
+      "business_type_id": "pest_control",
+      "archetype": "quote_request"
+    },
+    "nour-fashion": {
+      "fixture": "pages/page_clothing",
+      "business_type_id": "clothes_store",
+      "archetype": "catalog_order"
+    },
+    "physio-care": {
+      "fixture": "pages/page_physiotherapy",
+      "business_type_id": "physiotherapy",
+      "archetype": "service_booking"
+    },
+    "power-fitness": {
+      "fixture": "pages/page_gym",
+      "business_type_id": "gym",
+      "archetype": "service_booking"
+    },
+    "precision-watches": {
+      "fixture": "pages/page_watch_repair",
+      "business_type_id": "watch_repair",
+      "archetype": "service_booking"
+    },
+    "quick-lube-amman": {
+      "fixture": "pages/page_oil_change",
+      "business_type_id": "oil_change",
+      "archetype": "service_booking"
+    },
+    "royal-events": {
+      "fixture": "pages/page_events",
+      "business_type_id": "event_venue",
+      "archetype": "reservation"
+    },
+    "sahha-pharmacy": {
+      "fixture": "pages/page_pharmacy_sahha",
+      "business_type_id": "pharmacy",
+      "archetype": "catalog_order"
+    },
+    "salon-rania": {
+      "fixture": "pages/page_services",
+      "business_type_id": "salon",
+      "archetype": "service_booking"
+    },
+    "sara-photography": {
+      "fixture": "pages/page_photographer",
+      "business_type_id": "photographer",
+      "archetype": "portfolio_inquiry"
+    },
+    "serenity-spa": {
+      "fixture": "pages/page_spa",
+      "business_type_id": "spa",
+      "archetype": "service_booking"
+    },
+    "smart-fix-mobiles": {
+      "fixture": "pages/page_mobile_repair",
+      "business_type_id": "mobile_repair",
+      "archetype": "service_booking"
+    },
+    "smart-fix-phones": {
+      "fixture": "pages/page_phone_repair",
+      "business_type_id": "mobile_repair",
+      "archetype": "service_booking"
+    },
+    "social-development": {
+      "fixture": "pages/page_social_dev",
+      "business_type_id": "government",
+      "archetype": "follow_only"
+    },
+    "sparkle-car-wash": {
+      "fixture": "pages/page_car_wash",
+      "business_type_id": "car_wash",
+      "archetype": "service_booking"
+    },
+    "tazej-juice": {
+      "fixture": "pages/page_juice_bar",
+      "business_type_id": "juice_bar",
+      "archetype": "menu_order"
+    },
+    "tiny-tots": {
+      "fixture": "pages/page_kids_store",
+      "business_type_id": "kids_store",
+      "archetype": "catalog_order"
+    },
+    "traffic-department": {
+      "fixture": "pages/page_traffic",
+      "business_type_id": "government",
+      "archetype": "follow_only"
+    },
+    "vet-amman": {
+      "fixture": "pages/page_vet",
+      "business_type_id": "vet_clinic",
+      "archetype": "service_booking"
+    },
+    "villa-dead-sea": {
+      "fixture": "pages/page_villa",
+      "business_type_id": "villa_rental",
+      "archetype": "reservation"
+    },
+    "wadi-camp": {
+      "fixture": "pages/page_camping",
+      "business_type_id": "camping",
+      "archetype": "reservation"
+    }
+  }
+}

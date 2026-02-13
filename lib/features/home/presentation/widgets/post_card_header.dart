@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Compact single-row attribution: avatar + name + verified + type badge + time/promoted + optional follow.
 class CompactAttribution extends ConsumerWidget {
@@ -47,19 +48,10 @@ class CompactAttribution extends ConsumerWidget {
       onTap: onTap,
       child: Row(
         children: [
-          CircleAvatar(
+          AppImage.avatar(
+            url: page.avatarUrl,
+            name: page.name,
             radius: avatarRadius,
-            backgroundColor: context.colorScheme.surfaceContainerHighest,
-            backgroundImage:
-                page.avatarUrl != null ? NetworkImage(page.avatarUrl!) : null,
-            child: page.avatarUrl == null
-                ? Text(
-                    page.name.isNotEmpty ? page.name[0] : '',
-                    style: context.textTheme.labelSmall?.copyWith(
-                      fontSize: tiny ? 10 : 12,
-                    ),
-                  )
-                : null,
           ),
           SizedBox(width: AppSpacing.sm),
           Expanded(

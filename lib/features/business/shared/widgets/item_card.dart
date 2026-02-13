@@ -6,7 +6,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_item.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class ItemCard extends StatelessWidget {
   final BizItem item;
@@ -216,14 +216,12 @@ class _ItemImage extends StatelessWidget {
 
     return Stack(
       children: [
-        ClipRRect(
+        AppImage(
+          url: imageUrl,
+          width: 60,
+          height: 60,
           borderRadius: AppRadius.cardInner,
-          child: CachedImage(
-            imageUrl: imageUrl,
-            width: 60,
-            height: 60,
-            placeholderIcon: Icons.inventory_2_outlined,
-          ),
+          placeholderIcon: Icons.inventory_2_outlined,
         ),
         // Discount badge overlay
         if (item.discountPercent != null && item.discountPercent! > 0)

@@ -4,7 +4,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
 import 'package:honak/shared/entities/money.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class ProductCardMessage extends StatefulWidget {
   final Message message;
@@ -112,8 +112,8 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
           if (_product.image != null) ...[
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CachedImage(
-                imageUrl: _product.image,
+              child: AppImage(
+                url: _product.image,
                 width: 48,
                 height: 48,
                 fit: BoxFit.cover,

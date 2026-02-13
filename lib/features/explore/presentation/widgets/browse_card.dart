@@ -78,10 +78,6 @@ class BrowseCard extends ConsumerWidget {
       onTap: page.hasActiveStories
           ? () => openStoryViewer(context, ref, pageId: page.id)
           : null,
-      placeholder: Icon(
-        Icons.storefront_outlined,
-        color: context.colorScheme.onSurfaceVariant,
-      ),
     );
   }
 

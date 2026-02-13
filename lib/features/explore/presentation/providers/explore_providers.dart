@@ -40,6 +40,15 @@ final nearbyExploreProvider = FutureProvider<List<NearbyPage>>((ref) async {
   throw Exception(response.error?.message ?? 'Failed to load nearby pages');
 });
 
+/// Categories filtered to only those with at least one page in pages_list.
+final activeCategoriesProvider = FutureProvider<List<Category>>((ref) async {
+  final categories = await ref.watch(categoriesProvider.future);
+  final pages = await ref.watch(trendingPagesProvider.future);
+  final activeIds =
+      pages.map((p) => p.exploreCategory).whereType<String>().toSet();
+  return categories.where((c) => activeIds.contains(c.id)).toList();
+});
+
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
 final selectedFilterProvider = StateProvider<String?>((ref) => null);

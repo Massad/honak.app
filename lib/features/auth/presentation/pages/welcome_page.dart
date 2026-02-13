@@ -11,7 +11,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/api/mock_api_client.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class _DemoAccount {
   final String phone;
@@ -491,8 +491,8 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
                 ),
                 padding: const EdgeInsets.all(1),
                 child: ClipOval(
-                  child: CachedImage(
-                    imageUrl: account.avatar,
+                  child: AppImage(
+                    url: account.avatar,
                     width: 42,
                     height: 42,
                     fit: BoxFit.cover,

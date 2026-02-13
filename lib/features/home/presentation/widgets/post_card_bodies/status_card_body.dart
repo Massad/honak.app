@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 import 'post_card_helpers.dart';
 
@@ -74,22 +75,10 @@ class StatusCardBody extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          CircleAvatar(
+                          AppImage.avatar(
+                            url: post.page.avatarUrl,
+                            name: post.page.name,
                             radius: 8,
-                            backgroundColor:
-                                context.colorScheme.surfaceContainerHighest,
-                            backgroundImage: post.page.avatarUrl != null
-                                ? NetworkImage(post.page.avatarUrl!)
-                                : null,
-                            child: post.page.avatarUrl == null
-                                ? Text(
-                                    post.page.name.isNotEmpty
-                                        ? post.page.name[0]
-                                        : '',
-                                    style: context.textTheme.labelSmall
-                                        ?.copyWith(fontSize: 7),
-                                  )
-                                : null,
                           ),
                           SizedBox(width: AppSpacing.xs),
                           Text(

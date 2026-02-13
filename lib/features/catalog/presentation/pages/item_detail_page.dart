@@ -8,7 +8,7 @@ import 'package:honak/features/requests/domain/entities/cart.dart';
 import 'package:honak/features/requests/presentation/providers/cart_provider.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/item_selection/item_option_selector.dart';
 import 'package:honak/shared/widgets/money_text.dart';
@@ -284,8 +284,8 @@ class _ImageCarouselState extends State<_ImageCarousel> {
         PageView.builder(
           itemCount: widget.images.length,
           onPageChanged: (index) => setState(() => _currentPage = index),
-          itemBuilder: (context, index) => CachedImage(
-            imageUrl: widget.images[index],
+          itemBuilder: (context, index) => AppImage(
+            url: widget.images[index],
             width: double.infinity,
             fit: BoxFit.cover,
           ),

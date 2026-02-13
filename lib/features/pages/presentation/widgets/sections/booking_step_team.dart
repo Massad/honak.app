@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Step 1: Team member selection list.
 class TeamStepContent extends StatelessWidget {
@@ -84,23 +84,19 @@ class _TeamMemberOption extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Row(
             children: [
-              CircleAvatar(
-                radius: 22,
-                backgroundColor:
-                    context.colorScheme.surfaceContainerHighest,
-                child: isAnyOption
-                    ? Icon(Icons.groups,
-                        color: context.colorScheme.onSurfaceVariant)
-                    : avatarUrl != null
-                        ? ClipOval(
-                            child: CachedImage(
-                              imageUrl: avatarUrl,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : Icon(Icons.person,
-                            color: context.colorScheme.onSurfaceVariant),
-              ),
+              isAnyOption
+                  ? CircleAvatar(
+                      radius: 22,
+                      backgroundColor:
+                          context.colorScheme.surfaceContainerHighest,
+                      child: Icon(Icons.groups,
+                          color: context.colorScheme.onSurfaceVariant),
+                    )
+                  : AppImage.avatar(
+                      url: avatarUrl,
+                      name: name,
+                      radius: 22,
+                    ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Column(

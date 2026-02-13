@@ -3,7 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/money_text.dart';
 import 'package:honak/shared/widgets/price_change_badge.dart';
 
@@ -52,8 +52,8 @@ class MenuItemCard extends StatelessWidget {
                       child: SizedBox(
                         width: 80,
                         height: 80,
-                        child: CachedImage(
-                          imageUrl: item.images.isNotEmpty
+                        child: AppImage(
+                          url: item.images.isNotEmpty
                               ? item.images.first
                               : null,
                           fit: BoxFit.cover,

@@ -62,7 +62,7 @@ class _PackageCard extends StatelessWidget {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.secondary,
+                            color: AppColors.primary,
                             borderRadius: AppRadius.pill,
                           ),
                           child: const Text(
@@ -259,15 +259,19 @@ class _FieldLabel extends StatelessWidget {
   }
 }
 
+const _kOtherValue = '__other__';
+
 class _ChipGroup extends StatelessWidget {
   final List<String> items;
   final String? selected;
   final ValueChanged<String> onSelected;
+  final bool showOther;
 
   const _ChipGroup({
     required this.items,
     required this.selected,
     required this.onSelected,
+    this.showOther = false,
   });
 
   @override
@@ -275,30 +279,71 @@ class _ChipGroup extends StatelessWidget {
     return Wrap(
       spacing: AppSpacing.sm,
       runSpacing: AppSpacing.sm,
-      children: items.map((item) {
-        final isSelected = selected == item;
-        return GestureDetector(
-          onTap: () => onSelected(item),
-          child: Container(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
+      children: [
+        ...items.map((item) {
+          final isSelected = selected == item;
+          return GestureDetector(
+            onTap: () => onSelected(item),
+            child: Container(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.primary : Colors.grey.shade100,
+                borderRadius: AppRadius.pill,
+              ),
+              child: Text(
+                item,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: isSelected ? Colors.white : Colors.grey.shade500,
+                ),
+              ),
             ),
-            decoration: BoxDecoration(
-              color: isSelected ? AppColors.primary : Colors.grey.shade100,
-              borderRadius: AppRadius.pill,
-            ),
-            child: Text(
-              item,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: isSelected ? Colors.white : Colors.grey.shade500,
+          );
+        }),
+        if (showOther)
+          GestureDetector(
+            onTap: () => onSelected(_kOtherValue),
+            child: Container(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
+              decoration: BoxDecoration(
+                color: selected == _kOtherValue
+                    ? AppColors.primary
+                    : Colors.grey.shade100,
+                borderRadius: AppRadius.pill,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.add,
+                    size: 14,
+                    color: selected == _kOtherValue
+                        ? Colors.white
+                        : Colors.grey.shade500,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    'أخرى',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: selected == _kOtherValue
+                          ? Colors.white
+                          : Colors.grey.shade500,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        );
-      }).toList(),
+      ],
     );
   }
 }

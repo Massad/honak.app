@@ -4,7 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/user.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class PagePreviewCard extends StatelessWidget {
   final UserPage page;
@@ -187,19 +187,12 @@ class PagePreviewCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: ClipRRect(
+                    child: AppImage(
+                      url: page.avatarUrl,
+                      width: 50,
+                      height: 50,
                       borderRadius: BorderRadius.circular(10),
-                      child: page.avatarUrl != null
-                          ? CachedImage(
-                              imageUrl: page.avatarUrl!,
-                              width: 50,
-                              height: 50,
-                            )
-                          : Icon(
-                              Icons.store,
-                              size: 24,
-                              color: Colors.grey.shade400,
-                            ),
+                      placeholderIcon: Icons.store,
                     ),
                   ),
                 ],

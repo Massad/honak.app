@@ -35,6 +35,12 @@
       "color": "bg-green-50"
     }
   ],
+  "available_add_ons": [
+    { "id": "ao_air_filter", "name_ar": "فلتر هواء", "price": 5.0 },
+    { "id": "ao_cabin_filter", "name_ar": "فلتر مكيف", "price": 7.0 },
+    { "id": "ao_brake_check", "name_ar": "فحص مكابح", "price": 3.0 },
+    { "id": "ao_coolant", "name_ar": "تعبئة مياه رديتر", "price": 2.0 }
+  ],
   "queue": [
     {
       "id": "q-101",

@@ -8,7 +8,7 @@ import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class PageSelectorSheet extends ConsumerWidget {
   const PageSelectorSheet({super.key});
@@ -231,19 +231,12 @@ class _PageTile extends StatelessWidget {
                     color: Colors.grey.shade100,
                     border: Border.all(color: Colors.grey.shade200),
                   ),
-                  child: ClipRRect(
+                  child: AppImage(
+                    url: page.avatarUrl,
+                    width: 40,
+                    height: 40,
                     borderRadius: BorderRadius.circular(10),
-                    child: page.avatarUrl != null
-                        ? CachedImage(
-                            imageUrl: page.avatarUrl,
-                            width: 40,
-                            height: 40,
-                          )
-                        : Icon(
-                            Icons.store,
-                            size: 20,
-                            color: Colors.grey.shade400,
-                          ),
+                    placeholderIcon: Icons.store,
                   ),
                 ),
               ],

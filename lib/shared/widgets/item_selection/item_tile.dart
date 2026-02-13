@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// Compact item row for picker lists.
 ///
@@ -27,8 +27,8 @@ class ItemTile extends StatelessWidget {
             if (item.images.isNotEmpty) ...[
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: CachedImage(
-                  imageUrl: item.images.first,
+                child: AppImage(
+                  url: item.images.first,
                   width: 44,
                   height: 44,
                   fit: BoxFit.cover,

@@ -111,6 +111,102 @@
         { "status": "preparing", "label": "قيد التحضير", "timestamp": 1769991600, "actor": "business", "done": true },
         { "status": "completed", "label": "جاهز للاستلام", "timestamp": 1769993400, "actor": "business", "done": true }
       ]
+    },
+    {
+      "id": "req_107",
+      "type": "booking",
+      "status": "completed",
+      "business_page_id": "clean-express-laundry",
+      "business_name": "كلين إكسبرس",
+      "business_avatar_url": "https://picsum.photos/seed/clean-express/200",
+      "business_slug": "clean-express-laundry",
+      "summary": "غسيل وكوي ٥ قمصان",
+      "items_count": 5,
+      "total_cents": 1000,
+      "created_at": 1770075000,
+      "can_cancel": false,
+      "items": [
+        { "id": "svc_wash1", "name": "غسيل وكوي قميص", "quantity": 5, "price_cents": 200 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770075000, "actor": "customer", "done": true },
+        { "status": "accepted", "label": "تم الاستلام", "timestamp": 1770078600, "actor": "business", "done": true },
+        { "status": "in_progress", "label": "قيد الغسيل", "timestamp": 1770082200, "actor": "business", "done": true },
+        { "status": "completed", "label": "تم الاستلام", "timestamp": 1770161800, "actor": "customer", "done": true }
+      ]
+    },
+    {
+      "id": "req_108",
+      "type": "booking",
+      "status": "completed",
+      "business_page_id": "alaseel-shoe-repair",
+      "business_name": "إسكافي الأصيل",
+      "business_avatar_url": "https://picsum.photos/seed/alaseel-shoe/200",
+      "business_slug": "alaseel-shoe-repair",
+      "summary": "تصليح كعب حذاء",
+      "items_count": 1,
+      "total_cents": 500,
+      "created_at": 1769989000,
+      "can_cancel": false,
+      "items": [
+        { "id": "svc_heel", "name": "تصليح كعب", "quantity": 1, "price_cents": 500 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1769989000, "actor": "customer", "done": true },
+        { "status": "accepted", "label": "تم الاستلام", "timestamp": 1769992600, "actor": "business", "detail": "جاهز خلال ساعة", "done": true },
+        { "status": "completed", "label": "تم الاستلام", "timestamp": 1769996200, "actor": "customer", "done": true }
+      ]
+    },
+    {
+      "id": "req_105",
+      "type": "queue_service",
+      "status": "completed",
+      "business_page_id": "pg_sparkle_car_wash",
+      "business_name": "Sparkle مغسلة",
+      "business_avatar_url": "https://picsum.photos/seed/sparkle-cw/200",
+      "business_slug": "sparkle-car-wash",
+      "summary": "غسيل خارجي",
+      "items_count": 1,
+      "total_cents": 350,
+      "created_at": 1769900600,
+      "queue_position": null,
+      "estimated_wait_min": null,
+      "queue_status": "completed",
+      "can_cancel": false,
+      "items": [
+        { "id": "pkg_exterior", "name": "غسيل خارجي", "quantity": 1, "price_cents": 350 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الانضمام للدور", "timestamp": 1769900600, "actor": "customer", "done": true },
+        { "status": "waiting", "label": "بالانتظار", "timestamp": 1769900600, "actor": "system", "done": true },
+        { "status": "in_progress", "label": "قيد الخدمة", "timestamp": 1769902400, "actor": "business", "done": true },
+        { "status": "completed", "label": "اكتملت الخدمة", "timestamp": 1769904200, "actor": "business", "done": true }
+      ]
+    },
+    {
+      "id": "req_106",
+      "type": "queue_service",
+      "status": "no_show",
+      "business_page_id": "pg_fast_oil",
+      "business_name": "فاست أويل",
+      "business_avatar_url": "https://picsum.photos/seed/fast-oil/200",
+      "business_slug": "fast-oil",
+      "summary": "تغيير زيت عادي",
+      "items_count": 1,
+      "total_cents": 2000,
+      "created_at": 1769814200,
+      "queue_position": null,
+      "estimated_wait_min": null,
+      "queue_status": "no_show",
+      "can_cancel": false,
+      "items": [
+        { "id": "pkg_conventional", "name": "زيت عادي", "quantity": 1, "price_cents": 2000 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الانضمام للدور", "timestamp": 1769814200, "actor": "customer", "done": true },
+        { "status": "waiting", "label": "بالانتظار", "timestamp": 1769814200, "actor": "system", "done": true },
+        { "status": "no_show", "label": "لم يتم الحضور", "timestamp": 1769817800, "actor": "business", "done": true }
+      ]
     }
   ]
 }

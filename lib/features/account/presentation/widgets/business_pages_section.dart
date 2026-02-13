@@ -7,7 +7,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class BusinessPagesSection extends ConsumerWidget {
   final List<UserPage> pages;
@@ -275,18 +275,12 @@ class _PageCard extends StatelessWidget {
                   color: Colors.grey.shade100,
                   border: Border.all(color: Colors.grey.shade200),
                 ),
-                child: ClipRRect(
+                child: AppImage(
+                  url: page.avatarUrl,
+                  width: 44,
+                  height: 44,
                   borderRadius: BorderRadius.circular(10),
-                  child: page.avatarUrl != null
-                      ? CachedImage(
-                          imageUrl: page.avatarUrl,
-                          width: 44,
-                          height: 44,
-                        )
-                      : Icon(
-                          Icons.store,
-                          color: Colors.grey.shade400,
-                        ),
+                  placeholderIcon: Icons.store,
                 ),
               ),
             ],

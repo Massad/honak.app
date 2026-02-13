@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'queue_add_on.dart';
+import 'queue_discount.dart';
 import 'queue_source.dart';
 import 'queue_status.dart';
 
@@ -40,6 +41,10 @@ class QueueEntry with _$QueueEntry {
     @JsonKey(name: 'started_at') int? startedAt,
     @JsonKey(name: 'completed_at') int? completedAt,
     @JsonKey(name: 'estimated_ready_at') int? estimatedReadyAt,
+
+    // Discount (manual override by business)
+    QueueDiscount? discount,
+    @JsonKey(name: 'price_before_discount_cents') int? priceBeforeDiscount,
 
     // Extras
     String? notes,

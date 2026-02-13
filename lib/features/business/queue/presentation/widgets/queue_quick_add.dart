@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_add_on.dart';
+import 'package:honak/features/business/queue/domain/entities/queue_discount.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_source.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';

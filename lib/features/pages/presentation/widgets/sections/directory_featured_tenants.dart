@@ -4,7 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// 3-column grid of featured tenant avatars (max 6).
 class DirectoryFeaturedTenants extends StatelessWidget {
@@ -102,8 +102,8 @@ class _FeaturedTenantCell extends StatelessWidget {
             ),
             clipBehavior: Clip.antiAlias,
             child: item != null && item!.images.isNotEmpty
-                ? CachedImage(
-                    imageUrl: item!.images.first,
+                ? AppImage(
+                    url: item!.images.first,
                     fit: BoxFit.cover,
                     placeholderIcon: Icons.storefront,
                   )

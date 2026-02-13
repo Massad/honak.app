@@ -8,11 +8,41 @@
       "icon_name": "restaurant",
       "sort_order": 1,
       "types": [
-        { "id": "restaurant", "name": "مطعم", "icon": "🍽️" },
-        { "id": "coffee_shop", "name": "مقهى", "icon": "☕" },
-        { "id": "bakery", "name": "مخبز", "icon": "🥖" },
-        { "id": "sweet_shop", "name": "حلويات", "icon": "🍮" },
-        { "id": "juice_bar", "name": "عصائر", "icon": "🧃" }
+        {
+          "id": "catering",
+          "name": "تموين وضيافة",
+          "icon": "🍱"
+        },
+        {
+          "id": "produce",
+          "name": "خضار وفواكه",
+          "icon": "🥬"
+        },
+        {
+          "id": "juice_bar",
+          "name": "عصائر",
+          "icon": "🧃"
+        },
+        {
+          "id": "bakery",
+          "name": "مخبز",
+          "icon": "🥖"
+        },
+        {
+          "id": "restaurant",
+          "name": "مطعم",
+          "icon": "🍽️"
+        },
+        {
+          "id": "cafe",
+          "name": "مقهى",
+          "icon": "☕"
+        },
+        {
+          "id": "butcher",
+          "name": "ملحمة",
+          "icon": "🥩"
+        }
       ]
     },
     {
@@ -22,8 +52,16 @@
       "icon_name": "delivery_dining",
       "sort_order": 2,
       "types": [
-        { "id": "water_delivery", "name": "توصيل مياه", "icon": "🚰" },
-        { "id": "gas_delivery", "name": "توصيل غاز", "icon": "🔥" }
+        {
+          "id": "gas_delivery",
+          "name": "توصيل غاز",
+          "icon": "🔥"
+        },
+        {
+          "id": "water_delivery",
+          "name": "توصيل مياه",
+          "icon": "🚰"
+        }
       ]
     },
     {
@@ -33,7 +71,26 @@
       "icon_name": "spa",
       "sort_order": 3,
       "types": [
-        { "id": "salon", "name": "صالون تجميل", "icon": "💇" }
+        {
+          "id": "barber",
+          "name": "حلاق رجالي",
+          "icon": "💈"
+        },
+        {
+          "id": "spa",
+          "name": "سبا",
+          "icon": "🧖"
+        },
+        {
+          "id": "salon",
+          "name": "صالون تجميل",
+          "icon": "💇"
+        },
+        {
+          "id": "cosmetics_store",
+          "name": "مستحضرات تجميل",
+          "icon": "💄"
+        }
       ]
     },
     {
@@ -43,8 +100,26 @@
       "icon_name": "local_hospital",
       "sort_order": 4,
       "types": [
-        { "id": "clinic", "name": "عيادة / طبيب", "icon": "🏥" },
-        { "id": "pharmacy", "name": "صيدلية", "icon": "💊" }
+        {
+          "id": "pharmacy",
+          "name": "صيدلية",
+          "icon": "💊"
+        },
+        {
+          "id": "physiotherapy",
+          "name": "علاج طبيعي",
+          "icon": "🦴"
+        },
+        {
+          "id": "clinic",
+          "name": "عيادة / طبيب",
+          "icon": "🏥"
+        },
+        {
+          "id": "vet_clinic",
+          "name": "عيادة بيطرية",
+          "icon": "🐾"
+        }
       ]
     },
     {
@@ -54,7 +129,11 @@
       "icon_name": "fitness_center",
       "sort_order": 5,
       "types": [
-        { "id": "gym", "name": "نادي رياضي", "icon": "🏋️" }
+        {
+          "id": "gym",
+          "name": "نادي رياضي",
+          "icon": "🏋️"
+        }
       ]
     },
     {
@@ -64,12 +143,51 @@
       "icon_name": "checkroom",
       "sort_order": 6,
       "types": [
-        { "id": "clothes_store", "name": "متجر ملابس", "icon": "👗" },
-        { "id": "bookstore", "name": "مكتبة / قرطاسية", "icon": "📚" },
-        { "id": "online_store", "name": "متجر أونلاين", "icon": "🛒" },
-        { "id": "shoes", "name": "أحذية", "icon": "👟" },
-        { "id": "sportswear", "name": "أزياء رياضية", "icon": "👕" },
-        { "id": "electronics", "name": "إلكترونيات", "icon": "📱" }
+        {
+          "id": "kids_store",
+          "name": "أطفال",
+          "icon": "👶"
+        },
+        {
+          "id": "electronics_store",
+          "name": "إلكترونيات",
+          "icon": "📱"
+        },
+        {
+          "id": "directory",
+          "name": "دليل مجمع",
+          "icon": "🏬"
+        },
+        {
+          "id": "perfume_shop",
+          "name": "عطور",
+          "icon": "🧴"
+        },
+        {
+          "id": "bridal_shop",
+          "name": "فساتين زفاف",
+          "icon": "👰"
+        },
+        {
+          "id": "online_store",
+          "name": "متجر أونلاين",
+          "icon": "🛒"
+        },
+        {
+          "id": "clothes_store",
+          "name": "متجر ملابس",
+          "icon": "👗"
+        },
+        {
+          "id": "bookstore",
+          "name": "مكتبة / قرطاسية",
+          "icon": "📚"
+        },
+        {
+          "id": "mini_market",
+          "name": "ميني ماركت",
+          "icon": "🏪"
+        }
       ]
     },
     {
@@ -79,7 +197,31 @@
       "icon_name": "home_repair_service",
       "sort_order": 7,
       "types": [
-        { "id": "plumber", "name": "سباكة", "icon": "🔧" }
+        {
+          "id": "ac_repair",
+          "name": "تكييف وتبريد",
+          "icon": "❄️"
+        },
+        {
+          "id": "plumber",
+          "name": "سباك",
+          "icon": "🔧"
+        },
+        {
+          "id": "electrician",
+          "name": "كهربائي",
+          "icon": "⚡"
+        },
+        {
+          "id": "laundry",
+          "name": "مغسلة ملابس",
+          "icon": "👔"
+        },
+        {
+          "id": "pest_control",
+          "name": "مكافحة حشرات",
+          "icon": "🐛"
+        }
       ]
     },
     {
@@ -89,17 +231,26 @@
       "icon_name": "directions_car",
       "sort_order": 8,
       "types": [
-        { "id": "auto_mechanic", "name": "كراج سيارات", "icon": "🔧" }
-      ]
-    },
-    {
-      "id": "cat_cleaning",
-      "name_ar": "تنظيف",
-      "name_en": "Cleaning",
-      "icon_name": "cleaning_services",
-      "sort_order": 9,
-      "types": [
-        { "id": "laundry", "name": "مغسلة ملابس", "icon": "👔" }
+        {
+          "id": "oil_change",
+          "name": "تغيير زيت",
+          "icon": "🛢️"
+        },
+        {
+          "id": "tire_shop",
+          "name": "محل إطارات",
+          "icon": "🛞"
+        },
+        {
+          "id": "car_wash",
+          "name": "مغسلة سيارات",
+          "icon": "🚿"
+        },
+        {
+          "id": "car_mechanic",
+          "name": "ميكانيكي سيارات",
+          "icon": "🔧"
+        }
       ]
     },
     {
@@ -107,10 +258,23 @@
       "name_ar": "إقامة وسياحة",
       "name_en": "Stays & Tourism",
       "icon_name": "hotel",
-      "sort_order": 10,
+      "sort_order": 9,
       "types": [
-        { "id": "villa_rental", "name": "تأجير فلل", "icon": "🏡" },
-        { "id": "farm_stay", "name": "مزرعة", "icon": "🌿" }
+        {
+          "id": "villa_rental",
+          "name": "تأجير فلل",
+          "icon": "🏡"
+        },
+        {
+          "id": "camping",
+          "name": "تخييم",
+          "icon": "⛺"
+        },
+        {
+          "id": "hotel",
+          "name": "فندق",
+          "icon": "🏨"
+        }
       ]
     },
     {
@@ -118,12 +282,13 @@
       "name_ar": "فعاليات وترفيه",
       "name_en": "Events & Entertainment",
       "icon_name": "celebration",
-      "sort_order": 11,
+      "sort_order": 10,
       "types": [
-        { "id": "event_venue", "name": "قاعة مناسبات", "icon": "🏛️" },
-        { "id": "cinema", "name": "سينما", "icon": "🎬" },
-        { "id": "kids_entertainment", "name": "ترفيه أطفال", "icon": "🎠" },
-        { "id": "entertainment", "name": "ترفيه", "icon": "🎮" }
+        {
+          "id": "event_venue",
+          "name": "قاعة مناسبات",
+          "icon": "🏛️"
+        }
       ]
     },
     {
@@ -131,9 +296,13 @@
       "name_ar": "إبداع وعمل حر",
       "name_en": "Creative & Freelance",
       "icon_name": "palette",
-      "sort_order": 12,
+      "sort_order": 11,
       "types": [
-        { "id": "photographer", "name": "تصوير", "icon": "📷" }
+        {
+          "id": "photographer",
+          "name": "مصورة",
+          "icon": "📷"
+        }
       ]
     },
     {
@@ -141,33 +310,56 @@
       "name_ar": "جهات حكومية",
       "name_en": "Government",
       "icon_name": "account_balance",
+      "sort_order": 12,
+      "types": [
+        {
+          "id": "government",
+          "name": "جهة حكومية",
+          "icon": "🏛️"
+        },
+        {
+          "id": "municipality",
+          "name": "جهة حكومية",
+          "icon": "🏛️"
+        }
+      ]
+    },
+    {
+      "id": "cat_services",
+      "name_ar": "خدمات عامة",
+      "name_en": "General Services",
+      "icon_name": "build",
       "sort_order": 13,
       "types": [
-        { "id": "municipality", "name": "بلدية", "icon": "🏛️" },
-        { "id": "traffic", "name": "إدارة سير", "icon": "🚦" }
+        {
+          "id": "shoe_repair",
+          "name": "إسكافي",
+          "icon": "👞"
+        },
+        {
+          "id": "tailor",
+          "name": "خياط",
+          "icon": "🧵"
+        },
+        {
+          "id": "watch_repair",
+          "name": "صيانة ساعات",
+          "icon": "⌚"
+        }
       ]
     },
     {
-      "id": "cat_finance",
-      "name_ar": "مالية وبنوك",
-      "name_en": "Finance & Banking",
-      "icon_name": "account_balance_wallet",
+      "id": "cat_electronics",
+      "name_ar": "إلكترونيات وصيانة",
+      "name_en": "Electronics & Repair",
+      "icon_name": "phonelink",
       "sort_order": 14,
       "types": [
-        { "id": "bank", "name": "بنوك", "icon": "🏦" },
-        { "id": "exchange", "name": "صرافة", "icon": "💱" },
-        { "id": "telecom", "name": "اتصالات", "icon": "📱" }
-      ]
-    },
-    {
-      "id": "cat_shopping",
-      "name_ar": "مراكز تسوق",
-      "name_en": "Shopping Centers",
-      "icon_name": "store",
-      "sort_order": 15,
-      "types": [
-        { "id": "shopping_mall", "name": "مول / مجمع تجاري", "icon": "🏬" },
-        { "id": "market", "name": "سوق", "icon": "🛒" }
+        {
+          "id": "mobile_repair",
+          "name": "صيانة موبايلات",
+          "icon": "📱"
+        }
       ]
     },
     {
@@ -175,13 +367,18 @@
       "name_ar": "بقالة وسوبرماركت",
       "name_en": "Grocery",
       "icon_name": "shopping_cart",
-      "sort_order": 16,
+      "sort_order": 15,
       "types": [
-        { "id": "supermarket", "name": "سوبرماركت", "icon": "🛒" },
-        { "id": "butcher", "name": "ملحمة", "icon": "🥩" },
-        { "id": "fruit_veg", "name": "خضار وفواكه", "icon": "🥬" }
+        {
+          "id": "grocery",
+          "name": "دكانة / بقالة",
+          "icon": "🏪"
+        }
       ]
     }
   ],
-  "meta": {"total": 16, "has_more": false}
+  "meta": {
+    "total": 15,
+    "has_more": false
+  }
 }

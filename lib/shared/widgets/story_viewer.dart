@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 /// A single story item for the fullscreen viewer.
 class StoryItem {
@@ -138,19 +138,9 @@ class _StoryViewerState extends State<StoryViewer>
           fit: StackFit.expand,
           children: [
             // Story image
-            CachedNetworkImage(
-              imageUrl: story.imageUrl,
+            AppImage(
+              url: story.imageUrl,
               fit: BoxFit.cover,
-              placeholder: (_, __) => const Center(
-                child: CircularProgressIndicator(color: Colors.white),
-              ),
-              errorWidget: (_, __, ___) => const Center(
-                child: Icon(
-                  Icons.broken_image_outlined,
-                  color: Colors.white54,
-                  size: 48,
-                ),
-              ),
             ),
 
             // Gradient overlay at top for progress bar visibility

@@ -12,6 +12,7 @@ import 'package:honak/features/business/dropoff/presentation/widgets/activity_lo
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_config.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/ticket_activity_log.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/receipt_sheet.dart';
 
 /// Full-screen draggable bottom sheet showing complete ticket details.
 ///
@@ -1085,7 +1086,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
   Widget _buildBottomBar(BuildContext context, DropoffTicket ticket) {
     if (ticket.status == DropoffStatus.delivered ||
         ticket.status == DropoffStatus.cancelled) {
-      return const SizedBox.shrink();
+      return _buildTerminalBottomBar(context, ticket);
     }
 
     final action = DropoffStatusConfig.nextAction[ticket.status];
@@ -1182,6 +1183,124 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTerminalBottomBar(
+      BuildContext context, DropoffTicket ticket) {
+    return Container(
+      padding: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.lg,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        border: Border(top: BorderSide(color: Colors.grey.shade100)),
+      ),
+      child: SafeArea(
+        top: false,
+        child: Row(
+          children: [
+            // Chat button (outline)
+            Expanded(
+              child: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: AppRadius.cardInner,
+                    border: Border.all(color: Colors.grey.shade200),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.chat_bubble_outline_rounded,
+                        size: 14,
+                        color: Colors.grey.shade700,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        'محادثة',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            // Receipt button (primary filled)
+            Expanded(
+              child: GestureDetector(
+                onTap: () => _showReceipt(context, ticket),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: AppRadius.cardInner,
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.receipt_long_rounded,
+                        size: 14,
+                        color: Colors.white,
+                      ),
+                      SizedBox(width: 6),
+                      Text(
+                        'إرسال إيصال',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showReceipt(BuildContext context, DropoffTicket ticket) {
+    final dt = DateTime.tryParse(ticket.droppedOffAt);
+    final dateStr = dt != null
+        ? DateFormat('yyyy/MM/dd', 'ar').format(dt)
+        : null;
+    final timeStr = dt != null
+        ? DateFormat('h:mm a', 'ar').format(dt)
+        : null;
+
+    showReceiptSheet(
+      context,
+      businessName: 'المحل',
+      customerName: ticket.customerName,
+      customerPhone: ticket.customerPhone,
+      referenceNumber: ticket.ticketNumber,
+      items: ticket.items
+          .map((i) => ReceiptLineItem(
+                name: i.name,
+                quantity: i.quantity,
+                priceCents: i.price,
+                service: i.service,
+              ))
+          .toList(),
+      totalCents: ticket.totalPrice,
+      paymentMethod: ticket.paymentMethod,
+      statusLabel: DropoffStatusConfig.of(ticket.status).label,
+      date: dateStr,
+      time: timeStr,
+      notes: ticket.notes,
     );
   }
 

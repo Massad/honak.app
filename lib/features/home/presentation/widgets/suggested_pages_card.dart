@@ -6,7 +6,7 @@ import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 class SuggestedPagesCard extends StatelessWidget {
@@ -62,11 +62,10 @@ class _SuggestedPageMiniCard extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CachedImage(
-                imageUrl: page.coverUrl,
+              AppImage(
+                url: page.coverUrl,
                 width: 140,
                 height: 60,
-                fit: BoxFit.cover,
               ),
               SizedBox(height: AppSpacing.sm),
               StoryRingAvatar(

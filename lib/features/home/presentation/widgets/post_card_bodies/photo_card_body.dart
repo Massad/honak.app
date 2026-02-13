@@ -3,7 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 import 'post_card_helpers.dart';
 
@@ -33,11 +33,10 @@ class PhotoCardBody extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           // Full-bleed image
-          CachedImage(
-            imageUrl: post.media.first.url,
+          AppImage(
+            url: post.media.first.url,
             width: double.infinity,
             height: 300,
-            fit: BoxFit.cover,
           ),
           // Gradient overlay: from-black/60 via-transparent to-black/10
           Container(
@@ -117,25 +116,10 @@ class PhotoCardBody extends StatelessWidget {
                     onTap: onPageTap,
                     child: Row(
                       children: [
-                        CircleAvatar(
+                        AppImage.avatar(
+                          url: post.page.avatarUrl,
+                          name: post.page.name,
                           radius: 16,
-                          backgroundColor:
-                              Colors.white.withValues(alpha: 0.3),
-                          backgroundImage: post.page.avatarUrl != null
-                              ? NetworkImage(post.page.avatarUrl!)
-                              : null,
-                          child: post.page.avatarUrl == null
-                              ? Text(
-                                  post.page.name.isNotEmpty
-                                      ? post.page.name[0]
-                                      : '',
-                                  style: context.textTheme.labelSmall
-                                      ?.copyWith(
-                                    fontSize: 12,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : null,
                         ),
                         SizedBox(width: AppSpacing.sm),
                         Expanded(
@@ -210,20 +194,10 @@ class PhotoCardBody extends StatelessWidget {
           onTap: onPageTap,
           child: Row(
             children: [
-              CircleAvatar(
+              AppImage.avatar(
+                url: post.page.avatarUrl,
+                name: post.page.name,
                 radius: 16,
-                backgroundColor: context.colorScheme.surfaceContainerHighest,
-                backgroundImage: post.page.avatarUrl != null
-                    ? NetworkImage(post.page.avatarUrl!)
-                    : null,
-                child: post.page.avatarUrl == null
-                    ? Text(
-                        post.page.name.isNotEmpty ? post.page.name[0] : '',
-                        style: context.textTheme.labelSmall?.copyWith(
-                          fontSize: 12,
-                        ),
-                      )
-                    : null,
               ),
               SizedBox(width: AppSpacing.sm),
               Expanded(

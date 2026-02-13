@@ -1,43 +1,48 @@
 import 'package:flutter/material.dart';
 
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
 import 'package:honak/features/business/dropoff/domain/entities/ticket_activity.dart';
 
-/// Maps a [TicketActivityAction] to a Material icon.
+/// Maps a [TicketActivityAction] to a Material icon (matches Figma).
 IconData activityActionIcon(TicketActivityAction action) => switch (action) {
-      TicketActivityAction.ticketCreated => Icons.receipt_long_rounded,
-      TicketActivityAction.statusChanged => Icons.swap_horiz_rounded,
+      TicketActivityAction.ticketCreated => Icons.inbox_rounded,
+      TicketActivityAction.statusChanged => Icons.autorenew_rounded,
       TicketActivityAction.photoBefore => Icons.camera_alt_outlined,
-      TicketActivityAction.photoAfter => Icons.camera_rounded,
-      TicketActivityAction.infoRequested => Icons.help_outline_rounded,
-      TicketActivityAction.infoReceived => Icons.reply_rounded,
-      TicketActivityAction.paymentMarked => Icons.payments_outlined,
+      TicketActivityAction.photoAfter => Icons.image_rounded,
+      TicketActivityAction.infoRequested => Icons.chat_bubble_outline_rounded,
+      TicketActivityAction.infoReceived => Icons.chat_rounded,
+      TicketActivityAction.paymentMarked => Icons.credit_card_rounded,
       TicketActivityAction.noteAdded => Icons.sticky_note_2_outlined,
       TicketActivityAction.itemModified => Icons.edit_outlined,
     };
 
-/// Maps a [TicketActivityAction] to a semantic color.
+/// Maps a [TicketActivityAction] to a semantic color (matches Figma).
 Color activityActionColor(TicketActivityAction action) => switch (action) {
-      TicketActivityAction.ticketCreated => AppColors.primary,
-      TicketActivityAction.statusChanged => AppColors.info,
-      TicketActivityAction.photoBefore => AppColors.secondary,
-      TicketActivityAction.photoAfter => AppColors.success,
-      TicketActivityAction.infoRequested => const Color(0xFF7B1FA2),
-      TicketActivityAction.infoReceived => const Color(0xFF7B1FA2),
-      TicketActivityAction.paymentMarked => AppColors.success,
-      TicketActivityAction.noteAdded => AppColors.secondary,
-      TicketActivityAction.itemModified => AppColors.primary,
+      TicketActivityAction.ticketCreated => const Color(0xFF1A73E8),
+      TicketActivityAction.statusChanged => const Color(0xFF1A73E8),
+      TicketActivityAction.photoBefore => const Color(0xFF1A73E8),
+      TicketActivityAction.photoAfter => const Color(0xFF43A047),
+      TicketActivityAction.infoRequested => const Color(0xFFFF9800),
+      TicketActivityAction.infoReceived => const Color(0xFF43A047),
+      TicketActivityAction.paymentMarked => const Color(0xFF43A047),
+      TicketActivityAction.noteAdded => const Color(0xFF6B7280),
+      TicketActivityAction.itemModified => const Color(0xFFFF9800),
     };
 
-/// Mock staff names for realistic activity log entries.
-const _staffNames = ['عمر', 'سعيد', 'محمد', 'أحمد', 'يوسف'];
+/// Mock staff names with roles for realistic activity log entries.
+const _staffPool = [
+  ('محمد', 'استقبال'),
+  ('عمر', 'فني'),
+  ('خالد', 'مشرف'),
+  ('أحمد', 'فني'),
+  ('سعيد', 'عامل'),
+];
 
-/// Pick a deterministic staff name based on ticket + entry index.
-String _staffName(String ticketId, int idx) {
+/// Pick a deterministic staff member based on ticket + entry index.
+(String name, String role) _pickStaff(String ticketId, int idx) {
   final hash = ticketId.hashCode.abs();
-  return _staffNames[(hash + idx) % _staffNames.length];
+  return _staffPool[(hash + idx) % _staffPool.length];
 }
 
 /// Generates mock activity entries for demo purposes based on ticket state.
@@ -46,24 +51,26 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
   var idx = 0;
 
   // 1. Created
+  final creator = _pickStaff(ticket.id, 0);
   entries.add(TicketActivityEntry(
     id: 'act_${ticket.id}_${idx++}',
     timestamp: ticket.droppedOffAt,
     action: TicketActivityAction.ticketCreated,
-    actorName: _staffName(ticket.id, 0),
-    actorRole: 'staff',
+    actorName: creator.$1,
+    actorRole: creator.$2,
     note: 'تم إنشاء التذكرة ${ticket.ticketNumber}',
   ));
 
   // 2. Photo before (if any item has it)
   final hasPhotoBefore = ticket.items.any((i) => i.photoBefore != null);
   if (hasPhotoBefore) {
+    final photoPerson = _pickStaff(ticket.id, 1);
     entries.add(TicketActivityEntry(
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.droppedOffAt,
       action: TicketActivityAction.photoBefore,
-      actorName: _staffName(ticket.id, 1),
-      actorRole: 'staff',
+      actorName: photoPerson.$1,
+      actorRole: photoPerson.$2,
       items: ticket.items
           .where((i) => i.photoBefore != null)
           .map((i) => i.name)
@@ -74,25 +81,41 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
   // 3. Status → processing
   if (ticket.status.index >= DropoffStatus.processing.index &&
       ticket.startedAt != null) {
+    final processor = _pickStaff(ticket.id, 2);
     entries.add(TicketActivityEntry(
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.startedAt!,
       action: TicketActivityAction.statusChanged,
-      actorName: _staffName(ticket.id, 2),
-      actorRole: 'staff',
+      actorName: processor.$1,
+      actorRole: processor.$2,
       from: DropoffStatus.received.labelAr,
       to: DropoffStatus.processing.labelAr,
     ));
   }
 
-  // 4. Notes
+  // 4. Info requested (processing tickets with notes — matches Figma)
+  if (ticket.status == DropoffStatus.processing && ticket.notes != null) {
+    final infoRequester = _pickStaff(ticket.id, 3);
+    entries.add(TicketActivityEntry(
+      id: 'act_${ticket.id}_${idx++}',
+      timestamp: ticket.startedAt ?? ticket.droppedOffAt,
+      action: TicketActivityAction.infoRequested,
+      actorName: infoRequester.$1,
+      actorRole: infoRequester.$2,
+      items: const ['صورة إضافية', 'تفاصيل المشكلة'],
+      note: 'تم إرسال الطلب إلى المحادثة',
+    ));
+  }
+
+  // 5. Notes
   if (ticket.notes != null) {
+    final noter = _pickStaff(ticket.id, 3);
     entries.add(TicketActivityEntry(
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.startedAt ?? ticket.droppedOffAt,
       action: TicketActivityAction.noteAdded,
-      actorName: _staffName(ticket.id, 3),
-      actorRole: 'staff',
+      actorName: noter.$1,
+      actorRole: noter.$2,
       note: ticket.notes,
     ));
   }
@@ -100,12 +123,13 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
   // 5. Status → ready
   if (ticket.status.index >= DropoffStatus.ready.index &&
       ticket.completedAt != null) {
+    final completer = _pickStaff(ticket.id, 4);
     entries.add(TicketActivityEntry(
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.completedAt!,
       action: TicketActivityAction.statusChanged,
-      actorName: _staffName(ticket.id, 4),
-      actorRole: 'staff',
+      actorName: completer.$1,
+      actorRole: completer.$2,
       from: DropoffStatus.processing.labelAr,
       to: DropoffStatus.ready.labelAr,
     ));
@@ -114,12 +138,13 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
   // 6. Photo after
   final hasPhotoAfter = ticket.items.any((i) => i.photoAfter != null);
   if (hasPhotoAfter && ticket.completedAt != null) {
+    final afterPerson = _pickStaff(ticket.id, 1);
     entries.add(TicketActivityEntry(
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.completedAt!,
       action: TicketActivityAction.photoAfter,
-      actorName: _staffName(ticket.id, 1),
-      actorRole: 'staff',
+      actorName: afterPerson.$1,
+      actorRole: afterPerson.$2,
       items: ticket.items
           .where((i) => i.photoAfter != null)
           .map((i) => i.name)
@@ -129,12 +154,13 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
 
   // 7. Payment
   if (ticket.paid) {
+    final payer = _pickStaff(ticket.id, 0);
     entries.add(TicketActivityEntry(
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.completedAt ?? ticket.droppedOffAt,
       action: TicketActivityAction.paymentMarked,
-      actorName: _staffName(ticket.id, 0),
-      actorRole: 'staff',
+      actorName: payer.$1,
+      actorRole: payer.$2,
       amount: ticket.totalPrice,
       method: ticket.paymentMethod ?? 'نقدي',
     ));
@@ -142,12 +168,13 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
 
   // 8. Status → delivered
   if (ticket.status == DropoffStatus.delivered && ticket.pickedUpAt != null) {
+    final deliverer = _pickStaff(ticket.id, 2);
     entries.add(TicketActivityEntry(
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.pickedUpAt!,
       action: TicketActivityAction.statusChanged,
-      actorName: _staffName(ticket.id, 2),
-      actorRole: 'staff',
+      actorName: deliverer.$1,
+      actorRole: deliverer.$2,
       from: DropoffStatus.ready.labelAr,
       to: DropoffStatus.delivered.labelAr,
     ));

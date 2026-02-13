@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class AlternativeItemRow extends StatelessWidget {
   final Map<String, dynamic> item;
@@ -23,8 +23,8 @@ class AlternativeItemRow extends StatelessWidget {
           if (imageUrl != null) ...[
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CachedImage(
-                imageUrl: imageUrl,
+              child: AppImage(
+                url: imageUrl,
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,

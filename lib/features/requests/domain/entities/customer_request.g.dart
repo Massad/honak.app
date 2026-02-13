@@ -58,6 +58,9 @@ _$CustomerRequestImpl _$$CustomerRequestImplFromJson(
   deliveryAddress: json['delivery_address'] as String?,
   paymentMethod: json['payment_method'] as String?,
   declineReason: json['decline_reason'] as String?,
+  queuePosition: (json['queue_position'] as num?)?.toInt(),
+  estimatedWaitMin: (json['estimated_wait_min'] as num?)?.toInt(),
+  queueStatus: json['queue_status'] as String?,
 );
 
 Map<String, dynamic> _$$CustomerRequestImplToJson(
@@ -94,6 +97,9 @@ Map<String, dynamic> _$$CustomerRequestImplToJson(
   'delivery_address': instance.deliveryAddress,
   'payment_method': instance.paymentMethod,
   'decline_reason': instance.declineReason,
+  'queue_position': instance.queuePosition,
+  'estimated_wait_min': instance.estimatedWaitMin,
+  'queue_status': instance.queueStatus,
 };
 
 _$OrderLineItemImpl _$$OrderLineItemImplFromJson(Map<String, dynamic> json) =>

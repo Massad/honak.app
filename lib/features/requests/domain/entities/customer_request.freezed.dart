@@ -78,7 +78,13 @@ mixin _$CustomerRequest {
   @JsonKey(name: 'payment_method')
   String? get paymentMethod => throw _privateConstructorUsedError;
   @JsonKey(name: 'decline_reason')
-  String? get declineReason => throw _privateConstructorUsedError;
+  String? get declineReason => throw _privateConstructorUsedError; // Queue-specific fields
+  @JsonKey(name: 'queue_position')
+  int? get queuePosition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'estimated_wait_min')
+  int? get estimatedWaitMin => throw _privateConstructorUsedError;
+  @JsonKey(name: 'queue_status')
+  String? get queueStatus => throw _privateConstructorUsedError;
 
   /// Serializes this CustomerRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -130,6 +136,9 @@ abstract class $CustomerRequestCopyWith<$Res> {
     @JsonKey(name: 'delivery_address') String? deliveryAddress,
     @JsonKey(name: 'payment_method') String? paymentMethod,
     @JsonKey(name: 'decline_reason') String? declineReason,
+    @JsonKey(name: 'queue_position') int? queuePosition,
+    @JsonKey(name: 'estimated_wait_min') int? estimatedWaitMin,
+    @JsonKey(name: 'queue_status') String? queueStatus,
   });
 
   $DeliveryTrackingCopyWith<$Res>? get deliveryTracking;
@@ -182,6 +191,9 @@ class _$CustomerRequestCopyWithImpl<$Res, $Val extends CustomerRequest>
     Object? deliveryAddress = freezed,
     Object? paymentMethod = freezed,
     Object? declineReason = freezed,
+    Object? queuePosition = freezed,
+    Object? estimatedWaitMin = freezed,
+    Object? queueStatus = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -309,6 +321,18 @@ class _$CustomerRequestCopyWithImpl<$Res, $Val extends CustomerRequest>
                 ? _value.declineReason
                 : declineReason // ignore: cast_nullable_to_non_nullable
                       as String?,
+            queuePosition: freezed == queuePosition
+                ? _value.queuePosition
+                : queuePosition // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            estimatedWaitMin: freezed == estimatedWaitMin
+                ? _value.estimatedWaitMin
+                : estimatedWaitMin // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            queueStatus: freezed == queueStatus
+                ? _value.queueStatus
+                : queueStatus // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -387,6 +411,9 @@ abstract class _$$CustomerRequestImplCopyWith<$Res>
     @JsonKey(name: 'delivery_address') String? deliveryAddress,
     @JsonKey(name: 'payment_method') String? paymentMethod,
     @JsonKey(name: 'decline_reason') String? declineReason,
+    @JsonKey(name: 'queue_position') int? queuePosition,
+    @JsonKey(name: 'estimated_wait_min') int? estimatedWaitMin,
+    @JsonKey(name: 'queue_status') String? queueStatus,
   });
 
   @override
@@ -440,6 +467,9 @@ class __$$CustomerRequestImplCopyWithImpl<$Res>
     Object? deliveryAddress = freezed,
     Object? paymentMethod = freezed,
     Object? declineReason = freezed,
+    Object? queuePosition = freezed,
+    Object? estimatedWaitMin = freezed,
+    Object? queueStatus = freezed,
   }) {
     return _then(
       _$CustomerRequestImpl(
@@ -567,6 +597,18 @@ class __$$CustomerRequestImplCopyWithImpl<$Res>
             ? _value.declineReason
             : declineReason // ignore: cast_nullable_to_non_nullable
                   as String?,
+        queuePosition: freezed == queuePosition
+            ? _value.queuePosition
+            : queuePosition // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        estimatedWaitMin: freezed == estimatedWaitMin
+            ? _value.estimatedWaitMin
+            : estimatedWaitMin // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        queueStatus: freezed == queueStatus
+            ? _value.queueStatus
+            : queueStatus // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -607,6 +649,9 @@ class _$CustomerRequestImpl extends _CustomerRequest {
     @JsonKey(name: 'delivery_address') this.deliveryAddress,
     @JsonKey(name: 'payment_method') this.paymentMethod,
     @JsonKey(name: 'decline_reason') this.declineReason,
+    @JsonKey(name: 'queue_position') this.queuePosition,
+    @JsonKey(name: 'estimated_wait_min') this.estimatedWaitMin,
+    @JsonKey(name: 'queue_status') this.queueStatus,
   }) : _items = items,
        _timeline = timeline,
        super._();
@@ -722,10 +767,20 @@ class _$CustomerRequestImpl extends _CustomerRequest {
   @override
   @JsonKey(name: 'decline_reason')
   final String? declineReason;
+  // Queue-specific fields
+  @override
+  @JsonKey(name: 'queue_position')
+  final int? queuePosition;
+  @override
+  @JsonKey(name: 'estimated_wait_min')
+  final int? estimatedWaitMin;
+  @override
+  @JsonKey(name: 'queue_status')
+  final String? queueStatus;
 
   @override
   String toString() {
-    return 'CustomerRequest(id: $id, type: $type, status: $status, businessPageId: $businessPageId, businessName: $businessName, businessAvatarUrl: $businessAvatarUrl, businessSlug: $businessSlug, items: $items, itemsCount: $itemsCount, total: $total, note: $note, summary: $summary, createdAt: $createdAt, timeline: $timeline, deliveryTracking: $deliveryTracking, paidBySubscription: $paidBySubscription, canEdit: $canEdit, canCancel: $canCancel, canReschedule: $canReschedule, preferredDate: $preferredDate, timeSlot: $timeSlot, description: $description, dateRange: $dateRange, guestCount: $guestCount, serviceLocation: $serviceLocation, urgency: $urgency, teamMember: $teamMember, deliveryMethod: $deliveryMethod, deliveryAddress: $deliveryAddress, paymentMethod: $paymentMethod, declineReason: $declineReason)';
+    return 'CustomerRequest(id: $id, type: $type, status: $status, businessPageId: $businessPageId, businessName: $businessName, businessAvatarUrl: $businessAvatarUrl, businessSlug: $businessSlug, items: $items, itemsCount: $itemsCount, total: $total, note: $note, summary: $summary, createdAt: $createdAt, timeline: $timeline, deliveryTracking: $deliveryTracking, paidBySubscription: $paidBySubscription, canEdit: $canEdit, canCancel: $canCancel, canReschedule: $canReschedule, preferredDate: $preferredDate, timeSlot: $timeSlot, description: $description, dateRange: $dateRange, guestCount: $guestCount, serviceLocation: $serviceLocation, urgency: $urgency, teamMember: $teamMember, deliveryMethod: $deliveryMethod, deliveryAddress: $deliveryAddress, paymentMethod: $paymentMethod, declineReason: $declineReason, queuePosition: $queuePosition, estimatedWaitMin: $estimatedWaitMin, queueStatus: $queueStatus)';
   }
 
   @override
@@ -784,7 +839,13 @@ class _$CustomerRequestImpl extends _CustomerRequest {
             (identical(other.paymentMethod, paymentMethod) ||
                 other.paymentMethod == paymentMethod) &&
             (identical(other.declineReason, declineReason) ||
-                other.declineReason == declineReason));
+                other.declineReason == declineReason) &&
+            (identical(other.queuePosition, queuePosition) ||
+                other.queuePosition == queuePosition) &&
+            (identical(other.estimatedWaitMin, estimatedWaitMin) ||
+                other.estimatedWaitMin == estimatedWaitMin) &&
+            (identical(other.queueStatus, queueStatus) ||
+                other.queueStatus == queueStatus));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -822,6 +883,9 @@ class _$CustomerRequestImpl extends _CustomerRequest {
     deliveryAddress,
     paymentMethod,
     declineReason,
+    queuePosition,
+    estimatedWaitMin,
+    queueStatus,
   ]);
 
   /// Create a copy of CustomerRequest
@@ -876,6 +940,9 @@ abstract class _CustomerRequest extends CustomerRequest {
     @JsonKey(name: 'delivery_address') final String? deliveryAddress,
     @JsonKey(name: 'payment_method') final String? paymentMethod,
     @JsonKey(name: 'decline_reason') final String? declineReason,
+    @JsonKey(name: 'queue_position') final int? queuePosition,
+    @JsonKey(name: 'estimated_wait_min') final int? estimatedWaitMin,
+    @JsonKey(name: 'queue_status') final String? queueStatus,
   }) = _$CustomerRequestImpl;
   const _CustomerRequest._() : super._();
 
@@ -966,7 +1033,16 @@ abstract class _CustomerRequest extends CustomerRequest {
   String? get paymentMethod;
   @override
   @JsonKey(name: 'decline_reason')
-  String? get declineReason;
+  String? get declineReason; // Queue-specific fields
+  @override
+  @JsonKey(name: 'queue_position')
+  int? get queuePosition;
+  @override
+  @JsonKey(name: 'estimated_wait_min')
+  int? get estimatedWaitMin;
+  @override
+  @JsonKey(name: 'queue_status')
+  String? get queueStatus;
 
   /// Create a copy of CustomerRequest
   /// with the given fields replaced by the non-null parameter values.

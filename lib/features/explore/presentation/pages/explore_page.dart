@@ -15,7 +15,7 @@ import 'package:honak/features/home/domain/entities/nearby_page.dart';
 import 'package:honak/features/stories/presentation/providers/stories_provider.dart'
     show storyContentProvider;
 import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
@@ -212,7 +212,7 @@ class _FilterTriggerBar extends ConsumerWidget {
 class _CategoriesSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesAsync = ref.watch(categoriesProvider);
+    final categoriesAsync = ref.watch(activeCategoriesProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +235,7 @@ class _CategoriesSection extends ConsumerWidget {
           ),
           error: (error, _) => ErrorView(
             message: error.toString(),
-            onRetry: () => ref.invalidate(categoriesProvider),
+            onRetry: () => ref.invalidate(activeCategoriesProvider),
           ),
           data: (categories) => _CategoriesGrid(categories: categories),
         ),
@@ -319,6 +319,8 @@ class _CategoryTile extends StatelessWidget {
     'business_center': Icons.business_center_outlined,
     'celebration': Icons.celebration_outlined,
     'groups': Icons.groups_outlined,
+    'phonelink': Icons.phonelink_outlined,
+    'shopping_cart': Icons.shopping_cart_outlined,
   };
 
   @override
@@ -776,8 +778,8 @@ class _TrendingOverlayCard extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 // Full-bleed image
-                CachedImage(
-                  imageUrl: page.coverUrl,
+                AppImage(
+                  url: page.coverUrl,
                   width: 160,
                   height: 210,
                   fit: BoxFit.cover,

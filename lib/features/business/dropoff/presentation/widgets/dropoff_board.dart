@@ -196,7 +196,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
   }
 
   void _openActivityLog(DropoffTicket ticket) {
-    showActivityLogSheet(
+    showDropoffActivityLogSheet(
       context,
       ticket: ticket,
       activityLog: generateMockActivity(ticket),

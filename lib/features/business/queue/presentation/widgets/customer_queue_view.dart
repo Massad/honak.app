@@ -1,27 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
-import 'package:honak/features/business/queue/domain/entities/queue_subscription.dart';
+import 'package:honak/features/business/queue/domain/entities/available_add_on.dart';
+import 'package:honak/features/business/queue/domain/entities/customer_queue_entry.dart';
+import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
 import 'package:honak/features/business/queue/domain/entities/service_package.dart';
-import 'package:honak/shared/entities/money.dart';
+import 'package:honak/features/business/queue/presentation/widgets/customer/queue_active_tracker.dart';
+import 'package:honak/features/business/queue/presentation/widgets/customer/queue_modify_sheet.dart';
+import 'package:honak/features/business/queue/presentation/widgets/customer/queue_post_banner.dart';
 
-part 'customer_queue_subscriptions.dart';
+/// Determines the page state from the active and recent queue entries.
+String _getPageState(
+  CustomerQueueEntry? activeEntry,
+  CustomerQueueEntry? recentEntry,
+) {
+  if (activeEntry != null) {
+    const terminalStatuses = {QueueStatus.completed, QueueStatus.noShow};
+    if (!terminalStatuses.contains(activeEntry.status)) return 'active';
+  }
+  if (recentEntry != null) return 'post';
+  return 'browse';
+}
 
 /// Customer-facing live queue view.
 ///
-/// Shows queue stats, package selection, and join/cancel actions.
-/// Placed ABOVE ServiceBookingSection on queue-enabled business pages.
-class CustomerQueueView extends StatefulWidget {
+/// Routes between browse (stats only), active (tracker), and post (banner)
+/// states based on the customer's queue entry.
+class CustomerQueueView extends ConsumerWidget {
   final String pageName;
   final String? pageAvatar;
   final int currentQueueSize;
   final int estimatedWaitMin;
   final int inProgressCount;
   final List<ServicePackage> packages;
-  final List<QueueSubscription> subscriptions;
+  final List<AvailableAddOn> availableAddOns;
   final bool isPaused;
+
+  // Queue entry state
+  final CustomerQueueEntry? activeEntry;
+  final CustomerQueueEntry? recentEntry;
+
+  // Callbacks
+  final VoidCallback? onCancelEntry;
+  final void Function(QueueModificationRequest)? onRequestModification;
+  final VoidCallback? onMarkOnMyWay;
+  final VoidCallback? onRebook;
+  final VoidCallback? onViewRequestDetail;
 
   const CustomerQueueView({
     super.key,
@@ -31,18 +57,16 @@ class CustomerQueueView extends StatefulWidget {
     required this.estimatedWaitMin,
     required this.inProgressCount,
     required this.packages,
-    this.subscriptions = const [],
+    this.availableAddOns = const [],
     this.isPaused = false,
+    this.activeEntry,
+    this.recentEntry,
+    this.onCancelEntry,
+    this.onRequestModification,
+    this.onMarkOnMyWay,
+    this.onRebook,
+    this.onViewRequestDetail,
   });
-
-  @override
-  State<CustomerQueueView> createState() => _CustomerQueueViewState();
-}
-
-class _CustomerQueueViewState extends State<CustomerQueueView> {
-  String? _selectedPackageId;
-  bool _joined = false;
-  int _position = 0;
 
   static const _gradientBlue = LinearGradient(
     colors: [Color(0xFF1A73E8), Color(0xFF1565C0)],
@@ -50,57 +74,68 @@ class _CustomerQueueViewState extends State<CustomerQueueView> {
     end: AlignmentDirectional.centerEnd,
   );
 
-  void _handleJoin() {
-    if (_selectedPackageId == null) return;
-    setState(() {
-      _joined = true;
-      _position = widget.currentQueueSize + 1;
-    });
-  }
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = _getPageState(activeEntry, recentEntry);
 
-  void _handleCancel() {
-    setState(() {
-      _joined = false;
-      _selectedPackageId = null;
-    });
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (state == 'active')
+          QueueActiveTracker(
+            entry: activeEntry!,
+            packages: packages,
+            availableAddOns: availableAddOns,
+            onMarkOnMyWay: onMarkOnMyWay ?? () {},
+            onCancelEntry: onCancelEntry ?? () {},
+            onRequestModification:
+                onRequestModification ?? (_) {},
+          )
+        else ...[
+          _StatsHeader(
+            currentQueueSize: currentQueueSize,
+            estimatedWaitMin: estimatedWaitMin,
+            inProgressCount: inProgressCount,
+            isPaused: isPaused,
+          ),
+          if (state == 'post' && recentEntry != null)
+            Padding(
+              padding: const EdgeInsetsDirectional.only(
+                top: AppSpacing.md,
+              ),
+              child: QueuePostBanner(
+                entry: recentEntry!,
+                onRebook: onRebook ?? () {},
+                onViewDetail: onViewRequestDetail,
+              ),
+            ),
+        ],
+      ],
+    );
   }
+}
+
+// ── Stats Header (blue gradient) ──────────────────────────────────────────
+
+class _StatsHeader extends StatelessWidget {
+  final int currentQueueSize;
+  final int estimatedWaitMin;
+  final int inProgressCount;
+  final bool isPaused;
+
+  const _StatsHeader({
+    required this.currentQueueSize,
+    required this.estimatedWaitMin,
+    required this.inProgressCount,
+    required this.isPaused,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: AppRadius.card,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildStatusHeader(context),
-          if (!_joined && !widget.isPaused) ...[
-            _buildPackageSelection(context),
-            _buildJoinButton(context),
-            if (widget.subscriptions.isNotEmpty)
-              _QueueSubscriptionsSection(
-                subscriptions: widget.subscriptions,
-              ),
-          ],
-          if (_joined) _buildJoinedActions(context),
-          if (widget.isPaused && !_joined) _buildPausedNotice(context),
-        ],
-      ),
-    );
-  }
-
-  // ── Live Queue Status Header ──────────────────────────────────────────
-
-  Widget _buildStatusHeader(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: _gradientBlue,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(AppRadius.lg),
-          topRight: Radius.circular(AppRadius.lg),
-        ),
+        gradient: CustomerQueueView._gradientBlue,
+        borderRadius: AppRadius.card,
       ),
       padding: const EdgeInsets.all(AppSpacing.lg),
       child: Column(
@@ -116,7 +151,7 @@ class _CustomerQueueViewState extends State<CustomerQueueView> {
                 ),
               ),
               const Spacer(),
-              if (widget.isPaused)
+              if (isPaused)
                 Container(
                   padding: const EdgeInsetsDirectional.symmetric(
                     horizontal: AppSpacing.sm,
@@ -137,351 +172,36 @@ class _CustomerQueueViewState extends State<CustomerQueueView> {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          if (_joined) _buildJoinedStatus(context) else _buildQueueStats(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildQueueStats(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        _StatItem(
-          value: '${widget.currentQueueSize}',
-          label: 'بالانتظار',
-        ),
-        _verticalDivider(),
-        _StatItem(
-          value: '${widget.inProgressCount}',
-          label: 'قيد الخدمة',
-        ),
-        _verticalDivider(),
-        _StatItem(
-          value: '~${widget.estimatedWaitMin}',
-          label: 'دقيقة انتظار',
-          icon: Icons.access_time,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildJoinedStatus(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.navigation, size: 14, color: Colors.white70),
-            const SizedBox(width: AppSpacing.xs),
-            Text(
-              'أنت بالدور',
-              style: context.textTheme.labelSmall?.copyWith(
-                color: Colors.white70,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        Text(
-          '$_position',
-          style: context.textTheme.displaySmall?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          'رقمك بالدور',
-          style: context.textTheme.labelSmall?.copyWith(
-            color: Colors.white70,
-            fontSize: 10,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Container(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.15),
-            borderRadius: AppRadius.cardInner,
-          ),
-          child: Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Column(
-                children: [
-                  Text(
-                    '${_position - 1}',
-                    style: context.textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    'قبلك',
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.white70,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
+              _StatItem(
+                value: '$currentQueueSize',
+                label: 'بالانتظار',
               ),
-              _verticalDivider(height: 32),
-              Column(
-                children: [
-                  Text(
-                    '~${widget.estimatedWaitMin * _position} د',
-                    style: context.textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    'وقت الانتظار',
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.white70,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
+              _verticalDivider(),
+              _StatItem(
+                value: '$inProgressCount',
+                label: 'قيد الخدمة',
+              ),
+              _verticalDivider(),
+              _StatItem(
+                value: '~$estimatedWaitMin',
+                label: 'دقيقة انتظار',
+                icon: Icons.access_time,
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _verticalDivider({double height = 48}) {
+  Widget _verticalDivider() {
     return Container(
       width: 1,
-      height: height,
+      height: 48,
       color: Colors.white.withValues(alpha: 0.2),
-    );
-  }
-
-  // ── Package Selection ─────────────────────────────────────────────────
-
-  Widget _buildPackageSelection(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'اختر الخدمة',
-            style: context.textTheme.labelSmall?.copyWith(
-              color: AppColors.textSecondary,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          ...widget.packages.map((pkg) => _buildPackageCard(context, pkg)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPackageCard(BuildContext context, ServicePackage pkg) {
-    final isSelected = _selectedPackageId == pkg.id;
-    final price = Money(pkg.price);
-
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => setState(() => _selectedPackageId = pkg.id),
-          borderRadius: AppRadius.cardInner,
-          child: Container(
-            padding: const EdgeInsets.all(AppSpacing.md),
-            decoration: BoxDecoration(
-              borderRadius: AppRadius.cardInner,
-              border: Border.all(
-                color: isSelected ? AppColors.primary : AppColors.divider,
-              ),
-              color: isSelected
-                  ? AppColors.primary.withValues(alpha: 0.05)
-                  : null,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(AppRadius.sm),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    pkg.icon ?? '',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.md),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            pkg.nameAr,
-                            style: context.textTheme.labelSmall?.copyWith(
-                              color: AppColors.textPrimary,
-                            ),
-                          ),
-                          if (pkg.popular) ...[
-                            const SizedBox(width: AppSpacing.xs),
-                            Icon(
-                              Icons.star,
-                              size: 10,
-                              color: AppColors.secondary,
-                            ),
-                          ],
-                        ],
-                      ),
-                      Text(
-                        '~${pkg.durationMin} دقيقة',
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: AppColors.textSecondary,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      price.toJodString(),
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                    Text(
-                      'د.أ',
-                      style: context.textTheme.labelSmall?.copyWith(
-                        color: AppColors.textSecondary,
-                        fontSize: 9,
-                      ),
-                    ),
-                  ],
-                ),
-                if (isSelected) ...[
-                  const SizedBox(width: AppSpacing.sm),
-                  const Icon(
-                    Icons.check_circle,
-                    size: 18,
-                    color: AppColors.primary,
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // ── Join Button ───────────────────────────────────────────────────────
-
-  Widget _buildJoinButton(BuildContext context) {
-    final enabled = _selectedPackageId != null;
-
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg,
-        0,
-        AppSpacing.lg,
-        AppSpacing.lg,
-      ),
-      child: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              onPressed: enabled ? _handleJoin : null,
-              icon: const Icon(Icons.navigation, size: 16),
-              label: const Text('احجز مكانك بالدور'),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                disabledBackgroundColor: AppColors.divider,
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            'سيتم إشعارك عندما يقترب دورك',
-            style: context.textTheme.labelSmall?.copyWith(
-              color: AppColors.textSecondary,
-              fontSize: 10,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── After Joining — Action Buttons ────────────────────────────────────
-
-  Widget _buildJoinedActions(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.navigation, size: 14),
-              label: const Text('أنا ادور — في الطريق'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.success,
-                side: const BorderSide(color: AppColors.success),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: _handleCancel,
-              icon: const Icon(Icons.close, size: 14),
-              label: const Text('إلغاء الحجز'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textSecondary,
-                side: const BorderSide(color: AppColors.divider),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── Paused Notice ─────────────────────────────────────────────────────
-
-  Widget _buildPausedNotice(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Text(
-        'يمكنك المتابعة لتلقي إشعار عند استئناف الدور',
-        textAlign: TextAlign.center,
-        style: context.textTheme.bodySmall?.copyWith(
-          color: AppColors.textSecondary,
-        ),
-      ),
     );
   }
 }

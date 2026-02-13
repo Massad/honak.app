@@ -7,7 +7,7 @@ import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -205,8 +205,8 @@ class _ProfileHeader extends StatelessWidget {
             ),
             child: ClipOval(
               child: user?.avatarUrl != null
-                  ? CachedImage(
-                      imageUrl: user!.avatarUrl,
+                  ? AppImage(
+                      url: user!.avatarUrl,
                       width: 60,
                       height: 60,
                     )
@@ -434,8 +434,8 @@ class _PageCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: page.avatarUrl != null
-                      ? CachedImage(
-                          imageUrl: page.avatarUrl,
+                      ? AppImage(
+                          url: page.avatarUrl,
                           width: 44,
                           height: 44,
                         )

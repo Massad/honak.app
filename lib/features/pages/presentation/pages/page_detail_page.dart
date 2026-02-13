@@ -6,7 +6,13 @@ import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dropoff/presentation/providers/dropoff_providers.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/customer_dropoff_view.dart';
+import 'package:honak/features/business/queue/domain/entities/customer_queue_entry.dart';
+import 'package:honak/features/business/queue/domain/entities/queue_add_on.dart';
+import 'package:honak/features/business/queue/domain/entities/queue_source.dart';
+import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
+import 'package:honak/features/business/queue/presentation/providers/customer_queue_providers.dart';
 import 'package:honak/features/business/queue/presentation/providers/queue_providers.dart';
+import 'package:honak/features/business/queue/presentation/widgets/customer/queue_or_schedule_sheet.dart';
 import 'package:honak/features/business/queue/presentation/widgets/customer_queue_view.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
@@ -15,6 +21,7 @@ import 'package:honak/features/pages/presentation/widgets/info/info.dart';
 import 'package:honak/features/pages/presentation/widgets/page_skeleton.dart';
 import 'package:honak/features/pages/presentation/widgets/page_tab_bar.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/sections.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/booking_wizard_sheet.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/shared.dart';
 import 'package:honak/features/pages/presentation/pages/claim_request_page.dart';
 import 'package:honak/shared/widgets/coverage_banner.dart';
@@ -381,43 +388,228 @@ class _ServiceBookingWithDropoff extends ConsumerWidget {
 }
 
 /// Wraps ServiceBookingSection with a CustomerQueueView for queue-based pages.
-class _ServiceBookingWithQueue extends ConsumerWidget {
+///
+/// Manages local queue entry state for demo. When the user taps "حجز" on a
+/// service item, shows [QueueOrScheduleSheet] ("today / book later") instead
+/// of the default [BookingWizardSheet]. Joining the queue creates a local
+/// [CustomerQueueEntry] so the tracker renders immediately.
+class _ServiceBookingWithQueue extends ConsumerStatefulWidget {
   final PageDetail page;
 
   const _ServiceBookingWithQueue({required this.page});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final queueAsync = ref.watch(customerQueueDataProvider(page.id));
+  ConsumerState<_ServiceBookingWithQueue> createState() =>
+      _ServiceBookingWithQueueState();
+}
 
-    return ServiceBookingSection(
-      pageId: page.id,
-      pageName: page.name,
-      teamMembersCount: page.teamMembersCount,
-      packages: page.packages,
-      headerSlivers: [
-        SliverToBoxAdapter(
-          child: queueAsync.when(
-            data: (data) => Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
-              child: CustomerQueueView(
-                pageName: page.name,
-                pageAvatar: page.avatarUrl,
-                currentQueueSize: data.stats.waiting,
-                estimatedWaitMin: data.stats.avgWaitMin,
-                inProgressCount: data.stats.inProgress,
-                packages: data.packages,
-                subscriptions: data.subscriptions,
+class _ServiceBookingWithQueueState
+    extends ConsumerState<_ServiceBookingWithQueue> {
+  /// Local override — set when the user joins the queue in-session.
+  CustomerQueueEntry? _demoEntry;
+
+  /// Set to true after the post-queue banner is dismissed.
+  bool _recentDismissed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final queueAsync = ref.watch(customerQueueDataProvider(widget.page.id));
+    final activeEntryAsync =
+        ref.watch(customerActiveQueueProvider(widget.page.id));
+    final recentEntryAsync =
+        ref.watch(recentQueueEntryProvider(widget.page.id));
+
+    return queueAsync.when(
+      loading: () => const Center(
+        child: Padding(
+          padding: EdgeInsets.all(AppSpacing.xl),
+          child: CircularProgressIndicator(),
+        ),
+      ),
+      error: (_, __) => ServiceBookingSection(
+        pageId: widget.page.id,
+        pageName: widget.page.name,
+        teamMembersCount: widget.page.teamMembersCount,
+        packages: widget.page.packages,
+      ),
+      data: (data) {
+        // Active entry: local demo override takes precedence over API result
+        final activeEntry = _demoEntry ?? activeEntryAsync.valueOrNull;
+        final recentEntry =
+            _recentDismissed ? null : recentEntryAsync.valueOrNull;
+
+        return ServiceBookingSection(
+          pageId: widget.page.id,
+          pageName: widget.page.name,
+          teamMembersCount: widget.page.teamMembersCount,
+          packages: widget.page.packages,
+          onBookServiceOverride: (item) =>
+              _handleBookService(context, item, data),
+          headerSlivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: CustomerQueueView(
+                  pageName: widget.page.name,
+                  pageAvatar: widget.page.avatarUrl,
+                  currentQueueSize: data.stats.waiting,
+                  estimatedWaitMin: data.stats.avgWaitMin,
+                  inProgressCount: data.stats.inProgress,
+                  packages: data.packages,
+                  availableAddOns: data.availableAddOns,
+                  activeEntry: activeEntry,
+                  recentEntry: recentEntry,
+                  onCancelEntry: () => setState(() => _demoEntry = null),
+                  onMarkOnMyWay: () {
+                    if (_demoEntry != null) {
+                      setState(() {
+                        _demoEntry = _demoEntry!.copyWith(
+                          onTheWay: true,
+                          status: QueueStatus.onTheWay,
+                        );
+                      });
+                    }
+                  },
+                  onRequestModification: (_) {
+                    // Demo: show snackbar confirming modification request
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('تم إرسال طلب التعديل'),
+                        ),
+                      );
+                    }
+                  },
+                  onRebook: () => setState(() => _recentDismissed = true),
+                  onViewRequestDetail: () {
+                    // TODO: navigate to request detail page
+                  },
+                ),
               ),
             ),
-            loading: () => const Padding(
-              padding: EdgeInsets.all(AppSpacing.xl),
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            error: (_, __) => const SizedBox.shrink(),
+          ],
+        );
+      },
+    );
+  }
+
+  /// Intercepts service booking for queue pages.
+  ///
+  /// Matches the tapped [item] to a [ServicePackage] by `nameAr`. If matched,
+  /// shows [QueueOrScheduleSheet] ("today / book later"). If no match, falls
+  /// back to the standard [BookingWizardSheet].
+  void _handleBookService(
+    BuildContext context,
+    dynamic item,
+    QueueData queueData,
+  ) {
+    // item is an Item from catalog/domain/entities/item.dart
+    final itemName = item.nameAr as String;
+    final itemId = item.id as String;
+    final itemPriceCents = item.price.cents as int;
+
+    // If there's already an active queue entry, block and show dialog
+    final activeEntry = _demoEntry ??
+        ref.read(customerActiveQueueProvider(widget.page.id)).valueOrNull;
+    if (activeEntry != null) {
+      showDialog<void>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('لديك حجز قائم'),
+          content: const Text(
+            'لديك حجز قائم بالدور. الغِ الحالي أولاً لحجز خدمة جديدة.',
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('حسناً'),
+            ),
+          ],
         ),
-      ],
+      );
+      return;
+    }
+
+    // Match service → package by Arabic name
+    final matchedPackage = queueData.packages
+        .where((pkg) => pkg.nameAr == itemName)
+        .firstOrNull;
+
+    if (matchedPackage == null) {
+      // No matching queue package — fall back to standard booking
+      final durationMinutes = (item.sortOrder as int) > 0
+          ? item.sortOrder as int
+          : 30;
+      BookingWizardSheet.show(
+        context: context,
+        pageName: widget.page.name,
+        serviceId: itemId,
+        serviceName: itemName,
+        priceCents: itemPriceCents,
+        durationMinutes: durationMinutes,
+      );
+      return;
+    }
+
+    showQueueOrScheduleSheet(
+      context: context,
+      queuePackage: matchedPackage,
+      availableAddOns: queueData.availableAddOns,
+      queueSize: queueData.stats.waiting,
+      estimatedWaitMin: queueData.stats.avgWaitMin,
+      isPaused: false,
+      onJoinQueue: (packageId, addOnIds) {
+        // Calculate total with add-ons
+        var totalCents = matchedPackage.price;
+        final resolvedAddOns = <QueueAddOn>[];
+        if (addOnIds != null) {
+          for (final id in addOnIds) {
+            final addOn = queueData.availableAddOns
+                .where((a) => a.id == id)
+                .firstOrNull;
+            if (addOn != null) {
+              totalCents += addOn.priceCents;
+              resolvedAddOns.add(
+                QueueAddOn(name: addOn.nameAr, price: addOn.priceCents),
+              );
+            }
+          }
+        }
+
+        // Create local demo entry (in production this would be an API call)
+        final entry = CustomerQueueEntry(
+          id: 'qe_demo_${DateTime.now().millisecondsSinceEpoch}',
+          pageId: widget.page.id,
+          pageName: widget.page.name,
+          position: queueData.stats.waiting + 1,
+          status: QueueStatus.waiting,
+          source: QueueSource.appReserve,
+          packageId: packageId,
+          packageName: matchedPackage.nameAr,
+          packagePriceCents: matchedPackage.price,
+          addOns: resolvedAddOns,
+          totalPriceCents: totalCents,
+          estimatedDurationMin: matchedPackage.durationMin,
+          aheadCount: queueData.stats.waiting,
+          estimatedWaitMin: queueData.stats.avgWaitMin,
+          checkedInAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+        );
+        setState(() => _demoEntry = entry);
+      },
+      onBookLater: () {
+        // Standard booking wizard for scheduling
+        final durationMinutes = (item.sortOrder as int) > 0
+            ? item.sortOrder as int
+            : matchedPackage.durationMin;
+        BookingWizardSheet.show(
+          context: context,
+          pageName: widget.page.name,
+          serviceId: itemId,
+          serviceName: itemName,
+          priceCents: itemPriceCents,
+          durationMinutes: durationMinutes,
+        );
+      },
     );
   }
 }

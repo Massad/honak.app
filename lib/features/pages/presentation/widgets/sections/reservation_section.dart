@@ -9,7 +9,7 @@ import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/villa_detail_card.dart';
 import 'package:honak/features/requests/presentation/widgets/reservation_request_sheet.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/money_text.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
@@ -240,8 +240,8 @@ class _GalleryStrip extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           child: SizedBox(
             width: 280,
-            child: CachedImage(
-              imageUrl: images[index],
+            child: AppImage(
+              url: images[index],
               fit: BoxFit.cover,
             ),
           ),
@@ -325,8 +325,8 @@ class _SpaceCard extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  CachedImage(
-                    imageUrl: item.images.isNotEmpty
+                  AppImage(
+                    url: item.images.isNotEmpty
                         ? item.images.first
                         : null,
                     fit: BoxFit.cover,
@@ -399,7 +399,7 @@ class _SpaceCard extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: context
-                                .colorScheme.secondaryContainer,
+                                .colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Row(
@@ -409,7 +409,7 @@ class _SpaceCard extends StatelessWidget {
                                 Icons.people_outline,
                                 size: 14,
                                 color: context.colorScheme
-                                    .onSecondaryContainer,
+                                    .onSurfaceVariant,
                               ),
                               const SizedBox(width: AppSpacing.xxs),
                               Text(
@@ -417,7 +417,7 @@ class _SpaceCard extends StatelessWidget {
                                 style: context.textTheme.labelSmall
                                     ?.copyWith(
                                   color: context.colorScheme
-                                      .onSecondaryContainer,
+                                      .onSurfaceVariant,
                                 ),
                               ),
                             ],

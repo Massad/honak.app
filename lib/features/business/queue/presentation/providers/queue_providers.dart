@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/features/business/queue/domain/entities/available_add_on.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_add_on.dart';
+import 'package:honak/features/business/queue/domain/entities/queue_discount.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_source.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_stats.dart';
@@ -19,12 +21,14 @@ class QueueData {
   final QueueDayStats stats;
   final List<ServicePackage> packages;
   final List<QueueSubscription> subscriptions;
+  final List<AvailableAddOn> availableAddOns;
 
   const QueueData({
     required this.entries,
     required this.stats,
     required this.packages,
     required this.subscriptions,
+    this.availableAddOns = const [],
   });
 }
 
@@ -85,11 +89,21 @@ QueueData _parseQueueData(Map<String, dynamic> raw) {
       .map(_parseSubscription)
       .toList();
 
+  final availableAddOns = (raw['available_add_ons'] as List? ?? [])
+      .cast<Map<String, dynamic>>()
+      .map((a) => AvailableAddOn(
+            id: a['id'] as String,
+            nameAr: a['name_ar'] as String,
+            priceCents: _jodToPiasters(a['price']),
+          ))
+      .toList();
+
   return QueueData(
     entries: entries,
     stats: stats,
     packages: packages,
     subscriptions: subscriptions,
+    availableAddOns: availableAddOns,
   );
 }
 
@@ -102,6 +116,19 @@ QueueEntry _parseEntry(Map<String, dynamic> raw) {
               ))
           .toList() ??
       [];
+
+  // Parse discount if present
+  QueueDiscount? discount;
+  final discountRaw = raw['discount'] as Map<String, dynamic>?;
+  if (discountRaw != null) {
+    discount = QueueDiscount(
+      type: discountRaw['type'] as String,
+      value: _jodToPiasters(discountRaw['value']),
+      amount: _jodToPiasters(discountRaw['amount']),
+      reason: discountRaw['reason'] as String,
+      reasonNote: discountRaw['reason_note'] as String?,
+    );
+  }
 
   return QueueEntry(
     id: raw['id'] as String,
@@ -120,6 +147,10 @@ QueueEntry _parseEntry(Map<String, dynamic> raw) {
     addOns: addOns,
     totalPrice: _jodToPiasters(raw['total_price']),
     estimatedDurationMin: raw['estimated_duration_min'] as int,
+    discount: discount,
+    priceBeforeDiscount: raw['price_before_discount'] != null
+        ? _jodToPiasters(raw['price_before_discount'])
+        : null,
     checkedInAt: _parseTimestamp(raw['checked_in_at']),
     startedAt: raw['started_at'] != null
         ? _parseTimestamp(raw['started_at'])

@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/request_card_sections.dart';
 import 'package:honak/features/business/shared/domain/entities/entities.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 // Re-export shared status helpers so detail_page.dart can import them from here.
 export 'package:honak/features/business/order_management/presentation/widgets/request_card_sections.dart'
@@ -73,15 +74,10 @@ class RequestCustomerHeader extends StatelessWidget {
             ],
           ),
           const SizedBox(width: AppSpacing.md),
-          CircleAvatar(
+          AppImage.avatar(
+            url: customer.avatarUrl,
+            name: customer.name,
             radius: 24,
-            backgroundColor: Colors.grey.shade100,
-            backgroundImage: customer.avatarUrl != null
-                ? NetworkImage(customer.avatarUrl!)
-                : null,
-            child: customer.avatarUrl == null
-                ? Icon(Icons.person, color: Colors.grey.shade400)
-                : null,
           ),
         ],
       ),

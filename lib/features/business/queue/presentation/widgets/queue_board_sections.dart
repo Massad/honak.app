@@ -15,6 +15,8 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.isPaused,
     required this.onTogglePause,
     this.onAdd,
+    this.activeFilter,
+    this.onFilterChanged,
   });
 
   final int waitingCount;
@@ -24,6 +26,8 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
   final bool isPaused;
   final VoidCallback onTogglePause;
   final VoidCallback? onAdd;
+  final _QueueFilter? activeFilter;
+  final ValueChanged<_QueueFilter>? onFilterChanged;
 
   @override
   double get maxExtent => 108;
@@ -37,7 +41,8 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
       inProgressCount != oldDelegate.inProgressCount ||
       completedCount != oldDelegate.completedCount ||
       estimatedWaitMin != oldDelegate.estimatedWaitMin ||
-      isPaused != oldDelegate.isPaused;
+      isPaused != oldDelegate.isPaused ||
+      activeFilter != oldDelegate.activeFilter;
 
   @override
   Widget build(
@@ -104,7 +109,7 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
           ),
           const SizedBox(height: AppSpacing.sm),
 
-          // Stats strip
+          // Stats strip (tappable filters)
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -115,6 +120,10 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
                   value: '$waitingCount',
                   color: AppColors.secondary,
                   bgColor: const Color(0xFFFFF8E1),
+                  isActive: activeFilter == _QueueFilter.waiting,
+                  onTap: onFilterChanged != null
+                      ? () => onFilterChanged!(_QueueFilter.waiting)
+                      : null,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 _StatChip(
@@ -123,6 +132,10 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
                   value: '$inProgressCount',
                   color: AppColors.primary,
                   bgColor: const Color(0xFFEFF6FF),
+                  isActive: activeFilter == _QueueFilter.inProgress,
+                  onTap: onFilterChanged != null
+                      ? () => onFilterChanged!(_QueueFilter.inProgress)
+                      : null,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 _StatChip(
@@ -131,14 +144,18 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
                   value: '$completedCount',
                   color: AppColors.success,
                   bgColor: const Color(0xFFF0FDF4),
+                  isActive: activeFilter == _QueueFilter.completed,
+                  onTap: onFilterChanged != null
+                      ? () => onFilterChanged!(_QueueFilter.completed)
+                      : null,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 _StatChip(
                   icon: Icons.schedule_rounded,
                   label: 'وقت الانتظار',
                   value: '~$estimatedWaitMin د',
-                  color: const Color(0xFF7B1FA2), // purple
-                  bgColor: const Color(0xFFF3E5F5), // purple-50
+                  color: const Color(0xFF7B1FA2),
+                  bgColor: const Color(0xFFF3E5F5),
                 ),
               ],
             ),
@@ -158,6 +175,8 @@ class _StatChip extends StatelessWidget {
     required this.value,
     required this.color,
     required this.bgColor,
+    this.isActive = false,
+    this.onTap,
   });
 
   final IconData icon;
@@ -165,27 +184,30 @@ class _StatChip extends StatelessWidget {
   final String value;
   final Color color;
   final Color bgColor;
+  final bool isActive;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final chip = Container(
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: AppSpacing.md,
         vertical: 6,
       ),
       decoration: BoxDecoration(
-        color: bgColor,
+        color: isActive ? color : bgColor,
         borderRadius: BorderRadius.circular(AppRadius.sm),
+        border: isActive ? null : Border.all(color: Colors.transparent),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 12, color: color),
+          Icon(icon, size: 12, color: isActive ? Colors.white : color),
           const SizedBox(width: AppSpacing.xs),
           Text(
             label,
             style: context.textTheme.labelSmall?.copyWith(
-              color: Colors.grey.shade500,
+              color: isActive ? Colors.white70 : Colors.grey.shade500,
               fontSize: 10,
             ),
           ),
@@ -193,13 +215,18 @@ class _StatChip extends StatelessWidget {
           Text(
             value,
             style: context.textTheme.bodySmall?.copyWith(
-              color: color,
+              color: isActive ? Colors.white : color,
               fontSize: 12,
             ),
           ),
         ],
       ),
     );
+
+    if (onTap != null) {
+      return GestureDetector(onTap: onTap, child: chip);
+    }
+    return chip;
   }
 }
 
@@ -326,11 +353,15 @@ class _QueueColumn extends StatelessWidget {
     required this.entries,
     required this.advanceLabel,
     required this.advanceColor,
+    this.advanceIcon,
     this.showTimer = false,
     this.showNoShow = false,
     this.onAdvance,
     this.onNoShow,
     this.onRemove,
+    this.onOpenDetail,
+    this.onChangeStatus,
+    this.onOpenChat,
   });
 
   final String label;
@@ -343,11 +374,15 @@ class _QueueColumn extends StatelessWidget {
   final List<QueueEntry> entries;
   final String advanceLabel;
   final Color advanceColor;
+  final IconData? advanceIcon;
   final bool showTimer;
   final bool showNoShow;
   final void Function(String entryId)? onAdvance;
   final void Function(String entryId)? onNoShow;
   final void Function(String entryId)? onRemove;
+  final void Function(QueueEntry entry)? onOpenDetail;
+  final void Function(String entryId, QueueStatus newStatus)? onChangeStatus;
+  final VoidCallback? onOpenChat;
 
   @override
   Widget build(BuildContext context) {
@@ -441,7 +476,16 @@ class _QueueColumn extends StatelessWidget {
                 onRemove: onRemove != null
                     ? () => onRemove!(entry.id)
                     : null,
+                onOpenDetail: onOpenDetail != null
+                    ? () => onOpenDetail!(entry)
+                    : null,
+                onChangeStatus: onChangeStatus != null
+                    ? (newStatus) => onChangeStatus!(entry.id, newStatus)
+                    : null,
+                onOpenChat: onOpenChat,
+                activityLog: generateQueueActivity(entry),
                 advanceLabel: advanceLabel,
+                advanceIcon: advanceIcon,
                 advanceColor: advanceColor,
                 showTimer: showTimer,
               ),

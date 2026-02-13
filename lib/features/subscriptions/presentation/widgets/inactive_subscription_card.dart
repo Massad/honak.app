@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
@@ -6,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/renewal_request_sheet.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 
 class InactiveSubscriptionCard extends StatelessWidget {
   final Subscription subscription;
@@ -25,34 +25,12 @@ class InactiveSubscriptionCard extends StatelessWidget {
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Row(
           children: [
-            ClipRRect(
+            AppImage(
+              url: subscription.pageLogo,
+              width: 36,
+              height: 36,
               borderRadius: BorderRadius.circular(AppRadius.sm),
-              child: CachedNetworkImage(
-                imageUrl: subscription.pageLogo ?? '',
-                width: 36,
-                height: 36,
-                fit: BoxFit.cover,
-                placeholder: (_, __) => Container(
-                  width: 36,
-                  height: 36,
-                  color: Colors.grey.shade100,
-                  child: Icon(
-                    Icons.storefront,
-                    size: 18,
-                    color: Colors.grey.shade300,
-                  ),
-                ),
-                errorWidget: (_, __, ___) => Container(
-                  width: 36,
-                  height: 36,
-                  color: Colors.grey.shade100,
-                  child: Icon(
-                    Icons.storefront,
-                    size: 18,
-                    color: Colors.grey.shade300,
-                  ),
-                ),
-              ),
+              placeholderIcon: Icons.storefront,
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(

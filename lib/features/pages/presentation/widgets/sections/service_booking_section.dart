@@ -26,6 +26,11 @@ class ServiceBookingSection extends ConsumerStatefulWidget {
   /// scrollable widgets.
   final List<Widget> headerSlivers;
 
+  /// If provided, called instead of the default [BookingWizardSheet] when a
+  /// service item is tapped. Used by queue-type pages to show the
+  /// [QueueOrScheduleSheet] instead.
+  final void Function(Item item)? onBookServiceOverride;
+
   const ServiceBookingSection({
     super.key,
     required this.pageId,
@@ -33,6 +38,7 @@ class ServiceBookingSection extends ConsumerStatefulWidget {
     this.teamMembersCount = 0,
     this.packages = const [],
     this.headerSlivers = const [],
+    this.onBookServiceOverride,
   });
 
   @override
@@ -171,11 +177,17 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
                     context,
                     ref,
                     trigger: LoginPromptTrigger.book,
-                    onAuthed: () => _openBookingWizard(
-                      context,
-                      visible[index],
-                      teamMembers,
-                    ),
+                    onAuthed: () {
+                      if (widget.onBookServiceOverride != null) {
+                        widget.onBookServiceOverride!(visible[index]);
+                      } else {
+                        _openBookingWizard(
+                          context,
+                          visible[index],
+                          teamMembers,
+                        );
+                      }
+                    },
                   ),
                 ),
               ),

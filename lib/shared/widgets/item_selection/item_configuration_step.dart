@@ -4,7 +4,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/item_selection/item_option_selector.dart';
 
 /// Step 2 of the item picker: configure options + quantity + confirm.
@@ -199,8 +199,8 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
         if (widget.item.images.isNotEmpty) ...[
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: CachedImage(
-              imageUrl: widget.item.images.first,
+            child: AppImage(
+              url: widget.item.images.first,
               width: 72,
               height: 72,
               fit: BoxFit.cover,

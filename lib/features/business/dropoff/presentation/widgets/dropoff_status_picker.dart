@@ -9,21 +9,38 @@ import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.d
 import 'package:honak/features/business/dropoff/domain/entities/ticket_activity.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/activity_log_utils.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_config.dart';
+import 'package:honak/features/business/shared/widgets/activity_log.dart';
 
 /// Shows a full-screen activity log bottom sheet for a ticket.
-void showActivityLogSheet(
+void showDropoffActivityLogSheet(
   BuildContext context, {
   required DropoffTicket ticket,
   required List<TicketActivityEntry> activityLog,
 }) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
-    builder: (_) => _ActivityLogSheet(
-      ticket: ticket,
-      activityLog: activityLog,
-    ),
+  showActivityLogSheet(
+    context,
+    title: 'سجل النشاط',
+    subtitle: '#${ticket.ticketNumber} — ${ticket.customerName}',
+    entries: activityLog.map((e) => toActivityLogEntry(e)).toList(),
+  );
+}
+
+/// Converts a domain-specific [TicketActivityEntry] to the shared
+/// [ActivityLogEntry] UI model.
+ActivityLogEntry toActivityLogEntry(TicketActivityEntry e) {
+  return ActivityLogEntry(
+    id: e.id,
+    timestamp: e.timestamp,
+    label: e.action.labelAr,
+    icon: activityActionIcon(e.action),
+    color: activityActionColor(e.action),
+    actorName: e.actorName,
+    actorRole: e.actorRole,
+    from: e.from,
+    to: e.to,
+    note: e.note,
+    amount: e.amount,
+    method: e.method,
   );
 }
 
@@ -235,9 +252,7 @@ class _StatusPickerSheet extends StatelessWidget {
                     final isBackward = statusIdx < currentIdx;
 
                     return Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        bottom: 6,
-                      ),
+                      padding: const EdgeInsetsDirectional.only(bottom: 6),
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context, status),
                         child: Container(
@@ -305,99 +320,19 @@ class _StatusPickerSheet extends StatelessWidget {
               ),
             ),
 
-            // Activity log preview
+            // Activity log preview — reuses shared widget
             if (activityLog.isNotEmpty) ...[
               Divider(height: 1, color: Colors.grey.shade100),
               Padding(
                 padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Header row with "عرض السجل الكامل" link
-                    Row(
-                      children: [
-                        Text(
-                          'آخر الإجراءات',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey.shade400,
-                          ),
-                        ),
-                        const Spacer(),
-                        if (onViewFullLog != null)
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context); // close picker first
-                              onViewFullLog!();
-                            },
-                            child: const Text(
-                              'عرض السجل الكامل',
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: Color(0xFF1A73E8),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    ...activityLog.take(3).map((entry) {
-                      final color = activityActionColor(entry.action);
-                      final icon = activityActionIcon(entry.action);
-                      return Padding(
-                        padding: const EdgeInsetsDirectional.only(
-                          bottom: AppSpacing.xs,
-                        ),
-                        child: Container(
-                          padding: const EdgeInsetsDirectional.symmetric(
-                            horizontal: AppSpacing.sm,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade50,
-                            borderRadius:
-                                BorderRadius.circular(AppRadius.md),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 20,
-                                height: 20,
-                                decoration: BoxDecoration(
-                                  color: color.withValues(alpha: 0.15),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  icon,
-                                  size: 10,
-                                  color: color,
-                                ),
-                              ),
-                              const SizedBox(width: AppSpacing.sm),
-                              Expanded(
-                                child: Text(
-                                  entry.action.labelAr,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Colors.grey.shade700,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              Text(
-                                entry.actorName,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.grey.shade500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-                  ],
+                child: ActivityLogPreview(
+                  entries: activityLog
+                      .map((e) => toActivityLogEntry(e))
+                      .toList(),
+                  onViewFull: () {
+                    Navigator.pop(context); // close picker first
+                    onViewFullLog?.call();
+                  },
                 ),
               ),
             ],
@@ -407,322 +342,5 @@ class _StatusPickerSheet extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// Full Activity Log Sheet
-// ═══════════════════════════════════════════════════════════════
-
-class _ActivityLogSheet extends StatelessWidget {
-  const _ActivityLogSheet({
-    required this.ticket,
-    required this.activityLog,
-  });
-
-  final DropoffTicket ticket;
-  final List<TicketActivityEntry> activityLog;
-
-  @override
-  Widget build(BuildContext context) {
-    final sorted = List.of(activityLog)
-      ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
-
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.85,
-      ),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag handle
-            Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.only(top: AppSpacing.sm),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-
-            // Header
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.lg,
-                AppSpacing.md,
-                AppSpacing.lg,
-                AppSpacing.md,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'سجل النشاط',
-                          style: context.textTheme.titleSmall?.copyWith(
-                            color: context.colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          '#${ticket.ticketNumber} — ${ticket.customerName}',
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey.shade400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.close,
-                        size: 16,
-                        color: Colors.grey.shade500,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Divider(height: 1, color: Colors.grey.shade100),
-
-            // Activity list
-            if (sorted.isEmpty)
-              Padding(
-                padding: const EdgeInsetsDirectional.all(AppSpacing.xxl),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.history_rounded,
-                      size: 36,
-                      color: Colors.grey.shade200,
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Text(
-                      'لا يوجد نشاط بعد',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            else
-              Flexible(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  padding:
-                      const EdgeInsetsDirectional.all(AppSpacing.lg),
-                  itemCount: sorted.length,
-                  itemBuilder: (context, i) {
-                    final entry = sorted[i];
-                    final color = activityActionColor(entry.action);
-                    final icon = activityActionIcon(entry.action);
-
-                    return Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        bottom: AppSpacing.sm,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Timeline dot
-                          Column(
-                            children: [
-                              Container(
-                                width: 24,
-                                height: 24,
-                                decoration: BoxDecoration(
-                                  color:
-                                      color.withValues(alpha: 0.12),
-                                  shape: BoxShape.circle,
-                                ),
-                                child:
-                                    Icon(icon, size: 12, color: color),
-                              ),
-                              if (i < sorted.length - 1)
-                                Container(
-                                  width: 1,
-                                  height: 24,
-                                  color: Colors.grey.shade200,
-                                ),
-                            ],
-                          ),
-                          const SizedBox(width: AppSpacing.md),
-
-                          // Content
-                          Expanded(
-                            child: Container(
-                              padding:
-                                  const EdgeInsetsDirectional.all(
-                                AppSpacing.md,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade50,
-                                borderRadius: AppRadius.cardInner,
-                              ),
-                              child: Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          entry.action.labelAr,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: context.colorScheme
-                                                .onSurface,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        _formatTimeAgo(
-                                            entry.timestamp),
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color:
-                                              Colors.grey.shade400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                      height: AppSpacing.xxs),
-                                  Text(
-                                    entry.actorName,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.grey.shade500,
-                                    ),
-                                  ),
-                                  if (entry.from != null &&
-                                      entry.to != null) ...[
-                                    const SizedBox(
-                                        height: AppSpacing.xs),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          padding:
-                                              const EdgeInsetsDirectional
-                                                  .symmetric(
-                                            horizontal: 6,
-                                            vertical: 2,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.grey.shade100,
-                                            borderRadius:
-                                                AppRadius.pill,
-                                          ),
-                                          child: Text(
-                                            entry.from!,
-                                            style: TextStyle(
-                                              fontSize: 9,
-                                              color: Colors
-                                                  .grey.shade400,
-                                            ),
-                                          ),
-                                        ),
-                                        const Padding(
-                                          padding:
-                                              EdgeInsetsDirectional
-                                                  .symmetric(
-                                            horizontal:
-                                                AppSpacing.xs,
-                                          ),
-                                          child: Icon(
-                                            Icons
-                                                .arrow_forward_rounded,
-                                            size: 10,
-                                            color:
-                                                AppColors.textHint,
-                                          ),
-                                        ),
-                                        Container(
-                                          padding:
-                                              const EdgeInsetsDirectional
-                                                  .symmetric(
-                                            horizontal: 6,
-                                            vertical: 2,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: const Color(
-                                                0xFFEFF6FF),
-                                            borderRadius:
-                                                AppRadius.pill,
-                                          ),
-                                          child: Text(
-                                            entry.to!,
-                                            style: const TextStyle(
-                                              fontSize: 9,
-                                              color: Color(
-                                                  0xFF1A73E8),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                  if (entry.note != null) ...[
-                                    const SizedBox(
-                                        height: AppSpacing.xs),
-                                    Text(
-                                      entry.note!,
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.grey.shade600,
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-            const SizedBox(height: AppSpacing.md),
-          ],
-        ),
-      ),
-    );
-  }
-
-  String _formatTimeAgo(String timestamp) {
-    final dt = DateTime.tryParse(timestamp);
-    if (dt == null) return timestamp;
-    final diff = DateTime.now().difference(dt);
-    if (diff.inMinutes < 60) return 'قبل ${diff.inMinutes} د';
-    if (diff.inHours < 24) return 'قبل ${diff.inHours} س';
-    return 'قبل ${diff.inDays} يوم';
   }
 }

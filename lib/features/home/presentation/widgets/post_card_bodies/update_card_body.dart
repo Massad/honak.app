@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
+import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
 
 import 'post_card_helpers.dart';
@@ -46,21 +47,10 @@ class UpdateCardBody extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: onPageTap,
-                    child: CircleAvatar(
+                    child: AppImage.avatar(
+                      url: post.page.avatarUrl,
+                      name: post.page.name,
                       radius: 18,
-                      backgroundColor:
-                          context.colorScheme.surfaceContainerHighest,
-                      backgroundImage: post.page.avatarUrl != null
-                          ? NetworkImage(post.page.avatarUrl!)
-                          : null,
-                      child: post.page.avatarUrl == null
-                          ? Text(
-                              post.page.name.isNotEmpty
-                                  ? post.page.name[0]
-                                  : '',
-                              style: context.textTheme.labelSmall,
-                            )
-                          : null,
                     ),
                   ),
                   SizedBox(width: AppSpacing.sm),
