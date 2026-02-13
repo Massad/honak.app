@@ -1,0 +1,96 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_anf_01",
+      "conversation_id": "conv_ahmad_nour_fashion",
+      "sender_id": "usr_ahmad",
+      "sender_name": "أحمد محمد",
+      "type": "text",
+      "content": "مرحبا، في عندكم جاكيتات شتوي مقاس L؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707260000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_anf_02",
+      "conversation_id": "conv_ahmad_nour_fashion",
+      "sender_id": "usr_sara",
+      "sender_name": "نور فاشن",
+      "type": "text",
+      "content": "أهلاً أحمد! عندنا تشكيلة جديدة وصلت. شوف الصور",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707261000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_anf_03",
+      "conversation_id": "conv_ahmad_nour_fashion",
+      "sender_id": "usr_sara",
+      "sender_name": "نور فاشن",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/jacket_l/400/500",
+      "metadata": {},
+      "created_at": 1707261100,
+      "is_from_business": true
+    },
+    {
+      "id": "m_anf_04",
+      "conversation_id": "conv_ahmad_nour_fashion",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم إنشاء طلب #req_2002",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707270000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_anf_05",
+      "conversation_id": "conv_ahmad_nour_fashion",
+      "sender_id": "usr_ahmad",
+      "sender_name": "أحمد محمد",
+      "type": "modification_request",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "id": "mod_anf_01",
+        "order_id": "req_2002",
+        "item_changes": [
+          {
+            "name": "جاكيت شتوي L",
+            "changes": [
+              {"field": "اللون", "from": "أسود", "to": "كحلي"}
+            ]
+          }
+        ],
+        "note": "ممكن اللون الكحلي بدل الأسود؟",
+        "original_total": 4500,
+        "new_total": 4500,
+        "status": "pending"
+      },
+      "created_at": 1707275000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_anf_06",
+      "conversation_id": "conv_ahmad_nour_fashion",
+      "sender_id": "usr_ahmad",
+      "sender_name": "أحمد محمد",
+      "type": "text",
+      "content": "بدي أطلب جاكيت مقاس L والبنطلون الأسود",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707280000,
+      "is_from_business": false
+    }
+  ],
+  "meta": {
+    "total": 6,
+    "has_more": false
+  }
+}

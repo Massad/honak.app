@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "data": [
+    {"id": "story_01", "page_id": "beit-sitti", "page_name": "بيت ستي", "page_avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "has_new": true},
+    {"id": "story_02", "page_id": "nour-fashion", "page_name": "نور فاشن", "page_avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80", "has_new": true},
+    {"id": "story_03", "page_id": "salon-rania", "page_name": "صالون رانية", "page_avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "has_new": true},
+    {"id": "story_04", "page_id": "abu-ahmad-water", "page_name": "مياه أبو أحمد", "page_avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80", "has_new": true},
+    {"id": "story_05", "page_id": "dr-khaled-clinic", "page_name": "عيادة د. خالد", "page_avatar_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=200&q=80", "has_new": true},
+    {"id": "story_06", "page_id": "hara-coffee", "page_name": "قهوة الحارة", "page_avatar_url": "https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=200&q=80", "has_new": true},
+    {"id": "story_07", "page_id": "amman-municipality", "page_name": "أمانة عمّان الكبرى", "page_avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80", "has_new": true}
+  ],
+  "meta": {"total": 7, "has_more": false}
+}

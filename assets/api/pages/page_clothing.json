@@ -1,0 +1,92 @@
+{
+  "success": true,
+  "data": {
+    "id": "nour-fashion",
+    "owner_id": "usr_001",
+    "business_type_id": "clothes_store",
+    "business_type_name": "متجر ملابس",
+    "category_name": "تسوق",
+    "explore_category": "cat_retail",
+    "name": "نور فاشن",
+    "name_en": "Nour Fashion",
+    "slug": "nour-fashion",
+    "handle": "nour-fashion",
+    "store_type": "hybrid",
+    "archetype": "catalog_order",
+    "description": "ملابس عصرية للرجال والنساء والأطفال. ماركات محلية وعالمية بأسعار مناسبة. فرعين في عمّان.",
+    "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1770226415002-dbbd40327ec7?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000020",
+    "location": {
+      "lat": 31.965,
+      "lng": 35.862,
+      "label": "عبدون، شارع الأمير هاشم",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "14:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ٠٩:٠٠ ص — ١٠:٠٠ م\nالجمعة: ٢:٠٠ م — ١٠:٠٠ م",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 3200,
+    "items_count": 12,
+    "posts_count": 25,
+    "is_following": false,
+    "hours": {
+      "open_time": "09:00",
+      "close_time": "22:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 85,
+    "trust_metrics": [
+      {"label": "قطع بيعت هذا الشهر", "value": "٢,٠٠٠", "icon": "sell"},
+      {"label": "عملاء يعودون", "value": "٧٢٪", "icon": "repeat"},
+      {"label": "منتجات متوفرة", "value": "٣٤٠", "icon": "inventory"}
+    ],
+    "delivery_available": true,
+    "pickup_available": true,
+    "minimum_order_cents": 2500,
+    "delivery_fee_cents": 200,
+    "payment_methods": ["نقداً", "كليك: NourFashion", "فيزا/ماستركارد", "تحويل بنكي"],
+    "cliq_alias": "NourFashion",
+    "coverage_zones": ["عبدون", "الصويفية", "خلدا", "المقابلين", "الشميساني"],
+    "member_since": "2022",
+    "team_members_count": 3,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": false,
+    "catalog_strategy": "highlights",
+    "carry_categories": ["رجالي", "نسائي", "أطفال", "إكسسوارات", "أحذية"],
+    "stories": [
+      {"id": "s_nour1", "image_url": "https://picsum.photos/seed/nourfashionstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_nour2", "image_url": "https://picsum.photos/seed/nourfashionstory2/400/700", "duration": 5, "created_at": 1707850000},
+      {"id": "s_nour3", "image_url": "https://picsum.photos/seed/nourfashionstory3/400/700", "duration": 5, "created_at": 1707900000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-21", "reason": "جرد نهاية الموسم"}
+    ],
+    "return_policy": {
+      "accepts_returns": true,
+      "window_days": 14,
+      "type": "both",
+      "cost": "مجاني للاستبدال، ١ د.أ للاسترجاع",
+      "conditions_ar": ["المنتج بحالته الأصلية", "مع الفاتورة", "خلال ١٤ يوم من الشراء"]
+    },
+    "temporarily_closed": {
+      "reason": "صيانة وتجديد المحل",
+      "reopen_date": "2025-02-20"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "conv_yousef_maktabet_alnoor",
+      "page_id": "pg_maktabet_alnoor",
+      "page_name": "مكتبة النور",
+      "page_avatar": "https://picsum.photos/seed/maktabet-alnoor/200",
+      "page_handle": "maktabet-alnoor",
+      "customer_id": "usr_yousef",
+      "customer_name": "يوسف أحمد",
+      "customer_avatar": "https://picsum.photos/seed/yousef/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "الكتاب اللي سألت عنه موجود عنا — 'ألف شمس ساطعة'. سعره ١٢ دينار",
+      "last_message_at": 1739451600,
+      "last_message_from": "business",
+      "unread_count": 0,
+      "status": "active",
+      "type": "message",
+      "has_active_story": false,
+      "needs_info": false
+    },
+    {
+      "id": "conv_yousef_dukkaneh",
+      "page_id": "pg_dukkaneh",
+      "page_name": "دكانة — ملابس وأحذية",
+      "page_avatar": "https://picsum.photos/seed/dukkaneh-store/200",
+      "page_handle": "dukkaneh-store",
+      "customer_id": "usr_yousef",
+      "customer_name": "يوسف أحمد",
+      "customer_avatar": "https://picsum.photos/seed/yousef/200",
+      "request_id": "req_4001",
+      "request_status": "pending",
+      "request_expires_at": null,
+      "last_message": "هاي المقاسات المتوفرة للحذاء الرياضي: ٤٢ و٤٣. أي واحد بتفضل؟",
+      "last_message_at": 1739437200,
+      "last_message_from": "business",
+      "unread_count": 1,
+      "status": "active",
+      "type": "request",
+      "has_active_story": false,
+      "needs_info": false
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "has_more": false
+  }
+}

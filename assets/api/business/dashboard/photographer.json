@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 3,
+      "new_followers": 7,
+      "page_views": 145,
+      "today_revenue": 0
+    },
+    "active_quotes": [
+      {
+        "id": "qt_1",
+        "customer": "ليلى ومحمد",
+        "description": "تصوير حفل خطوبة — فندق الشيراتون",
+        "date": "2026-02-20",
+        "amount": 35000,
+        "status": "quoted"
+      },
+      {
+        "id": "qt_2",
+        "customer": "شركة الإبداع",
+        "description": "تصوير منتجات — 20 صورة",
+        "date": "2026-02-15",
+        "amount": 15000,
+        "status": "pending_quote"
+      },
+      {
+        "id": "qt_3",
+        "customer": "عائلة الحسني",
+        "description": "جلسة تصوير عائلية — حديقة الحسين",
+        "date": "2026-02-18",
+        "amount": 8000,
+        "status": "accepted"
+      }
+    ],
+    "pending_requests": [
+      {"id": "req_1101", "customer": "رنا سعيد", "service": "تصوير مولود جديد", "date": "2026-02-14", "time": "11:00"},
+      {"id": "req_1102", "customer": "شركة التقنية", "service": "تصوير فريق العمل", "date": "2026-02-16", "time": "09:00"}
+    ]
+  }
+}

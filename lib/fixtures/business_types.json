@@ -1,0 +1,58 @@
+[
+  {
+    "id": "bt_rest",
+    "name": "مطعم",
+    "name_en": "Restaurant",
+    "icon": "restaurant",
+    "sort_order": 1
+  },
+  {
+    "id": "bt_cafe",
+    "name": "مقهى",
+    "name_en": "Cafe",
+    "icon": "coffee",
+    "sort_order": 2
+  },
+  {
+    "id": "bt_groc",
+    "name": "بقالة",
+    "name_en": "Grocery",
+    "icon": "shopping_basket",
+    "sort_order": 3
+  },
+  {
+    "id": "bt_bakr",
+    "name": "مخبز",
+    "name_en": "Bakery",
+    "icon": "bakery_dining",
+    "sort_order": 4
+  },
+  {
+    "id": "bt_phrm",
+    "name": "صيدلية",
+    "name_en": "Pharmacy",
+    "icon": "local_pharmacy",
+    "sort_order": 5
+  },
+  {
+    "id": "bt_clth",
+    "name": "ملابس",
+    "name_en": "Clothing",
+    "icon": "checkroom",
+    "sort_order": 6
+  },
+  {
+    "id": "bt_elec",
+    "name": "إلكترونيات",
+    "name_en": "Electronics",
+    "icon": "devices",
+    "sort_order": 7
+  },
+  {
+    "id": "bt_srvs",
+    "name": "خدمات",
+    "name_en": "Services",
+    "icon": "handyman",
+    "sort_order": 8
+  }
+]

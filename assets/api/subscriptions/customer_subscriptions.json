@@ -1,0 +1,561 @@
+{
+  "sara": [
+    {
+      "id": "sub-s1",
+      "page_id": "abu-ahmad-water",
+      "page_name": "مياه أبو أحمد",
+      "page_logo": "https://images.unsplash.com/photo-1559839914-17aae19cec71?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-water-10",
+      "package_name": "باقة 10 قوارير",
+      "model": "visits_and_date",
+      "total_credits": 10,
+      "remaining_credits": 6,
+      "credit_label": "توصيلة",
+      "starts_at": "2026-01-15T10:00:00",
+      "expires_at": "2026-05-09T23:59:00",
+      "status": "active",
+      "item_ids": ["water-19l", "water-10l"],
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 30,
+        "can_cancel": true,
+        "cancellation_notice_days": 1,
+        "policy_text_ar": "يمكنك إيقاف الاشتراك مؤقتاً لمدة تصل إلى ٣٠ يوماً. الإلغاء متاح مع إشعار قبل يوم واحد."
+      },
+      "history": [
+        { "date": "2026-01-15T10:00:00", "type": "purchase", "amount": 10, "note": "شراء باقة 10 قوارير" },
+        { "date": "2026-01-19T14:30:00", "type": "auto_deduct", "amount": -2, "note": "طلب #1042 — توصيل قارورتين" },
+        { "date": "2026-01-22T09:15:00", "type": "auto_deduct", "amount": -2, "note": "طلب #1055 — توصيل قارورتين" }
+      ]
+    },
+    {
+      "id": "sub-s2",
+      "page_id": "salon-rania",
+      "page_name": "صالون رانية",
+      "page_logo": "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-salon-monthly",
+      "package_name": "باقة العناية الشهرية",
+      "model": "visits_and_date",
+      "total_credits": 4,
+      "remaining_credits": 2,
+      "credit_label": "زيارة",
+      "starts_at": "2026-02-01T14:00:00",
+      "expires_at": "2026-04-09T23:59:00",
+      "status": "active",
+      "item_ids": ["haircut", "hair-wash", "blowdry"],
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 14,
+        "can_cancel": true,
+        "cancellation_notice_days": 3,
+        "cancellation_fee": 500,
+        "policy_text_ar": "إيقاف مؤقت حتى ١٤ يوماً. الإلغاء بإشعار ٣ أيام مع رسوم ٥ دنانير."
+      },
+      "history": [
+        { "date": "2026-02-01T14:00:00", "type": "purchase", "amount": 4, "note": "شراء باقة العناية الشهرية" },
+        { "date": "2026-02-06T11:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #301 — قص + استشوار" },
+        { "date": "2026-02-10T16:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #305 — غسيل + استشوار" }
+      ]
+    },
+    {
+      "id": "sub-s3",
+      "page_id": "hara-coffee",
+      "page_name": "قهوة الحارة",
+      "page_logo": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-coffee-monthly",
+      "package_name": "اشتراك القهوة الشهري",
+      "model": "date_only",
+      "total_credits": null,
+      "remaining_credits": null,
+      "credit_label": null,
+      "starts_at": "2026-02-01T00:00:00",
+      "expires_at": "2026-03-01T23:59:00",
+      "status": "active",
+      "history": [
+        { "date": "2026-02-01T08:00:00", "type": "purchase", "amount": 1, "note": "اشتراك القهوة الشهري — فبراير" },
+        { "date": "2026-02-03T09:30:00", "type": "auto_deduct", "amount": 0, "note": "طلب #3010 — قهوة تركية (مغطّى)" },
+        { "date": "2026-02-06T10:00:00", "type": "auto_deduct", "amount": 0, "note": "طلب #3015 — لاتيه كبير (مغطّى)" },
+        { "date": "2026-02-09T08:45:00", "type": "auto_deduct", "amount": 0, "note": "طلب #3020 — قهوة عربية (مغطّى)" }
+      ]
+    },
+    {
+      "id": "sub-s4",
+      "page_id": "power-fitness",
+      "page_name": "نادي القوة للياقة",
+      "page_logo": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-gym-12",
+      "package_name": "اشتراك 12 جلسة",
+      "model": "visits_only",
+      "total_credits": 12,
+      "remaining_credits": 3,
+      "credit_label": "جلسة",
+      "starts_at": "2026-01-05T08:00:00",
+      "expires_at": null,
+      "status": "active",
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 15,
+        "can_cancel": false,
+        "policy_text_ar": "يمكنك إيقاف الاشتراك مؤقتاً حتى ١٥ يوماً. لا يمكن إلغاء الاشتراك بعد الشراء."
+      },
+      "history": [
+        { "date": "2026-01-05T08:00:00", "type": "purchase", "amount": 12, "note": "شراء باقة 12 جلسة" },
+        { "date": "2026-01-07T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة تمارين — أحمد المدرب" },
+        { "date": "2026-01-10T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة تمارين — أحمد المدرب" },
+        { "date": "2026-01-14T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة كارديو" },
+        { "date": "2026-01-17T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة أوزان — علي المدرب" },
+        { "date": "2026-01-20T07:30:00", "type": "pause", "amount": 0, "note": "إيقاف مؤقت — سفر" },
+        { "date": "2026-01-27T07:30:00", "type": "resume", "amount": 0, "note": "استئناف الاشتراك" },
+        { "date": "2026-01-28T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة تمارين — أحمد المدرب" },
+        { "date": "2026-01-31T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة كارديو" },
+        { "date": "2026-02-03T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة أوزان — علي المدرب" },
+        { "date": "2026-02-06T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة تمارين — أحمد المدرب" },
+        { "date": "2026-02-10T17:00:00", "type": "auto_deduct", "amount": -1, "note": "جلسة كارديو" }
+      ]
+    },
+    {
+      "id": "sub-s5",
+      "page_id": "sparkle-car-wash",
+      "page_name": "سباركل لغسيل السيارات",
+      "page_logo": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-carwash-bundle",
+      "package_name": "باقة 5 غسلات",
+      "model": "bundle",
+      "total_credits": 5,
+      "remaining_credits": 2,
+      "credit_label": "غسلة",
+      "starts_at": "2026-01-20T10:00:00",
+      "expires_at": null,
+      "status": "active",
+      "policy": {
+        "can_pause": false,
+        "can_cancel": true,
+        "cancellation_notice_days": 0,
+        "policy_text_ar": "لا يمكن إيقاف الاشتراك مؤقتاً. الإلغاء متاح مع استرجاع رصيد الغسلات المتبقية."
+      },
+      "history": [
+        { "date": "2026-01-20T10:00:00", "type": "purchase", "amount": 5, "note": "شراء باقة 5 غسلات" },
+        { "date": "2026-01-25T14:00:00", "type": "auto_deduct", "amount": -1, "note": "غسيل خارجي + داخلي — هوندا سيفيك" },
+        { "date": "2026-02-01T11:30:00", "type": "auto_deduct", "amount": -1, "note": "غسيل خارجي — هوندا سيفيك" },
+        { "date": "2026-02-08T10:00:00", "type": "auto_deduct", "amount": -1, "note": "غسيل كامل + تلميع — هوندا سيفيك" }
+      ]
+    },
+    {
+      "id": "sub-s6",
+      "page_id": "beit-sitti",
+      "page_name": "بيت ستي",
+      "page_logo": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-food-5",
+      "package_name": "باقة 5 وجبات عائلية",
+      "model": "visits_only",
+      "total_credits": 5,
+      "remaining_credits": 0,
+      "credit_label": "وجبة",
+      "starts_at": "2025-12-01T10:00:00",
+      "expires_at": null,
+      "status": "depleted",
+      "history": [
+        { "date": "2025-12-01T10:00:00", "type": "purchase", "amount": 5, "note": "شراء باقة 5 وجبات عائلية" },
+        { "date": "2025-12-08T13:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #800 — منسف عائلي" },
+        { "date": "2025-12-15T13:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #820 — مقلوبة + سلطات" },
+        { "date": "2025-12-25T12:30:00", "type": "auto_deduct", "amount": -1, "note": "طلب #840 — مشاوي مشكلة" },
+        { "date": "2026-01-05T13:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #860 — منسف + مقبلات" },
+        { "date": "2026-01-18T12:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #880 — كبسة دجاج" }
+      ]
+    },
+    {
+      "id": "sub-s7",
+      "page_id": "dr-khaled-clinic",
+      "page_name": "عيادة د. خالد",
+      "page_logo": "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-clinic-follow",
+      "package_name": "باقة متابعة 3 أشهر",
+      "model": "date_only",
+      "total_credits": null,
+      "remaining_credits": null,
+      "credit_label": null,
+      "starts_at": "2025-10-01T00:00:00",
+      "expires_at": "2025-12-31T23:59:00",
+      "status": "expired",
+      "history": [
+        { "date": "2025-10-01T10:00:00", "type": "purchase", "amount": 1, "note": "اشتراك متابعة — 3 أشهر" },
+        { "date": "2025-10-15T09:00:00", "type": "auto_deduct", "amount": 0, "note": "زيارة متابعة #1" },
+        { "date": "2025-11-12T09:00:00", "type": "auto_deduct", "amount": 0, "note": "زيارة متابعة #2" },
+        { "date": "2025-12-10T09:00:00", "type": "auto_deduct", "amount": 0, "note": "زيارة متابعة #3" },
+        { "date": "2025-12-31T23:59:00", "type": "expired", "amount": 0, "note": "انتهاء فترة الاشتراك" }
+      ]
+    }
+  ],
+  "ahmad": [
+    {
+      "id": "sub-a1",
+      "page_id": "abu-ahmad-water",
+      "page_name": "مياه أبو أحمد",
+      "page_logo": "https://images.unsplash.com/photo-1559839914-17aae19cec71?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-water-10",
+      "package_name": "باقة 10 قوارير",
+      "model": "visits_and_date",
+      "total_credits": 10,
+      "remaining_credits": 4,
+      "credit_label": "توصيلة",
+      "starts_at": "2025-12-03T10:00:00",
+      "expires_at": "2026-04-20T23:59:00",
+      "status": "active",
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 30,
+        "can_cancel": true,
+        "cancellation_notice_days": 1,
+        "policy_text_ar": "يمكنك إيقاف الاشتراك مؤقتاً لمدة تصل إلى ٣٠ يوماً. الإلغاء متاح مع إشعار قبل يوم واحد."
+      },
+      "history": [
+        { "date": "2025-12-03T10:00:00", "type": "purchase", "amount": 10, "note": "شراء باقة 10 قوارير" },
+        { "date": "2025-12-07T14:00:00", "type": "auto_deduct", "amount": -3, "note": "طلب #980 — توصيل 3 قوارير" },
+        { "date": "2025-12-15T11:00:00", "type": "auto_deduct", "amount": -3, "note": "طلب #1005 — توصيل 3 قوارير" }
+      ]
+    },
+    {
+      "id": "sub-a2",
+      "page_id": "hara-coffee",
+      "page_name": "قهوة الحارة",
+      "page_logo": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-coffee-weekly",
+      "package_name": "باقة القهوة الأسبوعية",
+      "model": "visits_and_date",
+      "total_credits": 7,
+      "remaining_credits": 3,
+      "credit_label": "كوب",
+      "starts_at": "2026-02-03T00:00:00",
+      "expires_at": "2026-02-17T23:59:00",
+      "status": "active",
+      "history": [
+        { "date": "2026-02-03T08:00:00", "type": "purchase", "amount": 7, "note": "شراء باقة القهوة الأسبوعية" },
+        { "date": "2026-02-04T09:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #2050 — قهوة تركية" },
+        { "date": "2026-02-06T08:30:00", "type": "auto_deduct", "amount": -1, "note": "طلب #2055 — لاتيه كبير" },
+        { "date": "2026-02-08T10:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #2060 — قهوة عربية" },
+        { "date": "2026-02-11T09:15:00", "type": "auto_deduct", "amount": -1, "note": "طلب #2065 — كابتشينو" }
+      ]
+    },
+    {
+      "id": "sub-a3",
+      "page_id": "alkaram-rest",
+      "page_name": "مطعم الكرم",
+      "page_logo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-karam-lunch",
+      "package_name": "باقة غداء 20 وجبة",
+      "model": "visits_only",
+      "total_credits": 20,
+      "remaining_credits": 8,
+      "credit_label": "وجبة",
+      "starts_at": "2026-01-10T10:00:00",
+      "expires_at": null,
+      "status": "active",
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 7,
+        "can_cancel": true,
+        "cancellation_notice_days": 0,
+        "policy_text_ar": "إيقاف مؤقت حتى ٧ أيام. الإلغاء متاح في أي وقت مع استرجاع رصيد الوجبات المتبقية."
+      },
+      "history": [
+        { "date": "2026-01-10T10:00:00", "type": "purchase", "amount": 20, "note": "شراء باقة 20 وجبة غداء" },
+        { "date": "2026-01-12T12:30:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4001 — شاورما دجاج + عصير" },
+        { "date": "2026-01-14T13:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4005 — فلافل + حمص" },
+        { "date": "2026-01-16T12:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4010 — كبسة لحم" },
+        { "date": "2026-01-19T12:30:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4015 — مشاوي مشكل" },
+        { "date": "2026-01-21T13:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4020 — منسف فردي" },
+        { "date": "2026-01-23T12:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4025 — شاورما لحم" },
+        { "date": "2026-01-26T12:30:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4030 — دجاج مشوي + رز" },
+        { "date": "2026-01-28T13:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4035 — فول + حمص + فلافل" },
+        { "date": "2026-02-02T12:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4040 — برغر كلاسيك" },
+        { "date": "2026-02-04T12:30:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4045 — شاورما دجاج" },
+        { "date": "2026-02-07T13:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4050 — كبسة دجاج" },
+        { "date": "2026-02-10T12:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4055 — مقلوبة فردي" }
+      ]
+    },
+    {
+      "id": "sub-a4",
+      "page_id": "sparkle-car-wash",
+      "page_name": "سباركل لغسيل السيارات",
+      "page_logo": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-carwash-monthly",
+      "package_name": "اشتراك غسيل شهري",
+      "model": "date_only",
+      "total_credits": null,
+      "remaining_credits": null,
+      "credit_label": null,
+      "starts_at": "2026-02-01T00:00:00",
+      "expires_at": "2026-03-01T23:59:00",
+      "status": "active",
+      "history": [
+        { "date": "2026-02-01T08:00:00", "type": "purchase", "amount": 1, "note": "اشتراك غسيل شهري — فبراير" },
+        { "date": "2026-02-05T15:00:00", "type": "auto_deduct", "amount": 0, "note": "غسيل خارجي — تويوتا كامري (مغطّى)" },
+        { "date": "2026-02-12T10:00:00", "type": "auto_deduct", "amount": 0, "note": "غسيل كامل — تويوتا كامري (مغطّى)" }
+      ]
+    },
+    {
+      "id": "sub-a5",
+      "page_id": "power-fitness",
+      "page_name": "نادي القوة للياقة",
+      "page_logo": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-gym-monthly",
+      "package_name": "اشتراك شهري",
+      "model": "date_only",
+      "total_credits": null,
+      "remaining_credits": null,
+      "credit_label": null,
+      "starts_at": "2025-12-01T00:00:00",
+      "expires_at": "2025-12-31T23:59:00",
+      "status": "expired",
+      "history": [
+        { "date": "2025-12-01T08:00:00", "type": "purchase", "amount": 1, "note": "اشتراك شهري — ديسمبر" },
+        { "date": "2025-12-31T23:59:00", "type": "expired", "amount": 0, "note": "انتهاء فترة الاشتراك" }
+      ]
+    },
+    {
+      "id": "sub-a6",
+      "page_id": "salon-rania",
+      "page_name": "صالون رانية",
+      "page_logo": "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-salon-5",
+      "package_name": "باقة 5 حلاقات",
+      "model": "visits_only",
+      "total_credits": 5,
+      "remaining_credits": 0,
+      "credit_label": "حلاقة",
+      "starts_at": "2025-09-15T10:00:00",
+      "expires_at": null,
+      "status": "depleted",
+      "history": [
+        { "date": "2025-09-15T10:00:00", "type": "purchase", "amount": 5, "note": "شراء باقة 5 حلاقات" },
+        { "date": "2025-09-25T11:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #201 — قص شعر" },
+        { "date": "2025-10-10T14:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #210 — قص + ذقن" },
+        { "date": "2025-10-28T11:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #220 — قص شعر" },
+        { "date": "2025-11-15T15:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #230 — قص + غسيل" },
+        { "date": "2025-12-05T11:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #240 — قص شعر" }
+      ]
+    }
+  ],
+  "khaled": [
+    {
+      "id": "sub-k1",
+      "page_id": "abu-ahmad-water",
+      "page_name": "مياه أبو أحمد",
+      "page_logo": "https://images.unsplash.com/photo-1559839914-17aae19cec71?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-water-20",
+      "package_name": "باقة 20 قارورة",
+      "model": "visits_and_date",
+      "total_credits": 20,
+      "remaining_credits": 14,
+      "credit_label": "توصيلة",
+      "starts_at": "2026-01-20T10:00:00",
+      "expires_at": "2026-07-20T23:59:00",
+      "status": "active",
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 30,
+        "can_cancel": true,
+        "cancellation_notice_days": 1,
+        "policy_text_ar": "يمكنك إيقاف الاشتراك مؤقتاً لمدة تصل إلى ٣٠ يوماً. الإلغاء متاح مع إشعار قبل يوم واحد."
+      },
+      "history": [
+        { "date": "2026-01-20T10:00:00", "type": "purchase", "amount": 20, "note": "شراء باقة 20 قارورة" },
+        { "date": "2026-01-25T14:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #1100 — توصيل قارورتين" },
+        { "date": "2026-02-01T11:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #1120 — توصيل قارورتين" },
+        { "date": "2026-02-08T14:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #1140 — توصيل قارورتين" }
+      ]
+    },
+    {
+      "id": "sub-k2",
+      "page_id": "hara-coffee",
+      "page_name": "قهوة الحارة",
+      "page_logo": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-coffee-monthly",
+      "package_name": "اشتراك القهوة الشهري",
+      "model": "date_only",
+      "total_credits": null,
+      "remaining_credits": null,
+      "credit_label": null,
+      "starts_at": "2026-02-01T00:00:00",
+      "expires_at": "2026-02-17T23:59:00",
+      "status": "active",
+      "history": [
+        { "date": "2026-02-01T08:00:00", "type": "purchase", "amount": 1, "note": "اشتراك القهوة — فبراير" },
+        { "date": "2026-02-03T10:00:00", "type": "auto_deduct", "amount": 0, "note": "طلب #3100 — قهوة تركية (مغطّى)" },
+        { "date": "2026-02-07T09:00:00", "type": "auto_deduct", "amount": 0, "note": "طلب #3110 — كابتشينو (مغطّى)" }
+      ]
+    },
+    {
+      "id": "sub-k3",
+      "page_id": "sparkle-car-wash",
+      "page_name": "سباركل لغسيل السيارات",
+      "page_logo": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-carwash-bundle",
+      "package_name": "باقة 5 غسلات",
+      "model": "bundle",
+      "total_credits": 5,
+      "remaining_credits": 1,
+      "credit_label": "غسلة",
+      "starts_at": "2025-12-15T10:00:00",
+      "expires_at": null,
+      "status": "active",
+      "history": [
+        { "date": "2025-12-15T10:00:00", "type": "purchase", "amount": 5, "note": "شراء باقة 5 غسلات" },
+        { "date": "2025-12-20T14:00:00", "type": "auto_deduct", "amount": -1, "note": "غسيل كامل — BMW X5" },
+        { "date": "2026-01-05T11:00:00", "type": "auto_deduct", "amount": -1, "note": "غسيل خارجي — BMW X5" },
+        { "date": "2026-01-20T15:00:00", "type": "auto_deduct", "amount": -1, "note": "غسيل كامل + تلميع — BMW X5" },
+        { "date": "2026-02-05T11:00:00", "type": "auto_deduct", "amount": -1, "note": "غسيل خارجي + داخلي — BMW X5" }
+      ]
+    },
+    {
+      "id": "sub-k4",
+      "page_id": "beit-sitti",
+      "page_name": "بيت ستي",
+      "page_logo": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-food-10",
+      "package_name": "باقة 10 وجبات عائلية",
+      "model": "visits_only",
+      "total_credits": 10,
+      "remaining_credits": 0,
+      "credit_label": "وجبة",
+      "starts_at": "2025-09-01T10:00:00",
+      "expires_at": null,
+      "status": "depleted",
+      "history": [
+        { "date": "2025-09-01T10:00:00", "type": "purchase", "amount": 10, "note": "شراء باقة 10 وجبات عائلية" },
+        { "date": "2025-09-08T13:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #700 — منسف + مقلوبة" },
+        { "date": "2025-09-20T12:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #720 — مشاوي + فتوش" },
+        { "date": "2025-10-05T13:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #740 — كبسة + سلطة" },
+        { "date": "2025-10-20T12:30:00", "type": "auto_deduct", "amount": -2, "note": "طلب #760 — منسف عائلي كبير" },
+        { "date": "2025-11-10T13:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #780 — دجاج محشي + رز" }
+      ]
+    },
+    {
+      "id": "sub-k5",
+      "page_id": "salon-rania",
+      "page_name": "صالون رانية",
+      "page_logo": "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-salon-kids",
+      "package_name": "باقة حلاقة أطفال",
+      "model": "visits_only",
+      "total_credits": 6,
+      "remaining_credits": 2,
+      "credit_label": "حلاقة",
+      "starts_at": "2026-01-01T10:00:00",
+      "expires_at": null,
+      "status": "paused",
+      "paused_at": "2026-02-05T00:00:00",
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 14,
+        "can_cancel": true,
+        "cancellation_notice_days": 3,
+        "cancellation_fee": 300,
+        "policy_text_ar": "إيقاف مؤقت حتى ١٤ يوماً. الإلغاء بإشعار ٣ أيام مع رسوم ٣ دنانير."
+      },
+      "history": [
+        { "date": "2026-01-01T10:00:00", "type": "purchase", "amount": 6, "note": "شراء باقة حلاقة أطفال (٣ أولاد)" },
+        { "date": "2026-01-08T10:00:00", "type": "auto_deduct", "amount": -2, "note": "حجز #350 — حلاقة ولدين" },
+        { "date": "2026-01-22T11:00:00", "type": "auto_deduct", "amount": -2, "note": "حجز #365 — حلاقة ولدين" },
+        { "date": "2026-02-05T00:00:00", "type": "pause", "amount": 0, "note": "إيقاف مؤقت — إجازة عائلية" }
+      ]
+    }
+  ],
+  "yousef": [
+    {
+      "id": "sub-y1",
+      "page_id": "dukkaneh-store",
+      "page_name": "دُكّانة",
+      "page_logo": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-dukkaneh-bundle",
+      "package_name": "باقة 10 طلبات",
+      "model": "bundle",
+      "total_credits": 10,
+      "remaining_credits": 6,
+      "credit_label": "طلب",
+      "starts_at": "2026-01-25T10:00:00",
+      "expires_at": null,
+      "status": "active",
+      "policy": {
+        "can_pause": false,
+        "can_cancel": true,
+        "cancellation_notice_days": 0,
+        "policy_text_ar": "الإلغاء متاح في أي وقت مع استرجاع رصيد الطلبات المتبقية."
+      },
+      "history": [
+        { "date": "2026-01-25T10:00:00", "type": "purchase", "amount": 10, "note": "شراء باقة 10 طلبات" },
+        { "date": "2026-01-28T18:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #5001 — مواد تنظيف" },
+        { "date": "2026-02-01T19:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #5010 — خضار وفواكه" },
+        { "date": "2026-02-05T17:30:00", "type": "auto_deduct", "amount": -1, "note": "طلب #5020 — ألبان وأجبان" },
+        { "date": "2026-02-09T18:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #5030 — معلبات ومعجنات" }
+      ]
+    },
+    {
+      "id": "sub-y2",
+      "page_id": "abu-ahmad-water",
+      "page_name": "مياه أبو أحمد",
+      "page_logo": "https://images.unsplash.com/photo-1559839914-17aae19cec71?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-water-10",
+      "package_name": "باقة 10 قوارير",
+      "model": "visits_and_date",
+      "total_credits": 10,
+      "remaining_credits": 7,
+      "credit_label": "توصيلة",
+      "starts_at": "2026-02-01T10:00:00",
+      "expires_at": "2026-06-01T23:59:00",
+      "status": "active",
+      "policy": {
+        "can_pause": true,
+        "pause_limit_days": 30,
+        "can_cancel": true,
+        "cancellation_notice_days": 1,
+        "policy_text_ar": "يمكنك إيقاف الاشتراك مؤقتاً لمدة تصل إلى ٣٠ يوماً."
+      },
+      "history": [
+        { "date": "2026-02-01T10:00:00", "type": "purchase", "amount": 10, "note": "شراء باقة 10 قوارير" },
+        { "date": "2026-02-05T14:00:00", "type": "auto_deduct", "amount": -2, "note": "طلب #1200 — توصيل قارورتين" },
+        { "date": "2026-02-11T11:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #1215 — توصيل قارورة" }
+      ]
+    },
+    {
+      "id": "sub-y3",
+      "page_id": "alkaram-rest",
+      "page_name": "مطعم الكرم",
+      "page_logo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-karam-lunch",
+      "package_name": "باقة غداء 20 وجبة",
+      "model": "visits_only",
+      "total_credits": 20,
+      "remaining_credits": 0,
+      "credit_label": "وجبة",
+      "starts_at": "2025-10-01T10:00:00",
+      "expires_at": null,
+      "status": "depleted",
+      "history": [
+        { "date": "2025-10-01T10:00:00", "type": "purchase", "amount": 20, "note": "شراء باقة 20 وجبة غداء" },
+        { "date": "2026-01-15T12:00:00", "type": "auto_deduct", "amount": -1, "note": "طلب #4200 — آخر وجبة في الباقة" }
+      ]
+    },
+    {
+      "id": "sub-y4",
+      "page_id": "salon-rania",
+      "page_name": "صالون رانية",
+      "page_logo": "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=150&q=80",
+      "package_id": "pkg-salon-monthly",
+      "package_name": "باقة العناية الشهرية",
+      "model": "visits_and_date",
+      "total_credits": 4,
+      "remaining_credits": 0,
+      "credit_label": "زيارة",
+      "starts_at": "2025-11-01T10:00:00",
+      "expires_at": "2026-01-31T23:59:00",
+      "status": "cancelled",
+      "history": [
+        { "date": "2025-11-01T10:00:00", "type": "purchase", "amount": 4, "note": "شراء باقة العناية الشهرية" },
+        { "date": "2025-11-10T14:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #250 — قص شعر" },
+        { "date": "2025-12-01T11:00:00", "type": "auto_deduct", "amount": -1, "note": "حجز #260 — قص + غسيل" },
+        { "date": "2025-12-20T10:00:00", "type": "cancel", "amount": -2, "note": "إلغاء الاشتراك — استرجاع زيارتين" }
+      ]
+    }
+  ]
+}

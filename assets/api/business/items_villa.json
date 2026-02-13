@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_vil_01",
+      "name": "فيلا البحر الميت",
+      "description": "فيلا مطلة على البحر الميت، 4 غرف نوم",
+      "price_cents": 25000,
+      "price_text": "لليلة الواحدة",
+      "images": ["https://picsum.photos/seed/villa1/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "status": "active",
+      "sort_order": 0,
+      "properties": {"bedrooms": "4", "capacity": "10"}
+    }
+  ],
+  "meta": {"total": 1, "has_more": false}
+}

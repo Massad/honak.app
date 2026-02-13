@@ -1,0 +1,608 @@
+{
+  "@@locale": "en",
+  "appName": "Honak",
+
+  "ok": "OK",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "edit": "Edit",
+  "search": "Search",
+  "discard": "Discard",
+  "unsavedChangesTitle": "Unsaved Changes",
+  "unsavedChangesMessage": "You have unsaved changes. Do you want to leave?",
+  "loading": "Loading...",
+  "retry": "Retry",
+  "close": "Close",
+  "back": "Back",
+  "next": "Next",
+  "done": "Done",
+  "seeAll": "See All",
+  "noResults": "No results",
+  "error": "Error",
+  "success": "Success",
+  "continueButton": "Continue",
+
+  "login": "Log In",
+  "logout": "Log Out",
+  "loginWelcome": "Log in to continue",
+  "phoneNumber": "Phone Number",
+  "enterPhone": "Enter your phone number",
+  "phoneStartsWith7": "Number must start with 7",
+  "phoneMustBe9Digits": "Number must be 9 digits",
+  "enterOtp": "Enter verification code",
+  "otpSentTo": "Verification code sent to {phone}",
+  "@otpSentTo": {
+    "description": "Message shown after OTP is sent",
+    "placeholders": {
+      "phone": {
+        "type": "String",
+        "example": "+962 791 234 567"
+      }
+    }
+  },
+  "otpResent": "Code resent",
+  "resendOtp": "Resend Code",
+  "resendOtpIn": "Resend in {seconds}s",
+  "@resendOtpIn": {
+    "description": "Countdown timer for OTP resend",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "otpAttemptsLeft": "{count, plural, =1{1 attempt left} other{{count} attempts left}}",
+  "@otpAttemptsLeft": {
+    "description": "Remaining OTP attempts",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "browseAsGuest": "Browse as guest",
+  "loginRequired": "Log in to continue",
+  "loginRequiredDescription": "You need to log in to perform this action",
+  "continueBrowsing": "Continue browsing",
+
+  "profileSetupTitle": "Welcome!",
+  "profileSetupSubtitle": "Tell us your name so others can find you",
+  "nameRequired": "Name is required",
+  "nameTooShort": "Name is too short",
+  "nameHint": "e.g. Sara Ahmad",
+  "getStarted": "Get Started",
+
+  "home": "Home",
+  "explore": "Explore",
+  "quickActions": "My Orders",
+  "chat": "Chat",
+  "me": "Me",
+
+  "dashboard": "Dashboard",
+  "orders": "Orders",
+  "createPost": "Post",
+  "catalog": "Catalog",
+  "settings": "Settings",
+
+  "feed": "Feed",
+  "newPost": "New Post",
+  "share": "Share",
+  "follow": "Follow",
+  "following": "Following",
+  "unfollow": "Unfollow",
+  "followers": "Followers",
+  "followersCount": "{count} followers",
+  "@followersCount": {
+    "description": "Number of followers",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "150"
+      }
+    }
+  },
+
+  "businessPage": "Business Page",
+  "about": "About",
+  "products": "Products",
+  "posts": "Posts",
+  "trustMetrics": "Trust Metrics",
+  "location": "Location",
+  "openNow": "Open Now",
+  "closed": "Closed",
+  "verified": "Verified",
+
+  "orderNow": "Order Now",
+  "addToCart": "Add to Cart",
+  "cart": "Cart",
+  "checkout": "Checkout",
+  "orderPlaced": "Order Placed",
+  "orderStatus": "Order Status",
+  "orderTotal": "Total",
+  "orderHistory": "Order History",
+  "pending": "Pending",
+  "confirmed": "Confirmed",
+  "preparing": "Preparing",
+  "ready": "Ready",
+  "delivering": "Delivering",
+  "delivered": "Delivered",
+  "cancelled": "Cancelled",
+  "trackOrder": "Track Order",
+  "emptyCart": "Your cart is empty",
+
+  "jod": "JOD",
+  "free": "Free",
+  "price": "Price",
+  "total": "Total",
+  "subtotal": "Subtotal",
+  "deliveryFee": "Delivery Fee",
+
+  "profile": "Profile",
+  "editProfile": "Edit Profile",
+  "name": "Name",
+  "phone": "Phone",
+  "language": "Language",
+  "arabic": "العربية",
+  "english": "English",
+  "darkMode": "Dark Mode",
+  "notifications": "Notifications",
+
+  "messages": "Messages",
+  "typeMessage": "Type a message...",
+  "online": "Online",
+  "offline": "Offline",
+
+  "networkError": "Connection error. Check your internet.",
+  "serverError": "Server error. Please try again.",
+  "sessionExpired": "Session expired. Please log in again.",
+  "notFound": "Not found",
+  "unauthorized": "Unauthorized",
+  "validationError": "Invalid input",
+
+  "noOrders": "No orders yet",
+  "noMessages": "No messages yet",
+  "noPosts": "No posts yet",
+  "noProducts": "No products yet",
+  "noNotifications": "No notifications",
+
+  "switchToCustomer": "Switch to Customer",
+  "switchToBusiness": "Switch to Business",
+  "customerMode": "Customer Mode",
+  "businessMode": "Business Mode",
+
+  "shareApp": "Share App",
+  "rateApp": "Rate App",
+  "privacyPolicy": "Privacy Policy",
+  "termsOfService": "Terms of Service",
+  "contactUs": "Contact Us",
+  "version": "Version {version}",
+  "@version": {
+    "description": "App version display string",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "1.0.0"
+      }
+    }
+  },
+
+  "loginAsCustomer": "Customer",
+  "loginAsBusiness": "Business",
+  "loginCustomerDesc": "Browse and order from stores",
+  "loginBusinessDesc": "Manage your store and receive orders",
+  "or": "or",
+  "devQuickAccess": "Dev Quick Access",
+
+  "itemCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@itemCount": {
+    "description": "Pluralized item count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+
+  "feedEmpty": "No posts yet",
+  "feedEmptySubtitle": "Follow pages to see their updates",
+  "trendingPages": "Trending",
+  "categories": "Categories",
+  "itemsTab": "Products",
+  "postsTab": "Posts",
+  "outOfStock": "Out of stock",
+  "required": "Required",
+  "optional": "Optional",
+  "totalPrice": "Total",
+  "logoutConfirm": "Are you sure you want to log out?",
+
+  "info": "Info",
+  "delivery": "Delivery",
+  "pickup": "Pickup",
+  "booking": "Booking",
+  "paymentMethods": "Payment Methods",
+  "cash": "Cash",
+  "cliq": "CliQ",
+  "bankTransfer": "Bank Transfer",
+  "minimumOrder": "Minimum Order",
+  "estimatedDelivery": "Est. Delivery",
+  "minutes": "{count} min",
+  "@minutes": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "workingHours": "Working Hours",
+  "available": "Available",
+  "notAvailable": "Not Available",
+
+  "viewProduct": "View Product",
+  "offer": "Offer",
+  "discount": "{percent}% OFF",
+  "@discount": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+
+  "stories": "Stories",
+  "suggestedPages": "Suggested for you",
+  "nearYou": "Near you",
+  "distanceKm": "{distance} km",
+  "@distanceKm": {
+    "placeholders": {
+      "distance": {"type": "String"}
+    }
+  },
+  "searchHint": "Search stores, products...",
+  "all": "All",
+  "food": "Food",
+  "shopping": "Shopping",
+  "services": "Services",
+  "health": "Health",
+  "searchResults": "Search Results",
+  "noSearchResults": "No results found",
+  "sharePost": "Share post",
+  "sharePage": "Share page",
+  "comingSoon": "Coming soon",
+
+  "postTypeProduct": "New Product",
+  "postTypeOffer": "Special Offer",
+  "postTypeUpdate": "Update",
+  "postTypeStatus": "Status",
+  "postTypePhoto": "Photos",
+  "shopNow": "Shop Now",
+  "visitPage": "Visit Page",
+  "promoted": "Promoted",
+  "offerExpiresIn": "Expires in {time}",
+  "@offerExpiresIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "offerExpired": "Offer expired",
+  "offerEndsToday": "Last day!",
+  "offerEndsTomorrow": "Ends tomorrow",
+  "readMore": "Read More",
+  "addProduct": "Add",
+  "statusAlert": "Alert",
+  "statusAnnouncement": "Announcement",
+  "specialOffer": "Special Offer",
+
+  "guestWelcomeTitle": "Welcome to Honak",
+  "guestWelcomeSubtitle": "Discover local businesses around you — browse, follow, and order",
+  "guestExploreNearby": "Explore nearby",
+  "guestCreateAccount": "Create account",
+  "browseNow": "Browse now",
+
+  "storyViewer": "Story Viewer",
+  "storyReply": "Reply to story...",
+  "storyReplySent": "Reply sent",
+  "storySwipeHint": "Swipe to navigate stories",
+  "storyPaused": "Paused",
+  "storyTapToResume": "Tap to resume",
+  "storyOf": "{current} of {total}",
+  "@storyOf": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "storyCreate": "Create Story",
+  "storyCreateNew": "New Story",
+  "storyBackground": "Background",
+  "storyText": "Text",
+  "storyPublish": "Publish",
+  "storyGradient": "Gradient",
+  "storySolidColor": "Solid Color",
+  "storyImage": "Image",
+  "storyAddText": "Add Text",
+  "storyEditText": "Edit Text",
+  "storyDeleteLayer": "Delete Layer",
+  "storyFont": "Font",
+  "storyFontSize": "Font Size",
+  "storyTextColor": "Text Color",
+  "storyTextAlign": "Text Align",
+  "storyPublishNow": "Publish Now",
+  "storySchedule": "Schedule",
+  "storyAudience": "Audience",
+  "storyAudienceAll": "Everyone",
+  "storyAudienceFollowers": "Followers Only",
+  "storyScheduleAt": "Publish at",
+  "storyPublished": "Story published",
+  "storyStep": "Step {step} of {total}",
+  "@storyStep": {
+    "placeholders": {
+      "step": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "storyManager": "Story Manager",
+  "storyMyStories": "My Stories",
+  "storyLive": "Live",
+  "storyScheduled": "Scheduled",
+  "storyExpired": "Expired",
+  "storyStatusLive": "Live now",
+  "storyStatusScheduled": "Scheduled",
+  "storyStatusExpired": "Expired",
+  "storyViews": "views",
+  "storyReach": "reach",
+  "storyShares": "shares",
+  "storyMessages": "messages",
+  "storyProfileVisits": "profile visits",
+  "storyStats": "Statistics",
+  "storyTotalViews": "Total Views",
+  "storyTotalShares": "Total Shares",
+  "storyAvgViews": "Avg. Views",
+  "storyBestTime": "Best Time to Post",
+  "storyBestDay": "Best Day to Post",
+  "storyThisMonth": "This Month",
+  "storyAllTime": "All Time",
+  "storyGrowth": "{percent}% growth vs last month",
+  "@storyGrowth": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "storyNoStories": "No stories yet",
+  "storyNoStoriesHint": "Create your first story to reach your customers",
+  "storyDelete": "Delete Story",
+  "storyDeleteConfirm": "Are you sure you want to delete this story?",
+  "storyExpiresIn": "Expires in {time}",
+  "@storyExpiresIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "storyScheduledFor": "Scheduled for {time}",
+  "@storyScheduledFor": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "storyFilterAll": "All",
+  "storyFilterLive": "Live",
+  "storyFilterScheduled": "Scheduled",
+  "storyFilterExpired": "Expired",
+  "storyPreview": "Preview",
+  "storyEdit": "Edit",
+  "storyShare": "Share",
+  "storyRepublish": "Republish",
+  "storyShareCopied": "Story link copied",
+  "storySearchHint": "Search stories...",
+  "storySortNewest": "Newest",
+  "storySortOldest": "Oldest",
+  "storySortMostViews": "Most Views",
+  "storySortMostShares": "Most Shares",
+  "storySortMostMessages": "Most Messages",
+  "storySortMostReach": "Most Reach",
+  "storyScheduledAtLabel": "Publish date",
+  "storyRepublishTitle": "Republish Story",
+  "storyRepublishNow": "Publish Now",
+  "storyRepublishSchedule": "Schedule Publish",
+  "storyRepublished": "Story republished",
+  "storyRepublishScheduled": "Republish scheduled",
+  "storyEditAndRepublish": "Edit & Republish",
+  "storyRepublishAsIs": "Republish As-Is",
+  "storyRepublishChoiceTitle": "Republish Story",
+  "storyRepublishChoiceSubtitle": "Would you like to edit the story before republishing?",
+  "storyEditTitle": "Edit Story",
+  "storyUpdated": "Story updated",
+  "storyAddContentFirst": "Add text or image first",
+  "storyPublishOptions": "Publish Options",
+  "storyFollowersDesc": "Visible to followers",
+  "storyAllDesc": "Paid promotion",
+  "storyPublishTime": "Publish Time",
+  "storyNow": "Now",
+  "storyDate": "Date",
+  "storyTime": "Time",
+  "storyEngagement": "Engagement",
+  "storyEngagementRate": "Engagement rate",
+  "storySortBy": "Sort by",
+  "storyRemove": "Remove",
+  "storyConfirmAction": "Confirm",
+  "storyLiveNote": "Live stories cannot be edited — you can remove them or wait until they expire",
+  "storyPreviewSubtitle": "Preview — as your followers see it",
+  "storyFollowerCount": "follower",
+  "storyCountOf": "{filtered} of {total} stories",
+  "@storyCountOf": {
+    "placeholders": {
+      "filtered": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "bizTabDashboard": "Dashboard",
+  "bizTabManage": "Manage",
+  "bizTabContent": "Content",
+  "bizTabCustomers": "Customers",
+  "contentStories": "Stories",
+  "contentPosts": "Posts",
+  "contentStoryStats": "Story Stats — This Month",
+  "contentPostStats": "Post Stats — This Month",
+  "contentViews": "Views",
+  "contentShares": "Shares",
+  "contentMessages": "Messages",
+  "contentLiveStories": "{count} live",
+  "@contentLiveStories": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "contentScheduled": "{count} scheduled",
+  "@contentScheduled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "contentManageComingSoon": "Product & service management — Coming soon",
+  "contentCustomersComingSoon": "Customer data — Coming soon",
+  "contentPostsComingSoon": "Post management — Coming soon",
+
+  "filter": "Filter",
+  "filterActive": "{count} active",
+  "@filterActive": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "filterCategory": "Category",
+  "filterDistance": "Distance",
+  "filterRating": "Rating",
+  "filterSortBy": "Sort By",
+  "filterNearest": "Nearest",
+  "filterPopular": "Most Popular",
+  "filterHighestRated": "Highest Rated",
+  "filterReset": "Reset",
+  "filterApply": "Apply",
+  "recentSearches": "Recent Searches",
+  "clearAll": "Clear All",
+  "searchNoResults": "No results for \"{query}\"",
+  "@searchNoResults": {
+    "placeholders": {
+      "query": {"type": "String"}
+    }
+  },
+  "pages": "Pages",
+  "exploreSearchHint": "Search pages, products, services...",
+  "browseCategory": "Browse {category}",
+  "@browseCategory": {
+    "placeholders": {
+      "category": {"type": "String"}
+    }
+  },
+  "subCategories": "Sub-categories",
+  "distanceAway": "{distance} km away",
+  "@distanceAway": {
+    "placeholders": {
+      "distance": {"type": "String"}
+    }
+  },
+  "filterAndSort": "Filter & Sort",
+  "closestFirst": "Closest first",
+  "mostActiveSort": "Most active",
+  "weeklyOrdersCount": "{count} orders/week",
+  "@weeklyOrdersCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "official": "Official",
+
+  "myOrders": "My Orders",
+  "ordersTabActive": "Active",
+  "ordersTabUpcoming": "Upcoming",
+  "ordersTabHistory": "History",
+  "ordersTabSubscriptions": "Subscriptions",
+  "ordersSearchHint": "Search your orders...",
+  "ordersEmptyActive": "No active orders",
+  "ordersEmptyUpcoming": "No upcoming appointments",
+  "ordersEmptyHistory": "No order history",
+  "ordersEmptySubscriptions": "No subscriptions yet",
+  "deliveryEta": "Delivery in {minutes} min",
+  "@deliveryEta": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "paidBySubscription": "Subscription",
+  "subscriptionCreditsLeft": "{count} remaining",
+  "@subscriptionCreditsLeft": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "subsActive": "Active",
+  "subsInactive": "Inactive",
+  "noSubscriptions": "No subscriptions",
+  "noSubscriptionsHint": "Your subscriptions to business packages will appear here",
+  "orderWithCredits": "Order with credits",
+  "renewSubscription": "Renew",
+  "autoDeductHint": "Auto-deducted on order",
+  "daysRemaining": "{days} days remaining",
+  "@daysRemaining": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "creditRemaining": "{remaining}/{total} {label}",
+  "@creditRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "total": {"type": "int"},
+      "label": {"type": "String"}
+    }
+  },
+  "unlimitedAccess": "Unlimited",
+  "expiresIn": "Expires in {days} days",
+  "@expiresIn": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "manageSubscription": "Manage subscription",
+  "pauseSubscription": "Pause subscription",
+  "cancelSubscription": "Cancel subscription",
+  "creditHistory": "Usage history",
+  "pauseDuration": "Pause duration",
+  "pauseResume": "Resumes on: {date}",
+  "@pauseResume": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "confirmPause": "Confirm pause",
+  "cancelWarning": "Are you sure you want to cancel this subscription?",
+  "confirmCancel": "Confirm cancellation",
+  "goBack": "Go back",
+  "creditHistoryTitle": "Credit history",
+  "noHistory": "No usage history",
+  "subsStatusDepleted": "Depleted",
+  "subsStatusExpired": "Expired",
+  "subsStatusCancelled": "Cancelled",
+  "subsStatusPaused": "Paused",
+  "packagesAndSubscriptions": "Packages & Subscriptions",
+  "addPackage": "Add package",
+  "addPackageHint": "Add a package or subscription for your customers",
+  "recurringCustomers": "Recurring Customers",
+  "viewAll": "View all",
+  "activeSubscribers": "Active",
+  "autoOrderSubscribers": "Auto",
+  "reminderSubscribers": "Reminder",
+  "autoOrder": "Auto order",
+  "confirmAutoOrder": "Confirm",
+  "skipAutoOrder": "Skip",
+  "sendReminder": "Remind",
+  "savingsPercent": "Save {percent}%",
+  "@savingsPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  }
+}

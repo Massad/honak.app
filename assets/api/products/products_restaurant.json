@@ -1,0 +1,169 @@
+{
+  "success": true,
+  "data": {
+    "page_id": "pg_deira",
+    "page_name": "مطعم الديرة",
+    "categories": [
+      {
+        "id": "cat_appetizers",
+        "name": "مقبلات",
+        "sort_order": 1,
+        "products": [
+          {
+            "id": "prod_hum01",
+            "name": "حمص",
+            "description": "حمص بالطحينة مع زيت زيتون",
+            "price_cents": 150,
+            "image_url": "https://picsum.photos/seed/hummus/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_ful01",
+            "name": "فول مدمس",
+            "description": "فول بالليمون والثوم وزيت الزيتون",
+            "price_cents": 150,
+            "image_url": "https://picsum.photos/seed/foul/400/300",
+            "is_available": true,
+            "sort_order": 2
+          },
+          {
+            "id": "prod_fat01",
+            "name": "فتوش",
+            "description": "سلطة فتوش بالخبز المحمص ودبس الرمان",
+            "price_cents": 175,
+            "image_url": "https://picsum.photos/seed/fattoush/400/300",
+            "is_available": true,
+            "sort_order": 3
+          },
+          {
+            "id": "prod_tab01",
+            "name": "تبولة",
+            "description": "تبولة طازجة بالبقدونس والبرغل",
+            "price_cents": 150,
+            "image_url": "https://picsum.photos/seed/tabouleh/400/300",
+            "is_available": true,
+            "sort_order": 4
+          }
+        ]
+      },
+      {
+        "id": "cat_mains",
+        "name": "أطباق رئيسية",
+        "sort_order": 2,
+        "products": [
+          {
+            "id": "prod_man01",
+            "name": "منسف",
+            "description": "منسف بلدي بلحم الخاروف والجميد الكركي. يكفي شخص واحد",
+            "price_cents": 800,
+            "image_url": "https://picsum.photos/seed/mansaf/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_maq01",
+            "name": "مقلوبة دجاج",
+            "description": "مقلوبة بالدجاج البلدي والباذنجان والأرز",
+            "price_cents": 550,
+            "image_url": "https://picsum.photos/seed/maqluba/400/300",
+            "is_available": true,
+            "sort_order": 2
+          },
+          {
+            "id": "prod_sha01",
+            "name": "شاورما لحم",
+            "description": "ساندويش شاورما لحم مع بطاطا وطرشي",
+            "price_cents": 250,
+            "image_url": "https://picsum.photos/seed/shawarma/400/300",
+            "is_available": true,
+            "sort_order": 3
+          },
+          {
+            "id": "prod_sha02",
+            "name": "شاورما دجاج",
+            "description": "ساندويش شاورما دجاج مع ثومية",
+            "price_cents": 200,
+            "image_url": "https://picsum.photos/seed/shawarmac/400/300",
+            "is_available": true,
+            "sort_order": 4
+          },
+          {
+            "id": "prod_fal01",
+            "name": "فلافل ساندويش",
+            "description": "ساندويش فلافل مقرمش مع سلطات وطحينة",
+            "price_cents": 100,
+            "image_url": "https://picsum.photos/seed/falafel/400/300",
+            "is_available": true,
+            "sort_order": 5
+          }
+        ]
+      },
+      {
+        "id": "cat_drinks",
+        "name": "مشروبات",
+        "sort_order": 3,
+        "products": [
+          {
+            "id": "prod_tea01",
+            "name": "شاي بالميرمية",
+            "description": "شاي أحمر مع ميرمية طازجة",
+            "price_cents": 75,
+            "image_url": "https://picsum.photos/seed/tea/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_cof01",
+            "name": "قهوة عربية",
+            "description": "قهوة عربية مع هيل",
+            "price_cents": 100,
+            "image_url": "https://picsum.photos/seed/coffee-ar/400/300",
+            "is_available": true,
+            "sort_order": 2
+          },
+          {
+            "id": "prod_lem01",
+            "name": "ليمونانا",
+            "description": "عصير ليمون بالنعناع الطازج",
+            "price_cents": 125,
+            "image_url": "https://picsum.photos/seed/lemonade/400/300",
+            "is_available": true,
+            "sort_order": 3
+          }
+        ]
+      },
+      {
+        "id": "cat_desserts",
+        "name": "حلويات",
+        "sort_order": 4,
+        "products": [
+          {
+            "id": "prod_kna01",
+            "name": "كنافة نابلسية",
+            "description": "كنافة بالجبنة النابلسية مع قطر",
+            "price_cents": 350,
+            "image_url": "https://picsum.photos/seed/knafeh/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_bas01",
+            "name": "بسبوسة",
+            "description": "بسبوسة بالقشطة",
+            "price_cents": 200,
+            "image_url": "https://picsum.photos/seed/basbousa/400/300",
+            "is_available": false,
+            "sort_order": 2
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "page": 1,
+    "per_page": 50,
+    "total": 14,
+    "total_pages": 1
+  }
+}

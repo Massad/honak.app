@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data": {
+    "request_id": "otp_req_abc123",
+    "expires_in": 300,
+    "phone": "0791234567"
+  }
+}

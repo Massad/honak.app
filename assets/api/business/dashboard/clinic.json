@@ -1,0 +1,43 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 12,
+      "new_followers": 5,
+      "page_views": 67,
+      "today_revenue": 24000
+    },
+    "today_summary": {
+      "completed": 8,
+      "upcoming": 4,
+      "cancelled": 1,
+      "no_show": 0,
+      "total": 13,
+      "revenue": 24000
+    },
+    "next_appointment": {
+      "customer_name": "أحمد محمود",
+      "service": "كشفية عامة",
+      "time": "15:00",
+      "provider": "د. خالد"
+    },
+    "today_schedule": [
+      {"time": "09:00", "customer": "سامي يوسف", "service": "كشفية عامة", "status": "completed"},
+      {"time": "09:30", "customer": "ليلى عبدالله", "service": "متابعة", "status": "completed"},
+      {"time": "10:00", "customer": "خالد ناصر", "service": "كشفية عامة", "status": "completed"},
+      {"time": "10:30", "customer": "منى سعيد", "service": "فحص شامل", "status": "completed"},
+      {"time": "11:00", "customer": "رامي حسن", "service": "كشفية عامة", "status": "completed"},
+      {"time": "11:30", "customer": "نادين عمر", "service": "متابعة", "status": "completed"},
+      {"time": "12:00", "customer": "طارق أحمد", "service": "تحاليل", "status": "completed"},
+      {"time": "13:00", "customer": "سارة خالد", "service": "كشفية عامة", "status": "completed"},
+      {"time": "15:00", "customer": "أحمد محمود", "service": "كشفية عامة", "status": "upcoming"},
+      {"time": "15:30", "customer": "هند سامر", "service": "فحص شامل", "status": "upcoming"},
+      {"time": "16:00", "customer": "فادي محمد", "service": "متابعة", "status": "upcoming"},
+      {"time": "16:30", "customer": "ريما حسن", "service": "كشفية عامة", "status": "upcoming"}
+    ],
+    "pending_requests": [
+      {"id": "req_201", "customer": "عمر خالد", "service": "كشفية عامة", "date": "2026-02-13", "time": "10:00"},
+      {"id": "req_202", "customer": "لمى سعيد", "service": "فحص شامل", "date": "2026-02-13", "time": "14:00"}
+    ]
+  }
+}

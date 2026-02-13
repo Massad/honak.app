@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "data": {
+    "id": "usr_new",
+    "phone": "0790000099",
+    "name": "",
+    "avatar_url": null,
+    "bio": null,
+    "created_at": 1707000000,
+    "status": "active",
+    "needs_profile_setup": true,
+    "stats": {
+      "following_count": 0,
+      "orders_count": 0
+    },
+    "pages": []
+  }
+}

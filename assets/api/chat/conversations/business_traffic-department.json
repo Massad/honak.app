@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "conv_khaled_omar_traffic",
+      "page_id": "pg_traffic_dept",
+      "page_name": "إدارة السير",
+      "page_avatar": "https://picsum.photos/seed/traffic-department/200",
+      "page_handle": "traffic-department",
+      "customer_id": "usr_khaled_omar",
+      "customer_name": "خالد عمر",
+      "customer_avatar": "https://picsum.photos/seed/khaled-omar/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "شو الأوراق المطلوبة لنقل ملكية سيارة من شخص لشخص؟",
+      "last_message_at": 1739510000,
+      "last_message_from": "customer",
+      "unread_count": 1,
+      "status": "active",
+      "type": "message",
+      "has_active_story": false,
+      "needs_info": false
+    },
+    {
+      "id": "conv_farah_traffic",
+      "page_id": "pg_traffic_dept",
+      "page_name": "إدارة السير",
+      "page_avatar": "https://picsum.photos/seed/traffic-department/200",
+      "page_handle": "traffic-department",
+      "customer_id": "usr_farah",
+      "customer_name": "فرح عبدالله",
+      "customer_avatar": "https://picsum.photos/seed/farah/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "تقدري تجددي الرخصة أونلاين من موقع الحكومة الإلكترونية أو بتيجي على الفرع بوثائقك",
+      "last_message_at": 1739430000,
+      "last_message_from": "business",
+      "unread_count": 0,
+      "status": "active",
+      "type": "message",
+      "has_active_story": false,
+      "needs_info": false
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "has_more": false
+  }
+}

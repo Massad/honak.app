@@ -1,0 +1,187 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_food",
+      "name_ar": "طعام ومشروبات",
+      "name_en": "Food & Drink",
+      "icon_name": "restaurant",
+      "sort_order": 1,
+      "types": [
+        { "id": "restaurant", "name": "مطعم", "icon": "🍽️" },
+        { "id": "coffee_shop", "name": "مقهى", "icon": "☕" },
+        { "id": "bakery", "name": "مخبز", "icon": "🥖" },
+        { "id": "sweet_shop", "name": "حلويات", "icon": "🍮" },
+        { "id": "juice_bar", "name": "عصائر", "icon": "🧃" }
+      ]
+    },
+    {
+      "id": "cat_delivery",
+      "name_ar": "توصيل",
+      "name_en": "Delivery",
+      "icon_name": "delivery_dining",
+      "sort_order": 2,
+      "types": [
+        { "id": "water_delivery", "name": "توصيل مياه", "icon": "🚰" },
+        { "id": "gas_delivery", "name": "توصيل غاز", "icon": "🔥" }
+      ]
+    },
+    {
+      "id": "cat_beauty",
+      "name_ar": "تجميل وعناية",
+      "name_en": "Beauty & Care",
+      "icon_name": "spa",
+      "sort_order": 3,
+      "types": [
+        { "id": "salon", "name": "صالون تجميل", "icon": "💇" }
+      ]
+    },
+    {
+      "id": "cat_health",
+      "name_ar": "صحة وطب",
+      "name_en": "Health & Medical",
+      "icon_name": "local_hospital",
+      "sort_order": 4,
+      "types": [
+        { "id": "clinic", "name": "عيادة / طبيب", "icon": "🏥" },
+        { "id": "pharmacy", "name": "صيدلية", "icon": "💊" }
+      ]
+    },
+    {
+      "id": "cat_fitness",
+      "name_ar": "رياضة ولياقة",
+      "name_en": "Fitness & Wellness",
+      "icon_name": "fitness_center",
+      "sort_order": 5,
+      "types": [
+        { "id": "gym", "name": "نادي رياضي", "icon": "🏋️" }
+      ]
+    },
+    {
+      "id": "cat_retail",
+      "name_ar": "تسوق وأزياء",
+      "name_en": "Shopping & Fashion",
+      "icon_name": "checkroom",
+      "sort_order": 6,
+      "types": [
+        { "id": "clothes_store", "name": "متجر ملابس", "icon": "👗" },
+        { "id": "bookstore", "name": "مكتبة / قرطاسية", "icon": "📚" },
+        { "id": "online_store", "name": "متجر أونلاين", "icon": "🛒" },
+        { "id": "shoes", "name": "أحذية", "icon": "👟" },
+        { "id": "sportswear", "name": "أزياء رياضية", "icon": "👕" },
+        { "id": "electronics", "name": "إلكترونيات", "icon": "📱" }
+      ]
+    },
+    {
+      "id": "cat_home_services",
+      "name_ar": "خدمات منزلية",
+      "name_en": "Home Services",
+      "icon_name": "home_repair_service",
+      "sort_order": 7,
+      "types": [
+        { "id": "plumber", "name": "سباكة", "icon": "🔧" }
+      ]
+    },
+    {
+      "id": "cat_auto",
+      "name_ar": "سيارات",
+      "name_en": "Automotive",
+      "icon_name": "directions_car",
+      "sort_order": 8,
+      "types": [
+        { "id": "auto_mechanic", "name": "كراج سيارات", "icon": "🔧" }
+      ]
+    },
+    {
+      "id": "cat_cleaning",
+      "name_ar": "تنظيف",
+      "name_en": "Cleaning",
+      "icon_name": "cleaning_services",
+      "sort_order": 9,
+      "types": [
+        { "id": "laundry", "name": "مغسلة ملابس", "icon": "👔" }
+      ]
+    },
+    {
+      "id": "cat_stays",
+      "name_ar": "إقامة وسياحة",
+      "name_en": "Stays & Tourism",
+      "icon_name": "hotel",
+      "sort_order": 10,
+      "types": [
+        { "id": "villa_rental", "name": "تأجير فلل", "icon": "🏡" },
+        { "id": "farm_stay", "name": "مزرعة", "icon": "🌿" }
+      ]
+    },
+    {
+      "id": "cat_entertainment",
+      "name_ar": "فعاليات وترفيه",
+      "name_en": "Events & Entertainment",
+      "icon_name": "celebration",
+      "sort_order": 11,
+      "types": [
+        { "id": "event_venue", "name": "قاعة مناسبات", "icon": "🏛️" },
+        { "id": "cinema", "name": "سينما", "icon": "🎬" },
+        { "id": "kids_entertainment", "name": "ترفيه أطفال", "icon": "🎠" },
+        { "id": "entertainment", "name": "ترفيه", "icon": "🎮" }
+      ]
+    },
+    {
+      "id": "cat_creative",
+      "name_ar": "إبداع وعمل حر",
+      "name_en": "Creative & Freelance",
+      "icon_name": "palette",
+      "sort_order": 12,
+      "types": [
+        { "id": "photographer", "name": "تصوير", "icon": "📷" }
+      ]
+    },
+    {
+      "id": "cat_government",
+      "name_ar": "جهات حكومية",
+      "name_en": "Government",
+      "icon_name": "account_balance",
+      "sort_order": 13,
+      "types": [
+        { "id": "municipality", "name": "بلدية", "icon": "🏛️" },
+        { "id": "traffic", "name": "إدارة سير", "icon": "🚦" }
+      ]
+    },
+    {
+      "id": "cat_finance",
+      "name_ar": "مالية وبنوك",
+      "name_en": "Finance & Banking",
+      "icon_name": "account_balance_wallet",
+      "sort_order": 14,
+      "types": [
+        { "id": "bank", "name": "بنوك", "icon": "🏦" },
+        { "id": "exchange", "name": "صرافة", "icon": "💱" },
+        { "id": "telecom", "name": "اتصالات", "icon": "📱" }
+      ]
+    },
+    {
+      "id": "cat_shopping",
+      "name_ar": "مراكز تسوق",
+      "name_en": "Shopping Centers",
+      "icon_name": "store",
+      "sort_order": 15,
+      "types": [
+        { "id": "shopping_mall", "name": "مول / مجمع تجاري", "icon": "🏬" },
+        { "id": "market", "name": "سوق", "icon": "🛒" }
+      ]
+    },
+    {
+      "id": "cat_grocery",
+      "name_ar": "بقالة وسوبرماركت",
+      "name_en": "Grocery",
+      "icon_name": "shopping_cart",
+      "sort_order": 16,
+      "types": [
+        { "id": "supermarket", "name": "سوبرماركت", "icon": "🛒" },
+        { "id": "butcher", "name": "ملحمة", "icon": "🥩" },
+        { "id": "fruit_veg", "name": "خضار وفواكه", "icon": "🥬" }
+      ]
+    }
+  ],
+  "meta": {"total": 16, "has_more": false}
+}

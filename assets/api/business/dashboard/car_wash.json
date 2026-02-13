@@ -1,0 +1,55 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 8,
+      "new_followers": 5,
+      "page_views": 64,
+      "today_revenue": 4600
+    },
+    "today_summary": {
+      "completed": 3,
+      "upcoming": 3,
+      "cancelled": 0,
+      "no_show": 0,
+      "total": 8,
+      "revenue": 4600
+    },
+    "live_queue": {
+      "waiting": 2,
+      "in_progress": 2,
+      "completed": 3,
+      "avg_wait_min": 12,
+      "revenue_today_cents": 4600
+    },
+    "today_revenue": {
+      "total": 4600,
+      "completed_count": 3,
+      "items": [
+        {"service": "غسيل خارجي", "amount": 300, "time": "07:55"},
+        {"service": "غسيل داخلي وخارجي", "amount": 500, "time": "08:25"},
+        {"service": "تفصيلي كامل", "amount": 1200, "time": "08:10"}
+      ]
+    },
+    "next_in_queue": {
+      "customer_name": "محمد ر.",
+      "service": "غسيل خارجي",
+      "position": 3,
+      "vehicle": "سيدان فضي"
+    },
+    "today_schedule": [
+      {"time": "07:30", "customer": "خالد ص.", "service": "غسيل خارجي", "status": "completed"},
+      {"time": "07:45", "customer": "نور ب.", "service": "غسيل داخلي وخارجي", "status": "completed"},
+      {"time": "07:00", "customer": "ياسر ف.", "service": "تفصيلي كامل", "status": "completed"},
+      {"time": "08:30", "customer": "أحمد م.", "service": "غسيل داخلي وخارجي", "status": "in_progress"},
+      {"time": "08:40", "customer": "سارة ع.", "service": "تفصيلي كامل", "status": "in_progress"},
+      {"time": "09:00", "customer": "محمد ر.", "service": "غسيل خارجي", "status": "waiting"},
+      {"time": "09:10", "customer": "ليلى ح.", "service": "غسيل داخلي وخارجي", "status": "waiting"},
+      {"time": "09:15", "customer": "عمر ن.", "service": "غسيل خارجي", "status": "on_the_way"}
+    ],
+    "pending_requests": [
+      {"id": "req_201", "customer": "يوسف ع.", "service": "غسيل داخلي وخارجي", "date": "2026-02-13", "time": "10:00"},
+      {"id": "req_202", "customer": "رامي م.", "service": "تفصيلي كامل", "date": "2026-02-13", "time": "11:30"}
+    ]
+  }
+}

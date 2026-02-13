@@ -1,0 +1,76 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_bottles",
+      "name": "قوارير",
+      "name_en": "Bottles",
+      "item_count": 2,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_coolers",
+      "name": "برادات",
+      "name_en": "Coolers",
+      "item_count": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_main",
+      "name": "أطباق رئيسية",
+      "name_en": "Main Dishes",
+      "item_count": 2,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_appetizers",
+      "name": "مقبلات",
+      "name_en": "Appetizers",
+      "item_count": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_desserts",
+      "name": "حلويات",
+      "name_en": "Desserts",
+      "item_count": 1,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_hair",
+      "name": "شعر",
+      "name_en": "Hair",
+      "item_count": 2,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_nails",
+      "name": "أظافر",
+      "name_en": "Nails",
+      "item_count": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_inspection",
+      "name": "كشف وفحص",
+      "name_en": "Inspection",
+      "item_count": 1,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_repair",
+      "name": "صيانة وإصلاح",
+      "name_en": "Repair",
+      "item_count": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_install",
+      "name": "تركيبات",
+      "name_en": "Installation",
+      "item_count": 1,
+      "sort_order": 3
+    }
+  ],
+  "meta": {"total": 10, "has_more": false}
+}

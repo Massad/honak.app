@@ -1,0 +1,399 @@
+import 'package:flutter/material.dart';
+import 'package:honak/core/theme/app_colors.dart';
+import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
+
+class AvailabilityPickerSheet extends StatefulWidget {
+  final void Function(
+    List<AvailabilitySlot> slots,
+    String? serviceName,
+  ) onSend;
+
+  const AvailabilityPickerSheet({super.key, required this.onSend});
+
+  @override
+  State<AvailabilityPickerSheet> createState() =>
+      _AvailabilityPickerSheetState();
+}
+
+class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
+  final _serviceController = TextEditingController();
+  int _selectedDayIndex = 0; // 0=today, 1=tomorrow, 2=day after
+  final Set<int> _selectedHours = {};
+
+  static const _hourPresets = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+  @override
+  void dispose() {
+    _serviceController.dispose();
+    super.dispose();
+  }
+
+  DateTime get _selectedDate =>
+      DateTime.now().add(Duration(days: _selectedDayIndex));
+
+  String _dayLabel(int index) {
+    return switch (index) {
+      0 => 'اليوم',
+      1 => 'غداً',
+      _ => 'بعد غداً',
+    };
+  }
+
+  String _formatDate(DateTime date) {
+    const months = [
+      'كانون الثاني',
+      'شباط',
+      'آذار',
+      'نيسان',
+      'أيار',
+      'حزيران',
+      'تموز',
+      'آب',
+      'أيلول',
+      'تشرين الأول',
+      'تشرين الثاني',
+      'كانون الأول',
+    ];
+    const days = [
+      'الاثنين',
+      'الثلاثاء',
+      'الأربعاء',
+      'الخميس',
+      'الجمعة',
+      'السبت',
+      'الأحد',
+    ];
+    return '${days[date.weekday - 1]} ${date.day} ${months[date.month - 1]}';
+  }
+
+  String _formatHour(int hour) {
+    final h = hour % 12 == 0 ? 12 : hour % 12;
+    final period = hour < 12 ? 'ص' : 'م';
+    return '$h:00 $period';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: 0.85,
+      minChildSize: 0.5,
+      maxChildSize: 0.95,
+      expand: false,
+      builder: (context, scrollController) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          child: Column(
+            children: [
+              _buildHandle(),
+              _buildHeader(context),
+              Expanded(
+                child: ListView(
+                  controller: scrollController,
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppSpacing.lg,
+                  ),
+                  children: [
+                    _buildServiceInput(),
+                    const SizedBox(height: AppSpacing.lg),
+                    _buildDaySelector(),
+                    const SizedBox(height: AppSpacing.lg),
+                    _buildTimeGrid(),
+                    const SizedBox(height: AppSpacing.xl),
+                  ],
+                ),
+              ),
+              _buildSendButton(context),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildHandle() {
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(top: AppSpacing.sm),
+      child: Container(
+        width: 36,
+        height: 4,
+        decoration: BoxDecoration(
+          color: AppColors.divider,
+          borderRadius: BorderRadius.circular(2),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(
+        start: AppSpacing.lg,
+        end: AppSpacing.sm,
+        top: AppSpacing.md,
+        bottom: AppSpacing.sm,
+      ),
+      child: Row(
+        children: [
+          const Expanded(
+            child: Text(
+              'أوقات متاحة',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.close, size: 20),
+            color: AppColors.textSecondary,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildServiceInput() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'اسم الخدمة (اختياري)',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+            color: AppColors.textSecondary,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        TextField(
+          controller: _serviceController,
+          decoration: InputDecoration(
+            hintText: 'مثل: قص شعر، كشف طبي...',
+            hintStyle: const TextStyle(
+              color: AppColors.textHint,
+              fontSize: 14,
+            ),
+            filled: true,
+            fillColor: AppColors.background,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.sm,
+            ),
+            isDense: true,
+          ),
+          style: const TextStyle(fontSize: 14),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDaySelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'اختر اليوم',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+            color: AppColors.textSecondary,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        Row(
+          children: List.generate(3, (i) {
+            final isSelected = _selectedDayIndex == i;
+            final date = DateTime.now().add(Duration(days: i));
+            return Expanded(
+              child: Padding(
+                padding: EdgeInsetsDirectional.only(
+                  end: i < 2 ? AppSpacing.sm : 0,
+                ),
+                child: GestureDetector(
+                  onTap: () => setState(() => _selectedDayIndex = i),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsetsDirectional.symmetric(
+                      vertical: AppSpacing.sm,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? AppColors.success.withValues(alpha: 0.1)
+                          : AppColors.surfaceVariant,
+                      border: Border.all(
+                        color: isSelected
+                            ? AppColors.success
+                            : AppColors.divider,
+                        width: isSelected ? 1.5 : 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          _dayLabel(i),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: isSelected
+                                ? AppColors.success
+                                : AppColors.textPrimary,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          '${date.day}/${date.month}',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isSelected
+                                ? AppColors.success
+                                : AppColors.textHint,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTimeGrid() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'اختر الأوقات',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+            color: AppColors.textSecondary,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            childAspectRatio: 2.2,
+            crossAxisSpacing: AppSpacing.sm,
+            mainAxisSpacing: AppSpacing.sm,
+          ),
+          itemCount: _hourPresets.length,
+          itemBuilder: (context, index) {
+            final hour = _hourPresets[index];
+            final isSelected = _selectedHours.contains(hour);
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (isSelected) {
+                    _selectedHours.remove(hour);
+                  } else {
+                    _selectedHours.add(hour);
+                  }
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? AppColors.success.withValues(alpha: 0.12)
+                      : AppColors.surfaceVariant,
+                  border: Border.all(
+                    color: isSelected
+                        ? AppColors.success
+                        : AppColors.divider,
+                    width: isSelected ? 1.5 : 1,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  _formatHour(hour),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight:
+                        isSelected ? FontWeight.w600 : FontWeight.w400,
+                    color: isSelected
+                        ? AppColors.success
+                        : AppColors.textPrimary,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSendButton(BuildContext context) {
+    final count = _selectedHours.length;
+    final isEnabled = count > 0;
+
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+        child: SizedBox(
+          width: double.infinity,
+          child: FilledButton.icon(
+            onPressed: isEnabled ? () => _send(context) : null,
+            icon: const Icon(Icons.send_rounded, size: 18),
+            label: Text(
+              isEnabled ? 'إرسال ($count أوقات)' : 'اختر وقت واحد على الأقل',
+            ),
+            style: FilledButton.styleFrom(
+              backgroundColor: AppColors.success,
+              disabledBackgroundColor: AppColors.divider,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsetsDirectional.symmetric(
+                vertical: 14,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _send(BuildContext context) {
+    final dateLabel = _formatDate(_selectedDate);
+    final sortedHours = _selectedHours.toList()..sort();
+    final slots = sortedHours.asMap().entries.map((entry) {
+      final hour = entry.value;
+      return AvailabilitySlot(
+        id: 'slot_${_selectedDayIndex}_$hour',
+        date: dateLabel,
+        time: _formatHour(hour),
+      );
+    }).toList();
+
+    final serviceName = _serviceController.text.trim().isNotEmpty
+        ? _serviceController.text.trim()
+        : null;
+
+    widget.onSend(slots, serviceName);
+    Navigator.pop(context);
+  }
+}

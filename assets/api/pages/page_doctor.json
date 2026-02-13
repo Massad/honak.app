@@ -1,0 +1,87 @@
+{
+  "success": true,
+  "data": {
+    "id": "dr-khaled-clinic",
+    "owner_id": "usr_003",
+    "business_type_id": "clinic",
+    "business_type_name": "عيادة / طبيب",
+    "category_name": "صحة",
+    "explore_category": "cat_health",
+    "name": "عيادة د. خالد",
+    "name_en": "Dr. Khaled Clinic",
+    "slug": "dr-khaled-clinic",
+    "handle": "dr-khaled-clinic",
+    "store_type": "physical",
+    "archetype": "service_booking",
+    "description": "عيادة طب عام وأسنان في عمّان. حجز مواعيد أونلاين، كشف شامل، تنظيف أسنان، وعلاجات متنوعة. فريق طبي متخصص.",
+    "avatar_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1548694942-fd9fa307bd9a?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000030",
+    "location": {
+      "lat": 31.960,
+      "lng": 35.898,
+      "label": "الشميساني، مجمع العيادات الطبية",
+      "area": "الشميساني",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "18:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "18:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "18:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "18:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "18:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": true, "open": "09:00", "close": "18:00"}
+    },
+    "operating_hours": "السبت — الخميس: ٩:٠٠ ص — ٦:٠٠ م\nالجمعة: مغلق",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 520,
+    "items_count": 11,
+    "posts_count": 15,
+    "is_following": false,
+    "hours": {
+      "open_time": "09:00",
+      "close_time": "18:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 91,
+    "trust_metrics": [
+      {"label": "مواعيد مكتملة", "value": "+٨٠٠", "icon": "check_circle"},
+      {"label": "نسبة الحضور", "value": "٨٨٪", "icon": "people"},
+      {"label": "مرضى نشطين", "value": "١٢٥", "icon": "person"}
+    ],
+    "booking_available": true,
+    "payment_methods": ["نقداً", "كليك", "حوالة بنكية"],
+    "member_since": "2024",
+    "team_members_count": 2,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_doc1", "image_url": "https://picsum.photos/seed/drkhaledstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_doc2", "image_url": "https://picsum.photos/seed/drkhaledstory2/400/700", "duration": 5, "created_at": 1707870000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"},
+      {"date": "2026-03-31", "reason": "عيد الفطر"}
+    ],
+    "cancellation_policy": "يرجى إلغاء أو تعديل الموعد قبل ٢٤ ساعة. عدم الحضور بدون إلغاء مسبق قد يؤثر على أولوية حجزك مستقبلاً.",
+    "branches": [
+      {
+        "id": "br_020",
+        "name": "العيادة الرئيسية — الشميساني",
+        "address": "شارع ابن خلدون، بناية ١٢، الشميساني",
+        "phone": "+962790000030",
+        "hours": "٠٩:٠٠ ص — ٠٦:٠٠ م (سبت—خميس)",
+        "city": "عمّان",
+        "neighborhood": "الشميساني",
+        "coverage": []
+      }
+    ]
+  }
+}

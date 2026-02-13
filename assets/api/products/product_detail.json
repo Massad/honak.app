@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": {
+    "id": "prod_man01",
+    "page_id": "pg_deira",
+    "page_name": "مطعم الديرة",
+    "category_id": "cat_mains",
+    "category_name": "أطباق رئيسية",
+    "name": "منسف",
+    "description": "منسف بلدي بلحم الخاروف والجميد الكركي. يقدم مع الأرز واللوز المحمص والصنوبر. يكفي شخص واحد. للعزائم يتوفر حجم عائلي.",
+    "price_cents": 800,
+    "images": [
+      "https://picsum.photos/seed/mansaf/600/400",
+      "https://picsum.photos/seed/mansaf2/600/400",
+      "https://picsum.photos/seed/mansaf3/600/400"
+    ],
+    "is_available": true,
+    "preparation_time_minutes": 25,
+    "options": [
+      {
+        "id": "opt_size",
+        "name": "الحجم",
+        "required": true,
+        "choices": [
+          {"id": "ch_regular", "name": "عادي", "price_delta_cents": 0},
+          {"id": "ch_family", "name": "عائلي (3-4 أشخاص)", "price_delta_cents": 1500}
+        ]
+      },
+      {
+        "id": "opt_extras",
+        "name": "إضافات",
+        "required": false,
+        "choices": [
+          {"id": "ch_extra_meat", "name": "لحم إضافي", "price_delta_cents": 300},
+          {"id": "ch_extra_jameed", "name": "جميد إضافي", "price_delta_cents": 100}
+        ]
+      }
+    ],
+    "sort_order": 1,
+    "created_at": 1695100000
+  }
+}

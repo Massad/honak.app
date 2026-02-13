@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "data": {
+    "status": "active",
+    "close_reason": null,
+    "temp_closed_message": null,
+    "engagement_level": "full",
+    "order_approval": "manual",
+    "return_window_days": 7,
+    "return_type": "both",
+    "return_cost": "free",
+    "cancel_window_hours": 24,
+    "no_show_action": "warn",
+    "late_cancel_fee_type": "none",
+    "late_cancel_fee_amount": 0,
+    "catalog_strategy": "full_catalog",
+    "highlight_categories": [],
+    "disclaimers": [
+      { "id": "disc_1", "type": "safety", "title": "الالتزام بالوقت", "text": "يرجى الالتزام بالوقت المحدد للحجز", "is_active": true, "sort_order": 0 },
+      { "id": "disc_2", "type": "policy", "title": "أطعمة خارجية", "text": "لا يُسمح بإحضار أطعمة أو مشروبات من خارج المكان", "is_active": true, "sort_order": 1 }
+    ],
+    "post_booking_steps": [
+      { "id": "pbs_1", "text": "إحضار بطاقة الهوية", "is_active": true, "sort_order": 0 },
+      { "id": "pbs_2", "text": "الوصول قبل الموعد بـ 15 دقيقة", "is_active": true, "sort_order": 1 }
+    ]
+  }
+}

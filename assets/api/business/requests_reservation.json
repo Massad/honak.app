@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "req_r01",
+      "customer": {
+        "id": "usr_040",
+        "name": "عمر",
+        "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000040"
+      },
+      "status": "pending",
+      "type": "reservation",
+      "items_count": 1,
+      "total_cents": 15000,
+      "note": "حفل تخرج، نحتاج تجهيز القاعة",
+      "date_range": "2024-03-01 - 2024-03-01",
+      "guest_count": 80,
+      "created_at": 1700100000,
+      "items": [
+        {"id": "sp_01", "name": "القاعة الكبيرة", "quantity": 1, "price_cents": 15000, "variation": "مسائي"}
+      ]
+    },
+    {
+      "id": "req_r02",
+      "customer": {
+        "id": "usr_041",
+        "name": "لينا",
+        "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000041"
+      },
+      "status": "pending",
+      "type": "reservation",
+      "items_count": 1,
+      "total_cents": 25000,
+      "note": null,
+      "date_range": "2024-03-15 - 2024-03-17",
+      "guest_count": 6,
+      "created_at": 1700099000,
+      "items": [
+        {"id": "sp_02", "name": "فيلا البحر الميت", "quantity": 1, "price_cents": 25000, "variation": "3 ليالي"}
+      ]
+    }
+  ]
+}

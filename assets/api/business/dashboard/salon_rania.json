@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 7,
+      "new_followers": 3,
+      "page_views": 42,
+      "today_revenue": 8500
+    },
+    "today_summary": {
+      "completed": 4,
+      "upcoming": 3,
+      "cancelled": 0,
+      "no_show": 0,
+      "total": 7,
+      "revenue": 8500
+    },
+    "today_revenue": {
+      "total": 8500,
+      "completed_count": 4,
+      "items": [
+        {"service": "قص شعر", "amount": 1500, "time": "09:30"},
+        {"service": "صبغة + سيشوار", "amount": 3500, "time": "10:00"},
+        {"service": "مانيكير", "amount": 1500, "time": "11:30"},
+        {"service": "قص + تصفيف", "amount": 2000, "time": "12:00"}
+      ]
+    },
+    "next_appointment": {
+      "customer_name": "هديل أحمد",
+      "service": "صبغة + تصفيف",
+      "time": "14:30",
+      "provider": "سارة محمود"
+    },
+    "today_schedule": [
+      {"time": "09:30", "customer": "ليلى حسن", "service": "قص شعر", "status": "completed"},
+      {"time": "10:00", "customer": "منى خالد", "service": "صبغة + سيشوار", "status": "completed"},
+      {"time": "11:30", "customer": "رنا عمر", "service": "مانيكير", "status": "completed"},
+      {"time": "12:00", "customer": "نور سعيد", "service": "قص + تصفيف", "status": "completed"},
+      {"time": "14:30", "customer": "هديل أحمد", "service": "صبغة + تصفيف", "status": "upcoming"},
+      {"time": "15:30", "customer": "سلمى يوسف", "service": "قص + سيشوار", "status": "upcoming"},
+      {"time": "16:30", "customer": "دانا محمد", "service": "بديكير + مانيكير", "status": "upcoming"}
+    ],
+    "pending_requests": [
+      {"id": "req_101", "customer": "فاطمة علي", "service": "قص + صبغة", "date": "2026-02-13", "time": "10:00"},
+      {"id": "req_102", "customer": "عائشة سمير", "service": "سيشوار", "date": "2026-02-13", "time": "14:00"},
+      {"id": "req_103", "customer": "ريم حسام", "service": "مانيكير + بديكير", "date": "2026-02-14", "time": "11:00"}
+    ]
+  }
+}

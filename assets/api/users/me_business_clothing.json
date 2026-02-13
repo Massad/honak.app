@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "data": {
+    "id": "usr_003",
+    "phone": "0790000030",
+    "name": "خالد",
+    "avatar_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=150&q=80",
+    "bio": "عمّان، الشميساني",
+    "created_at": 1698000000,
+    "status": "active",
+    "needs_profile_setup": false,
+    "stats": {
+      "following_count": 10,
+      "orders_count": 3
+    },
+    "pages": [
+      {
+        "id": "dr-khaled-clinic",
+        "name": "عيادة د. خالد",
+        "slug": "dr-khaled-clinic",
+        "avatar_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "عيادة / طبيب",
+        "business_type_id": "clinic",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "royal-events",
+        "name": "رويال للمناسبات",
+        "slug": "royal-events",
+        "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "قاعة مناسبات",
+        "business_type_id": "event_venue",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "villa-dead-sea",
+        "name": "فيلا البحر الميت",
+        "slug": "villa-dead-sea",
+        "avatar_url": "https://images.unsplash.com/photo-1758612853656-def5033bccb5?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "تأجير فلل",
+        "business_type_id": "villa_rental",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "city-mall",
+        "name": "City Mall",
+        "slug": "city-mall",
+        "avatar_url": "https://images.unsplash.com/photo-1770023895508-ac4a715e7a43?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "مراكز تجارية",
+        "business_type_id": "directory",
+        "is_verified": true,
+        "role": "owner"
+      }
+    ]
+  }
+}

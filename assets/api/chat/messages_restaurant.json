@@ -1,0 +1,192 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_rest_01",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "مرحبا! حابة أطلب من عندكم",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rest_02",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_beit_sitti",
+      "sender_name": "مطبخ بيت ستي",
+      "type": "text",
+      "content": "أهلاً وسهلاً سارة! تفضلي شوفي المنيو وأرسليلنا طلبك",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300300,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rest_03",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "بدي منسف وسط وعصير ليمون بالنعنع",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300600,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rest_04",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم إنشاء طلب #1201",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300800,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rest_05",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_beit_sitti",
+      "sender_name": "مطبخ بيت ستي",
+      "type": "text",
+      "content": "تمام! بس المنسف خلص اليوم للأسف. عندنا بديل ممتاز",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707301000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rest_06",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_beit_sitti",
+      "sender_name": "مطبخ بيت ستي",
+      "type": "alternative_suggestion",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "id": "alt_rest_01",
+        "suggestion_type": "replacement",
+        "reason": "المنسف خلص اليوم — بنقترح عليكِ مقلوبة دجاج طازجة",
+        "items": [
+          {
+            "item_id": "prd_maqloubeh",
+            "name": "مقلوبة دجاج",
+            "price": 450,
+            "quantity": 1,
+            "image_url": "https://picsum.photos/seed/maqloubeh/200"
+          }
+        ],
+        "original_total": 500,
+        "suggested_total": 450,
+        "price_difference": -50,
+        "status": "accepted"
+      },
+      "created_at": 1707301200,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rest_07",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم قبول البديل المقترح",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707301500,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rest_08",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "تمام المقلوبة حلوة كمان. شكراً!",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707302000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rest_08b",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_beit_sitti",
+      "sender_name": "مطبخ بيت ستي",
+      "type": "product_card",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "product": {
+          "id": "item_bs_limonana",
+          "name": "عصير ليمون بالنعنع",
+          "image": "https://picsum.photos/seed/limonana/200",
+          "price_cents": 150,
+          "description": "عصير ليمون طازج مع نعنع طبيعي",
+          "category": "مشروبات"
+        },
+        "status": "added"
+      },
+      "created_at": 1707302500,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rest_09",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_beit_sitti",
+      "sender_name": "مطبخ بيت ستي",
+      "type": "text",
+      "content": "تقريباً ٢٠-٢٥ دقيقة وبيكون جاهز إن شاء الله",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707303000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rest_10",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_beit_sitti",
+      "sender_name": "مطبخ بيت ستي",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/food_tray/400/300",
+      "metadata": {},
+      "created_at": 1707308000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rest_11",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم تأكيد الطلب #1201",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707309000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rest_12",
+      "conversation_id": "conv_sara_beit_sitti",
+      "sender_id": "usr_beit_sitti",
+      "sender_name": "مطبخ بيت ستي",
+      "type": "text",
+      "content": "طلبك جاهز للاستلام! بالعافية",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707310000,
+      "is_from_business": true
+    }
+  ],
+  "meta": {
+    "total": 12,
+    "has_more": false
+  }
+}

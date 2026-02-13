@@ -1,0 +1,100 @@
+{
+  "success": true,
+  "data": {
+    "id": "royal-events",
+    "owner_id": "usr_003",
+    "business_type_id": "event_venue",
+    "business_type_name": "قاعة مناسبات",
+    "category_name": "إقامة وسياحة",
+    "explore_category": "cat_entertainment",
+    "name": "رويال للمناسبات",
+    "name_en": "Royal Events",
+    "slug": "royal-events",
+    "handle": "royal-events",
+    "store_type": "physical",
+    "archetype": "reservation",
+    "description": "قاعات فاخرة للأعراس والمناسبات. حديقة خارجية وصالات VIP. خدمة متكاملة.",
+    "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1762765684665-6b6855bb6fe6?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000015",
+    "location": {
+      "lat": 31.950,
+      "lng": 35.940,
+      "label": "شارع المطار، عمّان",
+      "area": "ماركا",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "friday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "02:00"}
+    },
+    "operating_hours": "يومياً: ٩:٠٠ ص — ٢:٠٠ م",
+    "items_label_ar": "القاعات",
+    "items_label_en": "Spaces",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 1800,
+    "items_count": 3,
+    "posts_count": 12,
+    "is_following": false,
+    "trust_score": 90,
+    "trust_metrics": [
+      {"label": "حجوزات مكتملة", "value": "٢,٣٠٠", "icon": "check_circle"},
+      {"label": "نشط منذ", "value": "٢٠١٩", "icon": "calendar_today"},
+      {"label": "مناسبات هذا العام", "value": "١٨٠", "icon": "celebration"}
+    ],
+    "booking_available": true,
+    "payment_methods": ["نقداً", "تحويل بنكي", "شيكات"],
+    "member_since": "2019",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1560000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_events1", "image_url": "https://picsum.photos/seed/royaleventsstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_events2", "image_url": "https://picsum.photos/seed/royaleventsstory2/400/700", "duration": 5, "created_at": 1707860000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-04-05", "reason": "حفل زفاف — محجوز بالكامل"},
+      {"date": "2026-04-12", "reason": "مناسبة خاصة"}
+    ],
+    "gallery_images": [
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800",
+      "https://images.unsplash.com/photo-1478146059778-26028b07395a?w=800",
+      "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800"
+    ],
+    "amenities": [
+      {"icon": "local_parking", "label": "موقف سيارات واسع"},
+      {"icon": "speaker", "label": "نظام صوت متكامل"},
+      {"icon": "light", "label": "إضاءة احترافية"},
+      {"icon": "restaurant", "label": "مطبخ جاهز"},
+      {"icon": "ac_unit", "label": "تكييف مركزي"}
+    ],
+    "packages": [
+      {
+        "id": "pkg_010",
+        "name": "باقة الفضية",
+        "description": "قاعة رئيسية + بوفيه أساسي + تنسيق زهور",
+        "price_cents": 150000,
+        "credits": 1,
+        "credit_label": "حفل"
+      },
+      {
+        "id": "pkg_011",
+        "name": "باقة الذهبية",
+        "description": "قاعة VIP + بوفيه فاخر + تنسيق + تصوير",
+        "price_cents": 300000,
+        "credits": 1,
+        "credit_label": "حفل"
+      }
+    ]
+  }
+}

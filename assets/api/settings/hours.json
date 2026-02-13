@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "data": {
+    "schedule": [
+      { "day": "السبت", "open": true, "shifts": [{"open": "09:00", "close": "17:00"}] },
+      { "day": "الأحد", "open": true, "shifts": [{"open": "09:00", "close": "13:00"}, {"open": "15:00", "close": "20:00"}] },
+      { "day": "الاثنين", "open": true, "shifts": [{"open": "09:00", "close": "17:00"}] },
+      { "day": "الثلاثاء", "open": true, "shifts": [{"open": "09:00", "close": "17:00"}] },
+      { "day": "الأربعاء", "open": true, "shifts": [{"open": "09:00", "close": "17:00"}] },
+      { "day": "الخميس", "open": true, "shifts": [{"open": "09:00", "close": "17:00"}] },
+      { "day": "الجمعة", "open": false, "shifts": [] }
+    ],
+    "blocked_dates": [
+      { "date": "2026-03-21", "reason": "عيد الأم" },
+      { "date": "2026-05-01", "reason": "عيد العمال" }
+    ]
+  }
+}

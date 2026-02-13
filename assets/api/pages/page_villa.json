@@ -1,0 +1,105 @@
+{
+  "success": true,
+  "data": {
+    "id": "villa-dead-sea",
+    "owner_id": "usr_003",
+    "business_type_id": "villa_rental",
+    "business_type_name": "تأجير فلل",
+    "category_name": "إقامة وسياحة",
+    "explore_category": "cat_stays",
+    "name": "فيلا البحر الميت",
+    "name_en": "Dead Sea Villa",
+    "slug": "villa-dead-sea",
+    "handle": "dead-sea-villa",
+    "store_type": "physical",
+    "archetype": "reservation",
+    "description": "فيلا فاخرة تطل على البحر الميت. مسبح خاص، جاكوزي، حديقة، شواء، 4 غرف نوم.",
+    "avatar_url": "https://images.unsplash.com/photo-1758612853656-def5033bccb5?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1759256243437-9c8f7238c42b?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000016",
+    "location": {
+      "lat": 31.600,
+      "lng": 35.550,
+      "label": "البحر الميت، شارع المنتجعات",
+      "area": "شاطئ عمّان",
+      "city": "البحر الميت"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "00:00", "close": "23:59"},
+      "monday": {"enabled": true, "open": "00:00", "close": "23:59"},
+      "tuesday": {"enabled": true, "open": "00:00", "close": "23:59"},
+      "wednesday": {"enabled": true, "open": "00:00", "close": "23:59"},
+      "thursday": {"enabled": true, "open": "00:00", "close": "23:59"},
+      "friday": {"enabled": true, "open": "00:00", "close": "23:59"},
+      "saturday": {"enabled": true, "open": "00:00", "close": "23:59"}
+    },
+    "operating_hours": "متاح على مدار الساعة",
+    "items_label_ar": "المساحات",
+    "items_label_en": "Spaces",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 890,
+    "items_count": 1,
+    "posts_count": 8,
+    "is_following": false,
+    "trust_score": 87,
+    "trust_metrics": [
+      {"label": "حجوزات مكتملة", "value": "٣٤٠", "icon": "check_circle"},
+      {"label": "نشط منذ", "value": "٢٠٢٢", "icon": "calendar_today"},
+      {"label": "نسبة الحجز المتكرر", "value": "٧٥٪", "icon": "repeat"}
+    ],
+    "booking_available": true,
+    "payment_methods": ["نقداً", "كليك: DeadSeaVilla", "تحويل بنكي"],
+    "cliq_alias": "DeadSeaVilla",
+    "member_since": "2022",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_villa1", "image_url": "https://picsum.photos/seed/villadseastory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_villa2", "image_url": "https://picsum.photos/seed/villadseastory2/400/700", "duration": 5, "created_at": 1707860000},
+      {"id": "s_villa3", "image_url": "https://picsum.photos/seed/villadseastory3/400/700", "duration": 5, "created_at": 1707920000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-28", "reason": "محجوزة — حفل خاص"},
+      {"date": "2026-03-29", "reason": "محجوزة — حفل خاص"}
+    ],
+    "gallery_images": [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800"
+    ],
+    "amenities": [
+      {"icon": "pool", "label": "مسبح خاص"},
+      {"icon": "hot_tub", "label": "جاكوزي"},
+      {"icon": "yard", "label": "حديقة خاصة"},
+      {"icon": "outdoor_grill", "label": "شواء (باربكيو)"},
+      {"icon": "wifi", "label": "واي فاي مجاني"},
+      {"icon": "local_parking", "label": "موقف سيارات"}
+    ],
+    "pricing": {
+      "weekday_cents": 15000,
+      "weekend_cents": 22000,
+      "currency": "JOD"
+    },
+    "house_rules": [
+      "الهدوء بعد الساعة ١١ مساءً",
+      "ممنوع التدخين داخل الفيلا",
+      "ممنوع الحيوانات الأليفة",
+      "الحد الأقصى ١٢ شخص"
+    ],
+    "check_in": "14:00",
+    "check_out": "12:00",
+    "max_guests": 12,
+    "bedrooms": 4,
+    "bathrooms": 3
+  }
+}

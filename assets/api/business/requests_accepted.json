@@ -1,0 +1,52 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "req_004",
+      "customer": {
+        "id": "usr_013",
+        "name": "أحمد ر.",
+        "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000013"
+      },
+      "status": "accepted",
+      "type": "order",
+      "items_count": 2,
+      "total_cents": 600,
+      "note": "عمارة السلام، مدخل ب",
+      "created_at": 1700090000,
+      "items": [
+        {
+          "id": "biz_item_w02",
+          "name": "موزع مياه 5 جالون",
+          "quantity": 2,
+          "price_cents": 300
+        }
+      ]
+    },
+    {
+      "id": "req_005",
+      "customer": {
+        "id": "usr_014",
+        "name": "سارة ق.",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000014"
+      },
+      "status": "accepted",
+      "type": "order",
+      "items_count": 1,
+      "total_cents": 150,
+      "note": null,
+      "created_at": 1700085000,
+      "items": [
+        {
+          "id": "biz_item_w01",
+          "name": "قارورة مياه 19 لتر",
+          "quantity": 1,
+          "price_cents": 150
+        }
+      ]
+    }
+  ],
+  "meta": {"total": 2, "has_more": false}
+}

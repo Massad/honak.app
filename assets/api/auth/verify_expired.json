@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": "otp_expired",
+    "message": "انتهت صلاحية رمز التحقق. أعد الإرسال"
+  }
+}

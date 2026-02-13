@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "data": [
+    { "id": "br_1", "name": "الفرع الرئيسي", "address": "عبدون، شارع فيصل ١٢", "phone": "0790000001", "city": "عمّان", "neighborhood": "عبدون", "status": "active", "is_main": true, "active": true, "latitude": 31.955, "longitude": 35.87 },
+    { "id": "br_2", "name": "فرع الصويفية", "address": "الصويفية، مجمع برج العرب", "phone": "0790000002", "city": "عمّان", "neighborhood": "الصويفية", "status": "active", "is_main": false, "active": true, "latitude": 31.963, "longitude": 35.862 }
+  ]
+}

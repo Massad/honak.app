@@ -1,0 +1,86 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_rs_01",
+      "conversation_id": "conv_rania_salon_rania",
+      "sender_id": "usr_rania",
+      "sender_name": "رانيا خالد",
+      "type": "text",
+      "content": "مرحبا، بدي أحجز جلسة تنظيف بشرة يوم الأربعاء",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707280000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rs_02",
+      "conversation_id": "conv_rania_salon_rania",
+      "sender_id": "usr_sara",
+      "sender_name": "صالون رانيا",
+      "type": "text",
+      "content": "أهلاً رانيا! يوم الأربعاء محجوز بالكامل للأسف",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707281000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rs_03",
+      "conversation_id": "conv_rania_salon_rania",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم إنشاء طلب حجز #req_2010",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707282000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_rs_04",
+      "conversation_id": "conv_rania_salon_rania",
+      "sender_id": "usr_sara",
+      "sender_name": "صالون رانيا",
+      "type": "alternative_suggestion",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "id": "alt_rs_01",
+        "suggestion_type": "reschedule",
+        "reason": "يوم الأربعاء محجوز بالكامل. متاح يوم الخميس الساعة ١١ صباحاً",
+        "items": [
+          {
+            "item_id": "srv_facial",
+            "name": "تنظيف بشرة عميق",
+            "price": 2500,
+            "quantity": 1,
+            "image": "https://picsum.photos/seed/facial/200"
+          }
+        ],
+        "original_total": 2500,
+        "suggested_total": 2500,
+        "price_difference": 0,
+        "status": "pending"
+      },
+      "created_at": 1707283000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_rs_05",
+      "conversation_id": "conv_rania_salon_rania",
+      "sender_id": "usr_rania",
+      "sender_name": "رانيا خالد",
+      "type": "text",
+      "content": "ممكن موعد ثاني يوم الخميس بدل الأربعاء؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707295000,
+      "is_from_business": false
+    }
+  ],
+  "meta": {
+    "total": 5,
+    "has_more": false
+  }
+}

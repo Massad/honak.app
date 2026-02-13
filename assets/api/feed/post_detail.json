@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "data": {
+    "id": "post_001",
+    "page": {"id": "pg_deira", "name": "مطعم الديرة", "slug": "al-deira", "avatar_url": "https://picsum.photos/seed/deira/200", "is_verified": true},
+    "type": "update",
+    "content": "عرض اليوم! شاورما دجاج + عصير طبيعي بس 3 دينار",
+    "media": [{"url": "https://picsum.photos/seed/shawarma/600/400", "type": "image"}],
+    "created_at": 1707050000,
+    "is_following": true
+  }
+}

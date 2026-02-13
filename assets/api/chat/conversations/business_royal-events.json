@@ -1,0 +1,72 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "conv_ahmad_royal_events",
+      "page_id": "pg_royal_events",
+      "page_name": "قاعة رويال للمناسبات",
+      "page_avatar": "https://picsum.photos/seed/royal-events/200",
+      "page_handle": "royal-events",
+      "customer_id": "usr_ahmad",
+      "customer_name": "أحمد محمد",
+      "customer_avatar": "https://picsum.photos/seed/ahmad/200",
+      "request_id": "req_1220",
+      "request_status": "confirmed",
+      "request_expires_at": null,
+      "last_message": "تم تأكيد حجز القاعة الكبرى يوم الجمعة ٢١ شباط من الساعة ٧ مساءً. المبلغ المتفق عليه ١,٢٠٠ دينار",
+      "last_message_at": 1739480000,
+      "last_message_from": "business",
+      "unread_count": 0,
+      "status": "active",
+      "type": "request",
+      "has_active_story": true,
+      "needs_info": false
+    },
+    {
+      "id": "conv_sara_royal_events",
+      "page_id": "pg_royal_events",
+      "page_name": "قاعة رويال للمناسبات",
+      "page_avatar": "https://picsum.photos/seed/royal-events/200",
+      "page_handle": "royal-events",
+      "customer_id": "usr_sara",
+      "customer_name": "سارة أحمد",
+      "customer_avatar": "https://picsum.photos/seed/sara/200",
+      "request_id": "req_1221",
+      "request_status": "pending",
+      "request_expires_at": null,
+      "last_message": "بدي أحجز القاعة الصغيرة لحفلة تخرج ٤٠ شخص، هل متاحة يوم ١ آذار؟",
+      "last_message_at": 1739530000,
+      "last_message_from": "customer",
+      "unread_count": 1,
+      "status": "active",
+      "type": "request",
+      "has_active_story": false,
+      "needs_info": true
+    },
+    {
+      "id": "conv_tariq_royal_events",
+      "page_id": "pg_royal_events",
+      "page_name": "قاعة رويال للمناسبات",
+      "page_avatar": "https://picsum.photos/seed/royal-events/200",
+      "page_handle": "royal-events",
+      "customer_id": "usr_tariq",
+      "customer_name": "طارق حسين",
+      "customer_avatar": "https://picsum.photos/seed/tariq/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "ممكن تبعثولي صور الديكور الجديد؟ بدي أعرض على أهل العروس",
+      "last_message_at": 1739500000,
+      "last_message_from": "customer",
+      "unread_count": 1,
+      "status": "active",
+      "type": "message",
+      "has_active_story": true,
+      "needs_info": false
+    }
+  ],
+  "meta": {
+    "total": 3,
+    "has_more": false
+  }
+}

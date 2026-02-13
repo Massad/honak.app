@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_item_w01",
+      "name": "قارورة مياه 19 لتر",
+      "name_en": "Water Bottle 19L",
+      "description": "مياه نقية ومفلترة — توصيل لباب البيت",
+      "price_cents": 150,
+      "images": ["https://images.unsplash.com/photo-1644061798186-96785723f563?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_bottles",
+      "category_name": "قوارير",
+      "status": "active",
+      "stock": null,
+      "sort_order": 1,
+      "page_id": "abu-ahmad-water",
+      "properties": {}
+    },
+    {
+      "id": "biz_item_w02",
+      "name": "موزع مياه 5 جالون",
+      "name_en": "Water Dispenser 5 Gallon",
+      "description": "استبدال: أعد الفارغة واستلم الممتلئة",
+      "price_cents": 300,
+      "images": ["https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_bottles",
+      "category_name": "قوارير",
+      "status": "active",
+      "stock": null,
+      "sort_order": 2,
+      "page_id": "abu-ahmad-water",
+      "properties": {}
+    },
+    {
+      "id": "biz_item_w03",
+      "name": "برادة مياه (إيجار شهري)",
+      "name_en": "Water Cooler (Monthly Rental)",
+      "description": "برادة حديثة بتبريد وتسخين — إيجار شهري شامل الصيانة",
+      "price_cents": 1000,
+      "images": ["https://images.unsplash.com/photo-1571210862729-78a52d3779a2?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_coolers",
+      "category_name": "برادات",
+      "status": "active",
+      "stock": 5,
+      "sort_order": 3,
+      "page_id": "abu-ahmad-water",
+      "properties": {}
+    }
+  ],
+  "meta": {"total": 3, "has_more": false}
+}

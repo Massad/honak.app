@@ -1,0 +1,93 @@
+{
+  "success": true,
+  "data": {
+    "id": "hara-coffee",
+    "owner_id": "usr_001",
+    "business_type_id": "coffee_shop",
+    "business_type_name": "مقهى",
+    "category_name": "طعام",
+    "explore_category": "cat_grocery",
+    "name": "قهوة الحارة",
+    "name_en": "Hara Coffee",
+    "slug": "hara-coffee",
+    "handle": "hara-coffee",
+    "store_type": "physical",
+    "archetype": "menu_order",
+    "description": "قهوة عربية أصيلة ومشروبات ساخنة وباردة. حلويات طازجة يومياً. أجواء مريحة ومكان مثالي للعمل واللقاءات.",
+    "avatar_url": "https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1709276351463-fc72a6d00b3a?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000026",
+    "location": {
+      "lat": 31.953,
+      "lng": 35.912,
+      "label": "جبل عمّان، شارع الرينبو",
+      "area": "جبل عمّان",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "07:00", "close": "02:00"},
+      "monday": {"enabled": true, "open": "07:00", "close": "02:00"},
+      "tuesday": {"enabled": true, "open": "07:00", "close": "02:00"},
+      "wednesday": {"enabled": true, "open": "07:00", "close": "02:00"},
+      "thursday": {"enabled": true, "open": "07:00", "close": "02:00"},
+      "friday": {"enabled": true, "open": "07:00", "close": "02:00"},
+      "saturday": {"enabled": true, "open": "07:00", "close": "02:00"}
+    },
+    "operating_hours": "يومياً: ٧:٠٠ ص — ٢:٠٠ م",
+    "items_label_ar": "القائمة",
+    "items_label_en": "Menu",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 980,
+    "items_count": 8,
+    "posts_count": 18,
+    "is_following": false,
+    "hours": {
+      "open_time": "07:00",
+      "close_time": "02:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 86,
+    "trust_metrics": [
+      {"label": "أكواب يومياً", "value": "٢٥٠", "icon": "coffee"},
+      {"label": "الأكثر طلباً", "value": "قهوة عربية", "icon": "star"},
+      {"label": "عملاء يعودون", "value": "٨٥٪", "icon": "repeat"}
+    ],
+    "delivery_available": true,
+    "pickup_available": true,
+    "delivery_fee_cents": 200,
+    "payment_methods": ["نقداً", "كليك: HaraCoffee", "فيزا/ماستركارد"],
+    "cliq_alias": "HaraCoffee",
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1672000000,
+    "engagement_level": "showcase",
+    "data_synced": true,
+    "catalog_strategy": "highlights",
+    "carry_categories": ["مواد غذائية", "مشروبات", "وجبات خفيفة", "ألبان ومبردات"],
+    "stories": [
+      {"id": "s_hara1", "image_url": "https://picsum.photos/seed/haracoffeestory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_hara2", "image_url": "https://picsum.photos/seed/haracoffeestory2/400/700", "duration": 5, "created_at": 1707860000},
+      {"id": "s_hara3", "image_url": "https://picsum.photos/seed/haracoffeestory3/400/700", "duration": 5, "created_at": 1707920000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "external_links": [
+      {"platform": "talabat", "label": "اطلب عبر طلبات", "url": "https://www.talabat.com/jordan/coffee/hara-coffee"},
+      {"platform": "instagram", "label": "@hara.coffee.jo", "url": "https://instagram.com/hara.coffee.jo"}
+    ],
+    "specials": ["عرض الصباح — قهوة + كرواسون بـ ١.٥٠ د.أ حتى ١٠ صباحاً"],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "جبل عمان", "neighbourhoods": ["جبل عمان", "الدوار الأول", "الدوار الثاني"]},
+          {"name": "جبل اللويبدة", "neighbourhoods": ["اللويبدة", "الشابسوغ"]}
+        ]
+      }
+    ]
+  }
+}

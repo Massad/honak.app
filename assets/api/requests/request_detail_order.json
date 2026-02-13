@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": {
+    "id": "req_101",
+    "type": "order",
+    "status": "completed",
+    "business_page_id": "abu-ahmad-water",
+    "business_name": "مياه أبو أحمد",
+    "business_avatar_url": "https://picsum.photos/seed/abu-ahmad/200",
+    "business_slug": "abu-ahmad-water",
+    "items_count": 2,
+    "total_cents": 500,
+    "note": "الطابق الثاني، شقة ٤",
+    "created_at": 1770248200,
+    "delivery_method": "delivery",
+    "delivery_address": "خلدا، شارع الأمير هاشم، عمّان",
+    "payment_method": "نقدي",
+    "can_edit": false,
+    "can_cancel": false,
+    "items": [
+      { "id": "item_w1", "name": "مياه كبير ١٨ لتر", "quantity": 2, "price_cents": 250 }
+    ],
+    "timeline": [
+      { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770248200, "actor": "customer" },
+      { "status": "accepted", "label": "تم القبول", "timestamp": 1770250000, "actor": "business", "detail": "سيتم التوصيل خلال ساعة" },
+      { "status": "in_progress", "label": "جاري التحضير", "timestamp": 1770250900, "actor": "business" },
+      { "status": "out_for_delivery", "label": "قيد التوصيل", "timestamp": 1770251800, "actor": "business", "detail": "السائق في الطريق" },
+      { "status": "delivered", "label": "تم التوصيل", "timestamp": 1770255400, "actor": "business" },
+      { "status": "completed", "label": "مكتمل", "timestamp": 1770255400, "actor": "system" }
+    ]
+  }
+}

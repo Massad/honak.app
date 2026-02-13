@@ -1,0 +1,43 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "ord_b001",
+      "customer": { "id": "usr_sara01", "name": "سارة أحمد", "phone": "0791000001" },
+      "status": "pending",
+      "type": "order",
+      "total_cents": 650,
+      "items": [
+        { "id": "item_001", "name": "شاورما دجاج", "quantity": 2, "price_cents": 250 },
+        { "id": "item_002", "name": "عصير ليمون", "quantity": 1, "price_cents": 150 }
+      ],
+      "created_at": 1770853000,
+      "note": "بدون بصل"
+    },
+    {
+      "id": "ord_b002",
+      "customer": { "id": "usr_multi01", "name": "محمد حسن", "phone": "0791000006" },
+      "status": "preparing",
+      "type": "order",
+      "total_cents": 1200,
+      "items": [
+        { "id": "item_003", "name": "مشاوي مشكلة", "quantity": 1, "price_cents": 800 },
+        { "id": "item_004", "name": "تبولة", "quantity": 1, "price_cents": 200 },
+        { "id": "item_005", "name": "حمص", "quantity": 1, "price_cents": 200 }
+      ],
+      "created_at": 1770842600
+    },
+    {
+      "id": "ord_b003",
+      "customer": { "id": "usr_sara01", "name": "سارة أحمد", "phone": "0791000001" },
+      "status": "delivered",
+      "type": "order",
+      "total_cents": 450,
+      "items": [
+        { "id": "item_006", "name": "فلافل ساندويش", "quantity": 3, "price_cents": 150 }
+      ],
+      "created_at": 1770248200
+    }
+  ],
+  "meta": { "total": 3, "has_more": false }
+}

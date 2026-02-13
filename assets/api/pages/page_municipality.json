@@ -1,0 +1,92 @@
+{
+  "success": true,
+  "data": {
+    "id": "amman-municipality",
+    "owner_id": "usr_004",
+    "business_type_id": "municipality",
+    "business_type_name": "جهة حكومية",
+    "category_name": "حكومة وخدمات عامة",
+    "explore_category": "cat_government",
+    "name": "أمانة عمّان الكبرى",
+    "name_en": "Amman Municipality",
+    "slug": "amman-municipality",
+    "handle": "amman-municipality",
+    "store_type": "physical",
+    "archetype": "follow_only",
+    "description": "الحساب الرسمي لأمانة عمّان الكبرى. أخبار المدينة، خدمات البلدية، تنبيهات المياه والصيانة.",
+    "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80",
+    "phone": "+96265300555",
+    "location": {
+      "lat": 31.955,
+      "lng": 35.930,
+      "label": "عمّان، الأردن",
+      "area": "وسط عمّان",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": false, "open": null, "close": null}
+    },
+    "operating_hours": "الأحد - الخميس: ٨:٠٠ ص — ٤:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "platform_managed",
+    "followers_count": 120000,
+    "posts_count": 200,
+    "is_following": false,
+    "trust_score": 99,
+    "trust_metrics": [
+      {"label": "حساب رسمي", "value": "✓", "icon": "verified"},
+      {"label": "تنبيهات نشطة", "value": "يومياً", "icon": "notifications"},
+      {"label": "المتابعون", "value": "١٢٠,٠٠٠+", "icon": "people"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["phone"],
+    "created_at": 1704000000,
+    "engagement_level": "visibility",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_muni1", "image_url": "https://picsum.photos/seed/ammanmunistory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_muni2", "image_url": "https://picsum.photos/seed/ammanmunistory2/400/700", "duration": 5, "created_at": 1707870000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-05-25", "reason": "عيد الاستقلال"}
+    ],
+    "alerts": [
+      {
+        "id": "alert_001",
+        "title": "إغلاق شارع الجامعة للصيانة",
+        "body": "سيتم إغلاق شارع الجامعة الأردنية يوم الخميس من الساعة ٦ صباحاً حتى ٦ مساءً لأعمال صيانة الطريق. يرجى استخدام الطرق البديلة.",
+        "priority": "urgent",
+        "areas": ["الجبيهة", "طلال العلي"]
+      },
+      {
+        "id": "alert_002",
+        "title": "حملة تنظيف حي الصويفية",
+        "body": "تدعوكم أمانة عمان للمشاركة في حملة تنظيف حي الصويفية يوم السبت القادم. نقطة التجمع: حديقة الصويفية الساعة ٨ صباحاً.",
+        "priority": "important",
+        "areas": ["الصويفية"]
+      },
+      {
+        "id": "alert_003",
+        "title": "مواعيد جديدة لمراكز الخدمة",
+        "body": "اعتباراً من الأسبوع القادم، ستعمل مراكز خدمة الجمهور من الساعة ٨:٣٠ صباحاً حتى ٣:٣٠ مساءً بدلاً من ٤ مساءً.",
+        "priority": "info",
+        "areas": []
+      }
+    ],
+    "about_extended": "أمانة عمان الكبرى هي الجهة المسؤولة عن إدارة وتطوير العاصمة الأردنية عمّان. تأسست عام ١٩٢١ وتخدم أكثر من ٤ ملايين نسمة. نسعى لجعل عمّان مدينة ذكية ومستدامة توفر أعلى جودة حياة لسكانها.",
+    "services_links": [
+      {"label": "دفع المخالفات", "url": "https://eservices.ammancity.gov.jo/fines", "type": "payment"},
+      {"label": "رخص المهن", "url": "https://eservices.ammancity.gov.jo/licenses", "type": "service"},
+      {"label": "الشكاوى والاقتراحات", "url": "https://eservices.ammancity.gov.jo/complaints", "type": "feedback"}
+    ]
+  }
+}

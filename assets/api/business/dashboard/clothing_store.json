@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 5,
+      "new_followers": 12,
+      "page_views": 234,
+      "today_revenue": 15600
+    },
+    "today_revenue": {
+      "total": 15600,
+      "completed_count": 4,
+      "items": [
+        {"service": "فستان سهرة", "amount": 6500, "time": "11:00"},
+        {"service": "بلوزة + تنورة", "amount": 4200, "time": "12:30"},
+        {"service": "جاكيت شتوي", "amount": 3500, "time": "13:15"},
+        {"service": "حقيبة يد", "amount": 1400, "time": "14:00"}
+      ]
+    },
+    "low_stock": [
+      {"name": "فستان أسود مقاس M", "remaining": 1, "threshold": 5},
+      {"name": "بلوزة بيضاء مقاس S", "remaining": 2, "threshold": 8},
+      {"name": "جاكيت شتوي مقاس L", "remaining": 3, "threshold": 6}
+    ],
+    "best_sellers": [
+      {"name": "فستان سهرة أسود", "count": 18, "trend": "up"},
+      {"name": "بلوزة ساتان", "count": 15, "trend": "up"},
+      {"name": "تنورة ميدي", "count": 12, "trend": "same"},
+      {"name": "جاكيت شتوي", "count": 9, "trend": "down"},
+      {"name": "حقيبة يد جلد", "count": 8, "trend": "up"}
+    ],
+    "pending_requests": [
+      {"id": "req_701", "customer": "لمى أحمد", "service": "استفسار — فستان سهرة مقاس L", "date": "2026-02-12", "time": "15:00"},
+      {"id": "req_702", "customer": "دانا خالد", "service": "طلب — 3 بلوزات", "date": "2026-02-12", "time": "16:00"}
+    ]
+  }
+}

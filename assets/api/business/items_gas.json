@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_gas_01",
+      "name": "اسطوانة غاز كبيرة",
+      "description": "اسطوانة غاز 12 كيلو",
+      "price_cents": 700,
+      "images": ["https://picsum.photos/seed/gas1/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "status": "active",
+      "sort_order": 0,
+      "properties": {}
+    },
+    {
+      "id": "biz_gas_02",
+      "name": "اسطوانة غاز صغيرة",
+      "description": "اسطوانة غاز 6 كيلو",
+      "price_cents": 400,
+      "images": ["https://picsum.photos/seed/gas2/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "status": "active",
+      "sort_order": 1,
+      "properties": {}
+    }
+  ],
+  "meta": {"total": 2, "has_more": false}
+}

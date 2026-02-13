@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "pkg-1",
+      "name": "باقة 10 قوارير",
+      "description": "10 توصيلات مياه خلال 4 أشهر",
+      "price": 15000,
+      "credits": 10,
+      "credit_label": "توصيلة",
+      "validity_months": 4,
+      "model": "visits_and_date",
+      "compare_single_price": 2000,
+      "active": true,
+      "item_ids": ["water-19l", "water-10l"]
+    },
+    {
+      "id": "pkg-2",
+      "name": "باقة 20 قارورة",
+      "description": "20 توصيلة — بدون تاريخ انتهاء",
+      "price": 25000,
+      "credits": 20,
+      "credit_label": "توصيلة",
+      "validity_months": 0,
+      "model": "visits_only",
+      "compare_single_price": 2000,
+      "active": true,
+      "item_ids": ["water-19l"]
+    }
+  ]
+}

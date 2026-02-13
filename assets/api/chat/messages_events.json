@@ -1,0 +1,141 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_events_01",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "مرحبا، بدي أستفسر عن حجز قاعة لحفلة تخرج — ٥٠ شخص تقريباً",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707250000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_events_02",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_royal_events",
+      "sender_name": "قاعة رويال للمناسبات",
+      "type": "text",
+      "content": "أهلاً وسهلاً! عندنا القاعة الكبيرة بتتسع لـ ٨٠ شخص، والمتوسطة لـ ٥٠",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707250500,
+      "is_from_business": true
+    },
+    {
+      "id": "m_events_03",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "المتوسطة أنسب. قديش السعر؟ والتاريخ بكون ١٥ الشهر الجاي إن شاء الله",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707251000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_events_04",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_royal_events",
+      "sender_name": "قاعة رويال للمناسبات",
+      "type": "text",
+      "content": "المتوسطة ٥٠٠ دينار شاملة الضيافة الأساسية (قهوة + عصائر + حلويات). التاريخ متاح ✅",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707255000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_events_05",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم إنشاء طلب حجز #1205",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707256000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_events_06",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "ممكن أشوف صور للقاعة؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707260000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_events_07",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_royal_events",
+      "sender_name": "قاعة رويال للمناسبات",
+      "type": "text",
+      "content": "تفضلي صور القاعة الكبيرة",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707268000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_events_08",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_royal_events",
+      "sender_name": "قاعة رويال للمناسبات",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/event_hall_1/400/300",
+      "metadata": {},
+      "created_at": 1707268100,
+      "is_from_business": true
+    },
+    {
+      "id": "m_events_09",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_royal_events",
+      "sender_name": "قاعة رويال للمناسبات",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/event_hall_2/400/300",
+      "metadata": {},
+      "created_at": 1707268200,
+      "is_from_business": true
+    },
+    {
+      "id": "m_events_10",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_royal_events",
+      "sender_name": "قاعة رويال للمناسبات",
+      "type": "text",
+      "content": "وهاي المتوسطة اللي سألتي عنها",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707269000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_events_11",
+      "conversation_id": "conv_sara_royal_events",
+      "sender_id": "usr_royal_events",
+      "sender_name": "قاعة رويال للمناسبات",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/event_hall_3/400/300",
+      "metadata": {},
+      "created_at": 1707269100,
+      "is_from_business": true
+    }
+  ],
+  "meta": {
+    "total": 11,
+    "has_more": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "pst_e01",
+      "page": {"id": "dukkaneh-store", "name": "دُكّانة", "slug": "dukkaneh-store", "avatar_url": "https://images.unsplash.com/photo-1636100232064-0dcec9d3f291?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "offer",
+      "content": "خصم ٢٨٪ على السماعات اللاسلكية — ١٨ د.أ بدل ٢٥!",
+      "media": [{"url": "https://images.unsplash.com/photo-1636100232064-0dcec9d3f291?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707490000,
+      "is_following": false,
+      "metadata": {"discount_percent": 28, "expires_at": 1707700000}
+    },
+    {
+      "id": "pst_e02",
+      "page": {"id": "royal-events", "name": "رويال للمناسبات", "slug": "royal-events", "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "product",
+      "content": "تراس الحديقة — ابتداءً من ٣٠٠ د.أ",
+      "media": [{"url": "https://images.unsplash.com/photo-1759514139303-1f0c5fee6eae?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707400000,
+      "is_following": false,
+      "metadata": {"item_id": "2", "item_name": "الحديقة الخارجية", "price_cents": 30000}
+    }
+  ],
+  "meta": {"total": 2, "has_more": false}
+}

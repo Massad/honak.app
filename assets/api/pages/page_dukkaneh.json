@@ -1,0 +1,89 @@
+{
+  "success": true,
+  "data": {
+    "id": "dukkaneh-jabal",
+    "owner_id": "usr_005",
+    "business_type_id": "grocery",
+    "business_type_name": "دكانة / بقالة",
+    "category_name": "تسوق",
+    "explore_category": "cat_grocery",
+    "name": "دكانة الجبل",
+    "name_en": "Jabal Dukkaneh",
+    "slug": "dukkaneh-jabal",
+    "handle": "dukkaneh-jabal",
+    "store_type": "physical",
+    "archetype": "catalog_order",
+    "description": "بقالة حي شاملة — مواد غذائية، مشروبات، خضار وفواكه طازجة يومياً. توصيل سريع للجبل.",
+    "avatar_url": "https://picsum.photos/seed/dukkanehjabal/200",
+    "cover_url": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000050",
+    "location": {
+      "lat": 31.953,
+      "lng": 35.920,
+      "label": "جبل الحسين، بجانب مسجد الحسين",
+      "area": "جبل الحسين",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "monday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "tuesday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "wednesday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "thursday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "friday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "saturday": {"enabled": true, "open": "07:00", "close": "23:00"}
+    },
+    "operating_hours": "يومياً: ٧:٠٠ ص — ١١:٠٠ م",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 350,
+    "items_count": 20,
+    "posts_count": 5,
+    "is_following": false,
+    "hours": {
+      "open_time": "07:00",
+      "close_time": "23:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 78,
+    "trust_metrics": [
+      {"label": "طلبات أسبوعياً", "value": "١٢٠", "icon": "shopping_bag"},
+      {"label": "زبائن يعودون", "value": "٩٠٪", "icon": "repeat"},
+      {"label": "معدل التوصيل", "value": "١٥ دقيقة", "icon": "schedule"}
+    ],
+    "delivery_available": true,
+    "pickup_available": true,
+    "delivery_fee_cents": 50,
+    "estimated_delivery_minutes": 15,
+    "payment_methods": ["نقداً", "كليك: DukkanehJabal"],
+    "cliq_alias": "DukkanehJabal",
+    "coverage_zones": ["جبل الحسين", "جبل عمان", "وسط البلد"],
+    "member_since": "2024",
+    "team_members_count": 1,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1704000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "catalog_strategy": "highlights",
+    "carry_categories": ["خضار وفواكه", "ألبان وأجبان", "مواد تنظيف", "مشروبات", "حلويات ورقائق"],
+    "stories": [
+      {"id": "s_duk1", "image_url": "https://picsum.photos/seed/dukkanehstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_duk2", "image_url": "https://picsum.photos/seed/dukkanehstory2/400/700", "duration": 5, "created_at": 1707870000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "جبل الحسين", "neighbourhoods": ["جبل الحسين", "وسط البلد"]},
+          {"name": "جبل عمان", "neighbourhoods": ["جبل عمان", "الدوار الأول"]}
+        ]
+      }
+    ]
+  }
+}

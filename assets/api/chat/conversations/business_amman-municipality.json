@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "conv_sara_municipality",
+      "page_id": "pg_amman_municipality",
+      "page_name": "أمانة عمان الكبرى",
+      "page_avatar": "https://picsum.photos/seed/amman-municipality/200",
+      "page_handle": "amman-municipality",
+      "customer_id": "usr_sara",
+      "customer_name": "سارة أحمد",
+      "customer_avatar": "https://picsum.photos/seed/sara/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "تم تحويل شكواكِ بخصوص الحفرة في شارع المدينة المنوّرة للقسم المختص. رقم المتابعة: AM-2025-4821",
+      "last_message_at": 1739460000,
+      "last_message_from": "business",
+      "unread_count": 0,
+      "status": "active",
+      "type": "message",
+      "has_active_story": true,
+      "needs_info": false
+    },
+    {
+      "id": "conv_ahmad_municipality",
+      "page_id": "pg_amman_municipality",
+      "page_name": "أمانة عمان الكبرى",
+      "page_avatar": "https://picsum.photos/seed/amman-municipality/200",
+      "page_handle": "amman-municipality",
+      "customer_id": "usr_ahmad",
+      "customer_name": "أحمد محمد",
+      "customer_avatar": "https://picsum.photos/seed/ahmad/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "كيف أقدم طلب ترخيص مهن لمحل تجاري جديد في منطقة الشميساني؟",
+      "last_message_at": 1739530000,
+      "last_message_from": "customer",
+      "unread_count": 1,
+      "status": "active",
+      "type": "message",
+      "has_active_story": true,
+      "needs_info": true
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "has_more": false
+  }
+}

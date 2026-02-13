@@ -1,0 +1,137 @@
+{
+  "success": true,
+  "data": {
+    "id": "beit-sitti",
+    "owner_id": "usr_002",
+    "business_type_id": "restaurant",
+    "business_type_name": "مطعم",
+    "category_name": "طعام",
+    "explore_category": "cat_food",
+    "name": "بيت ستي",
+    "name_en": "Beit Sitti",
+    "slug": "beit-sitti",
+    "handle": "beit-sitti",
+    "store_type": "physical",
+    "archetype": "menu_order",
+    "description": "أشهى المأكولات الأردنية والعربية الأصيلة. منسف، مشاوي، ومقبلات طازجة يومياً.",
+    "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1705768300072-bb6a0cbb0e73?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000011",
+    "location": {
+      "lat": 31.9539,
+      "lng": 35.9106,
+      "label": "عبدون، شارع مكة",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "working_hours": {
+      "sunday": {"open": "09:00", "close": "02:00"},
+      "monday": {"open": "09:00", "close": "02:00"},
+      "tuesday": {"open": "09:00", "close": "02:00"},
+      "wednesday": {"open": "09:00", "close": "02:00"},
+      "thursday": {"open": "09:00", "close": "02:00"},
+      "friday": {"open": "12:00", "close": "02:00"},
+      "saturday": {"open": "09:00", "close": "02:00"}
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "02:00"},
+      "friday": {"enabled": true, "open": "12:00", "close": "02:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "02:00"}
+    },
+    "operating_hours": "يومياً: ٠٩:٠٠ ص — ٢:٠٠ م",
+    "items_label_ar": "القائمة",
+    "items_label_en": "Menu",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 2400,
+    "items_count": 5,
+    "posts_count": 45,
+    "is_following": false,
+    "hours": {
+      "open_time": "09:00",
+      "close_time": "02:00",
+      "open_days": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    },
+    "trust_score": 92,
+    "trust_metrics": [
+      {"label": "طلبات أسبوعياً", "value": "٥٣٠", "icon": "shopping_bag"},
+      {"label": "الأكثر طلباً", "value": "منسف أردني", "icon": "star"},
+      {"label": "معدل التحضير", "value": "١٨ دقيقة", "icon": "schedule"}
+    ],
+    "delivery_available": true,
+    "pickup_available": true,
+    "minimum_order_cents": 500,
+    "delivery_fee_cents": 100,
+    "estimated_delivery_minutes": 25,
+    "payment_methods": ["نقداً", "كليك: BeitSitti", "فيزا/ماستركارد"],
+    "cliq_alias": "BeitSitti",
+    "member_since": "2018",
+    "team_members_count": 2,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1695000000,
+    "engagement_level": "showcase",
+    "data_synced": true,
+    "catalog_strategy": "full_catalog",
+    "carry_categories": [],
+    "stories": [
+      {"id": "s_beit1", "image_url": "https://picsum.photos/seed/beitsittistory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_beit2", "image_url": "https://picsum.photos/seed/beitsittistory2/400/700", "duration": 5, "created_at": 1707850000},
+      {"id": "s_beit3", "image_url": "https://picsum.photos/seed/beitsittistory3/400/700", "duration": 5, "created_at": 1707900000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-21", "reason": "عيد الأم"},
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "external_links": [
+      {"platform": "talabat", "label": "اطلب عبر طلبات", "url": "https://www.talabat.com/jordan/restaurant/beit-sitti"},
+      {"platform": "instagram", "label": "@beitsitti.jo", "url": "https://instagram.com/beitsitti.jo"}
+    ],
+    "specials": ["عرض غداء العائلة — خصم ٢٠٪ أيام الجمعة", "منسف مجاني مع كل ٥ طلبات"],
+    "modifiers_note": "يمكن إضافة أرز إضافي أو لحم حسب الرغبة",
+    "active_price_change": {
+      "direction": "up",
+      "method": "percentage",
+      "value": 10,
+      "scope": "delivery",
+      "reason": "رسوم توصيل إضافية خلال ساعات الذروة",
+      "status": "active"
+    },
+    "branches": [
+      {
+        "id": "br_001",
+        "name": "فرع عبدون",
+        "address": "شارع مكة، عبدون",
+        "phone": "+962790000011",
+        "hours": "٠٩:٠٠ ص — ٢:٠٠ ص",
+        "city": "عمّان",
+        "neighborhood": "عبدون",
+        "coverage": ["عبدون", "الصويفية", "أم أذينة"]
+      },
+      {
+        "id": "br_002",
+        "name": "فرع الشميساني",
+        "address": "شارع الملكة رانيا، الشميساني",
+        "phone": "+962790000012",
+        "hours": "١٠:٠٠ ص — ١٢:٠٠ ص",
+        "city": "عمّان",
+        "neighborhood": "الشميساني",
+        "coverage": ["الشميساني", "جبل الحسين", "العبدلي"]
+      }
+    ],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "عبدون", "neighbourhoods": ["عبدون الشمالي", "عبدون الجنوبي", "أم أذينة"]},
+          {"name": "الصويفية", "neighbourhoods": ["الصويفية", "الرابية"]},
+          {"name": "الشميساني", "neighbourhoods": ["الشميساني", "العبدلي"]}
+        ]
+      }
+    ]
+  }
+}

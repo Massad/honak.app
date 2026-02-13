@@ -1,0 +1,72 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "conv_manal_maktabeh",
+      "page_id": "pg_maktabet_alnoor",
+      "page_name": "مكتبة النور",
+      "page_avatar": "https://picsum.photos/seed/maktabet-alnoor/200",
+      "page_handle": "maktabet-alnoor",
+      "customer_id": "usr_manal",
+      "customer_name": "منال صالح",
+      "customer_avatar": "https://picsum.photos/seed/manal/200",
+      "request_id": "req_8010",
+      "request_status": "confirmed",
+      "request_expires_at": null,
+      "last_message": "الكتب جاهزة — رواية \"في قلبي أنثى عبرية\" + كتاب \"العادات الذرية\". المجموع ١٨ دينار. تقدري تستلميهم أي وقت",
+      "last_message_at": 1739470000,
+      "last_message_from": "business",
+      "unread_count": 0,
+      "status": "active",
+      "type": "request",
+      "has_active_story": false,
+      "needs_info": false
+    },
+    {
+      "id": "conv_heba_maktabeh",
+      "page_id": "pg_maktabet_alnoor",
+      "page_name": "مكتبة النور",
+      "page_avatar": "https://picsum.photos/seed/maktabet-alnoor/200",
+      "page_handle": "maktabet-alnoor",
+      "customer_id": "usr_heba",
+      "customer_name": "هبة الرحمن",
+      "customer_avatar": "https://picsum.photos/seed/heba/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "عندكم دفاتر رسم A3 للأطفال؟ بنتي بالصف الرابع ومطلوب منها",
+      "last_message_at": 1739520000,
+      "last_message_from": "customer",
+      "unread_count": 1,
+      "status": "active",
+      "type": "message",
+      "has_active_story": false,
+      "needs_info": false
+    },
+    {
+      "id": "conv_tariq_maktabeh",
+      "page_id": "pg_maktabet_alnoor",
+      "page_name": "مكتبة النور",
+      "page_avatar": "https://picsum.photos/seed/maktabet-alnoor/200",
+      "page_handle": "maktabet-alnoor",
+      "customer_id": "usr_tariq",
+      "customer_name": "طارق حسين",
+      "customer_avatar": "https://picsum.photos/seed/tariq/200",
+      "request_id": "req_8015",
+      "request_status": "pending",
+      "request_expires_at": null,
+      "last_message": "بدي ٣ نسخ من كتاب \"الرحيق المختوم\" طبعة دار السلام — في عندكم؟",
+      "last_message_at": 1739440000,
+      "last_message_from": "customer",
+      "unread_count": 0,
+      "status": "active",
+      "type": "request",
+      "has_active_story": false,
+      "needs_info": true
+    }
+  ],
+  "meta": {
+    "total": 3,
+    "has_more": false
+  }
+}

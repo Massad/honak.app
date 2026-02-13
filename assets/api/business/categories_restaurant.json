@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "data": [
+    {"id": "cat_r01", "name": "المقبلات", "item_count": 3, "sort_order": 0},
+    {"id": "cat_r02", "name": "الأطباق الرئيسية", "item_count": 4, "sort_order": 1},
+    {"id": "cat_r03", "name": "المشروبات", "item_count": 2, "sort_order": 2},
+    {"id": "cat_r04", "name": "الحلويات", "item_count": 2, "sort_order": 3}
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ntf_001",
+    "type": "order_status",
+    "title": "تحديث الطلب",
+    "body": "طلبك من شاورما الريم أصبح جاهزاً",
+    "data": {"order_id": "ord_001"},
+    "is_read": false,
+    "created_at": 1700260000
+  },
+  {
+    "id": "ntf_002",
+    "type": "new_post",
+    "title": "منشور جديد",
+    "body": "قهوة وحكاية نشرت تحديث جديد",
+    "data": {"post_id": "pst_003", "page_id": "pg_cf02"},
+    "is_read": true,
+    "created_at": 1700255000
+  },
+  {
+    "id": "ntf_003",
+    "type": "new_follower",
+    "title": "متابع جديد",
+    "body": "سارة خالد بدأت بمتابعة صفحتك شاورما الريم",
+    "data": {"page_id": "pg_sh01", "follower_id": "usr_d4e5f6"},
+    "is_read": true,
+    "created_at": 1700250000
+  },
+  {
+    "id": "ntf_004",
+    "type": "order_status",
+    "title": "طلب جديد",
+    "body": "وصلك طلب جديد في تك هاوس",
+    "data": {"order_id": "ord_006"},
+    "is_read": false,
+    "created_at": 1700440000
+  },
+  {
+    "id": "ntf_005",
+    "type": "promotion",
+    "title": "عرض خاص",
+    "body": "مخابز السنابل الذهبية: كنافة نابلسية كل جمعة!",
+    "data": {"post_id": "pst_008", "page_id": "pg_bk04"},
+    "is_read": false,
+    "created_at": 1700270000
+  },
+  {
+    "id": "ntf_006",
+    "type": "chat_message",
+    "title": "رسالة جديدة",
+    "body": "تك هاوس: السماعات متوفرة باللون الأسود والأبيض",
+    "data": {"chat_id": "cht_003", "page_id": "pg_el06"},
+    "is_read": false,
+    "created_at": 1700230000
+  },
+  {
+    "id": "ntf_007",
+    "type": "order_status",
+    "title": "تحديث الطلب",
+    "body": "طلبك من ميني ماركت أبو خالد تم التوصيل",
+    "data": {"order_id": "ord_007"},
+    "is_read": true,
+    "created_at": 1700206000
+  },
+  {
+    "id": "ntf_008",
+    "type": "new_follower",
+    "title": "متابعون جدد",
+    "body": "٥ أشخاص بدأوا بمتابعة صفحتك قهوة وحكاية اليوم",
+    "data": {"page_id": "pg_cf02"},
+    "is_read": true,
+    "created_at": 1700200000
+  }
+]

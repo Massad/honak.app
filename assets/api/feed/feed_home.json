@@ -1,0 +1,53 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "pst_h01",
+      "page": {"id": "beit-sitti", "name": "بيت ستي", "slug": "beit-sitti", "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "offer",
+      "content": "خصم ٢٠٪ على صحن المنسف",
+      "media": [{"url": "https://images.unsplash.com/photo-1747518596371-ab78bd612d09?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707490000,
+      "is_following": true,
+      "metadata": {"discount_percent": 20, "expires_at": 1707790000}
+    },
+    {
+      "id": "pst_h02",
+      "page": {"id": "nour-fashion", "name": "نور فاشن", "slug": "nour-fashion", "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "product",
+      "content": "فستان صيفي ميدي — ٢٨ د.أ",
+      "media": [{"url": "https://images.unsplash.com/photo-1769162240814-daaede8751fc?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707480000,
+      "is_following": true,
+      "metadata": {"item_id": "4", "item_name": "فستان صيفي ميدي", "price_cents": 2800}
+    },
+    {
+      "id": "pst_h03",
+      "page": {"id": "abu-ahmad-water", "name": "مياه أبو أحمد", "slug": "abu-ahmad-water", "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "product",
+      "content": "قارورة مياه ١٩ لتر — ١.٥٠ د.أ",
+      "media": [{"url": "https://images.unsplash.com/photo-1760594308533-04642e48a141?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707470000,
+      "is_following": true,
+      "metadata": {"item_id": "1", "item_name": "قارورة مياه 19 لتر", "price_cents": 150}
+    },
+    {
+      "id": "pst_h04",
+      "page": {"id": "salon-rania", "name": "صالون رانية", "slug": "salon-rania", "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "status",
+      "content": "مغلقين بكرا — يوم تدريب للفريق",
+      "created_at": 1707400000,
+      "is_following": true
+    },
+    {
+      "id": "pst_h05",
+      "page": {"id": "sara-photography", "name": "تصوير سارة", "slug": "sara-photography", "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "photo",
+      "content": "كواليس تصوير حفل زفاف",
+      "media": [{"url": "https://images.unsplash.com/photo-1640020107930-b5a8f9f91ccf?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707350000,
+      "is_following": true
+    }
+  ],
+  "meta": {"total": 5, "has_more": false}
+}

@@ -1,0 +1,117 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_clinic_01",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "السلام عليكم دكتور، بدي أحجز موعد فحص عام",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707270000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_clinic_02",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": "usr_dr_khaled",
+      "sender_name": "عيادة د. خالد",
+      "type": "text",
+      "content": "وعليكم السلام. أهلاً سارة. عندنا مواعيد متاحة يوم الأحد والثلاثاء",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707270300,
+      "is_from_business": true
+    },
+    {
+      "id": "m_clinic_03",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "يوم الأحد أفضل. في موعد الصبح؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707270600,
+      "is_from_business": false
+    },
+    {
+      "id": "m_clinic_04",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": "usr_dr_khaled",
+      "sender_name": "عيادة د. خالد",
+      "type": "text",
+      "content": "عندنا ١٠ الصبح أو ١١. أيهم أنسب؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707271000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_clinic_05",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "الساعة ١١ لو سمحت",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707275000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_clinic_06",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم إنشاء حجز #1204",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707275500,
+      "is_from_business": false
+    },
+    {
+      "id": "m_clinic_07",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم تأكيد الحجز",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707276000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_clinic_08",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": "usr_dr_khaled",
+      "sender_name": "عيادة د. خالد",
+      "type": "text",
+      "content": "موعدك يوم الأحد الساعة ١١ صباحاً. لا تنسي تجيبي أي فحوصات سابقة إذا في",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707290000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_clinic_09",
+      "conversation_id": "conv_sara_clinic",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "إن شاء الله. شكراً دكتور",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707290500,
+      "is_from_business": false
+    }
+  ],
+  "meta": {
+    "total": 9,
+    "has_more": false
+  }
+}

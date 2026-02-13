@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "error": {
+    "code": "rate_limited",
+    "message": "عدد المحاولات كثير. حاول بعد 60 ثانية",
+    "details": {
+      "retry_after": 60
+    }
+  }
+}

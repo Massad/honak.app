@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": "account_suspended",
+    "message": "تم تعليق حسابك. تواصل مع الدعم."
+  }
+}

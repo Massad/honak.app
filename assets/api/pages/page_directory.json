@@ -1,0 +1,191 @@
+{
+  "success": true,
+  "data": {
+    "id": "mecca-mall-directory",
+    "owner_id": "usr_003",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "تسوق",
+    "explore_category": "cat_retail",
+    "name": "مكة مول",
+    "name_en": "Mecca Mall",
+    "slug": "mecca-mall",
+    "handle": "mecca-mall",
+    "store_type": "physical",
+    "archetype": "follow_only",
+    "description": "أكبر مجمع تجاري في عمّان — أزياء، مطاعم، سينما، ترفيه. أكثر من ٤٥ محل تجاري.",
+    "avatar_url": "https://picsum.photos/seed/meccamall/200",
+    "cover_url": "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=800&q=80",
+    "phone": "+96265821234",
+    "location": {
+      "lat": 31.960,
+      "lng": 35.860,
+      "label": "شارع مكة، عبدون",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "friday": {"enabled": true, "open": "14:00", "close": "23:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ١٠:٠٠ ص — ١٠:٠٠ م\nالخميس والجمعة: حتى ١١:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 25000,
+    "posts_count": 60,
+    "is_following": false,
+    "trust_score": 94,
+    "trust_metrics": [
+      {"label": "محلات تجارية", "value": "٤٥+", "icon": "storefront"},
+      {"label": "على حنك", "value": "١٢", "icon": "verified"},
+      {"label": "مفتوحة الآن", "value": "٨", "icon": "access_time"}
+    ],
+    "member_since": "2024",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_mall1", "image_url": "https://picsum.photos/seed/meccamallstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_mall2", "image_url": "https://picsum.photos/seed/meccamallstory2/400/700", "duration": 5, "created_at": 1707860000},
+      {"id": "s_mall3", "image_url": "https://picsum.photos/seed/meccamallstory3/400/700", "duration": 5, "created_at": 1707920000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر — ساعات مختلفة"}
+    ],
+    "mall_announcements": [
+      {
+        "id": "ann1",
+        "type": "promotion",
+        "title": "تخفيضات الشتاء",
+        "body": "خصومات تصل إلى ٥٠٪ في أكثر من ٢٠ محل",
+        "badge": "حتى نهاية الشهر",
+        "valid_until": "2026-03-01"
+      },
+      {
+        "id": "ann2",
+        "type": "event",
+        "title": "ليلة التسوق المتأخر",
+        "body": "المول مفتوح حتى منتصف الليل مع عروض حصرية",
+        "badge": "الخميس القادم",
+        "valid_until": "2026-02-20"
+      }
+    ],
+    "featured_tenant_ids": ["tenant_zara", "tenant_hm", "tenant_adidas", "tenant_starbucks", "tenant_tche", "tenant_virgil"],
+    "directory_stats": {
+      "total_tenants": 45,
+      "on_honak": 12,
+      "open_now": 8,
+      "floors": 3
+    },
+    "tenants": [
+      {
+        "id": "tenant_zara",
+        "name": "زارا",
+        "name_en": "Zara",
+        "category": "أزياء",
+        "floor": "الطابق الأول",
+        "unit": "A12",
+        "is_on_honak": true,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/zara/100"
+      },
+      {
+        "id": "tenant_hm",
+        "name": "إتش آند إم",
+        "name_en": "H&M",
+        "category": "أزياء",
+        "floor": "الطابق الأول",
+        "unit": "A15",
+        "is_on_honak": false,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/hm/100"
+      },
+      {
+        "id": "tenant_adidas",
+        "name": "أديداس",
+        "name_en": "Adidas",
+        "category": "رياضة",
+        "floor": "الطابق الثاني",
+        "unit": "B08",
+        "is_on_honak": true,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/adidas/100"
+      },
+      {
+        "id": "tenant_starbucks",
+        "name": "ستاربكس",
+        "name_en": "Starbucks",
+        "category": "مقاهي",
+        "floor": "الطابق الأرضي",
+        "unit": "G02",
+        "is_on_honak": true,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/starbucks/100"
+      },
+      {
+        "id": "tenant_tche",
+        "name": "تشي تشي لندن",
+        "name_en": "Tche Tche",
+        "category": "مطاعم",
+        "floor": "الطابق الثالث",
+        "unit": "C03",
+        "is_on_honak": false,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/tchetche/100"
+      },
+      {
+        "id": "tenant_virgil",
+        "name": "فيرجل",
+        "name_en": "Virgil",
+        "category": "إلكترونيات",
+        "floor": "الطابق الثاني",
+        "unit": "B22",
+        "is_on_honak": true,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/virgil/100"
+      },
+      {
+        "id": "tenant_lush",
+        "name": "لاش",
+        "name_en": "Lush",
+        "category": "عناية",
+        "floor": "الطابق الأول",
+        "unit": "A20",
+        "is_on_honak": false,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/lush/100"
+      },
+      {
+        "id": "tenant_cineplex",
+        "name": "سينما برايم",
+        "name_en": "Prime Cinemas",
+        "category": "ترفيه",
+        "floor": "الطابق الثالث",
+        "unit": "C10",
+        "is_on_honak": true,
+        "page_id": null,
+        "logo_url": "https://picsum.photos/seed/primecinema/100"
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الطابق الأرضي", "tenant_count": 10},
+      {"id": "first", "name": "الطابق الأول", "tenant_count": 15},
+      {"id": "second", "name": "الطابق الثاني", "tenant_count": 12},
+      {"id": "third", "name": "الطابق الثالث", "tenant_count": 8}
+    ],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف مجانية"},
+      {"icon": "wifi", "label": "واي فاي مجاني"},
+      {"icon": "wc", "label": "دورات مياه"},
+      {"icon": "child_care", "label": "منطقة أطفال"},
+      {"icon": "accessible", "label": "مصعد ووصول لذوي الاحتياجات"}
+    ]
+  }
+}

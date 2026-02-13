@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 34,
+      "new_followers": 2,
+      "page_views": 28,
+      "today_revenue": 17000
+    },
+    "today_revenue": {
+      "total": 17000,
+      "completed_count": 28,
+      "items": [
+        {"service": "عبوة 18.9 لتر × 5", "amount": 5000, "time": "07:30"},
+        {"service": "عبوة 18.9 لتر × 3", "amount": 3000, "time": "08:00"},
+        {"service": "عبوة 18.9 لتر × 4", "amount": 4000, "time": "09:15"},
+        {"service": "عبوة 10 لتر × 10", "amount": 5000, "time": "10:00"}
+      ]
+    },
+    "delivery_route": {
+      "completed": 28,
+      "total": 34,
+      "areas": [
+        {"name": "تلاع العلي", "completed": 8, "total": 8},
+        {"name": "خلدا", "completed": 7, "total": 7},
+        {"name": "الصويفية", "completed": 6, "total": 8},
+        {"name": "الشميساني", "completed": 5, "total": 7},
+        {"name": "عبدون", "completed": 2, "total": 4}
+      ]
+    },
+    "low_stock": [
+      {"name": "عبوة 18.9 لتر", "remaining": 12, "threshold": 50},
+      {"name": "عبوة 10 لتر", "remaining": 25, "threshold": 40},
+      {"name": "عبوة 5 لتر", "remaining": 45, "threshold": 60}
+    ],
+    "recurring_tomorrow": {
+      "total_customers": 18,
+      "total_units": 42,
+      "items": [
+        {"area": "تلاع العلي", "customer": "عائلة أبو سمير", "qty": 3, "schedule": "كل أسبوع"},
+        {"area": "تلاع العلي", "customer": "مكتب المحامي خالد", "qty": 2, "schedule": "كل أسبوع"},
+        {"area": "خلدا", "customer": "عائلة الحسيني", "qty": 4, "schedule": "كل أسبوع"},
+        {"area": "خلدا", "customer": "صيدلية النور", "qty": 2, "schedule": "كل أسبوعين"},
+        {"area": "الصويفية", "customer": "مطعم بيت ستي", "qty": 6, "schedule": "كل 3 أيام"}
+      ]
+    },
+    "customer_insights": [
+      {"type": "warning", "customer": "عائلة ناصر", "message": "لم يطلبوا منذ 3 أسابيع — كانوا يطلبون أسبوعياً"},
+      {"type": "info", "customer": "مكتب الهندسة", "message": "زادوا طلبهم الأسبوعي من 2 إلى 4 عبوات"},
+      {"type": "positive", "customer": "عائلة أبو سمير", "message": "عميل منتظم — 52 طلب خلال السنة"}
+    ],
+    "best_sellers": [
+      {"name": "عبوة 18.9 لتر", "count": 156, "trend": "up"},
+      {"name": "عبوة 10 لتر", "count": 89, "trend": "same"},
+      {"name": "عبوة 5 لتر", "count": 45, "trend": "down"},
+      {"name": "عبوة 1.5 لتر (كرتون)", "count": 23, "trend": "up"}
+    ],
+    "pending_requests": [
+      {"id": "req_501", "customer": "هاني سعيد", "service": "4 عبوات 18.9 لتر — الصويفية", "date": "2026-02-12", "time": "15:00"},
+      {"id": "req_502", "customer": "مكتب العمران", "service": "6 عبوات 18.9 لتر — الشميساني", "date": "2026-02-12", "time": "16:00"}
+    ]
+  }
+}

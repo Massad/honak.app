@@ -1,0 +1,608 @@
+{
+  "@@locale": "ar",
+  "appName": "حنك",
+
+  "ok": "حسناً",
+  "cancel": "إلغاء",
+  "save": "حفظ",
+  "delete": "حذف",
+  "edit": "تعديل",
+  "search": "بحث",
+  "discard": "تجاهل",
+  "unsavedChangesTitle": "تغييرات غير محفوظة",
+  "unsavedChangesMessage": "لديك تغييرات لم يتم حفظها. هل تريد المغادرة؟",
+  "loading": "جاري التحميل...",
+  "retry": "إعادة المحاولة",
+  "close": "إغلاق",
+  "back": "رجوع",
+  "next": "التالي",
+  "done": "تم",
+  "seeAll": "عرض الكل",
+  "noResults": "لا توجد نتائج",
+  "error": "خطأ",
+  "success": "نجاح",
+  "continueButton": "متابعة",
+
+  "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
+  "loginWelcome": "سجّل دخولك للمتابعة",
+  "phoneNumber": "رقم الهاتف",
+  "enterPhone": "أدخل رقم هاتفك",
+  "phoneStartsWith7": "يجب أن يبدأ الرقم بـ 7",
+  "phoneMustBe9Digits": "يجب أن يكون الرقم 9 أرقام",
+  "enterOtp": "أدخل رمز التحقق",
+  "otpSentTo": "تم إرسال رمز التحقق إلى {phone}",
+  "@otpSentTo": {
+    "description": "Message shown after OTP is sent",
+    "placeholders": {
+      "phone": {
+        "type": "String",
+        "example": "+962 791 234 567"
+      }
+    }
+  },
+  "otpResent": "تم إعادة إرسال الرمز",
+  "resendOtp": "إعادة إرسال الرمز",
+  "resendOtpIn": "إعادة الإرسال خلال {seconds} ثانية",
+  "@resendOtpIn": {
+    "description": "Countdown timer for OTP resend",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "otpAttemptsLeft": "{count, plural, =1{محاولة واحدة متبقية} other{{count} محاولات متبقية}}",
+  "@otpAttemptsLeft": {
+    "description": "Remaining OTP attempts",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "browseAsGuest": "تصفح كزائر",
+  "loginRequired": "سجّل دخول للمتابعة",
+  "loginRequiredDescription": "تحتاج تسجيل الدخول للقيام بهذا الإجراء",
+  "continueBrowsing": "متابعة التصفح",
+
+  "profileSetupTitle": "أهلاً بك!",
+  "profileSetupSubtitle": "أخبرنا عن اسمك حتى يعرفك الآخرون",
+  "nameRequired": "الاسم مطلوب",
+  "nameTooShort": "الاسم قصير جداً",
+  "nameHint": "مثال: سارة أحمد",
+  "getStarted": "ابدأ الآن",
+
+  "home": "الرئيسية",
+  "explore": "استكشاف",
+  "quickActions": "طلباتي",
+  "chat": "المحادثات",
+  "me": "حسابي",
+
+  "dashboard": "لوحة التحكم",
+  "orders": "الطلبات",
+  "createPost": "نشر",
+  "catalog": "المنتجات",
+  "settings": "الإعدادات",
+
+  "feed": "آخر الأخبار",
+  "newPost": "منشور جديد",
+  "share": "مشاركة",
+  "follow": "متابعة",
+  "following": "متابَع",
+  "unfollow": "إلغاء المتابعة",
+  "followers": "المتابعون",
+  "followersCount": "{count} متابع",
+  "@followersCount": {
+    "description": "Number of followers",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "150"
+      }
+    }
+  },
+
+  "businessPage": "صفحة الأعمال",
+  "about": "حول",
+  "products": "المنتجات",
+  "posts": "المنشورات",
+  "trustMetrics": "مؤشرات الثقة",
+  "location": "الموقع",
+  "openNow": "مفتوح الآن",
+  "closed": "مغلق",
+  "verified": "موثق",
+
+  "orderNow": "اطلب الآن",
+  "addToCart": "أضف للسلة",
+  "cart": "السلة",
+  "checkout": "إتمام الطلب",
+  "orderPlaced": "تم تقديم الطلب",
+  "orderStatus": "حالة الطلب",
+  "orderTotal": "المجموع",
+  "orderHistory": "سجل الطلبات",
+  "pending": "قيد الانتظار",
+  "confirmed": "مؤكد",
+  "preparing": "قيد التحضير",
+  "ready": "جاهز",
+  "delivering": "قيد التوصيل",
+  "delivered": "تم التوصيل",
+  "cancelled": "ملغي",
+  "trackOrder": "تتبع الطلب",
+  "emptyCart": "السلة فارغة",
+
+  "jod": "د.أ",
+  "free": "مجاناً",
+  "price": "السعر",
+  "total": "المجموع",
+  "subtotal": "المجموع الفرعي",
+  "deliveryFee": "رسوم التوصيل",
+
+  "profile": "الملف الشخصي",
+  "editProfile": "تعديل الملف الشخصي",
+  "name": "الاسم",
+  "phone": "الهاتف",
+  "language": "اللغة",
+  "arabic": "العربية",
+  "english": "English",
+  "darkMode": "الوضع الداكن",
+  "notifications": "الإشعارات",
+
+  "messages": "الرسائل",
+  "typeMessage": "اكتب رسالة...",
+  "online": "متصل",
+  "offline": "غير متصل",
+
+  "networkError": "خطأ في الاتصال. تحقق من الإنترنت.",
+  "serverError": "خطأ في الخادم. حاول مرة أخرى.",
+  "sessionExpired": "انتهت الجلسة. سجل الدخول مرة أخرى.",
+  "notFound": "غير موجود",
+  "unauthorized": "غير مصرح",
+  "validationError": "خطأ في البيانات المدخلة",
+
+  "noOrders": "لا توجد طلبات بعد",
+  "noMessages": "لا توجد رسائل بعد",
+  "noPosts": "لا توجد منشورات بعد",
+  "noProducts": "لا توجد منتجات بعد",
+  "noNotifications": "لا توجد إشعارات",
+
+  "switchToCustomer": "التبديل لوضع العميل",
+  "switchToBusiness": "التبديل لوضع الأعمال",
+  "customerMode": "وضع العميل",
+  "businessMode": "وضع الأعمال",
+
+  "shareApp": "مشاركة التطبيق",
+  "rateApp": "تقييم التطبيق",
+  "privacyPolicy": "سياسة الخصوصية",
+  "termsOfService": "شروط الاستخدام",
+  "contactUs": "تواصل معنا",
+  "version": "الإصدار {version}",
+  "@version": {
+    "description": "App version display string",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "1.0.0"
+      }
+    }
+  },
+
+  "loginAsCustomer": "زبون",
+  "loginAsBusiness": "صاحب عمل",
+  "loginCustomerDesc": "تصفح واطلب من المتاجر",
+  "loginBusinessDesc": "أدر متجرك واستقبل الطلبات",
+  "or": "أو",
+  "devQuickAccess": "وصول سريع للتطوير",
+
+  "itemCount": "{count, plural, =0{لا عناصر} =1{عنصر واحد} =2{عنصران} few{{count} عناصر} other{{count} عنصر}}",
+  "@itemCount": {
+    "description": "Pluralized item count with Arabic plural forms",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+
+  "feedEmpty": "لا توجد منشورات بعد",
+  "feedEmptySubtitle": "تابع صفحات لتشاهد آخر أخبارهم",
+  "trendingPages": "الرائج",
+  "categories": "التصنيفات",
+  "itemsTab": "المنتجات",
+  "postsTab": "المنشورات",
+  "outOfStock": "غير متوفر",
+  "required": "مطلوب",
+  "optional": "اختياري",
+  "totalPrice": "المجموع",
+  "logoutConfirm": "هل تريد تسجيل الخروج؟",
+
+  "info": "معلومات",
+  "delivery": "توصيل",
+  "pickup": "استلام",
+  "booking": "حجز",
+  "paymentMethods": "طرق الدفع",
+  "cash": "نقداً",
+  "cliq": "كليك",
+  "bankTransfer": "حوالة بنكية",
+  "minimumOrder": "الحد الأدنى للطلب",
+  "estimatedDelivery": "وقت التوصيل المتوقع",
+  "minutes": "{count} دقيقة",
+  "@minutes": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "workingHours": "ساعات العمل",
+  "available": "متاح",
+  "notAvailable": "غير متاح",
+
+  "viewProduct": "عرض المنتج",
+  "offer": "عرض",
+  "discount": "خصم {percent}٪",
+  "@discount": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+
+  "stories": "القصص",
+  "suggestedPages": "مقترح لك",
+  "nearYou": "بالقرب منك",
+  "distanceKm": "{distance} كم",
+  "@distanceKm": {
+    "placeholders": {
+      "distance": {"type": "String"}
+    }
+  },
+  "searchHint": "ابحث عن متاجر، منتجات...",
+  "all": "الكل",
+  "food": "طعام",
+  "shopping": "تسوق",
+  "services": "خدمات",
+  "health": "صحة",
+  "searchResults": "نتائج البحث",
+  "noSearchResults": "لا توجد نتائج",
+  "sharePost": "مشاركة المنشور",
+  "sharePage": "مشاركة الصفحة",
+  "comingSoon": "قريباً",
+
+  "postTypeProduct": "منتج جديد",
+  "postTypeOffer": "عرض خاص",
+  "postTypeUpdate": "تحديث",
+  "postTypeStatus": "حالة",
+  "postTypePhoto": "صور",
+  "shopNow": "تسوق الآن",
+  "visitPage": "زيارة الصفحة",
+  "promoted": "ممول",
+  "offerExpiresIn": "ينتهي بعد {time}",
+  "@offerExpiresIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "offerExpired": "انتهى العرض",
+  "offerEndsToday": "آخر يوم!",
+  "offerEndsTomorrow": "ينتهي غداً",
+  "readMore": "اقرأ المزيد",
+  "addProduct": "أضف",
+  "statusAlert": "تنبيه",
+  "statusAnnouncement": "إعلان",
+  "specialOffer": "عرض خاص",
+
+  "guestWelcomeTitle": "مرحباً بك في هناك",
+  "guestWelcomeSubtitle": "اكتشف أعمال ومتاجر محلية حولك — تصفح، تابع، واطلب",
+  "guestExploreNearby": "استكشف القريب منك",
+  "guestCreateAccount": "أنشئ حسابك",
+  "browseNow": "تصفّح الآن",
+
+  "storyViewer": "عارض القصص",
+  "storyReply": "رد على القصة...",
+  "storyReplySent": "تم إرسال الرد",
+  "storySwipeHint": "اسحب للتنقل بين القصص",
+  "storyPaused": "متوقفة مؤقتاً",
+  "storyTapToResume": "اضغط للمتابعة",
+  "storyOf": "{current} من {total}",
+  "@storyOf": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "storyCreate": "إنشاء قصة",
+  "storyCreateNew": "قصة جديدة",
+  "storyBackground": "الخلفية",
+  "storyText": "النص",
+  "storyPublish": "نشر",
+  "storyGradient": "تدرج",
+  "storySolidColor": "لون واحد",
+  "storyImage": "صورة",
+  "storyAddText": "إضافة نص",
+  "storyEditText": "تعديل النص",
+  "storyDeleteLayer": "حذف الطبقة",
+  "storyFont": "الخط",
+  "storyFontSize": "حجم الخط",
+  "storyTextColor": "لون النص",
+  "storyTextAlign": "محاذاة النص",
+  "storyPublishNow": "نشر الآن",
+  "storySchedule": "جدولة",
+  "storyAudience": "الجمهور",
+  "storyAudienceAll": "الجميع",
+  "storyAudienceFollowers": "المتابعون فقط",
+  "storyScheduleAt": "النشر في",
+  "storyPublished": "تم نشر القصة",
+  "storyStep": "الخطوة {step} من {total}",
+  "@storyStep": {
+    "placeholders": {
+      "step": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "storyManager": "إدارة القصص",
+  "storyMyStories": "قصصي",
+  "storyLive": "منشورة",
+  "storyScheduled": "مجدولة",
+  "storyExpired": "منتهية",
+  "storyStatusLive": "منشورة الآن",
+  "storyStatusScheduled": "مجدولة",
+  "storyStatusExpired": "منتهية",
+  "storyViews": "مشاهدة",
+  "storyReach": "وصول",
+  "storyShares": "مشاركة",
+  "storyMessages": "رسالة",
+  "storyProfileVisits": "زيارة للصفحة",
+  "storyStats": "إحصائيات",
+  "storyTotalViews": "إجمالي المشاهدات",
+  "storyTotalShares": "إجمالي المشاركات",
+  "storyAvgViews": "متوسط المشاهدات",
+  "storyBestTime": "أفضل وقت للنشر",
+  "storyBestDay": "أفضل يوم للنشر",
+  "storyThisMonth": "هذا الشهر",
+  "storyAllTime": "الكل",
+  "storyGrowth": "نمو {percent}٪ عن الشهر الماضي",
+  "@storyGrowth": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "storyNoStories": "لا توجد قصص بعد",
+  "storyNoStoriesHint": "أنشئ قصتك الأولى لتصل لعملائك",
+  "storyDelete": "حذف القصة",
+  "storyDeleteConfirm": "هل تريد حذف هذه القصة؟",
+  "storyExpiresIn": "تنتهي بعد {time}",
+  "@storyExpiresIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "storyScheduledFor": "مجدولة لـ {time}",
+  "@storyScheduledFor": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "storyFilterAll": "الكل",
+  "storyFilterLive": "منشورة",
+  "storyFilterScheduled": "مجدولة",
+  "storyFilterExpired": "منتهية",
+  "storyPreview": "معاينة",
+  "storyEdit": "تعديل",
+  "storyShare": "مشاركة",
+  "storyRepublish": "إعادة نشر",
+  "storyShareCopied": "تم نسخ رابط القصة",
+  "storySearchHint": "ابحث في القصص...",
+  "storySortNewest": "الأحدث",
+  "storySortOldest": "الأقدم",
+  "storySortMostViews": "الأكثر مشاهدة",
+  "storySortMostShares": "الأكثر مشاركة",
+  "storySortMostMessages": "الأكثر رسائل",
+  "storySortMostReach": "الأكثر وصولاً",
+  "storyScheduledAtLabel": "موعد النشر",
+  "storyRepublishTitle": "إعادة نشر القصة",
+  "storyRepublishNow": "نشر الآن",
+  "storyRepublishSchedule": "جدولة النشر",
+  "storyRepublished": "تم إعادة نشر القصة",
+  "storyRepublishScheduled": "تم جدولة إعادة النشر",
+  "storyEditAndRepublish": "تعديل وإعادة نشر",
+  "storyRepublishAsIs": "إعادة نشر كما هي",
+  "storyRepublishChoiceTitle": "إعادة نشر القصة",
+  "storyRepublishChoiceSubtitle": "هل تريد تعديل القصة قبل إعادة النشر؟",
+  "storyEditTitle": "تعديل القصة",
+  "storyUpdated": "تم تحديث القصة",
+  "storyAddContentFirst": "أضف نصاً أو صورة أولاً",
+  "storyPublishOptions": "خيارات النشر",
+  "storyFollowersDesc": "تظهر لمن يتابعك",
+  "storyAllDesc": "ترويج مدفوع",
+  "storyPublishTime": "وقت النشر",
+  "storyNow": "الآن",
+  "storyDate": "التاريخ",
+  "storyTime": "الوقت",
+  "storyEngagement": "التفاعل",
+  "storyEngagementRate": "نسبة التفاعل",
+  "storySortBy": "ترتيب حسب",
+  "storyRemove": "إزالة",
+  "storyConfirmAction": "تأكيد",
+  "storyLiveNote": "القصص الحالية لا يمكن تعديلها — يمكنك إزالتها أو الانتظار حتى تنتهي",
+  "storyPreviewSubtitle": "معاينة — كما يراها المتابعين",
+  "storyFollowerCount": "متابع",
+  "storyCountOf": "{filtered} من {total} قصة",
+  "@storyCountOf": {
+    "placeholders": {
+      "filtered": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "bizTabDashboard": "لوحة التحكم",
+  "bizTabManage": "إدارة",
+  "bizTabContent": "المحتوى",
+  "bizTabCustomers": "عملاء",
+  "contentStories": "القصص",
+  "contentPosts": "المنشورات",
+  "contentStoryStats": "إحصائيات القصص — هذا الشهر",
+  "contentPostStats": "إحصائيات المنشورات — هذا الشهر",
+  "contentViews": "مشاهدة",
+  "contentShares": "مشاركة",
+  "contentMessages": "رسالة",
+  "contentLiveStories": "{count} قصة حالية",
+  "@contentLiveStories": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "contentScheduled": "{count} مجدولة",
+  "@contentScheduled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "contentManageComingSoon": "إدارة المنتجات والخدمات — قريباً",
+  "contentCustomersComingSoon": "بيانات العملاء — قريباً",
+  "contentPostsComingSoon": "إدارة المنشورات — قريباً",
+
+  "filter": "تصفية",
+  "filterActive": "{count} نشط",
+  "@filterActive": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "filterCategory": "التصنيف",
+  "filterDistance": "المسافة",
+  "filterRating": "التقييم",
+  "filterSortBy": "ترتيب حسب",
+  "filterNearest": "الأقرب",
+  "filterPopular": "الأكثر شعبية",
+  "filterHighestRated": "الأعلى تقييماً",
+  "filterReset": "إعادة تعيين",
+  "filterApply": "تطبيق",
+  "recentSearches": "عمليات البحث الأخيرة",
+  "clearAll": "مسح الكل",
+  "searchNoResults": "لا توجد نتائج لـ \"{query}\"",
+  "@searchNoResults": {
+    "placeholders": {
+      "query": {"type": "String"}
+    }
+  },
+  "pages": "الصفحات",
+  "exploreSearchHint": "ابحث عن صفحات، منتجات، خدمات...",
+  "browseCategory": "تصفح {category}",
+  "@browseCategory": {
+    "placeholders": {
+      "category": {"type": "String"}
+    }
+  },
+  "subCategories": "تصنيفات فرعية",
+  "distanceAway": "{distance} كم",
+  "@distanceAway": {
+    "placeholders": {
+      "distance": {"type": "String"}
+    }
+  },
+  "filterAndSort": "فلتر وترتيب",
+  "closestFirst": "الأقرب أولاً",
+  "mostActiveSort": "الأكثر نشاطاً",
+  "weeklyOrdersCount": "{count} طلب/أسبوع",
+  "@weeklyOrdersCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "official": "رسمي",
+
+  "myOrders": "طلباتي",
+  "ordersTabActive": "نشطة",
+  "ordersTabUpcoming": "قادمة",
+  "ordersTabHistory": "السجل",
+  "ordersTabSubscriptions": "اشتراكاتي",
+  "ordersSearchHint": "ابحث في طلباتك...",
+  "ordersEmptyActive": "لا توجد طلبات نشطة",
+  "ordersEmptyUpcoming": "لا توجد مواعيد قادمة",
+  "ordersEmptyHistory": "لا توجد طلبات سابقة",
+  "ordersEmptySubscriptions": "لا توجد اشتراكات بعد",
+  "deliveryEta": "التوصيل خلال {minutes} د",
+  "@deliveryEta": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "paidBySubscription": "اشتراك",
+  "subscriptionCreditsLeft": "{count} متبقية",
+  "@subscriptionCreditsLeft": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "subsActive": "نشطة",
+  "subsInactive": "منتهية",
+  "noSubscriptions": "لا توجد اشتراكات",
+  "noSubscriptionsHint": "عند اشتراكك في باقات المتاجر ستظهر هنا",
+  "orderWithCredits": "اطلب برصيدك",
+  "renewSubscription": "تجديد",
+  "autoDeductHint": "خصم تلقائي عند الطلب",
+  "daysRemaining": "يتبقى {days} يوم",
+  "@daysRemaining": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "creditRemaining": "{remaining}/{total} {label}",
+  "@creditRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "total": {"type": "int"},
+      "label": {"type": "String"}
+    }
+  },
+  "unlimitedAccess": "غير محدود",
+  "expiresIn": "ينتهي خلال {days} أيام",
+  "@expiresIn": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "manageSubscription": "إدارة الاشتراك",
+  "pauseSubscription": "إيقاف مؤقت",
+  "cancelSubscription": "إلغاء الاشتراك",
+  "creditHistory": "سجل الاستخدام",
+  "pauseDuration": "مدة الإيقاف",
+  "pauseResume": "ستستأنف في: {date}",
+  "@pauseResume": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "confirmPause": "تأكيد الإيقاف",
+  "cancelWarning": "هل أنت متأكد من إلغاء الاشتراك؟",
+  "confirmCancel": "تأكيد الإلغاء",
+  "goBack": "العودة",
+  "creditHistoryTitle": "سجل الرصيد",
+  "noHistory": "لا يوجد سجل استخدام",
+  "subsStatusDepleted": "نفدت",
+  "subsStatusExpired": "انتهت",
+  "subsStatusCancelled": "ملغاة",
+  "subsStatusPaused": "متوقف",
+  "packagesAndSubscriptions": "الباقات والاشتراكات",
+  "addPackage": "إضافة باقة",
+  "addPackageHint": "إضافة باقة أو اشتراك لعملائك",
+  "recurringCustomers": "العملاء المتكررون",
+  "viewAll": "عرض الكل",
+  "activeSubscribers": "فعّال",
+  "autoOrderSubscribers": "تلقائي",
+  "reminderSubscribers": "تذكير",
+  "autoOrder": "طلب تلقائي",
+  "confirmAutoOrder": "تأكيد",
+  "skipAutoOrder": "تخطي",
+  "sendReminder": "تذكير",
+  "savingsPercent": "وفّر {percent}٪",
+  "@savingsPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  }
+}

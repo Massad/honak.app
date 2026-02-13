@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "data": {
+    "id": "usr_004",
+    "phone": "0790000040",
+    "name": "يوسف",
+    "avatar_url": "https://images.unsplash.com/photo-1639347719818-b8886d6665aa?auto=format&fit=crop&w=150&q=80",
+    "bio": "عمّان، تلاع العلي",
+    "created_at": 1702000000,
+    "status": "active",
+    "needs_profile_setup": false,
+    "stats": {
+      "following_count": 20,
+      "orders_count": 7
+    },
+    "pages": [
+      {
+        "id": "dukkaneh-store",
+        "name": "دُكّانة",
+        "slug": "dukkaneh-store",
+        "avatar_url": "https://images.unsplash.com/photo-1636100232064-0dcec9d3f291?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "متجر أونلاين",
+        "business_type_id": "online_store",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "maktabet-alnoor",
+        "name": "مكتبة النور",
+        "slug": "maktabet-alnoor",
+        "avatar_url": "https://images.unsplash.com/photo-1545028651-723b70d2a2ff?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "مكتبة / قرطاسية",
+        "business_type_id": "bookstore",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "amman-municipality",
+        "name": "أمانة عمّان الكبرى",
+        "slug": "amman-municipality",
+        "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "جهة حكومية",
+        "business_type_id": "government",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "traffic-department",
+        "name": "إدارة السير",
+        "slug": "traffic-department",
+        "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "جهة حكومية",
+        "business_type_id": "government",
+        "is_verified": true,
+        "role": "owner"
+      }
+    ]
+  }
+}

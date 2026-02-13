@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 6,
+      "new_followers": 4,
+      "page_views": 98,
+      "today_revenue": 125000
+    },
+    "today_revenue": {
+      "total": 125000,
+      "completed_count": 2,
+      "items": [
+        {"service": "قاعة الملكية — حفل زفاف", "amount": 85000, "time": "الأمس"},
+        {"service": "قاعة الأميرة — عيد ميلاد", "amount": 40000, "time": "الأمس"}
+      ]
+    },
+    "occupancy": {
+      "percentage": 75,
+      "period": "هذا الأسبوع",
+      "booked": 6,
+      "total": 8,
+      "checkin_today": 2,
+      "checkout_today": 1
+    },
+    "upcoming_reservations": [
+      {
+        "customer": "عائلة الزعبي",
+        "date_range": "14-15 شباط",
+        "guests": 200,
+        "space": "قاعة الملكية",
+        "total": 95000,
+        "is_soon": true
+      },
+      {
+        "customer": "شركة الإبداع",
+        "date_range": "16 شباط",
+        "guests": 50,
+        "space": "قاعة الياسمين",
+        "total": 25000,
+        "is_soon": false
+      },
+      {
+        "customer": "عائلة خالد",
+        "date_range": "20-21 شباط",
+        "guests": 150,
+        "space": "قاعة الأميرة",
+        "total": 75000,
+        "is_soon": false
+      }
+    ],
+    "pending_requests": [
+      {"id": "req_1201", "customer": "أحمد سعيد", "service": "استفسار — قاعة الملكية — آذار", "date": "2026-02-12", "time": "14:00"},
+      {"id": "req_1202", "customer": "منى عمر", "service": "حجز — قاعة الياسمين — 28 شباط", "date": "2026-02-12", "time": "15:00"}
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 15,
+      "new_followers": 6,
+      "page_views": 89,
+      "today_revenue": 12800
+    },
+    "today_revenue": {
+      "total": 12800,
+      "completed_count": 12,
+      "items": [
+        {"service": "قهوة تركي × 3", "amount": 2250, "time": "08:30"},
+        {"service": "لاتيه + كرواسان", "amount": 3500, "time": "09:00"},
+        {"service": "شاي أخضر × 2", "amount": 1200, "time": "10:15"},
+        {"service": "كابتشينو + كيك", "amount": 3000, "time": "11:00"}
+      ]
+    },
+    "active_queue": [
+      {"id": "q_1", "customer": "سارة محمد", "items": "لاتيه × 2، تشيز كيك", "status": "preparing", "time": "14:10", "order_number": 47},
+      {"id": "q_2", "customer": "خالد يوسف", "items": "V60، كرواسان شوكولا", "status": "waiting", "time": "14:15", "order_number": 48}
+    ],
+    "best_sellers": [
+      {"name": "لاتيه", "count": 67, "trend": "up"},
+      {"name": "قهوة تركي", "count": 52, "trend": "same"},
+      {"name": "كابتشينو", "count": 41, "trend": "up"},
+      {"name": "V60", "count": 28, "trend": "up"},
+      {"name": "شاي أخضر", "count": 23, "trend": "down"}
+    ],
+    "pending_requests": [
+      {"id": "req_401", "customer": "ريم سعيد", "service": "حجز زاوية — 4 أشخاص", "date": "2026-02-12", "time": "16:00"}
+    ]
+  }
+}

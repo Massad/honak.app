@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "data": {
+    "id": "usr_team01",
+    "phone": "0791000005",
+    "name": "يوسف علي",
+    "avatar_url": "https://picsum.photos/seed/yusuf/200",
+    "bio": null,
+    "created_at": 1703000000,
+    "status": "active",
+    "stats": {
+      "following_count": 2,
+      "orders_count": 0
+    },
+    "pages": [
+      {
+        "id": "pg_deira",
+        "name": "مطعم الديرة",
+        "slug": "al-deira",
+        "avatar_url": "https://picsum.photos/seed/deira/200",
+        "business_type_name": "مطعم",
+        "is_verified": true,
+        "role": "member",
+        "permissions": ["orders.view", "orders.update"]
+      }
+    ]
+  }
+}

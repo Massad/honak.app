@@ -1,0 +1,48 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "req_b01",
+      "customer": {
+        "id": "usr_020",
+        "name": "هند",
+        "avatar_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000020"
+      },
+      "status": "pending",
+      "type": "booking",
+      "items_count": 2,
+      "total_cents": 3500,
+      "note": "أفضل الموعد الصباحي",
+      "conversation_id": "conv_hind_salon",
+      "preferred_date": "2024-02-15",
+      "time_slot": "10:00-11:00",
+      "created_at": 1700100000,
+      "items": [
+        {"id": "srv_01", "name": "قص وتسريح", "quantity": 1, "price_cents": 2000, "variation": null},
+        {"id": "srv_02", "name": "صبغة", "quantity": 1, "price_cents": 1500, "variation": "بني فاتح"}
+      ]
+    },
+    {
+      "id": "req_b02",
+      "customer": {
+        "id": "usr_021",
+        "name": "سارة",
+        "avatar_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000021"
+      },
+      "status": "pending",
+      "type": "booking",
+      "items_count": 1,
+      "total_cents": 5000,
+      "note": null,
+      "conversation_id": "conv_sara_salon",
+      "preferred_date": "2024-02-16",
+      "time_slot": "14:00-15:30",
+      "created_at": 1700099000,
+      "items": [
+        {"id": "srv_03", "name": "مكياج سهرة", "quantity": 1, "price_cents": 5000, "variation": null}
+      ]
+    }
+  ]
+}

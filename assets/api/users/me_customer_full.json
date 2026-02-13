@@ -1,0 +1,69 @@
+{
+  "success": true,
+  "data": {
+    "id": "usr_001",
+    "phone": "0790000001",
+    "name": "سارة",
+    "avatar_url": "https://images.unsplash.com/photo-1720722005651-1a1d71311ee8?auto=format&fit=crop&w=150&q=80",
+    "bio": "عمّان، عبدون",
+    "created_at": 1700000000,
+    "status": "active",
+    "needs_profile_setup": false,
+    "stats": {
+      "following_count": 15,
+      "orders_count": 12
+    },
+    "pages": [
+      {
+        "id": "salon-rania",
+        "name": "صالون رانية",
+        "slug": "salon-rania",
+        "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "صالون تجميل",
+        "business_type_id": "salon",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "sara-photography",
+        "name": "تصوير سارة",
+        "slug": "sara-photography",
+        "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "مصورة",
+        "business_type_id": "photographer",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "nour-fashion",
+        "name": "نور فاشن",
+        "slug": "nour-fashion",
+        "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "متجر ملابس",
+        "business_type_id": "clothes_store",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "hara-coffee",
+        "name": "قهوة الحارة",
+        "slug": "hara-coffee",
+        "avatar_url": "https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "مقهى",
+        "business_type_id": "cafe",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "beauty-lounge",
+        "name": "بيوتي لاونج",
+        "slug": "beauty-lounge",
+        "avatar_url": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "صالون تجميل",
+        "business_type_id": "salon",
+        "is_verified": false,
+        "role": "owner"
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "req_q01",
+      "customer": {
+        "id": "usr_030",
+        "name": "أحمد",
+        "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000030"
+      },
+      "status": "pending",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": null,
+      "note": null,
+      "description": "تسريب مياه في المطبخ تحت المغسلة، والأرضية مبللة",
+      "service_location": "جبل عمان، شارع الرينبو",
+      "preferred_date": "2024-02-14",
+      "created_at": 1700100000,
+      "items": []
+    },
+    {
+      "id": "req_q02",
+      "customer": {
+        "id": "usr_031",
+        "name": "خالد",
+        "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000031"
+      },
+      "status": "pending",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": null,
+      "note": "يرجى الاتصال قبل الحضور",
+      "description": "صيانة سخان مركزي، لا يعمل منذ يومين",
+      "service_location": "الشميساني، بجانب مجمع جبر",
+      "created_at": 1700098000,
+      "items": []
+    }
+  ]
+}

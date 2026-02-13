@@ -1,0 +1,76 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_ap01",
+      "name_ar": "إصلاح واستبدال الأنابيب",
+      "name_en": "Pipe Repair & Replacement",
+      "description_ar": "كشف وإصلاح تسريبات المياه، استبدال أنابيب قديمة",
+      "price_cents": 0,
+      "images": ["https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_plumb_repair",
+      "category_name": "إصلاح",
+      "in_stock": true,
+      "page_id": "ahmad-plumbing",
+      "sort_order": 1,
+      "option_groups": []
+    },
+    {
+      "id": "item_ap02",
+      "name_ar": "تركيب سخانات مياه",
+      "name_en": "Water Heater Installation",
+      "description_ar": "تركيب وصيانة سخانات كهربائية وغاز",
+      "price_cents": 0,
+      "images": ["https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_plumb_install",
+      "category_name": "تركيب",
+      "in_stock": true,
+      "page_id": "ahmad-plumbing",
+      "sort_order": 2,
+      "option_groups": []
+    },
+    {
+      "id": "item_ap03",
+      "name_ar": "تجديد حمامات",
+      "name_en": "Bathroom Renovation",
+      "description_ar": "تجديد كامل — بلاط، أدوات صحية، شطافات",
+      "price_cents": 0,
+      "images": ["https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_plumb_reno",
+      "category_name": "تجديد",
+      "in_stock": true,
+      "page_id": "ahmad-plumbing",
+      "sort_order": 3,
+      "option_groups": []
+    },
+    {
+      "id": "item_ap04",
+      "name_ar": "تسليك مجاري",
+      "name_en": "Drain Unclogging",
+      "description_ar": "تسليك مجاري وبالوعات بأحدث المعدات",
+      "price_cents": 0,
+      "images": ["https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_plumb_drain",
+      "category_name": "تسليك",
+      "in_stock": true,
+      "page_id": "ahmad-plumbing",
+      "sort_order": 4,
+      "option_groups": []
+    },
+    {
+      "id": "item_ap05",
+      "name_ar": "طوارئ ٢٤/٧",
+      "name_en": "24/7 Emergency",
+      "description_ar": "خدمة طوارئ على مدار الساعة — تسريبات، انسداد، أعطال",
+      "price_cents": 0,
+      "images": ["https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_plumb_emergency",
+      "category_name": "طوارئ",
+      "in_stock": true,
+      "page_id": "ahmad-plumbing",
+      "sort_order": 5,
+      "option_groups": []
+    }
+  ],
+  "meta": {"total": 5, "has_more": false}
+}

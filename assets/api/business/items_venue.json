@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_ven_01",
+      "name": "القاعة الكبيرة",
+      "description": "قاعة تتسع حتى 200 شخص",
+      "price_cents": 15000,
+      "images": ["https://picsum.photos/seed/hall1/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "status": "active",
+      "sort_order": 0,
+      "properties": {"capacity": "200", "duration": "6 ساعات"}
+    },
+    {
+      "id": "biz_ven_02",
+      "name": "القاعة الصغيرة",
+      "description": "قاعة تتسع حتى 50 شخص",
+      "price_cents": 7000,
+      "images": ["https://picsum.photos/seed/hall2/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "status": "active",
+      "sort_order": 1,
+      "properties": {"capacity": "50", "duration": "4 ساعات"}
+    },
+    {
+      "id": "biz_ven_03",
+      "name": "الحديقة",
+      "description": "حديقة خارجية مع إضاءة",
+      "price_cents": 10000,
+      "images": ["https://picsum.photos/seed/garden1/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "status": "active",
+      "sort_order": 2,
+      "properties": {"capacity": "150", "duration": "5 ساعات"}
+    }
+  ],
+  "meta": {"total": 3, "has_more": false}
+}

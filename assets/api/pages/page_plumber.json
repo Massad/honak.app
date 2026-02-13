@@ -1,0 +1,98 @@
+{
+  "success": true,
+  "data": {
+    "id": "ahmad-plumbing",
+    "owner_id": "usr_002",
+    "business_type_id": "plumber",
+    "business_type_name": "سباك",
+    "category_name": "خدمات منزلية",
+    "explore_category": "cat_home_services",
+    "name": "سباكة أحمد",
+    "name_en": "Ahmad Plumbing",
+    "slug": "ahmad-plumbing",
+    "handle": "ahmad-plumbing",
+    "store_type": "physical",
+    "archetype": "quote_request",
+    "description": "خدمات سباكة متكاملة في عمّان. إصلاح، تركيب، وصيانة. خدمة طوارئ ٢٤/٧.",
+    "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000013",
+    "location": {
+      "lat": 31.955,
+      "lng": 35.920,
+      "label": "جبل الحسين، عمّان",
+      "area": "جبل الحسين",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": true, "open": "08:00", "close": "18:00"}
+    },
+    "operating_hours": "السبت - الخميس: ٨:٠٠ ص — ٦:٠٠ م\nطوارئ: ٢٤/٧",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 340,
+    "items_count": 5,
+    "posts_count": 8,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "18:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 82,
+    "trust_metrics": [
+      {"label": "أعمال مكتملة", "value": "٣٤٠", "icon": "check_circle"},
+      {"label": "يرد خلال", "value": "ساعة واحدة", "icon": "schedule"},
+      {"label": "عضو منذ", "value": "٢٠٢٣", "icon": "calendar_today"}
+    ],
+    "delivery_available": false,
+    "pickup_available": false,
+    "payment_methods": ["نقداً", "كليك: AhmadPlumbing"],
+    "cliq_alias": "AhmadPlumbing",
+    "coverage_zones": ["عبدون", "الصويفية", "خلدا", "دابوق", "تلاع العلي"],
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1672000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_plumb1", "image_url": "https://picsum.photos/seed/ahmadplumbstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_plumb2", "image_url": "https://picsum.photos/seed/ahmadplumbstory2/400/700", "duration": 5, "created_at": 1707870000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"},
+      {"date": "2026-03-31", "reason": "عيد الفطر"}
+    ],
+    "services_offered": [
+      {"name": "تسليك مجاري", "description": "تسليك جميع أنواع المجاري باستخدام أحدث المعدات"},
+      {"name": "تمديدات صحية", "description": "تمديدات مياه ساخنة وباردة للمنازل والمكاتب"},
+      {"name": "إصلاح تسربات", "description": "كشف وإصلاح تسربات المياه بدون تكسير"},
+      {"name": "تركيب سخانات", "description": "تركيب وصيانة سخانات المياه بجميع أنواعها"}
+    ],
+    "price_range": {
+      "min_cents": 1500,
+      "max_cents": 15000,
+      "note": "يعتمد السعر على نوع العمل وحجمه"
+    },
+    "service_areas": ["عبدون", "الصويفية", "خلدا", "دابوق", "طلال العلي", "الشميساني", "جبل عمان", "جبل الحسين"],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "غرب عمّان", "neighbourhoods": ["عبدون", "الصويفية", "خلدا", "دابوق", "طلال العلي"]},
+          {"name": "وسط عمّان", "neighbourhoods": ["الشميساني", "جبل عمان", "جبل الحسين", "العبدلي"]}
+        ]
+      }
+    ]
+  }
+}

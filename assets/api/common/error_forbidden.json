@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": "forbidden",
+    "message": "غير مصرح لك بهذا الإجراء"
+  }
+}

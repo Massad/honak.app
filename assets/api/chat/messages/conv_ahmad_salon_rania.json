@@ -1,0 +1,102 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_as_01",
+      "conversation_id": "conv_ahmad_salon_rania",
+      "sender_id": "usr_ahmad",
+      "sender_name": "أحمد محمد",
+      "type": "text",
+      "content": "مرحبا، حابب أحجز موعد حلاقة لابني يوم الثلاثاء",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707290000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_as_02",
+      "conversation_id": "conv_ahmad_salon_rania",
+      "sender_id": "usr_sara",
+      "sender_name": "صالون رانيا",
+      "type": "text",
+      "content": "أهلاً أحمد! أكيد، شو الوقت اللي بناسبك؟ عندنا فتحات الساعة ٢ و٤ عصراً",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707291000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_as_03",
+      "conversation_id": "conv_ahmad_salon_rania",
+      "sender_id": "usr_ahmad",
+      "sender_name": "أحمد محمد",
+      "type": "text",
+      "content": "الساعة ٤ عصراً بناسبني أكثر",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707292000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_as_04",
+      "conversation_id": "conv_ahmad_salon_rania",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم إنشاء طلب حجز #req_2001",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707293000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_as_05",
+      "conversation_id": "conv_ahmad_salon_rania",
+      "sender_id": "usr_sara",
+      "sender_name": "صالون رانيا",
+      "type": "text",
+      "content": "تمام! موعدك يوم الثلاثاء الساعة ٤ عصراً. حلاقة أطفال ٣ دنانير",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707295000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_as_06",
+      "conversation_id": "conv_ahmad_salon_rania",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم تأكيد الحجز",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707295100,
+      "is_from_business": false
+    },
+    {
+      "id": "m_as_07",
+      "conversation_id": "conv_ahmad_salon_rania",
+      "sender_id": "usr_sara",
+      "sender_name": "صالون رانيا",
+      "type": "availability_card",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "slots": [
+          {"id": "slot_tue_14", "date": "الثلاثاء ١٨ شباط", "time": "٢:٠٠ م", "team_member": "رانيا"},
+          {"id": "slot_tue_16", "date": "الثلاثاء ١٨ شباط", "time": "٤:٠٠ م", "team_member": "رانيا"},
+          {"id": "slot_wed_10", "date": "الأربعاء ١٩ شباط", "time": "١٠:٠٠ ص", "team_member": "سمر"},
+          {"id": "slot_wed_15", "date": "الأربعاء ١٩ شباط", "time": "٣:٠٠ م", "team_member": "رانيا"}
+        ],
+        "service_name": "حلاقة أطفال",
+        "status": "pending"
+      },
+      "created_at": 1707305000,
+      "is_from_business": true
+    }
+  ],
+  "meta": {
+    "total": 7,
+    "has_more": false
+  }
+}

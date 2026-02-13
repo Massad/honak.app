@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_caf_01",
+      "name": "قهوة عربية",
+      "description": "قهوة عربية مع هيل",
+      "price_cents": 150,
+      "images": ["https://picsum.photos/seed/coffee1/400/300"],
+      "category_id": "cat_caf01",
+      "category_name": "المشروبات الساخنة",
+      "status": "active",
+      "sort_order": 0,
+      "properties": {}
+    },
+    {
+      "id": "biz_caf_02",
+      "name": "لاتيه",
+      "description": "لاتيه بالحليب الطازج",
+      "price_cents": 250,
+      "images": ["https://picsum.photos/seed/latte1/400/300"],
+      "category_id": "cat_caf01",
+      "category_name": "المشروبات الساخنة",
+      "status": "active",
+      "sort_order": 1,
+      "properties": {}
+    },
+    {
+      "id": "biz_caf_03",
+      "name": "كنافة",
+      "description": "كنافة نابلسية بالجبن",
+      "price_cents": 350,
+      "images": ["https://picsum.photos/seed/knafeh1/400/300"],
+      "category_id": "cat_caf02",
+      "category_name": "الحلويات",
+      "status": "active",
+      "sort_order": 0,
+      "properties": {}
+    }
+  ],
+  "meta": {"total": 3, "has_more": false}
+}

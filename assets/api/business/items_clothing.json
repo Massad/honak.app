@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_clo_01",
+      "name": "فستان سهرة",
+      "description": "فستان سهرة أنيق",
+      "price_cents": 8500,
+      "original_price_cents": 12000,
+      "discount_percent": 29,
+      "images": ["https://picsum.photos/seed/dress1/400/300"],
+      "category_id": "cat_clo01",
+      "category_name": "فساتين",
+      "status": "active",
+      "stock": 5,
+      "sort_order": 0,
+      "properties": {"sizes": ["S", "M", "L"], "colors": ["أسود", "أحمر"]}
+    },
+    {
+      "id": "biz_clo_02",
+      "name": "حقيبة يد",
+      "description": "حقيبة يد جلد طبيعي",
+      "price_cents": 4500,
+      "images": ["https://picsum.photos/seed/bag1/400/300"],
+      "category_id": "cat_clo02",
+      "category_name": "إكسسوارات",
+      "status": "active",
+      "stock": 12,
+      "sort_order": 0,
+      "properties": {"colors": ["بني", "أسود", "بيج"]}
+    },
+    {
+      "id": "biz_clo_03",
+      "name": "عباية مطرزة",
+      "description": "عباية مطرزة يدوياً",
+      "price_cents": 6000,
+      "images": ["https://picsum.photos/seed/abaya1/400/300"],
+      "category_id": "cat_clo03",
+      "category_name": "عبايات",
+      "status": "active",
+      "stock": 3,
+      "sort_order": 0,
+      "properties": {"sizes": ["M", "L", "XL"]}
+    }
+  ],
+  "meta": {"total": 3, "has_more": false}
+}

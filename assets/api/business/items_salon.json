@@ -1,0 +1,563 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_item_s01",
+      "name": "قص شعر رجالي",
+      "name_en": "Men's Haircut",
+      "description": "قص شعر رجالي احترافي",
+      "price_cents": 500,
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "active",
+      "sort_order": 1,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 30
+      }
+    },
+    {
+      "id": "biz_item_s02",
+      "name": "قص + تصفيف",
+      "name_en": "Cut + Styling",
+      "description": "قص شعر مع تصفيف كامل",
+      "price_cents": 800,
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "active",
+      "sort_order": 2,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania", "team_noor"],
+      "properties": {
+        "duration_minutes": 45
+      }
+    },
+    {
+      "id": "biz_item_s03",
+      "name": "تصفيف فقط",
+      "name_en": "Styling Only",
+      "description": "تصفيف شعر بدون قص",
+      "price_cents": 300,
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "active",
+      "sort_order": 3,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 20
+      }
+    },
+    {
+      "id": "biz_item_s04",
+      "name": "صبغة شعر كاملة",
+      "name_en": "Full Hair Color",
+      "description": "صبغة كاملة مع علاج",
+      "price_cents": 2500,
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "active",
+      "sort_order": 4,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 90
+      }
+    },
+    {
+      "id": "biz_item_s05",
+      "name": "هايلايت",
+      "name_en": "Highlights",
+      "description": "هايلايت خصل شعر",
+      "price_cents": 1500,
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "active",
+      "sort_order": 5,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 60
+      }
+    },
+    {
+      "id": "biz_item_s06",
+      "name": "صبغة جذور",
+      "name_en": "Root Touch-up",
+      "description": "صبغة جذور الشعر فقط",
+      "price_cents": 1000,
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "active",
+      "sort_order": 6,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania", "team_noor"],
+      "properties": {
+        "duration_minutes": 45
+      }
+    },
+    {
+      "id": "biz_item_s07",
+      "name": "كيراتين برازيلي",
+      "name_en": "Brazilian Keratin",
+      "description": "علاج كيراتين برازيلي لتنعيم الشعر",
+      "price_cents": 3500,
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "active",
+      "sort_order": 7,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 120
+      }
+    },
+    {
+      "id": "biz_item_s08",
+      "name": "بروتين معالج",
+      "name_en": "Protein Treatment",
+      "description": "علاج بروتين لتقوية الشعر",
+      "price_cents": 3000,
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "active",
+      "sort_order": 8,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 90
+      }
+    },
+    {
+      "id": "biz_item_s09",
+      "name": "مناكير + بديكير",
+      "name_en": "Manicure + Pedicure",
+      "description": "عناية كاملة بالأظافر مع طلاء",
+      "price_cents": 1200,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "active",
+      "sort_order": 9,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 45
+      }
+    },
+    {
+      "id": "biz_item_s10",
+      "name": "جل أظافر",
+      "name_en": "Gel Nails",
+      "description": "تركيب جل أظافر",
+      "price_cents": 800,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "active",
+      "sort_order": 10,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 30
+      }
+    },
+    {
+      "id": "biz_item_s11",
+      "name": "قص أطفال",
+      "name_en": "Kids Haircut",
+      "description": "قص شعر للأطفال بأجواء مريحة",
+      "price_cents": 300,
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "active",
+      "sort_order": 11,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 20
+      }
+    },
+    {
+      "id": "biz_item_s12",
+      "name": "قص شعر بالماكينة",
+      "name_en": "Clipper Cut",
+      "description": "قص شعر قصير بالماكينة",
+      "price_cents": 350,
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "active",
+      "sort_order": 12,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 15
+      }
+    },
+    {
+      "id": "biz_item_s13",
+      "name": "تسريحة عروس",
+      "name_en": "Bridal Hairstyle",
+      "description": "تسريحة عروس كاملة مع تجربة مسبقة",
+      "price_cents": 3000,
+      "original_price_cents": 3500,
+      "discount_percent": 14,
+      "discount_ends": "2025-06-15T23:59:59Z",
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "active",
+      "sort_order": 13,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 120
+      }
+    },
+    {
+      "id": "biz_item_s14",
+      "name": "قص وصبغة",
+      "name_en": "Cut & Color",
+      "description": "قص شعر مع صبغة كاملة بجلسة واحدة",
+      "price_cents": 2800,
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "active",
+      "sort_order": 14,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania", "team_noor"],
+      "properties": {
+        "duration_minutes": 90
+      }
+    },
+    {
+      "id": "biz_item_s15",
+      "name": "فرد شعر مؤقت",
+      "name_en": "Temporary Straightening",
+      "description": "فرد شعر مؤقت بالسشوار والفير",
+      "price_cents": 600,
+      "images": [],
+      "category_id": "cat_s01",
+      "category_name": "قص وتصفيف",
+      "status": "out_of_stock",
+      "sort_order": 15,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 40
+      }
+    },
+    {
+      "id": "biz_item_s16",
+      "name": "صبغة شعر رمادي",
+      "name_en": "Grey Hair Color",
+      "description": "صبغة رمادية عصرية بتدرجات مختلفة",
+      "price_cents": 2000,
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "out_of_stock",
+      "sort_order": 16,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 75
+      }
+    },
+    {
+      "id": "biz_item_s17",
+      "name": "بلياج",
+      "name_en": "Balayage",
+      "description": "تقنية بلياج لتدرج لوني طبيعي",
+      "price_cents": 2000,
+      "original_price_cents": 2500,
+      "discount_percent": 20,
+      "discount_ends": "2025-07-01T23:59:59Z",
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "active",
+      "sort_order": 17,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 120
+      }
+    },
+    {
+      "id": "biz_item_s18",
+      "name": "أومبريه",
+      "name_en": "Ombre",
+      "description": "صبغة أومبريه بتدرج من الجذور للأطراف",
+      "price_cents": 1800,
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "active",
+      "sort_order": 18,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania", "team_noor"],
+      "properties": {
+        "duration_minutes": 90
+      }
+    },
+    {
+      "id": "biz_item_s19",
+      "name": "تصحيح لون",
+      "name_en": "Color Correction",
+      "description": "تصحيح لون الشعر بعد صبغة سابقة",
+      "price_cents": 3000,
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "hidden",
+      "sort_order": 19,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 150
+      }
+    },
+    {
+      "id": "biz_item_s20",
+      "name": "صبغة حواجب",
+      "name_en": "Eyebrow Tint",
+      "description": "صبغة حواجب بلون يناسب شعرك",
+      "price_cents": 500,
+      "images": [],
+      "category_id": "cat_s02",
+      "category_name": "ألوان وصبغات",
+      "status": "active",
+      "sort_order": 20,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 20
+      }
+    },
+    {
+      "id": "biz_item_s21",
+      "name": "حمام كريم",
+      "name_en": "Cream Bath",
+      "description": "حمام كريم مغذي للشعر الجاف والمتقصف",
+      "price_cents": 800,
+      "original_price_cents": 1000,
+      "discount_percent": 20,
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "active",
+      "sort_order": 21,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 45
+      }
+    },
+    {
+      "id": "biz_item_s22",
+      "name": "قناع شعر",
+      "name_en": "Hair Mask",
+      "description": "قناع شعر عميق لاستعادة الحيوية",
+      "price_cents": 700,
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "active",
+      "sort_order": 22,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 40
+      }
+    },
+    {
+      "id": "biz_item_s23",
+      "name": "علاج تساقط",
+      "name_en": "Hair Loss Treatment",
+      "description": "جلسة علاج تساقط الشعر بتقنيات متخصصة",
+      "price_cents": 2000,
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "out_of_stock",
+      "sort_order": 23,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 60
+      }
+    },
+    {
+      "id": "biz_item_s24",
+      "name": "ترطيب عميق",
+      "name_en": "Deep Conditioning",
+      "description": "ترطيب عميق للشعر المتضرر والجاف",
+      "price_cents": 900,
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "out_of_stock",
+      "sort_order": 24,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania", "team_noor"],
+      "properties": {
+        "duration_minutes": 50
+      }
+    },
+    {
+      "id": "biz_item_s25",
+      "name": "فيلر شعر",
+      "name_en": "Hair Filler",
+      "description": "فيلر شعر لتكثيف وتقوية الشعر الخفيف",
+      "price_cents": 2500,
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "active",
+      "sort_order": 25,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 60
+      }
+    },
+    {
+      "id": "biz_item_s26",
+      "name": "بوتوكس شعر",
+      "name_en": "Hair Botox",
+      "description": "علاج بوتوكس لترميم الشعر التالف وإعادة لمعانه",
+      "price_cents": 4000,
+      "original_price_cents": 5000,
+      "discount_percent": 20,
+      "discount_ends": "2025-06-30T23:59:59Z",
+      "images": [],
+      "category_id": "cat_s03",
+      "category_name": "عناية وعلاج",
+      "status": "active",
+      "sort_order": 26,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_rania"],
+      "properties": {
+        "duration_minutes": 120
+      }
+    },
+    {
+      "id": "biz_item_s27",
+      "name": "إزالة جل",
+      "name_en": "Gel Removal",
+      "description": "إزالة جل الأظافر بعناية دون ضرر",
+      "price_cents": 300,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "active",
+      "sort_order": 27,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 20
+      }
+    },
+    {
+      "id": "biz_item_s28",
+      "name": "تركيب أكريليك",
+      "name_en": "Acrylic Nails",
+      "description": "تركيب أظافر أكريليك بأشكال متنوعة",
+      "price_cents": 1500,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "active",
+      "sort_order": 28,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 75
+      }
+    },
+    {
+      "id": "biz_item_s29",
+      "name": "رسم أظافر",
+      "name_en": "Nail Art",
+      "description": "رسم وتزيين أظافر بتصاميم حسب الطلب",
+      "price_cents": 500,
+      "original_price_cents": 700,
+      "discount_percent": 29,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "active",
+      "sort_order": 29,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 45
+      }
+    },
+    {
+      "id": "biz_item_s30",
+      "name": "باديكير طبي",
+      "name_en": "Medical Pedicure",
+      "description": "باديكير طبي متخصص للعناية بالقدمين",
+      "price_cents": 1000,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "out_of_stock",
+      "sort_order": 30,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 50
+      }
+    },
+    {
+      "id": "biz_item_s31",
+      "name": "مناكير فرنسي",
+      "name_en": "French Manicure",
+      "description": "مناكير فرنسي كلاسيكي أنيق",
+      "price_cents": 600,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "hidden",
+      "sort_order": 31,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 35
+      }
+    },
+    {
+      "id": "biz_item_s32",
+      "name": "تزيين أظافر",
+      "name_en": "Nail Decoration",
+      "description": "تزيين أظافر بالستراس والأحجار",
+      "price_cents": 400,
+      "images": [],
+      "category_id": "cat_s04",
+      "category_name": "أظافر",
+      "status": "hidden",
+      "sort_order": 32,
+      "page_id": "salon-rania",
+      "assigned_team_ids": ["team_noor"],
+      "properties": {
+        "duration_minutes": 30
+      }
+    }
+  ],
+  "meta": {"total": 32, "has_more": false}
+}

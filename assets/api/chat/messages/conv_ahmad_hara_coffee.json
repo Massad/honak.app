@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_ahc_01",
+      "conversation_id": "conv_ahmad_hara_coffee",
+      "sender_id": "usr_ahmad",
+      "sender_name": "أحمد محمد",
+      "type": "text",
+      "content": "بدي ٢ قهوة عربي وكنافة",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707285000,
+      "is_from_business": false
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "has_more": false
+  }
+}

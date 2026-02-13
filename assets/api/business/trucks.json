@@ -1,0 +1,569 @@
+{
+  "abu-ahmad-water": {
+    "trucks": [
+      {
+        "id": "truck-1",
+        "name": "شاحنة 1",
+        "driver_name": "محمود",
+        "driver_phone": "+962790000011",
+        "assigned_driver_ids": ["tm-1"],
+        "color": "#1A73E8",
+        "capacity_full": 40,
+        "capacity_empty": 40,
+        "delivery_days": ["sun", "mon", "tue", "wed", "thu"],
+        "route_window": { "start": "08:00", "end": "14:00" },
+        "zones": [
+          {
+            "id": "zone-1a",
+            "name": "المسار الصباحي",
+            "polygon": [
+              { "lat": 31.9565, "lng": 35.8705 },
+              { "lat": 31.9590, "lng": 35.8780 },
+              { "lat": 31.9540, "lng": 35.8810 },
+              { "lat": 31.9510, "lng": 35.8750 },
+              { "lat": 31.9530, "lng": 35.8690 }
+            ],
+            "approximate_area_km2": 2.3,
+            "label": "شمال عبدون + طرف الصويفية"
+          },
+          {
+            "id": "zone-1b",
+            "name": "المسار المسائي",
+            "polygon": [
+              { "lat": 31.9480, "lng": 35.8620 },
+              { "lat": 31.9510, "lng": 35.8680 },
+              { "lat": 31.9460, "lng": 35.8700 },
+              { "lat": 31.9440, "lng": 35.8650 }
+            ],
+            "approximate_area_km2": 1.8,
+            "label": "شوارع خلدا الفرعية"
+          }
+        ],
+        "today": {
+          "status": "on_route",
+          "started_at": "2026-02-10T08:15:00",
+          "current_full": 28,
+          "current_empty": 12,
+          "delivered_count": 5,
+          "remaining_count": 7,
+          "reloads": 0
+        }
+      },
+      {
+        "id": "truck-2",
+        "name": "شاحنة 2",
+        "driver_name": "حسّان",
+        "driver_phone": "+962790000012",
+        "assigned_driver_ids": ["tm-2", "tm-1"],
+        "color": "#E53935",
+        "capacity_full": 30,
+        "capacity_empty": 30,
+        "delivery_days": ["sun", "mon", "tue", "wed", "thu"],
+        "route_window": { "start": "09:00", "end": "15:00" },
+        "zones": [
+          {
+            "id": "zone-2a",
+            "name": "جنوب عبدون + أم أذينة",
+            "polygon": [
+              { "lat": 31.9490, "lng": 35.8730 },
+              { "lat": 31.9520, "lng": 35.8800 },
+              { "lat": 31.9470, "lng": 35.8830 },
+              { "lat": 31.9440, "lng": 35.8770 },
+              { "lat": 31.9450, "lng": 35.8720 }
+            ],
+            "approximate_area_km2": 2.1,
+            "label": "جنوب عبدون + أم أذينة"
+          }
+        ],
+        "today": {
+          "status": "not_started",
+          "current_full": 0,
+          "current_empty": 0,
+          "delivered_count": 0,
+          "remaining_count": 8,
+          "reloads": 0
+        }
+      },
+      {
+        "id": "truck-3",
+        "name": "شاحنة 3",
+        "driver_name": "فادي",
+        "driver_phone": "+962790000013",
+        "assigned_driver_ids": [],
+        "color": "#43A047",
+        "capacity_full": 25,
+        "capacity_empty": 25,
+        "delivery_days": ["sun", "tue", "thu"],
+        "route_window": { "start": "07:30", "end": "12:00" },
+        "zones": [
+          {
+            "id": "zone-3a",
+            "name": "تلة خلدا",
+            "polygon": [
+              { "lat": 31.9530, "lng": 35.8580 },
+              { "lat": 31.9560, "lng": 35.8650 },
+              { "lat": 31.9510, "lng": 35.8670 },
+              { "lat": 31.9490, "lng": 35.8610 }
+            ],
+            "approximate_area_km2": 1.5,
+            "label": "تلة خلدا باتجاه عبدون"
+          }
+        ],
+        "today": {
+          "status": "route_complete",
+          "started_at": "2026-02-10T07:30:00",
+          "ended_at": "2026-02-10T12:15:00",
+          "current_full": 0,
+          "current_empty": 20,
+          "delivered_count": 20,
+          "remaining_count": 0,
+          "reloads": 0
+        }
+      }
+    ],
+    "route_queue": {
+      "truck-1": {
+        "date": "2026-02-10",
+        "queue": [
+          {
+            "position": 1, "status": "delivered",
+            "customer_name": "أحمد ر.", "customer_phone": "+962790100001",
+            "address": "عبدون، شارع 9، شقة 3",
+            "coordinates": { "lat": 31.9555, "lng": 35.8725 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "recurring_auto", "payment": "credits",
+            "delivered_at": "2026-02-10T08:32:00",
+            "full_delivered": 2, "empties_collected": 2,
+            "credits_before": 8, "credits_after": 6
+          },
+          {
+            "position": 2, "status": "delivered",
+            "customer_name": "لينا ت.", "customer_phone": "+962790100002",
+            "address": "عبدون، شارع 12، فيلا",
+            "coordinates": { "lat": 31.9562, "lng": 35.8740 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 3 }],
+            "source": "app_order", "payment": "cash",
+            "delivered_at": "2026-02-10T08:50:00",
+            "full_delivered": 3, "empties_collected": 3,
+            "cash_collected": 4.50
+          },
+          {
+            "position": 3, "status": "delivered",
+            "customer_name": "سارة م.", "customer_phone": "+962790000001",
+            "address": "الصويفية، بناية 22",
+            "coordinates": { "lat": 31.9578, "lng": 35.8795 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }],
+            "source": "recurring_auto", "payment": "credits",
+            "delivered_at": "2026-02-10T09:15:00",
+            "full_delivered": 1, "empties_collected": 1,
+            "credits_before": 6, "credits_after": 5
+          },
+          {
+            "position": 4, "status": "delivered",
+            "customer_name": "رامي ك.", "customer_phone": "+962790100004",
+            "address": "عبدون، قرب المسجد",
+            "coordinates": { "lat": 31.9548, "lng": 35.8718 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "walk_up", "payment": "cash",
+            "delivered_at": "2026-02-10T09:35:00",
+            "full_delivered": 2, "empties_collected": 1,
+            "cash_collected": 3.00
+          },
+          {
+            "position": 5, "status": "skipped",
+            "customer_name": "ريم س.", "customer_phone": "+962790100005",
+            "address": "الصويفية، شارع 5، طابق 3",
+            "coordinates": { "lat": 31.9585, "lng": 35.8805 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }],
+            "source": "app_order", "payment": "cash",
+            "skip_reason": "customer_not_home",
+            "rescheduled_to": "2026-02-11"
+          },
+          {
+            "position": 6, "status": "current",
+            "customer_name": "عمر هـ.", "customer_phone": "+962790100006",
+            "address": "عبدون، شارع 14، بناية 7",
+            "coordinates": { "lat": 31.9542, "lng": 35.8735 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "recurring_auto", "payment": "credits",
+            "notes": "اتركها عند الباب",
+            "credits_remaining": 6,
+            "recurring_label": "أسبوعي — أحد وأربعاء"
+          },
+          {
+            "position": 7, "status": "pending",
+            "customer_name": "خالد أ.", "customer_phone": "+962790100007",
+            "address": "عبدون، شارع 7، شقة 12",
+            "coordinates": { "lat": 31.9537, "lng": 35.8710 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 3 }],
+            "source": "app_order", "payment": "cash",
+            "is_new_customer": true
+          },
+          {
+            "position": 8, "status": "pending",
+            "customer_name": "نور و.", "customer_phone": "+962790100008",
+            "address": "الصويفية، الشارع الرئيسي، بجانب الصيدلية",
+            "coordinates": { "lat": 31.9572, "lng": 35.8788 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }],
+            "source": "phone_call", "payment": "cash"
+          },
+          {
+            "position": 9, "status": "pending",
+            "customer_name": "يوسف د.", "customer_phone": "+962790100009",
+            "address": "عبدون، خلف المدرسة",
+            "coordinates": { "lat": 31.9550, "lng": 35.8745 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "recurring_auto", "payment": "credits",
+            "credits_remaining": 4,
+            "recurring_label": "أسبوعي — أحد"
+          },
+          {
+            "position": 10, "status": "pending",
+            "customer_name": "زبون شارع", "customer_phone": "+962790100010",
+            "address": "نقطة GPS فقط",
+            "coordinates": { "lat": 31.9558, "lng": 35.8730 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }],
+            "source": "walk_up", "payment": "cash",
+            "is_new_customer": true,
+            "notes": "شب من البلكونة، بناية بيضاء"
+          },
+          {
+            "position": 11, "status": "pending",
+            "customer_name": "أحمد م.", "customer_phone": "+962790100011",
+            "address": "خلدا، شارع 3",
+            "coordinates": { "lat": 31.9495, "lng": 35.8645 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "recurring_auto", "payment": "on_account",
+            "recurring_label": "كل أسبوعين — أحد"
+          },
+          {
+            "position": 12, "status": "pending",
+            "customer_name": "هدى ف.", "customer_phone": "+962790100012",
+            "address": "الصويفية، قرب مدخل المول",
+            "coordinates": { "lat": 31.9580, "lng": 35.8800 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }],
+            "source": "app_order", "payment": "credits",
+            "credits_remaining": 9,
+            "notes": "اتصل قبل الوصول"
+          }
+        ]
+      },
+      "truck-2": {
+        "date": "2026-02-10",
+        "queue": [
+          {
+            "position": 1, "status": "pending",
+            "customer_name": "ليلى م.", "customer_phone": "+962790200001",
+            "address": "أم أذينة، بناية 8",
+            "coordinates": { "lat": 31.9500, "lng": 35.8770 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "recurring_auto", "payment": "credits",
+            "credits_remaining": 5,
+            "recurring_label": "أسبوعي — ثلاثاء"
+          },
+          {
+            "position": 2, "status": "pending",
+            "customer_name": "سامي ر.", "customer_phone": "+962790200002",
+            "address": "جنوب عبدون، فيلا 15",
+            "coordinates": { "lat": 31.9485, "lng": 35.8745 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }, { "name": "قارورة 10 لتر", "qty": 2 }],
+            "source": "app_order", "payment": "cash"
+          },
+          {
+            "position": 3, "status": "pending",
+            "customer_name": "دانا ح.", "customer_phone": "+962790200003",
+            "address": "أم أذينة، شارع المدين��",
+            "coordinates": { "lat": 31.9495, "lng": 35.8785 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 3 }],
+            "source": "recurring_auto", "payment": "credits",
+            "credits_remaining": 7,
+            "recurring_label": "أسبوعي — ثلاثاء وخميس"
+          },
+          {
+            "position": 4, "status": "pending",
+            "customer_name": "فراس ع.", "customer_phone": "+962790200004",
+            "address": "عبدون الجنوبي، بجانب الحديقة",
+            "coordinates": { "lat": 31.9478, "lng": 35.8755 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "phone_call", "payment": "cash"
+          },
+          {
+            "position": 5, "status": "pending",
+            "customer_name": "رنا ب.", "customer_phone": "+962790200005",
+            "address": "أم أذينة، بناية الأمل",
+            "coordinates": { "lat": 31.9505, "lng": 35.8790 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }],
+            "source": "app_order", "payment": "credits",
+            "credits_remaining": 3
+          },
+          {
+            "position": 6, "status": "pending",
+            "customer_name": "وليد ن.", "customer_phone": "+962790200006",
+            "address": "جنوب عبدون، شارع 8",
+            "coordinates": { "lat": 31.9470, "lng": 35.8740 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 2 }],
+            "source": "recurring_auto", "payment": "on_account",
+            "recurring_label": "كل أسبوعين"
+          },
+          {
+            "position": 7, "status": "pending",
+            "customer_name": "هند ق.", "customer_phone": "+962790200007",
+            "address": "أم أذينة، خلف السفارة",
+            "coordinates": { "lat": 31.9510, "lng": 35.8800 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 1 }],
+            "source": "app_order", "payment": "cash"
+          },
+          {
+            "position": 8, "status": "pending",
+            "customer_name": "طارق ش.", "customer_phone": "+962790200008",
+            "address": "عبدون الجنوبي، بناية 3",
+            "coordinates": { "lat": 31.9465, "lng": 35.8735 },
+            "items": [{ "name": "قارورة 19 لتر", "qty": 3 }],
+            "source": "recurring_auto", "payment": "credits",
+            "credits_remaining": 10,
+            "recurring_label": "أسبوعي — ثلاثاء"
+          }
+        ]
+      },
+      "truck-3": {
+        "date": "2026-02-10",
+        "queue": []
+      }
+    },
+    "delivery_estimation": {
+      "mode": "route_based",
+      "show_queue_position": true,
+      "show_driver_contact": true,
+      "show_live_tracking": false,
+      "typical_delivery_window": "٢-٣ ساعة بعد بداية المسار",
+      "route_days_label": "أحد، ثلاثاء، خميس",
+      "off_day_message": "التوصيل القادم: صباح الأحد"
+    },
+    "recurring_tomorrow": [
+      { "customer_name": "أحمد ر.", "phone": "+962790100001", "items": [{ "name": "قارورة 19 لتر", "qty": 2 }], "schedule": "أسبوعي — أحد وأربعاء", "area": "عبدون" },
+      { "customer_name": "سارة م.", "phone": "+962790000001", "items": [{ "name": "قارورة 19 لتر", "qty": 1 }], "schedule": "أسبوعي — أحد وأربعاء", "area": "الصويفية" },
+      { "customer_name": "يوسف د.", "phone": "+962790100009", "items": [{ "name": "قارورة 19 لتر", "qty": 2 }], "schedule": "أسبوعي — أحد", "area": "عبدون" },
+      { "customer_name": "أحمد م.", "phone": "+962790100011", "items": [{ "name": "قارورة 19 لتر", "qty": 2 }], "schedule": "كل أسبوعين — أحد", "area": "خلدا" },
+      { "customer_name": "هدى ف.", "phone": "+962790100012", "items": [{ "name": "قارورة 19 لتر", "qty": 1 }], "schedule": "أسبوعي — أربعاء", "area": "الصويفية" }
+    ],
+    "customer_insights": [
+      { "type": "inactive", "customer_name": "خالد أ.", "message": "لم يطلب منذ ٢٥ يوم — ربما تحوّل لمزوّد آخر", "severity": "warning" },
+      { "type": "credits_expiring", "customer_name": "سارة م.", "message": "ينتهي رصيدها خلال أسبوعين — ذكّرها بالتجديد", "severity": "info" },
+      { "type": "high_value", "customer_name": "عمر هـ.", "message": "عميل وفي — ٤٨ طلب · ٤ أشهر · أسبوعي بلا انقطاع", "severity": "positive" },
+      { "type": "frequency_drop", "customer_name": "رامي ك.", "message": "كان يطلب أسبوعياً — تراجع لكل ٣ أسابيع", "severity": "warning" },
+      { "type": "new_opportunity", "customer_name": "زبون شارع", "message": "٣ طلبات شارع هذا الأسبوع — اقترح عليه تطبيق هناك", "severity": "info" }
+    ],
+    "route_history": [
+      {
+        "date": "2026-02-09",
+        "truck_id": "truck-1",
+        "driver": "محمود",
+        "started_at": "08:15",
+        "ended_at": "13:45",
+        "duration_minutes": 330,
+        "loaded_full": 40,
+        "reloads": 0,
+        "total_delivered": 36,
+        "total_skipped": 2,
+        "total_failed": 1,
+        "empties_collected": 32,
+        "revenue": {
+          "prepaid_units": 28,
+          "cash_jod": 12.00,
+          "cash_units": 8,
+          "on_account_units": 4
+        },
+        "sources": {
+          "recurring_auto": 8,
+          "app_order": 5,
+          "walk_up": 3,
+          "phone_call": 1
+        }
+      }
+    ]
+  },
+  "abu-sulaiman-gas": {
+    "trucks": [
+      {
+        "id": "gas-truck-1",
+        "name": "شاحنة الغاز 1",
+        "driver_name": "سليمان",
+        "driver_phone": "+962790000020",
+        "assigned_driver_ids": ["gas-tm-1"],
+        "color": "#FF9800",
+        "capacity_full": 30,
+        "capacity_empty": 30,
+        "delivery_days": ["sun", "mon", "tue", "wed", "thu", "fri"],
+        "route_window": { "start": "07:00", "end": "16:00" },
+        "zones": [
+          {
+            "id": "gas-zone-1",
+            "name": "عبدون والصويفية",
+            "polygon": [],
+            "approximate_area_km2": 3.5,
+            "label": "عبدون والصويفية وخلدا"
+          }
+        ],
+        "today": {
+          "status": "on_route",
+          "started_at": "2026-02-10T07:30:00",
+          "current_full": 18,
+          "current_empty": 10,
+          "delivered_count": 4,
+          "remaining_count": 5,
+          "reloads": 0
+        }
+      }
+    ],
+    "route_queue": {
+      "gas-truck-1": {
+        "date": "2026-02-10",
+        "queue": [
+          {
+            "position": 1, "status": "delivered",
+            "customer_name": "أم هاني", "customer_phone": "+962790300001",
+            "address": "عبدون، شارع 5، عمارة 12",
+            "coordinates": { "lat": 31.9555, "lng": 35.8730 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 1 }],
+            "source": "recurring_auto", "payment": "cash",
+            "delivered_at": "2026-02-10T07:50:00",
+            "full_delivered": 1, "empties_collected": 1,
+            "cash_collected": 7.00,
+            "recurring_label": "شهري — كل أول ثلاثاء"
+          },
+          {
+            "position": 2, "status": "delivered",
+            "customer_name": "عماد ب.", "customer_phone": "+962790300002",
+            "address": "الصويفية، بناية النور",
+            "coordinates": { "lat": 31.9580, "lng": 35.8790 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 2 }],
+            "source": "app_order", "payment": "cash",
+            "delivered_at": "2026-02-10T08:15:00",
+            "full_delivered": 2, "empties_collected": 1,
+            "cash_collected": 29.00,
+            "delivery_note": "اسطوانة جديدة بدون فارغ — تأمين ١٥ د.أ"
+          },
+          {
+            "position": 3, "status": "delivered",
+            "customer_name": "فاطمة ز.", "customer_phone": "+962790300003",
+            "address": "خلدا، فيلا 8",
+            "coordinates": { "lat": 31.9495, "lng": 35.8640 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 1 }, { "name": "اسطوانة غاز 5 كغ", "qty": 1 }],
+            "source": "phone_call", "payment": "cash",
+            "delivered_at": "2026-02-10T08:45:00",
+            "full_delivered": 2, "empties_collected": 2,
+            "cash_collected": 10.50
+          },
+          {
+            "position": 4, "status": "delivered",
+            "customer_name": "مطعم البيت", "customer_phone": "+962790300004",
+            "address": "الصويفية، الشارع الرئيسي",
+            "coordinates": { "lat": 31.9575, "lng": 35.8785 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 3 }],
+            "source": "recurring_auto", "payment": "on_account",
+            "delivered_at": "2026-02-10T09:20:00",
+            "full_delivered": 3, "empties_collected": 3,
+            "recurring_label": "أسبوعي — ثلاثاء وجمعة"
+          },
+          {
+            "position": 5, "status": "skipped",
+            "customer_name": "وليد ج.", "customer_phone": "+962790300005",
+            "address": "عبدون، شارع 11",
+            "coordinates": { "lat": 31.9548, "lng": 35.8720 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 1 }],
+            "source": "app_order", "payment": "cash",
+            "skip_reason": "customer_not_home",
+            "rescheduled_to": "2026-02-11"
+          },
+          {
+            "position": 6, "status": "current",
+            "customer_name": "سارة م.", "customer_phone": "+962790000001",
+            "address": "عبدون، شارع الأمير محمد",
+            "coordinates": { "lat": 31.9560, "lng": 35.8735 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 2 }],
+            "source": "app_order", "payment": "cash",
+            "notes": "اتصل قبل الوصول"
+          },
+          {
+            "position": 7, "status": "pending",
+            "customer_name": "أبو محمد", "customer_phone": "+962790300007",
+            "address": "تلاع العلي، بناية 20",
+            "coordinates": { "lat": 31.9610, "lng": 35.8680 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 1 }],
+            "source": "recurring_auto", "payment": "cash",
+            "recurring_label": "كل أسبوعين — ثلاثاء",
+            "is_new_customer": false
+          },
+          {
+            "position": 8, "status": "pending",
+            "customer_name": "ليلى ش.", "customer_phone": "+962790300008",
+            "address": "دابوق، فيلا الورد",
+            "coordinates": { "lat": 31.9530, "lng": 35.8610 },
+            "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 1 }, { "name": "منظم غاز (أمان)", "qty": 1 }],
+            "source": "app_order", "payment": "cash",
+            "is_new_customer": true,
+            "notes": "أول طلب — ليس عندها فارغ"
+          },
+          {
+            "position": 9, "status": "pending",
+            "customer_name": "زبون شارع", "customer_phone": "+962790300009",
+            "address": "الصويفية، بجانب الصيدلية",
+            "coordinates": { "lat": 31.9572, "lng": 35.8792 },
+            "items": [{ "name": "اسطوانة غاز 5 كغ", "qty": 2 }],
+            "source": "walk_up", "payment": "cash",
+            "is_new_customer": true
+          }
+        ]
+      }
+    },
+    "recurring_tomorrow": [
+      { "customer_name": "أم هاني", "phone": "+962790300001", "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 1 }], "schedule": "شهري", "area": "عبدون" },
+      { "customer_name": "مطعم البيت", "phone": "+962790300004", "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 3 }], "schedule": "أسبوعي — ثلاثاء وجمعة", "area": "الصويفية" },
+      { "customer_name": "أبو محمد", "phone": "+962790300007", "items": [{ "name": "اسطوانة غاز 12 كغ", "qty": 1 }], "schedule": "كل أسبوعين", "area": "تلاع العلي" }
+    ],
+    "customer_insights": [
+      { "type": "inactive", "customer_name": "وليد ج.", "message": "لم يطلب منذ ٢٥ يوم — ربما تحول لمزوّد آخر", "severity": "warning" },
+      { "type": "credits_expiring", "customer_name": "لينا ت.", "message": "ينتهي رصيدها خلال أسبوع — ذكّرها بالتجديد", "severity": "info" },
+      { "type": "high_value", "customer_name": "مطعم البيت", "message": "أكبر عميل — ٣ اسطوانات أسبوعياً · ١٢ شهر", "severity": "positive" },
+      { "type": "new_opportunity", "customer_name": "ليلى ش.", "message": "عميلة جديدة — أول طلب اليوم. تابع الخدمة.", "severity": "info" },
+      { "type": "frequency_drop", "customer_name": "فاطمة ز.", "message": "كانت تطلب أسبوعياً — تراجعت لكل ٣ أسابيع", "severity": "warning" }
+    ],
+    "delivery_estimation": {
+      "mode": "time_estimate",
+      "show_queue_position": true,
+      "show_driver_contact": true,
+      "show_live_tracking": false,
+      "typical_delivery_window": "خلال ساعة",
+      "route_days_label": "يومياً عدا السبت",
+      "off_day_message": "التوصيل القادم: صباح الغد"
+    },
+    "route_history": [
+      {
+        "date": "2026-02-09",
+        "truck_id": "gas-truck-1",
+        "driver": "سليمان",
+        "started_at": "07:15",
+        "ended_at": "14:30",
+        "duration_minutes": 435,
+        "loaded_full": 30,
+        "reloads": 0,
+        "total_delivered": 22,
+        "total_skipped": 1,
+        "total_failed": 0,
+        "empties_collected": 18,
+        "revenue": {
+          "prepaid_units": 0,
+          "cash_jod": 168.00,
+          "cash_units": 22,
+          "on_account_units": 3
+        },
+        "sources": {
+          "recurring_auto": 10,
+          "app_order": 8,
+          "walk_up": 3,
+          "phone_call": 1
+        }
+      }
+    ]
+  }
+}

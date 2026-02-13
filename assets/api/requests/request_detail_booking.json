@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "data": {
+    "id": "req_002",
+    "type": "booking",
+    "status": "accepted",
+    "business_page_id": "salon-rania",
+    "business_name": "صالون رانيا",
+    "business_avatar_url": "https://picsum.photos/seed/salon-rania/200",
+    "business_slug": "salon-rania",
+    "items_count": 1,
+    "total_cents": 2500,
+    "created_at": 1770766600,
+    "preferred_date": "2026-02-15",
+    "time_slot": "صباحاً",
+    "team_member": "هبة",
+    "can_cancel": true,
+    "can_reschedule": true,
+    "items": [
+      { "id": "svc_1", "name": "قص وصبغة", "quantity": 1, "price_cents": 2500 }
+    ],
+    "timeline": [
+      { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770766600, "actor": "customer" },
+      { "status": "accepted", "label": "تم القبول", "timestamp": 1770770200, "actor": "business", "detail": "موعدك يوم السبت الساعة ١٠ صباحاً مع هبة" }
+    ]
+  }
+}

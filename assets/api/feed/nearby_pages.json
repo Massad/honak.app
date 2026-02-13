@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": [
+    {"id": "beit-sitti", "name": "مطعم بيت ستي", "slug": "beit-sitti", "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "cover_url": "https://images.unsplash.com/photo-1705768300072-bb6a0cbb0e73?auto=format&fit=crop&w=800&q=80", "category": "مطعم", "distance_km": 0.8, "is_following": true, "is_verified": true, "weekly_orders": 530, "is_open": true, "browse_only": true},
+    {"id": "hara-coffee", "name": "صيدلية المدينة", "slug": "hara-coffee", "avatar_url": "https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=200&q=80", "cover_url": "https://images.unsplash.com/photo-1709276351463-fc72a6d00b3a?auto=format&fit=crop&w=800&q=80", "category": "صيدلية", "distance_km": 1.0, "is_following": false, "is_verified": true, "weekly_orders": 210, "is_open": true, "browse_only": false},
+    {"id": "nour-fashion", "name": "نور فاشن", "slug": "nour-fashion", "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80", "cover_url": "https://images.unsplash.com/photo-1770226415002-dbbd40327ec7?auto=format&fit=crop&w=800&q=80", "category": "متجر ملابس", "distance_km": 1.0, "is_following": true, "is_verified": true, "weekly_orders": 90, "is_open": false, "browse_only": false},
+    {"id": "abu-ahmad-water", "name": "مياه أبو أحمد", "slug": "abu-ahmad-water", "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80", "cover_url": "https://images.unsplash.com/photo-1644061798186-96785723f563?auto=format&fit=crop&w=800&q=80", "category": "توصيل مياه", "distance_km": 1.2, "is_following": true, "is_verified": true, "weekly_orders": 420, "is_open": true, "browse_only": false},
+    {"id": "salon-rania", "name": "صالون رانية", "slug": "salon-rania", "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "cover_url": "https://images.unsplash.com/photo-1626383120723-2a941488860d?auto=format&fit=crop&w=800&q=80", "category": "صالون تجميل", "distance_km": 1.5, "is_following": false, "is_verified": true, "weekly_orders": 180, "is_open": true, "browse_only": false}
+  ],
+  "meta": {"total": 5, "has_more": false}
+}

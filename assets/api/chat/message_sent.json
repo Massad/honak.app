@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": {
+    "id": "msg_new_001",
+    "conversation_id": "conv_001",
+    "sender_id": "usr_sara",
+    "sender_name": "سارة أحمد",
+    "type": "text",
+    "content": "تم الإرسال",
+    "image_url": null,
+    "metadata": {},
+    "created_at": 1707310000,
+    "is_from_business": false
+  }
+}

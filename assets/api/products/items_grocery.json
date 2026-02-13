@@ -1,0 +1,130 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_hc01",
+      "name_ar": "قهوة عربية",
+      "name_en": "Arabic Coffee",
+      "description_ar": "قهوة عربية أصيلة مع هيل",
+      "price_cents": 150,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_hot",
+      "category_name": "مشروبات ساخنة",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 1,
+      "option_groups": []
+    },
+    {
+      "id": "item_hc02",
+      "name_ar": "لاتيه",
+      "name_en": "Latte",
+      "description_ar": "إسبريسو مع حليب مخفوق",
+      "price_cents": 250,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_hot",
+      "category_name": "مشروبات ساخنة",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 2,
+      "option_groups": [
+        {
+          "id": "og_latte_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_latte_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": 0},
+            {"id": "opt_latte_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 75}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_hc03",
+      "name_ar": "قهوة تركية",
+      "name_en": "Turkish Coffee",
+      "description_ar": "قهوة تركية على الجمر",
+      "price_cents": 100,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_hot",
+      "category_name": "مشروبات ساخنة",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 3,
+      "option_groups": []
+    },
+    {
+      "id": "item_hc04",
+      "name_ar": "شاي بالميرمية",
+      "name_en": "Sage Tea",
+      "description_ar": "شاي أحمر مع ميرمية طازجة",
+      "price_cents": 75,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_hot",
+      "category_name": "مشروبات ساخنة",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 4,
+      "option_groups": []
+    },
+    {
+      "id": "item_hc05",
+      "name_ar": "آيس لاتيه",
+      "name_en": "Iced Latte",
+      "description_ar": "لاتيه بارد مع ثلج",
+      "price_cents": 300,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_cold",
+      "category_name": "مشروبات باردة",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 5,
+      "option_groups": []
+    },
+    {
+      "id": "item_hc06",
+      "name_ar": "ليمونانا",
+      "name_en": "Lemonana",
+      "description_ar": "عصير ليمون بالنعناع الطازج",
+      "price_cents": 200,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_cold",
+      "category_name": "مشروبات باردة",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 6,
+      "option_groups": []
+    },
+    {
+      "id": "item_hc07",
+      "name_ar": "كيكة الشوكولا",
+      "name_en": "Chocolate Cake",
+      "description_ar": "كيكة شوكولا طازجة يومياً",
+      "price_cents": 250,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_sweets",
+      "category_name": "حلويات",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 7,
+      "option_groups": []
+    },
+    {
+      "id": "item_hc08",
+      "name_ar": "كنافة نابلسية",
+      "name_en": "Nabulsi Knafeh",
+      "description_ar": "كنافة بالجبنة النابلسية مع قطر",
+      "price_cents": 350,
+      "images": ["https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_sweets",
+      "category_name": "حلويات",
+      "in_stock": true,
+      "page_id": "hara-coffee",
+      "sort_order": 8,
+      "option_groups": []
+    }
+  ],
+  "meta": {"total": 8, "has_more": false}
+}

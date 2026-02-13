@@ -1,0 +1,117 @@
+{
+  "success": true,
+  "data": {
+    "page_id": "pg_lina01",
+    "page_name": "لينا بوتيك",
+    "categories": [
+      {
+        "id": "cat_dresses",
+        "name": "فساتين",
+        "sort_order": 1,
+        "products": [
+          {
+            "id": "prod_dress01",
+            "name": "فستان سهرة أسود",
+            "description": "فستان سهرة أنيق، قماش ساتان، طول ميدي",
+            "price_cents": 4500,
+            "image_url": "https://picsum.photos/seed/dress-black/400/500",
+            "is_available": true,
+            "sort_order": 1,
+            "variants": [
+              {"id": "var_d01_s", "type": "size", "value": "S", "is_available": true},
+              {"id": "var_d01_m", "type": "size", "value": "M", "is_available": true},
+              {"id": "var_d01_l", "type": "size", "value": "L", "is_available": true},
+              {"id": "var_d01_xl", "type": "size", "value": "XL", "is_available": false}
+            ]
+          },
+          {
+            "id": "prod_dress02",
+            "name": "فستان كاجوال زهري",
+            "description": "فستان قطني يومي، مريح وعملي",
+            "price_cents": 2200,
+            "image_url": "https://picsum.photos/seed/dress-pink/400/500",
+            "is_available": true,
+            "sort_order": 2,
+            "variants": [
+              {"id": "var_d02_s", "type": "size", "value": "S", "is_available": true},
+              {"id": "var_d02_m", "type": "size", "value": "M", "is_available": true},
+              {"id": "var_d02_l", "type": "size", "value": "L", "is_available": true},
+              {"id": "var_d02_xl", "type": "size", "value": "XL", "is_available": true}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cat_tops",
+        "name": "بلايز",
+        "sort_order": 2,
+        "products": [
+          {
+            "id": "prod_top01",
+            "name": "بلوزة شيفون بيضاء",
+            "description": "بلوزة شيفون بأكمام طويلة",
+            "price_cents": 1500,
+            "image_url": "https://picsum.photos/seed/blouse-white/400/500",
+            "is_available": true,
+            "sort_order": 1,
+            "variants": [
+              {"id": "var_t01_s", "type": "size", "value": "S", "is_available": true},
+              {"id": "var_t01_m", "type": "size", "value": "M", "is_available": true},
+              {"id": "var_t01_l", "type": "size", "value": "L", "is_available": false},
+              {"id": "var_t01_xl", "type": "size", "value": "XL", "is_available": false}
+            ]
+          },
+          {
+            "id": "prod_top02",
+            "name": "تيشيرت قطني",
+            "description": "تيشيرت قطن 100%، متوفر بعدة ألوان",
+            "price_cents": 800,
+            "image_url": "https://picsum.photos/seed/tshirt/400/500",
+            "is_available": true,
+            "sort_order": 2,
+            "variants": [
+              {"id": "var_t02_wh", "type": "color", "value": "أبيض", "is_available": true},
+              {"id": "var_t02_bk", "type": "color", "value": "أسود", "is_available": true},
+              {"id": "var_t02_nv", "type": "color", "value": "كحلي", "is_available": true},
+              {"id": "var_t02_s", "type": "size", "value": "S", "is_available": true},
+              {"id": "var_t02_m", "type": "size", "value": "M", "is_available": true},
+              {"id": "var_t02_l", "type": "size", "value": "L", "is_available": true},
+              {"id": "var_t02_xl", "type": "size", "value": "XL", "is_available": true}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cat_accessories",
+        "name": "إكسسوارات",
+        "sort_order": 3,
+        "products": [
+          {
+            "id": "prod_bag01",
+            "name": "شنطة يد جلد",
+            "description": "شنطة يد من الجلد الطبيعي، لون بني",
+            "price_cents": 3500,
+            "image_url": "https://picsum.photos/seed/bag-brown/400/400",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_scarf01",
+            "name": "شال حرير",
+            "description": "شال حرير مطبوع، ألوان خريفية",
+            "price_cents": 1200,
+            "image_url": "https://picsum.photos/seed/scarf/400/400",
+            "is_available": true,
+            "sort_order": 2
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "page": 1,
+    "per_page": 50,
+    "total": 6,
+    "total_pages": 1
+  }
+}

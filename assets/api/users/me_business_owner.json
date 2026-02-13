@@ -1,0 +1,69 @@
+{
+  "success": true,
+  "data": {
+    "id": "usr_002",
+    "phone": "0790000002",
+    "name": "أحمد",
+    "avatar_url": "https://images.unsplash.com/photo-1765366574945-e2f1b4b1a5b3?auto=format&fit=crop&w=150&q=80",
+    "bio": "عمّان، جبل عمان",
+    "created_at": 1695000000,
+    "status": "active",
+    "needs_profile_setup": false,
+    "stats": {
+      "following_count": 8,
+      "orders_count": 5
+    },
+    "pages": [
+      {
+        "id": "abu-ahmad-water",
+        "name": "مياه أبو أحمد",
+        "slug": "abu-ahmad-water",
+        "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "توصيل مياه",
+        "business_type_id": "water_delivery",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "ahmad-plumbing",
+        "name": "سباكة أحمد",
+        "slug": "ahmad-plumbing",
+        "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "سباك",
+        "business_type_id": "plumber",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "beit-sitti",
+        "name": "بيت ستي",
+        "slug": "beit-sitti",
+        "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "مطعم",
+        "business_type_id": "restaurant",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "abu-sulaiman-gas",
+        "name": "غاز أبو سليمان",
+        "slug": "abu-sulaiman-gas",
+        "avatar_url": "https://images.unsplash.com/photo-1697721135299-c169dc9733bf?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "توصيل غاز",
+        "business_type_id": "gas_delivery",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "sparkle-car-wash",
+        "name": "سباركل لغسيل السيارات",
+        "slug": "sparkle-car-wash",
+        "avatar_url": "https://images.unsplash.com/photo-1657368567304-5a2644b6052e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "مغسلة سيارات",
+        "business_type_id": "car_wash",
+        "is_verified": true,
+        "role": "owner"
+      }
+    ]
+  }
+}

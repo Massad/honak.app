@@ -1,0 +1,72 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "conv_heba_beauty_lounge",
+      "page_id": "pg_beauty_lounge",
+      "page_name": "بيوتي لاونج",
+      "page_avatar": "https://picsum.photos/seed/beauty-lounge/200",
+      "page_handle": "beauty-lounge",
+      "customer_id": "usr_heba_r",
+      "customer_name": "هبة الرحمن",
+      "customer_avatar": "https://picsum.photos/seed/heba_r/200",
+      "request_id": "req_6001",
+      "request_status": "pending",
+      "request_expires_at": null,
+      "last_message": "بدي موعد مانيكير وباديكير جل — شو أقرب وقت فاضي عندكم هالأسبوع؟",
+      "last_message_at": 1738748000,
+      "last_message_from": "customer",
+      "unread_count": 2,
+      "status": "active",
+      "type": "request",
+      "has_active_story": false,
+      "needs_info": false
+    },
+    {
+      "id": "conv_farah_beauty_lounge",
+      "page_id": "pg_beauty_lounge",
+      "page_name": "بيوتي لاونج",
+      "page_avatar": "https://picsum.photos/seed/beauty-lounge/200",
+      "page_handle": "beauty-lounge",
+      "customer_id": "usr_farah_a",
+      "customer_name": "فرح عبدالله",
+      "customer_avatar": "https://picsum.photos/seed/farah_a/200",
+      "request_id": "req_6005",
+      "request_status": "confirmed",
+      "request_expires_at": null,
+      "last_message": "تمام حبيبتي! موعدك يوم الأحد الساعة ٣ عصراً — تنظيف بشرة + ماسك ترطيب",
+      "last_message_at": 1738710000,
+      "last_message_from": "business",
+      "unread_count": 0,
+      "status": "active",
+      "type": "request",
+      "has_active_story": true,
+      "needs_info": false
+    },
+    {
+      "id": "conv_layla_beauty_lounge",
+      "page_id": "pg_beauty_lounge",
+      "page_name": "بيوتي لاونج",
+      "page_avatar": "https://picsum.photos/seed/beauty-lounge/200",
+      "page_handle": "beauty-lounge",
+      "customer_id": "usr_layla_h",
+      "customer_name": "ليلى حسن",
+      "customer_avatar": "https://picsum.photos/seed/layla_h/200",
+      "request_id": null,
+      "request_status": null,
+      "request_expires_at": null,
+      "last_message": "مرحبا! شو عروضكم لهالشهر على خدمات الشعر؟",
+      "last_message_at": 1738660000,
+      "last_message_from": "customer",
+      "unread_count": 1,
+      "status": "active",
+      "type": "message",
+      "has_active_story": false,
+      "needs_info": false
+    }
+  ],
+  "meta": {
+    "total": 3,
+    "has_more": false
+  }
+}

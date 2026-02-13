@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_muni_01",
+      "conversation_id": "conv_sara_municipality",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "السلام عليكم، بدي أستفسر عن تصريح فعالية في حديقة عامة",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707180000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_muni_02",
+      "conversation_id": "conv_sara_municipality",
+      "sender_id": "usr_municipality",
+      "sender_name": "أمانة عمان الكبرى",
+      "type": "text",
+      "content": "وعليكم السلام. يرجى تقديم طلب رسمي عبر موقع الأمانة الإلكتروني مرفقاً بتفاصيل الفعالية",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707190000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_muni_03",
+      "conversation_id": "conv_sara_municipality",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "طيب وين بالضبط أقدم الطلب؟ وشو المستندات المطلوبة؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707192000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_muni_04",
+      "conversation_id": "conv_sara_municipality",
+      "sender_id": "usr_municipality",
+      "sender_name": "أمانة عمان الكبرى",
+      "type": "text",
+      "content": "شكراً لاستفسارك. تم تحويل الموضوع للقسم المختص وسيتم الرد خلال ٤٨ ساعة عمل",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707200000,
+      "is_from_business": true
+    }
+  ],
+  "meta": {
+    "total": 4,
+    "has_more": false
+  }
+}

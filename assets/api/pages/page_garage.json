@@ -1,0 +1,75 @@
+{
+  "success": true,
+  "data": {
+    "id": "abukhaled-garage",
+    "business_type_id": "car_mechanic",
+    "business_type_name": "ميكانيكي سيارات",
+    "category_name": "سيارات ومركبات",
+    "explore_category": "cat_auto",
+    "name": "كراج أبو خالد للسيارات",
+    "name_en": "Abu Khaled Car Garage",
+    "slug": "abukhaled-garage",
+    "handle": "abukhaled-garage",
+    "store_type": "physical",
+    "archetype": "quote_request",
+    "description": "صيانة سيارات عامة — ميكانيك، كهرباء، عفشة.",
+    "avatar_url": "https://picsum.photos/seed/abukhaled/200",
+    "cover_url": "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962795551234",
+    "whatsapp": "+962795551234",
+    "location": {
+      "lat": 32.056,
+      "lng": 36.088,
+      "label": "الزرقاء، شارع الملك حسين",
+      "area": "الزرقاء",
+      "city": "الزرقاء"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "19:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "19:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "19:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "19:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "19:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": true, "open": "08:00", "close": "19:00"}
+    },
+    "operating_hours": "السبت - الخميس: ٨:٠٠ ص — ٧:٠٠ م\nالجمعة: مغلق",
+    "is_verified": false,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "unclaimed",
+    "permanently_closed": false,
+    "followers_count": 0,
+    "items_count": 0,
+    "posts_count": 0,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "19:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 0,
+    "trust_metrics": [],
+    "delivery_available": false,
+    "pickup_available": false,
+    "payment_methods": ["نقداً"],
+    "coverage_zones": [],
+    "contact_methods": ["phone", "whatsapp"],
+    "created_at": 1700000000,
+    "team_members_count": 0,
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "blocked_dates": [],
+    "branches": [
+      {
+        "id": "main",
+        "name": "كراج أبو خالد",
+        "city": "الزرقاء",
+        "city_id": "zarqa",
+        "neighborhood_id": "downtown",
+        "address": "الزرقاء، شارع الملك حسين"
+      }
+    ]
+  }
+}

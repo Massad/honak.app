@@ -1,0 +1,222 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "msg_001",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "مرحبا! حابة أطلب من عندكم",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300000,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_002",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_deira_owner",
+      "sender_name": "مطعم الديرة",
+      "type": "text",
+      "content": "أهلاً وسهلاً! تفضلي شوفي المنيو وأرسليلنا طلبك",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300300,
+      "is_from_business": true
+    },
+    {
+      "id": "msg_003",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "بدي شاورما لحمة وسط وعصير ليمون بالنعنع",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300600,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_004",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_deira_owner",
+      "sender_name": "مطعم الديرة",
+      "type": "text",
+      "content": "تمام! المجموع ٣ دنانير. بأكدلك الطلب هلأ",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707301000,
+      "is_from_business": true
+    },
+    {
+      "id": "msg_005",
+      "conversation_id": "conv_001",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم تأكيد الطلب #req_001",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707301200,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_006",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "شكراً! قديش بياخد وقت تقريباً؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707301500,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_007",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_deira_owner",
+      "sender_name": "مطعم الديرة",
+      "type": "text",
+      "content": "تقريباً ٢٠-٢٥ دقيقة إن شاء الله",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707301800,
+      "is_from_business": true
+    },
+    {
+      "id": "msg_008",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_deira_owner",
+      "sender_name": "مطعم الديرة",
+      "type": "alternative_suggestion",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "id": "alt_001",
+        "suggestion_type": "replacement",
+        "reason": "شاورما اللحمة خلصت، بنقترح عليكِ شاورما دجاج سبيشل",
+        "items": [
+          {
+            "item_id": "prd_alt_001",
+            "name": "شاورما دجاج سبيشل",
+            "price": 350,
+            "quantity": 1,
+            "image": "https://picsum.photos/seed/shawarma_chicken/200"
+          }
+        ],
+        "original_total": 300,
+        "suggested_total": 350,
+        "price_difference": 50,
+        "status": "pending"
+      },
+      "created_at": 1707302500,
+      "is_from_business": true
+    },
+    {
+      "id": "msg_009",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "ماشي تمام خلص دجاج سبيشل",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707303000,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_010",
+      "conversation_id": "conv_001",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم قبول البديل المقترح",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707303100,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_011",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_deira_owner",
+      "sender_name": "مطعم الديرة",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/food_prep/400/300",
+      "metadata": {},
+      "created_at": 1707304000,
+      "is_from_business": true
+    },
+    {
+      "id": "msg_012",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "modification_request",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "id": "mod_001",
+        "order_id": "req_001",
+        "item_changes": [
+          {
+            "name": "شاورما دجاج سبيشل",
+            "changes": [
+              {"field": "الكمية", "from": "1", "to": "2"},
+              {"field": "الحجم", "from": "وسط", "to": "كبير"}
+            ]
+          }
+        ],
+        "note": "ممكن تزيدوا الكمية لو سمحتوا",
+        "original_total": 350,
+        "new_total": 650,
+        "status": "pending"
+      },
+      "created_at": 1707305000,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_013",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_deira_owner",
+      "sender_name": "مطعم الديرة",
+      "type": "text",
+      "content": "تمام عدّلنا الطلب! المجموع الجديد ٦.٥٠ دينار",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707306000,
+      "is_from_business": true
+    },
+    {
+      "id": "msg_014",
+      "conversation_id": "conv_001",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم قبول التعديل على الطلب",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707306100,
+      "is_from_business": false
+    },
+    {
+      "id": "msg_015",
+      "conversation_id": "conv_001",
+      "sender_id": "usr_deira_owner",
+      "sender_name": "مطعم الديرة",
+      "type": "text",
+      "content": "طلبك جاهز للاستلام! بالعافية",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707310000,
+      "is_from_business": true
+    }
+  ],
+  "meta": {
+    "total": 15,
+    "has_more": false
+  }
+}

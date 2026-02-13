@@ -1,0 +1,81 @@
+{
+  "success": true,
+  "data": {
+    "id": "sara-photography",
+    "owner_id": "usr_001",
+    "business_type_id": "photographer",
+    "business_type_name": "مصورة",
+    "category_name": "إبداع وتصميم",
+    "explore_category": "cat_creative",
+    "name": "تصوير سارة",
+    "name_en": "Sara Photography",
+    "slug": "sara-photography",
+    "handle": "sara-photography",
+    "store_type": "online",
+    "archetype": "portfolio_inquiry",
+    "description": "تصوير مناسبات، أعراس، بورتريه. أسلوب فني وطبيعي. متاحة للتصوير الخارجي.",
+    "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1769230385107-bc6eaa7a123e?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000014",
+    "location": {
+      "lat": 31.958,
+      "lng": 35.872,
+      "label": "الصويفية، شارع الوكالات",
+      "area": "الصويفية",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "18:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "18:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "18:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "18:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "18:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "20:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "20:00"}
+    },
+    "operating_hours": "بالمواعيد",
+    "items_label_ar": "الأعمال",
+    "items_label_en": "Portfolio",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 560,
+    "items_count": 6,
+    "posts_count": 20,
+    "is_following": false,
+    "trust_score": 80,
+    "trust_metrics": [
+      {"label": "مشاريع مكتملة", "value": "١٢٠", "icon": "camera"},
+      {"label": "متاحة", "value": "هذا الشهر", "icon": "calendar_today"},
+      {"label": "نشطة منذ", "value": "+٣ سنوات", "icon": "history"}
+    ],
+    "booking_available": true,
+    "payment_methods": ["نقداً", "تحويل بنكي"],
+    "member_since": "2022",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_photo1", "image_url": "https://picsum.photos/seed/saraphotostory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_photo2", "image_url": "https://picsum.photos/seed/saraphotostory2/400/700", "duration": 5, "created_at": 1707870000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-04-10", "reason": "جلسة تصوير زفاف — محجوزة"},
+      {"date": "2026-04-11", "reason": "جلسة تصوير زفاف — محجوزة"}
+    ],
+    "gallery_images": [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800",
+      "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800",
+      "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800",
+      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800",
+      "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800"
+    ],
+    "external_links": [
+      {"platform": "instagram", "label": "@sara.photography.jo", "url": "https://instagram.com/sara.photography.jo"},
+      {"platform": "website", "label": "sara-photo.com", "url": "https://sara-photo.com"}
+    ]
+  }
+}

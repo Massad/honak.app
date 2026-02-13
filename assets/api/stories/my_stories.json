@@ -1,0 +1,377 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "my-s1",
+      "slide": {
+        "id": "my-s1",
+        "type": "image",
+        "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=80",
+        "text": "تحول اليوم — قبل وبعد",
+        "text_position": "top",
+        "font": "default",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": null,
+        "text_layers": [],
+        "created_at": "2026-02-11T07:45:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "live",
+      "audience": "followers",
+      "created_at": "2026-02-11T07:45:00Z",
+      "expires_at": "2026-02-12T07:45:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 578,
+        "unique_reach": 412,
+        "shares": 34,
+        "messages": 22,
+        "profile_visits": 45,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s2",
+      "slide": {
+        "id": "my-s2",
+        "type": "image",
+        "image": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=80",
+        "text": "مانيكير جل — عرض خاص ٨ د.أ",
+        "text_position": "bottom",
+        "font": "bold",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": null,
+        "text_layers": [],
+        "created_at": "2026-02-11T12:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "live",
+      "audience": "all",
+      "created_at": "2026-02-11T12:00:00Z",
+      "expires_at": "2026-02-12T12:00:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 234,
+        "unique_reach": 189,
+        "shares": 12,
+        "messages": 8,
+        "profile_visits": 15,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s3",
+      "slide": {
+        "id": "my-s3",
+        "type": "text",
+        "image": null,
+        "text": "حجوزات اليوم مكتملة\nاحجزي لبكرة من الآن",
+        "text_position": "center",
+        "font": "elegant",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": ["#9C27B0", "#E040FB"],
+        "text_layers": [],
+        "created_at": "2026-02-11T14:30:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "live",
+      "audience": "followers",
+      "created_at": "2026-02-11T14:30:00Z",
+      "expires_at": "2026-02-12T14:30:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 145,
+        "unique_reach": 98,
+        "shares": 6,
+        "messages": 3,
+        "profile_visits": 8,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s4",
+      "slide": {
+        "id": "my-s4",
+        "type": "image",
+        "image": "https://images.unsplash.com/photo-1583665354191-634609954d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=80",
+        "text": "ميكاب عرايس — احجزي قبل الموسم",
+        "text_position": "bottom",
+        "font": "bold",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": null,
+        "text_layers": [],
+        "created_at": "2026-02-11T09:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "scheduled",
+      "audience": "followers",
+      "created_at": "2026-02-11T09:00:00Z",
+      "expires_at": null,
+      "scheduled_at": "2026-02-13T10:00:00Z",
+      "stats": {
+        "views": 0,
+        "unique_reach": 0,
+        "shares": 0,
+        "messages": 0,
+        "profile_visits": 0,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s5",
+      "slide": {
+        "id": "my-s5",
+        "type": "text",
+        "image": null,
+        "text": "عرض نهاية الأسبوع\nخصم ١٥٪ على كل الخدمات",
+        "text_position": "center",
+        "font": "bold",
+        "text_color": "#FFD700",
+        "bg_color": null,
+        "bg_gradient": ["#E53935", "#FF5722"],
+        "text_layers": [],
+        "created_at": "2026-02-11T09:30:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "scheduled",
+      "audience": "all",
+      "created_at": "2026-02-11T09:30:00Z",
+      "expires_at": null,
+      "scheduled_at": "2026-02-14T09:00:00Z",
+      "stats": {
+        "views": 0,
+        "unique_reach": 0,
+        "shares": 0,
+        "messages": 0,
+        "profile_visits": 0,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s6",
+      "slide": {
+        "id": "my-s6",
+        "type": "image",
+        "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=80",
+        "text": "وصلتنا منتجات شعر جديدة من كوريا",
+        "text_position": "bottom",
+        "font": "default",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": null,
+        "text_layers": [],
+        "created_at": "2026-02-11T10:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "scheduled",
+      "audience": "followers",
+      "created_at": "2026-02-11T10:00:00Z",
+      "expires_at": null,
+      "scheduled_at": "2026-02-15T12:00:00Z",
+      "stats": {
+        "views": 0,
+        "unique_reach": 0,
+        "shares": 0,
+        "messages": 0,
+        "profile_visits": 0,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s7",
+      "slide": {
+        "id": "my-s7",
+        "type": "text",
+        "image": null,
+        "text": "باقات العيد — حنة + ميكاب + تسريحة\nاحجزي مبكراً",
+        "text_position": "center",
+        "font": "bold",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": ["#1A73E8", "#4DA3FF"],
+        "text_layers": [],
+        "created_at": "2026-02-11T11:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "scheduled",
+      "audience": "all",
+      "created_at": "2026-02-11T11:00:00Z",
+      "expires_at": null,
+      "scheduled_at": "2026-02-16T10:00:00Z",
+      "stats": {
+        "views": 0,
+        "unique_reach": 0,
+        "shares": 0,
+        "messages": 0,
+        "profile_visits": 0,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s8",
+      "slide": {
+        "id": "my-s8",
+        "type": "image",
+        "image": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=80",
+        "text": "صبغة شعر طبيعية — لون رائع بدون كيماويات",
+        "text_position": "bottom",
+        "font": "bold",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": null,
+        "text_layers": [],
+        "created_at": "2026-02-08T11:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "expired",
+      "audience": "followers",
+      "created_at": "2026-02-08T11:00:00Z",
+      "expires_at": "2026-02-09T11:00:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 456,
+        "unique_reach": 321,
+        "shares": 28,
+        "messages": 15,
+        "profile_visits": 32,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s9",
+      "slide": {
+        "id": "my-s9",
+        "type": "text",
+        "image": null,
+        "text": "يوم المرأة — خصومات على كل الخدمات",
+        "text_position": "center",
+        "font": "default",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": ["#43A047", "#66BB6A"],
+        "text_layers": [],
+        "created_at": "2026-02-07T14:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "expired",
+      "audience": "followers",
+      "created_at": "2026-02-07T14:00:00Z",
+      "expires_at": "2026-02-08T14:00:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 312,
+        "unique_reach": 245,
+        "shares": 9,
+        "messages": 5,
+        "profile_visits": 18,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s10",
+      "slide": {
+        "id": "my-s10",
+        "type": "image",
+        "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=80",
+        "text": "كيراتين برازيلي — نتائج مذهلة",
+        "text_position": "bottom",
+        "font": "default",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": null,
+        "text_layers": [],
+        "created_at": "2026-02-06T09:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "expired",
+      "audience": "all",
+      "created_at": "2026-02-06T09:00:00Z",
+      "expires_at": "2026-02-07T09:00:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 890,
+        "unique_reach": 623,
+        "shares": 56,
+        "messages": 41,
+        "profile_visits": 67,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s11",
+      "slide": {
+        "id": "my-s11",
+        "type": "text",
+        "image": null,
+        "text": "تشكيلة ألوان أظافر الربيع\nألوان جريئة ومميزة",
+        "text_position": "center",
+        "font": "elegant",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": ["#FF6B35", "#FF9800"],
+        "text_layers": [],
+        "created_at": "2026-02-05T10:00:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "expired",
+      "audience": "followers",
+      "created_at": "2026-02-05T10:00:00Z",
+      "expires_at": "2026-02-06T10:00:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 267,
+        "unique_reach": 198,
+        "shares": 14,
+        "messages": 7,
+        "profile_visits": 21,
+        "link_clicks": 0
+      }
+    },
+    {
+      "id": "my-s12",
+      "slide": {
+        "id": "my-s12",
+        "type": "text",
+        "image": null,
+        "text": "أفضل زبونات الشهر — شكراً لثقتكم\nمعاً نصنع الجمال",
+        "text_position": "center",
+        "font": "bold",
+        "text_color": "#FFFFFF",
+        "bg_color": null,
+        "bg_gradient": ["#9C27B0", "#E040FB"],
+        "text_layers": [],
+        "created_at": "2026-02-04T10:30:00Z",
+        "duration": 5,
+        "seen": false
+      },
+      "status": "expired",
+      "audience": "all",
+      "created_at": "2026-02-04T10:30:00Z",
+      "expires_at": "2026-02-05T10:30:00Z",
+      "scheduled_at": null,
+      "stats": {
+        "views": 1245,
+        "unique_reach": 876,
+        "shares": 89,
+        "messages": 63,
+        "profile_visits": 102,
+        "link_clicks": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 4,
+      "new_followers": 1,
+      "page_views": 23,
+      "today_revenue": 12000
+    },
+    "active_quotes": [
+      {
+        "id": "qt_1",
+        "customer": "أبو محمد",
+        "description": "تسليك مجاري — حمام رئيسي",
+        "date": "2026-02-12",
+        "amount": 3500,
+        "status": "pending_quote"
+      },
+      {
+        "id": "qt_2",
+        "customer": "عائلة سمير",
+        "description": "تغيير خلاط مطبخ + صيانة سخان",
+        "date": "2026-02-12",
+        "amount": 5500,
+        "status": "quoted"
+      },
+      {
+        "id": "qt_3",
+        "customer": "هاني يوسف",
+        "description": "كشف تسريب — سقف الحمام",
+        "date": "2026-02-11",
+        "amount": null,
+        "status": "pending_quote"
+      },
+      {
+        "id": "qt_4",
+        "customer": "مكتب الأمل",
+        "description": "صيانة دورية — 3 حمامات",
+        "date": "2026-02-10",
+        "amount": 8000,
+        "status": "accepted"
+      }
+    ],
+    "pending_requests": [
+      {"id": "req_1001", "customer": "أبو محمد", "service": "تسليك مجاري — الشميساني", "date": "2026-02-12", "time": "16:00"},
+      {"id": "req_1002", "customer": "سعاد خالد", "service": "تغيير حنفية — تلاع العلي", "date": "2026-02-13", "time": "10:00"}
+    ]
+  }
+}

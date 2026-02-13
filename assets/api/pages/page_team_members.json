@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "data": {
+    "page_id": "pg_deira",
+    "page_name": "مطعم الديرة",
+    "members": [
+      {
+        "id": "usr_deira01",
+        "name": "خالد المصري",
+        "avatar_url": "https://picsum.photos/seed/khaled/200",
+        "phone": "0771234567",
+        "role": "owner",
+        "permissions": ["*"],
+        "joined_at": 1695000000,
+        "trust_metric": 95
+      },
+      {
+        "id": "usr_team01",
+        "name": "يوسف علي",
+        "avatar_url": "https://picsum.photos/seed/yusuf/200",
+        "phone": "0761234567",
+        "role": "member",
+        "permissions": ["orders.view", "orders.update"],
+        "joined_at": 1703000000,
+        "trust_metric": 88
+      },
+      {
+        "id": "usr_team02",
+        "name": "رنا خالد",
+        "avatar_url": "https://picsum.photos/seed/rana/200",
+        "phone": "0741234567",
+        "role": "member",
+        "permissions": ["orders.view", "orders.update", "products.view", "products.edit", "posts.create"],
+        "joined_at": 1705000000,
+        "trust_metric": 91
+      }
+    ]
+  }
+}

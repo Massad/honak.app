@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "pkg-coffee-1",
+      "name": "اشتراك القهوة الشهري",
+      "description": "قهوة يومية لمدة شهر كامل — بلا حدود",
+      "price": 25000,
+      "credits": null,
+      "credit_label": null,
+      "validity_months": 1,
+      "model": "date_only",
+      "active": true
+    },
+    {
+      "id": "pkg-coffee-2",
+      "name": "باقة القهوة الأسبوعية",
+      "description": "7 أكواب خلال أسبوعين",
+      "price": 7000,
+      "credits": 7,
+      "credit_label": "كوب",
+      "validity_months": 0,
+      "model": "visits_and_date",
+      "compare_single_price": 1500,
+      "active": true
+    }
+  ]
+}

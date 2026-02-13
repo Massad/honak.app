@@ -1,0 +1,133 @@
+{
+  "success": true,
+  "data": {
+    "page_id": "pg_grocery01",
+    "page_name": "ميني ماركت أبو حسن",
+    "categories": [
+      {
+        "id": "cat_dairy",
+        "name": "ألبان وأجبان",
+        "sort_order": 1,
+        "products": [
+          {
+            "id": "prod_milk01",
+            "name": "حليب كامل الدسم 1 لتر",
+            "description": "حليب طازج كامل الدسم",
+            "price_cents": 110,
+            "image_url": "https://picsum.photos/seed/milk/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_laban01",
+            "name": "لبن عيران 1 لتر",
+            "description": "لبن عيران طازج",
+            "price_cents": 85,
+            "image_url": "https://picsum.photos/seed/laban/400/300",
+            "is_available": true,
+            "sort_order": 2
+          },
+          {
+            "id": "prod_cheese01",
+            "name": "جبنة بيضاء نابلسية",
+            "description": "جبنة نابلسية 500 غرام",
+            "price_cents": 250,
+            "image_url": "https://picsum.photos/seed/cheese/400/300",
+            "is_available": true,
+            "sort_order": 3
+          }
+        ]
+      },
+      {
+        "id": "cat_bread",
+        "name": "خبز ومعجنات",
+        "sort_order": 2,
+        "products": [
+          {
+            "id": "prod_bread01",
+            "name": "خبز عربي كيس",
+            "description": "كيس خبز عربي طازج (10 أرغفة)",
+            "price_cents": 50,
+            "image_url": "https://picsum.photos/seed/bread/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_kaak01",
+            "name": "كعك بالسمسم",
+            "description": "كعك القدس بالسمسم (5 حبات)",
+            "price_cents": 100,
+            "image_url": "https://picsum.photos/seed/kaak/400/300",
+            "is_available": true,
+            "sort_order": 2
+          }
+        ]
+      },
+      {
+        "id": "cat_veggies",
+        "name": "خضار وفواكه",
+        "sort_order": 3,
+        "products": [
+          {
+            "id": "prod_tomato01",
+            "name": "بندورة كيلو",
+            "description": "بندورة بلدي طازجة",
+            "price_cents": 60,
+            "image_url": "https://picsum.photos/seed/tomato/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_cucumber01",
+            "name": "خيار كيلو",
+            "description": "خيار بلدي",
+            "price_cents": 50,
+            "image_url": "https://picsum.photos/seed/cucumber/400/300",
+            "is_available": true,
+            "sort_order": 2
+          },
+          {
+            "id": "prod_banana01",
+            "name": "موز كيلو",
+            "description": "موز مستورد طازج",
+            "price_cents": 100,
+            "image_url": "https://picsum.photos/seed/banana/400/300",
+            "is_available": true,
+            "sort_order": 3
+          }
+        ]
+      },
+      {
+        "id": "cat_drinks_groc",
+        "name": "مشروبات",
+        "sort_order": 4,
+        "products": [
+          {
+            "id": "prod_water01",
+            "name": "مياه معدنية 1.5 لتر",
+            "description": "مياه معدنية طبيعية",
+            "price_cents": 35,
+            "image_url": "https://picsum.photos/seed/water/400/300",
+            "is_available": true,
+            "sort_order": 1
+          },
+          {
+            "id": "prod_juice01",
+            "name": "عصير برتقال 1 لتر",
+            "description": "عصير برتقال طبيعي 100%",
+            "price_cents": 150,
+            "image_url": "https://picsum.photos/seed/oj/400/300",
+            "is_available": false,
+            "sort_order": 2
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "page": 1,
+    "per_page": 50,
+    "total": 10,
+    "total_pages": 1
+  }
+}

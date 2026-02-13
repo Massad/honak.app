@@ -1,0 +1,81 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_store_01",
+      "conversation_id": "conv_sara_dukkaneh",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "مرحبا! في عندكم جاكيتات شتوي مقاس M؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707210000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_store_02",
+      "conversation_id": "conv_sara_dukkaneh",
+      "sender_id": "usr_dukkaneh",
+      "sender_name": "دكانة — ملابس وأحذية",
+      "type": "text",
+      "content": "أهلاً سارة! أكيد عندنا تشكيلة حلوة. شوفي الموقع أو تعالي على المحل",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707215000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_store_03",
+      "conversation_id": "conv_sara_dukkaneh",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "ممكن تصورولي اللي عندكم وتبعثولي صور؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707218000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_store_04",
+      "conversation_id": "conv_sara_dukkaneh",
+      "sender_id": "usr_dukkaneh",
+      "sender_name": "دكانة — ملابس وأحذية",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/jacket_1/400/500",
+      "metadata": {},
+      "created_at": 1707220000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_store_05",
+      "conversation_id": "conv_sara_dukkaneh",
+      "sender_id": "usr_dukkaneh",
+      "sender_name": "دكانة — ملابس وأحذية",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/jacket_2/400/500",
+      "metadata": {},
+      "created_at": 1707220100,
+      "is_from_business": true
+    },
+    {
+      "id": "m_store_06",
+      "conversation_id": "conv_sara_dukkaneh",
+      "sender_id": "usr_dukkaneh",
+      "sender_name": "دكانة — ملابس وأحذية",
+      "type": "text",
+      "content": "التشكيلة الجديدة وصلت! تفضلي شوفيها. الأسعار من ٢٥ لـ ٥٥ دينار",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707230000,
+      "is_from_business": true
+    }
+  ],
+  "meta": {
+    "total": 6,
+    "has_more": false
+  }
+}

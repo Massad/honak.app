@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_cli_01",
+      "name": "استشارة عامة",
+      "description": "استشارة طبية عامة مع الدكتور",
+      "price_cents": 2000,
+      "images": [],
+      "category_id": "cat_c01",
+      "category_name": "الاستشارات",
+      "status": "active",
+      "sort_order": 0,
+      "properties": {"duration": "30 دقيقة"}
+    },
+    {
+      "id": "biz_cli_02",
+      "name": "فحص شامل",
+      "description": "فحص طبي شامل مع تحاليل",
+      "price_cents": 5000,
+      "images": [],
+      "category_id": "cat_c02",
+      "category_name": "الفحوصات",
+      "status": "active",
+      "sort_order": 0,
+      "properties": {"duration": "60 دقيقة"}
+    },
+    {
+      "id": "biz_cli_03",
+      "name": "متابعة",
+      "description": "زيارة متابعة بعد الاستشارة الأولى",
+      "price_cents": 1000,
+      "images": [],
+      "category_id": "cat_c01",
+      "category_name": "الاستشارات",
+      "status": "active",
+      "sort_order": 1,
+      "properties": {"duration": "15 دقيقة"}
+    }
+  ],
+  "meta": {"total": 3, "has_more": false}
+}

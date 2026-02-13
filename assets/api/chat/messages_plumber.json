@@ -1,0 +1,162 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "m_plumb_01",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "مرحبا، في عندي تسريب مياه بالمطبخ تحت المجلى",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707280000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_plumb_02",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_ahmad_plumbing",
+      "sender_name": "سباكة أحمد",
+      "type": "text",
+      "content": "أهلين سارة. قديش صار عندك المشكلة؟",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707280300,
+      "is_from_business": true
+    },
+    {
+      "id": "m_plumb_03",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "من يومين تقريباً، بس اليوم زاد كثير",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707280600,
+      "is_from_business": false
+    },
+    {
+      "id": "m_plumb_04",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": null,
+      "sender_name": null,
+      "type": "system",
+      "content": "تم إنشاء طلب عرض سعر #1203",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707280800,
+      "is_from_business": false
+    },
+    {
+      "id": "m_plumb_05",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_ahmad_plumbing",
+      "sender_name": "سباكة أحمد",
+      "type": "info_request",
+      "content": "عشان أقدر أعطيكِ سعر دقيق، محتاج أشوف المشكلة",
+      "image_url": null,
+      "metadata": {
+        "question": "نحتاج صور للمشكلة عشان نقدر نقيّم الوضع ونعطيكِ سعر تقريبي",
+        "info_items": [
+          {"type": "photo", "label": "صورة التسريب"},
+          {"type": "photo", "label": "صورة تحت المجلى"}
+        ]
+      },
+      "created_at": 1707281000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_plumb_06",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/leak_photo/400/300",
+      "metadata": {},
+      "created_at": 1707285000,
+      "is_from_business": false
+    },
+    {
+      "id": "m_plumb_07",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "image",
+      "content": "",
+      "image_url": "https://picsum.photos/seed/under_sink/400/300",
+      "metadata": {},
+      "created_at": 1707285100,
+      "is_from_business": false
+    },
+    {
+      "id": "m_plumb_08",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_sara",
+      "sender_name": "سارة أحمد",
+      "type": "text",
+      "content": "هاي الصور. واضح إنه من الوصلة",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707285200,
+      "is_from_business": false
+    },
+    {
+      "id": "m_plumb_09",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_ahmad_plumbing",
+      "sender_name": "سباكة أحمد",
+      "type": "text",
+      "content": "شكراً على الصور. المشكلة واضحة — الوصلة بحاجة تبديل. التكلفة التقريبية ٢٥ دينار شامل القطع والتركيب",
+      "image_url": null,
+      "metadata": {},
+      "created_at": 1707300000,
+      "is_from_business": true
+    },
+    {
+      "id": "m_plumb_10",
+      "conversation_id": "conv_sara_plumbing",
+      "sender_id": "usr_ahmad_plumbing",
+      "sender_name": "سباكة أحمد",
+      "type": "quote_card",
+      "content": "",
+      "image_url": null,
+      "metadata": {
+        "quote": {
+          "id": "quote_plumber_01",
+          "items": [
+            {
+              "description": "تبديل وصلة مجلى",
+              "quantity": 1,
+              "unit_price": 1500
+            },
+            {
+              "description": "قطع غيار (وصلة + خراطيم)",
+              "quantity": 1,
+              "unit_price": 800
+            },
+            {
+              "description": "كشف وتشخيص",
+              "quantity": 1,
+              "unit_price": 500
+            }
+          ],
+          "subtotal": 2800,
+          "discount": 300,
+          "total": 2500,
+          "valid_days": 3,
+          "notes": "السعر شامل الزيارة والتركيب. في حال وجود مشاكل إضافية سيتم إعلامكِ قبل أي عمل إضافي."
+        },
+        "status": "pending"
+      },
+      "created_at": 1707306000,
+      "is_from_business": true
+    }
+  ],
+  "meta": {
+    "total": 10,
+    "has_more": false
+  }
+}

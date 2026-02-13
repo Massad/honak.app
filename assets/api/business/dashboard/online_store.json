@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 8,
+      "new_followers": 15,
+      "page_views": 312,
+      "today_revenue": 22400
+    },
+    "today_revenue": {
+      "total": 22400,
+      "completed_count": 6,
+      "items": [
+        {"service": "سماعات بلوتوث", "amount": 4500, "time": "09:00"},
+        {"service": "حافظة هاتف × 3", "amount": 3600, "time": "10:30"},
+        {"service": "شاحن سريع", "amount": 2500, "time": "11:00"},
+        {"service": "ساعة ذكية", "amount": 8500, "time": "12:00"},
+        {"service": "كابل شحن × 5", "amount": 3300, "time": "13:00"}
+      ]
+    },
+    "low_stock": [
+      {"name": "سماعات بلوتوث أبيض", "remaining": 3, "threshold": 15},
+      {"name": "شاحن سريع 65W", "remaining": 5, "threshold": 20},
+      {"name": "حافظة آيفون 15", "remaining": 4, "threshold": 25}
+    ],
+    "best_sellers": [
+      {"name": "حافظة هاتف سيليكون", "count": 89, "trend": "up"},
+      {"name": "سماعات بلوتوث", "count": 45, "trend": "up"},
+      {"name": "شاحن سريع 65W", "count": 38, "trend": "same"},
+      {"name": "كابل شحن Type-C", "count": 67, "trend": "up"},
+      {"name": "ساعة ذكية", "count": 12, "trend": "down"}
+    ],
+    "pending_requests": [
+      {"id": "req_801", "customer": "يوسف أحمد", "service": "طلب — سماعات + شاحن", "date": "2026-02-12", "time": "14:00"},
+      {"id": "req_802", "customer": "سارة عمر", "service": "استفسار — ساعة ذكية ألوان", "date": "2026-02-12", "time": "15:30"}
+    ]
+  }
+}

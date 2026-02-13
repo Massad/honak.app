@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": "server_error",
+    "message": "خطأ في الخادم. حاول مرة أخرى"
+  }
+}

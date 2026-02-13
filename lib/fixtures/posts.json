@@ -1,0 +1,137 @@
+[
+  {
+    "id": "pst_001",
+    "page_id": "pg_sh01",
+    "page_name": "شاورما الريم",
+    "page_avatar_url": "https://picsum.photos/seed/page1/200",
+    "type": "offer",
+    "text": "عرض خاص! شاورما + مشروب بس ٣ دنانير \ud83d\udd25",
+    "media": [
+      {"url": "https://picsum.photos/seed/post1/600/400", "type": "image"}
+    ],
+    "likes_count": 23,
+    "comments_count": 5,
+    "created_at": 1700200000
+  },
+  {
+    "id": "pst_002",
+    "page_id": "pg_cf02",
+    "page_name": "قهوة وحكاية",
+    "page_avatar_url": "https://picsum.photos/seed/page2/200",
+    "type": "update",
+    "text": "ساعات العمل الجديدة: كل يوم من ٧ الصبح لحد ١١ بالليل",
+    "media": [],
+    "likes_count": 8,
+    "comments_count": 2,
+    "created_at": 1700210000
+  },
+  {
+    "id": "pst_003",
+    "page_id": "pg_cf02",
+    "page_name": "قهوة وحكاية",
+    "page_avatar_url": "https://picsum.photos/seed/page2/200",
+    "type": "new_product",
+    "text": "جديد عنا: آيس لاتيه بالكراميل! جربوه اليوم \u2615",
+    "media": [
+      {"url": "https://picsum.photos/seed/post3/600/400", "type": "image"}
+    ],
+    "likes_count": 45,
+    "comments_count": 12,
+    "created_at": 1700220000
+  },
+  {
+    "id": "pst_004",
+    "page_id": "pg_bk04",
+    "page_name": "مخابز السنابل الذهبية",
+    "page_avatar_url": "https://picsum.photos/seed/page4/200",
+    "type": "update",
+    "text": "خبز طازج كل يوم الساعة ٦ الصبح. الكمية محدودة، بكّروا! \ud83c\udf5e",
+    "media": [
+      {"url": "https://picsum.photos/seed/post4a/600/400", "type": "image"},
+      {"url": "https://picsum.photos/seed/post4b/600/400", "type": "image"}
+    ],
+    "likes_count": 31,
+    "comments_count": 7,
+    "created_at": 1700230000
+  },
+  {
+    "id": "pst_005",
+    "page_id": "pg_sh01",
+    "page_name": "شاورما الريم",
+    "page_avatar_url": "https://picsum.photos/seed/page1/200",
+    "type": "announcement",
+    "text": "بنعتذر عن التأخير اليوم بسبب ضغط الطلبات. شكراً لصبركم!",
+    "media": [],
+    "likes_count": 0,
+    "comments_count": 0,
+    "created_at": 1700240000
+  },
+  {
+    "id": "pst_006",
+    "page_id": "pg_el06",
+    "page_name": "تك هاوس",
+    "page_avatar_url": "https://picsum.photos/seed/page6/200",
+    "type": "new_product",
+    "text": "وصلنا سماعات بلوتوث جديدة بجودة عالية وسعر مميز \ud83c\udfa7",
+    "media": [
+      {"url": "https://picsum.photos/seed/post6/600/400", "type": "image"}
+    ],
+    "likes_count": 67,
+    "comments_count": 15,
+    "created_at": 1700250000
+  },
+  {
+    "id": "pst_007",
+    "page_id": "pg_gr03",
+    "page_name": "ميني ماركت أبو خالد",
+    "page_avatar_url": "https://picsum.photos/seed/page3/200",
+    "type": "offer",
+    "text": "عرض نهاية الأسبوع: اشتري ٢ حليب واحصل على الثالث مجاناً",
+    "media": [],
+    "likes_count": 4,
+    "comments_count": 1,
+    "created_at": 1700260000
+  },
+  {
+    "id": "pst_008",
+    "page_id": "pg_bk04",
+    "page_name": "مخابز السنابل الذهبية",
+    "page_avatar_url": "https://picsum.photos/seed/page4/200",
+    "type": "offer",
+    "text": "كنافة نابلسية طازجة كل يوم جمعة! اطلبوا مبكراً \ud83c\udf1f\nالنص كيلو بـ ٤.٥٠ والكيلو بـ ٨ دنانير",
+    "media": [
+      {"url": "https://picsum.photos/seed/post8/600/400", "type": "image"}
+    ],
+    "likes_count": 89,
+    "comments_count": 22,
+    "created_at": 1700270000
+  },
+  {
+    "id": "pst_009",
+    "page_id": "pg_cl05",
+    "page_name": "ستايل زون",
+    "page_avatar_url": "https://picsum.photos/seed/page5/200",
+    "type": "announcement",
+    "text": "قريباً: تشكيلة الشتاء الجديدة! تابعونا للتفاصيل",
+    "media": [],
+    "likes_count": 3,
+    "comments_count": 0,
+    "created_at": 1700280000
+  },
+  {
+    "id": "pst_010",
+    "page_id": "pg_cf02",
+    "page_name": "قهوة وحكاية",
+    "page_avatar_url": "https://picsum.photos/seed/page2/200",
+    "type": "update",
+    "text": "أجواء المقهى هالأسبوع \u2728\nتعالوا استمتعوا بالقهوة والهدوء",
+    "media": [
+      {"url": "https://picsum.photos/seed/post10a/600/400", "type": "image"},
+      {"url": "https://picsum.photos/seed/post10b/600/400", "type": "image"},
+      {"url": "https://picsum.photos/seed/post10c/600/400", "type": "image"}
+    ],
+    "likes_count": 112,
+    "comments_count": 18,
+    "created_at": 1700290000
+  }
+]

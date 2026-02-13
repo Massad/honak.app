@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "pkg-3",
+      "name": "باقة العناية الشهرية",
+      "description": "4 زيارات خلال شهرين",
+      "price": 20000,
+      "credits": 4,
+      "credit_label": "زيارة",
+      "validity_months": 2,
+      "model": "visits_and_date",
+      "compare_single_price": 7000,
+      "active": true,
+      "item_ids": ["haircut", "haircut-beard", "hair-wash"]
+    },
+    {
+      "id": "pkg-4",
+      "name": "باقة VIP",
+      "description": "8 زيارات خلال 3 أشهر",
+      "price": 35000,
+      "credits": 8,
+      "credit_label": "زيارة",
+      "validity_months": 3,
+      "model": "visits_and_date",
+      "compare_single_price": 7000,
+      "active": true,
+      "item_ids": ["haircut", "haircut-beard", "hair-wash", "facial"]
+    }
+  ]
+}

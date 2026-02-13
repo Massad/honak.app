@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "error": {
+    "code": "validation_error",
+    "message": "خطأ في البيانات المدخلة",
+    "details": {
+      "phone": ["يجب أن يبدأ بـ 7", "يجب أن يكون 9 أرقام"]
+    }
+  }
+}

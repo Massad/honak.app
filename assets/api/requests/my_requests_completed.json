@@ -1,0 +1,116 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "req_101",
+      "type": "order",
+      "status": "delivered",
+      "business_page_id": "abu-ahmad-water",
+      "business_name": "مياه أبو أحمد",
+      "business_avatar_url": "https://picsum.photos/seed/abu-ahmad/200",
+      "business_slug": "abu-ahmad-water",
+      "summary": "2 عبوات مياه كبيرة",
+      "items_count": 2,
+      "total_cents": 500,
+      "note": "الطابق الثاني، شقة ٤",
+      "created_at": 1770248200,
+      "delivery_method": "delivery",
+      "delivery_address": "خلدا، شارع الأمير هاشم، عمّان",
+      "payment_method": "نقدي",
+      "can_edit": false,
+      "can_cancel": false,
+      "paid_by_subscription": {
+        "subscription_id": "sub_water_01",
+        "package_name": "باقة المياه الشهرية",
+        "credits_used": 1,
+        "remaining_after": 5
+      },
+      "items": [
+        { "id": "item_w1", "name": "مياه كبير ١٨ لتر", "quantity": 2, "price_cents": 250 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770248200, "actor": "customer", "done": true },
+        { "status": "accepted", "label": "تم القبول", "timestamp": 1770250000, "actor": "business", "detail": "سيتم التوصيل خلال ساعة", "done": true },
+        { "status": "in_progress", "label": "قيد التوصيل", "timestamp": 1770251800, "actor": "business", "done": true },
+        { "status": "delivered", "label": "تم التوصيل", "timestamp": 1770255400, "actor": "business", "done": true }
+      ]
+    },
+    {
+      "id": "req_102",
+      "type": "booking",
+      "status": "completed",
+      "business_page_id": "salon-rania",
+      "business_name": "صالون رانيا",
+      "business_avatar_url": "https://picsum.photos/seed/salon-rania/200",
+      "business_slug": "salon-rania",
+      "summary": "صبغة شعر + تسريحة",
+      "items_count": 2,
+      "total_cents": 3500,
+      "created_at": 1770161800,
+      "preferred_date": "2026-02-08",
+      "time_slot": "مساءً",
+      "team_member": "سارة",
+      "can_cancel": false,
+      "can_reschedule": false,
+      "items": [
+        { "id": "svc_2", "name": "صبغة شعر", "quantity": 1, "price_cents": 2000 },
+        { "id": "svc_3", "name": "تسريحة", "quantity": 1, "price_cents": 1500 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770161800, "actor": "customer", "done": true },
+        { "status": "accepted", "label": "تم القبول", "timestamp": 1770165400, "actor": "business", "detail": "موعدك يوم السبت الساعة ٤ مساءً مع سارة", "done": true },
+        { "status": "completed", "label": "تمت الخدمة", "timestamp": 1770248200, "actor": "business", "done": true }
+      ]
+    },
+    {
+      "id": "req_103",
+      "type": "quote",
+      "status": "declined",
+      "business_page_id": "ahmad-plumbing",
+      "business_name": "سباكة أحمد",
+      "business_avatar_url": "https://picsum.photos/seed/ahmad-plumb/200",
+      "business_slug": "ahmad-plumbing",
+      "summary": "تركيب سخّان مياه جديد",
+      "items_count": 0,
+      "created_at": 1770075400,
+      "description": "تركيب سخّان مياه جديد",
+      "urgency": "not_urgent",
+      "service_location": "الدوار السابع، عمّان",
+      "preferred_date": "الأسبوع القادم",
+      "can_edit": false,
+      "can_cancel": false,
+      "decline_reason": "عذراً، لا نقدم خدمة تركيب السخانات حالياً",
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1770075400, "actor": "customer", "done": true },
+        { "status": "declined", "label": "تم الرفض", "timestamp": 1770079000, "actor": "business", "detail": "عذراً، لا نقدم خدمة تركيب السخانات حالياً", "done": true }
+      ]
+    },
+    {
+      "id": "req_104",
+      "type": "order",
+      "status": "completed",
+      "business_page_id": "hara-coffee",
+      "business_name": "قهوة الحارة",
+      "business_avatar_url": "https://picsum.photos/seed/hara-coffee/200",
+      "business_slug": "hara-coffee",
+      "summary": "قهوة تركية + كنافة",
+      "items_count": 2,
+      "total_cents": 750,
+      "created_at": 1769989000,
+      "delivery_method": "pickup",
+      "payment_method": "نقدي",
+      "can_edit": false,
+      "can_cancel": false,
+      "items": [
+        { "id": "item_c1", "name": "قهوة تركية", "quantity": 2, "price_cents": 150 },
+        { "id": "item_c2", "name": "كنافة نابلسية", "quantity": 1, "price_cents": 450 }
+      ],
+      "timeline": [
+        { "status": "submitted", "label": "تم الإرسال", "timestamp": 1769989000, "actor": "customer", "done": true },
+        { "status": "accepted", "label": "تم القبول", "timestamp": 1769990800, "actor": "business", "done": true },
+        { "status": "preparing", "label": "قيد التحضير", "timestamp": 1769991600, "actor": "business", "done": true },
+        { "status": "completed", "label": "جاهز للاستلام", "timestamp": 1769993400, "actor": "business", "done": true }
+      ]
+    }
+  ]
+}

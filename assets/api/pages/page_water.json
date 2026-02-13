@@ -1,0 +1,117 @@
+{
+  "success": true,
+  "data": {
+    "id": "abu-ahmad-water",
+    "owner_id": "usr_002",
+    "business_type_id": "water_delivery",
+    "business_type_name": "توصيل مياه",
+    "category_name": "خدمات منزلية",
+    "explore_category": "cat_delivery",
+    "name": "مياه أبو أحمد",
+    "name_en": "Abu Ahmad Water",
+    "slug": "abu-ahmad-water",
+    "handle": "abu-ahmad-water",
+    "store_type": "physical",
+    "archetype": "catalog_order",
+    "description": "توصيل مياه نقية منذ 2015. خدمة سريعة وموثوقة في عمّان.",
+    "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1644061798186-96785723f563?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000010",
+    "location": {
+      "lat": 31.965,
+      "lng": 35.862,
+      "label": "عبدون، خلف مسجد عبدون الكبير",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "07:00", "close": "21:00"},
+      "monday": {"enabled": true, "open": "07:00", "close": "21:00"},
+      "tuesday": {"enabled": true, "open": "07:00", "close": "21:00"},
+      "wednesday": {"enabled": true, "open": "07:00", "close": "21:00"},
+      "thursday": {"enabled": true, "open": "07:00", "close": "21:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": true, "open": "07:00", "close": "21:00"}
+    },
+    "operating_hours": "السبت - الخميس: ٧:٠٠ ص — ٩:٠٠ م\nالجمعة: مغلق",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "claimed",
+    "followers_count": 1200,
+    "items_count": 3,
+    "posts_count": 12,
+    "is_following": false,
+    "hours": {
+      "open_time": "07:00",
+      "close_time": "21:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 95,
+    "trust_metrics": [
+      {"label": "يعيدون الطلب أسبوعياً", "value": "٩٢٪", "icon": "repeat"},
+      {"label": "قوارير شهرياً", "value": "٢,٠٠٠", "icon": "water_drop"},
+      {"label": "معدل التوصيل", "value": "٣٥ دقيقة", "icon": "schedule"}
+    ],
+    "delivery_available": true,
+    "pickup_available": false,
+    "delivery_fee_cents": 100,
+    "estimated_delivery_minutes": 35,
+    "payment_methods": ["نقداً", "كليك: AbuAhmadWater", "تحويل بنكي"],
+    "cliq_alias": "AbuAhmadWater",
+    "coverage_zones": ["عبدون", "الصويفية", "خلدا", "دابوق", "تلاع العلي", "الشميساني"],
+    "member_since": "2021",
+    "team_members_count": 2,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1620000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "catalog_strategy": "full_catalog",
+    "carry_categories": [],
+    "stories": [
+      {"id": "s_water1", "image_url": "https://picsum.photos/seed/abuahmadstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_water2", "image_url": "https://picsum.photos/seed/abuahmadstory2/400/700", "duration": 5, "created_at": 1707860000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "packages": [
+      {
+        "id": "pkg_001",
+        "name": "باقة العائلة",
+        "description": "١٠ قوارير مياه شهرياً بسعر مخفض",
+        "price_cents": 1500,
+        "credits": 10,
+        "credit_label": "قارورة"
+      },
+      {
+        "id": "pkg_002",
+        "name": "باقة المكتب",
+        "description": "٢٠ قارورة شهرياً + توصيل مجاني",
+        "price_cents": 2800,
+        "credits": 20,
+        "credit_label": "قارورة"
+      }
+    ],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "عبدون", "neighbourhoods": ["عبدون الشمالي", "عبدون الجنوبي"]},
+          {"name": "الصويفية", "neighbourhoods": ["الصويفية", "خلدا"]},
+          {"name": "دابوق", "neighbourhoods": ["دابوق", "صافوط"]},
+          {"name": "طلال العلي", "neighbourhoods": ["طلال العلي", "الرابية"]}
+        ]
+      }
+    ],
+    "return_policy": {
+      "accepts_returns": true,
+      "window_days": 1,
+      "type": "exchange",
+      "cost": "مجاني",
+      "conditions_ar": ["القارورة غير مفتوحة", "خلال ٢٤ ساعة من التوصيل"]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": "invalid_otp",
+    "message": "رمز التحقق غير صحيح"
+  }
+}

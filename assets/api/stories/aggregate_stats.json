@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "data": {
+    "total_stories_all_time": 48,
+    "total_stories_this_month": 12,
+    "total_views_this_month": 4267,
+    "total_shares_this_month": 198,
+    "total_messages_this_month": 134,
+    "avg_views_per_story": 355,
+    "avg_shares_per_story": 16,
+    "avg_messages_per_story": 11,
+    "best_posting_time": "10:00",
+    "best_posting_day": "الجمعة",
+    "top_story_id": "my-s8",
+    "followers_count": 1240,
+    "growth_vs_last_month": 23
+  }
+}

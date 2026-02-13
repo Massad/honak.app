@@ -1,0 +1,86 @@
+{
+  "success": true,
+  "data": {
+    "id": "sparkle-car-wash",
+    "owner_id": "usr_002",
+    "business_type_id": "car_wash",
+    "business_type_name": "مغسلة سيارات",
+    "category_name": "سيارات",
+    "explore_category": "cat_auto",
+    "name": "سباركل لغسيل السيارات",
+    "name_en": "Sparkle Car Wash",
+    "slug": "sparkle-car-wash",
+    "handle": "sparkle-car-wash",
+    "store_type": "physical",
+    "archetype": "service_booking",
+    "description": "مغسلة سيارات متكاملة — غسيل خارجي، داخلي، تفصيلي، وتلميع. خدمة سريعة ومحترفة في عبدون.",
+    "avatar_url": "https://images.unsplash.com/photo-1657368567304-5a2644b6052e?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1680533749371-59c49b31fd74?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962791234560",
+    "location": {
+      "lat": 31.955,
+      "lng": 35.878,
+      "label": "عبدون، عمّان",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "07:00", "close": "19:00"},
+      "monday": {"enabled": true, "open": "07:00", "close": "19:00"},
+      "tuesday": {"enabled": true, "open": "07:00", "close": "19:00"},
+      "wednesday": {"enabled": true, "open": "07:00", "close": "19:00"},
+      "thursday": {"enabled": true, "open": "07:00", "close": "19:00"},
+      "friday": {"enabled": true, "open": "07:00", "close": "19:00"},
+      "saturday": {"enabled": true, "open": "07:00", "close": "19:00"}
+    },
+    "operating_hours": "يومياً: ٧:٠٠ ص — ٧:٠٠ م",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": true,
+    "is_open": true,
+    "is_claimed": true,
+    "page_status": "active",
+    "followers_count": 820,
+    "items_count": 4,
+    "posts_count": 15,
+    "is_following": false,
+    "hours": {
+      "open_time": "07:00",
+      "close_time": "19:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 84,
+    "trust_metrics": [
+      {"label": "سيارات تم غسلها", "value": "٣,٢٠٠", "icon": "check_circle"},
+      {"label": "مشتركين شهرياً", "value": "٤٥", "icon": "loyalty"},
+      {"label": "زبائن يعودون", "value": "٧٢٪", "icon": "repeat"}
+    ],
+    "booking_available": true,
+    "payment_methods": ["نقداً", "كليك"],
+    "member_since": "2023",
+    "team_members_count": 3,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1672531200,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_cw1", "image_url": "https://picsum.photos/seed/sparklecwstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_cw2", "image_url": "https://picsum.photos/seed/sparklecwstory2/400/700", "duration": 5, "created_at": 1707860000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "branches": [
+      {
+        "id": "br_main",
+        "name": "سباركل — عبدون",
+        "address": "عبدون، بجانب محطة توتال",
+        "phone": "+962791234560",
+        "hours": "يومياً: ٧:٠٠ ص — ٧:٠٠ م",
+        "city": "عمّان",
+        "neighborhood": "عبدون",
+        "coverage": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "data": [
+    { "id": "pg_beit_sitti", "name": "بيت ستي", "handle": "beitsitti", "category_name": "مطعم", "verified": true, "saved_at": 1770000000 },
+    { "id": "pg_salon_rania", "name": "صالون رانيا", "handle": "salonrania", "category_name": "صالون", "verified": true, "saved_at": 1769990000 },
+    { "id": "pg_abu_ahmad", "name": "مياه أبو أحمد", "handle": "abuahmadwater", "category_name": "توصيل مياه", "verified": false, "saved_at": 1769980000 },
+    { "id": "pg_nour_studio", "name": "استوديو نور", "handle": "nourstudio", "category_name": "تصوير", "verified": true, "saved_at": 1769970000 },
+    { "id": "pg_clinic_salam", "name": "عيادة السلام", "handle": "clinicsalam", "category_name": "عيادة", "verified": false, "saved_at": 1769960000 }
+  ]
+}

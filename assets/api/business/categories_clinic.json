@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data": [
+    {"id": "cat_c01", "name": "الاستشارات", "item_count": 3, "sort_order": 0},
+    {"id": "cat_c02", "name": "الفحوصات", "item_count": 2, "sort_order": 1},
+    {"id": "cat_c03", "name": "العلاجات", "item_count": 2, "sort_order": 2}
+  ]
+}

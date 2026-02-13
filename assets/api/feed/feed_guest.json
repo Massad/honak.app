@@ -1,0 +1,104 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "pst_g01",
+      "page": {"id": "beit-sitti", "name": "بيت ستي", "slug": "beit-sitti", "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "offer",
+      "content": "خصم ٢٠٪ على صحن المنسف",
+      "media": [{"url": "https://images.unsplash.com/photo-1747518596371-ab78bd612d09?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707490000,
+      "is_following": false,
+      "is_promoted": true,
+      "metadata": {"discount_percent": 20, "expires_at": 1707790000}
+    },
+    {
+      "id": "pst_g02",
+      "page": {"id": "nour-fashion", "name": "نور فاشن", "slug": "nour-fashion", "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "product",
+      "content": "فستان صيفي ميدي — ٢٨ د.أ",
+      "media": [{"url": "https://images.unsplash.com/photo-1769162240814-daaede8751fc?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707480000,
+      "is_following": false,
+      "metadata": {"item_id": "4", "item_name": "فستان صيفي ميدي", "price_cents": 2800}
+    },
+    {
+      "id": "pst_g03",
+      "page": {"id": "abu-ahmad-water", "name": "مياه أبو أحمد", "slug": "abu-ahmad-water", "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "product",
+      "content": "قارورة مياه ١٩ لتر — ١.٥٠ د.أ",
+      "media": [{"url": "https://images.unsplash.com/photo-1760594308533-04642e48a141?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707470000,
+      "is_following": false,
+      "is_promoted": true,
+      "metadata": {"item_id": "1", "item_name": "قارورة مياه 19 لتر", "price_cents": 150}
+    },
+    {
+      "id": "pst_g04",
+      "page": {"id": "villa-dead-sea", "name": "فيلا البحر الميت", "slug": "villa-dead-sea", "avatar_url": "https://images.unsplash.com/photo-1758612853656-def5033bccb5?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "photo",
+      "content": "استمتعوا بصيف لا يُنسى",
+      "media": [{"url": "https://images.unsplash.com/photo-1758192838598-a1de4da5dcaf?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707400000,
+      "is_following": false
+    },
+    {
+      "id": "pst_g05",
+      "page": {"id": "nour-fashion", "name": "نور فاشن", "slug": "nour-fashion", "avatar_url": "https://images.unsplash.com/photo-1704213684422-cd2543e560d6?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "offer",
+      "content": "تخفيضات ٣٠٪ على جميع الجاكيتات — لفترة محدودة",
+      "media": [{"url": "https://images.unsplash.com/photo-1766524871302-88590e1fa1bf?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707380000,
+      "is_following": false,
+      "is_promoted": true,
+      "metadata": {"discount_percent": 30, "expires_at": 1707700000}
+    },
+    {
+      "id": "pst_g06",
+      "page": {"id": "royal-events", "name": "رويال للمناسبات", "slug": "royal-events", "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "product",
+      "content": "تراس الحديقة — ابتداءً من ٣٠٠ د.أ",
+      "media": [{"url": "https://images.unsplash.com/photo-1759514139303-1f0c5fee6eae?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707350000,
+      "is_following": false,
+      "metadata": {"item_id": "2", "item_name": "الحديقة الخارجية", "price_cents": 30000}
+    },
+    {
+      "id": "pst_g07",
+      "page": {"id": "hara-coffee", "name": "قهوة الحارة", "slug": "hara-coffee", "avatar_url": "https://images.unsplash.com/photo-1669809374019-9a9d02b0e10d?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "status",
+      "content": "عرض الصباح: قهوة + كيكة بـ ٢.٥٠ د.أ قبل ٠٩ صباحاً كل يوم",
+      "created_at": 1707300000,
+      "is_following": false
+    },
+    {
+      "id": "pst_g08",
+      "page": {"id": "salon-rania", "name": "صالون رانية", "slug": "salon-rania", "avatar_url": "https://images.unsplash.com/photo-1640285865892-38f969efe90e?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "photo",
+      "content": "نتائج صبغة شعر جديدة، قبل وبعد",
+      "media": [{"url": "https://images.unsplash.com/photo-1590503347339-ccd768ad83d3?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707250000,
+      "is_following": false,
+      "is_promoted": true
+    },
+    {
+      "id": "pst_g09",
+      "page": {"id": "dukkaneh-store", "name": "دُكّانة", "slug": "dukkaneh-store", "avatar_url": "https://images.unsplash.com/photo-1636100232064-0dcec9d3f291?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "offer",
+      "content": "خصم ٢٨٪ على السماعات اللاسلكية — ١٨ د.أ بدل ٢٥!",
+      "media": [{"url": "https://images.unsplash.com/photo-1636100232064-0dcec9d3f291?auto=format&fit=crop&w=800&q=80", "type": "image"}],
+      "created_at": 1707200000,
+      "is_following": false,
+      "metadata": {"discount_percent": 28, "expires_at": 1707700000}
+    },
+    {
+      "id": "pst_g10",
+      "page": {"id": "dr-khaled-clinic", "name": "عيادة د. خالد", "slug": "dr-khaled-clinic", "avatar_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=200&q=80", "is_verified": true},
+      "type": "status",
+      "content": "مواعيد متاحة اليوم من ٤ العصر لغاية ٨ المسا",
+      "created_at": 1707150000,
+      "is_following": false
+    }
+  ],
+  "meta": {"total": 10, "has_more": false}
+}

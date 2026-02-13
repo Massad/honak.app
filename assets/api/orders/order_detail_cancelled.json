@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "data": {
+    "id": "ord_b001",
+    "customer": { "id": "usr_sara01", "name": "سارة أحمد", "phone": "0791000001" },
+    "page": { "id": "beit-sitti", "name": "مطعم الديرة", "slug": "beit-sitti" },
+    "status": "cancelled",
+    "total_cents": 650,
+    "subtotal_cents": 650,
+    "delivery_fee_cents": 0,
+    "items": [
+      { "id": "oi_001", "product_id": "prod_001", "name": "شاورما دجاج", "quantity": 2, "price_cents": 250, "total_cents": 500 },
+      { "id": "oi_002", "product_id": "prod_005", "name": "عصير ليمون", "quantity": 1, "price_cents": 150, "total_cents": 150 }
+    ],
+    "note": "بدون بصل",
+    "created_at": 1770853000,
+    "cancelled_at": 1770853600,
+    "cancel_reason": "customer_request",
+    "payment_method": "cash"
+  }
+}

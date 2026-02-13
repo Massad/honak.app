@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 23,
+      "new_followers": 8,
+      "page_views": 156,
+      "today_revenue": 34500
+    },
+    "today_revenue": {
+      "total": 34500,
+      "completed_count": 18,
+      "items": [
+        {"service": "مسخن", "amount": 4500, "time": "12:15"},
+        {"service": "منسف", "amount": 8000, "time": "12:30"},
+        {"service": "مقلوبة", "amount": 5500, "time": "13:00"},
+        {"service": "شاورما عربي", "amount": 3500, "time": "13:15"},
+        {"service": "فتة حمص", "amount": 2500, "time": "13:45"}
+      ]
+    },
+    "active_queue": [
+      {"id": "q_1", "customer": "عمر حسن", "items": "منسف × 2، فتة حمص", "status": "preparing", "time": "13:50", "order_number": 24},
+      {"id": "q_2", "customer": "سامي خالد", "items": "مسخن، متبل", "status": "preparing", "time": "13:55", "order_number": 25},
+      {"id": "q_3", "customer": "ريم أحمد", "items": "شاورما عربي × 3", "status": "waiting", "time": "14:00", "order_number": 26},
+      {"id": "q_4", "customer": "أحمد يوسف", "items": "مقلوبة، سلطة فتوش", "status": "waiting", "time": "14:05", "order_number": 27}
+    ],
+    "unavailable_items": [
+      "كنافة نابلسية",
+      "عصير رمان طازج",
+      "محاشي ورق عنب"
+    ],
+    "best_sellers": [
+      {"name": "منسف", "count": 45, "trend": "up"},
+      {"name": "مسخن", "count": 38, "trend": "up"},
+      {"name": "مقلوبة", "count": 32, "trend": "same"},
+      {"name": "شاورما عربي", "count": 28, "trend": "down"},
+      {"name": "فتة حمص", "count": 22, "trend": "up"}
+    ],
+    "pending_requests": [
+      {"id": "req_301", "customer": "محمد سمير", "service": "طلب توصيل — جبل عمان", "date": "2026-02-12", "time": "14:30"},
+      {"id": "req_302", "customer": "نور أحمد", "service": "حجز طاولة — 6 أشخاص", "date": "2026-02-12", "time": "19:00"}
+    ]
+  }
+}

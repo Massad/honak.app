@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 4,
+      "new_followers": 3,
+      "page_views": 67,
+      "today_revenue": 45000
+    },
+    "occupancy": {
+      "percentage": 60,
+      "period": "هذا الشهر",
+      "booked": 18,
+      "total": 30,
+      "checkin_today": 1,
+      "checkout_today": 1
+    },
+    "upcoming_reservations": [
+      {
+        "customer": "عائلة المصري",
+        "date_range": "14-16 شباط",
+        "guests": 12,
+        "space": "الفيلا الرئيسية",
+        "total": 45000,
+        "is_soon": true
+      },
+      {
+        "customer": "مجموعة أصدقاء",
+        "date_range": "20-22 شباط",
+        "guests": 8,
+        "space": "الشاليه",
+        "total": 25000,
+        "is_soon": false
+      },
+      {
+        "customer": "عائلة يوسف",
+        "date_range": "28 شباط — 2 آذار",
+        "guests": 15,
+        "space": "الفيلا الرئيسية",
+        "total": 50000,
+        "is_soon": false
+      }
+    ],
+    "pending_requests": [
+      {"id": "req_1301", "customer": "سامي خالد", "service": "استفسار — الشاليه — نيسان", "date": "2026-02-12", "time": "16:00"},
+      {"id": "req_1302", "customer": "عائلة حمد", "service": "حجز — الفيلا — 7-9 آذار", "date": "2026-02-12", "time": "17:00"}
+    ]
+  }
+}

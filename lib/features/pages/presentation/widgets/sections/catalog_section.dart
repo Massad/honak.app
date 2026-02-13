@@ -1,0 +1,672 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/features/catalog/domain/entities/item.dart';
+import 'package:honak/features/pages/domain/entities/page_detail.dart';
+import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/catalog_item_card.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/floating_cart_bar.dart';
+import 'package:honak/features/pages/presentation/widgets/shared/catalog_filter_sheet.dart';
+import 'package:honak/features/requests/domain/entities/cart.dart';
+import 'package:honak/features/requests/presentation/widgets/order_request_sheet.dart';
+import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/entities/selected_item.dart';
+import 'package:honak/features/pages/presentation/widgets/shared/highlights_banner.dart';
+import 'package:honak/shared/widgets/credit_chip.dart';
+import 'package:honak/shared/widgets/credit_history_sheet.dart';
+import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
+import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
+
+/// Product list with category filtering, search, cart, and pagination.
+/// Used by the catalogOrder archetype (water delivery, grocery, retail).
+class CatalogSection extends ConsumerStatefulWidget {
+  final String pageId;
+  final PageDetail? page;
+  final int selectedBranchIndex;
+
+  const CatalogSection({
+    super.key,
+    required this.pageId,
+    this.page,
+    this.selectedBranchIndex = 0,
+  });
+
+  @override
+  ConsumerState<CatalogSection> createState() => _CatalogSectionState();
+}
+
+class _CatalogSectionState extends ConsumerState<CatalogSection> {
+  static const _pageSize = 12;
+
+  String? _selectedCategory;
+  String _searchQuery = '';
+  int _visibleCount = _pageSize;
+  final List<SelectedItem> _cart = [];
+  CatalogFilterState _filterState = CatalogFilterState.empty;
+  final _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  List<Item> _filterItems(List<Item> items) {
+    var filtered = items;
+
+    // Category pill filter
+    if (_selectedCategory != null) {
+      filtered = filtered
+          .where((item) => item.categoryName == _selectedCategory)
+          .toList();
+    }
+
+    // Text search
+    if (_searchQuery.isNotEmpty) {
+      final query = _searchQuery.toLowerCase();
+      filtered = filtered.where((item) {
+        final nameMatch = item.nameAr.toLowerCase().contains(query);
+        final descMatch =
+            item.descriptionAr?.toLowerCase().contains(query) ?? false;
+        return nameMatch || descMatch;
+      }).toList();
+    }
+
+    // In-stock filter
+    if (_filterState.showInStockOnly) {
+      filtered = filtered.where((item) => item.inStock).toList();
+    }
+
+    // Price range filter
+    if (_filterState.minPrice != null) {
+      final minCents = (_filterState.minPrice! * 100).round();
+      filtered =
+          filtered.where((item) => item.price.cents >= minCents).toList();
+    }
+    if (_filterState.maxPrice != null && _filterState.maxPrice! < 100) {
+      final maxCents = (_filterState.maxPrice! * 100).round();
+      filtered =
+          filtered.where((item) => item.price.cents <= maxCents).toList();
+    }
+
+    // Category multi-select from filter sheet
+    if (_filterState.selectedCategories.isNotEmpty) {
+      filtered = filtered
+          .where((item) =>
+              item.categoryName != null &&
+              _filterState.selectedCategories.contains(item.categoryName))
+          .toList();
+    }
+
+    // Sort
+    switch (_filterState.sort) {
+      case SortOption.priceLowHigh:
+        filtered = [...filtered]
+          ..sort((a, b) => a.price.cents.compareTo(b.price.cents));
+      case SortOption.priceHighLow:
+        filtered = [...filtered]
+          ..sort((a, b) => b.price.cents.compareTo(a.price.cents));
+      case SortOption.newest:
+        filtered = [...filtered]
+          ..sort((a, b) => b.sortOrder.compareTo(a.sortOrder));
+      case SortOption.popular:
+      case SortOption.defaultSort:
+        break;
+    }
+
+    return filtered;
+  }
+
+  void _openFilterSheet(List<Item> allItems) {
+    final categories = _extractCategories(allItems);
+    CatalogFilterSheet.show(
+      context: context,
+      initialState: _filterState,
+      config: FilterConfig(
+        categories: categories
+            .map((c) => (id: c, label: c))
+            .toList(),
+      ),
+      onApply: (state) {
+        setState(() {
+          _filterState = state;
+          _visibleCount = _pageSize;
+        });
+      },
+    );
+  }
+
+  List<String> _extractCategories(List<Item> items) {
+    final categories = <String>{};
+    for (final item in items) {
+      if (item.categoryName != null && item.categoryName!.isNotEmpty) {
+        categories.add(item.categoryName!);
+      }
+    }
+    return categories.toList();
+  }
+
+  int get _cartItemCount =>
+      _cart.fold(0, (sum, si) => sum + si.quantity);
+
+  Money get _cartTotal =>
+      Money(_cart.fold(0, (sum, si) => sum + si.totalPriceCents));
+
+  int _quantityForItem(String itemId) =>
+      _cart.where((si) => si.itemId == itemId).fold(0, (sum, si) => sum + si.quantity);
+
+  void _handleQuantityChanged(Item item, int qty) {
+    setState(() {
+      if (qty <= 0) {
+        _cart.removeWhere((si) => si.itemId == item.id);
+      } else {
+        final idx = _cart.indexWhere((si) => si.itemId == item.id);
+        if (idx >= 0) {
+          _cart[idx] = _cart[idx].copyWith(quantity: qty);
+        } else {
+          _cart.add(SelectedItem(
+            itemId: item.id,
+            name: item.nameAr,
+            image: item.images.isNotEmpty ? item.images.first : null,
+            basePriceCents: item.price.cents,
+            quantity: qty,
+          ));
+        }
+      }
+    });
+  }
+
+  void _showItemConfigSheet(Item item) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (ctx) => SizedBox(
+        height: MediaQuery.of(ctx).size.height * 0.85,
+        child: ItemConfigurationStep(
+          item: item,
+          confirmLabel: 'إضافة للسلة',
+          onConfirm: (selectedItem) {
+            Navigator.of(ctx).pop();
+            setState(() => _cart.add(selectedItem));
+          },
+          onBack: () => Navigator.of(ctx).pop(),
+        ),
+      ),
+    );
+  }
+
+  void _openOrderSheet(BuildContext context) {
+    final cartItems = _cart.map((si) => CartItem.fromSelectedItem(si)).toList();
+
+    final cart = Cart(
+      pageId: widget.pageId,
+      pageName: widget.page?.name ?? '',
+      items: cartItems,
+    );
+
+    OrderRequestSheet.show(
+      context: context,
+      cart: cart,
+      pageName: widget.page?.name ?? '',
+      paymentMethods: widget.page?.paymentMethods ?? const ['نقداً'],
+      onSubmit: (data) {
+        Navigator.of(context).pop();
+        setState(() => _cart.clear());
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628\u0643 \u0628\u0646\u062c\u0627\u062d \u2014 \u0633\u064a\u062a\u0645 \u0627\u0644\u0631\u062f \u0642\u0631\u064a\u0628\u0627\u064b',
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final itemsAsync = ref.watch(pageItemsProvider(widget.pageId));
+    final hasSpecials =
+        widget.page != null && widget.page!.specials.isNotEmpty;
+
+    return itemsAsync.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) => ErrorView(
+        message: error.toString(),
+        onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),
+      ),
+      data: (items) {
+        final categories = _extractCategories(items);
+        final filtered = _filterItems(items);
+        final visible = filtered.take(_visibleCount).toList();
+        final hasMore = filtered.length > _visibleCount;
+
+        return Stack(
+          children: [
+            CustomScrollView(
+              slivers: [
+                // Specials banner
+                if (hasSpecials)
+                  SliverToBoxAdapter(
+                    child: _SpecialsBanner(
+                      specials: widget.page!.specials,
+                    ),
+                  ),
+
+                // Credit chip
+                if (widget.page != null &&
+                    widget.page!.packages.isNotEmpty)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                        AppSpacing.lg,
+                        AppSpacing.sm,
+                        AppSpacing.lg,
+                        0,
+                      ),
+                      child: CreditChip(
+                        remainingCredits:
+                            widget.page!.packages.first.credits,
+                        totalCredits:
+                            widget.page!.packages.first.credits,
+                        creditLabel:
+                            widget.page!.packages.first.creditLabel ??
+                                // "\u0631\u0635\u064a\u062f"
+                                '\u0631\u0635\u064a\u062f',
+                        onTapHistory: () {
+                          CreditHistorySheet.show(
+                            context,
+                            creditLabel:
+                                widget.page!.packages.first.creditLabel ??
+                                    '\u0631\u0635\u064a\u062f',
+                            entries: const [],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+
+                // Category pills
+                if (categories.isNotEmpty)
+                  SliverToBoxAdapter(
+                    child: CategoryFilterPills(
+                      categories: categories,
+                      selected: _selectedCategory,
+                      onSelected: (cat) => setState(() {
+                        _selectedCategory = cat;
+                        _visibleCount = _pageSize;
+                      }),
+                    ),
+                  ),
+
+                // Search bar + filter button
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                      vertical: AppSpacing.sm,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: _searchController,
+                            onChanged: (value) => setState(() {
+                              _searchQuery = value;
+                              _visibleCount = _pageSize;
+                            }),
+                            decoration: InputDecoration(
+                              hintText: 'ابحث في المنتجات...',
+                              hintStyle: TextStyle(
+                                color: context.colorScheme.onSurfaceVariant
+                                    .withValues(alpha: 0.6),
+                                fontSize: 14,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: 20,
+                                color: context.colorScheme.onSurfaceVariant
+                                    .withValues(alpha: 0.6),
+                              ),
+                              suffixIcon: _searchQuery.isNotEmpty
+                                  ? IconButton(
+                                      icon: Icon(
+                                        Icons.close,
+                                        size: 18,
+                                        color: context
+                                            .colorScheme.onSurfaceVariant,
+                                      ),
+                                      onPressed: () => setState(() {
+                                        _searchController.clear();
+                                        _searchQuery = '';
+                                        _visibleCount = _pageSize;
+                                      }),
+                                    )
+                                  : null,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
+                              filled: true,
+                              fillColor: context
+                                  .colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.7),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.lg,
+                                vertical: AppSpacing.md,
+                              ),
+                              isDense: true,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.sm),
+                        // Filter button with badge
+                        _FilterButton(
+                          activeCount: _filterState.activeCount,
+                          onTap: () => _openFilterSheet(items),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Empty state
+                if (visible.isEmpty)
+                  const SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: _EmptyState(),
+                  )
+                else ...[
+                  // Product list
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                    ),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final item = visible[index];
+                          return Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: AppSpacing.sm),
+                            child: CatalogItemCard(
+                              item: item,
+                              quantity: _quantityForItem(item.id),
+                              onQuantityChanged: (qty) =>
+                                  _handleQuantityChanged(item, qty),
+                              onAdd: item.optionGroups.isNotEmpty
+                                  ? () => _showItemConfigSheet(item)
+                                  : null,
+                              activePriceChange:
+                                  widget.page?.activePriceChange,
+                            ),
+                          );
+                        },
+                        childCount: visible.length,
+                      ),
+                    ),
+                  ),
+
+                  // Show more button
+                  if (hasMore)
+                    SliverToBoxAdapter(
+                      child: _ShowMoreButton(
+                        visibleCount: visible.length,
+                        totalCount: filtered.length,
+                        onPressed: () => setState(() {
+                          _visibleCount += _pageSize;
+                        }),
+                      ),
+                    ),
+
+                  // Highlights banner
+                  if (widget.page?.catalogStrategy == 'highlights')
+                    SliverToBoxAdapter(
+                      child: HighlightsBanner(
+                        carryCategories:
+                            widget.page!.carryCategories,
+                        onAskAvailability: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'سيتم فتح محادثة مع المتجر قريباً',
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                ],
+
+                // Bottom padding for cart bar
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: _cart.isNotEmpty
+                        ? AppSpacing.xxl + 80
+                        : AppSpacing.xxl,
+                  ),
+                ),
+              ],
+            ),
+
+            // Floating cart bar
+            if (_cart.isNotEmpty)
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: FloatingCartBar(
+                  itemCount: _cartItemCount,
+                  total: _cartTotal,
+                  onSendOrder: () => _openOrderSheet(context),
+                ),
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _SpecialsBanner extends StatelessWidget {
+  final List<String> specials;
+
+  const _SpecialsBanner({required this.specials});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.sm,
+        AppSpacing.lg,
+        AppSpacing.xs,
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.orange.shade300,
+              Colors.yellow.shade600,
+            ],
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.auto_awesome, color: Colors.white, size: 24),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'عروض خاصة',
+                    style: context.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    specials.first,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.9),
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FilterButton extends StatelessWidget {
+  final int activeCount;
+  final VoidCallback onTap;
+
+  const _FilterButton({required this.activeCount, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: context.colorScheme.surfaceContainerHighest
+                  .withValues(alpha: 0.7),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              Icons.tune,
+              size: 18,
+              color: context.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          if (activeCount > 0)
+            PositionedDirectional(
+              top: -4,
+              start: -4,
+              child: Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primary,
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  '$activeCount',
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShowMoreButton extends StatelessWidget {
+  final int visibleCount;
+  final int totalCount;
+  final VoidCallback onPressed;
+
+  const _ShowMoreButton({
+    required this.visibleCount,
+    required this.totalCount,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: AppSpacing.lg,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'عرض $visibleCount من $totalCount منتج',
+            style: context.textTheme.bodySmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+              fontSize: 12,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: onPressed,
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                side: BorderSide(
+                  color: context.colorScheme.outlineVariant,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text(
+                'عرض المزيد',
+                style: TextStyle(
+                  color: context.colorScheme.onSurfaceVariant,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  const _EmptyState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.search_off,
+            size: 48,
+            color: context.colorScheme.onSurfaceVariant,
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            'لا توجد نتائج',
+            style: context.textTheme.bodyLarge?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

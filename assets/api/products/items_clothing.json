@@ -1,0 +1,244 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_nf01",
+      "name_ar": "تيشيرت قطن أساسي",
+      "name_en": "Basic Cotton T-Shirt",
+      "description_ar": "قطن ١٠٠٪ — متوفر بعدة ألوان",
+      "price_cents": 800,
+      "images": ["https://images.unsplash.com/photo-1580981440054-9dbd7d830a6b?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_men",
+      "category_name": "رجالي",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 1,
+      "option_groups": [
+        {
+          "id": "og_nf01_size",
+          "label_ar": "المقاس",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_nf01_s", "label_ar": "S", "label_en": "S", "price_modifier": 0},
+            {"id": "opt_nf01_m", "label_ar": "M", "label_en": "M", "price_modifier": 0},
+            {"id": "opt_nf01_l", "label_ar": "L", "label_en": "L", "price_modifier": 0},
+            {"id": "opt_nf01_xl", "label_ar": "XL", "label_en": "XL", "price_modifier": 0},
+            {"id": "opt_nf01_xxl", "label_ar": "XXL", "label_en": "XXL", "price_modifier": 0}
+          ]
+        },
+        {
+          "id": "og_nf01_color",
+          "label_ar": "اللون",
+          "label_en": "Color",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_nf01_white", "label_ar": "أبيض", "label_en": "White", "price_modifier": 0, "color_hex": "#FFFFFF"},
+            {"id": "opt_nf01_black", "label_ar": "أسود", "label_en": "Black", "price_modifier": 0, "color_hex": "#000000"},
+            {"id": "opt_nf01_navy", "label_ar": "كحلي", "label_en": "Navy", "price_modifier": 0, "color_hex": "#1B2A4A"},
+            {"id": "opt_nf01_grey", "label_ar": "رمادي", "label_en": "Grey", "price_modifier": 0, "color_hex": "#808080"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_nf02",
+      "name_ar": "جينز كلاسيك سليم",
+      "name_en": "Classic Slim Jeans",
+      "description_ar": "جينز مريح بقصة سليم فت",
+      "price_cents": 2200,
+      "images": ["https://images.unsplash.com/photo-1555689502-c4b22d76c56f?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_men",
+      "category_name": "رجالي",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 2,
+      "option_groups": [
+        {
+          "id": "og_nf02_size",
+          "label_ar": "المقاس",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_nf02_30", "label_ar": "30", "label_en": "30", "price_modifier": 0},
+            {"id": "opt_nf02_32", "label_ar": "32", "label_en": "32", "price_modifier": 0},
+            {"id": "opt_nf02_34", "label_ar": "34", "label_en": "34", "price_modifier": 0},
+            {"id": "opt_nf02_36", "label_ar": "36", "label_en": "36", "price_modifier": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_nf03",
+      "name_ar": "قميص أكسفورد",
+      "name_en": "Oxford Shirt",
+      "description_ar": "قميص رسمي/كاجوال — قطن مخلوط",
+      "price_cents": 1800,
+      "images": ["https://images.unsplash.com/photo-1598363777525-4818477ba9f9?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_men",
+      "category_name": "رجالي",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 3,
+      "option_groups": [
+        {
+          "id": "og_nf03_size",
+          "label_ar": "المقاس",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_nf03_s", "label_ar": "S", "label_en": "S", "price_modifier": 0},
+            {"id": "opt_nf03_m", "label_ar": "M", "label_en": "M", "price_modifier": 0},
+            {"id": "opt_nf03_l", "label_ar": "L", "label_en": "L", "price_modifier": 0},
+            {"id": "opt_nf03_xl", "label_ar": "XL", "label_en": "XL", "price_modifier": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_nf04",
+      "name_ar": "فستان صيفي ميدي",
+      "name_en": "Summer Midi Dress",
+      "description_ar": "فستان أنيق بنقشة زهور — مناسب للعمل والسهرات",
+      "price_cents": 2800,
+      "images": ["https://images.unsplash.com/photo-1672276079572-b3c5324a7adf?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_women",
+      "category_name": "نسائي",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 4,
+      "option_groups": [
+        {
+          "id": "og_nf04_size",
+          "label_ar": "المقاس",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_nf04_s", "label_ar": "S", "label_en": "S", "price_modifier": 0},
+            {"id": "opt_nf04_m", "label_ar": "M", "label_en": "M", "price_modifier": 0},
+            {"id": "opt_nf04_l", "label_ar": "L", "label_en": "L", "price_modifier": 0},
+            {"id": "opt_nf04_xl", "label_ar": "XL", "label_en": "XL", "price_modifier": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_nf05",
+      "name_ar": "بلوزة كتان",
+      "name_en": "Linen Blouse",
+      "description_ar": "بلوزة كتان طبيعي — خفيفة ومريحة",
+      "price_cents": 1500,
+      "images": ["https://images.unsplash.com/photo-1763824969015-e5d1d6755782?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_women",
+      "category_name": "نسائي",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 5,
+      "option_groups": []
+    },
+    {
+      "id": "item_nf06",
+      "name_ar": "بنطلون واسع نسائي",
+      "name_en": "Wide Leg Women's Pants",
+      "description_ar": "بنطلون مريح بخصر عالي",
+      "price_cents": 1900,
+      "images": ["https://images.unsplash.com/photo-1763824969015-e5d1d6755782?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_women",
+      "category_name": "نسائي",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 6,
+      "option_groups": []
+    },
+    {
+      "id": "item_nf07",
+      "name_ar": "طقم أطفال صيفي",
+      "name_en": "Kids Summer Set",
+      "description_ar": "تيشيرت + شورت — ٢-٨ سنوات",
+      "price_cents": 1200,
+      "images": ["https://images.unsplash.com/photo-1557503800-1bdcd9acdc67?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_kids",
+      "category_name": "أطفال",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 7,
+      "option_groups": []
+    },
+    {
+      "id": "item_nf08",
+      "name_ar": "فستان أطفال بناتي",
+      "name_en": "Girls Dress",
+      "description_ar": "فستان قطني بنقشة فراشات — ٢-٧ سنوات",
+      "price_cents": 1400,
+      "images": ["https://images.unsplash.com/photo-1557503800-1bdcd9acdc67?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_kids",
+      "category_name": "أطفال",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 8,
+      "option_groups": []
+    },
+    {
+      "id": "item_nf09",
+      "name_ar": "سنيكرز رياضي",
+      "name_en": "Sports Sneakers",
+      "description_ar": "حذاء رياضي مريح — مناسب للمشي والرياضة",
+      "price_cents": 3500,
+      "images": ["https://images.unsplash.com/photo-1768225286074-9039931bb9d3?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_shoes",
+      "category_name": "أحذية",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 9,
+      "option_groups": []
+    },
+    {
+      "id": "item_nf10",
+      "name_ar": "صندل نسائي",
+      "name_en": "Women's Sandals",
+      "description_ar": "صندل جلد صناعي — أنيق ومريح",
+      "price_cents": 1600,
+      "images": ["https://images.unsplash.com/photo-1768225286074-9039931bb9d3?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_shoes",
+      "category_name": "أحذية",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 10,
+      "option_groups": []
+    },
+    {
+      "id": "item_nf11",
+      "name_ar": "جاكيت جينز أوفرسايز",
+      "name_en": "Oversized Denim Jacket",
+      "description_ar": "جاكيت جينز بقصة واسعة — يونيسكس",
+      "price_cents": 3200,
+      "images": ["https://images.unsplash.com/photo-1766934587163-186d20bf3d40?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_jackets",
+      "category_name": "جاكيتات",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 11,
+      "option_groups": []
+    },
+    {
+      "id": "item_nf12",
+      "name_ar": "هودي فليس",
+      "name_en": "Fleece Hoodie",
+      "description_ar": "هودي سميك بجيب أمامي — مثالي للشتاء",
+      "price_cents": 2500,
+      "images": ["https://images.unsplash.com/photo-1766934587163-186d20bf3d40?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_jackets",
+      "category_name": "جاكيتات",
+      "in_stock": true,
+      "page_id": "nour-fashion",
+      "sort_order": 12,
+      "option_groups": []
+    }
+  ],
+  "meta": {"total": 12, "has_more": false}
+}

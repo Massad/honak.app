@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "req_001",
+      "customer": {
+        "id": "usr_010",
+        "name": "ليلى",
+        "avatar_url": "https://images.unsplash.com/photo-1720722005651-1a1d71311ee8?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000010"
+      },
+      "status": "pending",
+      "type": "order",
+      "items_count": 3,
+      "total_cents": 1250,
+      "note": "أرجو التوصيل قبل الساعة ٢",
+      "created_at": 1700100000
+    },
+    {
+      "id": "req_002",
+      "customer": {
+        "id": "usr_011",
+        "name": "محمد",
+        "avatar_url": "https://images.unsplash.com/photo-1765366574945-e2f1b4b1a5b3?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000011"
+      },
+      "status": "pending",
+      "type": "order",
+      "items_count": 1,
+      "total_cents": 350,
+      "note": null,
+      "created_at": 1700099000
+    },
+    {
+      "id": "req_003",
+      "customer": {
+        "id": "usr_012",
+        "name": "رنا",
+        "avatar_url": "https://images.unsplash.com/photo-1639347719818-b8886d6665aa?auto=format&fit=crop&w=100&q=80",
+        "phone": "0791000012"
+      },
+      "status": "pending",
+      "type": "order",
+      "items_count": 5,
+      "total_cents": 2100,
+      "note": "الدور الثالث، شقة ٧",
+      "created_at": 1700098000
+    }
+  ]
+}

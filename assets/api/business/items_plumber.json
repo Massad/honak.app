@@ -1,0 +1,48 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_item_p01",
+      "name": "كشف أعطال سباكة",
+      "name_en": "Plumbing Inspection",
+      "description": "فحص شامل وتحديد مصدر المشكلة",
+      "price_text": "يبدأ من ١٠ د.أ",
+      "images": ["https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_inspection",
+      "category_name": "كشف وفحص",
+      "status": "active",
+      "sort_order": 1,
+      "page_id": "ahmad-plumbing",
+      "properties": {}
+    },
+    {
+      "id": "biz_item_p02",
+      "name": "تسليك مجاري",
+      "name_en": "Drain Unclogging",
+      "description": "تسليك مجاري بأحدث المعدات",
+      "price_text": "حسب الحالة",
+      "images": ["https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_repair",
+      "category_name": "صيانة وإصلاح",
+      "status": "active",
+      "sort_order": 2,
+      "page_id": "ahmad-plumbing",
+      "properties": {}
+    },
+    {
+      "id": "biz_item_p03",
+      "name": "تركيب سخان مياه",
+      "name_en": "Water Heater Installation",
+      "description": "تركيب سخان كهربائي أو شمسي مع ضمان",
+      "price_cents": 2500,
+      "images": ["https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_install",
+      "category_name": "تركيبات",
+      "status": "active",
+      "sort_order": 3,
+      "page_id": "ahmad-plumbing",
+      "properties": {}
+    }
+  ],
+  "meta": {"total": 3, "has_more": false}
+}

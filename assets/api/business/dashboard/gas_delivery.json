@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 22,
+      "new_followers": 1,
+      "page_views": 18,
+      "today_revenue": 33000
+    },
+    "today_revenue": {
+      "total": 33000,
+      "completed_count": 18,
+      "items": [
+        {"service": "اسطوانة غاز كبيرة × 4", "amount": 12000, "time": "07:00"},
+        {"service": "اسطوانة غاز كبيرة × 3", "amount": 9000, "time": "08:30"},
+        {"service": "اسطوانة غاز صغيرة × 6", "amount": 6000, "time": "09:45"},
+        {"service": "اسطوانة غاز كبيرة × 2", "amount": 6000, "time": "11:00"}
+      ]
+    },
+    "delivery_route": {
+      "completed": 18,
+      "total": 22,
+      "areas": [
+        {"name": "ماركا الشمالية", "completed": 6, "total": 6},
+        {"name": "طبربور", "completed": 5, "total": 5},
+        {"name": "الهاشمي الشمالي", "completed": 4, "total": 6},
+        {"name": "ماركا الجنوبية", "completed": 3, "total": 5}
+      ]
+    },
+    "low_stock": [
+      {"name": "اسطوانة غاز كبيرة", "remaining": 8, "threshold": 30},
+      {"name": "اسطوانة غاز صغيرة", "remaining": 15, "threshold": 25}
+    ],
+    "recurring_tomorrow": {
+      "total_customers": 12,
+      "total_units": 24,
+      "items": [
+        {"area": "ماركا الشمالية", "customer": "بقالة أبو عادل", "qty": 3, "schedule": "كل 3 أيام"},
+        {"area": "طبربور", "customer": "مطعم الديوان", "qty": 4, "schedule": "كل أسبوع"},
+        {"area": "الهاشمي الشمالي", "customer": "فرن السنابل", "qty": 2, "schedule": "كل 3 أيام"},
+        {"area": "ماركا الجنوبية", "customer": "كافتيريا الأصدقاء", "qty": 2, "schedule": "كل أسبوع"}
+      ]
+    },
+    "pending_requests": [
+      {"id": "req_601", "customer": "أبو وليد", "service": "2 اسطوانة كبيرة — الهاشمي", "date": "2026-02-12", "time": "14:30"},
+      {"id": "req_602", "customer": "سوبرماركت النجمة", "service": "4 اسطوانة كبيرة — ماركا", "date": "2026-02-12", "time": "15:00"}
+    ]
+  }
+}

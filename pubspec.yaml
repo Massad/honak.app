@@ -1,0 +1,86 @@
+name: honak
+description: "Honak — a super app for Jordan"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Routing
+  go_router: ^14.8.1
+
+  # Networking
+  dio: ^5.7.0
+
+  # Code Generation
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+
+  # Secure Storage
+  flutter_secure_storage: ^9.2.4
+
+  # Localization
+  intl: ^0.20.2
+
+  # UI
+  cached_network_image: ^3.4.1
+  flutter_svg: ^2.0.16
+  shimmer: ^3.0.0
+
+  # Sharing
+  share_plus: ^10.1.4
+
+  # Utilities
+  equatable: ^2.0.7
+  uuid: ^4.5.1
+  timeago: ^3.7.0
+  url_launcher: ^6.3.1
+  collection: ^1.19.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^2.4.14
+  freezed: ^2.5.8
+  json_serializable: ^6.9.4
+  riverpod_generator: ^2.6.3
+  flutter_lints: ^5.0.0
+  mocktail: ^1.0.4
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - lib/fixtures/
+    - assets/api/auth/
+    - assets/api/users/
+    - assets/api/pages/
+    - assets/api/products/
+    - assets/api/orders/
+    - assets/api/feed/
+    - assets/api/chat/
+    - assets/api/chat/conversations/
+    - assets/api/chat/messages/
+    - assets/api/notifications/
+    - assets/api/common/
+    - assets/api/business/
+    - assets/api/business/dashboard/
+    - assets/api/requests/
+    - assets/api/settings/
+    - assets/api/wizard/
+    - assets/api/saved/
+    - assets/api/stories/
+    - assets/api/locations/
+    - assets/api/subscriptions/
