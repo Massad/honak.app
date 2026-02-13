@@ -11,8 +11,9 @@ void showMessageActionsMenu(
   BuildContext context,
   Message message,
   bool isMine,
-  WidgetRef ref,
-) {
+  WidgetRef ref, {
+  VoidCallback? onReport,
+}) {
   final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
   final ageMinutes = (now - message.createdAt) / 60;
   final isText = message.type == 'text';
@@ -99,12 +100,12 @@ void showMessageActionsMenu(
                   _ActionTile(
                     icon: Icons.flag_outlined,
                     label: 'إبلاغ',
-                    color: AppColors.warning,
+                    color: const Color(0xFFFB923C), // orange-400
                     onTap: () {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('قريباً')),
-                      );
+                      if (onReport != null) {
+                        onReport();
+                      }
                     },
                   ),
                 const Divider(height: 1),

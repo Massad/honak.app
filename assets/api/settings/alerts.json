@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data": [
+    { "id": "alt_1", "title": "تعطيل الدوام", "body": "سيتم تعطيل الدوام يوم الخميس بمناسبة عيد الاستقلال", "severity": "info", "expires_at": 1740000000, "active": true, "created_at": 1739500000, "views": 342, "target_areas": ["عمان الغربية", "عمان الشرقية"] },
+    { "id": "alt_2", "title": "تحديث مواعيد العمل", "body": "ابتداءً من الأسبوع القادم، ستكون ساعات الاستقبال من 8:00 إلى 3:00", "severity": "warning", "active": true, "expires_at": null, "created_at": 1739400000, "views": 187, "target_areas": ["عمان الغربية"] },
+    { "id": "alt_3", "title": "إغلاق مؤقت للصيانة", "body": "سيتم إغلاق المبنى يوم السبت للصيانة الدورية", "severity": "urgent", "active": false, "expires_at": 1739300000, "created_at": 1739200000, "views": 521, "target_areas": ["عمان الغربية", "عمان الشرقية", "الزرقاء"] }
+  ]
+}

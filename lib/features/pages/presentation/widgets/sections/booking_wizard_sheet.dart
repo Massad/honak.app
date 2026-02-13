@@ -280,11 +280,8 @@ class _WizardBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg,
-        AppSpacing.md,
-        AppSpacing.lg,
-        AppSpacing.lg,
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg,
       ),
       decoration: BoxDecoration(
         border: Border(
@@ -298,8 +295,7 @@ class _WizardBottomBar extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: onBack,
-                // \u0631\u062c\u0648\u0639 = "Back"
-                child: const Text('\u0631\u062c\u0648\u0639'),
+                child: const Text('\u0631\u062c\u0648\u0639'), // Back
               ),
             )
           else
@@ -310,10 +306,8 @@ class _WizardBottomBar extends StatelessWidget {
               onPressed: canProceed ? onNext : null,
               child: Text(
                 isLastStep
-                    // \u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u062c\u0632 = "Confirm booking"
-                    ? '\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u062c\u0632'
-                    // \u0627\u0644\u062a\u0627\u0644\u064a = "Next"
-                    : '\u0627\u0644\u062a\u0627\u0644\u064a',
+                    ? '\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u062c\u0632' // Confirm booking
+                    : '\u0627\u0644\u062a\u0627\u0644\u064a', // Next
               ),
             ),
           ),

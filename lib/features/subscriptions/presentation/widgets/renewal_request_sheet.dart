@@ -38,10 +38,6 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
 
   void _handleSubmit() {
     setState(() => _submitted = true);
-    context.showSnackBar('تم إرسال طلب التجديد بنجاح');
-    Future.delayed(const Duration(milliseconds: 1200), () {
-      if (mounted) Navigator.pop(context);
-    });
   }
 
   @override

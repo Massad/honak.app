@@ -84,16 +84,24 @@
         "name": "باقة الفضية",
         "description": "قاعة رئيسية + بوفيه أساسي + تنسيق زهور",
         "price_cents": 150000,
-        "credits": 1,
-        "credit_label": "حفل"
+        "credits": 0,
+        "credit_label": null,
+        "icon": "sparkles",
+        "active": true,
+        "model": "bundle",
+        "items": ["قاعة رئيسية ٢٠٠ شخص", "بوفيه أساسي", "تنسيق زهور", "نظام صوت"]
       },
       {
         "id": "pkg_011",
         "name": "باقة الذهبية",
         "description": "قاعة VIP + بوفيه فاخر + تنسيق + تصوير",
         "price_cents": 300000,
-        "credits": 1,
-        "credit_label": "حفل"
+        "credits": 0,
+        "credit_label": null,
+        "icon": "sparkles",
+        "active": true,
+        "model": "bundle",
+        "items": ["قاعة VIP ٣٠٠ شخص", "بوفيه فاخر", "تنسيق زهور وإضاءة", "تصوير احترافي", "نظام صوت وإضاءة"]
       }
     ]
   }

@@ -7,7 +7,10 @@ import 'package:honak/features/pages/presentation/providers/page_detail_provider
 import 'package:honak/features/pages/presentation/widgets/sections/service_item_card.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/team_member_grid.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/booking_wizard_sheet.dart';
+import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
+import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Service list with categories, search, pricing, duration, and team members.
 /// Used by the serviceBooking archetype (salon, doctor, tutor).
@@ -15,12 +18,14 @@ class ServiceBookingSection extends ConsumerStatefulWidget {
   final String pageId;
   final String pageName;
   final int teamMembersCount;
+  final List<Package> packages;
 
   const ServiceBookingSection({
     super.key,
     required this.pageId,
     this.pageName = '',
     this.teamMembersCount = 0,
+    this.packages = const [],
   });
 
   @override
@@ -94,7 +99,7 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
         : <Map<String, dynamic>>[];
 
     return itemsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const SkeletonProductCard(count: 4, grid: false),
       error: (error, _) => ErrorView(
         message: error.toString(),
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),
@@ -107,6 +112,20 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
 
         return CustomScrollView(
           slivers: [
+            // Packages section
+            if (widget.packages.isNotEmpty)
+              SliverToBoxAdapter(
+                child: PackagesSection(
+                  packages: widget.packages,
+                  archetype: 'service_booking',
+                  pageName: widget.pageName,
+                  existingCredits: widget.packages.isNotEmpty ? 2 : null,
+                  existingCreditLabel: widget.packages.isNotEmpty
+                      ? widget.packages.first.creditLabel
+                      : null,
+                ),
+              ),
+
             // Category pills
             if (categories.isNotEmpty)
               SliverToBoxAdapter(
@@ -223,7 +242,7 @@ class _TeamMembersSection extends ConsumerWidget {
     return teamAsync.when(
       loading: () => const Padding(
         padding: EdgeInsets.all(AppSpacing.lg),
-        child: Center(child: CircularProgressIndicator()),
+        child: SkeletonListTile(count: 3),
       ),
       error: (_, __) => const SizedBox.shrink(),
       data: (members) {

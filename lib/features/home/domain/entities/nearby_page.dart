@@ -18,6 +18,7 @@ class NearbyPage with _$NearbyPage {
     @JsonKey(name: 'weekly_orders') @Default(0) int weeklyOrders,
     @JsonKey(name: 'is_open') @Default(true) bool isOpen,
     @JsonKey(name: 'browse_only') @Default(false) bool browseOnly,
+    @JsonKey(name: 'has_active_stories') @Default(false) bool hasActiveStories,
   }) = _NearbyPage;
 
   factory NearbyPage.fromJson(Map<String, dynamic> json) =>

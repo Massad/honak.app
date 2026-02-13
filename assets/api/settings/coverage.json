@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "data": {
+    "default_delivery_fee": 150,
+    "zones": [
+      { "id": "cov_1", "name": "عبدون", "zone": "غرب عمّان", "active": true, "delivery_fee": null },
+      { "id": "cov_2", "name": "الصويفية", "zone": "غرب عمّان", "active": true, "delivery_fee": null },
+      { "id": "cov_3", "name": "الشميساني", "zone": "غرب عمّان", "active": false, "delivery_fee": null },
+      { "id": "cov_4", "name": "جبل الحسين", "zone": "وسط عمّان", "active": true, "delivery_fee": 200 },
+      { "id": "cov_5", "name": "وسط البلد", "zone": "وسط عمّان", "active": true, "delivery_fee": 200 },
+      { "id": "cov_6", "name": "جبل عمّان", "zone": "وسط عمّان", "active": true, "delivery_fee": null },
+      { "id": "cov_7", "name": "طبربور", "zone": "شرق عمّان", "active": true, "delivery_fee": 250 },
+      { "id": "cov_8", "name": "ماركا", "zone": "شرق عمّان", "active": false, "delivery_fee": 300 },
+      { "id": "cov_9", "name": "القويسمة", "zone": "شرق عمّان", "active": true, "delivery_fee": 250 },
+      { "id": "cov_10", "name": "خلدا", "zone": "شمال عمّان", "active": true, "delivery_fee": null },
+      { "id": "cov_11", "name": "تلاع العلي", "zone": "شمال عمّان", "active": true, "delivery_fee": null },
+      { "id": "cov_12", "name": "الجبيهة", "zone": "شمال عمّان", "active": true, "delivery_fee": 200 },
+      { "id": "cov_13", "name": "أبو نصير", "zone": "شمال عمّان", "active": false, "delivery_fee": 300 },
+      { "id": "cov_14", "name": "المقابلين", "zone": "جنوب عمّان", "active": true, "delivery_fee": 250 },
+      { "id": "cov_15", "name": "صويلح", "zone": "جنوب عمّان", "active": true, "delivery_fee": 200 }
+    ]
+  }
+}

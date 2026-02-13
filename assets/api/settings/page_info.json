@@ -6,6 +6,6 @@
     "phone": "0790000002",
     "cliq_alias": "abu.ahmad",
     "description_max_length": 500,
-    "payment_methods": ["cash", "cliq"]
+    "payment_methods": ["cash", "cliq", "bank_transfer"]
   }
 }

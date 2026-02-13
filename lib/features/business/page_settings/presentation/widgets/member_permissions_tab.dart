@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:honak/config/archetype_defaults/shared_definitions.dart';
 import 'package:honak/config/business_type_config.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -25,6 +24,8 @@ class MemberPermissionsTab extends ConsumerWidget {
     'respond_chat': Icons.chat_bubble_outline,
     'post_updates': Icons.edit_outlined,
     'view_insights': Icons.bar_chart_outlined,
+    'manage_settings': Icons.settings_outlined,
+    'manage_team': Icons.people_outline,
   };
 
   @override
@@ -33,18 +34,26 @@ class MemberPermissionsTab extends ConsumerWidget {
     final member = members.where((m) => m.id == memberId).firstOrNull;
     if (member == null) return const SizedBox.shrink();
 
-    final perms = (config?.availablePermissions ?? [])
-        .where((p) =>
-            p.id != Perm.manageTeam.id && p.id != Perm.manageSettings.id)
-        .toList();
+    final perms = config?.availablePermissions ?? [];
+    final isOwner = member.isOwner;
 
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
+        if (isOwner)
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.md),
+            child: Text(
+              'المشرف الرئيسي يملك جميع الصلاحيات',
+              style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+              textAlign: TextAlign.end,
+            ),
+          ),
         for (final perm in perms)
           _PermissionRow(
             perm: perm,
-            enabled: member.permissions.contains(perm.id),
+            enabled: isOwner || member.permissions.contains(perm.id),
+            disabled: isOwner,
             onToggle: () {
               final current = List<String>.from(member.permissions);
               if (current.contains(perm.id)) {
@@ -65,11 +74,13 @@ class MemberPermissionsTab extends ConsumerWidget {
 class _PermissionRow extends StatelessWidget {
   final PermissionMeta perm;
   final bool enabled;
+  final bool disabled;
   final VoidCallback onToggle;
 
   const _PermissionRow({
     required this.perm,
     required this.enabled,
+    this.disabled = false,
     required this.onToggle,
   });
 
@@ -85,7 +96,7 @@ class _PermissionRow extends StatelessWidget {
             child: FittedBox(
               child: Switch(
                 value: enabled,
-                onChanged: (_) => onToggle(),
+                onChanged: disabled ? null : (_) => onToggle(),
                 activeTrackColor: AppColors.primary.withValues(alpha: 0.4),
                 activeThumbColor: AppColors.primary,
               ),

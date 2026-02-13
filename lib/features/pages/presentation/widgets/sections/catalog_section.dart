@@ -6,6 +6,7 @@ import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/catalog_item_card.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/catalog_section_helpers.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/floating_cart_bar.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/catalog_filter_sheet.dart';
 import 'package:honak/features/requests/domain/entities/cart.dart';
@@ -13,9 +14,11 @@ import 'package:honak/features/requests/presentation/widgets/order_request_sheet
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/highlights_banner.dart';
+import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart';
 import 'package:honak/shared/widgets/credit_chip.dart';
 import 'package:honak/shared/widgets/credit_history_sheet.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
 import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
 
@@ -39,6 +42,25 @@ class CatalogSection extends ConsumerStatefulWidget {
 
 class _CatalogSectionState extends ConsumerState<CatalogSection> {
   static const _pageSize = 12;
+
+  // Mock credit history for demo (Phase 1)
+  static final _mockCreditHistory = [
+    CreditHistoryEntry(
+      date: DateTime(2025, 12, 3),
+      description: '\u0634\u0631\u0627\u0621 \u0628\u0627\u0642\u0629 10 \u0642\u0648\u0627\u0631\u064a\u0631',
+      amount: 10,
+    ),
+    CreditHistoryEntry(
+      date: DateTime(2025, 12, 7),
+      description: '\u0637\u0644\u0628 #980 \u2014 \u062a\u0648\u0635\u064a\u0644 3 \u0642\u0648\u0627\u0631\u064a\u0631',
+      amount: -3,
+    ),
+    CreditHistoryEntry(
+      date: DateTime(2025, 12, 15),
+      description: '\u0637\u0644\u0628 #1005 \u2014 \u062a\u0648\u0635\u064a\u0644 3 \u0642\u0648\u0627\u0631\u064a\u0631',
+      amount: -3,
+    ),
+  ];
 
   String? _selectedCategory;
   String _searchQuery = '';
@@ -190,7 +212,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
         height: MediaQuery.of(ctx).size.height * 0.85,
         child: ItemConfigurationStep(
           item: item,
-          confirmLabel: 'إضافة للسلة',
+          confirmLabel: '\u0625\u0636\u0627\u0641\u0629 \u0644\u0644\u0633\u0644\u0629',
           onConfirm: (selectedItem) {
             Navigator.of(ctx).pop();
             setState(() => _cart.add(selectedItem));
@@ -214,7 +236,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
       context: context,
       cart: cart,
       pageName: widget.page?.name ?? '',
-      paymentMethods: widget.page?.paymentMethods ?? const ['نقداً'],
+      paymentMethods: widget.page?.paymentMethods ?? const ['\u0646\u0642\u062f\u0627\u064b'],
       onSubmit: (data) {
         Navigator.of(context).pop();
         setState(() => _cart.clear());
@@ -236,7 +258,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
         widget.page != null && widget.page!.specials.isNotEmpty;
 
     return itemsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const SkeletonProductCard(count: 4, grid: false),
       error: (error, _) => ErrorView(
         message: error.toString(),
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),
@@ -254,7 +276,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                 // Specials banner
                 if (hasSpecials)
                   SliverToBoxAdapter(
-                    child: _SpecialsBanner(
+                    child: SpecialsBanner(
                       specials: widget.page!.specials,
                     ),
                   ),
@@ -277,18 +299,37 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                             widget.page!.packages.first.credits,
                         creditLabel:
                             widget.page!.packages.first.creditLabel ??
-                                // "\u0631\u0635\u064a\u062f"
                                 '\u0631\u0635\u064a\u062f',
                         onTapHistory: () {
+                          final pkg = widget.page!.packages.first;
                           CreditHistorySheet.show(
                             context,
+                            packageName: pkg.name,
+                            pageName: widget.page!.name,
                             creditLabel:
-                                widget.page!.packages.first.creditLabel ??
-                                    '\u0631\u0635\u064a\u062f',
-                            entries: const [],
+                                pkg.creditLabel ?? '\u0631\u0635\u064a\u062f',
+                            entries: _mockCreditHistory,
+                            startsAt: DateTime(2025, 12, 3),
+                            expiresAt: DateTime(2026, 4, 30),
+                            remainingCredits: 4,
+                            totalCredits: pkg.credits,
                           );
                         },
                       ),
+                    ),
+                  ),
+
+                // Packages section
+                if (widget.page != null &&
+                    widget.page!.packages.isNotEmpty)
+                  SliverToBoxAdapter(
+                    child: PackagesSection(
+                      packages: widget.page!.packages,
+                      archetype: 'catalog_order',
+                      pageName: widget.page!.name,
+                      existingCredits: 6,
+                      existingCreditLabel:
+                          widget.page!.packages.first.creditLabel,
                     ),
                   ),
 
@@ -322,7 +363,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                               _visibleCount = _pageSize;
                             }),
                             decoration: InputDecoration(
-                              hintText: 'ابحث في المنتجات...',
+                              hintText: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a...',
                               hintStyle: TextStyle(
                                 color: context.colorScheme.onSurfaceVariant
                                     .withValues(alpha: 0.6),
@@ -367,7 +408,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         // Filter button with badge
-                        _FilterButton(
+                        CatalogFilterButton(
                           activeCount: _filterState.activeCount,
                           onTap: () => _openFilterSheet(items),
                         ),
@@ -380,7 +421,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                 if (visible.isEmpty)
                   const SliverFillRemaining(
                     hasScrollBody: false,
-                    child: _EmptyState(),
+                    child: SectionEmptySearch(),
                   )
                 else ...[
                   // Product list
@@ -416,7 +457,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                   // Show more button
                   if (hasMore)
                     SliverToBoxAdapter(
-                      child: _ShowMoreButton(
+                      child: SectionShowMoreButton(
                         visibleCount: visible.length,
                         totalCount: filtered.length,
                         onPressed: () => setState(() {
@@ -435,7 +476,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(
-                                'سيتم فتح محادثة مع المتجر قريباً',
+                                '\u0633\u064a\u062a\u0645 \u0641\u062a\u062d \u0645\u062d\u0627\u062f\u062b\u0629 \u0645\u0639 \u0627\u0644\u0645\u062a\u062c\u0631 \u0642\u0631\u064a\u0628\u0627\u064b',
                               ),
                             ),
                           );
@@ -470,203 +511,6 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
           ],
         );
       },
-    );
-  }
-}
-
-class _SpecialsBanner extends StatelessWidget {
-  final List<String> specials;
-
-  const _SpecialsBanner({required this.specials});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.sm,
-        AppSpacing.lg,
-        AppSpacing.xs,
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.orange.shade300,
-              Colors.yellow.shade600,
-            ],
-          ),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.auto_awesome, color: Colors.white, size: 24),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'عروض خاصة',
-                    style: context.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    specials.first,
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: Colors.white.withValues(alpha: 0.9),
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _FilterButton extends StatelessWidget {
-  final int activeCount;
-  final VoidCallback onTap;
-
-  const _FilterButton({required this.activeCount, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: context.colorScheme.surfaceContainerHighest
-                  .withValues(alpha: 0.7),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(
-              Icons.tune,
-              size: 18,
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          if (activeCount > 0)
-            PositionedDirectional(
-              top: -4,
-              start: -4,
-              child: Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.primary,
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '$activeCount',
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ShowMoreButton extends StatelessWidget {
-  final int visibleCount;
-  final int totalCount;
-  final VoidCallback onPressed;
-
-  const _ShowMoreButton({
-    required this.visibleCount,
-    required this.totalCount,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.lg,
-        vertical: AppSpacing.lg,
-      ),
-      child: Column(
-        children: [
-          Text(
-            'عرض $visibleCount من $totalCount منتج',
-            style: context.textTheme.bodySmall?.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-              fontSize: 12,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton(
-              onPressed: onPressed,
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                side: BorderSide(
-                  color: context.colorScheme.outlineVariant,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                'عرض المزيد',
-                style: TextStyle(
-                  color: context.colorScheme.onSurfaceVariant,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _EmptyState extends StatelessWidget {
-  const _EmptyState();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.search_off,
-            size: 48,
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text(
-            'لا توجد نتائج',
-            style: context.textTheme.bodyLarge?.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

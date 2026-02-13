@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "data": [
+    { "id": "ten_1", "name": "مطعم الديوان", "floor": "الطابق الأرضي", "unit": "محل 1", "business_type": "مطعم", "linked_page_id": "pg_rest_01", "status": "active" },
+    { "id": "ten_2", "name": "صيدلية الشفاء", "floor": "الطابق الأرضي", "unit": "محل 5", "business_type": "صيدلية", "linked_page_id": null, "status": "active" },
+    { "id": "ten_3", "name": "أزياء نور", "floor": "الطابق الأول", "unit": "محل 12", "business_type": "ملابس", "linked_page_id": null, "status": "active" },
+    { "id": "ten_4", "name": "كوفي لاونج", "floor": "الطابق الأول", "unit": "محل 15", "business_type": "مقهى", "linked_page_id": null, "status": "coming_soon" },
+    { "id": "ten_5", "name": "سوبرماركت الأهل", "floor": "الطابق السفلي", "unit": "محل B2", "business_type": "سوبرماركت", "linked_page_id": null, "status": "active" }
+  ]
+}

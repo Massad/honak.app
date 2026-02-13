@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "data": [
+    { "id": "iq_10", "question": "صف المشكلة بالتفصيل", "field_type": "text", "options": [], "required": true, "sort_order": 0, "active": true },
+    { "id": "iq_11", "question": "هل حاولت إصلاحها سابقاً؟", "field_type": "select", "options": ["نعم", "لا"], "required": false, "sort_order": 1, "active": true },
+    { "id": "iq_12", "question": "مستوى الاستعجال", "field_type": "select", "options": ["عادي", "مستعجل", "طوارئ"], "required": true, "sort_order": 2, "active": true },
+    { "id": "iq_13", "question": "عدد الوحدات المطلوبة", "field_type": "number", "options": [], "required": false, "sort_order": 3, "active": true }
+  ]
+}

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/directory_announcements.dart';
+import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/directory_featured_tenants.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/directory_floors_preview.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/directory_stats_grid.dart';
@@ -80,7 +79,7 @@ class _DirectorySectionState extends ConsumerState<DirectorySection> {
     final page = widget.page;
 
     return itemsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const SkeletonListTile(count: 6),
       error: (error, _) => ErrorView(
         message: error.toString(),
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),

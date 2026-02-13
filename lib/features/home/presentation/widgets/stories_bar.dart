@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/story.dart';
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
@@ -46,12 +47,50 @@ class _StoryCircle extends StatelessWidget {
         width: 68,
         child: Column(
           children: [
-            StoryRingAvatar(
-              imageUrl: story.pageAvatarUrl,
-              name: story.pageName,
-              radius: 26,
-              hasStories: true,
-              allSeen: !story.hasNew,
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                StoryRingAvatar(
+                  imageUrl: story.pageAvatarUrl,
+                  name: story.pageName,
+                  radius: 26,
+                  hasStories: true,
+                  allSeen: !story.hasNew,
+                ),
+                if (story.storyCount > 1)
+                  PositionedDirectional(
+                    bottom: 0,
+                    end: -2,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 1,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(9999),
+                        border: Border.all(
+                          color: context.colorScheme.surface,
+                          width: 1.5,
+                        ),
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 18,
+                        minHeight: 18,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${story.storyCount}',
+                          style: const TextStyle(
+                            color: AppColors.white,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
             SizedBox(height: AppSpacing.xs),
             Text(

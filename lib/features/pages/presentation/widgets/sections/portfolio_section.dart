@@ -7,6 +7,7 @@ import 'package:honak/features/pages/presentation/providers/page_detail_provider
 import 'package:honak/features/requests/presentation/widgets/inquiry_request_sheet.dart';
 import 'package:honak/shared/widgets/cached_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Gallery grid with category pills, inquiry CTA, and custom work CTA.
 /// Used by the portfolioInquiry archetype (photographer, designer).
@@ -77,7 +78,7 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
     final itemsAsync = ref.watch(pageItemsProvider(widget.pageId));
 
     return itemsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const SkeletonProductCard(count: 9, grid: true),
       error: (error, _) => ErrorView(
         message: error.toString(),
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),

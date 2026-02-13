@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:honak/core/router/routes.dart';
 import 'package:honak/features/stories/domain/entities/story_content.dart';
 import 'package:honak/features/stories/presentation/widgets/story_header.dart';
 import 'package:honak/features/stories/presentation/widgets/story_progress_bar.dart';
@@ -228,6 +230,10 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage>
                             avatarUrl: business.avatar,
                             createdAt: slide.createdAt,
                             onClose: _close,
+                            onProfileTap: () {
+                              _close();
+                              context.push(Routes.pagePath(business.id));
+                            },
                           ),
 
                           const Spacer(),

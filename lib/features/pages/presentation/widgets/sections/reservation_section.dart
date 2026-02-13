@@ -12,6 +12,7 @@ import 'package:honak/features/requests/presentation/widgets/reservation_request
 import 'package:honak/shared/widgets/cached_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/money_text.dart';
+import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Space cards with category filtering, pagination, and villa support.
 /// Used by the reservation archetype (hotel, event venue, villa/chalet).
@@ -91,7 +92,7 @@ class _ReservationSectionState extends ConsumerState<ReservationSection> {
     final itemsAsync = ref.watch(pageItemsProvider(widget.pageId));
 
     return itemsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const SkeletonProductCard(count: 3, grid: false),
       error: (error, _) => ErrorView(
         message: error.toString(),
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),

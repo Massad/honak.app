@@ -6,6 +6,7 @@ import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/explore/presentation/providers/explore_providers.dart';
+import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 class ExploreSearchPage extends ConsumerStatefulWidget {
   const ExploreSearchPage({super.key});
@@ -190,11 +191,11 @@ class _PageResultsList extends StatelessWidget {
       itemBuilder: (context, index) {
         final page = pages[index];
         return ListTile(
-          leading: CircleAvatar(
+          leading: StoryRingAvatar(
+            imageUrl: page.avatarUrl,
+            name: page.name,
             radius: 24,
-            backgroundColor: context.colorScheme.surfaceContainerHighest,
-            backgroundImage:
-                page.avatarUrl != null ? NetworkImage(page.avatarUrl!) : null,
+            hasStories: page.hasActiveStories,
           ),
           title: Row(
             children: [

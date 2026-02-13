@@ -30,7 +30,7 @@ class ReturnPolicy extends ConsumerWidget {
     final windowDays = settings.returnWindowDays;
     final returnType = settings.returnType;
     final returnCost = settings.returnCost;
-    final acceptsReturns = windowDays > 0;
+    final acceptsReturns = settings.acceptReturns;
 
     void updatePolicy({int? days, String? type, String? cost}) {
       ref.read(pageSettingsProvider.notifier).updateReturnPolicy(
@@ -53,8 +53,9 @@ class ReturnPolicy extends ConsumerWidget {
                     ? 'العملاء يمكنهم إرجاع المنتجات'
                     : 'لا يتم قبول إرجاع المنتجات',
                 value: acceptsReturns,
-                onChanged: (v) =>
-                    updatePolicy(days: v ? 7 : 0),
+                onChanged: (v) => ref
+                    .read(pageSettingsProvider.notifier)
+                    .updateAcceptReturns(v),
               ),
               if (acceptsReturns) ...[
                 const SizedBox(height: AppSpacing.lg),
@@ -147,6 +148,52 @@ class ReturnPolicy extends ConsumerWidget {
                   label: 'على حساب العميل',
                   selected: returnCost == 'customer',
                   onTap: () => updatePolicy(cost: 'customer'),
+                ),
+                const SizedBox(height: AppSpacing.lg),
+                _SectionLabel('شروط الإرجاع (اختياري)'),
+                const SizedBox(height: AppSpacing.sm),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: Colors.grey.shade100),
+                  ),
+                  child: TextField(
+                    textAlign: TextAlign.end,
+                    maxLines: 3,
+                    controller: TextEditingController(
+                      text: settings.returnConditions,
+                    ),
+                    decoration: InputDecoration(
+                      hintText:
+                          'مثال: يجب أن يكون المنتج بحالته الأصلية...',
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade400,
+                      ),
+                      isDense: true,
+                      contentPadding:
+                          const EdgeInsets.all(AppSpacing.md),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade100),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade100),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide:
+                            const BorderSide(color: AppColors.primary),
+                      ),
+                    ),
+                    onChanged: (v) => ref
+                        .read(pageSettingsProvider.notifier)
+                        .updateReturnConditions(v),
+                  ),
                 ),
               ],
             ],

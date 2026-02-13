@@ -5,16 +5,20 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/catalog_section_helpers.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/floating_cart_bar.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/menu_item_card.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/menu_section_helpers.dart';
 import 'package:honak/features/requests/domain/entities/cart.dart';
 import 'package:honak/features/requests/presentation/widgets/order_request_sheet.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/highlights_banner.dart';
+import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart';
 import 'package:honak/shared/widgets/credit_chip.dart';
 import 'package:honak/shared/widgets/credit_history_sheet.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
 import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
 
@@ -38,6 +42,35 @@ class MenuSection extends ConsumerStatefulWidget {
 
 class _MenuSectionState extends ConsumerState<MenuSection> {
   static const _pageSize = 12;
+
+  // Mock credit history for demo (Phase 1)
+  static final _mockCreditHistory = [
+    CreditHistoryEntry(
+      date: DateTime(2026, 2, 3),
+      description: '\u0634\u0631\u0627\u0621 \u0628\u0627\u0642\u0629 \u0627\u0644\u0642\u0647\u0648\u0629 \u0627\u0644\u0623\u0633\u0628\u0648\u0639\u064a\u0629',
+      amount: 7,
+    ),
+    CreditHistoryEntry(
+      date: DateTime(2026, 2, 4),
+      description: '\u0637\u0644\u0628 #3010 \u2014 \u0642\u0647\u0648\u0629 \u062a\u0631\u0643\u064a\u0629',
+      amount: -1,
+    ),
+    CreditHistoryEntry(
+      date: DateTime(2026, 2, 6),
+      description: '\u0637\u0644\u0628 #3015 \u2014 \u0644\u0627\u062a\u064a\u0647 \u0643\u0628\u064a\u0631',
+      amount: -1,
+    ),
+    CreditHistoryEntry(
+      date: DateTime(2026, 2, 8),
+      description: '\u0637\u0644\u0628 #3020 \u2014 \u0642\u0647\u0648\u0629 \u0639\u0631\u0628\u064a\u0629',
+      amount: -1,
+    ),
+    CreditHistoryEntry(
+      date: DateTime(2026, 2, 10),
+      description: '\u0637\u0644\u0628 #3025 \u2014 \u0643\u0627\u0628\u062a\u0634\u064a\u0646\u0648',
+      amount: -1,
+    ),
+  ];
 
   String? _selectedCategory;
   String _searchQuery = '';
@@ -118,7 +151,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
         height: MediaQuery.of(ctx).size.height * 0.85,
         child: ItemConfigurationStep(
           item: item,
-          confirmLabel: 'إضافة للسلة',
+          confirmLabel: '\u0625\u0636\u0627\u0641\u0629 \u0644\u0644\u0633\u0644\u0629',
           onConfirm: (selectedItem) {
             Navigator.of(ctx).pop();
             setState(() => _cart.add(selectedItem));
@@ -142,7 +175,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
       context: context,
       cart: cart,
       pageName: widget.page?.name ?? '',
-      paymentMethods: widget.page?.paymentMethods ?? const ['نقداً'],
+      paymentMethods: widget.page?.paymentMethods ?? const ['\u0646\u0642\u062f\u0627\u064b'],
       onSubmit: (data) {
         Navigator.of(context).pop();
         setState(() => _cart.clear());
@@ -165,7 +198,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
         widget.page != null && widget.page!.specials.isNotEmpty;
 
     return itemsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const SkeletonProductCard(count: 4, grid: false),
       error: (error, _) => ErrorView(
         message: error.toString(),
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),
@@ -183,7 +216,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
                 // Specials banner
                 if (hasSpecials)
                   SliverToBoxAdapter(
-                    child: _MenuSpecialsBanner(
+                    child: SpecialsBanner(
                       specials: widget.page!.specials,
                     ),
                   ),
@@ -208,23 +241,42 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
                             widget.page!.packages.first.creditLabel ??
                                 '\u0631\u0635\u064a\u062f',
                         onTapHistory: () {
+                          final pkg = widget.page!.packages.first;
                           CreditHistorySheet.show(
                             context,
+                            packageName: pkg.name,
+                            pageName: widget.page!.name,
                             creditLabel:
-                                widget.page!.packages.first
-                                    .creditLabel ??
-                                    '\u0631\u0635\u064a\u062f',
-                            entries: const [],
+                                pkg.creditLabel ?? '\u0631\u0635\u064a\u062f',
+                            entries: _mockCreditHistory,
+                            startsAt: DateTime(2026, 2, 3),
+                            expiresAt: DateTime(2026, 2, 14),
+                            remainingCredits: 3,
+                            totalCredits: pkg.credits,
                           );
                         },
                       ),
                     ),
                   ),
 
+                // Packages section
+                if (widget.page != null &&
+                    widget.page!.packages.isNotEmpty)
+                  SliverToBoxAdapter(
+                    child: PackagesSection(
+                      packages: widget.page!.packages,
+                      archetype: 'menu_order',
+                      pageName: widget.page!.name,
+                      existingCredits: 6,
+                      existingCreditLabel:
+                          widget.page!.packages.first.creditLabel,
+                    ),
+                  ),
+
                 // Modifiers note banner
                 if (modifiersNote != null && modifiersNote.isNotEmpty)
                   SliverToBoxAdapter(
-                    child: _ModifiersBanner(note: modifiersNote),
+                    child: ModifiersBanner(note: modifiersNote),
                   ),
 
                 // Category pills
@@ -253,7 +305,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
                         _visibleCount = _pageSize;
                       }),
                       decoration: InputDecoration(
-                        hintText: 'ابحث في القائمة...',
+                        hintText: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u0642\u0627\u0626\u0645\u0629...',
                         prefixIcon: const Icon(Icons.search),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -276,7 +328,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
                 if (visible.isEmpty)
                   const SliverFillRemaining(
                     hasScrollBody: false,
-                    child: _MenuEmptyState(),
+                    child: SectionEmptySearch(),
                   )
                 else ...[
                   // Menu items list
@@ -313,7 +365,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
                   // Show more button
                   if (hasMore)
                     SliverToBoxAdapter(
-                      child: _MenuShowMoreButton(
+                      child: SectionShowMoreButton(
                         visibleCount: visible.length,
                         totalCount: filtered.length,
                         onPressed: () => setState(() {
@@ -332,7 +384,7 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(
-                                'سيتم فتح محادثة مع المتجر قريباً',
+                                '\u0633\u064a\u062a\u0645 \u0641\u062a\u062d \u0645\u062d\u0627\u062f\u062b\u0629 \u0645\u0639 \u0627\u0644\u0645\u062a\u062c\u0631 \u0642\u0631\u064a\u0628\u0627\u064b',
                               ),
                             ),
                           );
@@ -367,167 +419,6 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
           ],
         );
       },
-    );
-  }
-}
-
-class _MenuSpecialsBanner extends StatelessWidget {
-  final List<String> specials;
-
-  const _MenuSpecialsBanner({required this.specials});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.sm,
-        AppSpacing.lg,
-        AppSpacing.xs,
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.orange.shade300,
-              Colors.yellow.shade600,
-            ],
-          ),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.auto_awesome, color: Colors.white, size: 24),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    // "عروض خاصة"
-                    '\u0639\u0631\u0648\u0636 \u062e\u0627\u0635\u0629',
-                    style: context.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    specials.first,
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: Colors.white.withValues(alpha: 0.9),
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ModifiersBanner extends StatelessWidget {
-  final String note;
-
-  const _ModifiersBanner({required this.note});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.lg,
-          vertical: AppSpacing.xs,
-        ),
-        children: note
-            .split('،')
-            .map((part) => part.trim())
-            .where((part) => part.isNotEmpty)
-            .map(
-              (part) => Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(end: AppSpacing.xs),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.md,
-                    vertical: AppSpacing.xs,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.orange.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    part,
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.orange.shade800,
-                    ),
-                  ),
-                ),
-              ),
-            )
-            .toList(),
-      ),
-    );
-  }
-}
-
-class _MenuShowMoreButton extends StatelessWidget {
-  final int visibleCount;
-  final int totalCount;
-  final VoidCallback onPressed;
-
-  const _MenuShowMoreButton({
-    required this.visibleCount,
-    required this.totalCount,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-        child: TextButton(
-          onPressed: onPressed,
-          child: Text(
-            'عرض المزيد ($visibleCount من $totalCount)',
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _MenuEmptyState extends StatelessWidget {
-  const _MenuEmptyState();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.search_off,
-            size: 48,
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text(
-            'لا توجد نتائج',
-            style: context.textTheme.bodyLarge?.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

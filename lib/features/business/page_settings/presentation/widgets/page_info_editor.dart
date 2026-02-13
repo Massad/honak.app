@@ -29,8 +29,11 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
   final _paymentMethods = <String, bool>{
     'cash': false,
     'cliq': false,
-    'bank': false,
+    'bank_transfer': false,
+    'visa_mc': false,
+    'ewallet': false,
   };
+  final _customPaymentMethods = <String>[];
 
   bool _initialized = false;
 
@@ -53,8 +56,11 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
     _descMaxLength = data['description_max_length'] as int? ?? 500;
     final methods = data['payment_methods'] as List? ?? [];
     for (final m in methods) {
-      if (_paymentMethods.containsKey(m)) {
-        _paymentMethods[m as String] = true;
+      final key = m as String;
+      if (_paymentMethods.containsKey(key)) {
+        _paymentMethods[key] = true;
+      } else {
+        _customPaymentMethods.add(key);
       }
     }
   }
@@ -216,37 +222,192 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
         _buildTextField(_phoneController,
             keyboardType: TextInputType.phone),
         const SizedBox(height: AppSpacing.lg),
-        _FieldLabel('CliQ Alias'),
-        const SizedBox(height: AppSpacing.sm),
-        _buildTextField(_cliqController, hintText: 'username'),
-        const SizedBox(height: AppSpacing.xxl),
         _FieldLabel('طرق الدفع'),
         const SizedBox(height: AppSpacing.sm),
-        ..._paymentMethods.entries.map((e) {
-          final label = switch (e.key) {
-            'cash' => 'نقدي',
-            'cliq' => 'CliQ',
-            'bank' => 'تحويل بنكي',
-            _ => e.key,
-          };
-          return CheckboxListTile(
-            value: e.value,
-            onChanged: (v) {
-              setState(
-                  () => _paymentMethods[e.key] = v ?? false);
-            },
-            title: Text(
-              label,
-              style: context.textTheme.bodyMedium,
-              textAlign: TextAlign.end,
-            ),
-            controlAffinity: ListTileControlAffinity.leading,
-            dense: true,
-            contentPadding: EdgeInsets.zero,
-            activeColor: AppColors.primary,
-          );
-        }),
+        _buildPaymentChips(),
+        if (_paymentMethods['cliq'] == true) ...[
+          const SizedBox(height: AppSpacing.md),
+          _FieldLabel('CliQ Alias'),
+          const SizedBox(height: AppSpacing.sm),
+          _buildTextField(_cliqController, hintText: 'username'),
+        ],
       ],
+    );
+  }
+
+  static const _standardMethods = <String, (String, IconData)>{
+    'cash': ('كاش', Icons.payments_outlined),
+    'cliq': ('كليك', Icons.account_balance_outlined),
+    'bank_transfer': ('تحويل بنكي', Icons.account_balance_wallet_outlined),
+    'visa_mc': ('فيزا / ماستركارد', Icons.credit_card_outlined),
+    'ewallet': ('محفظة إلكترونية', Icons.phone_android_outlined),
+  };
+
+  Widget _buildPaymentChips() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          alignment: WrapAlignment.end,
+          children: [
+            ..._paymentMethods.entries.map((e) {
+              final config = _standardMethods[e.key];
+              if (config == null) return const SizedBox.shrink();
+              return _buildChip(
+                label: config.$1,
+                icon: config.$2,
+                isSelected: e.value,
+                onTap: () => setState(
+                    () => _paymentMethods[e.key] = !e.value),
+              );
+            }),
+            ..._customPaymentMethods.map((name) {
+              return _buildChip(
+                label: name,
+                icon: Icons.add_circle_outline,
+                isSelected: true,
+                onTap: () => setState(
+                    () => _customPaymentMethods.remove(name)),
+              );
+            }),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        TextButton.icon(
+          onPressed: () => _showAddCustomPaymentDialog(context),
+          icon: const Icon(Icons.add, size: 16),
+          label: const Text(
+            'إضافة طريقة دفع',
+            style: TextStyle(fontSize: 12),
+          ),
+          style: TextButton.styleFrom(
+            foregroundColor: AppColors.primary,
+            padding: EdgeInsetsDirectional.zero,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildChip({
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm + 2,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.primary.withValues(alpha: 0.08)
+              : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: isSelected
+                ? AppColors.primary.withValues(alpha: 0.3)
+                : Colors.grey.shade200,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight:
+                    isSelected ? FontWeight.w500 : FontWeight.normal,
+              ),
+            ),
+            const SizedBox(width: 6),
+            Icon(
+              icon,
+              size: 16,
+              color: isSelected
+                  ? AppColors.primary
+                  : Colors.grey.shade400,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showAddCustomPaymentDialog(BuildContext context) {
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: Text(
+            'إضافة طريقة دفع',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ),
+        content: TextField(
+          controller: controller,
+          textAlign: TextAlign.end,
+          autofocus: true,
+          decoration: InputDecoration(
+            hintText: 'اسم طريقة الدفع',
+            hintStyle: TextStyle(
+              fontSize: 12,
+              color: Colors.grey.shade400,
+            ),
+            isDense: true,
+            contentPadding: const EdgeInsets.all(AppSpacing.md),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.grey.shade200),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.grey.shade200),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: AppColors.primary),
+            ),
+          ),
+        ),
+        actions: [
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: Text(
+                  'إلغاء',
+                  style: TextStyle(color: Colors.grey.shade500),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  final name = controller.text.trim();
+                  if (name.isNotEmpty) {
+                    setState(() => _customPaymentMethods.add(name));
+                  }
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text(
+                  'إضافة',
+                  style: TextStyle(color: AppColors.primary),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

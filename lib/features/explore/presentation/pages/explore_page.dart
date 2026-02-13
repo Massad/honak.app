@@ -11,8 +11,12 @@ import 'package:honak/features/explore/presentation/providers/explore_providers.
 import 'package:honak/features/explore/presentation/providers/filter_provider.dart';
 import 'package:honak/features/explore/presentation/widgets/filter_sheet.dart';
 import 'package:honak/features/home/domain/entities/nearby_page.dart';
+import 'package:honak/features/stories/presentation/providers/stories_provider.dart'
+    show storyContentProvider;
+import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
 import 'package:honak/shared/widgets/cached_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/story_ring_avatar.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 class ExplorePage extends ConsumerWidget {
@@ -20,6 +24,9 @@ class ExplorePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Pre-load story content so avatar taps can open viewer
+    ref.watch(storyContentProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.explore),
@@ -455,13 +462,13 @@ class _NearbyCardsList extends StatelessWidget {
   }
 }
 
-class _NearbyCard extends StatelessWidget {
+class _NearbyCard extends ConsumerWidget {
   final NearbyPage page;
 
   const _NearbyCard({required this.page});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () => context.push(Routes.pagePath(page.slug)),
       child: Container(
@@ -481,15 +488,16 @@ class _NearbyCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Square image — 72×72 rounded
-            ClipRRect(
+            // Square image — 72×72 rounded, with story ring
+            StoryRingAvatar(
+              imageUrl: page.avatarUrl,
+              name: page.name,
+              size: 72,
               borderRadius: BorderRadius.circular(AppRadius.md),
-              child: CachedImage(
-                imageUrl: page.avatarUrl,
-                width: 72,
-                height: 72,
-                fit: BoxFit.cover,
-              ),
+              hasStories: page.hasActiveStories,
+              onTap: page.hasActiveStories
+                  ? () => openStoryViewer(context, ref, pageId: page.id)
+                  : null,
             ),
             SizedBox(width: AppSpacing.md),
             // Content

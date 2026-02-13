@@ -58,34 +58,33 @@ class SkeletonProductCard extends StatelessWidget {
 
   Widget _buildList() {
     return SkeletonContainer(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int i = 0; i < count; i++) ...[
-            if (i > 0) const Divider(height: 1),
-            Padding(
-              padding: AppSpacing.listItemPadding,
-              child: Row(
-                children: [
-                  const SkeletonBox(width: 80, height: 80, borderRadius: 12),
-                  SizedBox(width: AppSpacing.md),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SkeletonText(height: 14),
-                        SizedBox(height: AppSpacing.sm),
-                        SkeletonText(width: 140, height: 12),
-                        SizedBox(height: AppSpacing.sm),
-                        SkeletonText(width: 60, height: 12),
-                      ],
-                    ),
-                  ),
-                ],
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
+        itemCount: count,
+        separatorBuilder: (_, __) => const Divider(height: 1),
+        itemBuilder: (context, index) => Padding(
+          padding: AppSpacing.listItemPadding,
+          child: Row(
+            children: [
+              const SkeletonBox(width: 80, height: 80, borderRadius: 12),
+              SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SkeletonText(height: 14),
+                    SizedBox(height: AppSpacing.sm),
+                    SkeletonText(width: 140, height: 12),
+                    SizedBox(height: AppSpacing.sm),
+                    SkeletonText(width: 60, height: 12),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }

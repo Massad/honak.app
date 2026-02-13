@@ -236,6 +236,52 @@ class _CancellationPolicyState
                   },
                 ),
               ],
+              const SizedBox(height: AppSpacing.lg),
+              _SectionLabel('رسالة التأخير (اختياري)'),
+              const SizedBox(height: AppSpacing.sm),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: Colors.grey.shade100),
+                ),
+                child: TextField(
+                  textAlign: TextAlign.end,
+                  maxLines: 2,
+                  controller: TextEditingController(
+                    text: settings.lateCancelMessage,
+                  ),
+                  decoration: InputDecoration(
+                    hintText:
+                        'رسالة تظهر للعميل عند الإلغاء المتأخر',
+                    hintStyle: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade400,
+                    ),
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.all(AppSpacing.md),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide:
+                          BorderSide(color: Colors.grey.shade100),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide:
+                          BorderSide(color: Colors.grey.shade100),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: const BorderSide(
+                          color: AppColors.primary),
+                    ),
+                  ),
+                  onChanged: (v) => ref
+                      .read(pageSettingsProvider.notifier)
+                      .updateLateCancelMessage(v),
+                ),
+              ),
             ],
           ),
         ),

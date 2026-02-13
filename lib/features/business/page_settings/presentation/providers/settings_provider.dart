@@ -67,6 +67,29 @@ class PageSettingsNotifier extends AsyncNotifier<PageSettings> {
     ));
   }
 
+  void updateAcceptReturns(bool accepts) {
+    final current = state.valueOrNull;
+    if (current == null) return;
+    state = AsyncValue.data(current.copyWith(
+      acceptReturns: accepts,
+      returnWindowDays: accepts
+          ? (current.returnWindowDays > 0 ? current.returnWindowDays : 7)
+          : current.returnWindowDays,
+    ));
+  }
+
+  void updateReturnConditions(String conditions) {
+    final current = state.valueOrNull;
+    if (current == null) return;
+    state = AsyncValue.data(current.copyWith(returnConditions: conditions));
+  }
+
+  void updateLateCancelMessage(String message) {
+    final current = state.valueOrNull;
+    if (current == null) return;
+    state = AsyncValue.data(current.copyWith(lateCancelMessage: message));
+  }
+
   void updateCatalogStrategy(String strategy) {
     final current = state.valueOrNull;
     if (current == null) return;

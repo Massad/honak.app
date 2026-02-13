@@ -22,7 +22,18 @@ import 'package:honak/features/business/page_settings/presentation/widgets/safet
 import 'package:honak/features/business/page_settings/presentation/widgets/settings_item.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/settings_section.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/share_section.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/alert_manager.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/calendar_sync_settings.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/catalog_sync_settings.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/coverage_settings.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/intake_questions.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/packages_manager.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/qr_code_section.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/relocation_settings.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/team_management.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/tenant_manager.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/venue_settings.dart';
+import 'package:honak/features/business/page_settings/presentation/widgets/villa_settings.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 
 enum _SubScreen {
@@ -38,6 +49,19 @@ enum _SubScreen {
   safety,
   postBooking,
   pageStatus,
+  // ─── New sub-screens ────────────────────────
+  coverage,
+  intakeQuestions,
+  quoteFormQuestions,
+  packages,
+  villaSettings,
+  venueSettings,
+  tenantDirectory,
+  alerts,
+  qrCode,
+  relocation,
+  calendarSync,
+  catalogSync,
 }
 
 class BusinessSettingsPage extends ConsumerStatefulWidget {
@@ -126,6 +150,8 @@ class _BusinessSettingsPageState
   }
 
   Widget _buildSubScreen(Archetype archetype, {BusinessTypeConfig? config}) {
+    final bizContext = ref.watch(businessContextProvider);
+    final page = bizContext?.page;
     return switch (_activeSubScreen) {
       _SubScreen.pageInfo => PageInfoEditor(onClose: _closeSubScreen),
       _SubScreen.team => TeamManagement(
@@ -152,6 +178,40 @@ class _BusinessSettingsPageState
         PostBookingSteps(onClose: _closeSubScreen),
       _SubScreen.pageStatus =>
         PageStatusSettings(onClose: _closeSubScreen),
+      // ─── New sub-screens ────────────────────────
+      _SubScreen.coverage =>
+        CoverageSettings(onClose: _closeSubScreen),
+      _SubScreen.intakeQuestions => IntakeQuestions(
+          onClose: _closeSubScreen,
+          title: 'أسئلة ما قبل الحجز',
+          questionType: 'service',
+        ),
+      _SubScreen.quoteFormQuestions => IntakeQuestions(
+          onClose: _closeSubScreen,
+          title: 'نموذج طلب عرض السعر',
+          questionType: 'quote',
+        ),
+      _SubScreen.packages =>
+        PackagesManager(onClose: _closeSubScreen),
+      _SubScreen.villaSettings =>
+        VillaSettings(onClose: _closeSubScreen),
+      _SubScreen.venueSettings =>
+        VenueSettings(onClose: _closeSubScreen),
+      _SubScreen.tenantDirectory =>
+        TenantManager(onClose: _closeSubScreen),
+      _SubScreen.alerts =>
+        AlertManager(onClose: _closeSubScreen),
+      _SubScreen.qrCode => QrCodeSection(
+          onClose: _closeSubScreen,
+          targets: config?.qrTargets ?? [],
+          pageHandle: page?.slug ?? '',
+        ),
+      _SubScreen.relocation =>
+        RelocationSettings(onClose: _closeSubScreen),
+      _SubScreen.calendarSync =>
+        CalendarSyncSettings(onClose: _closeSubScreen),
+      _SubScreen.catalogSync =>
+        CatalogSyncSettings(onClose: _closeSubScreen),
       _SubScreen.main => const SizedBox.shrink(),
     };
   }
@@ -190,6 +250,33 @@ class _MyPageTab extends StatelessWidget {
       config?.dateSelection != DateSelection.none;
   bool get _showSafety => archetype == Archetype.reservation;
   bool get _showPostBooking => archetype == Archetype.reservation;
+  // ─── New visibility conditions ──────────────────────────
+  bool get _showCoverage =>
+      config?.coverageModel != CoverageModel.none;
+  bool get _showIntakeQuestions =>
+      archetype == Archetype.serviceBooking;
+  bool get _showQuoteFormQuestions =>
+      archetype == Archetype.quoteRequest;
+  bool get _showPackages =>
+      config?.features.any((f) => [
+            'subscriptions',
+            'punch_cards',
+            'recurring_orders',
+          ].contains(f)) ??
+      false;
+  bool get _showVillaSettings =>
+      config?.id == 'villa_rental' || config?.id == 'farm_rental';
+  bool get _showVenueSettings => config?.id == 'event_venue';
+  bool get _showTenantDirectory => archetype == Archetype.directory;
+  bool get _showAlerts => archetype == Archetype.followOnly;
+  bool get _showQrCode =>
+      config?.qrTargets.isNotEmpty ?? false;
+  bool get _showCalendarSync =>
+      archetype == Archetype.serviceBooking ||
+      archetype == Archetype.reservation;
+  bool get _showCatalogSync =>
+      archetype == Archetype.catalogOrder ||
+      archetype == Archetype.menuOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +287,7 @@ class _MyPageTab extends StatelessWidget {
       children: [
         const SizedBox(height: AppSpacing.lg),
 
-        // 1. Page preview card
+        // ── 1. Page preview card ─────────────────────────────
         if (page != null)
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -213,45 +300,47 @@ class _MyPageTab extends StatelessWidget {
           ),
         const SizedBox(height: AppSpacing.md),
 
-        // 2. Share section
-        if (page != null)
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg),
-            child: ShareSection(page: page),
-          ),
-        const SizedBox(height: AppSpacing.md),
-
-        // 3. Page status (→ sub-screen)
+        // ── 2. حالة الصفحة — Status + Relocation ────────────
         SettingsSection(
           label: 'حالة الصفحة',
-          child: SettingsItem(
-            icon: Icons.toggle_on_outlined,
-            label: 'حالة الصفحة',
-            desc: 'نشطة، مغلقة مؤقتاً، أو مغلقة نهائياً',
-            badge: _statusBadge(context),
-            badgeColor: _statusColor(),
-            onTap: () => onOpenSubScreen(_SubScreen.pageStatus),
+          child: Column(
+            children: [
+              SettingsItem(
+                icon: Icons.toggle_on_outlined,
+                label: 'حالة الصفحة',
+                desc: 'نشطة، مغلقة مؤقتاً، أو مغلقة نهائياً',
+                badge: 'نشط',
+                badgeColor: AppColors.success,
+                onTap: () => onOpenSubScreen(_SubScreen.pageStatus),
+              ),
+              const SizedBox(height: 6),
+              SettingsItem(
+                icon: Icons.moving_outlined,
+                label: 'الانتقال',
+                desc: 'أبلغ متابعيك في حال غيّرت موقعك',
+                onTap: () => onOpenSubScreen(_SubScreen.relocation),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: AppSpacing.md),
 
-        // 4. Page info (info, branches, payment)
+        // ── 3. معلومات الصفحة — Info, Branches, Payment ─────
         SettingsSection(
           label: 'معلومات الصفحة',
           child: Column(
             children: [
               SettingsItem(
                 icon: Icons.edit_outlined,
-                label: 'معلومات الصفحة',
-                desc: 'الاسم، الشعار، الصورة، الوصف',
+                label: 'الاسم والشعار والوصف',
+                desc: page?.name ?? '',
                 onTap: () => onOpenSubScreen(_SubScreen.pageInfo),
               ),
               const SizedBox(height: 6),
               SettingsItem(
                 icon: Icons.location_on_outlined,
-                label: 'الفروع',
-                desc: 'إدارة فروعك ومواقعك',
+                label: 'الفروع والمواقع',
+                desc: 'إدارة الفروع والتغطية',
                 onTap: () => onOpenSubScreen(_SubScreen.branches),
               ),
               const SizedBox(height: 6),
@@ -259,15 +348,14 @@ class _MyPageTab extends StatelessWidget {
                 icon: Icons.payment_outlined,
                 label: 'طرق الدفع',
                 desc: 'كاش، كليك، أو تحويل بنكي',
-                onTap: () =>
-                    context.showSnackBar('قريباً: طرق الدفع'),
+                onTap: () => onOpenSubScreen(_SubScreen.pageInfo),
               ),
             ],
           ),
         ),
         const SizedBox(height: AppSpacing.md),
 
-        // 5. Operations (config-driven)
+        // ── 4. التشغيل — Operations ─────────────────────────
         if (_showOperations) ...[
           SettingsSection(
             label: 'التشغيل',
@@ -275,8 +363,8 @@ class _MyPageTab extends StatelessWidget {
               children: [
                 SettingsItem(
                   icon: Icons.tune_outlined,
-                  label: 'مستوى التواجد',
-                  desc: 'تواجد كامل، عرض فقط، أو بسيط',
+                  label: 'نوع التواجد',
+                  desc: 'طلبات مفعّلة — تلقائي',
                   onTap: () =>
                       onOpenSubScreen(_SubScreen.engagement),
                 ),
@@ -285,7 +373,9 @@ class _MyPageTab extends StatelessWidget {
                   SettingsItem(
                     icon: Icons.event_busy_outlined,
                     label: 'سياسة الإلغاء',
-                    desc: 'نافذة الإلغاء ورسوم عدم الحضور',
+                    desc: 'يمكن إلغاء الطلبات خلال 24 ساعة',
+                    badge: 'مفعّلة',
+                    badgeColor: AppColors.success,
                     onTap: () =>
                         onOpenSubScreen(_SubScreen.cancellation),
                   ),
@@ -295,19 +385,83 @@ class _MyPageTab extends StatelessWidget {
                   SettingsItem(
                     icon: Icons.assignment_return_outlined,
                     label: 'سياسة الإرجاع',
-                    desc: 'شروط الإرجاع والاستبدال',
+                    desc: 'إرجاع خلال 3 يوم — استبدال فقط',
+                    badge: 'مفعّلة',
+                    badgeColor: AppColors.success,
                     onTap: () =>
                         onOpenSubScreen(_SubScreen.returnPolicy),
+                  ),
+                ],
+                if (_showCoverage) ...[
+                  const SizedBox(height: 6),
+                  SettingsItem(
+                    icon: Icons.local_shipping_outlined,
+                    label: 'مناطق التغطية',
+                    desc: 'مناطق التوصيل ورسوم التوصيل',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.coverage),
                   ),
                 ],
                 if (_showCatalogStrategy) ...[
                   const SizedBox(height: 6),
                   SettingsItem(
                     icon: Icons.view_list_outlined,
-                    label: 'استراتيجية الكتالوج',
-                    desc: 'كتالوج كامل أو أبرز المنتجات',
+                    label: 'عرض المنتجات',
+                    desc: 'كل ما أبيعه مدرج في الصفحة',
+                    badge: 'كامل',
+                    badgeColor: AppColors.primary,
                     onTap: () =>
                         onOpenSubScreen(_SubScreen.catalogStrategy),
+                  ),
+                ],
+                if (_showPackages) ...[
+                  const SizedBox(height: 6),
+                  SettingsItem(
+                    icon: Icons.card_giftcard_outlined,
+                    label: 'الباقات',
+                    desc: 'باقات الاشتراك والعروض المجمعة',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.packages),
+                  ),
+                ],
+                if (_showIntakeQuestions) ...[
+                  const SizedBox(height: 6),
+                  SettingsItem(
+                    icon: Icons.quiz_outlined,
+                    label: 'أسئلة ما قبل الحجز',
+                    desc: 'أسئلة يجيب عليها العميل عند الحجز',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.intakeQuestions),
+                  ),
+                ],
+                if (_showQuoteFormQuestions) ...[
+                  const SizedBox(height: 6),
+                  SettingsItem(
+                    icon: Icons.description_outlined,
+                    label: 'نموذج طلب عرض السعر',
+                    desc: 'أسئلة لفهم احتياج العميل',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.quoteFormQuestions),
+                  ),
+                ],
+                if (_showVillaSettings) ...[
+                  const SizedBox(height: 6),
+                  SettingsItem(
+                    icon: Icons.villa_outlined,
+                    label: 'إعدادات المكان',
+                    desc: 'المرافق وقواعد الإقامة والمعرض',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.villaSettings),
+                  ),
+                ],
+                if (_showVenueSettings) ...[
+                  const SizedBox(height: 6),
+                  SettingsItem(
+                    icon: Icons.event_outlined,
+                    label: 'إعدادات القاعة',
+                    desc: 'السعة وخيارات التنظيم والعربون',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.venueSettings),
                   ),
                 ],
               ],
@@ -316,7 +470,7 @@ class _MyPageTab extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
         ],
 
-        // 6. Safety (reservation only)
+        // ── 5. السلامة — Safety (reservation only) ──────────
         if (_showSafety || _showPostBooking) ...[
           SettingsSection(
             label: 'السلامة',
@@ -346,21 +500,21 @@ class _MyPageTab extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
         ],
 
-        // 7. Team (only when config has suggested roles)
+        // ── 6. الفريق — Team ────────────────────────────────
         if (config != null && config!.suggestedRoles.isNotEmpty) ...[
           SettingsSection(
             label: 'الفريق',
             child: SettingsItem(
               icon: Icons.people_outline,
-              label: 'فريق العمل',
-              desc: 'إدارة أعضاء الفريق والصلاحيات',
+              label: 'إدارة الفريق',
+              desc: 'إدارة الأدوار والصلاحيات',
               onTap: () => onOpenSubScreen(_SubScreen.team),
             ),
           ),
           const SizedBox(height: AppSpacing.md),
         ],
 
-        // 8. Availability (config-driven)
+        // ── 7. الجدول والمواعيد — Availability ──────────────
         if (_showAvailability) ...[
           SettingsSection(
             label: 'الجدول والمواعيد',
@@ -375,16 +529,92 @@ class _MyPageTab extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
         ],
 
-        // 9. Verification card
-        if (page != null)
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg),
-            child: _VerificationCard(page: page),
+        // ── 8. Archetype-specific (directory, follow_only) ──
+        if (_showTenantDirectory) ...[
+          SettingsSection(
+            label: 'إدارة الدليل',
+            child: SettingsItem(
+              icon: Icons.store_mall_directory_outlined,
+              label: 'المستأجرون',
+              desc: 'إدارة المحلات والمستأجرين',
+              onTap: () =>
+                  onOpenSubScreen(_SubScreen.tenantDirectory),
+            ),
           ),
+          const SizedBox(height: AppSpacing.md),
+        ],
+        if (_showAlerts) ...[
+          SettingsSection(
+            label: 'التنبيهات والإعلانات',
+            child: SettingsItem(
+              icon: Icons.campaign_outlined,
+              label: 'إدارة التنبيهات',
+              desc: 'إنشاء ونشر التنبيهات والإعلانات',
+              onTap: () => onOpenSubScreen(_SubScreen.alerts),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+        ],
+
+        // ── 9. التسويق والمشاركة — Marketing ────────────────
+        SettingsSection(
+          label: 'التسويق والمشاركة',
+          child: Column(
+            children: [
+              // Share / Page Link card (inline)
+              if (page != null)
+                ShareSection(
+                  page: page,
+                  onOpenQrCode: _showQrCode
+                      ? () => onOpenSubScreen(_SubScreen.qrCode)
+                      : null,
+                ),
+              const SizedBox(height: 6),
+              SettingsItem(
+                icon: Icons.palette_outlined,
+                label: 'مظهر الصفحة',
+                desc: 'تخصيص الألوان والتصميم',
+                onTap: () =>
+                    context.showSnackBar('قريباً: مظهر الصفحة'),
+              ),
+              const SizedBox(height: 6),
+              _VerificationCard(page: page),
+            ],
+          ),
+        ),
         const SizedBox(height: AppSpacing.md),
 
-        // 10. Quick stats
+        // ── 10. أدوات — Tools (sync only) ───────────────────
+        if (_showCalendarSync || _showCatalogSync) ...[
+          SettingsSection(
+            label: 'أدوات',
+            child: Column(
+              children: [
+                if (_showCalendarSync)
+                  SettingsItem(
+                    icon: Icons.sync_outlined,
+                    label: 'مزامنة التقويم',
+                    desc: 'Google Calendar أو Outlook',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.calendarSync),
+                  ),
+                if (_showCalendarSync && _showCatalogSync)
+                  const SizedBox(height: 6),
+                if (_showCatalogSync)
+                  SettingsItem(
+                    icon: Icons.cloud_sync_outlined,
+                    label: 'مزامنة المنتجات',
+                    desc: 'Shopify أو WooCommerce أو API',
+                    onTap: () =>
+                        onOpenSubScreen(_SubScreen.catalogSync),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+        ],
+
+        // ── 11. إحصائيات سريعة ──────────────────────────────
         Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
@@ -392,16 +622,6 @@ class _MyPageTab extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String? _statusBadge(BuildContext context) {
-    // We can't read the provider here (StatelessWidget), so return null.
-    // The status badge could be derived from the page status if available.
-    return null;
-  }
-
-  Color? _statusColor() {
-    return null;
   }
 }
 
@@ -412,11 +632,11 @@ class _MyPageTab extends StatelessWidget {
 class _VerificationCard extends StatelessWidget {
   final dynamic page;
 
-  const _VerificationCard({required this.page});
+  const _VerificationCard({this.page});
 
   @override
   Widget build(BuildContext context) {
-    final isVerified = page.isVerified as bool;
+    final isVerified = (page?.isVerified as bool?) ?? false;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),

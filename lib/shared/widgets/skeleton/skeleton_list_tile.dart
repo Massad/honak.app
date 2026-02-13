@@ -13,32 +13,31 @@ class SkeletonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SkeletonContainer(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int i = 0; i < count; i++) ...[
-            if (i > 0) const Divider(height: 1),
-            Padding(
-              padding: AppSpacing.listItemPadding,
-              child: Row(
-                children: [
-                  const SkeletonCircle(size: 40),
-                  SizedBox(width: AppSpacing.md),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SkeletonText(width: 120, height: 14),
-                        SizedBox(height: AppSpacing.sm),
-                        SkeletonText(width: 200, height: 12),
-                      ],
-                    ),
-                  ),
-                ],
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
+        itemCount: count,
+        separatorBuilder: (_, __) => const Divider(height: 1),
+        itemBuilder: (context, index) => Padding(
+          padding: AppSpacing.listItemPadding,
+          child: Row(
+            children: [
+              const SkeletonCircle(size: 40),
+              SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SkeletonText(width: 120, height: 14),
+                    SizedBox(height: AppSpacing.sm),
+                    SkeletonText(width: 200, height: 12),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }

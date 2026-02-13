@@ -1,8 +1,8 @@
 {
   "success": true,
   "data": [
-    { "id": "tm_1", "name": "أحمد سالم", "phone": "0790000010", "role": "مدير", "active": true, "permissions": ["orders", "catalog", "settings"], "service_ids": [], "joined_at": "2025-06-15", "avatar_url": null },
-    { "id": "tm_2", "name": "سارة محمود", "phone": "0790000011", "role": "موظف", "active": true, "permissions": ["orders", "catalog"], "service_ids": ["svc_1", "svc_2"], "joined_at": "2025-08-20", "avatar_url": null },
-    { "id": "tm_3", "name": "خالد عمر", "phone": "0790000012", "role": "محاسب", "active": false, "permissions": ["orders"], "service_ids": [], "joined_at": "2025-09-10", "avatar_url": null }
+    { "id": "tm_1", "name": "أحمد سالم", "phone": "0790000010", "role": "مدير", "active": true, "is_owner": true, "permissions": ["manage_orders", "manage_catalog", "manage_settings", "respond_chat", "post_updates", "view_insights", "manage_team", "manage_availability"], "service_ids": [], "location_ids": [], "joined_at": "2025-06-15", "avatar_url": null },
+    { "id": "tm_2", "name": "سارة محمود", "phone": "0790000011", "role": "موظفة", "active": true, "is_owner": false, "permissions": ["manage_orders", "respond_chat", "view_insights"], "service_ids": ["svc_1", "svc_2"], "location_ids": ["br_1"], "joined_at": "2025-08-20", "avatar_url": null },
+    { "id": "tm_3", "name": "خالد عمر", "phone": "0790000012", "role": "محاسب", "active": false, "is_owner": false, "permissions": ["manage_orders", "view_insights"], "service_ids": [], "location_ids": [], "joined_at": "2025-09-10", "avatar_url": null }
   ]
 }

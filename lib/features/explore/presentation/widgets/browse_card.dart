@@ -9,7 +9,8 @@ import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/explore/presentation/widgets/smart_badge.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/follow_button.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
+import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 /// Rich business card for category browse list.
 class BrowseCard extends ConsumerWidget {
@@ -40,8 +41,8 @@ class BrowseCard extends ConsumerWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Square image
-                  _buildImage(context),
+                  // Square image — opens stories if available
+                  _buildImage(context, ref),
                   const SizedBox(width: AppSpacing.md),
                   // Content
                   Expanded(
@@ -67,53 +68,21 @@ class BrowseCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildImage(BuildContext context) {
-    Widget image = ClipRRect(
+  Widget _buildImage(BuildContext context, WidgetRef ref) {
+    return StoryRingAvatar(
+      imageUrl: page.avatarUrl,
+      name: page.name,
+      size: 80,
       borderRadius: AppRadius.cardInner,
-      child: page.avatarUrl != null
-          ? CachedImage(
-              imageUrl: page.avatarUrl!,
-              width: 80,
-              height: 80,
-              fit: BoxFit.cover,
-            )
-          : Container(
-              width: 80,
-              height: 80,
-              color: context.colorScheme.surfaceContainerHighest,
-              child: Icon(
-                Icons.storefront_outlined,
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-            ),
+      hasStories: page.hasActiveStories,
+      onTap: page.hasActiveStories
+          ? () => openStoryViewer(context, ref, pageId: page.id)
+          : null,
+      placeholder: Icon(
+        Icons.storefront_outlined,
+        color: context.colorScheme.onSurfaceVariant,
+      ),
     );
-
-    if (page.hasActiveStories) {
-      image = Container(
-        padding: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppRadius.md + 2),
-          gradient: LinearGradient(
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-            colors: [
-              context.feedColors.storyRingStart,
-              context.feedColors.storyRingEnd,
-            ],
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-            color: context.colorScheme.surface,
-          ),
-          child: image,
-        ),
-      );
-    }
-
-    return image;
   }
 
   Widget _buildNameRow(BuildContext context, WidgetRef ref, bool isFollowing) {

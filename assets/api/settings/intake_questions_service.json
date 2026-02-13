@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data": [
+    { "id": "iq_1", "question": "هل لديك حساسية من أي مواد؟", "field_type": "text", "options": [], "required": false, "sort_order": 0, "active": true },
+    { "id": "iq_2", "question": "هل هذه زيارتك الأولى؟", "field_type": "select", "options": ["نعم", "لا"], "required": true, "sort_order": 1, "active": true },
+    { "id": "iq_3", "question": "ما نوع شعرك؟", "field_type": "select", "options": ["عادي", "جاف", "دهني", "مختلط"], "required": false, "sort_order": 2, "active": true }
+  ]
+}

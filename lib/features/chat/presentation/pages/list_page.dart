@@ -9,6 +9,9 @@ import 'package:honak/features/chat/domain/entities/conversation.dart';
 import 'package:honak/features/chat/presentation/providers/chat_provider.dart';
 import 'package:honak/features/chat/presentation/widgets/chat_list_skeleton.dart';
 import 'package:honak/features/chat/presentation/widgets/conversation_card.dart';
+import 'package:honak/features/stories/presentation/providers/stories_provider.dart'
+    show storyContentProvider;
+import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 
@@ -37,6 +40,8 @@ class _ChatListPageState extends ConsumerState<ChatListPage> {
   @override
   Widget build(BuildContext context) {
     final conversationsAsync = ref.watch(conversationsProvider);
+    // Pre-load story content for avatar taps
+    ref.watch(storyContentProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -86,6 +91,13 @@ class _ChatListPageState extends ConsumerState<ChatListPage> {
                             extra: conv,
                           );
                         },
+                        onAvatarTap: conv.hasActiveStory
+                            ? () => openStoryViewer(
+                                  context,
+                                  ref,
+                                  pageId: conv.pageId,
+                                )
+                            : null,
                       );
                     },
                   ),

@@ -69,6 +69,47 @@
         "neighborhood_id": "abdoun",
         "address": "عبدون، شارع الأمير هاشم"
       }
+    ],
+    "packages": [
+      {
+        "id": "pkg_030",
+        "name": "اشتراك شهري",
+        "description": "دخول غير محدود للنادي لمدة شهر",
+        "price_cents": 3500,
+        "credits": 0,
+        "credit_label": null,
+        "validity_months": 1,
+        "icon": "fitness",
+        "compare_single_price": 500,
+        "active": true,
+        "model": "date_only"
+      },
+      {
+        "id": "pkg_031",
+        "name": "اشتراك ٣ أشهر",
+        "description": "دخول غير محدود + حصة PT مجانية شهرياً",
+        "price_cents": 9000,
+        "credits": 0,
+        "credit_label": null,
+        "validity_months": 3,
+        "icon": "fitness",
+        "compare_single_price": 3500,
+        "active": true,
+        "model": "date_only"
+      },
+      {
+        "id": "pkg_032",
+        "name": "باقة ١٠ حصص",
+        "description": "١٠ حصص تدريب شخصي",
+        "price_cents": 7000,
+        "credits": 10,
+        "credit_label": "حصة",
+        "validity_months": 6,
+        "icon": "fitness",
+        "compare_single_price": 800,
+        "active": true,
+        "model": "visits_and_date"
+      }
     ]
   }
 }

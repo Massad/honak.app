@@ -81,10 +81,15 @@
       {
         "id": "pkg_001",
         "name": "باقة العائلة",
-        "description": "١٠ قوارير مياه شهرياً بسعر مخفض",
-        "price_cents": 1500,
+        "description": "١٠ قوارير مياه نقية ١٩ لتر",
+        "price_cents": 1200,
         "credits": 10,
-        "credit_label": "قارورة"
+        "credit_label": "قارورة",
+        "validity_months": 3,
+        "icon": "water-drop",
+        "compare_single_price": 150,
+        "active": true,
+        "model": "visits_and_date"
       },
       {
         "id": "pkg_002",
@@ -92,7 +97,25 @@
         "description": "٢٠ قارورة شهرياً + توصيل مجاني",
         "price_cents": 2800,
         "credits": 20,
-        "credit_label": "قارورة"
+        "credit_label": "قارورة",
+        "validity_months": 3,
+        "icon": "water-drop",
+        "compare_single_price": 150,
+        "active": true,
+        "model": "visits_and_date"
+      },
+      {
+        "id": "pkg_003",
+        "name": "باقة سنوية",
+        "description": "٥٠ قارورة — أفضل سعر للقارورة",
+        "price_cents": 5500,
+        "credits": 50,
+        "credit_label": "قارورة",
+        "validity_months": 12,
+        "icon": "water-drop",
+        "compare_single_price": 150,
+        "active": true,
+        "model": "visits_and_date"
       }
     ],
     "coverage_zones_structured": [

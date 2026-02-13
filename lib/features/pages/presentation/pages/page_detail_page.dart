@@ -299,7 +299,7 @@ class _PageDetailContent extends StatelessWidget {
           pinnedPosts: page.pinnedPosts,
         ),
       'info' => InfoTab(page: page),
-      'directory' => DirectorySection(pageId: page.id),
+      'directory' => DirectorySection(pageId: page.id, page: page),
       _ => const SizedBox.shrink(),
     };
   }
@@ -326,6 +326,7 @@ class _PageDetailContent extends StatelessWidget {
               pageId: page.id,
               pageName: page.name,
               teamMembersCount: page.teamMembersCount,
+              packages: page.packages,
             ),
       Archetype.quoteRequest =>
         QuoteRequestSection(pageId: page.id, page: page),
@@ -334,7 +335,7 @@ class _PageDetailContent extends StatelessWidget {
       Archetype.reservation =>
         ReservationSection(pageId: page.id, page: page),
       Archetype.followOnly => FollowOnlySection(page: page),
-      Archetype.directory => DirectorySection(pageId: page.id),
+      Archetype.directory => DirectorySection(pageId: page.id, page: page),
     };
   }
 }
@@ -379,6 +380,7 @@ class _ServiceBookingWithQueue extends ConsumerWidget {
             pageId: page.id,
             pageName: page.name,
             teamMembersCount: page.teamMembersCount,
+            packages: page.packages,
           ),
         ),
       ],

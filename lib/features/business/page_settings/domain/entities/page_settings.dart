@@ -30,6 +30,10 @@ class PageSettings with _$PageSettings {
     @JsonKey(name: 'post_booking_steps')
     @Default([])
     List<PostBookingStep> postBookingSteps,
+    @JsonKey(name: 'accept_returns') @Default(true) bool acceptReturns,
+    @JsonKey(name: 'return_conditions') @Default('') String returnConditions,
+    @JsonKey(name: 'late_cancel_message') @Default('') String lateCancelMessage,
+    @JsonKey(name: 'reopen_date') String? reopenDate,
   }) = _PageSettings;
 
   factory PageSettings.fromJson(Map<String, dynamic> json) =>

@@ -13,5 +13,8 @@ final deletedForEveryoneProvider = StateProvider<Set<String>>((ref) => {});
 /// Multi-select mode: set of selected message IDs.
 final selectedMessagesProvider = StateProvider<Set<String>>((ref) => {});
 
+/// Purpose of selection mode: 'report', 'delete', or null (generic).
+final selectionPurposeProvider = StateProvider<String?>((ref) => null);
+
 /// The message currently being edited (shows edit banner in input).
 final editingMessageProvider = StateProvider<Message?>((ref) => null);

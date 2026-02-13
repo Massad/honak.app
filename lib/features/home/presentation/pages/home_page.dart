@@ -12,9 +12,9 @@ import 'package:honak/features/home/presentation/widgets/post_card.dart';
 import 'package:honak/features/home/presentation/widgets/promo_banner_carousel.dart';
 import 'package:honak/features/home/presentation/widgets/quick_categories.dart';
 import 'package:honak/features/home/presentation/widgets/stories_bar.dart';
-import 'package:honak/features/stories/presentation/pages/story_viewer_page.dart';
 import 'package:honak/features/stories/presentation/providers/stories_provider.dart'
     show storyContentProvider;
+import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
@@ -119,33 +119,8 @@ class HomePage extends ConsumerWidget {
                             children: [
                               StoriesBar(
                                 stories: stories,
-                                onStoryTap: (index) {
-                                  final content = ref
-                                      .read(storyContentProvider)
-                                      .valueOrNull;
-                                  if (content != null &&
-                                      content.isNotEmpty) {
-                                    final safeIndex =
-                                        index.clamp(0, content.length - 1);
-                                    Navigator.of(context, rootNavigator: true).push(
-                                      PageRouteBuilder(
-                                        opaque: true,
-                                        pageBuilder: (_, __, ___) =>
-                                            StoryViewerPage(
-                                          businesses: content,
-                                          initialIndex: safeIndex,
-                                        ),
-                                        transitionsBuilder:
-                                            (_, animation, __, child) {
-                                          return FadeTransition(
-                                            opacity: animation,
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }
-                                },
+                                onStoryTap: (index) =>
+                                    openStoryViewer(context, ref, index: index),
                               ),
                               SizedBox(height: AppSpacing.md),
                             ],

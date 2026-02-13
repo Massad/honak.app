@@ -52,6 +52,14 @@ mixin _$PageSettings {
   @JsonKey(name: 'post_booking_steps')
   List<PostBookingStep> get postBookingSteps =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'accept_returns')
+  bool get acceptReturns => throw _privateConstructorUsedError;
+  @JsonKey(name: 'return_conditions')
+  String get returnConditions => throw _privateConstructorUsedError;
+  @JsonKey(name: 'late_cancel_message')
+  String get lateCancelMessage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'reopen_date')
+  String? get reopenDate => throw _privateConstructorUsedError;
 
   /// Serializes this PageSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -87,6 +95,10 @@ abstract class $PageSettingsCopyWith<$Res> {
     @JsonKey(name: 'highlight_categories') List<String> highlightCategories,
     List<SafetyDisclaimer> disclaimers,
     @JsonKey(name: 'post_booking_steps') List<PostBookingStep> postBookingSteps,
+    @JsonKey(name: 'accept_returns') bool acceptReturns,
+    @JsonKey(name: 'return_conditions') String returnConditions,
+    @JsonKey(name: 'late_cancel_message') String lateCancelMessage,
+    @JsonKey(name: 'reopen_date') String? reopenDate,
   });
 }
 
@@ -121,6 +133,10 @@ class _$PageSettingsCopyWithImpl<$Res, $Val extends PageSettings>
     Object? highlightCategories = null,
     Object? disclaimers = null,
     Object? postBookingSteps = null,
+    Object? acceptReturns = null,
+    Object? returnConditions = null,
+    Object? lateCancelMessage = null,
+    Object? reopenDate = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -188,6 +204,22 @@ class _$PageSettingsCopyWithImpl<$Res, $Val extends PageSettings>
                 ? _value.postBookingSteps
                 : postBookingSteps // ignore: cast_nullable_to_non_nullable
                       as List<PostBookingStep>,
+            acceptReturns: null == acceptReturns
+                ? _value.acceptReturns
+                : acceptReturns // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            returnConditions: null == returnConditions
+                ? _value.returnConditions
+                : returnConditions // ignore: cast_nullable_to_non_nullable
+                      as String,
+            lateCancelMessage: null == lateCancelMessage
+                ? _value.lateCancelMessage
+                : lateCancelMessage // ignore: cast_nullable_to_non_nullable
+                      as String,
+            reopenDate: freezed == reopenDate
+                ? _value.reopenDate
+                : reopenDate // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -220,6 +252,10 @@ abstract class _$$PageSettingsImplCopyWith<$Res>
     @JsonKey(name: 'highlight_categories') List<String> highlightCategories,
     List<SafetyDisclaimer> disclaimers,
     @JsonKey(name: 'post_booking_steps') List<PostBookingStep> postBookingSteps,
+    @JsonKey(name: 'accept_returns') bool acceptReturns,
+    @JsonKey(name: 'return_conditions') String returnConditions,
+    @JsonKey(name: 'late_cancel_message') String lateCancelMessage,
+    @JsonKey(name: 'reopen_date') String? reopenDate,
   });
 }
 
@@ -253,6 +289,10 @@ class __$$PageSettingsImplCopyWithImpl<$Res>
     Object? highlightCategories = null,
     Object? disclaimers = null,
     Object? postBookingSteps = null,
+    Object? acceptReturns = null,
+    Object? returnConditions = null,
+    Object? lateCancelMessage = null,
+    Object? reopenDate = freezed,
   }) {
     return _then(
       _$PageSettingsImpl(
@@ -320,6 +360,22 @@ class __$$PageSettingsImplCopyWithImpl<$Res>
             ? _value._postBookingSteps
             : postBookingSteps // ignore: cast_nullable_to_non_nullable
                   as List<PostBookingStep>,
+        acceptReturns: null == acceptReturns
+            ? _value.acceptReturns
+            : acceptReturns // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        returnConditions: null == returnConditions
+            ? _value.returnConditions
+            : returnConditions // ignore: cast_nullable_to_non_nullable
+                  as String,
+        lateCancelMessage: null == lateCancelMessage
+            ? _value.lateCancelMessage
+            : lateCancelMessage // ignore: cast_nullable_to_non_nullable
+                  as String,
+        reopenDate: freezed == reopenDate
+            ? _value.reopenDate
+            : reopenDate // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -347,6 +403,10 @@ class _$PageSettingsImpl implements _PageSettings {
     final List<SafetyDisclaimer> disclaimers = const [],
     @JsonKey(name: 'post_booking_steps')
     final List<PostBookingStep> postBookingSteps = const [],
+    @JsonKey(name: 'accept_returns') this.acceptReturns = true,
+    @JsonKey(name: 'return_conditions') this.returnConditions = '',
+    @JsonKey(name: 'late_cancel_message') this.lateCancelMessage = '',
+    @JsonKey(name: 'reopen_date') this.reopenDate,
   }) : _highlightCategories = highlightCategories,
        _disclaimers = disclaimers,
        _postBookingSteps = postBookingSteps;
@@ -423,8 +483,21 @@ class _$PageSettingsImpl implements _PageSettings {
   }
 
   @override
+  @JsonKey(name: 'accept_returns')
+  final bool acceptReturns;
+  @override
+  @JsonKey(name: 'return_conditions')
+  final String returnConditions;
+  @override
+  @JsonKey(name: 'late_cancel_message')
+  final String lateCancelMessage;
+  @override
+  @JsonKey(name: 'reopen_date')
+  final String? reopenDate;
+
+  @override
   String toString() {
-    return 'PageSettings(status: $status, closeReason: $closeReason, tempClosedMessage: $tempClosedMessage, engagementLevel: $engagementLevel, orderApproval: $orderApproval, returnWindowDays: $returnWindowDays, returnType: $returnType, returnCost: $returnCost, cancelWindowHours: $cancelWindowHours, noShowAction: $noShowAction, lateCancelFeeType: $lateCancelFeeType, lateCancelFeeAmount: $lateCancelFeeAmount, catalogStrategy: $catalogStrategy, highlightCategories: $highlightCategories, disclaimers: $disclaimers, postBookingSteps: $postBookingSteps)';
+    return 'PageSettings(status: $status, closeReason: $closeReason, tempClosedMessage: $tempClosedMessage, engagementLevel: $engagementLevel, orderApproval: $orderApproval, returnWindowDays: $returnWindowDays, returnType: $returnType, returnCost: $returnCost, cancelWindowHours: $cancelWindowHours, noShowAction: $noShowAction, lateCancelFeeType: $lateCancelFeeType, lateCancelFeeAmount: $lateCancelFeeAmount, catalogStrategy: $catalogStrategy, highlightCategories: $highlightCategories, disclaimers: $disclaimers, postBookingSteps: $postBookingSteps, acceptReturns: $acceptReturns, returnConditions: $returnConditions, lateCancelMessage: $lateCancelMessage, reopenDate: $reopenDate)';
   }
 
   @override
@@ -468,12 +541,20 @@ class _$PageSettingsImpl implements _PageSettings {
             const DeepCollectionEquality().equals(
               other._postBookingSteps,
               _postBookingSteps,
-            ));
+            ) &&
+            (identical(other.acceptReturns, acceptReturns) ||
+                other.acceptReturns == acceptReturns) &&
+            (identical(other.returnConditions, returnConditions) ||
+                other.returnConditions == returnConditions) &&
+            (identical(other.lateCancelMessage, lateCancelMessage) ||
+                other.lateCancelMessage == lateCancelMessage) &&
+            (identical(other.reopenDate, reopenDate) ||
+                other.reopenDate == reopenDate));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     status,
     closeReason,
@@ -491,7 +572,11 @@ class _$PageSettingsImpl implements _PageSettings {
     const DeepCollectionEquality().hash(_highlightCategories),
     const DeepCollectionEquality().hash(_disclaimers),
     const DeepCollectionEquality().hash(_postBookingSteps),
-  );
+    acceptReturns,
+    returnConditions,
+    lateCancelMessage,
+    reopenDate,
+  ]);
 
   /// Create a copy of PageSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -527,6 +612,10 @@ abstract class _PageSettings implements PageSettings {
     final List<SafetyDisclaimer> disclaimers,
     @JsonKey(name: 'post_booking_steps')
     final List<PostBookingStep> postBookingSteps,
+    @JsonKey(name: 'accept_returns') final bool acceptReturns,
+    @JsonKey(name: 'return_conditions') final String returnConditions,
+    @JsonKey(name: 'late_cancel_message') final String lateCancelMessage,
+    @JsonKey(name: 'reopen_date') final String? reopenDate,
   }) = _$PageSettingsImpl;
 
   factory _PageSettings.fromJson(Map<String, dynamic> json) =
@@ -578,6 +667,18 @@ abstract class _PageSettings implements PageSettings {
   @override
   @JsonKey(name: 'post_booking_steps')
   List<PostBookingStep> get postBookingSteps;
+  @override
+  @JsonKey(name: 'accept_returns')
+  bool get acceptReturns;
+  @override
+  @JsonKey(name: 'return_conditions')
+  String get returnConditions;
+  @override
+  @JsonKey(name: 'late_cancel_message')
+  String get lateCancelMessage;
+  @override
+  @JsonKey(name: 'reopen_date')
+  String? get reopenDate;
 
   /// Create a copy of PageSettings
   /// with the given fields replaced by the non-null parameter values.

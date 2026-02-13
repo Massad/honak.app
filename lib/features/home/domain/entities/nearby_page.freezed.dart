@@ -41,6 +41,8 @@ mixin _$NearbyPage {
   bool get isOpen => throw _privateConstructorUsedError;
   @JsonKey(name: 'browse_only')
   bool get browseOnly => throw _privateConstructorUsedError;
+  @JsonKey(name: 'has_active_stories')
+  bool get hasActiveStories => throw _privateConstructorUsedError;
 
   /// Serializes this NearbyPage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -72,6 +74,7 @@ abstract class $NearbyPageCopyWith<$Res> {
     @JsonKey(name: 'weekly_orders') int weeklyOrders,
     @JsonKey(name: 'is_open') bool isOpen,
     @JsonKey(name: 'browse_only') bool browseOnly,
+    @JsonKey(name: 'has_active_stories') bool hasActiveStories,
   });
 }
 
@@ -102,6 +105,7 @@ class _$NearbyPageCopyWithImpl<$Res, $Val extends NearbyPage>
     Object? weeklyOrders = null,
     Object? isOpen = null,
     Object? browseOnly = null,
+    Object? hasActiveStories = null,
   }) {
     return _then(
       _value.copyWith(
@@ -153,6 +157,10 @@ class _$NearbyPageCopyWithImpl<$Res, $Val extends NearbyPage>
                 ? _value.browseOnly
                 : browseOnly // ignore: cast_nullable_to_non_nullable
                       as bool,
+            hasActiveStories: null == hasActiveStories
+                ? _value.hasActiveStories
+                : hasActiveStories // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -181,6 +189,7 @@ abstract class _$$NearbyPageImplCopyWith<$Res>
     @JsonKey(name: 'weekly_orders') int weeklyOrders,
     @JsonKey(name: 'is_open') bool isOpen,
     @JsonKey(name: 'browse_only') bool browseOnly,
+    @JsonKey(name: 'has_active_stories') bool hasActiveStories,
   });
 }
 
@@ -210,6 +219,7 @@ class __$$NearbyPageImplCopyWithImpl<$Res>
     Object? weeklyOrders = null,
     Object? isOpen = null,
     Object? browseOnly = null,
+    Object? hasActiveStories = null,
   }) {
     return _then(
       _$NearbyPageImpl(
@@ -261,6 +271,10 @@ class __$$NearbyPageImplCopyWithImpl<$Res>
             ? _value.browseOnly
             : browseOnly // ignore: cast_nullable_to_non_nullable
                   as bool,
+        hasActiveStories: null == hasActiveStories
+            ? _value.hasActiveStories
+            : hasActiveStories // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -282,6 +296,7 @@ class _$NearbyPageImpl implements _NearbyPage {
     @JsonKey(name: 'weekly_orders') this.weeklyOrders = 0,
     @JsonKey(name: 'is_open') this.isOpen = true,
     @JsonKey(name: 'browse_only') this.browseOnly = false,
+    @JsonKey(name: 'has_active_stories') this.hasActiveStories = false,
   });
 
   factory _$NearbyPageImpl.fromJson(Map<String, dynamic> json) =>
@@ -319,10 +334,13 @@ class _$NearbyPageImpl implements _NearbyPage {
   @override
   @JsonKey(name: 'browse_only')
   final bool browseOnly;
+  @override
+  @JsonKey(name: 'has_active_stories')
+  final bool hasActiveStories;
 
   @override
   String toString() {
-    return 'NearbyPage(id: $id, name: $name, slug: $slug, avatarUrl: $avatarUrl, coverUrl: $coverUrl, category: $category, distanceKm: $distanceKm, isFollowing: $isFollowing, isVerified: $isVerified, weeklyOrders: $weeklyOrders, isOpen: $isOpen, browseOnly: $browseOnly)';
+    return 'NearbyPage(id: $id, name: $name, slug: $slug, avatarUrl: $avatarUrl, coverUrl: $coverUrl, category: $category, distanceKm: $distanceKm, isFollowing: $isFollowing, isVerified: $isVerified, weeklyOrders: $weeklyOrders, isOpen: $isOpen, browseOnly: $browseOnly, hasActiveStories: $hasActiveStories)';
   }
 
   @override
@@ -349,7 +367,9 @@ class _$NearbyPageImpl implements _NearbyPage {
                 other.weeklyOrders == weeklyOrders) &&
             (identical(other.isOpen, isOpen) || other.isOpen == isOpen) &&
             (identical(other.browseOnly, browseOnly) ||
-                other.browseOnly == browseOnly));
+                other.browseOnly == browseOnly) &&
+            (identical(other.hasActiveStories, hasActiveStories) ||
+                other.hasActiveStories == hasActiveStories));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -368,6 +388,7 @@ class _$NearbyPageImpl implements _NearbyPage {
     weeklyOrders,
     isOpen,
     browseOnly,
+    hasActiveStories,
   );
 
   /// Create a copy of NearbyPage
@@ -398,6 +419,7 @@ abstract class _NearbyPage implements NearbyPage {
     @JsonKey(name: 'weekly_orders') final int weeklyOrders,
     @JsonKey(name: 'is_open') final bool isOpen,
     @JsonKey(name: 'browse_only') final bool browseOnly,
+    @JsonKey(name: 'has_active_stories') final bool hasActiveStories,
   }) = _$NearbyPageImpl;
 
   factory _NearbyPage.fromJson(Map<String, dynamic> json) =
@@ -435,6 +457,9 @@ abstract class _NearbyPage implements NearbyPage {
   @override
   @JsonKey(name: 'browse_only')
   bool get browseOnly;
+  @override
+  @JsonKey(name: 'has_active_stories')
+  bool get hasActiveStories;
 
   /// Create a copy of NearbyPage
   /// with the given fields replaced by the non-null parameter values.

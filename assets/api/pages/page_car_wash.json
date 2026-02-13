@@ -81,6 +81,34 @@
         "neighborhood": "عبدون",
         "coverage": []
       }
+    ],
+    "packages": [
+      {
+        "id": "pkg_020",
+        "name": "باقة ٥ غسلات",
+        "description": "٥ غسلات خارجية شاملة",
+        "price_cents": 2000,
+        "credits": 5,
+        "credit_label": "غسلة",
+        "validity_months": 6,
+        "icon": "car",
+        "compare_single_price": 500,
+        "active": true,
+        "model": "visits_and_date"
+      },
+      {
+        "id": "pkg_021",
+        "name": "باقة ١٠ غسلات",
+        "description": "١٠ غسلات خارجية + داخلية",
+        "price_cents": 4500,
+        "credits": 10,
+        "credit_label": "غسلة",
+        "validity_months": 12,
+        "icon": "car",
+        "compare_single_price": 600,
+        "active": true,
+        "model": "visits_and_date"
+      }
     ]
   }
 }

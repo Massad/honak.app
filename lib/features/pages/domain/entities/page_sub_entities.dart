@@ -134,8 +134,15 @@ class Package with _$Package {
     required String name,
     String? description,
     @JsonKey(name: 'price_cents') required int priceCents,
-    required int credits,
+    @Default(0) int credits,
     @JsonKey(name: 'credit_label') String? creditLabel,
+    @JsonKey(name: 'validity_months') int? validityMonths,
+    @Default('package') String icon,
+    @JsonKey(name: 'compare_single_price') int? compareSinglePrice,
+    @Default(true) bool active,
+    @Default('visits_and_date') String model,
+    @Default([]) List<String> items,
+    String? category,
   }) = _Package;
 
   factory Package.fromJson(Map<String, dynamic> json) =>

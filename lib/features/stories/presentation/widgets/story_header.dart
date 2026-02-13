@@ -9,6 +9,7 @@ class StoryHeader extends StatelessWidget {
   final String? avatarUrl;
   final String? createdAt;
   final VoidCallback onClose;
+  final VoidCallback? onProfileTap;
 
   const StoryHeader({
     super.key,
@@ -16,6 +17,7 @@ class StoryHeader extends StatelessWidget {
     this.avatarUrl,
     this.createdAt,
     required this.onClose,
+    this.onProfileTap,
   });
 
   @override
@@ -28,37 +30,47 @@ class StoryHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          StoryRingAvatar(
-            imageUrl: avatarUrl,
-            name: name,
-            radius: 16,
-            hasStories: false,
-          ),
-          SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onProfileTap,
+              child: Row(
+                children: [
+                  StoryRingAvatar(
+                    imageUrl: avatarUrl,
+                    name: name,
+                    radius: 16,
+                    hasStories: false,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                if (createdAt != null)
-                  Text(
-                    _formatTime(createdAt!),
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.7),
-                      fontSize: 12,
+                  SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        if (createdAt != null)
+                          Text(
+                            _formatTime(createdAt!),
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.7),
+                              fontSize: 12,
+                            ),
+                          ),
+                      ],
                     ),
                   ),
-              ],
+                ],
+              ),
             ),
           ),
           IconButton(

@@ -38,7 +38,12 @@ class SettingsItem extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const Spacer(),
+              Icon(
+                Icons.arrow_back_ios,
+                size: 14,
+                color: Colors.grey.shade300,
+              ),
+              const SizedBox(width: AppSpacing.sm),
               Expanded(
                 flex: 5,
                 child: Column(

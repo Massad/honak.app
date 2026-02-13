@@ -2022,6 +2022,15 @@ mixin _$Package {
   int get credits => throw _privateConstructorUsedError;
   @JsonKey(name: 'credit_label')
   String? get creditLabel => throw _privateConstructorUsedError;
+  @JsonKey(name: 'validity_months')
+  int? get validityMonths => throw _privateConstructorUsedError;
+  String get icon => throw _privateConstructorUsedError;
+  @JsonKey(name: 'compare_single_price')
+  int? get compareSinglePrice => throw _privateConstructorUsedError;
+  bool get active => throw _privateConstructorUsedError;
+  String get model => throw _privateConstructorUsedError;
+  List<String> get items => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
 
   /// Serializes this Package to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2044,6 +2053,13 @@ abstract class $PackageCopyWith<$Res> {
     @JsonKey(name: 'price_cents') int priceCents,
     int credits,
     @JsonKey(name: 'credit_label') String? creditLabel,
+    @JsonKey(name: 'validity_months') int? validityMonths,
+    String icon,
+    @JsonKey(name: 'compare_single_price') int? compareSinglePrice,
+    bool active,
+    String model,
+    List<String> items,
+    String? category,
   });
 }
 
@@ -2068,6 +2084,13 @@ class _$PackageCopyWithImpl<$Res, $Val extends Package>
     Object? priceCents = null,
     Object? credits = null,
     Object? creditLabel = freezed,
+    Object? validityMonths = freezed,
+    Object? icon = null,
+    Object? compareSinglePrice = freezed,
+    Object? active = null,
+    Object? model = null,
+    Object? items = null,
+    Object? category = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -2095,6 +2118,34 @@ class _$PackageCopyWithImpl<$Res, $Val extends Package>
                 ? _value.creditLabel
                 : creditLabel // ignore: cast_nullable_to_non_nullable
                       as String?,
+            validityMonths: freezed == validityMonths
+                ? _value.validityMonths
+                : validityMonths // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            icon: null == icon
+                ? _value.icon
+                : icon // ignore: cast_nullable_to_non_nullable
+                      as String,
+            compareSinglePrice: freezed == compareSinglePrice
+                ? _value.compareSinglePrice
+                : compareSinglePrice // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            active: null == active
+                ? _value.active
+                : active // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            model: null == model
+                ? _value.model
+                : model // ignore: cast_nullable_to_non_nullable
+                      as String,
+            items: null == items
+                ? _value.items
+                : items // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            category: freezed == category
+                ? _value.category
+                : category // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -2116,6 +2167,13 @@ abstract class _$$PackageImplCopyWith<$Res> implements $PackageCopyWith<$Res> {
     @JsonKey(name: 'price_cents') int priceCents,
     int credits,
     @JsonKey(name: 'credit_label') String? creditLabel,
+    @JsonKey(name: 'validity_months') int? validityMonths,
+    String icon,
+    @JsonKey(name: 'compare_single_price') int? compareSinglePrice,
+    bool active,
+    String model,
+    List<String> items,
+    String? category,
   });
 }
 
@@ -2139,6 +2197,13 @@ class __$$PackageImplCopyWithImpl<$Res>
     Object? priceCents = null,
     Object? credits = null,
     Object? creditLabel = freezed,
+    Object? validityMonths = freezed,
+    Object? icon = null,
+    Object? compareSinglePrice = freezed,
+    Object? active = null,
+    Object? model = null,
+    Object? items = null,
+    Object? category = freezed,
   }) {
     return _then(
       _$PackageImpl(
@@ -2166,6 +2231,34 @@ class __$$PackageImplCopyWithImpl<$Res>
             ? _value.creditLabel
             : creditLabel // ignore: cast_nullable_to_non_nullable
                   as String?,
+        validityMonths: freezed == validityMonths
+            ? _value.validityMonths
+            : validityMonths // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        icon: null == icon
+            ? _value.icon
+            : icon // ignore: cast_nullable_to_non_nullable
+                  as String,
+        compareSinglePrice: freezed == compareSinglePrice
+            ? _value.compareSinglePrice
+            : compareSinglePrice // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        active: null == active
+            ? _value.active
+            : active // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        model: null == model
+            ? _value.model
+            : model // ignore: cast_nullable_to_non_nullable
+                  as String,
+        items: null == items
+            ? _value._items
+            : items // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        category: freezed == category
+            ? _value.category
+            : category // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -2179,9 +2272,16 @@ class _$PackageImpl implements _Package {
     required this.name,
     this.description,
     @JsonKey(name: 'price_cents') required this.priceCents,
-    required this.credits,
+    this.credits = 0,
     @JsonKey(name: 'credit_label') this.creditLabel,
-  });
+    @JsonKey(name: 'validity_months') this.validityMonths,
+    this.icon = 'package',
+    @JsonKey(name: 'compare_single_price') this.compareSinglePrice,
+    this.active = true,
+    this.model = 'visits_and_date',
+    final List<String> items = const [],
+    this.category,
+  }) : _items = items;
 
   factory _$PackageImpl.fromJson(Map<String, dynamic> json) =>
       _$$PackageImplFromJson(json);
@@ -2196,14 +2296,41 @@ class _$PackageImpl implements _Package {
   @JsonKey(name: 'price_cents')
   final int priceCents;
   @override
+  @JsonKey()
   final int credits;
   @override
   @JsonKey(name: 'credit_label')
   final String? creditLabel;
+  @override
+  @JsonKey(name: 'validity_months')
+  final int? validityMonths;
+  @override
+  @JsonKey()
+  final String icon;
+  @override
+  @JsonKey(name: 'compare_single_price')
+  final int? compareSinglePrice;
+  @override
+  @JsonKey()
+  final bool active;
+  @override
+  @JsonKey()
+  final String model;
+  final List<String> _items;
+  @override
+  @JsonKey()
+  List<String> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  final String? category;
 
   @override
   String toString() {
-    return 'Package(id: $id, name: $name, description: $description, priceCents: $priceCents, credits: $credits, creditLabel: $creditLabel)';
+    return 'Package(id: $id, name: $name, description: $description, priceCents: $priceCents, credits: $credits, creditLabel: $creditLabel, validityMonths: $validityMonths, icon: $icon, compareSinglePrice: $compareSinglePrice, active: $active, model: $model, items: $items, category: $category)';
   }
 
   @override
@@ -2219,7 +2346,17 @@ class _$PackageImpl implements _Package {
                 other.priceCents == priceCents) &&
             (identical(other.credits, credits) || other.credits == credits) &&
             (identical(other.creditLabel, creditLabel) ||
-                other.creditLabel == creditLabel));
+                other.creditLabel == creditLabel) &&
+            (identical(other.validityMonths, validityMonths) ||
+                other.validityMonths == validityMonths) &&
+            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.compareSinglePrice, compareSinglePrice) ||
+                other.compareSinglePrice == compareSinglePrice) &&
+            (identical(other.active, active) || other.active == active) &&
+            (identical(other.model, model) || other.model == model) &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2232,6 +2369,13 @@ class _$PackageImpl implements _Package {
     priceCents,
     credits,
     creditLabel,
+    validityMonths,
+    icon,
+    compareSinglePrice,
+    active,
+    model,
+    const DeepCollectionEquality().hash(_items),
+    category,
   );
 
   /// Create a copy of Package
@@ -2254,8 +2398,15 @@ abstract class _Package implements Package {
     required final String name,
     final String? description,
     @JsonKey(name: 'price_cents') required final int priceCents,
-    required final int credits,
+    final int credits,
     @JsonKey(name: 'credit_label') final String? creditLabel,
+    @JsonKey(name: 'validity_months') final int? validityMonths,
+    final String icon,
+    @JsonKey(name: 'compare_single_price') final int? compareSinglePrice,
+    final bool active,
+    final String model,
+    final List<String> items,
+    final String? category,
   }) = _$PackageImpl;
 
   factory _Package.fromJson(Map<String, dynamic> json) = _$PackageImpl.fromJson;
@@ -2274,6 +2425,22 @@ abstract class _Package implements Package {
   @override
   @JsonKey(name: 'credit_label')
   String? get creditLabel;
+  @override
+  @JsonKey(name: 'validity_months')
+  int? get validityMonths;
+  @override
+  String get icon;
+  @override
+  @JsonKey(name: 'compare_single_price')
+  int? get compareSinglePrice;
+  @override
+  bool get active;
+  @override
+  String get model;
+  @override
+  List<String> get items;
+  @override
+  String? get category;
 
   /// Create a copy of Package
   /// with the given fields replaced by the non-null parameter values.

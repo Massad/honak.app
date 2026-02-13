@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data": [
+    { "id": "pkg_1", "name": "باقة شهرية", "description": "30 توصيلة مياه شهرياً", "price": 22500, "credits": 30, "credit_label": "توصيلة", "validity_model": "visits_date", "validity_months": 1, "compare_price": 1000, "active": true, "icon": "droplet" },
+    { "id": "pkg_2", "name": "باقة أسبوعية", "description": "7 توصيلات مياه أسبوعياً", "price": 6000, "credits": 7, "credit_label": "توصيلة", "validity_model": "visits_date", "validity_months": 1, "compare_price": 1000, "active": true, "icon": "droplet" },
+    { "id": "pkg_3", "name": "باقة VIP", "description": "60 توصيلة + أولوية", "price": 40000, "credits": 60, "credit_label": "توصيلة", "validity_model": "visits_date", "validity_months": 2, "compare_price": 1000, "active": true, "icon": "crown" }
+  ]
+}

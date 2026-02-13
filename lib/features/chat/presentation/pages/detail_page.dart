@@ -18,6 +18,7 @@ import 'package:honak/features/chat/presentation/widgets/chat_detail_skeleton.da
 import 'package:honak/features/chat/presentation/widgets/image_message.dart';
 import 'package:honak/features/chat/presentation/widgets/info_request_card.dart';
 import 'package:honak/features/chat/presentation/widgets/message_actions_menu.dart';
+import 'package:honak/features/chat/presentation/widgets/report_conversation_sheet.dart';
 import 'package:honak/features/chat/presentation/widgets/message_bubble.dart';
 import 'package:honak/features/chat/presentation/widgets/message_input.dart';
 import 'package:honak/features/chat/presentation/widgets/modification_card.dart';
@@ -30,7 +31,8 @@ import 'package:honak/features/chat/presentation/widgets/quote_card_message.dart
 import 'package:honak/features/chat/presentation/widgets/system_message.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
+import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 class ChatDetailPage extends ConsumerStatefulWidget {
   final Conversation conversation;
@@ -156,6 +158,7 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
 
   void _clearSelection() {
     ref.read(selectedMessagesProvider.notifier).state = {};
+    ref.read(selectionPurposeProvider.notifier).state = null;
   }
 
   void _deleteSelectedForMe() {
@@ -163,6 +166,43 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
     final deleted = ref.read(deletedForMeProvider.notifier);
     deleted.state = {...deleted.state, ...selected};
     _clearSelection();
+  }
+
+  // ── Report flow ──────────────────────────────────────────────
+
+  void _enterReportSelectionMode([String? initialMessageId]) {
+    ref.read(selectionPurposeProvider.notifier).state = 'report';
+    ref.read(selectedMessagesProvider.notifier).state =
+        initialMessageId != null ? {initialMessageId} : {};
+  }
+
+  void _openReportSheet({Set<String> preSelectedIds = const {}}) {
+    final mode = ref.read(appModeProvider).valueOrNull;
+    final isBiz = mode == AppMode.business;
+    final name = _conv.displayName(isBusinessMode: isBiz);
+
+    ReportConversationSheet.show(
+      context: context,
+      conversationName: name,
+      preSelectedIds: preSelectedIds,
+      onSubmit: _handleReportSubmit,
+      onSelectInChat: () => _enterReportSelectionMode(),
+    );
+  }
+
+  void _handleReportContinue() {
+    final selected = ref.read(selectedMessagesProvider);
+    _clearSelection();
+    _openReportSheet(preSelectedIds: selected);
+  }
+
+  void _handleReportSubmit(ChatReportData report) {
+    // In a real app: POST to backend.
+    // The sheet auto-dismisses after 2.5s with a success screen.
+  }
+
+  void _handleReportFromMenu() {
+    _openReportSheet();
   }
 
   @override
@@ -178,12 +218,16 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
         hasPowerChatActions(bizCtx.archetype);
 
     final selectedIds = ref.watch(selectedMessagesProvider);
-    final isSelectionMode = selectedIds.isNotEmpty;
+    final selectionPurpose = ref.watch(selectionPurposeProvider);
+    final isSelectionMode =
+        selectionPurpose != null || selectedIds.isNotEmpty;
+    final isReportSelection = selectionPurpose == 'report';
     final editingMsg = ref.watch(editingMessageProvider);
 
     return Scaffold(
       appBar: isSelectionMode
-          ? _buildSelectionAppBar(context, selectedIds.length)
+          ? _buildSelectionAppBar(
+              context, selectedIds.length, isReportSelection)
           : _buildAppBar(context),
       body: Column(
         children: [
@@ -221,8 +265,16 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
                 isBusinessMode: isBusinessMode,
                 ref: ref,
                 selectedIds: selectedIds,
+                isSelectionMode: isSelectionMode,
                 onLongPress: (message, isMine) {
-                  showMessageActionsMenu(context, message, isMine, ref);
+                  showMessageActionsMenu(
+                    context,
+                    message,
+                    isMine,
+                    ref,
+                    onReport: () =>
+                        _enterReportSelectionMode(message.id),
+                  );
                 },
                 onTapInSelectionMode: (messageId) {
                   final notifier =
@@ -237,13 +289,19 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
               ),
             ),
           ),
-          MessageInput(
-            onSend: _handleSend,
-            isBusinessMode: isBusinessMode,
-            onZapTap: showZap ? () => _showPowerMenu(context) : null,
-            editingMessage: editingMsg,
-            onCancelEdit: _cancelEdit,
-          ),
+          if (isReportSelection)
+            _ReportSelectionFooter(
+              selectedCount: selectedIds.length,
+              onContinue: _handleReportContinue,
+            )
+          else
+            MessageInput(
+              onSend: _handleSend,
+              isBusinessMode: isBusinessMode,
+              onZapTap: showZap ? () => _showPowerMenu(context) : null,
+              editingMessage: editingMsg,
+              onCancelEdit: _cancelEdit,
+            ),
         ],
       ),
     );
@@ -264,7 +322,102 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
   PreferredSizeWidget _buildSelectionAppBar(
     BuildContext context,
     int count,
+    bool isReport,
   ) {
+    if (isReport) {
+      return AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: Colors.red.shade50,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.flag_rounded, size: 13, color: Colors.red.shade500),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Text(
+              'اختر الرسائل',
+              style: context.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          GestureDetector(
+            onTap: _clearSelection,
+            child: Container(
+              width: 32,
+              height: 32,
+              margin: const EdgeInsetsDirectional.only(end: AppSpacing.md),
+              decoration: BoxDecoration(
+                color: context.colorScheme.surfaceContainerHighest,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.close,
+                size: 14,
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(24),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.lg,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  count > 0
+                      ? '$count رسالة محددة'
+                      : 'اختر رسالة أو أكثر',
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Select all selectable messages
+                    final messages = ref
+                        .read(conversationMessagesProvider(_conv.id))
+                        .valueOrNull;
+                    if (messages == null) return;
+                    final selectable = messages
+                        .where((m) =>
+                            m.type == 'text' || m.type == 'image')
+                        .map((m) => m.id)
+                        .toSet();
+                    final notifier =
+                        ref.read(selectedMessagesProvider.notifier);
+                    if (notifier.state.length == selectable.length) {
+                      notifier.state = {};
+                    } else {
+                      notifier.state = selectable;
+                    }
+                  },
+                  child: Text(
+                    'تحديد الكل',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Default delete selection bar
     return AppBar(
       leading: IconButton(
         icon: const Icon(Icons.close),
@@ -327,6 +480,38 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
       ),
       centerTitle: true,
       actions: [
+        PopupMenuButton<String>(
+          icon: Icon(
+            Icons.more_vert,
+            size: 18,
+            color: context.colorScheme.onSurfaceVariant,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          offset: const Offset(0, 40),
+          onSelected: (value) {
+            if (value == 'report') _handleReportFromMenu();
+          },
+          itemBuilder: (_) => [
+            PopupMenuItem(
+              value: 'report',
+              child: Row(
+                children: [
+                  Icon(Icons.flag_outlined, size: 14, color: Colors.red.shade400),
+                  const SizedBox(width: AppSpacing.sm),
+                  Text(
+                    'الإبلاغ عن المحادثة',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.red.shade500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         IconButton(
           icon: const Icon(Icons.arrow_forward_ios, size: 20),
           onPressed: () => Navigator.pop(context),
@@ -340,44 +525,65 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
     String? avatarUrl,
     bool isBiz = false,
   }) {
-    Widget avatar = CircleAvatar(
+    final title = _conv.displayName(isBusinessMode: isBiz);
+    // Stories belong to business pages, not customers
+    final showStories = !isBiz && _conv.hasActiveStory;
+
+    return StoryRingAvatar(
+      imageUrl: avatarUrl ?? _conv.pageAvatar,
+      name: title,
       radius: 16,
-      backgroundColor: AppColors.background,
-      child: ClipOval(
-        child: CachedImage(
-          imageUrl: avatarUrl ?? _conv.pageAvatar,
-          width: 32,
-          height: 32,
-          fit: BoxFit.cover,
-          placeholderIcon:
-              isBiz ? Icons.person_outline : Icons.store_outlined,
+      hasStories: showStories,
+      onTap: showStories
+          ? () => openStoryViewer(context, ref, pageId: _conv.pageId)
+          : null,
+    );
+  }
+}
+
+class _ReportSelectionFooter extends StatelessWidget {
+  final int selectedCount;
+  final VoidCallback onContinue;
+
+  const _ReportSelectionFooter({
+    required this.selectedCount,
+    required this.onContinue,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = selectedCount > 0;
+    return Container(
+      padding: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.md,
+      ),
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        border: const Border(
+          top: BorderSide(color: AppColors.divider, width: 0.5),
+        ),
+      ),
+      child: SafeArea(
+        top: false,
+        child: SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: FilledButton(
+            onPressed: enabled ? onContinue : null,
+            style: FilledButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              disabledBackgroundColor:
+                  context.colorScheme.surfaceContainerHighest,
+              disabledForegroundColor: context.colorScheme.outlineVariant,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text('متابعة ($selectedCount)'),
+          ),
         ),
       ),
     );
-
-    if (_conv.hasActiveStory) {
-      avatar = Container(
-        padding: const EdgeInsets.all(2),
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.primaryLight],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(1.5),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.surface,
-          ),
-          child: avatar,
-        ),
-      );
-    }
-
-    return avatar;
   }
 }
 
@@ -493,6 +699,7 @@ class _MessageList extends ConsumerWidget {
   final bool isBusinessMode;
   final WidgetRef ref;
   final Set<String> selectedIds;
+  final bool isSelectionMode;
   final void Function(Message message, bool isMine) onLongPress;
   final void Function(String messageId) onTapInSelectionMode;
 
@@ -502,6 +709,7 @@ class _MessageList extends ConsumerWidget {
     this.isBusinessMode = false,
     required this.ref,
     required this.selectedIds,
+    this.isSelectionMode = false,
     required this.onLongPress,
     required this.onTapInSelectionMode,
   });
@@ -511,7 +719,6 @@ class _MessageList extends ConsumerWidget {
     final deletedForMe = ref.watch(deletedForMeProvider);
     final deletedForEveryone = ref.watch(deletedForEveryoneProvider);
     final editedMessages = ref.watch(editedMessagesProvider);
-    final isSelectionMode = selectedIds.isNotEmpty;
 
     // Filter out locally-deleted messages
     final visibleMessages =

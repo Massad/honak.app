@@ -4,17 +4,19 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/conversation.dart';
-import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 class ConversationCard extends StatelessWidget {
   final Conversation conversation;
   final VoidCallback? onTap;
+  final VoidCallback? onAvatarTap;
   final bool isBusinessMode;
 
   const ConversationCard({
     super.key,
     required this.conversation,
     this.onTap,
+    this.onAvatarTap,
     this.isBusinessMode = false,
   });
 
@@ -53,37 +55,19 @@ class ConversationCard extends StatelessWidget {
 
   Widget _buildAvatar(ThemeData theme) {
     final avatarUrl = conversation.displayAvatar(isBusinessMode: isBusinessMode);
-    Widget avatar = ClipOval(
-      child: CachedImage(
-        imageUrl: avatarUrl,
-        width: 48,
-        height: 48,
-        placeholderIcon:
-            isBusinessMode ? Icons.person_outline : Icons.store_outlined,
-      ),
-    );
+    final displayName =
+        conversation.displayName(isBusinessMode: isBusinessMode);
 
-    if (conversation.hasActiveStory) {
-      avatar = Container(
-        padding: const EdgeInsets.all(2),
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.primaryLight],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: theme.colorScheme.surface,
-          ),
-          child: avatar,
-        ),
-      );
-    }
+    // Stories belong to business pages, not customers
+    final showStories = !isBusinessMode && conversation.hasActiveStory;
+
+    Widget avatar = StoryRingAvatar(
+      imageUrl: avatarUrl,
+      name: displayName,
+      radius: 24,
+      hasStories: showStories,
+      onTap: showStories ? onAvatarTap : null,
+    );
 
     if (_isUnread) {
       return Stack(

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Text scale aligned with Figma prototype (Tailwind CSS v4 defaults).
+///
+/// All styles use `height: 1.5` and **zero letter-spacing** to match the
+/// Figma/Tailwind rendering. System fonts are used (no custom font family).
 abstract final class AppTypography {
   static const TextStyle displayLarge = TextStyle(
     fontSize: 57,
@@ -38,66 +42,66 @@ abstract final class AppTypography {
     height: 1.5,
   );
 
+  /// Screen titles, AppBar — Figma `text-xl` (20px).
   static const TextStyle titleLarge = TextStyle(
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: FontWeight.w600,
     height: 1.5,
   );
 
+  /// Section headers — Figma `text-lg` (18px).
   static const TextStyle titleMedium = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
     height: 1.5,
-    letterSpacing: 0.15,
   );
 
   static const TextStyle titleSmall = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     height: 1.5,
-    letterSpacing: 0.1,
   );
 
+  /// Primary body text — Figma `text-base` (16px).
   static const TextStyle bodyLarge = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     height: 1.5,
-    letterSpacing: 0.5,
   );
 
+  /// Default body text — Figma `text-sm` (14px).
   static const TextStyle bodyMedium = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     height: 1.5,
-    letterSpacing: 0.25,
   );
 
+  /// Captions, timestamps — Figma `text-xs` (12px).
   static const TextStyle bodySmall = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     height: 1.5,
-    letterSpacing: 0.4,
   );
 
+  /// Button labels, tab labels — 14px medium.
   static const TextStyle labelLarge = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
     height: 1.5,
-    letterSpacing: 0.1,
   );
 
+  /// Badge text, chip labels — 12px medium.
   static const TextStyle labelMedium = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w500,
     height: 1.5,
-    letterSpacing: 0.5,
   );
 
+  /// Nav labels, tiny counts — Figma `text-[10px]`.
   static const TextStyle labelSmall = TextStyle(
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: FontWeight.w500,
     height: 1.5,
-    letterSpacing: 0.5,
   );
 
   static TextTheme get textTheme => const TextTheme(

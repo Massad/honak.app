@@ -5,6 +5,7 @@ import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/shared/widgets/cached_image.dart';
 import 'package:honak/shared/widgets/money_text.dart';
+import 'package:honak/shared/widgets/price_change_badge.dart';
 
 /// Horizontal list-style card for catalog items.
 /// Shows image, title, description, variant chips, price, and cart controls.
@@ -64,7 +65,7 @@ class CatalogItemCard extends StatelessWidget {
                       PositionedDirectional(
                         top: -4,
                         start: -4,
-                        child: _PriceChangeBadge(
+                        child: PriceChangeBadge(
                           priceChange: activePriceChange!,
                         ),
                       ),
@@ -173,7 +174,7 @@ class CatalogItemCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    'نفذ',
+                    '\u0646\u0641\u0630',
                     style: context.textTheme.labelMedium?.copyWith(
                       color: context.colorScheme.onErrorContainer,
                       fontWeight: FontWeight.bold,
@@ -188,7 +189,7 @@ class CatalogItemCard extends StatelessWidget {
   }
 }
 
-/// Shows "إضافة" button for items with options.
+/// Shows "\u0625\u0636\u0627\u0641\u0629" button for items with options.
 /// When quantity > 0, shows a badge with the count.
 class _AddButton extends StatelessWidget {
   final int quantity;
@@ -213,7 +214,7 @@ class _AddButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             visualDensity: VisualDensity.compact,
           ),
-          child: const Text('إضافة'),
+          child: const Text('\u0625\u0636\u0627\u0641\u0629'),
         ),
       ),
     );
@@ -244,7 +245,7 @@ class _CartControls extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             visualDensity: VisualDensity.compact,
           ),
-          child: const Text('إضافة'),
+          child: const Text('\u0625\u0636\u0627\u0641\u0629'),
         ),
       );
     }
@@ -299,41 +300,6 @@ class _CircleButton extends StatelessWidget {
           icon,
           size: 18,
           color: context.colorScheme.primary,
-        ),
-      ),
-    );
-  }
-}
-
-/// Small colored badge showing price increase/decrease on item image.
-class _PriceChangeBadge extends StatelessWidget {
-  final PriceChange priceChange;
-
-  const _PriceChangeBadge({required this.priceChange});
-
-  @override
-  Widget build(BuildContext context) {
-    final isDecrease = priceChange.direction == 'decrease';
-    final bgColor = isDecrease
-        ? const Color(0xFF16A34A) // green-600
-        : const Color(0xFFDC2626); // red-600
-    final arrow = isDecrease ? '\u2193' : '\u2191';
-    // "فلس"
-    final unit =
-        priceChange.method == 'percentage' ? '%' : ' \u0641\u0644\u0633';
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: Text(
-        '$arrow ${priceChange.value}$unit',
-        style: const TextStyle(
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
         ),
       ),
     );

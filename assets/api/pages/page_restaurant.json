@@ -132,6 +132,21 @@
           {"name": "الشميساني", "neighbourhoods": ["الشميساني", "العبدلي"]}
         ]
       }
+    ],
+    "packages": [
+      {
+        "id": "pkg_040",
+        "name": "باقة غداء الموظفين",
+        "description": "١٠ وجبات غداء أساسية",
+        "price_cents": 2500,
+        "credits": 10,
+        "credit_label": "وجبة",
+        "validity_months": 2,
+        "icon": "restaurant",
+        "compare_single_price": 300,
+        "active": true,
+        "model": "visits_only"
+      }
     ]
   }
 }

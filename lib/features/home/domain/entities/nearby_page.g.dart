@@ -20,6 +20,7 @@ _$NearbyPageImpl _$$NearbyPageImplFromJson(Map<String, dynamic> json) =>
       weeklyOrders: (json['weekly_orders'] as num?)?.toInt() ?? 0,
       isOpen: json['is_open'] as bool? ?? true,
       browseOnly: json['browse_only'] as bool? ?? false,
+      hasActiveStories: json['has_active_stories'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$NearbyPageImplToJson(_$NearbyPageImpl instance) =>
@@ -36,4 +37,5 @@ Map<String, dynamic> _$$NearbyPageImplToJson(_$NearbyPageImpl instance) =>
       'weekly_orders': instance.weeklyOrders,
       'is_open': instance.isOpen,
       'browse_only': instance.browseOnly,
+      'has_active_stories': instance.hasActiveStories,
     };

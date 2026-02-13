@@ -24,8 +24,8 @@ abstract final class AppTheme {
       onSurfaceVariant: AppColors.textSecondary,
       error: AppColors.error,
       onError: AppColors.white,
-      outline: AppColors.divider,
-      outlineVariant: AppColors.divider,
+      outline: AppColors.divider, // gray-200, visible borders
+      outlineVariant: AppColors.border, // gray-100, subtle borders
       shadow: AppColors.black,
     );
 
@@ -71,10 +71,11 @@ abstract final class AppTheme {
       ),
       cardTheme: CardThemeData(
         color: AppColors.surface,
-        elevation: 0.5,
+        elevation: 0,
         shadowColor: AppColors.black.withValues(alpha: 0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
+          side: BorderSide(color: AppColors.border), // gray-100 subtle border
         ),
         margin: EdgeInsets.zero,
       ),
@@ -206,8 +207,8 @@ abstract final class AppTheme {
       onSurfaceVariant: AppColors.textSecondaryDark,
       error: AppColors.error,
       onError: AppColors.white,
-      outline: AppColors.dividerDark,
-      outlineVariant: AppColors.dividerDark,
+      outline: AppColors.dividerDark, // gray-700
+      outlineVariant: AppColors.borderDark, // gray-800, subtle
       shadow: AppColors.black,
     );
 
@@ -253,10 +254,11 @@ abstract final class AppTheme {
       ),
       cardTheme: CardThemeData(
         color: AppColors.surfaceDark,
-        elevation: 0.5,
+        elevation: 0,
         shadowColor: AppColors.black.withValues(alpha: 0.3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
+          side: BorderSide(color: AppColors.borderDark),
         ),
         margin: EdgeInsets.zero,
       ),

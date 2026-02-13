@@ -22,6 +22,10 @@
     "post_booking_steps": [
       { "id": "pbs_1", "text": "إحضار بطاقة الهوية", "is_active": true, "sort_order": 0 },
       { "id": "pbs_2", "text": "الوصول قبل الموعد بـ 15 دقيقة", "is_active": true, "sort_order": 1 }
-    ]
+    ],
+    "accept_returns": true,
+    "return_conditions": "يجب أن يكون المنتج بحالته الأصلية مع العبوة",
+    "late_cancel_message": "سيتم خصم رسوم التأخير في حال الإلغاء المتأخر",
+    "reopen_date": null
   }
 }

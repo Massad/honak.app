@@ -8,8 +8,9 @@ import 'package:honak/shared/entities/user.dart';
 
 class ShareSection extends StatelessWidget {
   final UserPage page;
+  final VoidCallback? onOpenQrCode;
 
-  const ShareSection({super.key, required this.page});
+  const ShareSection({super.key, required this.page, this.onOpenQrCode});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class ShareSection extends StatelessWidget {
                   icon: Icons.qr_code,
                   color: Colors.grey.shade600,
                   bgColor: Colors.grey.shade100,
-                  onTap: () => context.showSnackBar('قريباً: رمز QR'),
+                  onTap: onOpenQrCode ?? () => context.showSnackBar('قريباً: رمز QR'),
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),

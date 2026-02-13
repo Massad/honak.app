@@ -5,5 +5,7 @@ export 'follow_button.dart';
 export 'follow_notification_sheet.dart';
 export 'highlights_banner.dart';
 export 'load_more_button.dart';
+export 'package_detail_sheet.dart';
+export 'packages_section.dart';
 export 'page_overflow_menu.dart';
 export 'report_sheet.dart';

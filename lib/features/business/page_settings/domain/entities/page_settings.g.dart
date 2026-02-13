@@ -37,6 +37,10 @@ _$PageSettingsImpl _$$PageSettingsImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => PostBookingStep.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      acceptReturns: json['accept_returns'] as bool? ?? true,
+      returnConditions: json['return_conditions'] as String? ?? '',
+      lateCancelMessage: json['late_cancel_message'] as String? ?? '',
+      reopenDate: json['reopen_date'] as String?,
     );
 
 Map<String, dynamic> _$$PageSettingsImplToJson(_$PageSettingsImpl instance) =>
@@ -57,6 +61,10 @@ Map<String, dynamic> _$$PageSettingsImplToJson(_$PageSettingsImpl instance) =>
       'highlight_categories': instance.highlightCategories,
       'disclaimers': instance.disclaimers,
       'post_booking_steps': instance.postBookingSteps,
+      'accept_returns': instance.acceptReturns,
+      'return_conditions': instance.returnConditions,
+      'late_cancel_message': instance.lateCancelMessage,
+      'reopen_date': instance.reopenDate,
     };
 
 _$SafetyDisclaimerImpl _$$SafetyDisclaimerImplFromJson(

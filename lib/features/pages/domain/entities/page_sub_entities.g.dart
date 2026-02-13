@@ -166,8 +166,17 @@ _$PackageImpl _$$PackageImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       description: json['description'] as String?,
       priceCents: (json['price_cents'] as num).toInt(),
-      credits: (json['credits'] as num).toInt(),
+      credits: (json['credits'] as num?)?.toInt() ?? 0,
       creditLabel: json['credit_label'] as String?,
+      validityMonths: (json['validity_months'] as num?)?.toInt(),
+      icon: json['icon'] as String? ?? 'package',
+      compareSinglePrice: (json['compare_single_price'] as num?)?.toInt(),
+      active: json['active'] as bool? ?? true,
+      model: json['model'] as String? ?? 'visits_and_date',
+      items:
+          (json['items'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const [],
+      category: json['category'] as String?,
     );
 
 Map<String, dynamic> _$$PackageImplToJson(_$PackageImpl instance) =>
@@ -178,6 +187,13 @@ Map<String, dynamic> _$$PackageImplToJson(_$PackageImpl instance) =>
       'price_cents': instance.priceCents,
       'credits': instance.credits,
       'credit_label': instance.creditLabel,
+      'validity_months': instance.validityMonths,
+      'icon': instance.icon,
+      'compare_single_price': instance.compareSinglePrice,
+      'active': instance.active,
+      'model': instance.model,
+      'items': instance.items,
+      'category': instance.category,
     };
 
 _$AmenityImpl _$$AmenityImplFromJson(Map<String, dynamic> json) =>

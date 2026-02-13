@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
 import 'package:honak/shared/widgets/cached_image.dart';
+import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 class SuggestedPagesCard extends StatelessWidget {
   final List<PageSummary> pages;
@@ -68,12 +69,11 @@ class _SuggestedPageMiniCard extends ConsumerWidget {
                 fit: BoxFit.cover,
               ),
               SizedBox(height: AppSpacing.sm),
-              CircleAvatar(
+              StoryRingAvatar(
+                imageUrl: page.avatarUrl,
+                name: page.name,
                 radius: 20,
-                backgroundColor: context.colorScheme.surfaceContainerHighest,
-                backgroundImage: page.avatarUrl != null
-                    ? NetworkImage(page.avatarUrl!)
-                    : null,
+                hasStories: page.hasActiveStories,
               ),
               SizedBox(height: AppSpacing.xs),
               Padding(
