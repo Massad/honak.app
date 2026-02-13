@@ -27,5 +27,7 @@ final catalogTypes = <BusinessTypeConfig>[
   supermarket,
   butcher,
   fruitVeg,
+  miniMarket,
+  produce,
   electronicsStore,
 ];

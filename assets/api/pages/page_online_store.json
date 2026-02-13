@@ -1,0 +1,85 @@
+{
+  "success": true,
+  "data": {
+    "id": "dukkaneh-store",
+    "owner_id": "usr_040",
+    "business_type_id": "online_store",
+    "business_type_name": "متجر أونلاين",
+    "category_name": "متجر أونلاين",
+    "explore_category": "cat_retail",
+    "name": "دُكّانة",
+    "name_en": "Dukkaneh",
+    "slug": "dukkaneh-store",
+    "handle": "dukkaneh-store",
+    "store_type": "online",
+    "archetype": "catalog_order",
+    "description": "متجر إلكتروني أردني لأحدث الإلكترونيات والإكسسوارات. شحن لكل المحافظات. أسعار منافسة وضمان محلي.",
+    "avatar_url": "https://images.unsplash.com/photo-1636100232064-0dceb9d3f291?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1702737806973-22324ac61a62?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000040",
+    "location": {
+      "lat": null,
+      "lng": null,
+      "label": "أونلاين — توصيل لكل الأردن",
+      "area": "أونلاين",
+      "city": "الأردن"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "friday": {"enabled": true, "open": "12:00", "close": "21:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "21:00"}
+    },
+    "operating_hours": "يومياً: ٠٩:٠٠ ص — ٠٩:٠٠ م\nالجمعة: ١٢:٠٠ م — ٠٩:٠٠ م",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 4500,
+    "items_count": 8,
+    "posts_count": 18,
+    "is_following": false,
+    "hours": {
+      "open_time": "09:00",
+      "close_time": "21:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 83,
+    "trust_metrics": [
+      {"label": "طلب هذا الشهر", "value": "٣٨٠", "icon": "local_shipping"},
+      {"label": "عملاء يعودون", "value": "٦٨٪", "icon": "repeat"},
+      {"label": "منتجات متوفرة", "value": "٨", "icon": "inventory"}
+    ],
+    "delivery_available": true,
+    "pickup_available": false,
+    "minimum_order_cents": 1000,
+    "delivery_fee_cents": 200,
+    "payment_methods": ["نقداً عند الاستلام", "كليك: Dukkaneh", "تحويل بنكي"],
+    "cliq_alias": "Dukkaneh",
+    "coverage_zones": ["عمّان", "الزرقاء", "إربد", "العقبة", "السلط", "الكرك", "المفرق"],
+    "member_since": "2023",
+    "team_members_count": 2,
+    "contact_methods": ["chat", "whatsapp"],
+    "created_at": 1672531200,
+    "engagement_level": "full",
+    "data_synced": false,
+    "catalog_strategy": "full",
+    "carry_categories": ["سماعات", "شواحن وكوابل", "إكسسوارات جوال", "كمبيوتر"],
+    "stories": [
+      {"id": "s_duk1", "image_url": "https://picsum.photos/seed/dukkanehstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_duk2", "image_url": "https://picsum.photos/seed/dukkanehstory2/400/700", "duration": 5, "created_at": 1707850000}
+    ],
+    "blocked_dates": [],
+    "return_policy": {
+      "accepts_returns": true,
+      "window_days": 7,
+      "type": "exchange",
+      "cost": "مجاني للاستبدال خلال ٧ أيام",
+      "conditions_ar": ["المنتج بحالته الأصلية مع التغليف", "مع الفاتورة", "خلال ٧ أيام من الاستلام"]
+    }
+  }
+}

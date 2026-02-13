@@ -12,7 +12,7 @@
     "slug": "quick-lube-amman",
     "handle": "quick-lube-amman",
     "store_type": "physical",
-    "archetype": "queue",
+    "archetype": "service_booking",
     "description": "مركز تغيير زيت سريع بدون موعد. زيوت أصلية وفلاتر معتمدة. خدمة بأقل من 30 دقيقة.",
     "avatar_url": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=200&q=80",
     "cover_url": "https://images.unsplash.com/photo-1600861194802-a928b3f07c36?auto=format&fit=crop&w=800&q=80",

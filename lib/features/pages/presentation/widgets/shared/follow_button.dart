@@ -79,7 +79,7 @@ class _FollowButtonState extends ConsumerState<FollowButton> {
         context,
         ref,
         // "\u0645\u062a\u0627\u0628\u0639\u0629" = متابعة
-        action: '\u0645\u062a\u0627\u0628\u0639\u0629',
+        trigger: LoginPromptTrigger.follow,
         onAuthed: () => widget.onFollowChanged(FollowLevel.all),
       );
     }

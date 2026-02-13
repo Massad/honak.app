@@ -54,10 +54,20 @@ class _ReviewStep extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(
-                Icons.person_outline_rounded,
-                size: 18,
-                color: Colors.grey.shade500,
+              // Avatar circle
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: Icon(
+                  Icons.person_outline_rounded,
+                  size: 16,
+                  color: Colors.grey.shade400,
+                ),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -68,17 +78,16 @@ class _ReviewStep extends StatelessWidget {
                       customerName,
                       style: context.textTheme.bodySmall?.copyWith(
                         color: context.colorScheme.onSurface,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
                       ),
                     ),
                     if (customerPhone != null)
                       Text(
                         customerPhone!,
                         textDirection: TextDirection.ltr,
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade400,
+                        style: TextStyle(
                           fontSize: 10,
+                          color: Colors.grey.shade400,
                         ),
                       ),
                   ],
@@ -90,7 +99,7 @@ class _ReviewStep extends StatelessWidget {
                   'تعديل',
                   style: TextStyle(
                     fontSize: 10,
-                    color: AppColors.primary,
+                    color: Color(0xFF1A73E8),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -106,6 +115,9 @@ class _ReviewStep extends StatelessWidget {
         ...List.generate(items.length, (i) {
           final item = items[i];
           final price = Money(item.price);
+          final validAttrs = item.attributes.entries
+              .where((e) => e.value.isNotEmpty && e.value != '__custom__')
+              .toList();
           return Container(
             margin: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
             padding: const EdgeInsetsDirectional.all(AppSpacing.md),
@@ -114,18 +126,45 @@ class _ReviewStep extends StatelessWidget {
               borderRadius: AppRadius.cardInner,
             ),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Package icon
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                    top: 2,
+                    end: AppSpacing.sm,
+                  ),
+                  child: Icon(
+                    Icons.inventory_2_outlined,
+                    size: 14,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '${item.name} × ${item.quantity}',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onSurface,
-                          fontSize: 12,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '${item.name} × ${item.quantity}',
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: context.colorScheme.onSurface,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            price.toFormattedArabic(),
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: Colors.grey.shade600,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
+                      const SizedBox(height: 2),
                       Text(
                         item.service,
                         style: context.textTheme.labelSmall?.copyWith(
@@ -133,45 +172,68 @@ class _ReviewStep extends StatelessWidget {
                           fontSize: 10,
                         ),
                       ),
-                      if (item.attributes.isNotEmpty)
+                      if (validAttrs.isNotEmpty)
                         Padding(
                           padding: const EdgeInsetsDirectional.only(
                             top: AppSpacing.xxs,
                           ),
                           child: Wrap(
                             spacing: AppSpacing.xs,
-                            children: item.attributes.entries
-                                .where((e) =>
-                                    e.value.isNotEmpty &&
-                                    e.value != '__custom__')
-                                .map((e) => Text(
-                                      e.value,
-                                      style: context.textTheme.labelSmall
-                                          ?.copyWith(
-                                        color: Colors.grey.shade400,
-                                        fontSize: 9,
+                            runSpacing: AppSpacing.xxs,
+                            children: validAttrs
+                                .map((e) => Container(
+                                      padding:
+                                          const EdgeInsetsDirectional.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade50,
+                                        borderRadius: AppRadius.pill,
+                                        border: Border.all(
+                                          color: Colors.grey.shade100,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        e.value,
+                                        style: context.textTheme.labelSmall
+                                            ?.copyWith(
+                                          color: Colors.grey.shade500,
+                                          fontSize: 9,
+                                        ),
                                       ),
                                     ))
                                 .toList(),
                           ),
                         ),
+                      if (item.notes != null && item.notes!.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            top: AppSpacing.xxs,
+                          ),
+                          child: Text(
+                            item.notes!,
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: Color(0xFFFF9800),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                     ],
-                  ),
-                ),
-                Text(
-                  price.toFormattedArabic(),
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade600,
-                    fontSize: 12,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 GestureDetector(
                   onTap: () => onRemoveItem(i),
-                  child: Icon(
-                    Icons.close_rounded,
-                    size: 14,
-                    color: Colors.grey.shade400,
+                  child: const Padding(
+                    padding: EdgeInsetsDirectional.only(top: 2),
+                    child: Icon(
+                      Icons.delete_outline_rounded,
+                      size: 14,
+                      color: Color(0xFFE53935),
+                    ),
                   ),
                 ),
               ],
@@ -191,10 +253,10 @@ class _ReviewStep extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(
-                Icons.event_rounded,
+              const Icon(
+                Icons.calendar_today_rounded,
                 size: 16,
-                color: Colors.grey.shade500,
+                color: Color(0xFF1A73E8),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -246,54 +308,76 @@ class _ReviewStep extends StatelessWidget {
         const SizedBox(height: AppSpacing.lg),
 
         // ── Urgent toggle ──
-        Container(
-          padding: const EdgeInsetsDirectional.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: urgent
-                ? const Color(0xFFFFF8E1)
-                : Colors.grey.shade50,
-            borderRadius: AppRadius.cardInner,
-            border: urgent
-                ? Border.all(color: const Color(0xFFFFE082))
-                : null,
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.bolt_rounded,
-                size: 18,
-                color: urgent
-                    ? AppColors.secondary
-                    : Colors.grey.shade400,
-              ),
-              const SizedBox(width: AppSpacing.md),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'خدمة مستعجلة',
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: context.colorScheme.onSurface,
-                        fontSize: 12,
-                      ),
-                    ),
-                    Text(
-                      'أولوية معالجة أعلى',
-                      style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
-                        fontSize: 10,
-                      ),
-                    ),
-                  ],
+        GestureDetector(
+          onTap: () => onUrgentChanged(!urgent),
+          child: Container(
+            padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: urgent
+                  ? const Color(0xFFFEF2F2)
+                  : Colors.grey.shade50,
+              borderRadius: AppRadius.cardInner,
+              border: urgent
+                  ? Border.all(color: const Color(0xFFE53935))
+                  : Border.all(color: Colors.grey.shade200),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.bolt_rounded,
+                  size: 18,
+                  color: urgent
+                      ? const Color(0xFFE53935)
+                      : Colors.grey.shade400,
                 ),
-              ),
-              Switch.adaptive(
-                value: urgent,
-                onChanged: onUrgentChanged,
-                activeTrackColor: AppColors.secondary,
-              ),
-            ],
+                const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'خدمة مستعجلة',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          color: context.colorScheme.onSurface,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text(
+                        'أولوية معالجة أعلى',
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: Colors.grey.shade400,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Checkbox indicator
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: urgent
+                        ? const Color(0xFFE53935)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: urgent
+                          ? const Color(0xFFE53935)
+                          : Colors.grey.shade300,
+                      width: 2,
+                    ),
+                  ),
+                  child: urgent
+                      ? const Icon(
+                          Icons.check_rounded,
+                          size: 14,
+                          color: Colors.white,
+                        )
+                      : null,
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
@@ -331,25 +415,31 @@ class _ReviewStep extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.md),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            onPressed: items.isNotEmpty ? onSubmit : null,
-            icon: const Icon(Icons.receipt_long_rounded, size: 18),
-            label: Text(
-              'إنشاء تذكرة $ticketNumber',
-              style:
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+        GestureDetector(
+          onTap: items.isNotEmpty ? onSubmit : null,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            decoration: BoxDecoration(
+              color: items.isNotEmpty
+                  ? const Color(0xFF1A73E8)
+                  : Colors.grey.shade300,
+              borderRadius: AppRadius.cardInner,
             ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.grey.shade300,
-              disabledForegroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.cardInner,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.add_rounded, size: 16, color: Colors.white),
+                const SizedBox(width: 6),
+                Text(
+                  'إنشاء تذكرة $ticketNumber',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

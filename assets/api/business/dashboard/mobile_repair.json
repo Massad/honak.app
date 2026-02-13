@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "data": {
+    "stats": {"requests_today": 8, "new_followers": 3, "page_views": 55, "today_revenue": 12000},
+    "today_revenue": {"total": 12000, "completed_count": 6, "items": [
+      {"service": "تبديل شاشة iPhone 14", "amount": 2500, "time": "09:30"},
+      {"service": "تبديل بطارية Samsung S23", "amount": 1200, "time": "10:30"},
+      {"service": "إصلاح شحن + تبديل بطارية", "amount": 2200, "time": "12:00"},
+      {"service": "ضرر مياه iPhone 13", "amount": 3000, "time": "14:00"},
+      {"service": "تبديل شاشة + غطاء خلفي", "amount": 3100, "time": "15:30"}
+    ]},
+    "best_sellers": [
+      {"name": "تبديل شاشة", "count": 45, "trend": "up"},
+      {"name": "تبديل بطارية", "count": 35, "trend": "same"},
+      {"name": "إصلاح شحن", "count": 20, "trend": "up"},
+      {"name": "تركيب حماية", "count": 60, "trend": "up"}
+    ],
+    "pending_requests": [
+      {"id": "req_mr01", "customer": "سارة أحمد", "service": "تبديل شاشة Samsung S24", "date": "2026-02-13", "time": "16:00"},
+      {"id": "req_mr02", "customer": "محمد خالد", "service": "ضرر مياه + استرجاع بيانات", "date": "2026-02-13", "time": "17:00"}
+    ]
+  }
+}

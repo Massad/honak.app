@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "data": {
+    "stats": {"requests_today": 30, "new_followers": 1, "page_views": 45, "today_revenue": 4500},
+    "today_revenue": {"total": 4500, "completed_count": 25, "items": [
+      {"service": "بقالة متنوعة × 8", "amount": 1200, "time": "08:00"},
+      {"service": "ألبان وبيض × 5", "amount": 1000, "time": "09:30"},
+      {"service": "مواد تنظيف × 3", "amount": 800, "time": "11:00"},
+      {"service": "سناكات ومشروبات × 9", "amount": 1500, "time": "14:00"}
+    ]},
+    "best_sellers": [
+      {"name": "حليب طازج", "count": 45, "trend": "up"},
+      {"name": "خبز توست", "count": 38, "trend": "same"},
+      {"name": "بيض بلدي", "count": 30, "trend": "up"},
+      {"name": "مياه معدنية", "count": 25, "trend": "same"}
+    ],
+    "low_stock": [
+      {"name": "حليب طازج", "remaining": 8, "threshold": 20},
+      {"name": "بيض بلدي", "remaining": 5, "threshold": 15}
+    ],
+    "pending_requests": [
+      {"id": "req_mm01", "customer": "عائلة السعيد", "service": "بقالة متنوعة — تلاع العلي", "date": "2026-02-13", "time": "16:00"},
+      {"id": "req_mm02", "customer": "أم محمد", "service": "ألبان وخبز — خلدا", "date": "2026-02-13", "time": "17:00"}
+    ]
+  }
+}

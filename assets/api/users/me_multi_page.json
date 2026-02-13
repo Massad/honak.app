@@ -53,6 +53,16 @@
         "business_type_id": "government",
         "is_verified": true,
         "role": "owner"
+      },
+      {
+        "id": "tazej-juice",
+        "name": "عصائر الطازج",
+        "slug": "tazej-juice",
+        "avatar_url": "https://picsum.photos/seed/tazej-juice/200",
+        "business_type_name": "عصائر",
+        "business_type_id": "juice_bar",
+        "is_verified": true,
+        "role": "owner"
       }
     ]
   }

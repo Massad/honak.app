@@ -12,7 +12,7 @@
     "slug": "clean-express-laundry",
     "handle": "clean-express-laundry",
     "store_type": "physical",
-    "archetype": "dropoff",
+    "archetype": "service_booking",
     "description": "مغسلة ملابس متخصصة بالغسيل الجاف والعادي. خدمة سريعة وجودة عالية منذ 2018.",
     "avatar_url": "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=200&q=80",
     "cover_url": "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=800&q=80",

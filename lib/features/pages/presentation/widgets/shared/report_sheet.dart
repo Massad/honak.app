@@ -1,6 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
@@ -206,17 +206,12 @@ class _ReportSheetState extends State<ReportSheet> {
 
   void _handleSubmit() {
     setState(() => _submitted = true);
-    Timer(const Duration(milliseconds: 2500), () {
-      if (mounted) Navigator.pop(context);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_submitted) return _buildSuccess(context);
-
-    final reasons = _getReasons(widget.claimStatus);
     final title = _getTitle(widget.claimStatus);
+    final reasons = _getReasons(widget.claimStatus);
     final submitLabel = _getSubmitLabel(widget.claimStatus);
 
     return Column(
@@ -282,178 +277,168 @@ class _ReportSheetState extends State<ReportSheet> {
           ),
         ),
 
-        Divider(height: 1, color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
+        if (_submitted)
+          _buildSuccess(context)
+        else ...[
+          Divider(height: 1, color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
 
-        // Scrollable content — auto-expands, scrolls only if needed
-        Flexible(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Info banner for unclaimed pages
-                if (_isUnclaimed) ...[
-                  Container(
-                    padding: const EdgeInsets.all(AppSpacing.md),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade50,
-                      borderRadius: AppRadius.cardInner,
-                      border: Border.all(
-                        color: Colors.blue.shade100,
-                      ),
-                    ),
-                    child: Text(
-                      '\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u062a\u0645 \u0625\u0646\u0634\u0627\u0624\u0647\u0627 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u064b \u0645\u0646 \u0628\u064a\u0627\u0646\u0627\u062a \u0639\u0627\u0645\u0629.\n\u0628\u0644\u0627\u063a\u0643 \u064a\u0633\u0627\u0639\u062f\u0646\u0627 \u0646\u062d\u0633\u0651\u0646 \u062f\u0642\u0629 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0644\u0644\u062c\u0645\u064a\u0639.',
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: context.colorScheme.onSurfaceVariant,
-                        fontSize: 11,
-                        height: 1.6,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                ],
-
-                // Reason radio buttons
-                ...reasons.map((reason) => _ReasonOption(
-                      reason: reason,
-                      isSelected: _selectedReason == reason.id,
-                      accentColor: _accentColor,
-                      accentBg: _accentBg,
-                      onTap: () =>
-                          setState(() => _selectedReason = reason.id),
-                    )),
-
-                // Other text area
-                if (_selectedReason == 'other') ...[
-                  const SizedBox(height: AppSpacing.sm),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.md),
-                    child: TextField(
-                      controller: _otherController,
-                      onChanged: (_) => setState(() {}),
-                      maxLines: 3,
-                      decoration: InputDecoration(
-                        hintText: _isPlatformManaged
-                            ? '\u0627\u0643\u062a\u0628 \u0627\u0642\u062a\u0631\u0627\u062d\u0643...'
-                            : '\u0627\u0643\u062a\u0628 \u0627\u0644\u0633\u0628\u0628...',
-                        hintStyle: TextStyle(
-                          color: context.colorScheme.outlineVariant,
-                          fontSize: 14,
+          // Scrollable content — auto-expands, scrolls only if needed
+          Flexible(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Info banner for unclaimed pages
+                  if (_isUnclaimed) ...[
+                    Container(
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade50,
+                        borderRadius: AppRadius.cardInner,
+                        border: Border.all(
+                          color: Colors.blue.shade100,
                         ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
+                      ),
+                      child: Text(
+                        '\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u062a\u0645 \u0625\u0646\u0634\u0627\u0624\u0647\u0627 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u064b \u0645\u0646 \u0628\u064a\u0627\u0646\u0627\u062a \u0639\u0627\u0645\u0629.\n\u0628\u0644\u0627\u063a\u0643 \u064a\u0633\u0627\u0639\u062f\u0646\u0627 \u0646\u062d\u0633\u0651\u0646 \u062f\u0642\u0629 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0644\u0644\u062c\u0645\u064a\u0639.',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          color: context.colorScheme.onSurfaceVariant,
+                          fontSize: 11,
+                          height: 1.6,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                  ],
+
+                  // Reason radio buttons
+                  ...reasons.map((reason) => _ReasonOption(
+                        reason: reason,
+                        isSelected: _selectedReason == reason.id,
+                        accentColor: _accentColor,
+                        accentBg: _accentBg,
+                        onTap: () =>
+                            setState(() => _selectedReason = reason.id),
+                      )),
+
+                  // Other text area
+                  if (_selectedReason == 'other') ...[
+                    const SizedBox(height: AppSpacing.sm),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md),
+                      child: TextField(
+                        controller: _otherController,
+                        onChanged: (_) => setState(() {}),
+                        maxLines: 3,
+                        decoration: InputDecoration(
+                          hintText: _isPlatformManaged
+                              ? '\u0627\u0643\u062a\u0628 \u0627\u0642\u062a\u0631\u0627\u062d\u0643...'
+                              : '\u0627\u0643\u062a\u0628 \u0627\u0644\u0633\u0628\u0628...',
+                          hintStyle: TextStyle(
                             color: context.colorScheme.outlineVariant,
+                            fontSize: 14,
                           ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: context.colorScheme.outlineVariant,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: context.colorScheme.outlineVariant,
+                            ),
                           ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: context.colorScheme.outlineVariant,
+                            ),
+                          ),
+                          contentPadding: const EdgeInsets.all(AppSpacing.md),
                         ),
-                        contentPadding: const EdgeInsets.all(AppSpacing.md),
                       ),
                     ),
-                  ),
+                  ],
+
+                  // Correction fields
+                  if (_showCorrectionFields(_selectedReason)) ...[
+                    const SizedBox(height: AppSpacing.md),
+                    _CorrectionFields(
+                      phoneController: _phoneController,
+                      addressController: _addressController,
+                      notesController: _notesController,
+                      isMoved: _selectedReason == 'moved',
+                    ),
+                  ],
+
+                  const SizedBox(height: AppSpacing.lg),
                 ],
-
-                // Correction fields
-                if (_showCorrectionFields(_selectedReason)) ...[
-                  const SizedBox(height: AppSpacing.md),
-                  _CorrectionFields(
-                    phoneController: _phoneController,
-                    addressController: _addressController,
-                    notesController: _notesController,
-                    isMoved: _selectedReason == 'moved',
-                  ),
-                ],
-
-                const SizedBox(height: AppSpacing.lg),
-              ],
-            ),
-          ),
-        ),
-
-        // Submit button
-        Padding(
-          padding: const EdgeInsets.fromLTRB(
-              AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.md),
-          child: SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: FilledButton(
-              onPressed: _canSubmit ? _handleSubmit : null,
-              style: FilledButton.styleFrom(
-                backgroundColor: _canSubmit ? _accentColor : null,
-                disabledBackgroundColor:
-                    context.colorScheme.surfaceContainerHighest,
-                disabledForegroundColor:
-                    context.colorScheme.outlineVariant,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
               ),
-              child: Text(submitLabel),
             ),
           ),
-        ),
+
+          // Submit button
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.md),
+            child: SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: FilledButton(
+                onPressed: _canSubmit ? _handleSubmit : null,
+                style: FilledButton.styleFrom(
+                  backgroundColor: _canSubmit ? _accentColor : null,
+                  disabledBackgroundColor:
+                      context.colorScheme.surfaceContainerHighest,
+                  disabledForegroundColor:
+                      context.colorScheme.outlineVariant,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(submitLabel),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
 
   Widget _buildSuccess(BuildContext context) {
     final msg = _getSuccessMessage(widget.claimStatus);
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg, vertical: AppSpacing.xxl),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag handle
-            Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: context.colorScheme.outlineVariant,
-                borderRadius: AppRadius.pill,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
+      child: Column(
+        children: [
+          Container(
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+              color: AppColors.success.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
             ),
-            SizedBox(height: AppSpacing.xxl),
-            Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                color: Colors.green.shade50,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.check_circle,
-                size: 32,
-                color: Colors.green.shade600,
-              ),
+            child: Icon(
+              Icons.check_circle,
+              size: 32,
+              color: AppColors.success,
             ),
-            SizedBox(height: AppSpacing.lg),
-            Text(
-              msg.title,
-              style: context.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Text(
+            msg.title,
+            style: context.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
             ),
-            SizedBox(height: AppSpacing.xs),
-            Text(
-              msg.desc,
-              style: context.textTheme.bodySmall?.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-              textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            msg.desc,
+            style: TextStyle(
+              fontSize: 13,
+              color: context.colorScheme.onSurfaceVariant,
             ),
-            SizedBox(height: AppSpacing.xxl),
-          ],
-        ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }

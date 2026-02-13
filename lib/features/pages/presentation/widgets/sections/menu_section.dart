@@ -21,6 +21,7 @@ import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
+import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
 
 /// Browsable menu with categories, search, cart, and pagination.
@@ -407,7 +408,12 @@ class _MenuSectionState extends ConsumerState<MenuSection> {
                 child: FloatingCartBar(
                   itemCount: _cartItemCount,
                   total: _cartTotal,
-                  onSendOrder: () => _openOrderSheet(context),
+                  onSendOrder: () => AuthGate.require(
+                    context,
+                    ref,
+                    trigger: LoginPromptTrigger.order,
+                    onAuthed: () => _openOrderSheet(context),
+                  ),
                 ),
               ),
           ],

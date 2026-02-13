@@ -9,13 +9,19 @@ import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.d
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
 import 'package:honak/features/business/dropoff/domain/entities/ticket_activity.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/activity_log_utils.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_config.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/ticket_activity_log.dart';
 import 'package:honak/shared/entities/money.dart';
 
 /// Full-screen draggable bottom sheet showing complete ticket details.
 ///
-/// Includes a 4-step progress bar, customer info, items list,
-/// payment section, timing details, activity log preview, and action bar.
+/// Matches the Figma DropoffDetailView component with:
+/// - Header: back arrow, ticket #, urgent/overdue badges, activity log button
+/// - Progress bar: 4 connected circles with status lines
+/// - Customer card: avatar, name, phone, chat button
+/// - Items cards: photo status bars, attribute chips, notes
+/// - Payment card, timing card, activity log preview
+/// - Bottom action bar: chat + advance button
 class DropoffDetailView extends StatefulWidget {
   final DropoffTicket ticket;
   final ValueChanged<String>? onAdvance;
@@ -47,52 +53,29 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       builder: (context, scrollController) {
         return Container(
           decoration: const BoxDecoration(
-            color: AppColors.surface,
+            color: Color(0xFFF5F5F5),
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(AppRadius.xxl),
             ),
           ),
           child: Column(
             children: [
-              // Drag handle + close
               _buildHeader(context),
-
-              // Scrollable content
               Expanded(
                 child: ListView(
                   controller: scrollController,
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.lg,
-                  ),
+                  padding: EdgeInsets.zero,
                   children: [
-                    // Progress bar
-                    _buildProgressBar(context, ticket.status),
-                    const SizedBox(height: AppSpacing.lg),
-
-                    // Customer info
-                    _buildCustomerSection(context, ticket),
-                    const SizedBox(height: AppSpacing.lg),
-
-                    // Items list
-                    _buildItemsSection(context, ticket),
-                    const SizedBox(height: AppSpacing.lg),
-
-                    // Payment section
-                    _buildPaymentSection(context, ticket),
-                    const SizedBox(height: AppSpacing.lg),
-
-                    // Timing details
-                    _buildTimingSection(context, ticket),
-                    const SizedBox(height: AppSpacing.lg),
-
-                    // Activity log
+                    _buildProgressBar(context, ticket),
+                    _buildCustomerCard(context, ticket),
+                    _buildItemsCard(context, ticket),
+                    _buildPaymentCard(context, ticket),
+                    _buildTimingCard(context, ticket),
                     _buildActivitySection(context),
-                    const SizedBox(height: AppSpacing.lg),
+                    const SizedBox(height: 100),
                   ],
                 ),
               ),
-
-              // Bottom action bar
               _buildBottomBar(context, ticket),
             ],
           ),
@@ -104,454 +87,928 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
   // ── Header ──
 
   Widget _buildHeader(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg,
-        AppSpacing.sm,
-        AppSpacing.lg,
-        0,
-      ),
+    final ticket = widget.ticket;
+    final isOverdue = _isOverdue(ticket);
+
+    return Container(
+      color: AppColors.surface,
       child: Column(
         children: [
+          // Drag handle
           Container(
-            width: 36,
+            width: 40,
             height: 4,
-            margin: const EdgeInsets.only(bottom: AppSpacing.md),
+            margin: const EdgeInsets.only(top: AppSpacing.sm),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          Row(
-            children: [
-              Text(
-                'تفاصيل التذكرة ${widget.ticket.ticketNumber}',
-                textDirection: TextDirection.rtl,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Spacer(),
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    shape: BoxShape.circle,
-                  ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.lg,
+              AppSpacing.md,
+              AppSpacing.lg,
+              AppSpacing.md,
+            ),
+            child: Row(
+              children: [
+                // Back button
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
                   child: Icon(
-                    Icons.close,
-                    size: 16,
-                    color: Colors.grey.shade500,
+                    Icons.arrow_forward_rounded,
+                    size: 22,
+                    color: Colors.grey.shade600,
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.md),
-        ],
-      ),
-    );
-  }
+                const SizedBox(width: AppSpacing.md),
 
-  // ── 4-Step Progress Bar ──
-
-  Widget _buildProgressBar(BuildContext context, DropoffStatus status) {
-    final steps = [
-      (DropoffStatus.received, 'مستلمة', Icons.inbox_rounded),
-      (DropoffStatus.processing, 'قيد المعالجة', Icons.settings_rounded),
-      (DropoffStatus.ready, 'جاهزة', Icons.check_circle_outline_rounded),
-      (DropoffStatus.delivered, 'تم التسليم', Icons.done_all_rounded),
-    ];
-    final activeIdx = steps.indexWhere((s) => s.$1 == status);
-
-    return Row(
-      children: [
-        for (var i = 0; i < steps.length; i++) ...[
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: i <= activeIdx
-                        ? _statusColor(steps[i].$1)
-                        : Colors.grey.shade100,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    steps[i].$3,
-                    size: 16,
-                    color: i <= activeIdx ? Colors.white : Colors.grey.shade400,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xs),
-                Text(
-                  steps[i].$2,
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: i <= activeIdx
-                        ? _statusColor(steps[i].$1)
-                        : Colors.grey.shade400,
-                    fontSize: 9,
-                    fontWeight:
-                        i == activeIdx ? FontWeight.w600 : FontWeight.normal,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          if (i < steps.length - 1)
-            Expanded(
-              flex: 0,
-              child: Container(
-                width: 24,
-                height: 2,
-                color: i < activeIdx
-                    ? _statusColor(steps[i].$1)
-                    : Colors.grey.shade200,
-              ),
-            ),
-        ],
-      ],
-    );
-  }
-
-  // ── Customer Section ──
-
-  Widget _buildCustomerSection(BuildContext context, DropoffTicket ticket) {
-    return Container(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade50,
-        borderRadius: AppRadius.cardInner,
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.person_outline_rounded,
-              size: 20,
-              color: Colors.grey.shade500,
-            ),
-          ),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  ticket.customerName,
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    color: context.colorScheme.onSurface,
-                  ),
-                ),
-                if (ticket.customerPhone != null) ...[
-                  const SizedBox(height: AppSpacing.xxs),
-                  Text(
-                    ticket.customerPhone!,
-                    textDirection: TextDirection.ltr,
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.grey.shade500,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          if (ticket.customerPhone != null) ...[
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.chat_bubble_outline_rounded,
-                  size: 14,
-                  color: AppColors.primary,
-                ),
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: AppColors.success.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.phone_outlined,
-                  size: 14,
-                  color: AppColors.success,
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  // ── Items Section ──
-
-  Widget _buildItemsSection(BuildContext context, DropoffTicket ticket) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'القطع (${ticket.items.length})',
-          style: context.textTheme.bodySmall?.copyWith(
-            color: Colors.grey.shade500,
-            fontSize: 12,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        ...ticket.items.map((item) {
-          final price = Money(item.price);
-          return Container(
-            margin: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
-            padding: const EdgeInsetsDirectional.all(AppSpacing.md),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade100),
-              borderRadius: AppRadius.cardInner,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        '${item.name} × ${item.quantity}',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onSurface,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      price.toFormattedArabic(),
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.shade600,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSpacing.xxs),
-                Text(
-                  item.service,
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: AppColors.primary,
-                    fontSize: 10,
-                  ),
-                ),
-                if (item.attributes.isNotEmpty) ...[
-                  const SizedBox(height: AppSpacing.xs),
-                  Wrap(
-                    spacing: AppSpacing.xs,
-                    runSpacing: AppSpacing.xs,
-                    children: item.attributes.entries.map((attr) {
-                      return Container(
-                        padding: const EdgeInsetsDirectional.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade50,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          '${attr.key}: ${attr.value}',
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: Colors.grey.shade500,
-                            fontSize: 9,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-                // Photo status icons
-                if (item.photoBefore != null || item.photoAfter != null) ...[
-                  const SizedBox(height: AppSpacing.xs),
-                  Row(
+                // Title + badges
+                Expanded(
+                  child: Row(
                     children: [
-                      if (item.photoBefore != null) ...[
-                        Icon(
-                          Icons.camera_alt_outlined,
-                          size: 10,
-                          color: AppColors.secondary,
+                      Text(
+                        'تذكرة #${ticket.ticketNumber}',
+                        textDirection: TextDirection.rtl,
+                        style: context.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.colorScheme.onSurface,
                         ),
-                        const SizedBox(width: 2),
-                        Text(
-                          'قبل',
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: AppColors.secondary,
-                            fontSize: 9,
+                      ),
+                      if (ticket.urgent) ...[
+                        const SizedBox(width: AppSpacing.sm),
+                        Container(
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFEF2F2),
+                            borderRadius: AppRadius.pill,
+                          ),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.bolt_rounded,
+                                size: 10,
+                                color: Color(0xFFE53935),
+                              ),
+                              SizedBox(width: 2),
+                              Text(
+                                'مستعجل',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Color(0xFFE53935),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
-                      if (item.photoBefore != null && item.photoAfter != null)
+                      if (isOverdue) ...[
                         const SizedBox(width: AppSpacing.sm),
-                      if (item.photoAfter != null) ...[
-                        Icon(
-                          Icons.camera_rounded,
-                          size: 10,
-                          color: AppColors.success,
-                        ),
-                        const SizedBox(width: 2),
-                        Text(
-                          'بعد',
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: AppColors.success,
-                            fontSize: 9,
+                        Container(
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFF8E1),
+                            borderRadius: AppRadius.pill,
+                          ),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.warning_amber_rounded,
+                                size: 10,
+                                color: Color(0xFFFF9800),
+                              ),
+                              SizedBox(width: 2),
+                              Text(
+                                'متأخر',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Color(0xFFFF9800),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ],
                   ),
-                ],
+                ),
+
+                // Activity log button
+                GestureDetector(
+                  onTap: () => setState(() => _showFullLog = !_showFullLog),
+                  child: Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFEFF6FF),
+                      borderRadius: AppRadius.cardInner,
+                    ),
+                    child: const Icon(
+                      Icons.history_rounded,
+                      size: 16,
+                      color: Color(0xFF1A73E8),
+                    ),
+                  ),
+                ),
               ],
             ),
-          );
-        }),
+          ),
+          Divider(height: 1, color: Colors.grey.shade100),
+        ],
+      ),
+    );
+  }
+
+  // ── Progress Bar ──
+
+  Widget _buildProgressBar(BuildContext context, DropoffTicket ticket) {
+    final currentIdx =
+        DropoffStatusConfig.statusFlow.indexOf(ticket.status);
+
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        0,
+      ),
+      padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.cardInner,
+        border: Border.all(color: Colors.grey.shade100),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          // Step circles + connecting lines
+          Row(
+            children: [
+              for (var i = 0;
+                  i < DropoffStatusConfig.statusFlow.length;
+                  i++) ...[
+                _buildProgressStep(
+                  context,
+                  DropoffStatusConfig.statusFlow[i],
+                  i,
+                  currentIdx,
+                ),
+                if (i < DropoffStatusConfig.statusFlow.length - 1)
+                  Expanded(
+                    child: Container(
+                      height: 2,
+                      margin: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: i < currentIdx
+                            ? const Color(0xFF43A047)
+                            : Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(1),
+                      ),
+                    ),
+                  ),
+              ],
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+
+          // Current status badge
+          _buildCurrentStatusBadge(context, ticket),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProgressStep(
+    BuildContext context,
+    DropoffStatus status,
+    int index,
+    int currentIdx,
+  ) {
+    final conf = DropoffStatusConfig.of(status);
+    final isCurrent = index == currentIdx;
+    final isComplete = index < currentIdx;
+    return Column(
+      children: [
+        Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: isCurrent
+                ? conf.bgColor
+                : isComplete
+                    ? const Color(0xFF43A047).withValues(alpha: 0.1)
+                    : Colors.grey.shade50,
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: isCurrent
+                  ? conf.borderColor
+                  : isComplete
+                      ? const Color(0xFF43A047)
+                      : Colors.grey.shade200,
+              width: 2,
+            ),
+          ),
+          child: Icon(
+            isComplete ? Icons.check_circle_rounded : conf.icon,
+            size: 14,
+            color: isCurrent
+                ? conf.color
+                : isComplete
+                    ? const Color(0xFF43A047)
+                    : Colors.grey.shade300,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          conf.label,
+          style: TextStyle(
+            fontSize: 9,
+            color: isCurrent
+                ? conf.color
+                : isComplete
+                    ? const Color(0xFF43A047)
+                    : Colors.grey.shade300,
+          ),
+        ),
       ],
     );
   }
 
-  // ── Payment Section ──
-
-  Widget _buildPaymentSection(BuildContext context, DropoffTicket ticket) {
-    final total = Money(ticket.totalPrice);
+  Widget _buildCurrentStatusBadge(
+    BuildContext context,
+    DropoffTicket ticket,
+  ) {
+    final conf = DropoffStatusConfig.of(ticket.status);
 
     return Container(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+      width: double.infinity,
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       decoration: BoxDecoration(
-        color: ticket.paid
-            ? const Color(0xFFF0FDF4)
-            : Colors.grey.shade50,
+        color: conf.bgColor,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(
-          color: ticket.paid
-              ? const Color(0xFFBBF7D0)
-              : Colors.grey.shade100,
-        ),
+        border: Border.all(color: conf.borderColor),
       ),
       child: Row(
         children: [
-          Icon(
-            ticket.paid
-                ? Icons.check_circle
-                : Icons.payments_outlined,
-            size: 18,
-            color: ticket.paid ? AppColors.success : Colors.grey.shade400,
-          ),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  ticket.paid ? 'مدفوع' : 'غير مدفوع',
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: ticket.paid
-                        ? AppColors.success
-                        : Colors.grey.shade600,
-                    fontSize: 12,
-                  ),
-                ),
-                if (ticket.paid && ticket.paymentMethod != null) ...[
-                  const SizedBox(height: AppSpacing.xxs),
-                  Text(
-                    ticket.paymentMethod!,
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.grey.shade500,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
+          Icon(conf.icon, size: 14, color: conf.color),
+          const SizedBox(width: AppSpacing.sm),
           Text(
-            total.toFormattedArabic(),
-            style: context.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: context.colorScheme.onSurface,
+            conf.label,
+            style: TextStyle(fontSize: 12, color: conf.color),
+          ),
+          if (ticket.status != DropoffStatus.delivered &&
+              ticket.status != DropoffStatus.cancelled) ...[
+            const Spacer(),
+            Text(
+              'الموعد المتوقع: ${_formatShortDate(ticket.estimatedReadyAt)}',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey.shade400,
+              ),
             ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  // ── Customer Card ──
+
+  Widget _buildCustomerCard(BuildContext context, DropoffTicket ticket) {
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        0,
+      ),
+      padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.cardInner,
+        border: Border.all(color: Colors.grey.shade100),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'العميل',
+            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.person_outline_rounded,
+                  size: 20,
+                  color: Colors.grey.shade400,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ticket.customerName,
+                      style: context.textTheme.titleSmall?.copyWith(
+                        color: context.colorScheme.onSurface,
+                      ),
+                    ),
+                    if (ticket.customerPhone != null) ...[
+                      const SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.phone_outlined,
+                            size: 10,
+                            color: Colors.grey.shade400,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            ticket.customerPhone!,
+                            textDirection: TextDirection.ltr,
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey.shade500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsetsDirectional.symmetric(
+                  horizontal: 12,
+                  vertical: AppSpacing.sm,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1A73E8),
+                  borderRadius: AppRadius.cardInner,
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.chat_bubble_outline_rounded,
+                      size: 13,
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 6),
+                    Text(
+                      'محادثة',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  // ── Timing Section ──
+  // ── Items Card ──
 
-  Widget _buildTimingSection(BuildContext context, DropoffTicket ticket) {
+  Widget _buildItemsCard(BuildContext context, DropoffTicket ticket) {
+    final total = Money(ticket.totalPrice);
+    final totalItems =
+        ticket.items.fold(0, (sum, item) => sum + item.quantity);
+
     return Container(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+      margin: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        0,
+      ),
+      padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.cardInner,
+        border: Border.all(color: Colors.grey.shade100),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'القطع ($totalItems قطعة)',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey.shade400,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '${total.toFormattedArabic()} د.أ',
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF111827),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          ...ticket.items.map((item) {
+            final price = Money(item.price * item.quantity);
+            return Container(
+              margin: const EdgeInsetsDirectional.only(
+                bottom: AppSpacing.md,
+              ),
+              padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade100),
+                borderRadius: AppRadius.cardInner,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Name + qty + price
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.inventory_2_outlined,
+                        size: 14,
+                        color: Colors.grey.shade400,
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Text(
+                              item.name,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF111827),
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              '×${item.quantity}',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.grey.shade400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        '${price.toFormattedArabic()} د.أ',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // Service + attribute chips
+                  const SizedBox(height: AppSpacing.sm),
+                  Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
+                    children: [
+                      _buildChip(item.service, Colors.grey.shade500),
+                      ...item.attributes.entries.map(
+                        (e) => _buildChip(e.value, Colors.grey.shade500),
+                      ),
+                    ],
+                  ),
+
+                  // Photo status bars
+                  const SizedBox(height: AppSpacing.sm),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: AppSpacing.md,
+                            vertical: AppSpacing.sm,
+                          ),
+                          decoration: BoxDecoration(
+                            color: item.photoBefore != null
+                                ? const Color(0xFFEFF6FF)
+                                : Colors.grey.shade50,
+                            borderRadius:
+                                BorderRadius.circular(AppRadius.md),
+                            border: Border.all(
+                              color: item.photoBefore != null
+                                  ? const Color(0xFFBFDBFE)
+                                  : Colors.grey.shade100,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.camera_alt_outlined,
+                                size: 11,
+                                color: item.photoBefore != null
+                                    ? const Color(0xFF1A73E8)
+                                    : Colors.grey.shade300,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                item.photoBefore != null
+                                    ? 'صورة قبل ✓'
+                                    : 'لا توجد صورة قبل',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: item.photoBefore != null
+                                      ? const Color(0xFF1A73E8)
+                                      : Colors.grey.shade300,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: AppSpacing.md,
+                            vertical: AppSpacing.sm,
+                          ),
+                          decoration: BoxDecoration(
+                            color: item.photoAfter != null
+                                ? const Color(0xFFF0FDF4)
+                                : Colors.grey.shade50,
+                            borderRadius:
+                                BorderRadius.circular(AppRadius.md),
+                            border: Border.all(
+                              color: item.photoAfter != null
+                                  ? const Color(0xFFBBF7D0)
+                                  : Colors.grey.shade100,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.image_outlined,
+                                size: 11,
+                                color: item.photoAfter != null
+                                    ? const Color(0xFF43A047)
+                                    : Colors.grey.shade300,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                item.photoAfter != null
+                                    ? 'صورة بعد ✓'
+                                    : 'لا توجد صورة بعد',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: item.photoAfter != null
+                                      ? const Color(0xFF43A047)
+                                      : Colors.grey.shade300,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // Item notes
+                  if (item.notes != null) ...[
+                    const SizedBox(height: AppSpacing.sm),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: AppSpacing.sm,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFF8E1),
+                        borderRadius:
+                            BorderRadius.circular(AppRadius.md),
+                      ),
+                      child: Text(
+                        item.notes!,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFFFF9800),
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildChip(String text, Color color) {
+    return Container(
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: 2,
+      ),
       decoration: BoxDecoration(
         color: Colors.grey.shade50,
+        borderRadius: AppRadius.pill,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 10, color: color),
+      ),
+    );
+  }
+
+  // ── Payment Card ──
+
+  Widget _buildPaymentCard(BuildContext context, DropoffTicket ticket) {
+    final total = Money(ticket.totalPrice);
+
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        0,
+      ),
+      padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
         borderRadius: AppRadius.cardInner,
+        border: Border.all(color: Colors.grey.shade100),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
       ),
       child: Column(
         children: [
-          _TimingRow(
-            label: 'وقت الاستلام',
-            value: _formatDateTime(ticket.droppedOffAt),
-            icon: Icons.inbox_rounded,
+          Row(
+            children: [
+              Text(
+                'الدفع',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey.shade400,
+                ),
+              ),
+              const Spacer(),
+              if (ticket.paid)
+                Container(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppSpacing.sm,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF0FDF4),
+                    borderRadius: AppRadius.pill,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.credit_card_rounded,
+                        size: 10,
+                        color: AppColors.success,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'مدفوع${ticket.paymentMethod != null ? ' (${ticket.paymentMethod})' : ''}',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: AppColors.success,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              else
+                Container(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppSpacing.sm,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade50,
+                    borderRadius: AppRadius.pill,
+                  ),
+                  child: Text(
+                    'لم يتم الدفع بعد',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                ),
+            ],
           ),
           const SizedBox(height: AppSpacing.sm),
-          _TimingRow(
-            label: 'الموعد المتوقع',
-            value: _formatDateTime(ticket.estimatedReadyAt),
-            icon: Icons.event_rounded,
+          Row(
+            children: [
+              Text(
+                'الإجمالي',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey.shade500,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '${total.toFormattedArabic()} د.أ',
+                style: context.textTheme.titleSmall?.copyWith(
+                  color: context.colorScheme.onSurface,
+                ),
+              ),
+            ],
           ),
-          if (ticket.startedAt != null) ...[
-            const SizedBox(height: AppSpacing.sm),
-            _TimingRow(
-              label: 'بدء المعالجة',
-              value: _formatDateTime(ticket.startedAt!),
-              icon: Icons.play_arrow_rounded,
+          if (ticket.notes != null) ...[
+            const SizedBox(height: AppSpacing.md),
+            Divider(height: 1, color: Colors.grey.shade100),
+            const SizedBox(height: AppSpacing.md),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: Text(
+                'ملاحظات',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey.shade400,
+                ),
+              ),
             ),
-          ],
-          if (ticket.completedAt != null) ...[
-            const SizedBox(height: AppSpacing.sm),
-            _TimingRow(
-              label: 'اكتمال المعالجة',
-              value: _formatDateTime(ticket.completedAt!),
-              icon: Icons.check_circle_outline_rounded,
-            ),
-          ],
-          if (ticket.pickedUpAt != null) ...[
-            const SizedBox(height: AppSpacing.sm),
-            _TimingRow(
-              label: 'وقت التسليم',
-              value: _formatDateTime(ticket.pickedUpAt!),
-              icon: Icons.done_all_rounded,
+            const SizedBox(height: 4),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: Text(
+                ticket.notes!,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey.shade700,
+                ),
+              ),
             ),
           ],
         ],
       ),
+    );
+  }
+
+  // ── Timing Card ──
+
+  Widget _buildTimingCard(BuildContext context, DropoffTicket ticket) {
+    final isOverdue = _isOverdue(ticket);
+
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        0,
+      ),
+      padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.cardInner,
+        border: Border.all(color: Colors.grey.shade100),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'المواعيد',
+            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          _buildTimingRow(
+            icon: Icons.schedule_rounded,
+            iconColor: Colors.grey.shade400,
+            label: 'استلام القطع',
+            value: _formatDateTime(ticket.droppedOffAt),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          _buildTimingRow(
+            icon: Icons.schedule_rounded,
+            iconColor: Colors.grey.shade400,
+            label: 'الموعد المتوقع',
+            value: _formatShortDate(ticket.estimatedReadyAt),
+            valueColor: isOverdue ? const Color(0xFFE53935) : null,
+            suffix: isOverdue ? ' (متأخر)' : null,
+          ),
+          if (ticket.startedAt != null) ...[
+            const SizedBox(height: AppSpacing.sm),
+            _buildTimingRow(
+              icon: Icons.autorenew_rounded,
+              iconColor: const Color(0xFFFF9800),
+              label: 'بدء المعالجة',
+              value: _formatDateTime(ticket.startedAt!),
+            ),
+          ],
+          if (ticket.completedAt != null) ...[
+            const SizedBox(height: AppSpacing.sm),
+            _buildTimingRow(
+              icon: Icons.check_circle_rounded,
+              iconColor: const Color(0xFF43A047),
+              label: 'اكتمل العمل',
+              value: _formatDateTime(ticket.completedAt!),
+            ),
+          ],
+          if (ticket.pickedUpAt != null) ...[
+            const SizedBox(height: AppSpacing.sm),
+            _buildTimingRow(
+              icon: Icons.local_shipping_rounded,
+              iconColor: Colors.grey.shade400,
+              label: 'تسليم العميل',
+              value: _formatDateTime(ticket.pickedUpAt!),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimingRow({
+    required IconData icon,
+    required Color iconColor,
+    required String label,
+    required String value,
+    Color? valueColor,
+    String? suffix,
+  }) {
+    return Row(
+      children: [
+        Icon(icon, size: 11, color: iconColor),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+        ),
+        const Spacer(),
+        Text(
+          '$value${suffix ?? ''}',
+          style: TextStyle(
+            fontSize: 11,
+            color: valueColor ?? Colors.grey.shade700,
+          ),
+        ),
+      ],
     );
   }
 
@@ -561,38 +1018,65 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
     final entries = _activityEntries;
     if (entries.isEmpty) return const SizedBox.shrink();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              'سجل النشاط',
-              style: context.textTheme.bodySmall?.copyWith(
-                color: Colors.grey.shade500,
-                fontSize: 12,
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        0,
+      ),
+      padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.cardInner,
+        border: Border.all(color: Colors.grey.shade100),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.history_rounded,
+                size: 10,
+                color: Colors.grey.shade400,
               ),
-            ),
-            const Spacer(),
-            if (!_showFullLog)
-              GestureDetector(
-                onTap: () => setState(() => _showFullLog = true),
-                child: Text(
-                  'عرض الكل',
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: AppColors.primary,
-                    fontSize: 10,
-                  ),
+              const SizedBox(width: 4),
+              Text(
+                'سجل النشاط (${entries.length} إجراء)',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey.shade400,
                 ),
               ),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        TicketActivityLog(
-          entries: entries,
-          isPreview: !_showFullLog,
-        ),
-      ],
+              const Spacer(),
+              if (!_showFullLog)
+                GestureDetector(
+                  onTap: () => setState(() => _showFullLog = true),
+                  child: const Text(
+                    'عرض الكل',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Color(0xFF1A73E8),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          TicketActivityLog(
+            entries: entries,
+            isPreview: !_showFullLog,
+          ),
+        ],
+      ),
     );
   }
 
@@ -604,11 +1088,17 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       return const SizedBox.shrink();
     }
 
-    final (label, color) = switch (ticket.status) {
-      DropoffStatus.received => ('بدء المعالجة', AppColors.primary),
-      DropoffStatus.processing => ('جاهز للاستلام', AppColors.success),
-      DropoffStatus.ready => ('تم التسليم', const Color(0xFF616161)),
-      _ => ('', AppColors.primary),
+    final action = DropoffStatusConfig.nextAction[ticket.status];
+    if (action == null) return const SizedBox.shrink();
+
+    final isReady = ticket.status == DropoffStatus.ready;
+    final buttonColor =
+        isReady ? const Color(0xFF43A047) : const Color(0xFF1A73E8);
+    final buttonIcon = switch (ticket.status) {
+      DropoffStatus.received => Icons.autorenew_rounded,
+      DropoffStatus.processing => Icons.check_circle_rounded,
+      DropoffStatus.ready => Icons.local_shipping_rounded,
+      _ => Icons.arrow_forward_rounded,
     };
 
     return Container(
@@ -627,42 +1117,64 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
         child: Row(
           children: [
             // Chat button
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade200),
-                borderRadius: AppRadius.cardInner,
-              ),
-              child: Icon(
-                Icons.chat_bubble_outline_rounded,
-                size: 18,
-                color: Colors.grey.shade500,
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                padding: const EdgeInsetsDirectional.symmetric(
+                  horizontal: AppSpacing.lg,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: AppRadius.cardInner,
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.chat_bubble_outline_rounded,
+                      size: 14,
+                      color: Colors.grey.shade700,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'محادثة',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade700,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(width: AppSpacing.md),
 
             // Advance button
             Expanded(
-              child: SizedBox(
-                height: 44,
-                child: ElevatedButton(
-                  onPressed: widget.onAdvance != null
-                      ? () => widget.onAdvance!(ticket.id)
-                      : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: color,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.cardInner,
-                    ),
+              child: GestureDetector(
+                onTap: widget.onAdvance != null
+                    ? () => widget.onAdvance!(ticket.id)
+                    : null,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                    color: buttonColor,
+                    borderRadius: AppRadius.cardInner,
                   ),
-                  child: Text(
-                    label,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(buttonIcon, size: 14, color: Colors.white),
+                      const SizedBox(width: 6),
+                      Text(
+                        action.label,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -675,58 +1187,25 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
 
   // ── Helpers ──
 
-  Color _statusColor(DropoffStatus status) => switch (status) {
-        DropoffStatus.received => AppColors.secondary,
-        DropoffStatus.processing => AppColors.primary,
-        DropoffStatus.ready => AppColors.success,
-        DropoffStatus.delivered => const Color(0xFF616161),
-        DropoffStatus.cancelled => AppColors.error,
-      };
+  bool _isOverdue(DropoffTicket ticket) {
+    if (ticket.status == DropoffStatus.delivered ||
+        ticket.status == DropoffStatus.cancelled) {
+      return false;
+    }
+    final ready = DateTime.tryParse(ticket.estimatedReadyAt);
+    if (ready == null) return false;
+    return DateTime.now().isAfter(ready);
+  }
 
   String _formatDateTime(String timestamp) {
     final dt = DateTime.tryParse(timestamp);
     if (dt == null) return timestamp;
     return DateFormat('yyyy/MM/dd h:mm a', 'ar').format(dt);
   }
-}
 
-// ═══════════════════════════════════════════════════════════════
-// Timing Row
-// ═══════════════════════════════════════════════════════════════
-
-class _TimingRow extends StatelessWidget {
-  final String label;
-  final String value;
-  final IconData icon;
-
-  const _TimingRow({
-    required this.label,
-    required this.value,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(icon, size: 14, color: Colors.grey.shade400),
-        const SizedBox(width: AppSpacing.sm),
-        Text(
-          label,
-          style: context.textTheme.labelSmall?.copyWith(
-            color: Colors.grey.shade500,
-            fontSize: 10,
-          ),
-        ),
-        const Spacer(),
-        Text(
-          value,
-          style: context.textTheme.bodySmall?.copyWith(
-            color: context.colorScheme.onSurface,
-            fontSize: 12,
-          ),
-        ),
-      ],
-    );
+  String _formatShortDate(String timestamp) {
+    final dt = DateTime.tryParse(timestamp);
+    if (dt == null) return timestamp;
+    return DateFormat('yyyy-MM-dd').format(dt);
   }
 }

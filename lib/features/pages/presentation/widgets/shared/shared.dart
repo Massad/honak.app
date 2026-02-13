@@ -1,5 +1,6 @@
 export 'activity_tab.dart';
 export 'catalog_filter_sheet.dart';
+export 'contact_prompt_sheet.dart';
 export 'empty_search_state.dart';
 export 'follow_button.dart';
 export 'follow_notification_sheet.dart';

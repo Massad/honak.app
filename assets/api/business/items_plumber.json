@@ -42,7 +42,38 @@
       "sort_order": 3,
       "page_id": "ahmad-plumbing",
       "properties": {}
+    },
+    {
+      "id": "biz_item_p04",
+      "name": "تجديد حمامات",
+      "name_en": "Bathroom Renovation",
+      "description": "تجديد كامل — بلاط، أدوات صحية، شطافات",
+      "price_text": "يبدأ من ٥ د.أ",
+      "price_range": "500-2000",
+      "images": ["https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_reno",
+      "category_name": "أعمال كبيرة",
+      "status": "active",
+      "sort_order": 4,
+      "page_id": "ahmad-plumbing",
+      "properties": {}
+    },
+    {
+      "id": "biz_item_p05",
+      "name": "طوارئ ٢٤/٧",
+      "name_en": "24/7 Emergency",
+      "description": "خدمة طوارئ على مدار الساعة — تسريبات، انسداد، أعطال",
+      "price_text": "يبدأ من ٢٠ د.أ",
+      "price_range": "2000+",
+      "has_surcharge": true,
+      "images": ["https://images.unsplash.com/photo-1731694411560-050e5b91e943?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_emergency",
+      "category_name": "طوارئ",
+      "status": "active",
+      "sort_order": 5,
+      "page_id": "ahmad-plumbing",
+      "properties": {}
     }
   ],
-  "meta": {"total": 3, "has_more": false}
+  "meta": {"total": 5, "has_more": false}
 }

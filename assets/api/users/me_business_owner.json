@@ -83,6 +83,46 @@
         "business_type_id": "oil_change",
         "is_verified": true,
         "role": "owner"
+      },
+      {
+        "id": "mini-market-ahmad",
+        "name": "ميني ماركت أحمد",
+        "slug": "mini-market-ahmad",
+        "avatar_url": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "ميني ماركت",
+        "business_type_id": "mini_market",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "alkheir-butcher",
+        "name": "ملحمة الخير",
+        "slug": "alkheir-butcher",
+        "avatar_url": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "ملحمة",
+        "business_type_id": "butcher",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "abu-mahmoud-veggies",
+        "name": "خضار أبو محمود",
+        "slug": "abu-mahmoud-veggies",
+        "avatar_url": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "خضار وفواكه",
+        "business_type_id": "produce",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "smart-fix-mobiles",
+        "name": "سمارت فيكس",
+        "slug": "smart-fix-mobiles",
+        "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "صيانة موبايلات",
+        "business_type_id": "mobile_repair",
+        "is_verified": true,
+        "role": "owner"
       }
     ]
   }

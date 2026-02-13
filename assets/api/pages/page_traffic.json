@@ -1,0 +1,91 @@
+{
+  "success": true,
+  "data": {
+    "id": "traffic-department",
+    "owner_id": "usr_gov_02",
+    "business_type_id": "government",
+    "business_type_name": "جهة حكومية",
+    "category_name": "جهة حكومية",
+    "explore_category": "cat_government",
+    "name": "إدارة السير",
+    "name_en": "Traffic Department",
+    "slug": "traffic-department",
+    "handle": "traffic-department",
+    "store_type": "physical",
+    "archetype": "follow_only",
+    "description": "الحساب الرسمي لإدارة السير. تحديثات الطرق، الإغلاقات، التحويلات، والسلامة المرورية.",
+    "avatar_url": "https://images.unsplash.com/photo-1607596797957-74f502d89d1c?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=80",
+    "phone": "+96265300444",
+    "location": {
+      "lat": 31.955,
+      "lng": 35.930,
+      "label": "عمّان، الأردن",
+      "area": "وسط عمّان",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "15:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": false, "open": null, "close": null}
+    },
+    "operating_hours": "الأحد - الخميس: ٨:٠٠ ص — ٣:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "platform_managed",
+    "followers_count": 45000,
+    "posts_count": 150,
+    "is_following": false,
+    "trust_score": 98,
+    "trust_metrics": [
+      {"label": "حساب رسمي", "value": "✓", "icon": "verified"},
+      {"label": "تنبيهات نشطة", "value": "يومياً", "icon": "notifications"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["phone"],
+    "created_at": 1704000000,
+    "engagement_level": "visibility",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_traffic1", "image_url": "https://picsum.photos/seed/trafficstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_traffic2", "image_url": "https://picsum.photos/seed/trafficstory2/400/700", "duration": 5, "created_at": 1707870000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-05-25", "reason": "عيد الاستقلال"}
+    ],
+    "alerts": [
+      {
+        "id": "alert_t01",
+        "title": "إغلاق نفق الصحافة للصيانة",
+        "body": "سيتم إغلاق نفق الصحافة يوم الجمعة من الساعة ١٠ مساءً حتى ٦ صباح السبت لأعمال صيانة الإنارة. يرجى استخدام الطرق البديلة عبر دوار الداخلية.",
+        "priority": "urgent",
+        "areas": ["الشميساني", "الصحافة"]
+      },
+      {
+        "id": "alert_t02",
+        "title": "تحويلات مرورية — مشروع الباص السريع",
+        "body": "تحويلات مرورية على شارع الاستقلال بسبب أعمال مشروع الباص السريع. التحويلة عبر شارع الملك حسين. مدة العمل ٣ أسابيع.",
+        "priority": "important",
+        "areas": ["وسط البلد", "المحطة"]
+      },
+      {
+        "id": "alert_t03",
+        "title": "كثافة مرورية متوقعة — مباراة الفيصلي",
+        "body": "كثافة مرورية متوقعة محيط ستاد عمّان الدولي يوم الجمعة من الساعة ٤ عصراً. ننصح بالتبكير واستخدام شارع الأردن.",
+        "priority": "info",
+        "areas": ["الحسين", "رأس العين"]
+      }
+    ],
+    "about_extended": "إدارة السير الأردنية تعمل على تنظيم حركة المرور وضمان السلامة على الطرق. نقدم تحديثات فورية حول الإغلاقات والتحويلات والحوادث وأعمال الصيانة في جميع أنحاء المملكة.",
+    "services_links": [
+      {"label": "الاستعلام عن المخالفات", "type": "external"},
+      {"label": "تجديد رخصة القيادة", "type": "external"},
+      {"label": "الإبلاغ عن حادث", "type": "message"}
+    ]
+  }
+}

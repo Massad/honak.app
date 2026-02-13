@@ -63,6 +63,26 @@
         "business_type_id": "salon",
         "is_verified": false,
         "role": "owner"
+      },
+      {
+        "id": "golden-oven-bakery",
+        "name": "مخبز الفرن الذهبي",
+        "slug": "golden-oven-bakery",
+        "avatar_url": "https://picsum.photos/seed/golden-oven/200",
+        "business_type_name": "مخبز",
+        "business_type_id": "bakery",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "hayat-pharmacy",
+        "name": "صيدلية الحياة",
+        "slug": "hayat-pharmacy",
+        "avatar_url": "https://picsum.photos/seed/hayat-pharmacy/200",
+        "business_type_name": "صيدلية",
+        "business_type_id": "pharmacy",
+        "is_verified": true,
+        "role": "owner"
       }
     ]
   }

@@ -1,0 +1,80 @@
+{
+  "success": true,
+  "data": {
+    "id": "sahha-pharmacy",
+    "owner_id": null,
+    "business_type_id": "pharmacy",
+    "business_type_name": "صيدلية",
+    "category_name": "صحة وطب",
+    "explore_category": "cat_health",
+    "name": "صيدلية صحة",
+    "name_en": "Sahha Pharmacy",
+    "slug": "sahha-pharmacy",
+    "handle": "sahha-pharmacy",
+    "store_type": "physical",
+    "archetype": "catalog_order",
+    "description": "صيدلية شاملة. أدوية، مكملات غذائية، مستحضرات عناية. توصيل متاح.",
+    "avatar_url": "https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790100013",
+    "location": {
+      "lat": 31.963,
+      "lng": 35.856,
+      "label": "خلدا، عمّان",
+      "area": "خلدا",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "23:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "23:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "23:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "23:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "23:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "saturday": {"enabled": true, "open": "08:00", "close": "23:00"}
+    },
+    "operating_hours": "يومياً: ٨:٠٠ ص — ١١:٠٠ م\nالجمعة: ١٠:٠٠ ص — ١١:٠٠ م",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": false,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "unclaimed",
+    "followers_count": 0,
+    "items_count": 0,
+    "posts_count": 0,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "23:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 0,
+    "trust_metrics": [],
+    "delivery_available": true,
+    "pickup_available": true,
+    "delivery_fee_cents": 100,
+    "estimated_delivery_minutes": 40,
+    "payment_methods": ["نقداً", "كليك: SahhaPharmacy"],
+    "cliq_alias": "SahhaPharmacy",
+    "coverage_zones": ["خلدا", "تلاع العلي", "الصويفية", "دابوق"],
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": false,
+    "catalog_strategy": "full_catalog",
+    "carry_categories": [],
+    "stories": [],
+    "gallery_images": [],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "غرب عمّان", "neighbourhoods": ["خلدا", "تلاع العلي", "الصويفية", "دابوق"]}
+        ]
+      }
+    ]
+  }
+}

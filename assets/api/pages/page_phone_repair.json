@@ -12,7 +12,7 @@
     "slug": "smart-fix-phones",
     "handle": "smart-fix-phones",
     "store_type": "physical",
-    "archetype": "dropoff",
+    "archetype": "service_booking",
     "description": "مركز صيانة موبايلات متخصص. قطع غيار أصلية وضمان على جميع الإصلاحات.",
     "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
     "cover_url": "https://images.unsplash.com/photo-1580910051074-3eb694886571?auto=format&fit=crop&w=800&q=80",

@@ -17,14 +17,38 @@
       "id": "biz_gas_02",
       "name": "اسطوانة غاز صغيرة",
       "description": "اسطوانة غاز 6 كيلو",
-      "price_cents": 400,
+      "price_cents": 350,
       "images": ["https://picsum.photos/seed/gas2/400/300"],
       "category_id": null,
       "category_name": null,
       "status": "active",
       "sort_order": 1,
       "properties": {}
+    },
+    {
+      "id": "biz_gas_03",
+      "name": "منظم غاز (أمان)",
+      "description": "منظم غاز بصمام أمان — حماية من التسرب",
+      "price_cents": 1200,
+      "images": ["https://picsum.photos/seed/gasreg/400/300"],
+      "category_id": "cat_accessories",
+      "category_name": "إكسسوارات",
+      "status": "active",
+      "sort_order": 2,
+      "properties": {}
+    },
+    {
+      "id": "biz_gas_04",
+      "name": "خرطوم غاز (1.5 متر)",
+      "description": "خرطوم غاز معتمد — طول ١.٥ متر",
+      "price_cents": 500,
+      "images": ["https://picsum.photos/seed/gashose/400/300"],
+      "category_id": "cat_accessories",
+      "category_name": "إكسسوارات",
+      "status": "active",
+      "sort_order": 3,
+      "properties": {}
     }
   ],
-  "meta": {"total": 2, "has_more": false}
+  "meta": {"total": 4, "has_more": false}
 }

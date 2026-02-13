@@ -1,0 +1,103 @@
+{
+  "success": true,
+  "data": {
+    "id": "hayat-pharmacy",
+    "owner_id": "usr_001",
+    "business_type_id": "pharmacy",
+    "business_type_name": "صيدلية",
+    "category_name": "صيدلية",
+    "explore_category": "cat_health",
+    "name": "صيدلية الحياة",
+    "name_en": "Hayat Pharmacy",
+    "slug": "hayat-pharmacy",
+    "handle": "hayat-pharmacy",
+    "store_type": "physical",
+    "archetype": "catalog_order",
+    "description": "صيدلية متكاملة — مكملات غذائية، عناية بالبشرة، أجهزة طبية، وتوصيل سريع للصويفية والمناطق المجاورة.",
+    "avatar_url": "https://picsum.photos/seed/hayat-pharmacy/200",
+    "cover_url": "https://picsum.photos/seed/hayat-pharm-cover/800/400",
+    "phone": "+96265857700",
+    "location": {
+      "lat": 31.9580,
+      "lng": 35.8670,
+      "label": "الصويفية، عمّان",
+      "area": "الصويفية",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "friday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "saturday": {"enabled": true, "open": "08:00", "close": "00:00"}
+    },
+    "operating_hours": "يومياً: ٨:٠٠ ص – ١٢:٠٠ ص",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 3100,
+    "items_count": 15,
+    "posts_count": 28,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "00:00",
+      "open_days": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    },
+    "trust_score": 88,
+    "trust_metrics": [
+      {"label": "طلبات أسبوعياً", "value": "٢٤٠", "icon": "shopping_bag"},
+      {"label": "الأكثر طلباً", "value": "فيتامين D3", "icon": "star"},
+      {"label": "معدل التوصيل", "value": "٣٠ دقيقة", "icon": "schedule"}
+    ],
+    "delivery_available": true,
+    "pickup_available": true,
+    "delivery_fee_cents": 50,
+    "estimated_delivery_minutes": 30,
+    "payment_methods": ["نقداً", "كليك: HayatPharm", "فيزا/ماستركارد"],
+    "cliq_alias": "HayatPharm",
+    "coverage_zones": ["الصويفية", "الشميساني", "عبدون", "دير غبار"],
+    "member_since": "2019",
+    "team_members_count": 4,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1560000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "catalog_strategy": "full_catalog",
+    "carry_categories": [],
+    "stories": [
+      {"id": "s_pharm1", "image_url": "https://picsum.photos/seed/hayatpharmstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_pharm2", "image_url": "https://picsum.photos/seed/hayatpharmstory2/400/700", "duration": 5, "created_at": 1707860000},
+      {"id": "s_pharm3", "image_url": "https://picsum.photos/seed/hayatpharmstory3/400/700", "duration": 5, "created_at": 1707900000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "external_links": [
+      {"platform": "instagram", "label": "@hayat.pharmacy", "url": "https://instagram.com/hayat.pharmacy"}
+    ],
+    "specials": ["خصم ١٠٪ على المكملات الغذائية لأول طلب", "توصيل مجاني للطلبات فوق ١٥ دينار"],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "الصويفية", "neighbourhoods": ["الصويفية", "خلدا"]},
+          {"name": "الشميساني", "neighbourhoods": ["الشميساني", "العبدلي"]},
+          {"name": "عبدون", "neighbourhoods": ["عبدون الشمالي", "عبدون الجنوبي"]},
+          {"name": "دير غبار", "neighbourhoods": ["دير غبار", "الرابية"]}
+        ]
+      }
+    ],
+    "return_policy": {
+      "accepts_returns": true,
+      "window_days": 3,
+      "type": "exchange",
+      "cost": "مجاني",
+      "conditions_ar": ["المنتج غير مفتوح", "بالتغليف الأصلي", "خلال ٣ أيام من الاستلام"]
+    }
+  }
+}

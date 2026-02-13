@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "data": [
+    {"id": "biz_item_cw01", "name": "غسيل خارجي", "name_en": "Exterior Wash", "description": "غسيل خارجي شامل مع تجفيف", "price_cents": 300, "images": ["https://images.unsplash.com/photo-1680533749371-59c49b31fd74?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_wash", "category_name": "غسيل", "status": "active", "sort_order": 1, "page_id": "sparkle-car-wash", "properties": {}},
+    {"id": "biz_item_cw02", "name": "غسيل داخلي وخارجي", "name_en": "Full Wash", "description": "غسيل كامل داخلي وخارجي مع تلميع", "price_cents": 500, "images": ["https://images.unsplash.com/photo-1680533749371-59c49b31fd74?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_wash", "category_name": "غسيل", "status": "active", "sort_order": 2, "page_id": "sparkle-car-wash", "properties": {}},
+    {"id": "biz_item_cw03", "name": "تفصيلي كامل", "name_en": "Full Detail", "description": "تنظيف عميق داخلي وخارجي مع تلميع وحماية", "price_cents": 1200, "images": ["https://images.unsplash.com/photo-1680533749371-59c49b31fd74?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_detail", "category_name": "تفصيلي", "status": "active", "sort_order": 3, "page_id": "sparkle-car-wash", "properties": {}},
+    {"id": "biz_item_cw04", "name": "غسيل محرك", "name_en": "Engine Wash", "description": "تنظيف وغسيل المحرك مع حماية", "price_cents": 700, "images": ["https://images.unsplash.com/photo-1680533749371-59c49b31fd74?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_engine", "category_name": "محرك", "status": "active", "sort_order": 4, "page_id": "sparkle-car-wash", "properties": {}}
+  ],
+  "meta": {"total": 4, "has_more": false}
+}

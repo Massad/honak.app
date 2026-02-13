@@ -545,30 +545,30 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
       };
 
   Color _statusColor(DropoffStatus status) => switch (status) {
-        DropoffStatus.received => AppColors.secondary,
-        DropoffStatus.processing => AppColors.primary,
-        DropoffStatus.ready => AppColors.success,
-        DropoffStatus.delivered => const Color(0xFF616161),
-        DropoffStatus.cancelled => AppColors.error,
+        DropoffStatus.received => const Color(0xFF1A73E8),
+        DropoffStatus.processing => const Color(0xFFFF9800),
+        DropoffStatus.ready => const Color(0xFF43A047),
+        DropoffStatus.delivered => const Color(0xFF9CA3AF),
+        DropoffStatus.cancelled => const Color(0xFFE53935),
       };
 
   Color _statusBgColor(DropoffStatus status) => switch (status) {
-        DropoffStatus.received => const Color(0xFFFFF8E1),
-        DropoffStatus.processing => const Color(0xFFEFF6FF),
+        DropoffStatus.received => const Color(0xFFEFF6FF),
+        DropoffStatus.processing => const Color(0xFFFFF8E1),
         DropoffStatus.ready => const Color(0xFFF0FDF4),
         _ => Colors.grey.shade50,
       };
 
   Color _statusTextColor(DropoffStatus status) => switch (status) {
-        DropoffStatus.received => AppColors.secondary,
-        DropoffStatus.processing => AppColors.primary,
-        DropoffStatus.ready => AppColors.success,
+        DropoffStatus.received => const Color(0xFF1A73E8),
+        DropoffStatus.processing => const Color(0xFFFF9800),
+        DropoffStatus.ready => const Color(0xFF43A047),
         _ => Colors.grey.shade500,
       };
 
   Color _statusBorderColor(DropoffStatus status) => switch (status) {
-        DropoffStatus.received => const Color(0xFFFFE082),
-        DropoffStatus.processing => const Color(0xFFBFDBFE),
+        DropoffStatus.received => const Color(0xFFBFDBFE),
+        DropoffStatus.processing => const Color(0xFFFFE082),
         DropoffStatus.ready => const Color(0xFFBBF7D0),
         _ => Colors.grey.shade100,
       };
@@ -593,23 +593,23 @@ class _StatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final (color, bgColor) = switch (status) {
       DropoffStatus.received => (
-        AppColors.secondary,
-        const Color(0xFFFFF8E1),
-      ),
-      DropoffStatus.processing => (
-        AppColors.primary,
+        const Color(0xFF1A73E8),
         const Color(0xFFEFF6FF),
       ),
+      DropoffStatus.processing => (
+        const Color(0xFFFF9800),
+        const Color(0xFFFFF8E1),
+      ),
       DropoffStatus.ready => (
-        AppColors.success,
+        const Color(0xFF43A047),
         const Color(0xFFF0FDF4),
       ),
       DropoffStatus.delivered => (
-        Colors.grey.shade500,
-        Colors.grey.shade100,
+        const Color(0xFF9CA3AF),
+        const Color(0xFFF9FAFB),
       ),
       DropoffStatus.cancelled => (
-        AppColors.error,
+        const Color(0xFFE53935),
         const Color(0xFFFEF2F2),
       ),
     };

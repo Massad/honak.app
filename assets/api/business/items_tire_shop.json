@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": [
+    {"id": "biz_item_ts01", "name": "تبديل إطار", "name_en": "Tire Change", "description": "15 دقيقة", "price_cents": 300, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_change", "category_name": "تبديل", "status": "active", "sort_order": 1, "page_id": "aljazeera-tires", "properties": {"duration": "15 دقيقة"}},
+    {"id": "biz_item_ts02", "name": "تبديل 4 إطارات", "name_en": "4 Tire Change", "description": "30 دقيقة", "price_cents": 1000, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_change", "category_name": "تبديل", "status": "active", "sort_order": 2, "page_id": "aljazeera-tires", "properties": {"duration": "30 دقيقة"}},
+    {"id": "biz_item_ts03", "name": "تصليح بنشر", "name_en": "Puncture Repair", "description": "10 دقائق", "price_cents": 200, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_repair", "category_name": "إصلاح", "status": "active", "sort_order": 3, "page_id": "aljazeera-tires", "properties": {"duration": "10 دقائق"}},
+    {"id": "biz_item_ts04", "name": "ضبط زوايا", "name_en": "Wheel Alignment", "description": "30 دقيقة", "price_cents": 1500, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_service", "category_name": "خدمات", "status": "active", "sort_order": 4, "page_id": "aljazeera-tires", "properties": {"duration": "30 دقيقة"}},
+    {"id": "biz_item_ts05", "name": "تعبئة نيتروجين", "name_en": "Nitrogen Fill", "description": "10 دقائق", "price_cents": 400, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_service", "category_name": "خدمات", "status": "active", "sort_order": 5, "page_id": "aljazeera-tires", "properties": {"duration": "10 دقائق"}}
+  ],
+  "meta": {"total": 5, "has_more": false}
+}

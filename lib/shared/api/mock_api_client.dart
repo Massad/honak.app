@@ -86,6 +86,7 @@ class MockApiClient implements ApiClient {
     'abu-ahmad-water': 'pages/page_water',
     'abu-sulaiman-gas': 'pages/page_gas',
     'salon-rania': 'pages/page_services',
+    'beauty-lounge': 'pages/page_services',
     'ahmad-plumbing': 'pages/page_plumber',
     'sara-photography': 'pages/page_photographer',
     'royal-events': 'pages/page_events',
@@ -94,7 +95,13 @@ class MockApiClient implements ApiClient {
     'villa-dead-sea': 'pages/page_villa',
     'hara-coffee': 'pages/page_grocery',
     'amman-municipality': 'pages/page_municipality',
-    'dukkaneh-store': 'pages/page_clothing',
+    'dukkaneh-store': 'pages/page_online_store',
+    'maktabet-alnoor': 'pages/page_bookstore',
+    'traffic-department': 'pages/page_traffic',
+    'city-mall': 'pages/page_directory',
+    'golden-oven-bakery': 'pages/page_bakery',
+    'hayat-pharmacy': 'pages/page_pharmacy',
+    'tazej-juice': 'pages/page_juice_bar',
     'abukhaled-garage': 'pages/page_garage',
     'power-fitness': 'pages/page_gym',
     'alkaram-rest': 'pages/page_alkaram',
@@ -106,6 +113,36 @@ class MockApiClient implements ApiClient {
     'precision-watches': 'pages/page_watch_repair',
     'quick-lube-amman': 'pages/page_oil_change',
     'aljazeera-tires': 'pages/page_tire_shop',
+    'mini-market-ahmad': 'pages/page_mini_market',
+    'alkheir-butcher': 'pages/page_butcher',
+    'abu-mahmoud-veggies': 'pages/page_produce',
+    'smart-fix-mobiles': 'pages/page_mobile_repair',
+    'furna-alhara': 'pages/page_bakery_hara',
+    'fresh-juice-bar': 'pages/page_juice_fresh',
+    'atr-oud': 'pages/page_perfume',
+    'tiny-tots': 'pages/page_kids_store',
+    'farah-bridal': 'pages/page_bridal',
+    'gadget-zone': 'pages/page_electronics',
+    // Unclaimed — beauty
+    'barber-fadi': 'pages/page_barber',
+    'serenity-spa': 'pages/page_spa',
+    'glamour-cosmetics': 'pages/page_cosmetics',
+    // Unclaimed — stays
+    'grand-palace-hotel': 'pages/page_hotel',
+    'wadi-camp': 'pages/page_camping',
+    // Unclaimed — government
+    'moe-jordan': 'pages/page_moe',
+    'social-development': 'pages/page_social_dev',
+    // Unclaimed — home services
+    'kahraba-express': 'pages/page_electrician',
+    'cool-ac': 'pages/page_ac_repair',
+    'no-bugs': 'pages/page_pest_control',
+    // Unclaimed — health
+    'sahha-pharmacy': 'pages/page_pharmacy_sahha',
+    'physio-care': 'pages/page_physiotherapy',
+    'vet-amman': 'pages/page_vet',
+    // Unclaimed — food
+    'layal-catering': 'pages/page_catering',
   };
 
   /// Maps page IDs to their items fixture files.
@@ -114,11 +151,31 @@ class MockApiClient implements ApiClient {
     'abu-ahmad-water': 'products/items_water',
     'abu-sulaiman-gas': 'products/items_gas',
     'salon-rania': 'products/items_services',
+    'beauty-lounge': 'products/items_services',
     'ahmad-plumbing': 'products/items_plumber',
     'nour-fashion': 'products/items_clothing',
     'dr-khaled-clinic': 'products/items_doctor',
     'hara-coffee': 'products/items_grocery',
+    'dukkaneh-store': 'products/items_online_store',
+    'maktabet-alnoor': 'products/items_bookstore',
+    'golden-oven-bakery': 'products/items_bakery',
+    'hayat-pharmacy': 'products/items_pharmacy',
+    'tazej-juice': 'products/items_juice_bar',
     'sparkle-car-wash': 'products/items_car_wash',
+    'clean-express-laundry': 'products/items_laundry',
+    'quick-lube-amman': 'products/items_oil_change',
+    'alnajjar-tailor': 'products/items_tailor',
+    'alaseel-shoe-repair': 'products/items_shoe_repair',
+    'smart-fix-phones': 'products/items_phone_repair',
+    'precision-watches': 'products/items_watch_repair',
+    'aljazeera-tires': 'products/items_tire_shop',
+    'villa-dead-sea': 'products/items_villa',
+    'royal-events': 'products/items_events',
+    'sara-photography': 'products/items_photography',
+    'mini-market-ahmad': 'products/items_mini_market',
+    'alkheir-butcher': 'products/items_butcher',
+    'abu-mahmoud-veggies': 'products/items_produce',
+    'smart-fix-mobiles': 'products/items_mobile_repair',
   };
 
   /// Maps page IDs to their business items fixture files.
@@ -126,15 +183,31 @@ class MockApiClient implements ApiClient {
     'abu-ahmad-water': 'business/items_water',
     'beit-sitti': 'business/items_restaurant',
     'salon-rania': 'business/items_salon',
+    'beauty-lounge': 'business/items_salon',
     'ahmad-plumbing': 'business/items_plumber',
     'hara-coffee': 'business/items_cafe',
     'dr-khaled-clinic': 'business/items_clinic',
     'nour-fashion': 'business/items_clothing',
-    'dukkaneh-store': 'business/items_clothing',
+    'dukkaneh-store': 'business/items_online_store',
+    'maktabet-alnoor': 'business/items_bookstore',
+    'golden-oven-bakery': 'business/items_bakery',
+    'hayat-pharmacy': 'business/items_pharmacy',
+    'tazej-juice': 'business/items_juice_bar',
     'royal-events': 'business/items_venue',
     'villa-dead-sea': 'business/items_villa',
     'abu-sulaiman-gas': 'business/items_gas',
-    'sparkle-car-wash': 'products/items_car_wash',
+    'sparkle-car-wash': 'business/items_car_wash',
+    'clean-express-laundry': 'business/items_laundry',
+    'quick-lube-amman': 'business/items_oil_change',
+    'alnajjar-tailor': 'business/items_tailor',
+    'alaseel-shoe-repair': 'business/items_shoe_repair',
+    'smart-fix-phones': 'business/items_phone_repair',
+    'precision-watches': 'business/items_watch_repair',
+    'aljazeera-tires': 'business/items_tire_shop',
+    'mini-market-ahmad': 'business/items_mini_market',
+    'alkheir-butcher': 'business/items_butcher',
+    'abu-mahmoud-veggies': 'business/items_produce',
+    'smart-fix-mobiles': 'business/items_mobile_repair',
   };
 
   /// Maps page IDs to their dashboard fixture files.
@@ -156,6 +229,9 @@ class MockApiClient implements ApiClient {
     'maktabet-alnoor': 'business/dashboard/bookstore',
     'amman-municipality': 'business/dashboard/government',
     'traffic-department': 'business/dashboard/government',
+    'golden-oven-bakery': 'business/dashboard/bakery',
+    'hayat-pharmacy': 'business/dashboard/pharmacy',
+    'tazej-juice': 'business/dashboard/juice_bar',
     'sparkle-car-wash': 'business/dashboard/car_wash',
     'clean-express-laundry': 'business/dashboard/laundry',
     'alnajjar-tailor': 'business/dashboard/tailor',
@@ -164,6 +240,10 @@ class MockApiClient implements ApiClient {
     'precision-watches': 'business/dashboard/watch_repair',
     'quick-lube-amman': 'business/dashboard/oil_change',
     'aljazeera-tires': 'business/dashboard/tire_shop',
+    'mini-market-ahmad': 'business/dashboard/mini_market',
+    'alkheir-butcher': 'business/dashboard/butcher',
+    'abu-mahmoud-veggies': 'business/dashboard/produce',
+    'smart-fix-mobiles': 'business/dashboard/mobile_repair',
   };
 
   /// Maps page IDs to their business categories fixture files.
@@ -442,7 +522,9 @@ class MockApiClient implements ApiClient {
         }
 
         return ApiResponse(
-          data: fromJson != null ? fromJson(data) : data as T?,
+          data: data != null && fromJson != null
+              ? fromJson(data)
+              : data as T?,
           meta: meta,
         );
       }

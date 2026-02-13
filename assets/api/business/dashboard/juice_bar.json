@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 35,
+      "new_followers": 4,
+      "page_views": 180,
+      "today_revenue": 6800
+    },
+    "today_revenue": {
+      "total": 6800,
+      "completed_count": 30,
+      "items": [
+        {"service": "عصير برتقال × 15", "amount": 1500, "time": "08:30"},
+        {"service": "كوكتيل أفوكادو × 8", "amount": 1200, "time": "09:00"},
+        {"service": "ميلك شيك لوتس × 6", "amount": 1500, "time": "10:00"},
+        {"service": "سموذي منجا × 10", "amount": 2000, "time": "11:00"},
+        {"service": "عصير ليمون بالنعنع × 8", "amount": 600, "time": "12:00"}
+      ]
+    },
+    "active_queue": [
+      {"id": "q_jc1", "customer": "طارق", "items": "كوكتيل أفوكادو كبير × 2", "status": "preparing", "time": "13:00", "order_number": 31},
+      {"id": "q_jc2", "customer": "دانا", "items": "سموذي توت × 1، ميلك شيك أوريو × 1", "status": "preparing", "time": "13:05", "order_number": 32},
+      {"id": "q_jc3", "customer": "محمد", "items": "عصير برتقال كبير × 3", "status": "waiting", "time": "13:10", "order_number": 33}
+    ],
+    "unavailable_items": [],
+    "best_sellers": [
+      {"name": "عصير برتقال", "count": 180, "trend": "up"},
+      {"name": "كوكتيل أفوكادو", "count": 95, "trend": "up"},
+      {"name": "ميلك شيك لوتس", "count": 72, "trend": "up"},
+      {"name": "سموذي منجا", "count": 65, "trend": "same"},
+      {"name": "عصير ليمون بالنعنع", "count": 58, "trend": "same"}
+    ],
+    "pending_requests": [
+      {"id": "req_jc01", "customer": "حفلة تخرج", "service": "طلب كبير — 50 عصير متنوع", "date": "2026-02-15", "time": "14:00"}
+    ]
+  }
+}

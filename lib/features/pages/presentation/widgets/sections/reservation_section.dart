@@ -12,6 +12,7 @@ import 'package:honak/features/requests/presentation/widgets/reservation_request
 import 'package:honak/shared/widgets/cached_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/money_text.dart';
+import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Space cards with category filtering, pagination, and villa support.
@@ -173,8 +174,13 @@ class _ReservationSectionState extends ConsumerState<ReservationSection> {
                       ),
                       child: _SpaceCard(
                         item: visible[index],
-                        onBook: () =>
-                            _openReservationSheet(context, items),
+                        onBook: () => AuthGate.require(
+                          context,
+                          ref,
+                          trigger: LoginPromptTrigger.reserve,
+                          onAuthed: () =>
+                              _openReservationSheet(context, items),
+                        ),
                       ),
                     ),
                     childCount: visible.length,

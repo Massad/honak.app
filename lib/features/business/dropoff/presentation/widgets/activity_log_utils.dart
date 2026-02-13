@@ -31,6 +31,15 @@ Color activityActionColor(TicketActivityAction action) => switch (action) {
       TicketActivityAction.itemModified => AppColors.primary,
     };
 
+/// Mock staff names for realistic activity log entries.
+const _staffNames = ['عمر', 'سعيد', 'محمد', 'أحمد', 'يوسف'];
+
+/// Pick a deterministic staff name based on ticket + entry index.
+String _staffName(String ticketId, int idx) {
+  final hash = ticketId.hashCode.abs();
+  return _staffNames[(hash + idx) % _staffNames.length];
+}
+
 /// Generates mock activity entries for demo purposes based on ticket state.
 List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
   final entries = <TicketActivityEntry>[];
@@ -41,8 +50,8 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
     id: 'act_${ticket.id}_${idx++}',
     timestamp: ticket.droppedOffAt,
     action: TicketActivityAction.ticketCreated,
-    actorName: 'النظام',
-    actorRole: 'system',
+    actorName: _staffName(ticket.id, 0),
+    actorRole: 'staff',
     note: 'تم إنشاء التذكرة ${ticket.ticketNumber}',
   ));
 
@@ -53,7 +62,7 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.droppedOffAt,
       action: TicketActivityAction.photoBefore,
-      actorName: 'الموظف',
+      actorName: _staffName(ticket.id, 1),
       actorRole: 'staff',
       items: ticket.items
           .where((i) => i.photoBefore != null)
@@ -69,7 +78,7 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.startedAt!,
       action: TicketActivityAction.statusChanged,
-      actorName: 'الموظف',
+      actorName: _staffName(ticket.id, 2),
       actorRole: 'staff',
       from: DropoffStatus.received.labelAr,
       to: DropoffStatus.processing.labelAr,
@@ -82,7 +91,7 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.startedAt ?? ticket.droppedOffAt,
       action: TicketActivityAction.noteAdded,
-      actorName: 'الموظف',
+      actorName: _staffName(ticket.id, 3),
       actorRole: 'staff',
       note: ticket.notes,
     ));
@@ -95,7 +104,7 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.completedAt!,
       action: TicketActivityAction.statusChanged,
-      actorName: 'الموظف',
+      actorName: _staffName(ticket.id, 4),
       actorRole: 'staff',
       from: DropoffStatus.processing.labelAr,
       to: DropoffStatus.ready.labelAr,
@@ -109,7 +118,7 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.completedAt!,
       action: TicketActivityAction.photoAfter,
-      actorName: 'الموظف',
+      actorName: _staffName(ticket.id, 1),
       actorRole: 'staff',
       items: ticket.items
           .where((i) => i.photoAfter != null)
@@ -124,7 +133,7 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.completedAt ?? ticket.droppedOffAt,
       action: TicketActivityAction.paymentMarked,
-      actorName: 'الموظف',
+      actorName: _staffName(ticket.id, 0),
       actorRole: 'staff',
       amount: ticket.totalPrice,
       method: ticket.paymentMethod ?? 'نقدي',
@@ -137,8 +146,8 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       id: 'act_${ticket.id}_${idx++}',
       timestamp: ticket.pickedUpAt!,
       action: TicketActivityAction.statusChanged,
-      actorName: 'النظام',
-      actorRole: 'system',
+      actorName: _staffName(ticket.id, 2),
+      actorRole: 'staff',
       from: DropoffStatus.ready.labelAr,
       to: DropoffStatus.delivered.labelAr,
     ));

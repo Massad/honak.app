@@ -102,7 +102,7 @@ class ActionBar extends ConsumerWidget {
                   onTap: () => AuthGate.require(
                     context,
                     ref,
-                    action: '\u0645\u0631\u0627\u0633\u0644\u0629',
+                    trigger: LoginPromptTrigger.message,
                     onAuthed: () => onMessage?.call(),
                   ),
                 ),
@@ -117,24 +117,14 @@ class ActionBar extends ConsumerWidget {
                   child: _ActionButton(
                     icon: Icons.phone_outlined,
                     label: '\u0627\u062a\u0635\u0627\u0644',
-                    onTap: () => AuthGate.require(
-                      context,
-                      ref,
-                      action: '\u0627\u062a\u0635\u0627\u0644',
-                      onAuthed: () => onCall?.call(),
-                    ),
+                    onTap: onCall,
                   ),
                 )
               else
                 _ActionButton(
                   icon: Icons.phone_outlined,
                   label: null,
-                  onTap: () => AuthGate.require(
-                    context,
-                    ref,
-                    action: '\u0627\u062a\u0635\u0627\u0644',
-                    onAuthed: () => onCall?.call(),
-                  ),
+                  onTap: onCall,
                   compact: true,
                 ),
               SizedBox(width: AppSpacing.sm),
@@ -150,7 +140,7 @@ class ActionBar extends ConsumerWidget {
                     onTap: () => AuthGate.require(
                       context,
                       ref,
-                      action: '\u0648\u0627\u062a\u0633\u0627\u0628',
+                      trigger: LoginPromptTrigger.message,
                       onAuthed: () => onWhatsApp?.call(),
                     ),
                   ),
@@ -162,7 +152,7 @@ class ActionBar extends ConsumerWidget {
                   onTap: () => AuthGate.require(
                     context,
                     ref,
-                    action: '\u0648\u0627\u062a\u0633\u0627\u0628',
+                    trigger: LoginPromptTrigger.message,
                     onAuthed: () => onWhatsApp?.call(),
                   ),
                   compact: true,

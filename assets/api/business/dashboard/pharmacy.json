@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 18,
+      "new_followers": 3,
+      "page_views": 95,
+      "today_revenue": 8500
+    },
+    "today_revenue": {
+      "total": 8500,
+      "completed_count": 15,
+      "items": [
+        {"service": "فيتامين D3 × 5", "amount": 2750, "time": "09:00"},
+        {"service": "كريم سيرافي × 2", "amount": 2800, "time": "10:30"},
+        {"service": "حفاضات بامبرز × 3", "amount": 2700, "time": "11:00"},
+        {"service": "واقي شمس × 2", "amount": 2200, "time": "12:00"}
+      ]
+    },
+    "active_queue": [
+      {"id": "q_ph1", "customer": "سناء محمود", "items": "فيتامين C × 2، أوميغا 3 × 1", "status": "preparing", "time": "13:00", "order_number": 16},
+      {"id": "q_ph2", "customer": "رنا خالد", "items": "حليب أطفال S-26 × 2، حفاضات × 1", "status": "delivering", "time": "13:15", "order_number": 17},
+      {"id": "q_ph3", "customer": "فادي حسن", "items": "جهاز قياس ضغط × 1", "status": "waiting", "time": "13:30", "order_number": 18}
+    ],
+    "unavailable_items": [
+      "بروبيوتيك ٣٠ كبسولة"
+    ],
+    "best_sellers": [
+      {"name": "فيتامين D3 5000", "count": 85, "trend": "up"},
+      {"name": "واقي شمس بيوديرما", "count": 62, "trend": "up"},
+      {"name": "حفاضات بامبرز", "count": 48, "trend": "same"},
+      {"name": "كريم سيرافي", "count": 38, "trend": "up"},
+      {"name": "فيتامين C 1000mg", "count": 35, "trend": "same"}
+    ],
+    "pending_requests": [
+      {"id": "req_ph01", "customer": "عيادة د. سمير", "service": "طلب جملة — مكملات غذائية", "date": "2026-02-14", "time": "10:00"},
+      {"id": "req_ph02", "customer": "نادية عمر", "service": "استفسار — أجهزة طبية منزلية", "date": "2026-02-13", "time": "15:00"}
+    ]
+  }
+}

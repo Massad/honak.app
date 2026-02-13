@@ -177,6 +177,84 @@ final fruitVeg = createType(
   ),
 );
 
+// ─── Mini Market (compact — createType) ──────────────────────
+
+final miniMarket = createType(
+  id: 'mini_market',
+  nameAr: 'ميني ماركت',
+  nameEn: 'Mini Market',
+  categoryAr: 'بقالة واحتياجات يومية',
+  categoryEn: 'Mini Market',
+  archetype: Archetype.catalogOrder,
+  icon: '🏪',
+  features: ['product_catalog', 'cart', 'order_tracking'],
+  orderLabels: OrderLabels(
+    incoming: 'طلبات جديدة',
+    accepted: 'طلبات قيد التجهيز',
+    completed: 'طلبات مكتملة',
+    itemUnit: 'منتج',
+  ),
+  suggestedRoles: [
+    SuggestedRole(
+        labelAr: 'بائع',
+        defaultPermissions: ['manage_catalog', 'manage_orders']),
+    SuggestedRole(
+        labelAr: 'موصّل', defaultPermissions: ['manage_orders']),
+  ],
+  itemManagement: ItemManagementConfig(
+    sourceField: 'catalog',
+    itemLabelAr: 'منتج',
+    itemsLabelAr: 'المنتجات',
+    addLabelAr: 'إضافة منتج',
+    hasImage: true,
+    hasCategory: true,
+    hasDescription: false,
+    hasPrice: true,
+    properties: [],
+    quantityMode: QuantityMode.perItem,
+    canDiscount: true,
+  ),
+);
+
+// ─── Produce (compact — createType) ──────────────────────────
+
+final produce = createType(
+  id: 'produce',
+  nameAr: 'خضار وفواكه',
+  nameEn: 'Produce',
+  categoryAr: 'بقالة واحتياجات يومية',
+  categoryEn: 'Produce',
+  archetype: Archetype.catalogOrder,
+  icon: '🥦',
+  features: ['product_catalog', 'cart', 'order_tracking'],
+  orderLabels: OrderLabels(
+    incoming: 'طلبات جديدة',
+    accepted: 'طلبات قيد التجهيز',
+    completed: 'طلبات مكتملة',
+    itemUnit: 'صنف',
+  ),
+  suggestedRoles: [
+    SuggestedRole(
+        labelAr: 'بائع',
+        defaultPermissions: ['manage_catalog', 'manage_orders']),
+    SuggestedRole(
+        labelAr: 'موصّل', defaultPermissions: ['manage_orders']),
+  ],
+  itemManagement: ItemManagementConfig(
+    sourceField: 'catalog',
+    itemLabelAr: 'صنف',
+    itemsLabelAr: 'المنتجات',
+    addLabelAr: 'إضافة صنف',
+    hasImage: true,
+    hasCategory: true,
+    hasDescription: false,
+    hasPrice: true,
+    properties: [],
+    quantityMode: QuantityMode.open,
+    canDiscount: true,
+  ),
+);
+
 // ─── Electronics Store (compact — createType) ──────────────
 
 final electronicsStore = createType(

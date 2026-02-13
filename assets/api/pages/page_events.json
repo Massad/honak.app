@@ -5,7 +5,7 @@
     "owner_id": "usr_003",
     "business_type_id": "event_venue",
     "business_type_name": "قاعة مناسبات",
-    "category_name": "إقامة وسياحة",
+    "category_name": "قاعة مناسبات",
     "explore_category": "cat_entertainment",
     "name": "رويال للمناسبات",
     "name_en": "Royal Events",
@@ -78,6 +78,9 @@
       {"icon": "restaurant", "label": "مطبخ جاهز"},
       {"icon": "ac_unit", "label": "تكييف مركزي"}
     ],
+    "booking_questions": ["ما نوع المناسبة؟", "كم عدد الضيوف المتوقع؟", "ما التاريخ المطلوب؟", "هل تحتاج تجهيزات إضافية؟"],
+    "safety_disclaimers": ["المكان مؤمّن بالكامل ضد الحريق", "يتوفر طاقم أمن لجميع المناسبات", "يُطلب تأمين مسبق يُسترد بعد المناسبة"],
+    "deposit_config": {"percentage": 30, "min_amount": 10000},
     "packages": [
       {
         "id": "pkg_010",

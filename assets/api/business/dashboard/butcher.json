@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "data": {
+    "stats": {"requests_today": 18, "new_followers": 2, "page_views": 35, "today_revenue": 8500},
+    "today_revenue": {"total": 8500, "completed_count": 15, "items": [
+      {"service": "خروف بلدي 3 كيلو", "amount": 3600, "time": "07:30"},
+      {"service": "صدور دجاج 2 كيلو", "amount": 1000, "time": "09:00"},
+      {"service": "كفتة 2 كيلو + شيش طاووق 1 كيلو", "amount": 2300, "time": "11:00"},
+      {"service": "ستيك فيليه 1 كيلو", "amount": 1600, "time": "13:00"}
+    ]},
+    "best_sellers": [
+      {"name": "خروف بلدي", "count": 35, "trend": "up"},
+      {"name": "صدور دجاج", "count": 28, "trend": "same"},
+      {"name": "كفتة", "count": 22, "trend": "up"},
+      {"name": "شيش طاووق", "count": 18, "trend": "up"}
+    ],
+    "pending_requests": [
+      {"id": "req_bt01", "customer": "أحمد العمري", "service": "خروف كامل — حفلة شواء", "date": "2026-02-14", "time": "08:00"},
+      {"id": "req_bt02", "customer": "مطعم الكرم", "service": "10 كيلو لحم بقر + 5 كيلو دجاج", "date": "2026-02-13", "time": "15:00"}
+    ]
+  }
+}

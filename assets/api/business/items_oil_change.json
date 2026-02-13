@@ -1,0 +1,48 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_item_oc01",
+      "name": "زيت عادي",
+      "name_en": "Standard Oil Change",
+      "description": "زيت 4 لتر + فلتر زيت — 20 دقيقة",
+      "price_cents": 1500,
+      "images": ["https://images.unsplash.com/photo-1600861194802-a928b3f07c36?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_oil",
+      "category_name": "تغيير زيت",
+      "status": "active",
+      "sort_order": 1,
+      "page_id": "quick-lube-amman",
+      "properties": {"duration": "20 دقيقة"}
+    },
+    {
+      "id": "biz_item_oc02",
+      "name": "زيت تخليقي",
+      "name_en": "Synthetic Oil Change",
+      "description": "زيت تخليقي 4 لتر + فلتر زيت + فلتر هواء — 25 دقيقة",
+      "price_cents": 2500,
+      "images": ["https://images.unsplash.com/photo-1600861194802-a928b3f07c36?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_oil",
+      "category_name": "تغيير زيت",
+      "status": "active",
+      "sort_order": 2,
+      "page_id": "quick-lube-amman",
+      "properties": {"duration": "25 دقيقة"}
+    },
+    {
+      "id": "biz_item_oc03",
+      "name": "خدمة شاملة",
+      "name_en": "Full Service",
+      "description": "زيت تخليقي + جميع الفلاتر + فحص نقاط + غسيل محرك — 45 دقيقة",
+      "price_cents": 4000,
+      "images": ["https://images.unsplash.com/photo-1600861194802-a928b3f07c36?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_oil",
+      "category_name": "تغيير زيت",
+      "status": "active",
+      "sort_order": 3,
+      "page_id": "quick-lube-amman",
+      "properties": {"duration": "45 دقيقة"}
+    }
+  ],
+  "meta": {"total": 3, "has_more": false}
+}

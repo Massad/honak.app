@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/config/archetype.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/requests/presentation/widgets/quote_request_sheet.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/auth_gate.dart';
 
 /// Data-driven overview for quote request businesses.
 /// Used by the quoteRequest archetype (plumber, electrician).
 /// Shows services from page data, coverage area, price range, and CTA.
-class QuoteRequestSection extends StatelessWidget {
+class QuoteRequestSection extends ConsumerWidget {
   final String pageId;
   final PageDetail? page;
 
@@ -20,7 +22,7 @@ class QuoteRequestSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final services = page?.servicesOffered ?? [];
     final priceRange = page?.priceRange;
     final serviceAreas = page?.serviceAreas ?? [];
@@ -223,17 +225,24 @@ class QuoteRequestSection extends StatelessWidget {
           width: double.infinity,
           child: FilledButton.icon(
             onPressed: () {
-              QuoteRequestSheet.show(
-                context: context,
-                pageName: page?.name ?? '',
-                onSubmit: (data) {
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628\u0643 \u0628\u0646\u062c\u0627\u062d \u2014 \u0633\u064a\u062a\u0645 \u0627\u0644\u0631\u062f \u0642\u0631\u064a\u0628\u0627\u064b',
-                      ),
-                    ),
+              AuthGate.require(
+                context,
+                ref,
+                trigger: LoginPromptTrigger.quote,
+                onAuthed: () {
+                  QuoteRequestSheet.show(
+                    context: context,
+                    pageName: page?.name ?? '',
+                    onSubmit: (data) {
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628\u0643 \u0628\u0646\u062c\u0627\u062d \u2014 \u0633\u064a\u062a\u0645 \u0627\u0644\u0631\u062f \u0642\u0631\u064a\u0628\u0627\u064b',
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               );

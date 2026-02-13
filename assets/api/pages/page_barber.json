@@ -1,0 +1,73 @@
+{
+  "success": true,
+  "data": {
+    "id": "barber-fadi",
+    "owner_id": null,
+    "business_type_id": "barber",
+    "business_type_name": "حلاق رجالي",
+    "category_name": "جمال وعناية",
+    "explore_category": "cat_beauty",
+    "name": "حلاق فادي",
+    "name_en": "Barber Fadi",
+    "slug": "barber-fadi",
+    "handle": "barber-fadi",
+    "store_type": "physical",
+    "archetype": "service_booking",
+    "description": "حلاق رجالي متخصص. قص شعر، حلاقة ذقن، تصفيف.",
+    "avatar_url": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1585747860182-ee6d3a2e5a47?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790100001",
+    "location": {
+      "lat": 31.955,
+      "lng": 35.870,
+      "label": "الدوار السابع، عمّان",
+      "area": "الدوار السابع",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "friday": {"enabled": true, "open": "14:00", "close": "21:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "21:00"}
+    },
+    "operating_hours": "السبت - الخميس: ٩:٠٠ ص — ٩:٠٠ م\nالجمعة: ٢:٠٠ م — ٩:٠٠ م",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": false,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "unclaimed",
+    "followers_count": 0,
+    "items_count": 0,
+    "posts_count": 0,
+    "is_following": false,
+    "hours": {
+      "open_time": "09:00",
+      "close_time": "21:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 0,
+    "trust_metrics": [],
+    "booking_available": true,
+    "payment_methods": ["نقداً"],
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "gallery_images": [],
+    "services": [
+      {"id": "svc_b01", "name": "قص شعر", "price_cents": 300, "duration": "20 دقيقة"},
+      {"id": "svc_b02", "name": "حلاقة ذقن", "price_cents": 200, "duration": "15 دقيقة"},
+      {"id": "svc_b03", "name": "قص + ذقن", "price_cents": 400, "duration": "30 دقيقة"},
+      {"id": "svc_b04", "name": "تصفيف", "price_cents": 250, "duration": "20 دقيقة"},
+      {"id": "svc_b05", "name": "صبغة شعر", "price_cents": 500, "duration": "45 دقيقة"},
+      {"id": "svc_b06", "name": "تنظيف بشرة", "price_cents": 350, "duration": "30 دقيقة"}
+    ]
+  }
+}

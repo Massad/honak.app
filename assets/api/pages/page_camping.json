@@ -1,0 +1,80 @@
+{
+  "success": true,
+  "data": {
+    "id": "wadi-camp",
+    "owner_id": null,
+    "business_type_id": "camping",
+    "business_type_name": "تخييم",
+    "category_name": "إقامة وسياحة",
+    "explore_category": "cat_stays",
+    "name": "مخيم الوادي",
+    "name_en": "Wadi Camp",
+    "slug": "wadi-camp",
+    "handle": "wadi-camp",
+    "store_type": "physical",
+    "archetype": "reservation",
+    "description": "تجربة تخييم فريدة في وادي رم. خيم عائلية، غلامبينغ، سهرات بدوية.",
+    "avatar_url": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1537905569824-f89f14cceb68?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790100004",
+    "location": {
+      "lat": 29.530,
+      "lng": 35.410,
+      "label": "وادي رم، العقبة",
+      "area": "وادي رم",
+      "city": "العقبة"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "08:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "08:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ٨:٠٠ ص — ١٠:٠٠ م",
+    "items_label_ar": "الخيم",
+    "items_label_en": "Tents",
+    "is_verified": false,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "unclaimed",
+    "followers_count": 0,
+    "items_count": 0,
+    "posts_count": 0,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "22:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 0,
+    "trust_metrics": [],
+    "booking_available": true,
+    "payment_methods": ["نقداً"],
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "gallery_images": [],
+    "amenities": [
+      {"icon": "local_fire_department", "label": "نار مخيم"},
+      {"icon": "restaurant", "label": "مطبخ مشترك"},
+      {"icon": "terrain", "label": "جولات صحراوية"},
+      {"icon": "star", "label": "سهرة بدوية"}
+    ],
+    "booking_questions": [
+      "ما تاريخ الوصول والمغادرة؟",
+      "كم عدد الأشخاص؟",
+      "هل تريد جولة صحراوية؟"
+    ],
+    "pricing": {
+      "weekday_cents": 3500,
+      "weekend_cents": 5000
+    }
+  }
+}

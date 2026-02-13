@@ -1,0 +1,93 @@
+{
+  "success": true,
+  "data": {
+    "id": "golden-oven-bakery",
+    "owner_id": "usr_001",
+    "business_type_id": "bakery",
+    "business_type_name": "مخبز",
+    "category_name": "مخبز",
+    "explore_category": "cat_food",
+    "name": "مخبز الفرن الذهبي",
+    "name_en": "Golden Oven Bakery",
+    "slug": "golden-oven-bakery",
+    "handle": "golden-oven-bakery",
+    "store_type": "physical",
+    "archetype": "menu_order",
+    "description": "مخبز تقليدي بنكهة أصيلة — خبز طازج، معجنات ساخنة، وفطائر يومية منذ ١٩٩٥.",
+    "avatar_url": "https://picsum.photos/seed/golden-oven/200",
+    "cover_url": "https://picsum.photos/seed/golden-oven-cover/800/400",
+    "phone": "+96264621100",
+    "location": {
+      "lat": 31.9550,
+      "lng": 35.9230,
+      "label": "جبل الحسين، عمّان",
+      "area": "جبل الحسين",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "06:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "06:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "06:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "06:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "06:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "06:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "06:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ٦:٠٠ ص – ١٠:٠٠ م",
+    "items_label_ar": "القائمة",
+    "items_label_en": "Menu",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 2800,
+    "items_count": 15,
+    "posts_count": 32,
+    "is_following": false,
+    "hours": {
+      "open_time": "06:00",
+      "close_time": "22:00",
+      "open_days": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    },
+    "trust_score": 85,
+    "trust_metrics": [
+      {"label": "طلبات أسبوعياً", "value": "٣٨٠", "icon": "shopping_bag"},
+      {"label": "الأكثر طلباً", "value": "مناقيش زعتر", "icon": "star"},
+      {"label": "معدل التحضير", "value": "١٠ دقائق", "icon": "schedule"}
+    ],
+    "delivery_available": true,
+    "pickup_available": true,
+    "minimum_order_cents": 100,
+    "delivery_fee_cents": 75,
+    "estimated_delivery_minutes": 20,
+    "payment_methods": ["نقداً", "كليك: GoldenOven"],
+    "cliq_alias": "GoldenOven",
+    "member_since": "1995",
+    "team_members_count": 3,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1695000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "catalog_strategy": "full_catalog",
+    "carry_categories": [],
+    "stories": [
+      {"id": "s_bakery1", "image_url": "https://picsum.photos/seed/goldenovenstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_bakery2", "image_url": "https://picsum.photos/seed/goldenovenstory2/400/700", "duration": 5, "created_at": 1707860000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "external_links": [
+      {"platform": "instagram", "label": "@goldenoven.jo", "url": "https://instagram.com/goldenoven.jo"}
+    ],
+    "specials": ["عرض الصباح — ٦ خبزات + مناقيش زعتر بـ ١.٠٠ دينار", "خصم ١٥٪ على فطائر العائلة أيام الجمعة"],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "جبل الحسين", "neighbourhoods": ["جبل الحسين", "العبدلي"]},
+          {"name": "الشميساني", "neighbourhoods": ["الشميساني", "جبل اللويبدة"]}
+        ]
+      }
+    ]
+  }
+}

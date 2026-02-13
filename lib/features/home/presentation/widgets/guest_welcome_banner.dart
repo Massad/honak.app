@@ -81,7 +81,7 @@ class GuestWelcomeBanner extends StatelessWidget {
                 // Explore button
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => context.push(Routes.explore),
+                    onTap: () => context.go(Routes.explore),
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: AppSpacing.sm),
                       decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class GuestWelcomeBanner extends StatelessWidget {
                 // Sign up button
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => context.push(Routes.login),
+                    onTap: () => context.go(Routes.login),
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: AppSpacing.sm),
                       decoration: BoxDecoration(

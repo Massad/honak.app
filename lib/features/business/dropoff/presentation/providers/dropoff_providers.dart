@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/features/business/dropoff/domain/entities/dropoff_info_template.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_item.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_service.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_source.dart';
@@ -25,6 +26,7 @@ class DropoffData {
   final List<DropoffServiceCategory> serviceCategories;
   final List<DropoffAttribute> attributes;
   final List<String> itemTypes;
+  final List<DropoffInfoTemplate> infoTemplates;
 
   const DropoffData({
     required this.tickets,
@@ -32,8 +34,78 @@ class DropoffData {
     required this.serviceCategories,
     required this.attributes,
     required this.itemTypes,
+    this.infoTemplates = const [],
   });
 }
+
+/// Config-driven info request templates per business type.
+///
+/// Matches Figma service-types.ts — each type defines which
+/// photos/videos/text the business can request from customers.
+const _infoTemplatesByType = <String, List<DropoffInfoTemplate>>{
+  'laundry': [
+    DropoffInfoTemplate(id: 'stain_info', labelAr: 'معلومات البقعة', items: [
+      DropoffInfoTemplateItem(id: 'stain_photo', labelAr: 'صورة للبقعة', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'stain_type', labelAr: 'نوع البقعة', type: 'text'),
+      DropoffInfoTemplateItem(id: 'prev_attempts', labelAr: 'محاولات تنظيف سابقة', type: 'text'),
+    ]),
+    DropoffInfoTemplate(id: 'care_label', labelAr: 'علامة العناية', items: [
+      DropoffInfoTemplateItem(id: 'care_label_photo', labelAr: 'صورة علامة العناية', type: 'photo'),
+    ]),
+    DropoffInfoTemplate(id: 'damage_report', labelAr: 'ضرر موجود مسبقاً', items: [
+      DropoffInfoTemplateItem(id: 'damage_photo', labelAr: 'صورة للضرر الموجود', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'damage_desc', labelAr: 'وصف الضرر', type: 'text'),
+    ]),
+  ],
+  'mobile_repair': [
+    DropoffInfoTemplate(id: 'screen_damage', labelAr: 'صورة الشاشة / الضرر', items: [
+      DropoffInfoTemplateItem(id: 'screen_photo', labelAr: 'صورة للشاشة المكسورة', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'damage_location', labelAr: 'صورة لمكان الضرر', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'problem_video', labelAr: 'فيديو للمشكلة', type: 'video'),
+    ]),
+    DropoffInfoTemplate(id: 'device_info', labelAr: 'معلومات الجهاز', items: [
+      DropoffInfoTemplateItem(id: 'device_model', labelAr: 'موديل الجهاز', type: 'text'),
+      DropoffInfoTemplateItem(id: 'water_resistance', labelAr: 'حالة مقاومة الماء', type: 'text'),
+    ]),
+  ],
+  'tailor': [
+    DropoffInfoTemplate(id: 'fabric_info', labelAr: 'معلومات القماش', items: [
+      DropoffInfoTemplateItem(id: 'fabric_photo', labelAr: 'صورة للقماش', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'design_ref', labelAr: 'صورة التصميم المطلوب', type: 'photo'),
+    ]),
+    DropoffInfoTemplate(id: 'measurements', labelAr: 'المقاسات', items: [
+      DropoffInfoTemplateItem(id: 'measurement_text', labelAr: 'المقاسات المطلوبة', type: 'text'),
+      DropoffInfoTemplateItem(id: 'original_piece', labelAr: 'صورة القطعة الأصلية', type: 'photo'),
+    ]),
+  ],
+  'shoe_repair': [
+    DropoffInfoTemplate(id: 'damage_photos', labelAr: 'صور الضرر', items: [
+      DropoffInfoTemplateItem(id: 'sole_photo', labelAr: 'صورة النعل', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'heel_photo', labelAr: 'صورة الكعب', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'interior_photo', labelAr: 'صورة من الداخل', type: 'photo'),
+    ]),
+    DropoffInfoTemplate(id: 'material_info', labelAr: 'معلومات المادة', items: [
+      DropoffInfoTemplateItem(id: 'leather_type', labelAr: 'نوع الجلد', type: 'text'),
+      DropoffInfoTemplateItem(id: 'brand_model', labelAr: 'الماركة والموديل', type: 'text'),
+    ]),
+  ],
+  'watch_repair': [
+    DropoffInfoTemplate(id: 'watch_photos', labelAr: 'صور الساعة', items: [
+      DropoffInfoTemplateItem(id: 'face_photo', labelAr: 'صورة الوجه', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'caseback_photo', labelAr: 'صورة الغطاء الخلفي', type: 'photo'),
+      DropoffInfoTemplateItem(id: 'problem_video', labelAr: 'فيديو للمشكلة', type: 'video'),
+    ]),
+    DropoffInfoTemplate(id: 'watch_info', labelAr: 'معلومات الساعة', items: [
+      DropoffInfoTemplateItem(id: 'brand_model', labelAr: 'الماركة والموديل', type: 'text'),
+      DropoffInfoTemplateItem(id: 'movement_type', labelAr: 'نوع الحركة', type: 'text'),
+      DropoffInfoTemplateItem(id: 'last_service', labelAr: 'آخر صيانة', type: 'text'),
+    ]),
+  ],
+};
+
+/// Returns info templates for a given business type ID.
+List<DropoffInfoTemplate> getInfoTemplates(String? typeId) =>
+    _infoTemplatesByType[typeId] ?? const [];
 
 /// Loads and parses dropoff data for a business page (business side).
 final dropoffDataProvider =

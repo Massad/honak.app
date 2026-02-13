@@ -1,0 +1,332 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_jc01",
+      "name_ar": "عصير برتقال",
+      "name_en": "Orange Juice",
+      "description_ar": "عصير برتقال طبيعي ١٠٠٪",
+      "price_cents": 100,
+      "images": ["https://picsum.photos/seed/juice-orange/400"],
+      "category_id": "cat_natural",
+      "category_name": "عصائر طبيعية",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 1,
+      "option_groups": [
+        {
+          "id": "og_jc01_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_jc01_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -25},
+            {"id": "opt_jc01_md", "label_ar": "وسط", "label_en": "Medium", "price_modifier": 0},
+            {"id": "opt_jc01_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 50}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc02",
+      "name_ar": "عصير ليمون بالنعنع",
+      "name_en": "Lemon Mint Juice",
+      "description_ar": "عصير ليمون منعش مع أوراق نعنع طازجة",
+      "price_cents": 100,
+      "images": ["https://picsum.photos/seed/juice-lemon-mint/400"],
+      "category_id": "cat_natural",
+      "category_name": "عصائر طبيعية",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 2,
+      "option_groups": [
+        {
+          "id": "og_jc02_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_jc02_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -25},
+            {"id": "opt_jc02_md", "label_ar": "وسط", "label_en": "Medium", "price_modifier": 0},
+            {"id": "opt_jc02_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 50}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc03",
+      "name_ar": "عصير رمان",
+      "name_en": "Pomegranate Juice",
+      "description_ar": "عصير رمان طبيعي طازج",
+      "price_cents": 150,
+      "images": ["https://picsum.photos/seed/juice-pomegranate/400"],
+      "category_id": "cat_natural",
+      "category_name": "عصائر طبيعية",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 3,
+      "option_groups": [
+        {
+          "id": "og_jc03_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_jc03_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -25},
+            {"id": "opt_jc03_md", "label_ar": "وسط", "label_en": "Medium", "price_modifier": 0},
+            {"id": "opt_jc03_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 50}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc04",
+      "name_ar": "عصير جزر",
+      "name_en": "Carrot Juice",
+      "description_ar": "عصير جزر صحي طازج",
+      "price_cents": 75,
+      "images": ["https://picsum.photos/seed/juice-carrot/400"],
+      "category_id": "cat_natural",
+      "category_name": "عصائر طبيعية",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 4,
+      "option_groups": [
+        {
+          "id": "og_jc04_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_jc04_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -25},
+            {"id": "opt_jc04_md", "label_ar": "وسط", "label_en": "Medium", "price_modifier": 0},
+            {"id": "opt_jc04_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 25}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc05",
+      "name_ar": "عصير فراولة",
+      "name_en": "Strawberry Juice",
+      "description_ar": "عصير فراولة طبيعي",
+      "price_cents": 125,
+      "images": ["https://picsum.photos/seed/juice-strawberry/400"],
+      "category_id": "cat_natural",
+      "category_name": "عصائر طبيعية",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 5,
+      "option_groups": [
+        {
+          "id": "og_jc05_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_jc05_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -25},
+            {"id": "opt_jc05_md", "label_ar": "وسط", "label_en": "Medium", "price_modifier": 0},
+            {"id": "opt_jc05_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 50}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc06",
+      "name_ar": "كوكتيل فواكه مشكلة",
+      "name_en": "Mixed Fruit Cocktail",
+      "description_ar": "مزيج فواكه موسمية طازجة",
+      "price_cents": 150,
+      "images": ["https://picsum.photos/seed/cocktail-mix/400"],
+      "category_id": "cat_cocktail",
+      "category_name": "كوكتيل",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 6,
+      "option_groups": [
+        {
+          "id": "og_jc06_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_jc06_md", "label_ar": "وسط", "label_en": "Medium", "price_modifier": 0},
+            {"id": "opt_jc06_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 50}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc07",
+      "name_ar": "كوكتيل أفوكادو",
+      "name_en": "Avocado Cocktail",
+      "description_ar": "كوكتيل أفوكادو كريمي",
+      "price_cents": 150,
+      "original_price_cents": 200,
+      "discount_percent": 25,
+      "images": ["https://picsum.photos/seed/cocktail-avocado/400"],
+      "category_id": "cat_cocktail",
+      "category_name": "كوكتيل",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 7,
+      "option_groups": [
+        {
+          "id": "og_jc07_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_jc07_md", "label_ar": "وسط", "label_en": "Medium", "price_modifier": 0},
+            {"id": "opt_jc07_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 75}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc08",
+      "name_ar": "كوكتيل موز بالحليب",
+      "name_en": "Banana Milk Cocktail",
+      "description_ar": "كوكتيل موز بالحليب الطازج",
+      "price_cents": 125,
+      "images": ["https://picsum.photos/seed/cocktail-banana/400"],
+      "category_id": "cat_cocktail",
+      "category_name": "كوكتيل",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 8,
+      "option_groups": []
+    },
+    {
+      "id": "item_jc09",
+      "name_ar": "سموذي منجا",
+      "name_en": "Mango Smoothie",
+      "description_ar": "سموذي منجا كثيف وطبيعي",
+      "price_cents": 200,
+      "images": ["https://picsum.photos/seed/smoothie-mango/400"],
+      "category_id": "cat_smoothie",
+      "category_name": "سموذي",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 9,
+      "option_groups": []
+    },
+    {
+      "id": "item_jc10",
+      "name_ar": "سموذي توت",
+      "name_en": "Berry Smoothie",
+      "description_ar": "سموذي توت مشكل طبيعي",
+      "price_cents": 225,
+      "images": ["https://picsum.photos/seed/smoothie-berry/400"],
+      "category_id": "cat_smoothie",
+      "category_name": "سموذي",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 10,
+      "option_groups": []
+    },
+    {
+      "id": "item_jc11",
+      "name_ar": "سموذي أخضر",
+      "name_en": "Green Smoothie",
+      "description_ar": "سبانخ + تفاح + زنجبيل — صحي ومنعش",
+      "price_cents": 200,
+      "images": ["https://picsum.photos/seed/smoothie-green/400"],
+      "category_id": "cat_smoothie",
+      "category_name": "سموذي",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 11,
+      "option_groups": []
+    },
+    {
+      "id": "item_jc12",
+      "name_ar": "ميلك شيك أوريو",
+      "name_en": "Oreo Milkshake",
+      "description_ar": "ميلك شيك أوريو كريمي",
+      "price_cents": 250,
+      "images": ["https://picsum.photos/seed/milkshake-oreo/400"],
+      "category_id": "cat_milkshake",
+      "category_name": "ميلك شيك",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 12,
+      "option_groups": [
+        {
+          "id": "og_jc12_add",
+          "label_ar": "إضافات",
+          "label_en": "Extras",
+          "type": "multi_select",
+          "required": false,
+          "options": [
+            {"id": "opt_jc12_cream", "label_ar": "كريمة مخفوقة", "label_en": "Whipped Cream", "price_modifier": 50},
+            {"id": "opt_jc12_ice", "label_ar": "آيس كريم إضافي", "label_en": "Extra Ice Cream", "price_modifier": 75},
+            {"id": "opt_jc12_caramel", "label_ar": "صوص كراميل", "label_en": "Caramel Sauce", "price_modifier": 25}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc13",
+      "name_ar": "ميلك شيك لوتس",
+      "name_en": "Lotus Milkshake",
+      "description_ar": "ميلك شيك لوتس غني",
+      "price_cents": 250,
+      "images": ["https://picsum.photos/seed/milkshake-lotus/400"],
+      "category_id": "cat_milkshake",
+      "category_name": "ميلك شيك",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 13,
+      "option_groups": [
+        {
+          "id": "og_jc13_add",
+          "label_ar": "إضافات",
+          "label_en": "Extras",
+          "type": "multi_select",
+          "required": false,
+          "options": [
+            {"id": "opt_jc13_cream", "label_ar": "كريمة مخفوقة", "label_en": "Whipped Cream", "price_modifier": 50},
+            {"id": "opt_jc13_ice", "label_ar": "آيس كريم إضافي", "label_en": "Extra Ice Cream", "price_modifier": 75},
+            {"id": "opt_jc13_caramel", "label_ar": "صوص كراميل", "label_en": "Caramel Sauce", "price_modifier": 25}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_jc14",
+      "name_ar": "ميلك شيك نوتيلا",
+      "name_en": "Nutella Milkshake",
+      "description_ar": "ميلك شيك نوتيلا فاخر",
+      "price_cents": 275,
+      "images": ["https://picsum.photos/seed/milkshake-nutella/400"],
+      "category_id": "cat_milkshake",
+      "category_name": "ميلك شيك",
+      "in_stock": true,
+      "page_id": "tazej-juice",
+      "sort_order": 14,
+      "option_groups": [
+        {
+          "id": "og_jc14_add",
+          "label_ar": "إضافات",
+          "label_en": "Extras",
+          "type": "multi_select",
+          "required": false,
+          "options": [
+            {"id": "opt_jc14_cream", "label_ar": "كريمة مخفوقة", "label_en": "Whipped Cream", "price_modifier": 50},
+            {"id": "opt_jc14_ice", "label_ar": "آيس كريم إضافي", "label_en": "Extra Ice Cream", "price_modifier": 75},
+            {"id": "opt_jc14_choc", "label_ar": "صوص شوكولا", "label_en": "Chocolate Sauce", "price_modifier": 25}
+          ]
+        }
+      ]
+    }
+  ],
+  "meta": {"total": 14, "has_more": false}
+}

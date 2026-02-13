@@ -1,0 +1,84 @@
+{
+  "success": true,
+  "data": {
+    "id": "tazej-juice",
+    "owner_id": "usr_004",
+    "business_type_id": "juice_bar",
+    "business_type_name": "عصائر",
+    "category_name": "عصائر",
+    "explore_category": "cat_food",
+    "name": "عصائر الطازج",
+    "name_en": "Al-Tazej Fresh Juice",
+    "slug": "tazej-juice",
+    "handle": "tazej-juice",
+    "store_type": "physical",
+    "archetype": "menu_order",
+    "description": "عصائر طبيعية ١٠٠٪ — كوكتيلات، سموذي، وميلك شيك. كل شيء يُحضّر أمامك.",
+    "avatar_url": "https://picsum.photos/seed/tazej-juice/200",
+    "cover_url": "https://picsum.photos/seed/tazej-cover/800/400",
+    "phone": "+962795552200",
+    "location": {
+      "lat": 32.0200,
+      "lng": 35.8700,
+      "label": "شارع الجامعة، الجبيهة",
+      "area": "الجبيهة",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "friday": {"enabled": true, "open": "08:00", "close": "00:00"},
+      "saturday": {"enabled": true, "open": "08:00", "close": "00:00"}
+    },
+    "operating_hours": "يومياً: ٨:٠٠ ص – ١٢:٠٠ ص",
+    "items_label_ar": "القائمة",
+    "items_label_en": "Menu",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 3400,
+    "items_count": 14,
+    "posts_count": 25,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "00:00",
+      "open_days": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    },
+    "trust_score": 88,
+    "trust_metrics": [
+      {"label": "طلبات أسبوعياً", "value": "٢٤٠", "icon": "shopping_bag"},
+      {"label": "الأكثر طلباً", "value": "عصير برتقال", "icon": "star"},
+      {"label": "معدل التحضير", "value": "٥ دقائق", "icon": "schedule"}
+    ],
+    "delivery_available": false,
+    "pickup_available": true,
+    "payment_methods": ["نقداً", "كليك: TazejJuice"],
+    "cliq_alias": "TazejJuice",
+    "member_since": "2022",
+    "team_members_count": 2,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1702000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "catalog_strategy": "full_catalog",
+    "carry_categories": [],
+    "stories": [
+      {"id": "s_juice1", "image_url": "https://picsum.photos/seed/tazejstory1/400/700", "duration": 5, "created_at": 1707800000},
+      {"id": "s_juice2", "image_url": "https://picsum.photos/seed/tazejstory2/400/700", "duration": 5, "created_at": 1707860000}
+    ],
+    "external_links": [
+      {"platform": "instagram", "label": "@tazej_juice", "url": "https://instagram.com/tazej_juice"}
+    ],
+    "specials": ["كوكتيل أفوكادو — ١.٥٠ بدل ٢.٠٠"],
+    "global_modifiers": [
+      {"id": "mod_honey", "label_ar": "عسل", "label_en": "Honey", "price_cents": 25, "applicable_categories": ["عصائر طبيعية", "كوكتيل", "سموذي"]},
+      {"id": "mod_protein", "label_ar": "بروتين", "label_en": "Protein", "price_cents": 50},
+      {"id": "mod_chia", "label_ar": "بذور شيا", "label_en": "Chia Seeds", "price_cents": 25, "applicable_categories": ["عصائر طبيعية", "كوكتيل", "سموذي"]},
+      {"id": "mod_ginger", "label_ar": "زنجبيل", "label_en": "Ginger", "price_cents": 15, "applicable_categories": ["عصائر طبيعية", "كوكتيل"]}
+    ]
+  }
+}

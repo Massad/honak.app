@@ -101,7 +101,13 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                   top: AppSpacing.xxl,
                 ),
                 child: GestureDetector(
-                  onTap: () => context.pop(),
+                  onTap: () {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go(Routes.home);
+                    }
+                  },
                   child: Container(
                     width: 40,
                     height: 40,

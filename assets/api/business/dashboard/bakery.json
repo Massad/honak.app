@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 48,
+      "new_followers": 5,
+      "page_views": 210,
+      "today_revenue": 12500
+    },
+    "today_revenue": {
+      "total": 12500,
+      "completed_count": 42,
+      "items": [
+        {"service": "مناقيش زعتر × 20", "amount": 1000, "time": "06:30"},
+        {"service": "خبز عربي × 50", "amount": 750, "time": "07:00"},
+        {"service": "فطيرة لحمة × 15", "amount": 1125, "time": "08:00"},
+        {"service": "فطيرة دجاج × 8", "amount": 1600, "time": "09:00"},
+        {"service": "مناقيش جبنة × 25", "amount": 1500, "time": "09:30"}
+      ]
+    },
+    "active_queue": [
+      {"id": "q_bk1", "customer": "أم محمد", "items": "مناقيش زعتر × 10، فطيرة سبانخ × 5", "status": "preparing", "time": "10:15", "order_number": 49},
+      {"id": "q_bk2", "customer": "مطعم الديوان", "items": "خبز عربي × 100", "status": "preparing", "time": "10:20", "order_number": 50},
+      {"id": "q_bk3", "customer": "سامر يوسف", "items": "فطيرة دجاج × 2، بيتزا مخبز", "status": "waiting", "time": "10:25", "order_number": 51},
+      {"id": "q_bk4", "customer": "ليلى أحمد", "items": "كعكة يومية × 3، بسكويت بالتمر × 2", "status": "waiting", "time": "10:30", "order_number": 52}
+    ],
+    "unavailable_items": [
+      "قرص عقيلي"
+    ],
+    "best_sellers": [
+      {"name": "مناقيش زعتر", "count": 120, "trend": "up"},
+      {"name": "خبز عربي كبير", "count": 95, "trend": "same"},
+      {"name": "فطيرة لحمة", "count": 68, "trend": "up"},
+      {"name": "مناقيش جبنة", "count": 55, "trend": "up"},
+      {"name": "فطيرة دجاج", "count": 42, "trend": "same"}
+    ],
+    "pending_requests": [
+      {"id": "req_bk01", "customer": "مدرسة الأمل", "service": "طلب كبير — 200 مناقيش + 100 فطيرة", "date": "2026-02-14", "time": "07:00"},
+      {"id": "req_bk02", "customer": "عائلة الخطيب", "service": "طلب فطائر عائلية — توصيل جبل اللويبدة", "date": "2026-02-13", "time": "12:00"}
+    ]
+  }
+}

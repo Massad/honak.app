@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_ev01",
+      "name_ar": "باقة الفضية",
+      "name_en": "Silver Package",
+      "description_ar": "قاعة رئيسية ٢٠٠ شخص + بوفيه أساسي + تنسيق زهور + نظام صوت",
+      "price_cents": 150000,
+      "images": ["https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400"],
+      "category_id": "cat_venue_hall",
+      "category_name": "قاعات",
+      "in_stock": true,
+      "page_id": "royal-events",
+      "sort_order": 1,
+      "option_groups": [],
+      "properties": {"capacity": "200"}
+    },
+    {
+      "id": "item_ev02",
+      "name_ar": "باقة الذهبية",
+      "name_en": "Gold Package",
+      "description_ar": "قاعة VIP ٣٠٠ شخص + بوفيه فاخر + تنسيق زهور وإضاءة + تصوير احترافي + نظام صوت وإضاءة",
+      "price_cents": 300000,
+      "images": ["https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400"],
+      "category_id": "cat_venue_hall",
+      "category_name": "قاعات",
+      "in_stock": true,
+      "page_id": "royal-events",
+      "sort_order": 2,
+      "option_groups": [],
+      "properties": {"capacity": "300"}
+    }
+  ],
+  "meta": {"total": 2, "has_more": false}
+}

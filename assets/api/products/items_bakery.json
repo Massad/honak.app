@@ -1,0 +1,252 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_bk01",
+      "name_ar": "خبز عربي كبير",
+      "name_en": "Large Arabic Bread",
+      "description_ar": "خبز عربي طازج من الفرن",
+      "price_cents": 15,
+      "images": ["https://picsum.photos/seed/bakery-bread-arabi/400"],
+      "category_id": "cat_bread",
+      "category_name": "خبز",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 1,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk02",
+      "name_ar": "خبز صاج",
+      "name_en": "Saj Bread",
+      "description_ar": "خبز صاج رقيق ومقرمش",
+      "price_cents": 20,
+      "images": ["https://picsum.photos/seed/bakery-bread-saj/400"],
+      "category_id": "cat_bread",
+      "category_name": "خبز",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 2,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk03",
+      "name_ar": "خبز تنور",
+      "name_en": "Tannour Bread",
+      "description_ar": "خبز تنور تقليدي سميك",
+      "price_cents": 25,
+      "images": ["https://picsum.photos/seed/bakery-bread-tannour/400"],
+      "category_id": "cat_bread",
+      "category_name": "خبز",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 3,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk04",
+      "name_ar": "خبز كماج",
+      "name_en": "Kmaj Bread",
+      "description_ar": "خبز كماج طري ومنفوخ",
+      "price_cents": 20,
+      "images": ["https://picsum.photos/seed/bakery-bread-kmaj/400"],
+      "category_id": "cat_bread",
+      "category_name": "خبز",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 4,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk05",
+      "name_ar": "مناقيش زعتر",
+      "name_en": "Zaatar Manakeesh",
+      "description_ar": "مناقيش زعتر بزيت زيتون طازج",
+      "price_cents": 50,
+      "images": ["https://picsum.photos/seed/bakery-manaqeesh-zaatar/400"],
+      "category_id": "cat_pastries",
+      "category_name": "معجنات",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 5,
+      "option_groups": [
+        {
+          "id": "og_bk05_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_bk05_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -15},
+            {"id": "opt_bk05_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_bk06",
+      "name_ar": "مناقيش جبنة",
+      "name_en": "Cheese Manakeesh",
+      "description_ar": "مناقيش بجبنة عكاوي ومشللة",
+      "price_cents": 60,
+      "images": ["https://picsum.photos/seed/bakery-manaqeesh-cheese/400"],
+      "category_id": "cat_pastries",
+      "category_name": "معجنات",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 6,
+      "option_groups": [
+        {
+          "id": "og_bk06_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_bk06_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -20},
+            {"id": "opt_bk06_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_bk07",
+      "name_ar": "فطيرة سبانخ",
+      "name_en": "Spinach Pie",
+      "description_ar": "فطيرة سبانخ بالسماق والبصل",
+      "price_cents": 50,
+      "images": ["https://picsum.photos/seed/bakery-fatayer-spinach/400"],
+      "category_id": "cat_pastries",
+      "category_name": "معجنات",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 7,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk08",
+      "name_ar": "فطيرة لحمة",
+      "name_en": "Meat Pie",
+      "description_ar": "فطيرة باللحم المفروم والبهارات",
+      "price_cents": 75,
+      "images": ["https://picsum.photos/seed/bakery-fatayer-meat/400"],
+      "category_id": "cat_pastries",
+      "category_name": "معجنات",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 8,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk09",
+      "name_ar": "صفيحة",
+      "name_en": "Sfiha",
+      "description_ar": "صفيحة باللحم على الطريقة الشامية",
+      "price_cents": 60,
+      "images": ["https://picsum.photos/seed/bakery-sfiha/400"],
+      "category_id": "cat_pastries",
+      "category_name": "معجنات",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 9,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk10",
+      "name_ar": "بيتزا مخبز",
+      "name_en": "Bakery Pizza",
+      "description_ar": "بيتزا على طريقة المخبز بالجبنة والزيتون",
+      "price_cents": 100,
+      "images": ["https://picsum.photos/seed/bakery-pizza/400"],
+      "category_id": "cat_pastries",
+      "category_name": "معجنات",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 10,
+      "option_groups": [
+        {
+          "id": "og_bk10_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_bk10_sm", "label_ar": "صغير", "label_en": "Small", "price_modifier": -25},
+            {"id": "opt_bk10_lg", "label_ar": "كبير", "label_en": "Large", "price_modifier": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_bk11",
+      "name_ar": "فطيرة جبنة وزعتر",
+      "name_en": "Cheese & Zaatar Pie",
+      "description_ar": "فطيرة كبيرة بالجبنة والزعتر الأخضر",
+      "price_cents": 150,
+      "images": ["https://picsum.photos/seed/bakery-pie-cheese-zaatar/400"],
+      "category_id": "cat_pies",
+      "category_name": "فطائر",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 11,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk12",
+      "name_ar": "فطيرة دجاج",
+      "name_en": "Chicken Pie",
+      "description_ar": "فطيرة محشوة بالدجاج والخضار",
+      "price_cents": 200,
+      "images": ["https://picsum.photos/seed/bakery-pie-chicken/400"],
+      "category_id": "cat_pies",
+      "category_name": "فطائر",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 12,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk13",
+      "name_ar": "كعكة يومية",
+      "name_en": "Daily Cake",
+      "description_ar": "كعكة طازجة من إنتاج اليوم",
+      "price_cents": 50,
+      "images": ["https://picsum.photos/seed/bakery-cake-daily/400"],
+      "category_id": "cat_bakery_sweets",
+      "category_name": "حلويات المخبز",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 13,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk14",
+      "name_ar": "بسكويت بالتمر",
+      "name_en": "Date Cookies",
+      "description_ar": "بسكويت محشو بالتمر — ٦ حبات",
+      "price_cents": 30,
+      "images": ["https://picsum.photos/seed/bakery-date-cookies/400"],
+      "category_id": "cat_bakery_sweets",
+      "category_name": "حلويات المخبز",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 14,
+      "option_groups": []
+    },
+    {
+      "id": "item_bk15",
+      "name_ar": "قرص عقيلي",
+      "name_en": "Qors Aqeeli",
+      "description_ar": "قرص عقيلي تقليدي بالسمسم",
+      "price_cents": 40,
+      "images": ["https://picsum.photos/seed/bakery-qors-aqeeli/400"],
+      "category_id": "cat_bakery_sweets",
+      "category_name": "حلويات المخبز",
+      "in_stock": true,
+      "page_id": "golden-oven-bakery",
+      "sort_order": 15,
+      "option_groups": []
+    }
+  ],
+  "meta": {"total": 15, "has_more": false}
+}

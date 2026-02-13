@@ -19,6 +19,8 @@ class _DemoAccount {
   final String name;
   final String nameEn;
   final String avatar;
+  final Color gradientStart;
+  final Color gradientEnd;
 
   const _DemoAccount({
     required this.phone,
@@ -26,6 +28,8 @@ class _DemoAccount {
     required this.name,
     required this.nameEn,
     required this.avatar,
+    required this.gradientStart,
+    required this.gradientEnd,
   });
 }
 
@@ -37,6 +41,8 @@ const _demoAccounts = [
     nameEn: 'Sara',
     avatar:
         'https://images.unsplash.com/photo-1720722005651-1a1d71311ee8?auto=format&fit=crop&w=150&q=80',
+    gradientStart: Color(0xFF3B82F6),
+    gradientEnd: Color(0xFF22D3EE),
   ),
   _DemoAccount(
     phone: '0790000002',
@@ -45,6 +51,8 @@ const _demoAccounts = [
     nameEn: 'Ahmad',
     avatar:
         'https://images.unsplash.com/photo-1765366574945-e2f1b4b1a5b3?auto=format&fit=crop&w=150&q=80',
+    gradientStart: Color(0xFF10B981),
+    gradientEnd: Color(0xFF14B8A6),
   ),
   _DemoAccount(
     phone: '0790000030',
@@ -53,6 +61,8 @@ const _demoAccounts = [
     nameEn: 'Khaled',
     avatar:
         'https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=150&q=80',
+    gradientStart: Color(0xFF8B5CF6),
+    gradientEnd: Color(0xFF6366F1),
   ),
   _DemoAccount(
     phone: '0790000040',
@@ -61,6 +71,8 @@ const _demoAccounts = [
     nameEn: 'Yousef',
     avatar:
         'https://images.unsplash.com/photo-1639347719818-b8886d6665aa?auto=format&fit=crop&w=150&q=80',
+    gradientStart: Color(0xFFF97316),
+    gradientEnd: Color(0xFFFBBF24),
   ),
 ];
 
@@ -410,7 +422,7 @@ class _DashedBorderPainter extends CustomPainter {
   }
 }
 
-class _DemoAccountCard extends StatelessWidget {
+class _DemoAccountCard extends StatefulWidget {
   final _DemoAccount account;
   final List<String> businessNames;
   final VoidCallback onTap;
@@ -422,9 +434,24 @@ class _DemoAccountCard extends StatelessWidget {
   });
 
   @override
+  State<_DemoAccountCard> createState() => _DemoAccountCardState();
+}
+
+class _DemoAccountCardState extends State<_DemoAccountCard> {
+  static const _maxVisible = 3;
+  bool _isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
+    final account = widget.account;
+    final names = widget.businessNames;
+    final visibleNames =
+        _isExpanded ? names : names.take(_maxVisible).toList();
+    final hasMore = names.length > _maxVisible && !_isExpanded;
+    final remaining = names.length - _maxVisible;
+
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(AppSpacing.md),
@@ -443,29 +470,34 @@ class _DemoAccountCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Avatar
+            // Avatar with gradient ring
             Container(
-              width: 44,
-              height: 44,
+              width: 48,
+              height: 48,
               margin: const EdgeInsetsDirectional.only(top: 2),
               decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [account.gradientStart, account.gradientEnd],
+                ),
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.white, width: 2),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x0D000000),
-                    blurRadius: 2,
-                    offset: Offset(0, 1),
-                  ),
-                ],
               ),
-              child: ClipOval(
-                child: CachedImage(
-                  imageUrl: account.avatar,
-                  width: 44,
-                  height: 44,
-                  fit: BoxFit.cover,
-                  placeholderIcon: Icons.person,
+              padding: const EdgeInsets.all(2),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(1),
+                child: ClipOval(
+                  child: CachedImage(
+                    imageUrl: account.avatar,
+                    width: 42,
+                    height: 42,
+                    fit: BoxFit.cover,
+                    placeholderIcon: Icons.person,
+                  ),
                 ),
               ),
             ),
@@ -515,7 +547,7 @@ class _DemoAccountCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: AppSpacing.xs),
-                  // Personal account indicator
+                  // Personal account + page count
                   Row(
                     children: [
                       const Icon(
@@ -531,51 +563,109 @@ class _DemoAccountCard extends StatelessWidget {
                           color: Color(0xFF6B7280),
                         ),
                       ),
+                      if (names.isNotEmpty) ...[
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 6),
+                          child: Text(
+                            '|',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Color(0xFFD1D5DB),
+                            ),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.storefront,
+                          size: 9,
+                          color: Color(0xFF9CA3AF),
+                        ),
+                        const SizedBox(width: AppSpacing.xs),
+                        Text(
+                          'صاحب ${names.length} صفحات',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF6B7280),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                   const SizedBox(height: AppSpacing.xs),
-                  // Business badges
-                  if (businessNames.isNotEmpty)
+                  // Business badges (truncated)
+                  if (names.isNotEmpty)
                     Wrap(
                       spacing: AppSpacing.xs,
                       runSpacing: AppSpacing.xs,
-                      children: businessNames.map((biz) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.sm,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFEFF6FF),
-                            borderRadius:
-                                BorderRadius.circular(AppRadius.xs),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.storefront,
-                                size: 9,
-                                color: AppColors.primary,
+                      children: [
+                        ...visibleNames.map((biz) => _BusinessPill(name: biz)),
+                        if (hasMore)
+                          GestureDetector(
+                            onTap: () =>
+                                setState(() => _isExpanded = true),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.sm,
+                                vertical: 2,
                               ),
-                              const SizedBox(width: AppSpacing.xs),
-                              Text(
-                                biz,
-                                style: TextStyle(
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF3F4F6),
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.xs),
+                              ),
+                              child: Text(
+                                '+$remaining أخرى',
+                                style: const TextStyle(
                                   fontSize: 10,
-                                  color: AppColors.primary,
+                                  color: Color(0xFF9CA3AF),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        );
-                      }).toList(),
+                      ],
                     ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _BusinessPill extends StatelessWidget {
+  final String name;
+
+  const _BusinessPill({required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: 2,
+      ),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEFF6FF),
+        borderRadius: BorderRadius.circular(AppRadius.xs),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.storefront,
+            size: 9,
+            color: AppColors.primary,
+          ),
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            name,
+            style: TextStyle(
+              fontSize: 10,
+              color: AppColors.primary,
+            ),
+          ),
+        ],
       ),
     );
   }

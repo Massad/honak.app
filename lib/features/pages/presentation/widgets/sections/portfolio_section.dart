@@ -7,6 +7,7 @@ import 'package:honak/features/pages/presentation/providers/page_detail_provider
 import 'package:honak/features/requests/presentation/widgets/inquiry_request_sheet.dart';
 import 'package:honak/shared/widgets/cached_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Gallery grid with category pills, inquiry CTA, and custom work CTA.
@@ -205,7 +206,12 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
                             SizedBox(
                               width: double.infinity,
                               child: FilledButton(
-                                onPressed: () => _openInquirySheet(context),
+                                onPressed: () => AuthGate.require(
+                                  context,
+                                  ref,
+                                  trigger: LoginPromptTrigger.general,
+                                  onAuthed: () => _openInquirySheet(context),
+                                ),
                                 child: const Text('إرسال استفسار'),
                               ),
                             ),
@@ -229,7 +235,12 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
               left: AppSpacing.lg,
               right: AppSpacing.lg,
               child: FilledButton.icon(
-                onPressed: () => _openInquirySheet(context),
+                onPressed: () => AuthGate.require(
+                  context,
+                  ref,
+                  trigger: LoginPromptTrigger.general,
+                  onAuthed: () => _openInquirySheet(context),
+                ),
                 icon: const Icon(Icons.chat_outlined),
                 label: const Text('استفسر الآن'),
                 style: FilledButton.styleFrom(

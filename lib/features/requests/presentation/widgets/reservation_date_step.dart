@@ -131,29 +131,20 @@ class ReservationDateStep extends StatelessWidget {
               ?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: AppSpacing.sm),
-        _DateRow(label: 'الوصول', date: checkIn, onPick: onCheckInPicked),
+        _DateTimeRow(
+          label: 'الوصول',
+          date: checkIn,
+          time: checkInTime,
+          onPickDate: onCheckInPicked,
+          onPickTime: onPickCheckInTime,
+        ),
         const SizedBox(height: AppSpacing.sm),
-        _DateRow(label: 'المغادرة', date: checkOut, onPick: onCheckOutPicked),
-        // FG6: Time selection
-        const SizedBox(height: AppSpacing.sm),
-        Row(
-          children: [
-            Expanded(
-              child: _TimeChip(
-                label: 'وقت الوصول',
-                value: checkInTime,
-                onTap: onPickCheckInTime,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: _TimeChip(
-                label: 'وقت المغادرة',
-                value: checkOutTime,
-                onTap: onPickCheckOutTime,
-              ),
-            ),
-          ],
+        _DateTimeRow(
+          label: 'المغادرة',
+          date: checkOut,
+          time: checkOutTime,
+          onPickDate: onCheckOutPicked,
+          onPickTime: onPickCheckOutTime,
         ),
         // Night count badge
         if (_nightCount != null && _nightCount! > 0) ...[
@@ -165,111 +156,120 @@ class ReservationDateStep extends StatelessWidget {
   }
 }
 
-class _DateRow extends StatelessWidget {
+class _DateTimeRow extends StatelessWidget {
   final String label;
   final DateTime? date;
-  final ValueChanged<DateTime> onPick;
+  final String? time;
+  final ValueChanged<DateTime> onPickDate;
+  final VoidCallback onPickTime;
 
-  const _DateRow({
+  const _DateTimeRow({
     required this.label,
     required this.date,
-    required this.onPick,
+    required this.time,
+    required this.onPickDate,
+    required this.onPickTime,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final hasDate = date != null;
+    final hasTime = time != null;
 
-    return InkWell(
-      onTap: () async {
-        final picked = await showDatePicker(
-          context: context,
-          initialDate: date ?? DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(const Duration(days: 365)),
-          locale: const Locale('ar'),
-        );
-        if (picked != null) onPick(picked);
-      },
-      borderRadius: AppRadius.cardInner,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
-          borderRadius: AppRadius.cardInner,
-          border: Border.all(
-            color: date != null ? AppColors.primary : AppColors.divider,
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.calendar_today,
-                size: 14,
-                color: date != null ? AppColors.primary : AppColors.textHint),
-            const SizedBox(width: AppSpacing.sm),
-            Text(
-              label,
-              style: theme.textTheme.labelSmall
-                  ?.copyWith(color: AppColors.textHint),
-            ),
-            const Spacer(),
-            Text(
-              date != null
-                  ? '${date!.day}/${date!.month}/${date!.year}'
-                  : 'اختر التاريخ',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: date != null ? null : AppColors.textHint,
-              ),
-            ),
-          ],
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surfaceVariant,
+        borderRadius: AppRadius.cardInner,
+        border: Border.all(
+          color: hasDate ? AppColors.primary : AppColors.divider,
         ),
       ),
-    );
-  }
-}
-
-class _TimeChip extends StatelessWidget {
-  final String label;
-  final String? value;
-  final VoidCallback onTap;
-
-  const _TimeChip({
-    required this.label,
-    required this.value,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
-          borderRadius: AppRadius.cardInner,
-          border: Border.all(color: AppColors.divider),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.access_time,
-                size: 14, color: AppColors.textSecondary),
-            const SizedBox(width: AppSpacing.xs),
-            Expanded(
-              child: Text(
-                value ?? label,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: value != null
-                      ? AppColors.textPrimary
-                      : AppColors.textHint,
+      child: Row(
+        children: [
+          // Date portion
+          Expanded(
+            flex: 3,
+            child: InkWell(
+              onTap: () async {
+                final picked = await showDatePicker(
+                  context: context,
+                  initialDate: date ?? DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now().add(const Duration(days: 365)),
+                  locale: const Locale('ar'),
+                );
+                if (picked != null) onPickDate(picked);
+              },
+              borderRadius: const BorderRadius.all(
+                Radius.circular(AppRadius.sm),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: Row(
+                  children: [
+                    Icon(Icons.calendar_today,
+                        size: 14,
+                        color: hasDate
+                            ? AppColors.primary
+                            : AppColors.textHint),
+                    const SizedBox(width: AppSpacing.sm),
+                    Text(
+                      label,
+                      style: theme.textTheme.labelSmall
+                          ?.copyWith(color: AppColors.textHint),
+                    ),
+                    const Spacer(),
+                    Text(
+                      hasDate
+                          ? '${date!.day}/${date!.month}/${date!.year}'
+                          : 'التاريخ',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: hasDate ? null : AppColors.textHint,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          // Divider
+          Container(
+            width: 1,
+            height: 28,
+            color: hasDate ? AppColors.primary.withValues(alpha: 0.2) : AppColors.divider,
+          ),
+          // Time portion
+          Expanded(
+            flex: 2,
+            child: InkWell(
+              onTap: onPickTime,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(AppRadius.sm),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.access_time,
+                        size: 14,
+                        color: hasTime
+                            ? AppColors.primary
+                            : AppColors.textHint),
+                    const SizedBox(width: AppSpacing.xs),
+                    Text(
+                      hasTime ? time! : 'الوقت',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: hasTime ? null : AppColors.textHint,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,0 +1,80 @@
+{
+  "success": true,
+  "data": {
+    "id": "kahraba-express",
+    "owner_id": null,
+    "business_type_id": "electrician",
+    "business_type_name": "كهربائي",
+    "category_name": "خدمات منزلية",
+    "explore_category": "cat_home_services",
+    "name": "كهربا إكسبرس",
+    "name_en": "Kahraba Express",
+    "slug": "kahraba-express",
+    "handle": "kahraba-express",
+    "store_type": "physical",
+    "archetype": "quote_request",
+    "description": "كهربائي متنقل لجميع الأعطال المنزلية والتجارية. تمديدات، صيانة، طوارئ ٢٤ ساعة.",
+    "avatar_url": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790100010",
+    "location": {
+      "lat": 31.975,
+      "lng": 35.865,
+      "label": "تلاع العلي، عمّان",
+      "area": "تلاع العلي",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "20:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "20:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "20:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "20:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "20:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": true, "open": "08:00", "close": "20:00"}
+    },
+    "operating_hours": "السبت - الخميس: ٨:٠٠ ص — ٨:٠٠ م\nطوارئ: ٢٤/٧",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": false,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "unclaimed",
+    "followers_count": 0,
+    "items_count": 0,
+    "posts_count": 0,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "20:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 0,
+    "trust_metrics": [],
+    "delivery_available": false,
+    "pickup_available": false,
+    "payment_methods": ["نقداً"],
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "gallery_images": [],
+    "services_offered": [
+      {"name": "صيانة كهربائية عامة"},
+      {"name": "تمديدات جديدة"},
+      {"name": "كشف أعطال"},
+      {"name": "تركيب إنارة"},
+      {"name": "صيانة لوحات كهربائية"}
+    ],
+    "price_range": {
+      "min_cents": 1000,
+      "max_cents": 10000,
+      "note": "حسب نوع العمل"
+    },
+    "booking_questions": ["ما نوع العطل الكهربائي؟", "ما موقع المشكلة (غرفة/مطبخ/خارجي)؟", "هل هناك خطر حريق أو شرارة؟", "ما المنطقة؟"],
+    "service_areas": ["تلاع العلي", "خلدا", "الصويفية", "عبدون", "الشميساني", "الجبيهة"]
+  }
+}

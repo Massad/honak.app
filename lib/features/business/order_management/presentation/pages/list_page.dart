@@ -10,7 +10,9 @@ import 'package:honak/features/business/order_management/presentation/widgets/re
 import 'package:honak/features/business/order_management/presentation/widgets/truck_detail_overlay.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/truck_status_cards.dart';
 import 'package:honak/features/business/dropoff/presentation/providers/dropoff_providers.dart';
+import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_board.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_quick_add.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/presentation/providers/queue_providers.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_board.dart';
@@ -36,7 +38,10 @@ class _BusinessRequestsPageState extends ConsumerState<BusinessRequestsPage> {
 
     // Dropoff-based businesses get the DropoffBoard
     if (isDropoffType(bizContext.config?.id)) {
-      return _DropoffBoardWrapper(pageId: bizContext.page.id);
+      return _DropoffBoardWrapper(
+        pageId: bizContext.page.id,
+        typeId: bizContext.config?.id,
+      );
     }
 
     // Queue-based businesses get the QueueBoard instead of the standard list
@@ -626,27 +631,58 @@ class _ErrorState extends StatelessWidget {
 // Dropoff board wrapper — loads data and renders DropoffBoard
 // ═══════════════════════════════════════════════════════════════
 
-class _DropoffBoardWrapper extends ConsumerWidget {
+class _DropoffBoardWrapper extends ConsumerStatefulWidget {
   final String pageId;
+  final String? typeId;
 
-  const _DropoffBoardWrapper({required this.pageId});
+  const _DropoffBoardWrapper({required this.pageId, this.typeId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final dropoffAsync = ref.watch(dropoffDataProvider(pageId));
+  ConsumerState<_DropoffBoardWrapper> createState() =>
+      _DropoffBoardWrapperState();
+}
+
+class _DropoffBoardWrapperState extends ConsumerState<_DropoffBoardWrapper> {
+  late List<DropoffTicket> _tickets;
+  DropoffData? _data;
+  final _boardKey = GlobalKey<State>();
+
+  @override
+  Widget build(BuildContext context) {
+    final dropoffAsync = ref.watch(dropoffDataProvider(widget.pageId));
+    final infoTemplates = getInfoTemplates(widget.typeId);
 
     return dropoffAsync.when(
-      data: (data) => DropoffBoard(
-        initialTickets: data.tickets,
-        stats: data.stats,
-        serviceCategories: data.serviceCategories,
-        attributes: data.attributes,
-        itemTypes: data.itemTypes,
-      ),
+      data: (data) {
+        if (_data == null || !identical(_data, data)) {
+          _data = data;
+          _tickets = List.of(data.tickets);
+        }
+
+        return DropoffBoard(
+          key: _boardKey,
+          initialTickets: _tickets,
+          stats: data.stats,
+          infoTemplates: infoTemplates,
+          onAdd: () async {
+            final ticket = await showDropoffQuickAdd(
+              context,
+              serviceCategories: data.serviceCategories,
+              attributes: data.attributes,
+              itemTypes: data.itemTypes,
+            );
+            if (ticket != null && mounted) {
+              setState(() {
+                _tickets = [ticket, ..._tickets];
+              });
+            }
+          },
+        );
+      },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, _) => _ErrorState(
         message: error.toString(),
-        onRetry: () => ref.invalidate(dropoffDataProvider(pageId)),
+        onRetry: () => ref.invalidate(dropoffDataProvider(widget.pageId)),
       ),
     );
   }

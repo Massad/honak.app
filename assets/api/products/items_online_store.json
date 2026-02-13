@@ -1,0 +1,158 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_duk01",
+      "name_ar": "سماعات لاسلكية بلوتوث",
+      "name_en": "Wireless Bluetooth Earbuds",
+      "description_ar": "سماعات لاسلكية بجودة صوت عالية — بطارية تدوم ٦ ساعات",
+      "price_cents": 1800,
+      "original_price_cents": 2500,
+      "discount_percent": 28,
+      "images": ["https://picsum.photos/seed/dukearbuds/400/400"],
+      "category_id": "cat_duk_headphones",
+      "category_name": "سماعات",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 1,
+      "option_groups": [
+        {
+          "id": "og_duk01_color",
+          "label_ar": "اللون",
+          "label_en": "Color",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_duk01_black", "label_ar": "أسود", "label_en": "Black", "price_modifier": 0, "color_hex": "#000000"},
+            {"id": "opt_duk01_white", "label_ar": "أبيض", "label_en": "White", "price_modifier": 0, "color_hex": "#FFFFFF"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_duk02",
+      "name_ar": "شاحن سريع ٦٥ واط",
+      "name_en": "65W Fast Charger",
+      "description_ar": "شاحن سريع GaN بقوة ٦٥ واط — يشحن اللابتوب والجوال",
+      "price_cents": 1200,
+      "images": ["https://picsum.photos/seed/dukcharger/400/400"],
+      "category_id": "cat_duk_chargers",
+      "category_name": "شواحن وكوابل",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 2,
+      "option_groups": []
+    },
+    {
+      "id": "item_duk03",
+      "name_ar": "كفر جوال مقاوم للصدمات",
+      "name_en": "Shockproof Phone Case",
+      "description_ar": "كفر حماية شفاف مقاوم للصدمات — متوافق مع أغلب الأجهزة",
+      "price_cents": 500,
+      "images": ["https://picsum.photos/seed/dukcase/400/400"],
+      "category_id": "cat_duk_phone_acc",
+      "category_name": "إكسسوارات جوال",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 3,
+      "option_groups": []
+    },
+    {
+      "id": "item_duk04",
+      "name_ar": "ماوس لاسلكي مريح",
+      "name_en": "Ergonomic Wireless Mouse",
+      "description_ar": "ماوس لاسلكي بتصميم مريح — بطارية تدوم ٣ أشهر",
+      "price_cents": 800,
+      "images": ["https://picsum.photos/seed/dukmouse/400/400"],
+      "category_id": "cat_duk_computer",
+      "category_name": "كمبيوتر",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 4,
+      "option_groups": [
+        {
+          "id": "og_duk04_color",
+          "label_ar": "اللون",
+          "label_en": "Color",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_duk04_black", "label_ar": "أسود", "label_en": "Black", "price_modifier": 0, "color_hex": "#000000"},
+            {"id": "opt_duk04_grey", "label_ar": "رمادي", "label_en": "Grey", "price_modifier": 0, "color_hex": "#808080"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_duk05",
+      "name_ar": "كيبل USB-C مضفر ٢ متر",
+      "name_en": "Braided USB-C Cable 2m",
+      "description_ar": "كيبل USB-C متين بطول ٢ متر — يدعم الشحن السريع",
+      "price_cents": 350,
+      "images": ["https://picsum.photos/seed/dukcable/400/400"],
+      "category_id": "cat_duk_chargers",
+      "category_name": "شواحن وكوابل",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 5,
+      "option_groups": []
+    },
+    {
+      "id": "item_duk06",
+      "name_ar": "ستاند لابتوب ألومنيوم",
+      "name_en": "Aluminum Laptop Stand",
+      "description_ar": "حامل لابتوب من الألومنيوم — قابل للتعديل، يحسّن وضعية الجلوس",
+      "price_cents": 2200,
+      "images": ["https://picsum.photos/seed/dukstand/400/400"],
+      "category_id": "cat_duk_computer",
+      "category_name": "كمبيوتر",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 6,
+      "option_groups": []
+    },
+    {
+      "id": "item_duk07",
+      "name_ar": "باور بانك ١٠٠٠٠ أمبير",
+      "name_en": "10000mAh Power Bank",
+      "description_ar": "باور بانك سعة ١٠٠٠٠ أمبير — شحن سريع ومنفذين USB",
+      "price_cents": 1500,
+      "original_price_cents": 2000,
+      "discount_percent": 25,
+      "images": ["https://picsum.photos/seed/dukpowerbank/400/400"],
+      "category_id": "cat_duk_chargers",
+      "category_name": "شواحن وكوابل",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 7,
+      "option_groups": [
+        {
+          "id": "og_duk07_color",
+          "label_ar": "اللون",
+          "label_en": "Color",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_duk07_black", "label_ar": "أسود", "label_en": "Black", "price_modifier": 0, "color_hex": "#000000"},
+            {"id": "opt_duk07_blue", "label_ar": "أزرق", "label_en": "Blue", "price_modifier": 0, "color_hex": "#1A73E8"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_duk08",
+      "name_ar": "حامل جوال مغناطيسي للسيارة",
+      "name_en": "Magnetic Car Phone Mount",
+      "description_ar": "حامل جوال مغناطيسي قوي — يثبت على فتحة المكيف",
+      "price_cents": 600,
+      "images": ["https://picsum.photos/seed/dukmount/400/400"],
+      "category_id": "cat_duk_phone_acc",
+      "category_name": "إكسسوارات جوال",
+      "in_stock": true,
+      "page_id": "dukkaneh-store",
+      "sort_order": 8,
+      "option_groups": []
+    }
+  ],
+  "meta": {"total": 8, "has_more": false}
+}

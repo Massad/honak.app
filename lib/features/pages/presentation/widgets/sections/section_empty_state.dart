@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/config/archetype.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
+import 'package:honak/features/pages/presentation/widgets/shared/contact_prompt_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Contextual empty states for business page sections.
@@ -150,7 +151,12 @@ class _UnclaimedState extends StatelessWidget {
                           child: _ContactButton(
                             icon: Icons.phone_outlined,
                             label: 'اتصال مباشر',
-                            onTap: () => _launchPhone(context),
+                            onTap: () => ContactPromptSheet.show(
+                              context,
+                              businessName: page.name,
+                              method: 'call',
+                              onProceed: () => _launchPhone(context),
+                            ),
                           ),
                         ),
                       if (hasPhone && hasWhatsApp)
@@ -160,7 +166,12 @@ class _UnclaimedState extends StatelessWidget {
                           child: _ContactButton(
                             icon: Icons.chat_outlined,
                             label: 'واتساب',
-                            onTap: () => _launchWhatsApp(context),
+                            onTap: () => ContactPromptSheet.show(
+                              context,
+                              businessName: page.name,
+                              method: 'whatsapp',
+                              onProceed: () => _launchWhatsApp(context),
+                            ),
                           ),
                         ),
                     ],

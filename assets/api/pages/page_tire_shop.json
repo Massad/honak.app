@@ -12,7 +12,7 @@
     "slug": "aljazeera-tires",
     "handle": "aljazeera-tires",
     "store_type": "physical",
-    "archetype": "queue",
+    "archetype": "service_booking",
     "description": "محل إطارات متخصص — بيع وتركيب وموازنة وترصيص. وكيل ماركات عالمية.",
     "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
     "cover_url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",

@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_vil01",
+      "name_ar": "فيلا البحر الميت",
+      "name_en": "Dead Sea Villa",
+      "description_ar": "فيلا فاخرة — 4 غرف نوم، مسبح خاص، جاكوزي، حديقة. أيام الأسبوع ١٥٠ د.أ، نهاية الأسبوع ٢٠٠ د.أ",
+      "price_cents": 15000,
+      "images": [
+        "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400",
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400"
+      ],
+      "category_id": null,
+      "category_name": null,
+      "in_stock": true,
+      "page_id": "villa-dead-sea",
+      "sort_order": 1,
+      "option_groups": [],
+      "properties": {
+        "bedrooms": "4",
+        "bathrooms": "3",
+        "max_guests": "12",
+        "weekend_price": 20000
+      }
+    }
+  ],
+  "meta": {"total": 1, "has_more": false}
+}

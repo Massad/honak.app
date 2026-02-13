@@ -3,62 +3,115 @@
   "data": [
     {
       "id": "biz_item_r01",
-      "name": "منسف",
-      "name_en": "Mansaf",
-      "description": "لحم بلدي مع جميد الكرك وأرز — يكفي ٢ أشخاص",
-      "price_cents": 800,
-      "images": ["https://images.unsplash.com/photo-1630343710506-89f0b2a0a2e5?auto=format&fit=crop&w=400&q=80"],
+      "name": "منسف أردني باللحم",
+      "name_en": "Jordanian Mansaf",
+      "description": "جميد كركي أصلي، لحم بلدي، أرز ومكسرات",
+      "price_cents": 1200,
+      "images": ["https://images.unsplash.com/photo-1704544331046-2f08535a25b3?auto=format&fit=crop&w=400&q=80"],
       "category_id": "cat_main",
-      "category_name": "أطباق رئيسية",
+      "category_name": "الرئيسية",
       "status": "active",
       "sort_order": 1,
       "page_id": "beit-sitti",
+      "option_groups": [
+        {
+          "id": "og_mans_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_mans_single", "label_ar": "فردي", "label_en": "Single", "price_modifier": 0},
+            {"id": "opt_mans_family", "label_ar": "عائلي", "label_en": "Family", "price_modifier": 2300}
+          ]
+        }
+      ],
       "properties": {}
     },
     {
       "id": "biz_item_r02",
-      "name": "مقلوبة دجاج",
-      "name_en": "Chicken Maqloubeh",
-      "description": "دجاج مع أرز وباذنجان مقلي — الطبخة الشامية الأصلية",
-      "price_cents": 550,
-      "images": ["https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=400&q=80"],
+      "name": "مشاوي مشكلة",
+      "name_en": "Mixed Grill",
+      "description": "شيش طاووق، كباب، شقف مع بصل وبندورة",
+      "price_cents": 1500,
+      "images": ["https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80"],
       "category_id": "cat_main",
-      "category_name": "أطباق رئيسية",
+      "category_name": "الرئيسية",
       "status": "active",
       "sort_order": 2,
       "page_id": "beit-sitti",
+      "option_groups": [
+        {
+          "id": "og_grill_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_grill_reg", "label_ar": "عادي", "label_en": "Regular", "price_modifier": 0},
+            {"id": "opt_grill_2kg", "label_ar": "٢ كغ", "label_en": "2 kg", "price_modifier": 1300}
+          ]
+        }
+      ],
       "properties": {}
     },
     {
       "id": "biz_item_r03",
-      "name": "حمص بطحينة",
-      "name_en": "Hummus",
-      "description": "حمص طازج مع طحينة وزيت زيتون",
-      "price_cents": 200,
-      "images": ["https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=400&q=80"],
-      "category_id": "cat_appetizers",
-      "category_name": "مقبلات",
+      "name": "شاورما دجاج سوبر",
+      "name_en": "Chicken Shawarma Super",
+      "description": "خبز صاج، ثومية زيادة، مخلل، وبطاطا",
+      "price_cents": 350,
+      "images": ["https://images.unsplash.com/photo-1665989215795-f67f4723087d?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_sandwiches",
+      "category_name": "السندويشات",
       "status": "active",
       "sort_order": 3,
       "page_id": "beit-sitti",
+      "option_groups": [
+        {
+          "id": "og_shaw_size",
+          "label_ar": "الحجم",
+          "label_en": "Size",
+          "type": "single_select",
+          "required": true,
+          "options": [
+            {"id": "opt_shaw_sand", "label_ar": "سندويش", "label_en": "Sandwich", "price_modifier": 0},
+            {"id": "opt_shaw_plate", "label_ar": "صحن", "label_en": "Plate", "price_modifier": 350}
+          ]
+        }
+      ],
       "properties": {}
     },
     {
       "id": "biz_item_r04",
-      "name": "كنافة نابلسية",
-      "name_en": "Kunafa Nabulsieh",
-      "description": "كنافة بالجبنة الحلوة — طازجة من الفرن",
-      "price_cents": 350,
-      "original_price_cents": 400,
-      "discount_percent": 12,
-      "images": ["https://images.unsplash.com/photo-1579888944880-d98341245702?auto=format&fit=crop&w=400&q=80"],
-      "category_id": "cat_desserts",
-      "category_name": "حلويات",
+      "name": "حمص باللحمة",
+      "name_en": "Hummus with Meat",
+      "description": "حمص طازج مع لحمة مفرومة وصنوبر",
+      "price_cents": 400,
+      "images": ["https://images.unsplash.com/photo-1577906096429-f736f9f3b9bd?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_appetizers",
+      "category_name": "المقبلات",
       "status": "active",
       "sort_order": 4,
       "page_id": "beit-sitti",
+      "option_groups": [],
+      "properties": {}
+    },
+    {
+      "id": "biz_item_r05",
+      "name": "فتوش",
+      "name_en": "Fattoush",
+      "description": "خضار طازجة، خبز مقلي، دبس رمان",
+      "price_cents": 250,
+      "images": ["https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?auto=format&fit=crop&w=400&q=80"],
+      "category_id": "cat_appetizers",
+      "category_name": "المقبلات",
+      "status": "active",
+      "sort_order": 5,
+      "page_id": "beit-sitti",
+      "option_groups": [],
       "properties": {}
     }
   ],
-  "meta": {"total": 4, "has_more": false}
+  "meta": {"total": 5, "has_more": false}
 }

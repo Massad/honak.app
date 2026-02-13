@@ -12,7 +12,7 @@
     "slug": "precision-watches",
     "handle": "precision-watches",
     "store_type": "physical",
-    "archetype": "dropoff",
+    "archetype": "service_booking",
     "description": "مركز متخصص بصيانة وإصلاح الساعات السويسرية والعالمية. فنيون معتمدون.",
     "avatar_url": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=200&q=80",
     "cover_url": "https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?auto=format&fit=crop&w=800&q=80",

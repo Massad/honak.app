@@ -354,18 +354,18 @@ class _ServiceBookingWithDropoff extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dropoffAsync = ref.watch(customerDropoffDataProvider(page.id));
 
-    return CustomScrollView(
-      slivers: [
-        // Dropoff tracking view (loaded async)
+    return ServiceBookingSection(
+      pageId: page.id,
+      pageName: page.name,
+      teamMembersCount: page.teamMembersCount,
+      packages: page.packages,
+      headerSlivers: [
         SliverToBoxAdapter(
           child: dropoffAsync.when(
             data: (data) => Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: CustomerDropoffView(
-                pageName: page.name,
-                pageAvatar: page.avatarUrl,
                 tickets: data.tickets,
-                serviceCategories: data.serviceCategories,
               ),
             ),
             loading: () => const Padding(
@@ -373,15 +373,6 @@ class _ServiceBookingWithDropoff extends ConsumerWidget {
               child: Center(child: CircularProgressIndicator()),
             ),
             error: (_, __) => const SizedBox.shrink(),
-          ),
-        ),
-        // Standard service booking section below
-        SliverToBoxAdapter(
-          child: ServiceBookingSection(
-            pageId: page.id,
-            pageName: page.name,
-            teamMembersCount: page.teamMembersCount,
-            packages: page.packages,
           ),
         ),
       ],
@@ -399,9 +390,12 @@ class _ServiceBookingWithQueue extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final queueAsync = ref.watch(customerQueueDataProvider(page.id));
 
-    return CustomScrollView(
-      slivers: [
-        // Queue view (loaded async)
+    return ServiceBookingSection(
+      pageId: page.id,
+      pageName: page.name,
+      teamMembersCount: page.teamMembersCount,
+      packages: page.packages,
+      headerSlivers: [
         SliverToBoxAdapter(
           child: queueAsync.when(
             data: (data) => Padding(
@@ -421,15 +415,6 @@ class _ServiceBookingWithQueue extends ConsumerWidget {
               child: Center(child: CircularProgressIndicator()),
             ),
             error: (_, __) => const SizedBox.shrink(),
-          ),
-        ),
-        // Standard service booking section below
-        SliverToBoxAdapter(
-          child: ServiceBookingSection(
-            pageId: page.id,
-            pageName: page.name,
-            teamMembersCount: page.teamMembersCount,
-            packages: page.packages,
           ),
         ),
       ],

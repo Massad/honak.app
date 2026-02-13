@@ -1,0 +1,79 @@
+{
+  "success": true,
+  "data": {
+    "id": "cool-ac",
+    "owner_id": null,
+    "business_type_id": "ac_repair",
+    "business_type_name": "تكييف وتبريد",
+    "category_name": "خدمات منزلية",
+    "explore_category": "cat_home_services",
+    "name": "كول لتكييف الهواء",
+    "name_en": "Cool AC",
+    "slug": "cool-ac",
+    "handle": "cool-ac",
+    "store_type": "physical",
+    "archetype": "quote_request",
+    "description": "تركيب، صيانة، وتنظيف مكيفات. جميع الماركات. خدمة سريعة.",
+    "avatar_url": "https://images.unsplash.com/photo-1631545806609-30ee9a05a509?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790100011",
+    "location": {
+      "lat": 31.942,
+      "lng": 35.840,
+      "label": "مرج الحمام، عمّان",
+      "area": "مرج الحمام",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "18:00"},
+      "friday": {"enabled": false, "open": null, "close": null},
+      "saturday": {"enabled": true, "open": "08:00", "close": "18:00"}
+    },
+    "operating_hours": "السبت - الخميس: ٨:٠٠ ص — ٦:٠٠ م",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": false,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "unclaimed",
+    "followers_count": 0,
+    "items_count": 0,
+    "posts_count": 0,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:00",
+      "close_time": "18:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 0,
+    "trust_metrics": [],
+    "delivery_available": false,
+    "pickup_available": false,
+    "payment_methods": ["نقداً"],
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "gallery_images": [],
+    "services_offered": [
+      {"name": "تركيب مكيفات"},
+      {"name": "صيانة دورية"},
+      {"name": "تنظيف مكيفات"},
+      {"name": "إصلاح أعطال"},
+      {"name": "تعبئة غاز"}
+    ],
+    "price_range": {
+      "min_cents": 1500,
+      "max_cents": 15000
+    },
+    "booking_questions": ["ما نوع المكيف (سبلت/شباك/مركزي)؟", "ما ماركة المكيف؟", "ما المشكلة (تبريد ضعيف/تسريب/صوت/لا يعمل)؟", "ما المنطقة؟"],
+    "service_areas": ["مرج الحمام", "الجبيهة", "طبربور", "أبو نصير", "شفا بدران"]
+  }
+}

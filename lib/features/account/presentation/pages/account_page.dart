@@ -173,7 +173,7 @@ class _GuestView extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: () => context.go(Routes.login),
+                  onPressed: () => context.go(Routes.welcome),
                   child: const Text('\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644'),
                 ),
               ),

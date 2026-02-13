@@ -67,6 +67,11 @@ class _ItemsStepState extends State<_ItemsStep> {
   bool get _canAddItem =>
       _selectedService != null && _currentItemName.isNotEmpty;
 
+  Money get _totalPrice => widget.items.fold(
+        const Money.zero(),
+        (sum, item) => sum + Money(item.price) * item.quantity,
+      );
+
   void _addCurrentItem() {
     if (!_canAddItem) return;
     final item = DropoffItem(
@@ -217,27 +222,43 @@ class _ItemsStepState extends State<_ItemsStep> {
         const SizedBox(height: AppSpacing.lg),
 
         // ── Add item button ──
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: _canAddItem ? _addCurrentItem : null,
-            icon: const Icon(Icons.add, size: 16),
-            label: const Text(
-              'إضافة القطعة للتذكرة',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-            ),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.primary,
-              side: BorderSide(
+        GestureDetector(
+          onTap: _canAddItem ? _addCurrentItem : null,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            decoration: BoxDecoration(
+              color: _canAddItem
+                  ? const Color(0xFFEFF6FF)
+                  : Colors.transparent,
+              borderRadius: AppRadius.cardInner,
+              border: Border.all(
                 color: _canAddItem
-                    ? AppColors.primary
-                    : Colors.grey.shade300,
+                    ? const Color(0xFF1A73E8)
+                    : Colors.grey.shade200,
               ),
-              disabledForegroundColor: Colors.grey.shade400,
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.cardInner,
-              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.add,
+                  size: 14,
+                  color: _canAddItem
+                      ? const Color(0xFF1A73E8)
+                      : Colors.grey.shade300,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  'إضافة القطعة للتذكرة',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: _canAddItem
+                        ? const Color(0xFF1A73E8)
+                        : Colors.grey.shade300,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -257,21 +278,33 @@ class _ItemsStepState extends State<_ItemsStep> {
           const SizedBox(height: AppSpacing.lg),
 
           // ── Proceed to review ──
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: widget.onNext,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
+          GestureDetector(
+            onTap: widget.onNext,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1A73E8),
+                borderRadius: AppRadius.cardInner,
               ),
-              child: const Text(
-                'مراجعة الطلب',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'مراجعة الطلب (${widget.items.length} قطعة — ${_totalPrice.toFormattedArabic()})',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  const Icon(
+                    Icons.chevron_left_rounded,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                ],
               ),
             ),
           ),
@@ -520,10 +553,10 @@ class _AddedItemCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: onRemove,
-            child: Icon(
-              Icons.close_rounded,
-              size: 16,
-              color: Colors.grey.shade400,
+            child: const Icon(
+              Icons.delete_outline_rounded,
+              size: 14,
+              color: Color(0xFFE53935),
             ),
           ),
         ],

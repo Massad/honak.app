@@ -37,6 +37,9 @@ import 'package:honak/features/business/page_wizard/presentation/pages/wizard_pa
 import 'package:honak/features/business/shared/domain/entities/entities.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
+import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/theme/app_colors.dart';
+import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -71,7 +74,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       if (auth is AuthLoading || auth == null) return null;
 
       final isAuthenticated = auth is Authenticated;
-      final isGuest = auth is AuthGuest;
       final isLoggedOut = auth is Unauthenticated;
 
       // Logged out users must go to welcome
@@ -83,8 +85,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         return Routes.home;
       }
 
-      // Guests can access certain routes, redirect rest to home
-      if (isGuest && isAuthRoute) return Routes.home;
+      // Guests CAN navigate to auth routes (to sign up/log in)
 
       return null;
     },
@@ -340,57 +341,10 @@ class _AppShell extends ConsumerWidget {
 
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationShell.currentIndex,
-        onDestinationSelected: (index) {
-          navigationShell.goBranch(
-            index,
-            initialLocation: index == navigationShell.currentIndex,
-          );
-        },
-        destinations: [
-          const NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'الرئيسية',
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.explore_outlined),
-            selectedIcon: Icon(Icons.explore),
-            label: 'استكشاف',
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.receipt_long_outlined),
-            selectedIcon: Icon(Icons.receipt_long),
-            label: 'طلباتي',
-          ),
-          NavigationDestination(
-            icon: Badge(
-              isLabelVisible: unreadChats > 0,
-              label: Text(unreadChats > 99 ? '99+' : '$unreadChats'),
-              child: const Icon(Icons.chat_outlined),
-            ),
-            selectedIcon: Badge(
-              isLabelVisible: unreadChats > 0,
-              label: Text(unreadChats > 99 ? '99+' : '$unreadChats'),
-              child: const Icon(Icons.chat),
-            ),
-            label: 'المحادثات',
-          ),
-          NavigationDestination(
-            icon: Badge(
-              isLabelVisible: unreadNotifs > 0,
-              label: Text(unreadNotifs > 99 ? '99+' : '$unreadNotifs'),
-              child: const Icon(Icons.person_outlined),
-            ),
-            selectedIcon: Badge(
-              isLabelVisible: unreadNotifs > 0,
-              label: Text(unreadNotifs > 99 ? '99+' : '$unreadNotifs'),
-              child: const Icon(Icons.person),
-            ),
-            label: 'حسابي',
-          ),
-        ],
+      bottomNavigationBar: _CustomerBottomNav(
+        navigationShell: navigationShell,
+        unreadChats: unreadChats,
+        unreadNotifs: unreadNotifs,
       ),
     );
   }
@@ -423,6 +377,239 @@ class _PlaceholderPage extends StatelessWidget {
               'قريباً...',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomerBottomNav extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
+  final int unreadChats;
+  final int unreadNotifs;
+
+  const _CustomerBottomNav({
+    required this.navigationShell,
+    required this.unreadChats,
+    required this.unreadNotifs,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final currentIndex = navigationShell.currentIndex;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: AppSpacing.sm,
+            right: AppSpacing.sm,
+            top: AppSpacing.xs,
+            bottom: AppSpacing.xs,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _NavItem(
+                index: 0,
+                currentIndex: currentIndex,
+                icon: Icons.home_outlined,
+                activeIcon: Icons.home,
+                label: 'الرئيسية',
+                onTap: () => navigationShell.goBranch(
+                  0,
+                  initialLocation: currentIndex == 0,
+                ),
+              ),
+              _NavItem(
+                index: 1,
+                currentIndex: currentIndex,
+                icon: Icons.explore_outlined,
+                activeIcon: Icons.explore,
+                label: 'استكشاف',
+                onTap: () => navigationShell.goBranch(
+                  1,
+                  initialLocation: currentIndex == 1,
+                ),
+              ),
+              _CenterTab(
+                isActive: currentIndex == 2,
+                onTap: () => navigationShell.goBranch(
+                  2,
+                  initialLocation: currentIndex == 2,
+                ),
+              ),
+              _NavItem(
+                index: 3,
+                currentIndex: currentIndex,
+                icon: Icons.chat_outlined,
+                activeIcon: Icons.chat,
+                label: 'المحادثات',
+                badgeCount: unreadChats,
+                onTap: () => navigationShell.goBranch(
+                  3,
+                  initialLocation: currentIndex == 3,
+                ),
+              ),
+              _NavItem(
+                index: 4,
+                currentIndex: currentIndex,
+                icon: Icons.person_outlined,
+                activeIcon: Icons.person,
+                label: 'حسابي',
+                badgeCount: unreadNotifs,
+                onTap: () => navigationShell.goBranch(
+                  4,
+                  initialLocation: currentIndex == 4,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NavItem extends StatelessWidget {
+  final int index;
+  final int currentIndex;
+  final IconData icon;
+  final IconData activeIcon;
+  final String label;
+  final int badgeCount;
+  final VoidCallback onTap;
+
+  const _NavItem({
+    required this.index,
+    required this.currentIndex,
+    required this.icon,
+    required this.activeIcon,
+    required this.label,
+    this.badgeCount = 0,
+    required this.onTap,
+  });
+
+  bool get _isActive => index == currentIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = context.colorScheme.primary;
+    const grey = Color(0xFF9CA3AF);
+
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: SizedBox(
+        width: 64,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Badge(
+              isLabelVisible: badgeCount > 0,
+              label: Text(badgeCount > 99 ? '99+' : '$badgeCount'),
+              child: Icon(
+                _isActive ? activeIcon : icon,
+                size: 24,
+                color: _isActive ? primary : grey,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: _isActive ? FontWeight.w600 : FontWeight.normal,
+                color: _isActive ? primary : grey,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Container(
+              width: 4,
+              height: 4,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: _isActive ? primary : Colors.transparent,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CenterTab extends StatelessWidget {
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _CenterTab({required this.isActive, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: SizedBox(
+        width: 64,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Transform.translate(
+              offset: const Offset(0, -12),
+              child: Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [AppColors.primary, Color(0xFF4DA3FF)],
+                  ),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 4),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                alignment: Alignment.center,
+                child: const Icon(
+                  Icons.shopping_bag,
+                  size: 24,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Transform.translate(
+              offset: const Offset(0, -8),
+              child: Text(
+                'طلباتي',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight:
+                      isActive ? FontWeight.w600 : FontWeight.normal,
+                  color: isActive
+                      ? context.colorScheme.primary
+                      : const Color(0xFF9CA3AF),
+                ),
               ),
             ),
           ],

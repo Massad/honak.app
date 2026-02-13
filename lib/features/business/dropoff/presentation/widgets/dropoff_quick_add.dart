@@ -208,25 +208,37 @@ class _DropoffQuickAddSheetState extends State<_DropoffQuickAddSheet> {
         ),
         const SizedBox(height: AppSpacing.xxl),
 
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: _canProceedStep1
-                ? () => setState(() => _step = 1)
-                : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.grey.shade300,
-              disabledForegroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.cardInner,
-              ),
+        GestureDetector(
+          onTap: _canProceedStep1
+              ? () => setState(() => _step = 1)
+              : null,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            decoration: BoxDecoration(
+              color: _canProceedStep1
+                  ? const Color(0xFF1A73E8)
+                  : Colors.grey.shade300,
+              borderRadius: AppRadius.cardInner,
             ),
-            child: const Text(
-              'التالي',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'التالي — إضافة القطع',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                const Icon(
+                  Icons.chevron_left_rounded,
+                  size: 16,
+                  color: Colors.white,
+                ),
+              ],
             ),
           ),
         ),

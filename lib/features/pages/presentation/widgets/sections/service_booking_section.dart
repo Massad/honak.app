@@ -10,6 +10,7 @@ import 'package:honak/features/pages/presentation/widgets/sections/booking_wizar
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Service list with categories, search, pricing, duration, and team members.
@@ -20,12 +21,18 @@ class ServiceBookingSection extends ConsumerStatefulWidget {
   final int teamMembersCount;
   final List<Package> packages;
 
+  /// Optional slivers to prepend (e.g. queue or dropoff views).
+  /// These are inserted into the same [CustomScrollView] to avoid nesting
+  /// scrollable widgets.
+  final List<Widget> headerSlivers;
+
   const ServiceBookingSection({
     super.key,
     required this.pageId,
     this.pageName = '',
     this.teamMembersCount = 0,
     this.packages = const [],
+    this.headerSlivers = const [],
   });
 
   @override
@@ -72,6 +79,136 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
     return categories.toList();
   }
 
+  /// Builds the sliver list for the service booking section.
+  /// Exposed so parent widgets (queue/dropoff wrappers) can embed these
+  /// slivers directly into their own CustomScrollView instead of nesting.
+  List<Widget> buildSlivers(
+    BuildContext context, {
+    required List<String> categories,
+    required List<Item> visible,
+    required List<Item> filtered,
+    required bool hasMore,
+    required List<Map<String, dynamic>> teamMembers,
+  }) {
+    return [
+      // Packages section
+      if (widget.packages.isNotEmpty)
+        SliverToBoxAdapter(
+          child: PackagesSection(
+            packages: widget.packages,
+            archetype: 'service_booking',
+            pageName: widget.pageName,
+            existingCredits: widget.packages.isNotEmpty ? 2 : null,
+            existingCreditLabel: widget.packages.isNotEmpty
+                ? widget.packages.first.creditLabel
+                : null,
+          ),
+        ),
+
+      // Category pills
+      if (categories.isNotEmpty)
+        SliverToBoxAdapter(
+          child: _ServiceCategoryPills(
+            categories: categories,
+            selected: _selectedCategory,
+            onSelected: (cat) => setState(() {
+              _selectedCategory = cat;
+              _visibleCount = _pageSize;
+            }),
+          ),
+        ),
+
+      // Search bar
+      SliverToBoxAdapter(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.sm,
+          ),
+          child: TextField(
+            onChanged: (value) => setState(() {
+              _searchQuery = value;
+              _visibleCount = _pageSize;
+            }),
+            decoration: InputDecoration(
+              hintText:
+                  '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u062e\u062f\u0645\u0627\u062a...',
+              prefixIcon: const Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              fillColor: context.colorScheme.surfaceContainerHighest,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.md,
+              ),
+              isDense: true,
+            ),
+          ),
+        ),
+      ),
+
+      // Empty state
+      if (visible.isEmpty)
+        const SliverToBoxAdapter(
+          child: _ServiceEmptyState(),
+        )
+      else ...[
+        // Service list
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+          ),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                child: ServiceItemCard(
+                  item: visible[index],
+                  onBook: () => AuthGate.require(
+                    context,
+                    ref,
+                    trigger: LoginPromptTrigger.book,
+                    onAuthed: () => _openBookingWizard(
+                      context,
+                      visible[index],
+                      teamMembers,
+                    ),
+                  ),
+                ),
+              ),
+              childCount: visible.length,
+            ),
+          ),
+        ),
+
+        // Show more
+        if (hasMore)
+          SliverToBoxAdapter(
+            child: _ServiceShowMoreButton(
+              visibleCount: visible.length,
+              totalCount: filtered.length,
+              onPressed: () => setState(() {
+                _visibleCount += _pageSize;
+              }),
+            ),
+          ),
+      ],
+
+      // Team members grid
+      if (widget.teamMembersCount > 0)
+        SliverToBoxAdapter(
+          child: _TeamMembersSection(pageId: widget.pageId),
+        ),
+
+      const SliverToBoxAdapter(
+        child: SizedBox(height: AppSpacing.xxl),
+      ),
+    ];
+  }
+
   void _openBookingWizard(
     BuildContext context,
     Item item,
@@ -112,116 +249,14 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
 
         return CustomScrollView(
           slivers: [
-            // Packages section
-            if (widget.packages.isNotEmpty)
-              SliverToBoxAdapter(
-                child: PackagesSection(
-                  packages: widget.packages,
-                  archetype: 'service_booking',
-                  pageName: widget.pageName,
-                  existingCredits: widget.packages.isNotEmpty ? 2 : null,
-                  existingCreditLabel: widget.packages.isNotEmpty
-                      ? widget.packages.first.creditLabel
-                      : null,
-                ),
-              ),
-
-            // Category pills
-            if (categories.isNotEmpty)
-              SliverToBoxAdapter(
-                child: _ServiceCategoryPills(
-                  categories: categories,
-                  selected: _selectedCategory,
-                  onSelected: (cat) => setState(() {
-                    _selectedCategory = cat;
-                    _visibleCount = _pageSize;
-                  }),
-                ),
-              ),
-
-            // Search bar
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.lg,
-                  vertical: AppSpacing.sm,
-                ),
-                child: TextField(
-                  onChanged: (value) => setState(() {
-                    _searchQuery = value;
-                    _visibleCount = _pageSize;
-                  }),
-                  decoration: InputDecoration(
-                    hintText: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u062e\u062f\u0645\u0627\u062a...',
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: context.colorScheme.surfaceContainerHighest,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.lg,
-                      vertical: AppSpacing.md,
-                    ),
-                    isDense: true,
-                  ),
-                ),
-              ),
-            ),
-
-            // Empty state
-            if (visible.isEmpty)
-              const SliverFillRemaining(
-                hasScrollBody: false,
-                child: _ServiceEmptyState(),
-              )
-            else ...[
-              // Service list
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.lg,
-                ),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => Padding(
-                      padding:
-                          const EdgeInsets.only(bottom: AppSpacing.sm),
-                      child: ServiceItemCard(
-                        item: visible[index],
-                        onBook: () => _openBookingWizard(
-                          context,
-                          visible[index],
-                          teamMembers,
-                        ),
-                      ),
-                    ),
-                    childCount: visible.length,
-                  ),
-                ),
-              ),
-
-              // Show more
-              if (hasMore)
-                SliverToBoxAdapter(
-                  child: _ServiceShowMoreButton(
-                    visibleCount: visible.length,
-                    totalCount: filtered.length,
-                    onPressed: () => setState(() {
-                      _visibleCount += _pageSize;
-                    }),
-                  ),
-                ),
-            ],
-
-            // Team members grid
-            if (widget.teamMembersCount > 0)
-              SliverToBoxAdapter(
-                child: _TeamMembersSection(pageId: widget.pageId),
-              ),
-
-            const SliverToBoxAdapter(
-              child: SizedBox(height: AppSpacing.xxl),
+            ...widget.headerSlivers,
+            ...buildSlivers(
+              context,
+              categories: categories,
+              visible: visible,
+              filtered: filtered,
+              hasMore: hasMore,
+              teamMembers: teamMembers,
             ),
           ],
         );

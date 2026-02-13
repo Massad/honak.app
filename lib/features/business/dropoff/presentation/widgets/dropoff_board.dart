@@ -7,25 +7,35 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_stats.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/activity_log_utils.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_detail_view.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_entry_card.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_config.dart';
+import 'package:honak/features/business/dropoff/domain/entities/dropoff_info_template.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_info_request_sheet.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_picker.dart';
 
 /// Main tracking board view for dropoff-type businesses.
 ///
-/// Copies [initialTickets] from provider into local state.
-/// Supports status filtering, overdue alerts, search toggle,
-/// collapsible delivered section, and ticket detail view.
+/// Matches the Figma DropoffBoard component with:
+/// - Sticky header: title, active count, overdue, search toggle, add button
+/// - Stats row: 4 circular status cards (blue/orange/green/gray)
+/// - Filter tabs: icon + label + count pills
+/// - Ticket list with empty state
+/// - Collapsible delivered section
 class DropoffBoard extends StatefulWidget {
   const DropoffBoard({
     super.key,
     required this.initialTickets,
     required this.stats,
     this.onAdd,
+    this.infoTemplates = const [],
   });
 
   final List<DropoffTicket> initialTickets;
   final DropoffDayStats stats;
   final VoidCallback? onAdd;
+  final List<DropoffInfoTemplate> infoTemplates;
 
   @override
   State<DropoffBoard> createState() => _DropoffBoardState();
@@ -36,6 +46,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
   DropoffStatus? _activeFilter;
   bool _showDelivered = false;
   bool _searchActive = false;
+  final _searchCtrl = TextEditingController();
 
   @override
   void initState() {
@@ -43,37 +54,51 @@ class _DropoffBoardState extends State<DropoffBoard> {
     _tickets = List.of(widget.initialTickets);
   }
 
-  // ── Grouped tickets ──
+  @override
+  void dispose() {
+    _searchCtrl.dispose();
+    super.dispose();
+  }
 
-  List<DropoffTicket> get _received =>
-      _tickets.where((t) => t.status == DropoffStatus.received).toList();
+  // ── Computed properties ──
 
-  List<DropoffTicket> get _processing =>
-      _tickets.where((t) => t.status == DropoffStatus.processing).toList();
-
-  List<DropoffTicket> get _ready =>
-      _tickets.where((t) => t.status == DropoffStatus.ready).toList();
+  List<DropoffTicket> get _active => _tickets
+      .where((t) =>
+          t.status != DropoffStatus.delivered &&
+          t.status != DropoffStatus.cancelled)
+      .toList();
 
   List<DropoffTicket> get _delivered =>
       _tickets.where((t) => t.status == DropoffStatus.delivered).toList();
 
-  List<DropoffTicket> get _active =>
-      _tickets.where((t) => t.status != DropoffStatus.delivered &&
-          t.status != DropoffStatus.cancelled).toList();
+  int _countByStatus(DropoffStatus s) =>
+      _tickets.where((t) => t.status == s).length;
 
   int get _overdueCount => _active.where((t) {
-    final ready = DateTime.tryParse(t.estimatedReadyAt);
-    if (ready == null) return false;
-    return DateTime.now().isAfter(ready);
-  }).length;
+        final ready = DateTime.tryParse(t.estimatedReadyAt);
+        if (ready == null) return false;
+        return DateTime.now().isAfter(ready);
+      }).length;
 
   List<DropoffTicket> get _filteredTickets {
-    if (_activeFilter == null) {
-      return _tickets.where((t) =>
-          t.status != DropoffStatus.delivered &&
-          t.status != DropoffStatus.cancelled).toList();
+    var list = _activeFilter == null
+        ? _tickets
+            .where((t) =>
+                t.status != DropoffStatus.delivered &&
+                t.status != DropoffStatus.cancelled)
+            .toList()
+        : _tickets.where((t) => t.status == _activeFilter).toList();
+
+    if (_searchCtrl.text.trim().isNotEmpty) {
+      final q = _searchCtrl.text.toLowerCase();
+      list = list.where((t) {
+        return t.customerName.toLowerCase().contains(q) ||
+            t.ticketNumber.toLowerCase().contains(q) ||
+            (t.customerPhone?.contains(q) ?? false) ||
+            t.items.any((i) => i.name.contains(q));
+      }).toList();
     }
-    return _tickets.where((t) => t.status == _activeFilter).toList();
+    return list;
   }
 
   // ── Status transitions ──
@@ -97,15 +122,91 @@ class _DropoffBoardState extends State<DropoffBoard> {
     _showToast('تم تحديث الحالة');
   }
 
+  void _changeStatus(String ticketId, DropoffStatus newStatus) {
+    setState(() {
+      _tickets = _tickets.map((t) {
+        if (t.id != ticketId) return t;
+        final now = DateTime.now().toIso8601String();
+        var updated = t.copyWith(status: newStatus);
+        if (newStatus == DropoffStatus.processing) {
+          updated = updated.copyWith(startedAt: t.startedAt ?? now);
+        } else if (newStatus == DropoffStatus.ready) {
+          updated = updated.copyWith(
+            startedAt: t.startedAt ?? now,
+            completedAt: t.completedAt ?? now,
+          );
+        } else if (newStatus == DropoffStatus.delivered) {
+          updated = updated.copyWith(
+            startedAt: t.startedAt ?? now,
+            completedAt: t.completedAt ?? now,
+            pickedUpAt: t.pickedUpAt ?? now,
+            paid: true,
+          );
+        }
+        return updated;
+      }).toList();
+    });
+    _showToast('تم تغيير الحالة');
+  }
+
+  void _mockPhotoCapture(String ticketId, String type) {
+    setState(() {
+      _tickets = _tickets.map((t) {
+        if (t.id != ticketId) return t;
+        final updatedItems = t.items.map((item) {
+          if (item == t.items.first) {
+            if (type == 'before') {
+              return item.copyWith(
+                photoBefore: item.photoBefore != null
+                    ? null
+                    : 'mock://photo-captured',
+              );
+            } else {
+              return item.copyWith(
+                photoAfter: item.photoAfter != null
+                    ? null
+                    : 'mock://photo-captured',
+              );
+            }
+          }
+          return item;
+        }).toList();
+        return t.copyWith(items: updatedItems);
+      }).toList();
+    });
+  }
+
   void _showToast(String message) {
     if (!mounted) return;
     context.showSnackBar(message);
   }
 
+  void _showInfoRequest(String ticketId) async {
+    if (widget.infoTemplates.isEmpty) {
+      _showToast('لا توجد قوالب طلب معلومات');
+      return;
+    }
+    final selectedIds = await showDropoffInfoRequestSheet(
+      context,
+      templates: widget.infoTemplates,
+    );
+    if (selectedIds != null && selectedIds.isNotEmpty && mounted) {
+      _showToast('تم إرسال طلب معلومات (${selectedIds.length})');
+    }
+  }
+
+  void _openActivityLog(DropoffTicket ticket) {
+    showActivityLogSheet(
+      context,
+      ticket: ticket,
+      activityLog: generateMockActivity(ticket),
+    );
+  }
+
   /// Adds a new ticket (called from DropoffQuickAdd).
   void addTicket(DropoffTicket ticket) {
     setState(() {
-      _tickets = [..._tickets, ticket];
+      _tickets = [ticket, ..._tickets];
     });
     _showToast('تم إنشاء التذكرة');
   }
@@ -135,18 +236,26 @@ class _DropoffBoardState extends State<DropoffBoard> {
       body: CustomScrollView(
         slivers: [
           // ── Sticky header ──
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _DropoffHeaderDelegate(
-              activeCount: _active.length,
-              overdueCount: overdueCount,
-              searchActive: _searchActive,
-              onToggleSearch: () =>
-                  setState(() => _searchActive = !_searchActive),
-              onAdd: widget.onAdd,
+          SliverToBoxAdapter(
+            child: Container(
+              color: AppColors.surface,
+              child: SafeArea(
+                bottom: false,
+                child: Column(
+                  children: [
+                    _buildHeader(context, overdueCount),
+                    if (_searchActive) _buildSearchBar(context),
+                    _buildStatsRow(context),
+                    _buildFilterTabs(context),
+                    const SizedBox(height: AppSpacing.sm),
+                    Divider(height: 1, color: Colors.grey.shade100),
+                  ],
+                ),
+              ),
             ),
           ),
 
+          // ── Ticket list ──
           SliverPadding(
             padding: const EdgeInsetsDirectional.symmetric(
               horizontal: AppSpacing.lg,
@@ -155,49 +264,32 @@ class _DropoffBoardState extends State<DropoffBoard> {
               delegate: SliverChildListDelegate([
                 const SizedBox(height: AppSpacing.md),
 
-                // ── Status filter pills ──
-                _buildFilterRow(context),
-                const SizedBox(height: AppSpacing.md),
-
-                // ── Overdue alert ──
-                if (overdueCount > 0) ...[
-                  _OverdueAlert(count: overdueCount),
-                  const SizedBox(height: AppSpacing.md),
-                ],
-
-                // ── Ticket list ──
                 if (filtered.isEmpty)
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
-                    decoration: BoxDecoration(
-                      borderRadius: AppRadius.cardInner,
-                      border: Border.all(color: Colors.grey.shade200),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'لا توجد تذاكر',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: Colors.grey.shade300,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  )
+                  _buildEmptyState(context)
                 else
                   ...filtered.map((ticket) => Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      bottom: AppSpacing.sm,
-                    ),
-                    child: DropoffEntryCard(
-                      ticket: ticket,
-                      onAdvance: () => _advanceStatus(ticket.id),
-                      onTap: () => _openDetail(ticket),
-                    ),
-                  )),
+                        padding: const EdgeInsetsDirectional.only(
+                          bottom: AppSpacing.md,
+                        ),
+                        child: DropoffEntryCard(
+                          ticket: ticket,
+                          onAdvance: () => _advanceStatus(ticket.id),
+                          onTap: () => _openDetail(ticket),
+                          onStatusChange: (status) =>
+                              _changeStatus(ticket.id, status),
+                          onPhotoBefore: () =>
+                              _mockPhotoCapture(ticket.id, 'before'),
+                          onPhotoAfter: () =>
+                              _mockPhotoCapture(ticket.id, 'after'),
+                          onRequestInfo: () =>
+                              _showInfoRequest(ticket.id),
+                          onActivityLog: () => _openActivityLog(ticket),
+                          activityLog: generateMockActivity(ticket),
+                        ),
+                      )),
 
                 // ── Delivered section (collapsible) ──
-                const SizedBox(height: AppSpacing.lg),
+                const SizedBox(height: AppSpacing.md),
                 _DeliveredSection(
                   tickets: _delivered,
                   isExpanded: _showDelivered,
@@ -214,57 +306,292 @@ class _DropoffBoardState extends State<DropoffBoard> {
     );
   }
 
-  Widget _buildFilterRow(BuildContext context) {
-    final filters = <(DropoffStatus?, String, int)>[
-      (null, 'الكل', _active.length),
-      (DropoffStatus.received, 'مستلمة', _received.length),
-      (DropoffStatus.processing, 'قيد المعالجة', _processing.length),
-      (DropoffStatus.ready, 'جاهزة', _ready.length),
-      (DropoffStatus.delivered, 'تم التسليم', _delivered.length),
-    ];
+  // ── Header ──
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+  Widget _buildHeader(BuildContext context, int overdueCount) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.sm,
+      ),
       child: Row(
-        children: filters.map((f) {
-          final isActive = _activeFilter == f.$1;
-          final color = f.$1 != null ? _statusColor(f.$1!) : AppColors.primary;
+        children: [
+          // Title + subtitle
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'لوحة التتبع',
+                  style: context.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: context.colorScheme.onSurface,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '${_active.length} تذكرة نشطة',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.grey.shade400,
+                      ),
+                    ),
+                    if (overdueCount > 0) ...[
+                      const SizedBox(width: AppSpacing.sm),
+                      Icon(
+                        Icons.warning_amber_rounded,
+                        size: 10,
+                        color: AppColors.error,
+                      ),
+                      const SizedBox(width: 2),
+                      Text(
+                        '$overdueCount متأخرة',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: AppColors.error,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ],
+            ),
+          ),
 
-          return Padding(
-            padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
-            child: GestureDetector(
-              onTap: () => setState(() => _activeFilter = f.$1),
+          // Search toggle
+          GestureDetector(
+            onTap: () => setState(() {
+              _searchActive = !_searchActive;
+              if (!_searchActive) _searchCtrl.clear();
+            }),
+            child: Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: AppRadius.cardInner,
+              ),
+              child: Icon(
+                _searchActive ? Icons.close : Icons.search_rounded,
+                size: 16,
+                color: Colors.grey.shade500,
+              ),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+
+          // Add button
+          if (widget.onAdd != null)
+            GestureDetector(
+              onTap: widget.onAdd,
               child: Container(
+                height: 36,
                 padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: AppSpacing.md,
-                  vertical: 6,
+                  horizontal: AppSpacing.lg,
                 ),
                 decoration: BoxDecoration(
-                  color: isActive
-                      ? color.withValues(alpha: 0.1)
-                      : Colors.grey.shade100,
-                  borderRadius: AppRadius.pill,
-                  border: isActive ? Border.all(color: color) : null,
+                  color: const Color(0xFF1A73E8),
+                  borderRadius: AppRadius.cardInner,
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Icon(Icons.add, size: 14, color: Colors.white),
+                    const SizedBox(width: 6),
+                    const Text(
+                      'استلام جديد',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  // ── Search Bar ──
+
+  Widget _buildSearchBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: AppSpacing.lg,
+      ),
+      child: TextField(
+        controller: _searchCtrl,
+        onChanged: (_) => setState(() {}),
+        autofocus: true,
+        decoration: InputDecoration(
+          hintText: 'بحث بالاسم أو رقم التذكرة...',
+          hintStyle: TextStyle(fontSize: 13, color: Colors.grey.shade300),
+          filled: true,
+          fillColor: Colors.grey.shade50,
+          contentPadding: const EdgeInsetsDirectional.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.sm,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: AppRadius.cardInner,
+            borderSide: BorderSide(color: Colors.grey.shade200),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: AppRadius.cardInner,
+            borderSide: BorderSide(color: Colors.grey.shade200),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: AppRadius.cardInner,
+            borderSide: const BorderSide(color: Color(0xFF1A73E8)),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ── Stats Row (4 circular cards) ──
+
+  Widget _buildStatsRow(BuildContext context) {
+    final stats = <(DropoffStatus, IconData, String)>[
+      (DropoffStatus.received, Icons.inbox_rounded, 'استلام'),
+      (DropoffStatus.processing, Icons.autorenew_rounded, 'معالجة'),
+      (DropoffStatus.ready, Icons.check_circle_rounded, 'جاهز'),
+      (DropoffStatus.delivered, Icons.local_shipping_rounded, 'تم التسليم'),
+    ];
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: AppSpacing.sm,
+      ),
+      child: Row(
+        children: stats.map((s) {
+          final conf = DropoffStatusConfig.of(s.$1);
+          final count = _countByStatus(s.$1);
+
+          return Padding(
+            padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
+            child: Container(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 12,
+                vertical: AppSpacing.sm,
+              ),
+              decoration: BoxDecoration(
+                color: conf.bgColor,
+                borderRadius: AppRadius.cardInner,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(s.$2, size: 14, color: conf.color),
+                  const SizedBox(width: AppSpacing.sm),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '$count',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: context.colorScheme.onSurface,
+                        ),
+                      ),
+                      Text(
+                        s.$3,
+                        style: TextStyle(
+                          fontSize: 9,
+                          color: Colors.grey.shade400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  // ── Filter Tabs ──
+
+  Widget _buildFilterTabs(BuildContext context) {
+    final filters = <(DropoffStatus?, IconData, String)>[
+      (null, Icons.inventory_2_outlined, 'الكل'),
+      (DropoffStatus.received, Icons.inbox_rounded, 'استلام'),
+      (DropoffStatus.processing, Icons.autorenew_rounded, 'معالجة'),
+      (DropoffStatus.ready, Icons.check_circle_rounded, 'جاهز'),
+      (DropoffStatus.delivered, Icons.local_shipping_rounded, 'تم التسليم'),
+    ];
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: AppSpacing.lg,
+      ),
+      child: Row(
+        children: filters.map((f) {
+          final isActive = _activeFilter == f.$1;
+          final count = f.$1 == null
+              ? _active.length
+              : _countByStatus(f.$1!);
+
+          return Padding(
+            padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
+            child: GestureDetector(
+              onTap: () => setState(() {
+                _activeFilter = f.$1;
+                if (f.$1 == DropoffStatus.delivered) {
+                  _showDelivered = true;
+                }
+              }),
+              child: Container(
+                padding: const EdgeInsetsDirectional.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: isActive
+                      ? const Color(0xFF1A73E8)
+                      : Colors.grey.shade100,
+                  borderRadius: AppRadius.pill,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
                       f.$2,
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: isActive ? color : Colors.grey.shade500,
-                        fontSize: 12,
-                      ),
+                      size: 12,
+                      color: isActive ? Colors.white : Colors.grey.shade500,
                     ),
-                    const SizedBox(width: AppSpacing.xs),
+                    const SizedBox(width: 6),
                     Text(
-                      '${f.$3}',
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: isActive ? color : Colors.grey.shade400,
+                      f.$3,
+                      style: TextStyle(
                         fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                        color:
+                            isActive ? Colors.white : Colors.grey.shade500,
                       ),
                     ),
+                    if (count > 0) ...[
+                      const SizedBox(width: 6),
+                      Text(
+                        '$count',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: isActive
+                              ? Colors.white.withValues(alpha: 0.8)
+                              : Colors.grey.shade400,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -275,236 +602,32 @@ class _DropoffBoardState extends State<DropoffBoard> {
     );
   }
 
-  Color _statusColor(DropoffStatus status) => switch (status) {
-        DropoffStatus.received => AppColors.secondary,
-        DropoffStatus.processing => AppColors.primary,
-        DropoffStatus.ready => AppColors.success,
-        DropoffStatus.delivered => const Color(0xFF616161),
-        DropoffStatus.cancelled => AppColors.error,
-      };
-}
+  // ── Empty State ──
 
-// ═══════════════════════════════════════════════════════════════
-// Sticky Header Delegate
-// ═══════════════════════════════════════════════════════════════
-
-class _DropoffHeaderDelegate extends SliverPersistentHeaderDelegate {
-  const _DropoffHeaderDelegate({
-    required this.activeCount,
-    required this.overdueCount,
-    required this.searchActive,
-    required this.onToggleSearch,
-    this.onAdd,
-  });
-
-  final int activeCount;
-  final int overdueCount;
-  final bool searchActive;
-  final VoidCallback onToggleSearch;
-  final VoidCallback? onAdd;
-
-  @override
-  double get maxExtent => 60;
-
-  @override
-  double get minExtent => 60;
-
-  @override
-  bool shouldRebuild(covariant _DropoffHeaderDelegate oldDelegate) =>
-      activeCount != oldDelegate.activeCount ||
-      overdueCount != oldDelegate.overdueCount ||
-      searchActive != oldDelegate.searchActive;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
-      ),
-      padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg,
-        AppSpacing.md,
-        AppSpacing.lg,
-        AppSpacing.md,
-      ),
-      child: Row(
-        children: [
-          Text(
-            'لوحة التتبع',
-            style: context.textTheme.titleMedium?.copyWith(
-              color: context.colorScheme.onSurface,
+  Widget _buildEmptyState(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 64),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.inventory_2_outlined,
+              size: 40,
+              color: Colors.grey.shade200,
             ),
-          ),
-          const SizedBox(width: AppSpacing.sm),
-          // Active count badge
-          Container(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: 6,
-              vertical: 2,
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.1),
-              borderRadius: AppRadius.pill,
-            ),
-            child: Text(
-              '$activeCount',
-              style: context.textTheme.labelSmall?.copyWith(
-                color: AppColors.primary,
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-
-          // Overdue alert
-          if (overdueCount > 0) ...[
-            const SizedBox(width: AppSpacing.xs),
-            Container(
-              padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: 6,
-                vertical: 2,
-              ),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFEF2F2),
-                borderRadius: AppRadius.pill,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.warning_amber_rounded,
-                    size: 10,
-                    color: AppColors.error,
-                  ),
-                  const SizedBox(width: 2),
-                  Text(
-                    '$overdueCount',
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: AppColors.error,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
+            const SizedBox(height: AppSpacing.md),
+            Text(
+              _searchCtrl.text.isNotEmpty
+                  ? 'لا توجد نتائج'
+                  : 'لا توجد تذاكر',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade400,
               ),
             ),
           ],
-
-          const Spacer(),
-
-          // Search toggle
-          GestureDetector(
-            onTap: onToggleSearch,
-            child: Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: searchActive
-                    ? AppColors.primary.withValues(alpha: 0.1)
-                    : Colors.grey.shade100,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.search_rounded,
-                size: 18,
-                color: searchActive ? AppColors.primary : Colors.grey.shade500,
-              ),
-            ),
-          ),
-
-          // Add button
-          if (onAdd != null) ...[
-            const SizedBox(width: AppSpacing.sm),
-            GestureDetector(
-              onTap: onAdd,
-              child: Container(
-                height: 36,
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: AppSpacing.md,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: AppRadius.pill,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x33000000),
-                      blurRadius: 4,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.add, size: 16, color: Colors.white),
-                    const SizedBox(width: AppSpacing.xs),
-                    Text(
-                      'استلام جديد',
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// Overdue Alert Banner
-// ═══════════════════════════════════════════════════════════════
-
-class _OverdueAlert extends StatelessWidget {
-  const _OverdueAlert({required this.count});
-
-  final int count;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFEF2F2),
-        border: Border.all(color: const Color(0xFFFEE2E2)),
-        borderRadius: AppRadius.cardInner,
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.warning_amber_rounded, size: 18, color: AppColors.error),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '$count تذاكر متأخرة',
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: AppColors.error,
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xxs),
-                Text(
-                  'تجاوزت الموعد المتوقع للتجهيز',
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: const Color(0xFFEF5350),
-                    fontSize: 10,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -574,11 +697,11 @@ class _DeliveredSection extends StatelessWidget {
             )
           else
             ...tickets.map((ticket) => Padding(
-              padding: const EdgeInsetsDirectional.only(
-                bottom: AppSpacing.sm,
-              ),
-              child: DropoffEntryCard(ticket: ticket, compact: true),
-            )),
+                  padding: const EdgeInsetsDirectional.only(
+                    bottom: AppSpacing.sm,
+                  ),
+                  child: DropoffEntryCard(ticket: ticket, compact: true),
+                )),
         ],
       ],
     );

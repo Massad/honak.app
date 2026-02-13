@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": [
+    {"id": "item_ts01", "name_ar": "تبديل إطار", "name_en": "Tire Change", "description_ar": "تبديل إطار واحد — 15 دقيقة", "price_cents": 300, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_change", "category_name": "تبديل", "in_stock": true, "page_id": "aljazeera-tires", "sort_order": 1, "option_groups": []},
+    {"id": "item_ts02", "name_ar": "تبديل 4 إطارات", "name_en": "4 Tire Change", "description_ar": "تبديل 4 إطارات مع موازنة — 30 دقيقة", "price_cents": 1000, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_change", "category_name": "تبديل", "in_stock": true, "page_id": "aljazeera-tires", "sort_order": 2, "option_groups": []},
+    {"id": "item_ts03", "name_ar": "تصليح بنشر", "name_en": "Puncture Repair", "description_ar": "تصليح بنشر — 10 دقائق", "price_cents": 200, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_repair", "category_name": "إصلاح", "in_stock": true, "page_id": "aljazeera-tires", "sort_order": 3, "option_groups": []},
+    {"id": "item_ts04", "name_ar": "ضبط زوايا", "name_en": "Wheel Alignment", "description_ar": "ضبط زوايا بالكمبيوتر — 30 دقيقة", "price_cents": 1500, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_service", "category_name": "خدمات", "in_stock": true, "page_id": "aljazeera-tires", "sort_order": 4, "option_groups": []},
+    {"id": "item_ts05", "name_ar": "تعبئة نيتروجين", "name_en": "Nitrogen Fill", "description_ar": "تعبئة نيتروجين 4 إطارات — 10 دقائق", "price_cents": 400, "images": ["https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=400&q=80"], "category_id": "cat_tire_service", "category_name": "خدمات", "in_stock": true, "page_id": "aljazeera-tires", "sort_order": 5, "option_groups": []}
+  ],
+  "meta": {"total": 5, "has_more": false}
+}

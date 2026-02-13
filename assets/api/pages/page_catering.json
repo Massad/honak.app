@@ -1,0 +1,80 @@
+{
+  "success": true,
+  "data": {
+    "id": "layal-catering",
+    "owner_id": null,
+    "business_type_id": "catering",
+    "business_type_name": "تموين وضيافة",
+    "category_name": "أكل ومطاعم",
+    "explore_category": "cat_food",
+    "name": "ليال للتموين",
+    "name_en": "Layal Catering",
+    "slug": "layal-catering",
+    "handle": "layal-catering",
+    "store_type": "physical",
+    "archetype": "quote_request",
+    "description": "خدمات تموين للمناسبات والحفلات. بوفيه عربي، غربي، حلويات.",
+    "avatar_url": "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790100016",
+    "location": {
+      "lat": 31.968,
+      "lng": 35.870,
+      "label": "الرابية، عمّان",
+      "area": "الرابية",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "20:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "20:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "20:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "20:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "20:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "18:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "20:00"}
+    },
+    "operating_hours": "السبت - الخميس: ٩:٠٠ ص — ٨:٠٠ م\nالجمعة: ١٠:٠٠ ص — ٦:٠٠ م",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": false,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "unclaimed",
+    "followers_count": 0,
+    "items_count": 0,
+    "posts_count": 0,
+    "is_following": false,
+    "hours": {
+      "open_time": "09:00",
+      "close_time": "20:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 0,
+    "trust_metrics": [],
+    "delivery_available": true,
+    "pickup_available": false,
+    "payment_methods": ["نقداً", "تحويل بنكي"],
+    "member_since": "2023",
+    "team_members_count": 0,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1640000000,
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "gallery_images": [],
+    "services_offered": [
+      {"name": "بوفيه عربي"},
+      {"name": "بوفيه غربي"},
+      {"name": "حلويات ومعجنات"},
+      {"name": "ضيافة قهوة"},
+      {"name": "تموين شركات"}
+    ],
+    "price_range": {
+      "min_cents": 50000,
+      "max_cents": 500000,
+      "note": "حسب عدد الأشخاص"
+    },
+    "booking_questions": ["ما نوع المناسبة؟", "كم عدد الأشخاص المتوقع؟", "ما تاريخ المناسبة؟", "ما المنطقة؟", "هل تحتاج خدمة ضيافة قهوة؟"],
+    "service_areas": ["الرابية", "عبدون", "الصويفية", "خلدا", "دابوق", "الشميساني", "تلاع العلي", "دير غبار"]
+  }
+}
