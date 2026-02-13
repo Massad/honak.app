@@ -200,6 +200,13 @@ class Section {
     type: DashboardSectionType.liveQueue,
     minEngagement: EngagementLevel.full,
   );
+
+  static const liveDropoff = DashboardSection(
+    id: 'live_dropoff',
+    titleAr: 'لوحة التتبع',
+    type: DashboardSectionType.liveDropoff,
+    minEngagement: EngagementLevel.full,
+  );
 }
 
 // ═══════════════════════════════════════════════════════════════

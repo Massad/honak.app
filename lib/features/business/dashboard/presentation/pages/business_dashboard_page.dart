@@ -361,6 +361,7 @@ class _SectionCard extends StatelessWidget {
       DashboardSectionType.lowStock => Icons.warning_amber_outlined,
       DashboardSectionType.activeQueue => Icons.queue_outlined,
       DashboardSectionType.liveQueue => Icons.queue_outlined,
+      DashboardSectionType.liveDropoff => Icons.receipt_long_outlined,
       DashboardSectionType.occupancy => Icons.meeting_room_outlined,
       DashboardSectionType.bestSellers => Icons.star_outline,
       DashboardSectionType.upcomingReservations => Icons.book_online_outlined,

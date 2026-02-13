@@ -1,0 +1,133 @@
+{
+  "service_categories": [
+    {
+      "id": "screen",
+      "name_ar": "شاشة",
+      "icon": "📱",
+      "services": [
+        { "id": "screen_replace", "name_ar": "تبديل شاشة", "price": 35.0, "duration_days": 1 },
+        { "id": "screen_protector", "name_ar": "تركيب حماية شاشة", "price": 3.0, "duration_days": 0 },
+        { "id": "touch_fix", "name_ar": "إصلاح لمس", "price": 25.0, "duration_days": 1 }
+      ]
+    },
+    {
+      "id": "battery",
+      "name_ar": "بطارية",
+      "icon": "🔋",
+      "services": [
+        { "id": "battery_replace", "name_ar": "تبديل بطارية", "price": 15.0, "duration_days": 1 },
+        { "id": "charging_port", "name_ar": "إصلاح منفذ شحن", "price": 12.0, "duration_days": 1 }
+      ]
+    },
+    {
+      "id": "hardware",
+      "name_ar": "عتاد",
+      "icon": "🔩",
+      "services": [
+        { "id": "speaker_fix", "name_ar": "إصلاح سماعة", "price": 10.0, "duration_days": 1 },
+        { "id": "camera_fix", "name_ar": "إصلاح كاميرا", "price": 20.0, "duration_days": 2 },
+        { "id": "back_cover", "name_ar": "تبديل غطاء خلفي", "price": 15.0, "duration_days": 1 },
+        { "id": "power_button", "name_ar": "إصلاح زر التشغيل", "price": 8.0, "duration_days": 1 }
+      ]
+    },
+    {
+      "id": "software",
+      "name_ar": "برمجيات",
+      "icon": "💻",
+      "services": [
+        { "id": "software_update", "name_ar": "تحديث نظام", "price": 5.0, "duration_days": 0 },
+        { "id": "data_recovery", "name_ar": "استعادة بيانات", "price": 15.0, "duration_days": 1 },
+        { "id": "unlock", "name_ar": "فتح قفل", "price": 10.0, "duration_days": 0 }
+      ]
+    }
+  ],
+  "item_types": ["iPhone 15", "iPhone 15 Pro", "iPhone 14", "iPhone 13", "Samsung Galaxy S24", "Samsung Galaxy S23", "Samsung Galaxy A54", "Huawei Nova", "Xiaomi Redmi", "OnePlus", "iPad", "Samsung Tab"],
+  "attributes": [
+    { "id": "color", "label_ar": "اللون", "values": ["أسود", "أبيض", "أزرق", "ذهبي", "فضي", "وردي", "بنفسجي", "أخضر"] },
+    { "id": "storage", "label_ar": "السعة", "values": ["64GB", "128GB", "256GB", "512GB", "1TB"] }
+  ],
+  "tickets": [
+    {
+      "id": "d-301",
+      "ticket_number": "P-0088",
+      "status": "processing",
+      "source": "walk_in",
+      "customer_name": "يزن عماد",
+      "customer_phone": "0792334455",
+      "items": [
+        { "id": "i-301", "name": "iPhone 15 Pro", "quantity": 1, "service": "تبديل شاشة", "price": 35.0, "attributes": { "color": "أسود", "storage": "256GB" } }
+      ],
+      "total_price": 35.0,
+      "dropped_off_at": "2026-02-12T09:00:00Z",
+      "estimated_ready_at": "2026-02-13",
+      "started_at": "2026-02-12T11:00:00Z",
+      "notes": "الشاشة مكسورة من الزاوية اليمنى — اللمس شغال",
+      "urgent": true,
+      "paid": false
+    },
+    {
+      "id": "d-302",
+      "ticket_number": "P-0089",
+      "status": "received",
+      "source": "app_request",
+      "customer_name": "لمى راشد",
+      "customer_phone": "0786778899",
+      "items": [
+        { "id": "i-302", "name": "Samsung Galaxy S24", "quantity": 1, "service": "تبديل بطارية", "price": 15.0, "attributes": { "color": "بنفسجي", "storage": "128GB" } },
+        { "id": "i-303", "name": "Samsung Galaxy S24", "quantity": 1, "service": "إصلاح منفذ شحن", "price": 12.0, "attributes": { "color": "بنفسجي", "storage": "128GB" } }
+      ],
+      "total_price": 27.0,
+      "dropped_off_at": "2026-02-12T10:30:00Z",
+      "estimated_ready_at": "2026-02-13",
+      "urgent": false,
+      "paid": false
+    },
+    {
+      "id": "d-303",
+      "ticket_number": "P-0087",
+      "status": "ready",
+      "source": "walk_in",
+      "customer_name": "طارق وليد",
+      "customer_phone": "0799556677",
+      "items": [
+        { "id": "i-304", "name": "iPhone 14", "quantity": 1, "service": "إصلاح كاميرا", "price": 20.0, "attributes": { "color": "أزرق", "storage": "128GB" } }
+      ],
+      "total_price": 20.0,
+      "dropped_off_at": "2026-02-10T15:00:00Z",
+      "estimated_ready_at": "2026-02-12",
+      "started_at": "2026-02-11T09:00:00Z",
+      "completed_at": "2026-02-12T14:00:00Z",
+      "paid": true,
+      "payment_method": "CliQ"
+    },
+    {
+      "id": "d-304",
+      "ticket_number": "P-0086",
+      "status": "delivered",
+      "source": "walk_in",
+      "customer_name": "آلاء محمود",
+      "customer_phone": "0780112233",
+      "items": [
+        { "id": "i-305", "name": "iPhone 13", "quantity": 1, "service": "تبديل بطارية", "price": 15.0, "attributes": { "color": "وردي", "storage": "128GB" } },
+        { "id": "i-306", "name": "iPhone 13", "quantity": 1, "service": "تركيب حماية شاشة", "price": 3.0, "attributes": { "color": "وردي", "storage": "128GB" } }
+      ],
+      "total_price": 18.0,
+      "dropped_off_at": "2026-02-09T10:00:00Z",
+      "estimated_ready_at": "2026-02-10",
+      "started_at": "2026-02-09T14:00:00Z",
+      "completed_at": "2026-02-10T11:00:00Z",
+      "picked_up_at": "2026-02-10T18:00:00Z",
+      "paid": true,
+      "payment_method": "كاش"
+    }
+  ],
+  "stats": {
+    "total_today": 4,
+    "received": 1,
+    "processing": 1,
+    "ready": 1,
+    "delivered": 1,
+    "overdue": 0,
+    "revenue_today": 100.0
+  }
+}

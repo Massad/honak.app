@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 // ─── Report reason model ────────────────────────────────────
 
@@ -71,10 +72,8 @@ class ReportConversationSheet extends StatefulWidget {
     required void Function(ChatReportData report) onSubmit,
     VoidCallback? onSelectInChat,
   }) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet<void>(
+      context,
       builder: (_) => ReportConversationSheet._(
         conversationName: conversationName,
         preSelectedIds: preSelectedIds,
@@ -171,61 +170,49 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final maxHeight = screenHeight * 0.85;
-
-    return Container(
-      constraints: BoxConstraints(maxHeight: maxHeight),
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag handle
-            Padding(
-              padding: const EdgeInsets.only(top: AppSpacing.sm),
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.outlineVariant,
-                  borderRadius: AppRadius.pill,
-                ),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Drag handle
+        Padding(
+          padding: const EdgeInsets.only(top: AppSpacing.sm),
+          child: Container(
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: context.colorScheme.outlineVariant,
+              borderRadius: AppRadius.pill,
             ),
-
-            // Header
-            _buildHeader(context),
-
-            if (!_submitted) ...[
-              // Step indicator
-              _buildStepIndicator(context),
-
-              Divider(
-                height: 1,
-                color: context.colorScheme.outlineVariant
-                    .withValues(alpha: 0.5),
-              ),
-
-              // Content — flexible, scrollable when needed
-              Flexible(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(AppSpacing.lg),
-                  child: _step == 1
-                      ? _buildScopeStep(context)
-                      : _step == 2
-                          ? _buildReasonStep(context)
-                          : _buildConfirmStep(context),
-                ),
-              ),
-            ] else
-              _buildSuccess(context),
-          ],
+          ),
         ),
-      ),
+
+        // Header
+        _buildHeader(context),
+
+        if (!_submitted) ...[
+          // Step indicator
+          _buildStepIndicator(context),
+
+          Divider(
+            height: 1,
+            color: context.colorScheme.outlineVariant
+                .withValues(alpha: 0.5),
+          ),
+
+          // Content — flexible, scrollable when needed
+          Flexible(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: _step == 1
+                  ? _buildScopeStep(context)
+                  : _step == 2
+                      ? _buildReasonStep(context)
+                      : _buildConfirmStep(context),
+            ),
+          ),
+        ] else
+          _buildSuccess(context),
+      ],
     );
   }
 

@@ -84,6 +84,7 @@ class MockApiClient implements ApiClient {
   static const _pageIdToFixture = {
     'beit-sitti': 'pages/page_restaurant',
     'abu-ahmad-water': 'pages/page_water',
+    'abu-sulaiman-gas': 'pages/page_gas',
     'salon-rania': 'pages/page_services',
     'ahmad-plumbing': 'pages/page_plumber',
     'sara-photography': 'pages/page_photographer',
@@ -98,12 +99,20 @@ class MockApiClient implements ApiClient {
     'power-fitness': 'pages/page_gym',
     'alkaram-rest': 'pages/page_alkaram',
     'sparkle-car-wash': 'pages/page_car_wash',
+    'clean-express-laundry': 'pages/page_laundry',
+    'alnajjar-tailor': 'pages/page_tailor',
+    'alaseel-shoe-repair': 'pages/page_shoe_repair',
+    'smart-fix-phones': 'pages/page_phone_repair',
+    'precision-watches': 'pages/page_watch_repair',
+    'quick-lube-amman': 'pages/page_oil_change',
+    'aljazeera-tires': 'pages/page_tire_shop',
   };
 
   /// Maps page IDs to their items fixture files.
   static const _pageIdToItemsFixture = {
     'beit-sitti': 'products/items_restaurant',
     'abu-ahmad-water': 'products/items_water',
+    'abu-sulaiman-gas': 'products/items_gas',
     'salon-rania': 'products/items_services',
     'ahmad-plumbing': 'products/items_plumber',
     'nour-fashion': 'products/items_clothing',
@@ -148,6 +157,13 @@ class MockApiClient implements ApiClient {
     'amman-municipality': 'business/dashboard/government',
     'traffic-department': 'business/dashboard/government',
     'sparkle-car-wash': 'business/dashboard/car_wash',
+    'clean-express-laundry': 'business/dashboard/laundry',
+    'alnajjar-tailor': 'business/dashboard/tailor',
+    'alaseel-shoe-repair': 'business/dashboard/shoe_repair',
+    'smart-fix-phones': 'business/dashboard/phone_repair',
+    'precision-watches': 'business/dashboard/watch_repair',
+    'quick-lube-amman': 'business/dashboard/oil_change',
+    'aljazeera-tires': 'business/dashboard/tire_shop',
   };
 
   /// Maps page IDs to their business categories fixture files.
@@ -239,6 +255,22 @@ class MockApiClient implements ApiClient {
     'abu-ahmad-water': 'subscriptions/packages_abu-ahmad-water',
     'salon-rania': 'subscriptions/packages_salon-rania',
     'hara-coffee': 'subscriptions/packages_hara-coffee',
+  };
+
+  /// Maps page IDs to their dropoff business fixture files.
+  static const _pageIdToDropoffFixture = {
+    'clean-express-laundry': 'business/laundry',
+    'alnajjar-tailor': 'business/tailor',
+    'alaseel-shoe-repair': 'business/shoe_repair',
+    'smart-fix-phones': 'business/phone_repair',
+    'precision-watches': 'business/watch_repair',
+  };
+
+  /// Maps page IDs to their queue business fixture files.
+  static const _pageIdToQueueFixture = {
+    'sparkle-car-wash': 'business/car_wash',
+    'quick-lube-amman': 'business/oil_change',
+    'aljazeera-tires': 'business/tire_shop',
   };
 
   static const _phoneToFeedFixture = {
@@ -336,7 +368,9 @@ class MockApiClient implements ApiClient {
         case 'members':
           return 'pages/page_team_members';
         case 'queue':
-          return 'business/car_wash';
+          return _pageIdToQueueFixture[pageId] ?? 'business/car_wash';
+        case 'dropoff':
+          return _pageIdToDropoffFixture[pageId] ?? 'business/laundry';
       }
     }
 
@@ -355,7 +389,9 @@ class MockApiClient implements ApiClient {
         case 'packages':
           return _pageIdToPackagesFixture[pageId] ?? 'subscriptions/packages_abu-ahmad-water';
         case 'queue':
-          return 'business/car_wash';
+          return _pageIdToQueueFixture[pageId] ?? 'business/car_wash';
+        case 'dropoff':
+          return _pageIdToDropoffFixture[pageId] ?? 'business/laundry';
         case 'posts':
           return 'feed/feed_home';
         case 'team':

@@ -53,6 +53,56 @@
         "business_type_id": "directory",
         "is_verified": true,
         "role": "owner"
+      },
+      {
+        "id": "alnajjar-tailor",
+        "name": "خياط النجار",
+        "slug": "alnajjar-tailor",
+        "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "خياط",
+        "business_type_id": "tailor",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "alaseel-shoe-repair",
+        "name": "إسكافي الأصيل",
+        "slug": "alaseel-shoe-repair",
+        "avatar_url": "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "إسكافي",
+        "business_type_id": "shoe_repair",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "smart-fix-phones",
+        "name": "سمارت فيكس",
+        "slug": "smart-fix-phones",
+        "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "صيانة موبايلات",
+        "business_type_id": "mobile_repair",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "precision-watches",
+        "name": "ساعات بريسيجن",
+        "slug": "precision-watches",
+        "avatar_url": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "صيانة ساعات",
+        "business_type_id": "watch_repair",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "aljazeera-tires",
+        "name": "إطارات الجزيرة",
+        "slug": "aljazeera-tires",
+        "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "محل إطارات",
+        "business_type_id": "tire_shop",
+        "is_verified": true,
+        "role": "owner"
       }
     ]
   }

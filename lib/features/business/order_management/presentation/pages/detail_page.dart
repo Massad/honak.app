@@ -13,6 +13,7 @@ import 'package:honak/features/business/order_management/presentation/widgets/re
 import 'package:honak/features/business/shared/domain/entities/entities.dart';
 import 'package:honak/features/chat/domain/entities/conversation.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 class RequestDetailPage extends ConsumerStatefulWidget {
   final BizRequest request;
@@ -54,12 +55,8 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
   }
 
   Future<void> _handleDecline() async {
-    final result = await showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    final result = await showAppSheet<bool>(
+      context,
       builder: (_) => DeclineSheet(requestId: _request.id),
     );
     if (result == true && mounted) {
@@ -71,12 +68,8 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
   }
 
   Future<void> _handleAlternative() async {
-    final result = await showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    final result = await showAppSheet<bool>(
+      context,
       builder: (_) => AlternativeSheet(requestId: _request.id),
     );
     if (result == true && mounted) {

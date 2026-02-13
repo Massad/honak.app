@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 
 /// 3-step alternative suggestion sheet:
@@ -75,10 +76,8 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
   void _openItemPicker() {
     final slug = _resolvedPageSlug;
     if (slug == null) return;
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet(
+      context,
       builder: (_) => ItemPickerSheet(
         pageSlug: slug,
         mode: ItemPickerMode.multiPick,

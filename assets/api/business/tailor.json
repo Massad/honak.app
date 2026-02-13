@@ -1,0 +1,128 @@
+{
+  "service_categories": [
+    {
+      "id": "alteration",
+      "name_ar": "تعديلات",
+      "icon": "✂️",
+      "services": [
+        { "id": "shorten_pants", "name_ar": "تقصير بنطلون", "price": 3.0, "duration_days": 1 },
+        { "id": "narrow_waist", "name_ar": "تضييق خصر", "price": 4.0, "duration_days": 2 },
+        { "id": "shorten_sleeves", "name_ar": "تقصير أكمام", "price": 2.5, "duration_days": 1 },
+        { "id": "adjust_length", "name_ar": "تعديل طول فستان", "price": 5.0, "duration_days": 2 },
+        { "id": "take_in_sides", "name_ar": "تضييق من الجوانب", "price": 4.0, "duration_days": 2 }
+      ]
+    },
+    {
+      "id": "repair",
+      "name_ar": "إصلاحات",
+      "icon": "🧵",
+      "services": [
+        { "id": "fix_zipper", "name_ar": "تبديل سحّاب", "price": 3.0, "duration_days": 1 },
+        { "id": "fix_button", "name_ar": "تبديل أزرار", "price": 1.0, "duration_days": 1 },
+        { "id": "patch_tear", "name_ar": "رتق تمزق", "price": 3.5, "duration_days": 1 },
+        { "id": "fix_lining", "name_ar": "إصلاح بطانة", "price": 4.0, "duration_days": 2 }
+      ]
+    },
+    {
+      "id": "custom",
+      "name_ar": "تفصيل",
+      "icon": "👔",
+      "services": [
+        { "id": "custom_thobe", "name_ar": "تفصيل ثوب", "price": 25.0, "duration_days": 7 },
+        { "id": "custom_abaya", "name_ar": "تفصيل عباية", "price": 30.0, "duration_days": 7 },
+        { "id": "custom_suit", "name_ar": "تفصيل بدلة رسمية", "price": 80.0, "duration_days": 14 },
+        { "id": "custom_dress", "name_ar": "تفصيل فستان", "price": 40.0, "duration_days": 10 }
+      ]
+    }
+  ],
+  "item_types": ["ثوب", "بنطلون", "قميص", "فستان", "جاكيت", "عباية", "تنورة", "بدلة", "معطف", "بلوزة", "جلابية"],
+  "attributes": [
+    { "id": "fabric", "label_ar": "نوع القماش", "values": ["قطن", "بوليستر", "حرير", "صوف", "كتان", "جينز", "شيفون", "ساتان"] },
+    { "id": "color", "label_ar": "اللون", "values": ["أبيض", "أسود", "أزرق", "رمادي", "بني", "أحمر", "بيج", "أخضر", "كحلي"] }
+  ],
+  "tickets": [
+    {
+      "id": "d-101",
+      "ticket_number": "T-0021",
+      "status": "processing",
+      "source": "walk_in",
+      "customer_name": "فاطمة علي",
+      "customer_phone": "0791122334",
+      "items": [
+        { "id": "i-101", "name": "فستان", "quantity": 1, "service": "تعديل طول فستان", "price": 5.0, "attributes": { "color": "أحمر", "fabric": "ساتان" } },
+        { "id": "i-102", "name": "بنطلون", "quantity": 2, "service": "تقصير بنطلون", "price": 3.0, "attributes": { "color": "أسود", "fabric": "قطن" } }
+      ],
+      "total_price": 11.0,
+      "dropped_off_at": "2026-02-11T10:00:00Z",
+      "estimated_ready_at": "2026-02-13",
+      "started_at": "2026-02-11T16:00:00Z",
+      "notes": "الفستان لازم يكون جاهز قبل الخميس",
+      "urgent": true,
+      "paid": false
+    },
+    {
+      "id": "d-102",
+      "ticket_number": "T-0022",
+      "status": "received",
+      "source": "walk_in",
+      "customer_name": "عبدالله حسن",
+      "customer_phone": "0785544332",
+      "items": [
+        { "id": "i-103", "name": "ثوب", "quantity": 1, "service": "تفصيل ثوب", "price": 25.0, "attributes": { "color": "أبيض", "fabric": "قطن" } }
+      ],
+      "total_price": 25.0,
+      "dropped_off_at": "2026-02-12T09:00:00Z",
+      "estimated_ready_at": "2026-02-19",
+      "urgent": false,
+      "paid": true,
+      "payment_method": "كاش"
+    },
+    {
+      "id": "d-103",
+      "ticket_number": "T-0023",
+      "status": "ready",
+      "source": "phone",
+      "customer_name": "نورا سامي",
+      "customer_phone": "0799001122",
+      "items": [
+        { "id": "i-104", "name": "جاكيت", "quantity": 1, "service": "تبديل سحّاب", "price": 3.0, "attributes": { "color": "كحلي" } },
+        { "id": "i-105", "name": "بنطلون", "quantity": 1, "service": "تضييق خصر", "price": 4.0, "attributes": { "color": "رمادي", "fabric": "جينز" } }
+      ],
+      "total_price": 7.0,
+      "dropped_off_at": "2026-02-09T14:00:00Z",
+      "estimated_ready_at": "2026-02-11",
+      "started_at": "2026-02-10T08:00:00Z",
+      "completed_at": "2026-02-11T12:00:00Z",
+      "paid": false
+    },
+    {
+      "id": "d-104",
+      "ticket_number": "T-0020",
+      "status": "delivered",
+      "source": "walk_in",
+      "customer_name": "ريم خالد",
+      "customer_phone": "0781234555",
+      "items": [
+        { "id": "i-106", "name": "عباية", "quantity": 1, "service": "تفصيل عباية", "price": 30.0, "attributes": { "color": "أسود", "fabric": "شيفون" } },
+        { "id": "i-107", "name": "تنورة", "quantity": 1, "service": "تقصير بنطلون", "price": 3.0, "attributes": { "color": "بيج" } }
+      ],
+      "total_price": 33.0,
+      "dropped_off_at": "2026-02-05T11:00:00Z",
+      "estimated_ready_at": "2026-02-12",
+      "started_at": "2026-02-06T09:00:00Z",
+      "completed_at": "2026-02-11T15:00:00Z",
+      "picked_up_at": "2026-02-12T10:00:00Z",
+      "paid": true,
+      "payment_method": "CliQ"
+    }
+  ],
+  "stats": {
+    "total_today": 4,
+    "received": 1,
+    "processing": 1,
+    "ready": 1,
+    "delivered": 1,
+    "overdue": 0,
+    "revenue_today": 76.0
+  }
+}

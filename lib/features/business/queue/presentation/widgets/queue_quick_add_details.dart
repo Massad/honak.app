@@ -46,13 +46,11 @@ const _kAddOns = [
 
 class _DetailsStep extends StatefulWidget {
   final ServicePackage package;
-  final ScrollController scrollController;
   final VoidCallback onChangePackage;
   final ValueChanged<QueueEntry> onSubmit;
 
   const _DetailsStep({
     required this.package,
-    required this.scrollController,
     required this.onChangePackage,
     required this.onSubmit,
   });
@@ -126,7 +124,6 @@ class _DetailsStepState extends State<_DetailsStep> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      controller: widget.scrollController,
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       children: [
         // ── Selected package summary ──

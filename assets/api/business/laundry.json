@@ -1,0 +1,162 @@
+{
+  "service_categories": [
+    {
+      "id": "wash",
+      "name_ar": "غسيل",
+      "icon": "💧",
+      "services": [
+        { "id": "wash_normal", "name_ar": "غسيل عادي", "price": 0.75, "duration_days": 1 },
+        { "id": "wash_dry", "name_ar": "غسيل جاف", "price": 2.0, "duration_days": 2 },
+        { "id": "wash_delicate", "name_ar": "غسيل ملابس حساسة", "price": 2.5, "duration_days": 2 }
+      ]
+    },
+    {
+      "id": "iron",
+      "name_ar": "كي",
+      "icon": "🔥",
+      "services": [
+        { "id": "iron_normal", "name_ar": "كي عادي", "price": 0.5, "duration_days": 1 },
+        { "id": "iron_steam", "name_ar": "كي بالبخار", "price": 1.0, "duration_days": 1 }
+      ]
+    },
+    {
+      "id": "special",
+      "name_ar": "خدمات خاصة",
+      "icon": "✨",
+      "services": [
+        { "id": "stain_remove", "name_ar": "إزالة بقع", "price": 3.0, "duration_days": 3 },
+        { "id": "blanket_wash", "name_ar": "غسيل بطانيات / لحاف", "price": 5.0, "duration_days": 2 },
+        { "id": "curtain_wash", "name_ar": "غسيل ستائر", "price": 4.0, "duration_days": 3 },
+        { "id": "suit_full", "name_ar": "تنظيف بدلة كاملة", "price": 6.0, "duration_days": 2 },
+        { "id": "wedding_dress", "name_ar": "تنظيف فستان سهرة", "price": 10.0, "duration_days": 5 }
+      ]
+    }
+  ],
+  "item_types": ["قميص", "بنطلون", "فستان", "تنورة", "جاكيت", "بدلة", "عباية", "ثوب", "بطانية", "لحاف", "ستارة", "شرشف", "معطف", "قميص رسمي", "بلوزة"],
+  "attributes": [
+    { "id": "color", "label_ar": "اللون", "values": ["أبيض", "أسود", "أزرق", "رمادي", "بني", "أحمر", "بيج", "أخضر", "وردي", "كحلي"] },
+    { "id": "fabric", "label_ar": "نوع القماش", "values": ["قطن", "بوليستر", "حرير", "صوف", "كتان", "جينز", "شيفون"] }
+  ],
+  "tickets": [
+    {
+      "id": "d-001",
+      "ticket_number": "L-0042",
+      "status": "processing",
+      "source": "walk_in",
+      "customer_name": "سارة أحمد",
+      "customer_phone": "0791234567",
+      "items": [
+        { "id": "i-001", "name": "قميص رسمي", "quantity": 3, "service": "غسيل جاف", "price": 2.0, "attributes": { "color": "أبيض" } },
+        { "id": "i-002", "name": "بنطلون", "quantity": 2, "service": "غسيل عادي", "price": 0.75, "attributes": { "color": "أسود", "fabric": "قطن" } },
+        { "id": "i-003", "name": "جاكيت", "quantity": 1, "service": "غسيل جاف", "price": 2.0, "attributes": { "color": "كحلي" } }
+      ],
+      "total_price": 9.5,
+      "dropped_off_at": "2026-02-11T09:30:00Z",
+      "estimated_ready_at": "2026-02-13",
+      "started_at": "2026-02-11T14:00:00Z",
+      "notes": "انتبهوا على الجاكيت — فيه زر مفكوك",
+      "urgent": false,
+      "paid": false
+    },
+    {
+      "id": "d-002",
+      "ticket_number": "L-0043",
+      "status": "ready",
+      "source": "walk_in",
+      "customer_name": "محمد خالد",
+      "customer_phone": "0787654321",
+      "items": [
+        { "id": "i-004", "name": "بدلة", "quantity": 1, "service": "تنظيف بدلة كاملة", "price": 6.0, "attributes": { "color": "رمادي" } },
+        { "id": "i-005", "name": "قميص رسمي", "quantity": 2, "service": "كي بالبخار", "price": 1.0, "attributes": { "color": "أبيض" } }
+      ],
+      "total_price": 8.0,
+      "dropped_off_at": "2026-02-10T11:00:00Z",
+      "estimated_ready_at": "2026-02-12",
+      "started_at": "2026-02-10T15:00:00Z",
+      "completed_at": "2026-02-12T10:00:00Z",
+      "paid": true,
+      "payment_method": "كاش"
+    },
+    {
+      "id": "d-003",
+      "ticket_number": "L-0044",
+      "status": "received",
+      "source": "walk_in",
+      "customer_name": "ليلى عمر",
+      "customer_phone": "0799887766",
+      "items": [
+        { "id": "i-006", "name": "ستارة", "quantity": 4, "service": "غسيل ستائر", "price": 4.0, "attributes": {} },
+        { "id": "i-007", "name": "لحاف", "quantity": 2, "service": "غسيل بطانيات / لحاف", "price": 5.0, "attributes": {} }
+      ],
+      "total_price": 26.0,
+      "dropped_off_at": "2026-02-12T08:15:00Z",
+      "estimated_ready_at": "2026-02-15",
+      "urgent": false,
+      "paid": false
+    },
+    {
+      "id": "d-004",
+      "ticket_number": "L-0045",
+      "status": "received",
+      "source": "app_request",
+      "customer_name": "أحمد ناصر",
+      "customer_phone": "0781112233",
+      "items": [
+        { "id": "i-008", "name": "فستان", "quantity": 1, "service": "تنظيف فستان سهرة", "price": 10.0, "attributes": { "color": "وردي", "fabric": "شيفون" } },
+        { "id": "i-009", "name": "عباية", "quantity": 1, "service": "غسيل ملابس حساسة", "price": 2.5, "attributes": { "color": "أسود", "fabric": "حرير" } }
+      ],
+      "total_price": 12.5,
+      "dropped_off_at": "2026-02-12T10:00:00Z",
+      "estimated_ready_at": "2026-02-17",
+      "urgent": true,
+      "paid": false,
+      "notes": "الفستان فيه بقعة عند الصدر"
+    },
+    {
+      "id": "d-005",
+      "ticket_number": "L-0041",
+      "status": "delivered",
+      "source": "walk_in",
+      "customer_name": "عمر يوسف",
+      "customer_phone": "0795556677",
+      "items": [
+        { "id": "i-010", "name": "قميص", "quantity": 5, "service": "غسيل عادي", "price": 0.75, "attributes": { "fabric": "قطن" } },
+        { "id": "i-011", "name": "بنطلون", "quantity": 3, "service": "كي عادي", "price": 0.5, "attributes": {} }
+      ],
+      "total_price": 5.25,
+      "dropped_off_at": "2026-02-09T09:00:00Z",
+      "estimated_ready_at": "2026-02-10",
+      "started_at": "2026-02-09T12:00:00Z",
+      "completed_at": "2026-02-10T08:00:00Z",
+      "picked_up_at": "2026-02-10T16:30:00Z",
+      "paid": true,
+      "payment_method": "كاش"
+    },
+    {
+      "id": "d-006",
+      "ticket_number": "L-0046",
+      "status": "processing",
+      "source": "phone",
+      "customer_name": "هدى سعيد",
+      "customer_phone": "0786543210",
+      "items": [
+        { "id": "i-012", "name": "بطانية", "quantity": 2, "service": "غسيل بطانيات / لحاف", "price": 5.0, "attributes": {} },
+        { "id": "i-013", "name": "شرشف", "quantity": 4, "service": "غسيل عادي", "price": 0.75, "attributes": { "color": "أبيض" } }
+      ],
+      "total_price": 13.0,
+      "dropped_off_at": "2026-02-11T15:00:00Z",
+      "estimated_ready_at": "2026-02-13",
+      "started_at": "2026-02-12T08:00:00Z",
+      "paid": false
+    }
+  ],
+  "stats": {
+    "total_today": 6,
+    "received": 2,
+    "processing": 2,
+    "ready": 1,
+    "delivered": 1,
+    "overdue": 0,
+    "revenue_today": 74.25
+  }
+}

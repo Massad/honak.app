@@ -9,6 +9,7 @@ import 'package:honak/features/business/queue/domain/entities/queue_source.dart'
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
 import 'package:honak/features/business/queue/domain/entities/service_package.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 part 'queue_quick_add_details.dart';
 part 'queue_quick_add_widgets.dart';
@@ -23,10 +24,8 @@ Future<QueueEntry?> showQueueQuickAdd(
   BuildContext context, {
   required List<ServicePackage> packages,
 }) {
-  return showModalBottomSheet<QueueEntry>(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet<QueueEntry>(
+    context,
     builder: (_) => _QueueQuickAddSheet(packages: packages),
   );
 }
@@ -57,43 +56,28 @@ class _QueueQuickAddSheetState extends State<_QueueQuickAddSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.85,
-      minChildSize: 0.4,
-      maxChildSize: 0.95,
-      expand: false,
-      builder: (context, scrollController) => Container(
-        decoration: const BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(AppRadius.xxl),
-          ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _SheetHeader(
+          title: _selectedPackage == null
+              ? 'اختر الخدمة'
+              : 'تفاصيل العميل',
+          onClose: () => Navigator.pop(context),
         ),
-        child: Column(
-          children: [
-            _SheetHeader(
-              title: _selectedPackage == null
-                  ? 'اختر الخدمة'
-                  : 'تفاصيل العميل',
-              onClose: () => Navigator.pop(context),
-            ),
-            Expanded(
-              child: _selectedPackage == null
-                  ? _PackageList(
-                      packages: widget.packages,
-                      scrollController: scrollController,
-                      onSelect: _onPackageSelected,
-                    )
-                  : _DetailsStep(
-                      package: _selectedPackage!,
-                      scrollController: scrollController,
-                      onChangePackage: _clearPackage,
-                      onSubmit: (entry) => Navigator.pop(context, entry),
-                    ),
-            ),
-          ],
+        Flexible(
+          child: _selectedPackage == null
+              ? _PackageList(
+                  packages: widget.packages,
+                  onSelect: _onPackageSelected,
+                )
+              : _DetailsStep(
+                  package: _selectedPackage!,
+                  onChangePackage: _clearPackage,
+                  onSubmit: (entry) => Navigator.pop(context, entry),
+                ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -173,19 +157,16 @@ class _SheetHeader extends StatelessWidget {
 
 class _PackageList extends StatelessWidget {
   final List<ServicePackage> packages;
-  final ScrollController scrollController;
   final ValueChanged<ServicePackage> onSelect;
 
   const _PackageList({
     required this.packages,
-    required this.scrollController,
     required this.onSelect,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      controller: scrollController,
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       itemCount: packages.length,
       separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.md),

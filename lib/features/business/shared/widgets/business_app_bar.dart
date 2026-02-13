@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/widgets/page_selector_sheet.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/cached_image.dart';
 
 class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -155,11 +156,8 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
   }
 
   void _showPageSelector(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet(
+      context,
       builder: (_) => const PageSelectorSheet(),
     );
   }

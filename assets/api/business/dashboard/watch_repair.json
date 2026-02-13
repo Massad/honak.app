@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 5,
+      "new_followers": 1,
+      "page_views": 15,
+      "today_revenue": 7900
+    },
+    "today_summary": {
+      "completed": 1,
+      "upcoming": 0,
+      "cancelled": 0,
+      "no_show": 0,
+      "total": 5,
+      "revenue": 7900
+    },
+    "live_dropoff": {
+      "received": 1,
+      "processing": 2,
+      "ready": 1,
+      "delivered": 1,
+      "overdue": 0
+    },
+    "today_revenue": {
+      "total": 7900,
+      "completed_count": 2,
+      "items": [
+        { "service": "تبديل زجاج + تنظيف — Tissot", "amount": 1500, "time": "10:00" },
+        { "service": "تبديل سوار + بطارية — Casio", "amount": 800, "time": "15:00" }
+      ]
+    },
+    "pending_requests": [
+      { "id": "req_901", "customer": "يحيى سامر", "service": "صيانة حركة — ساعة Longines", "date": "2026-02-13", "time": "11:00" }
+    ]
+  }
+}

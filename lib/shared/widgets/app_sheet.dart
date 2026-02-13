@@ -145,14 +145,20 @@ class AppSheetHeader extends StatelessWidget {
 // showAppSheet — modal bottom sheet with consistent styling
 // ═══════════════════════════════════════════════════════════════
 
-/// Shows a modal bottom sheet with standard app styling.
-/// The sheet has rounded top corners and transparent background.
-/// Content is provided via [builder].
+/// Shows a modal bottom sheet with standard app styling and auto-expand.
+///
+/// The sheet uses `MainAxisSize.min` + `Flexible(fit: FlexFit.loose)` so it
+/// auto-sizes to its content and scrolls only when content exceeds
+/// [maxHeightFraction] of the screen. When content changes (e.g. new form
+/// fields appear), the sheet height adjusts automatically.
+///
+/// Includes rounded top corners, keyboard-aware bottom padding, and SafeArea.
 Future<T?> showAppSheet<T>(
   BuildContext context, {
   required WidgetBuilder builder,
   bool isDismissible = true,
   bool enableDrag = true,
+  double maxHeightFraction = 0.9,
 }) {
   return showModalBottomSheet<T>(
     context: context,
@@ -160,17 +166,28 @@ Future<T?> showAppSheet<T>(
     isDismissible: isDismissible,
     enableDrag: enableDrag,
     backgroundColor: Colors.transparent,
-    builder: (ctx) => Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
+    builder: (ctx) {
+      final viewInsets = MediaQuery.of(ctx).viewInsets;
+      return Padding(
+        padding: EdgeInsets.only(bottom: viewInsets.bottom),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(ctx).size.height * maxHeightFraction,
+          ),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(AppRadius.xxl),
+              ),
+            ),
+            child: SafeArea(
+              top: false,
+              child: builder(ctx),
+            ),
+          ),
         ),
-      ),
-      child: SafeArea(
-        top: false,
-        child: builder(ctx),
-      ),
-    ),
+      );
+    },
   );
 }

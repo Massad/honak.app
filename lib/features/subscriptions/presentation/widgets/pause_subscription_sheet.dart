@@ -4,17 +4,15 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 void showPauseSubscriptionSheet(
   BuildContext context,
   Subscription subscription,
 ) {
-  showModalBottomSheet(
-    context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
+  showAppSheet(
+    context,
     builder: (context) =>
         _PauseSubscriptionSheet(subscription: subscription),
   );
@@ -46,12 +44,11 @@ class _PauseSubscriptionSheetState extends State<_PauseSubscriptionSheet> {
     final resumeDate = DateTime.now().add(Duration(days: _days.round()));
     final dateFormat = DateFormat('d MMMM yyyy', 'ar');
 
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.xxl),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+    return Padding(
+      padding: const EdgeInsets.all(AppSpacing.xxl),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
             Container(
               width: 36,
               height: 4,
@@ -174,8 +171,7 @@ class _PauseSubscriptionSheetState extends State<_PauseSubscriptionSheet> {
                 child: const Text('العودة'),
               ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }

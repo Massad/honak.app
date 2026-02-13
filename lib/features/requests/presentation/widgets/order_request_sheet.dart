@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/cart.dart';
 import 'package:honak/features/requests/presentation/widgets/order_sheet_sections.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Bottom sheet for catalog_order + menu_order archetypes.
 ///
@@ -37,23 +38,15 @@ class OrderRequestSheet extends StatefulWidget {
     List<Map<String, dynamic>> locations = const [],
     required ValueChanged<Map<String, dynamic>> onSubmit,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => DraggableScrollableSheet(
-        initialChildSize: 0.85,
-        maxChildSize: 0.95,
-        minChildSize: 0.5,
-        builder: (_, controller) => _OrderBody(
-          cart: cart,
-          pageName: pageName,
-          paymentMethods: paymentMethods,
-          deliveryFee: deliveryFee,
-          locations: locations,
-          onSubmit: onSubmit,
-          scrollController: controller,
-        ),
+    return showAppSheet(
+      context,
+      builder: (_) => _OrderBody(
+        cart: cart,
+        pageName: pageName,
+        paymentMethods: paymentMethods,
+        deliveryFee: deliveryFee,
+        locations: locations,
+        onSubmit: onSubmit,
       ),
     );
   }
@@ -83,7 +76,6 @@ class _OrderBody extends StatefulWidget {
   final String? deliveryFee;
   final List<Map<String, dynamic>> locations;
   final ValueChanged<Map<String, dynamic>> onSubmit;
-  final ScrollController? scrollController;
 
   const _OrderBody({
     required this.cart,
@@ -92,7 +84,6 @@ class _OrderBody extends StatefulWidget {
     this.deliveryFee,
     required this.locations,
     required this.onSubmit,
-    this.scrollController,
   });
 
   @override
@@ -140,63 +131,56 @@ class _OrderBodyState extends State<_OrderBody> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: Column(
-        children: [
-          _buildDragHandle(),
-          _buildHeader(theme),
-          Expanded(
-            child: ListView(
-              controller: widget.scrollController,
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
-              ),
-              children: [
-                _buildBusinessLabel(theme),
-                const SizedBox(height: AppSpacing.xl),
-                OrderCartSummary(cart: widget.cart),
-                const SizedBox(height: AppSpacing.xl),
-                DeliveryToggle(
-                  isDelivery: _isDelivery,
-                  onChanged: (v) => setState(() => _isDelivery = v),
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                if (_isDelivery) ...[
-                  DeliveryAddressSection(deliveryFee: widget.deliveryFee),
-                  const SizedBox(height: AppSpacing.xl),
-                ] else if (_enabledLocations.length > 1) ...[
-                  OrderBranchSelector(
-                    locations: _enabledLocations,
-                    selectedIndex: _selectedLocationIdx,
-                    onChanged: (i) =>
-                        setState(() => _selectedLocationIdx = i),
-                  ),
-                  const SizedBox(height: AppSpacing.xl),
-                ] else if (_enabledLocations.length == 1) ...[
-                  OrderSingleBranch(location: _enabledLocations.first),
-                  const SizedBox(height: AppSpacing.xl),
-                ],
-                OrderPaymentMethods(
-                  paymentMethods: widget.paymentMethods,
-                  selectedIndex: _selectedPaymentIdx,
-                  onChanged: (i) =>
-                      setState(() => _selectedPaymentIdx = i),
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                OrderNoteField(controller: _noteController),
-                const SizedBox(height: AppSpacing.lg),
-              ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildDragHandle(),
+        _buildHeader(theme),
+        Flexible(
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
             ),
+            children: [
+              _buildBusinessLabel(theme),
+              const SizedBox(height: AppSpacing.xl),
+              OrderCartSummary(cart: widget.cart),
+              const SizedBox(height: AppSpacing.xl),
+              DeliveryToggle(
+                isDelivery: _isDelivery,
+                onChanged: (v) => setState(() => _isDelivery = v),
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              if (_isDelivery) ...[
+                DeliveryAddressSection(deliveryFee: widget.deliveryFee),
+                const SizedBox(height: AppSpacing.xl),
+              ] else if (_enabledLocations.length > 1) ...[
+                OrderBranchSelector(
+                  locations: _enabledLocations,
+                  selectedIndex: _selectedLocationIdx,
+                  onChanged: (i) =>
+                      setState(() => _selectedLocationIdx = i),
+                ),
+                const SizedBox(height: AppSpacing.xl),
+              ] else if (_enabledLocations.length == 1) ...[
+                OrderSingleBranch(location: _enabledLocations.first),
+                const SizedBox(height: AppSpacing.xl),
+              ],
+              OrderPaymentMethods(
+                paymentMethods: widget.paymentMethods,
+                selectedIndex: _selectedPaymentIdx,
+                onChanged: (i) =>
+                    setState(() => _selectedPaymentIdx = i),
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              OrderNoteField(controller: _noteController),
+              const SizedBox(height: AppSpacing.lg),
+            ],
           ),
-          _buildSubmitButton(theme),
-        ],
-      ),
+        ),
+        _buildSubmitButton(theme),
+      ],
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Shows a bottom sheet to pick team members for a service item.
 /// Returns the selected member IDs, or null if dismissed.
@@ -11,10 +12,9 @@ Future<List<String>?> showTeamPickerSheet(
   required List<TeamMember> members,
   required List<String> selectedIds,
 }) {
-  return showModalBottomSheet<List<String>>(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet<List<String>>(
+    context,
+    maxHeightFraction: 0.7,
     builder: (_) => _TeamPickerContent(
       members: members,
       initialSelected: selectedIds,
@@ -83,35 +83,25 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
   Widget build(BuildContext context) {
     final allSelected = _selected.length == _pickable.length;
 
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.7,
-      ),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag handle
-            Center(
-              child: Container(
-                width: 36,
-                height: 4,
-                margin: const EdgeInsets.only(
-                    top: AppSpacing.sm, bottom: AppSpacing.md),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Drag handle
+        Center(
+          child: Container(
+            width: 36,
+            height: 4,
+            margin: const EdgeInsets.only(
+                top: AppSpacing.sm, bottom: AppSpacing.md),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
             ),
+          ),
+        ),
 
-            // Header
-            Padding(
+        // Header
+        Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               child: Row(
                 children: [
@@ -216,9 +206,7 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
                 ),
               ),
             ),
-          ],
-        ),
-      ),
+      ],
     );
   }
 }

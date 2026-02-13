@@ -6,6 +6,7 @@ import 'package:honak/features/business/page_settings/domain/entities/alert_mode
 import 'package:honak/features/business/page_settings/presentation/providers/alert_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/confirm_dialog.dart';
 
 class AlertManager extends ConsumerWidget {
@@ -123,21 +124,15 @@ class _AlertBody extends ConsumerWidget {
     var severity = 'info';
     var hasExpiry = false;
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.vertical(top: Radius.circular(16))),
+    showAppSheet(
+      context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setS) => Padding(
           padding: EdgeInsets.only(
               left: AppSpacing.lg,
               right: AppSpacing.lg,
               top: AppSpacing.lg,
-              bottom: MediaQuery.of(ctx).viewInsets.bottom +
-                  AppSpacing.lg),
+              bottom: AppSpacing.lg),
           child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,

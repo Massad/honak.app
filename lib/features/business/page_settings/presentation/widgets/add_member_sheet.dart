@@ -4,6 +4,7 @@ import 'package:honak/config/business_type_config.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Shows a bottom sheet to add a new team member with phone, role suggestions,
 /// and permission toggles.
@@ -12,10 +13,8 @@ Future<void> showAddMemberSheet(
   BusinessTypeConfig? config,
   required ValueChanged<TeamMember> onAdd,
 }) {
-  return showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet(
+    context,
     builder: (_) => _AddMemberContent(config: config, onAdd: onAdd),
   );
 }
@@ -104,58 +103,44 @@ class _AddMemberContentState extends State<_AddMemberContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: Container(
-        constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.85,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Drag handle
+        Center(
+          child: Container(
+            width: 36,
+            height: 4,
+            margin: const EdgeInsets.only(
+              top: AppSpacing.sm,
+              bottom: AppSpacing.md,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
         ),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+
+        // Header
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          child: Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: Text(
+              'إضافة عضو جديد',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
-        child: SafeArea(
-          top: false,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Drag handle
-              Center(
-                child: Container(
-                  width: 36,
-                  height: 4,
-                  margin: const EdgeInsets.only(
-                    top: AppSpacing.sm,
-                    bottom: AppSpacing.md,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
 
-              // Header
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                child: Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Text(
-                    'إضافة عضو جديد',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
+        const SizedBox(height: AppSpacing.lg),
 
-              const SizedBox(height: AppSpacing.lg),
-
-              Flexible(
-                child: ListView(
+        Flexible(
+          child: ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.lg),
@@ -374,11 +359,8 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
         ),
-      ),
+      ],
     );
   }
 }

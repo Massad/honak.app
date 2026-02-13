@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 part 'category_manager_widgets.dart';
 
@@ -151,12 +152,8 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
     final others = _categories.where((c) => c.id != cat.id).toList();
     var reassignTo = '';
 
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xxl)),
-      ),
+    showAppSheet<void>(
+      context,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSheetState) => Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(

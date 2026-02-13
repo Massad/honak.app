@@ -25,46 +25,41 @@ class _ExploreFilterSheetState extends ConsumerState<ExploreFilterSheet> {
   Widget build(BuildContext context) {
     final categoriesAsync = ref.watch(categoriesProvider);
 
-    return DraggableScrollableSheet(
-      initialChildSize: 0.7,
-      maxChildSize: 0.9,
-      minChildSize: 0.5,
-      expand: false,
-      builder: (context, scrollController) {
-        return Column(
-          children: [
-            // Drag handle provided by theme's showDragHandle: true
-            // Header
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg,
-                vertical: AppSpacing.md,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Header
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.l10n.filter,
+                style: context.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.l10n.filter,
-                    style: context.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => setState(
-                      () => _draft = ExploreFilterState.empty,
-                    ),
-                    child: Text(context.l10n.filterReset),
-                  ),
-                ],
+              TextButton(
+                onPressed: () => setState(
+                  () => _draft = ExploreFilterState.empty,
+                ),
+                child: Text(context.l10n.filterReset),
               ),
-            ),
-            const Divider(height: 1),
-            // Scrollable content
-            Expanded(
-              child: ListView(
-                controller: scrollController,
-                padding: EdgeInsets.all(AppSpacing.lg),
-                children: [
+            ],
+          ),
+        ),
+        const Divider(height: 1),
+        // Scrollable content
+        Flexible(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                   // Category toggles
                   Text(
                     context.l10n.filterCategory,
@@ -148,26 +143,25 @@ class _ExploreFilterSheetState extends ConsumerState<ExploreFilterSheet> {
                       );
                     },
                   ),
-                ],
-              ),
+              ],
             ),
-            // Apply button
-            Padding(
-              padding: EdgeInsets.all(AppSpacing.lg),
-              child: SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: () {
-                    ref.read(exploreFilterProvider.notifier).update(_draft);
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(context.l10n.filterApply),
-                ),
-              ),
+          ),
+        ),
+        // Apply button
+        Padding(
+          padding: EdgeInsets.all(AppSpacing.lg),
+          child: SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: () {
+                ref.read(exploreFilterProvider.notifier).update(_draft);
+                Navigator.of(context).pop();
+              },
+              child: Text(context.l10n.filterApply),
             ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     );
   }
 }

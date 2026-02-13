@@ -9,6 +9,7 @@ import 'package:honak/features/requests/presentation/widgets/edit_order_sheet.da
 import 'package:honak/features/requests/presentation/widgets/request_type_details.dart';
 import 'package:honak/features/requests/presentation/widgets/reschedule_sheet.dart';
 import 'package:honak/features/requests/presentation/widgets/status_timeline.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Full request detail page (customer view).
 class CustomerRequestDetailPage extends StatefulWidget {
@@ -293,10 +294,8 @@ class _CustomerRequestDetailPageState
   }
 
   void _showCancel() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet<void>(
+      context,
       builder: (_) => CancelConfirmationSheet(
         requestId: _request.id,
         onConfirm: () {
@@ -328,10 +327,8 @@ class _CustomerRequestDetailPageState
   }
 
   void _showReschedule() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet<void>(
+      context,
       builder: (_) => RescheduleSheet(
         request: _request,
         onSubmit: (newTime, reason) {
@@ -359,10 +356,8 @@ class _CustomerRequestDetailPageState
   }
 
   void _showEditOrder() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet<void>(
+      context,
       builder: (_) => EditOrderSheet(
         request: _request,
         onSave: (updatedItems, updatedNote) {

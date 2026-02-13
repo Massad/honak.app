@@ -6,6 +6,7 @@ import 'package:honak/features/business/dashboard/presentation/widgets/sections/
 import 'package:honak/features/business/dashboard/presentation/widgets/sections/delivery_sections.dart';
 import 'package:honak/features/business/dashboard/presentation/widgets/sections/order_sections.dart';
 import 'package:honak/features/business/dashboard/presentation/widgets/sections/venue_sections.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_dashboard_widget.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_dashboard_widget.dart';
 
 /// Whether this section type renders its own colored container
@@ -102,6 +103,33 @@ class DashboardSectionContent extends StatelessWidget {
                   as int? ??
               0,
           revenueTodayCents: (data['live_queue']
+                  as Map<String, dynamic>?)?['revenue_today_cents']
+              as int? ??
+              0,
+        ),
+      // Dropoff
+      DashboardSectionType.liveDropoff => DropoffDashboardWidget(
+          received:
+              (data['live_dropoff'] as Map<String, dynamic>?)?['received']
+                  as int? ??
+              0,
+          processing:
+              (data['live_dropoff'] as Map<String, dynamic>?)?['processing']
+                  as int? ??
+              0,
+          ready:
+              (data['live_dropoff'] as Map<String, dynamic>?)?['ready']
+                  as int? ??
+              0,
+          delivered:
+              (data['live_dropoff'] as Map<String, dynamic>?)?['delivered']
+                  as int? ??
+              0,
+          overdue:
+              (data['live_dropoff'] as Map<String, dynamic>?)?['overdue']
+                  as int? ??
+              0,
+          revenueTodayCents: (data['live_dropoff']
                   as Map<String, dynamic>?)?['revenue_today_cents']
               as int? ??
               0,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 /// A single entry in the credit usage history.
@@ -44,7 +45,6 @@ class CreditHistorySheet extends StatelessWidget {
     this.expiresAt,
     this.remainingCredits,
     this.totalCredits,
-    this.scrollController,
   });
 
   static Future<void> show(
@@ -58,33 +58,20 @@ class CreditHistorySheet extends StatelessWidget {
     int? remainingCredits,
     int? totalCredits,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.7,
-        minChildSize: 0.4,
-        maxChildSize: 0.9,
-        expand: false,
-        builder: (context, scrollController) => CreditHistorySheet(
-          packageName: packageName,
-          pageName: pageName,
-          creditLabel: creditLabel,
-          entries: entries,
-          startsAt: startsAt,
-          expiresAt: expiresAt,
-          remainingCredits: remainingCredits,
-          totalCredits: totalCredits,
-          scrollController: scrollController,
-        ),
+    return showAppSheet(
+      context,
+      builder: (_) => CreditHistorySheet(
+        packageName: packageName,
+        pageName: pageName,
+        creditLabel: creditLabel,
+        entries: entries,
+        startsAt: startsAt,
+        expiresAt: expiresAt,
+        remainingCredits: remainingCredits,
+        totalCredits: totalCredits,
       ),
     );
   }
-
-  final ScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -115,11 +102,10 @@ class CreditHistorySheet extends StatelessWidget {
         Divider(height: 1, color: Colors.grey.shade100),
 
         // Content
-        Expanded(
+        Flexible(
           child: entries.isEmpty
               ? _buildEmptyState(context)
               : ListView(
-                  controller: scrollController,
                   padding: const EdgeInsetsDirectional.fromSTEB(
                     AppSpacing.lg,
                     0,

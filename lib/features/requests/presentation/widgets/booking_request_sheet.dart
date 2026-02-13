@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/booking_sheet_chrome.dart';
 import 'package:honak/features/requests/presentation/widgets/booking_sheet_sections.dart';
 import 'package:honak/features/requests/presentation/widgets/customer_questions_section.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Bottom sheet for the service_booking archetype.
 ///
@@ -39,24 +39,16 @@ class BookingRequestSheet extends StatelessWidget {
     List<String>? branches,
     required ValueChanged<Map<String, dynamic>> onSubmit,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => DraggableScrollableSheet(
-        initialChildSize: 0.85,
-        maxChildSize: 0.95,
-        minChildSize: 0.5,
-        builder: (_, controller) => _BookingBody(
-          pageName: pageName,
-          services: services,
-          team: team,
-          questions: questions,
-          initialServiceId: initialServiceId,
-          branches: branches,
-          onSubmit: onSubmit,
-          scrollController: controller,
-        ),
+    return showAppSheet(
+      context,
+      builder: (_) => _BookingBody(
+        pageName: pageName,
+        services: services,
+        team: team,
+        questions: questions,
+        initialServiceId: initialServiceId,
+        branches: branches,
+        onSubmit: onSubmit,
       ),
     );
   }
@@ -83,7 +75,6 @@ class _BookingBody extends StatefulWidget {
   final String? initialServiceId;
   final List<String>? branches;
   final ValueChanged<Map<String, dynamic>> onSubmit;
-  final ScrollController? scrollController;
 
   const _BookingBody({
     required this.pageName,
@@ -93,7 +84,6 @@ class _BookingBody extends StatefulWidget {
     this.initialServiceId,
     this.branches,
     required this.onSubmit,
-    this.scrollController,
   });
 
   @override
@@ -173,89 +163,80 @@ class _BookingBodyState extends State<_BookingBody> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const BookingSheetDragHandle(),
+        BookingSheetHeader(
+          onClose: () => Navigator.of(context).pop(),
         ),
-      ),
-      child: Column(
-        children: [
-          const BookingSheetDragHandle(),
-          BookingSheetHeader(
-            onClose: () => Navigator.of(context).pop(),
-          ),
-          Expanded(
-            child: ListView(
-              controller: widget.scrollController,
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
-              ),
-              children: [
-                BookingBusinessLabel(pageName: widget.pageName),
-                const SizedBox(height: AppSpacing.xl),
-                BookingServiceSelector(
-                  services: widget.services,
-                  activeServiceId: _activeServiceId,
-                  onChanged: (id) =>
-                      setState(() => _activeServiceId = id),
-                ),
-                // FG2: Branch selector
-                if (widget.branches != null &&
-                    widget.branches!.length > 1) ...[
-                  const SizedBox(height: AppSpacing.xl),
-                  BookingBranchSelector(
-                    branches: widget.branches!,
-                    selected: _selectedBranch,
-                    onChanged: (b) =>
-                        setState(() => _selectedBranch = b),
-                  ),
-                ],
-                const SizedBox(height: AppSpacing.xl),
-                if (widget.team.isNotEmpty) ...[
-                  BookingTeamSelector(
-                    team: widget.team,
-                    selectedTeam: _selectedTeam,
-                    onChanged: (t) =>
-                        setState(() => _selectedTeam = t),
-                  ),
-                  const SizedBox(height: AppSpacing.xl),
-                ],
-                BookingTimePreference(
-                  preferredTime: _preferredTime,
-                  onTimeChanged: (v) =>
-                      setState(() => _preferredTime = v),
-                  specificDay: _specificDay,
-                  onDayChanged: (d) =>
-                      setState(() => _specificDay = d),
-                  specificPeriod: _specificPeriod,
-                  onPeriodChanged: (p) =>
-                      setState(() => _specificPeriod = p),
-                  otherTextController: _otherTextController,
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                BookingNoteField(controller: _noteController),
-                const SizedBox(height: AppSpacing.xl),
-                CustomerQuestionsSection(
-                  questions: widget.questions,
-                  answers: _questionAnswers,
-                  onChanged: (a) =>
-                      setState(() => _questionAnswers = a),
-                ),
-                const SizedBox(height: AppSpacing.lg),
-              ],
+        Flexible(
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
             ),
+            children: [
+              BookingBusinessLabel(pageName: widget.pageName),
+              const SizedBox(height: AppSpacing.xl),
+              BookingServiceSelector(
+                services: widget.services,
+                activeServiceId: _activeServiceId,
+                onChanged: (id) =>
+                    setState(() => _activeServiceId = id),
+              ),
+              // FG2: Branch selector
+              if (widget.branches != null &&
+                  widget.branches!.length > 1) ...[
+                const SizedBox(height: AppSpacing.xl),
+                BookingBranchSelector(
+                  branches: widget.branches!,
+                  selected: _selectedBranch,
+                  onChanged: (b) =>
+                      setState(() => _selectedBranch = b),
+                ),
+              ],
+              const SizedBox(height: AppSpacing.xl),
+              if (widget.team.isNotEmpty) ...[
+                BookingTeamSelector(
+                  team: widget.team,
+                  selectedTeam: _selectedTeam,
+                  onChanged: (t) =>
+                      setState(() => _selectedTeam = t),
+                ),
+                const SizedBox(height: AppSpacing.xl),
+              ],
+              BookingTimePreference(
+                preferredTime: _preferredTime,
+                onTimeChanged: (v) =>
+                    setState(() => _preferredTime = v),
+                specificDay: _specificDay,
+                onDayChanged: (d) =>
+                    setState(() => _specificDay = d),
+                specificPeriod: _specificPeriod,
+                onPeriodChanged: (p) =>
+                    setState(() => _specificPeriod = p),
+                otherTextController: _otherTextController,
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              BookingNoteField(controller: _noteController),
+              const SizedBox(height: AppSpacing.xl),
+              CustomerQuestionsSection(
+                questions: widget.questions,
+                answers: _questionAnswers,
+                onChanged: (a) =>
+                    setState(() => _questionAnswers = a),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+            ],
           ),
-          BookingSubmitButton(
-            questionsValid: _questionsValid,
-            servicePriceStr: _servicePriceStr,
-            onSubmit: _submit,
-          ),
-        ],
-      ),
+        ),
+        BookingSubmitButton(
+          questionsValid: _questionsValid,
+          servicePriceStr: _servicePriceStr,
+          onSubmit: _submit,
+        ),
+      ],
     );
   }
 }

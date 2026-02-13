@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/booking_wizard_steps.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// 3-step booking wizard: team member, date/time, confirm.
 /// Step 1 (team) is skipped when [teamMembers] is empty.
@@ -33,22 +33,15 @@ class BookingWizardSheet extends StatefulWidget {
     int? durationMinutes,
     List<Map<String, dynamic>> teamMembers = const [],
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => DraggableScrollableSheet(
-        initialChildSize: 0.85,
-        maxChildSize: 0.95,
-        minChildSize: 0.5,
-        builder: (sheetContext, controller) => BookingWizardSheet(
-          pageName: pageName,
-          serviceId: serviceId,
-          serviceName: serviceName,
-          priceCents: priceCents,
-          durationMinutes: durationMinutes,
-          teamMembers: teamMembers,
-        ),
+    return showAppSheet(
+      context,
+      builder: (_) => BookingWizardSheet(
+        pageName: pageName,
+        serviceId: serviceId,
+        serviceName: serviceName,
+        priceCents: priceCents,
+        durationMinutes: durationMinutes,
+        teamMembers: teamMembers,
       ),
     );
   }
@@ -129,50 +122,43 @@ class _BookingWizardSheetState extends State<BookingWizardSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: Column(
-        children: [
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: AppSpacing.sm),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: context.colorScheme.outlineVariant,
-                borderRadius: BorderRadius.circular(2),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: AppSpacing.sm),
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: context.colorScheme.outlineVariant,
+              borderRadius: BorderRadius.circular(2),
             ),
           ),
-          _WizardHeader(
-            pageName: widget.pageName,
-            serviceName: widget.serviceName,
-            onClose: () => Navigator.of(context).pop(),
-          ),
-          WizardStepIndicator(
-            labels: _stepLabels,
-            currentStep: _currentStep,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Expanded(
-            child: _buildStepContent(),
-          ),
-          _WizardBottomBar(
-            isFirstStep: _currentStep == 0,
-            isLastStep: _activeStepType == _WizardStepType.confirm,
-            canProceed: _canProceed,
-            onBack: _back,
-            onNext: _activeStepType == _WizardStepType.confirm
-                ? _confirm
-                : _next,
-          ),
-        ],
-      ),
+        ),
+        _WizardHeader(
+          pageName: widget.pageName,
+          serviceName: widget.serviceName,
+          onClose: () => Navigator.of(context).pop(),
+        ),
+        WizardStepIndicator(
+          labels: _stepLabels,
+          currentStep: _currentStep,
+        ),
+        const SizedBox(height: AppSpacing.md),
+        Flexible(
+          child: _buildStepContent(),
+        ),
+        _WizardBottomBar(
+          isFirstStep: _currentStep == 0,
+          isLastStep: _activeStepType == _WizardStepType.confirm,
+          canProceed: _canProceed,
+          onBack: _back,
+          onNext: _activeStepType == _WizardStepType.confirm
+              ? _confirm
+              : _next,
+        ),
+      ],
     );
   }
 

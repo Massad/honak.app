@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/follow_notification_sheet.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
 
 /// Notification level for followed pages.
@@ -54,12 +55,8 @@ class _FollowButtonState extends ConsumerState<FollowButton> {
   FollowLevel _currentLevel = FollowLevel.all;
 
   void _showNotificationSheet() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    showAppSheet<void>(
+      context,
       builder: (_) => FollowNotificationSheet(
         pageName: widget.pageName ?? '',
         currentLevel: _currentLevel,

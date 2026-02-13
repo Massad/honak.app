@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/customer_questions_section.dart';
 import 'package:honak/features/requests/presentation/widgets/reservation_sheet_chrome.dart';
 import 'package:honak/features/requests/presentation/widgets/reservation_steps.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Full-screen 4-step wizard for the reservation archetype.
 ///
@@ -23,7 +23,6 @@ class ReservationRequestSheet extends StatefulWidget {
   final int? depositCents;
   final List<String>? disclaimers;
   final ValueChanged<Map<String, dynamic>> onSubmit;
-  final ScrollController? scrollController;
 
   const ReservationRequestSheet({
     super.key,
@@ -37,7 +36,6 @@ class ReservationRequestSheet extends StatefulWidget {
     this.depositCents,
     this.disclaimers,
     required this.onSubmit,
-    this.scrollController,
   });
 
   static Future<void> show({
@@ -53,27 +51,19 @@ class ReservationRequestSheet extends StatefulWidget {
     List<String>? disclaimers,
     required ValueChanged<Map<String, dynamic>> onSubmit,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => DraggableScrollableSheet(
-        initialChildSize: 0.92,
-        maxChildSize: 0.95,
-        minChildSize: 0.5,
-        builder: (_, controller) => ReservationRequestSheet(
-          pageName: pageName,
-          spaces: spaces,
-          questions: questions,
-          paymentMethods: paymentMethods,
-          maxGuests: maxGuests,
-          isVillaType: isVillaType,
-          pricePerNightCents: pricePerNightCents,
-          depositCents: depositCents,
-          disclaimers: disclaimers,
-          onSubmit: onSubmit,
-          scrollController: controller,
-        ),
+    return showAppSheet(
+      context,
+      builder: (_) => ReservationRequestSheet(
+        pageName: pageName,
+        spaces: spaces,
+        questions: questions,
+        paymentMethods: paymentMethods,
+        maxGuests: maxGuests,
+        isVillaType: isVillaType,
+        pricePerNightCents: pricePerNightCents,
+        depositCents: depositCents,
+        disclaimers: disclaimers,
+        onSubmit: onSubmit,
       ),
     );
   }
@@ -182,46 +172,39 @@ class _ReservationRequestSheetState extends State<ReservationRequestSheet> {
   Widget build(BuildContext context) {
     final currentStepId = _steps[_currentStep].id;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ReservationSheetHeader(
+          pageName: widget.pageName,
+          onClose: () => Navigator.of(context).pop(),
         ),
-      ),
-      child: Column(
-        children: [
-          ReservationSheetHeader(
-            pageName: widget.pageName,
-            onClose: () => Navigator.of(context).pop(),
-          ),
-          ReservationStepIndicator(
-            steps: _steps,
-            currentStep: _currentStep,
-            onTapStep: (i) => setState(() => _currentStep = i),
-          ),
-          Expanded(
-            child: ListView(
-              controller: widget.scrollController,
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
-              ),
-              children: [_buildCurrentStep()],
+        ReservationStepIndicator(
+          steps: _steps,
+          currentStep: _currentStep,
+          onTapStep: (i) => setState(() => _currentStep = i),
+        ),
+        Flexible(
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
             ),
+            children: [_buildCurrentStep()],
           ),
-          ReservationSheetFooter(
-            isLast: _isLast,
-            isFirst: _isFirst,
-            canAdvance: _canAdvance(currentStepId),
-            currentStepId: currentStepId,
-            guestNum: _guestNum,
-            onSubmit: _submit,
-            onNext: _goNext,
-            onBack: _goBack,
-            canSubmitAll: _canAdvance('date') && _guestNum >= 1,
-          ),
-        ],
-      ),
+        ),
+        ReservationSheetFooter(
+          isLast: _isLast,
+          isFirst: _isFirst,
+          canAdvance: _canAdvance(currentStepId),
+          currentStepId: currentStepId,
+          guestNum: _guestNum,
+          onSubmit: _submit,
+          onNext: _goNext,
+          onBack: _goBack,
+          canSubmitAll: _canAdvance('date') && _guestNum >= 1,
+        ),
+      ],
     );
   }
 

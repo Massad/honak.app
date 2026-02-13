@@ -63,6 +63,26 @@
         "business_type_id": "car_wash",
         "is_verified": true,
         "role": "owner"
+      },
+      {
+        "id": "clean-express-laundry",
+        "name": "كلين إكسبرس",
+        "slug": "clean-express-laundry",
+        "avatar_url": "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "مغسلة ملابس",
+        "business_type_id": "laundry",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
+        "id": "quick-lube-amman",
+        "name": "تغيير زيت سريع",
+        "slug": "quick-lube-amman",
+        "avatar_url": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "تغيير زيت",
+        "business_type_id": "oil_change",
+        "is_verified": true,
+        "role": "owner"
       }
     ]
   }

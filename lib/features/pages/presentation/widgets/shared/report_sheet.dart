@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/theme/app_radius.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 // ─── Report reason model ────────────────────────────────────
 
@@ -158,12 +159,8 @@ class ReportSheet extends StatefulWidget {
     required String pageName,
     required String claimStatus,
   }) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    showAppSheet<void>(
+      context,
       builder: (_) => ReportSheet._(
         pageName: pageName,
         claimStatus: claimStatus,
@@ -222,195 +219,188 @@ class _ReportSheetState extends State<ReportSheet> {
     final title = _getTitle(widget.claimStatus);
     final submitLabel = _getSubmitLabel(widget.claimStatus);
 
-    return DraggableScrollableSheet(
-      initialChildSize: 0.7,
-      maxChildSize: 0.9,
-      minChildSize: 0.4,
-      expand: false,
-      builder: (context, scrollController) {
-        return SafeArea(
-          child: Column(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Drag handle
+        Padding(
+          padding: const EdgeInsets.only(top: AppSpacing.sm),
+          child: Container(
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: context.colorScheme.outlineVariant,
+              borderRadius: AppRadius.pill,
+            ),
+          ),
+        ),
+
+        // Header
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.md),
+          child: Row(
             children: [
-              // Drag handle
-              Padding(
-                padding: EdgeInsets.only(top: AppSpacing.sm),
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.outlineVariant,
-                    borderRadius: AppRadius.pill,
-                  ),
-                ),
-              ),
-
-              // Header
-              Padding(
-                padding: EdgeInsets.fromLTRB(
-                    AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.md),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            title,
-                            style: context.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 2),
-                          Text(
-                            widget.pageName,
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: context.colorScheme.onSurfaceVariant,
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: context.colorScheme.surfaceContainerHighest,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.close,
-                          size: 14,
-                          color: context.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              Divider(height: 1, color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
-
-              // Scrollable content
               Expanded(
-                child: ListView(
-                  controller: scrollController,
-                  padding: EdgeInsets.all(AppSpacing.lg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Info banner for unclaimed pages
-                    if (_isUnclaimed) ...[
-                      Container(
-                        padding: EdgeInsets.all(AppSpacing.md),
-                        decoration: BoxDecoration(
-                          color: Colors.blue.shade50,
-                          borderRadius: AppRadius.cardInner,
-                          border: Border.all(
-                            color: Colors.blue.shade100,
-                          ),
-                        ),
-                        child: Text(
-                          '\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u062a\u0645 \u0625\u0646\u0634\u0627\u0624\u0647\u0627 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u064b \u0645\u0646 \u0628\u064a\u0627\u0646\u0627\u062a \u0639\u0627\u0645\u0629.\n\u0628\u0644\u0627\u063a\u0643 \u064a\u0633\u0627\u0639\u062f\u0646\u0627 \u0646\u062d\u0633\u0651\u0646 \u062f\u0642\u0629 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0644\u0644\u062c\u0645\u064a\u0639.',
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: context.colorScheme.onSurfaceVariant,
-                            fontSize: 11,
-                            height: 1.6,
-                          ),
-                        ),
+                    Text(
+                      title,
+                      style: context.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: AppSpacing.md),
-                    ],
-
-                    // Reason radio buttons
-                    ...reasons.map((reason) => _ReasonOption(
-                          reason: reason,
-                          isSelected: _selectedReason == reason.id,
-                          accentColor: _accentColor,
-                          accentBg: _accentBg,
-                          onTap: () =>
-                              setState(() => _selectedReason = reason.id),
-                        )),
-
-                    // Other text area
-                    if (_selectedReason == 'other') ...[
-                      SizedBox(height: AppSpacing.sm),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: AppSpacing.md),
-                        child: TextField(
-                          controller: _otherController,
-                          onChanged: (_) => setState(() {}),
-                          maxLines: 3,
-                          decoration: InputDecoration(
-                            hintText: _isPlatformManaged
-                                ? '\u0627\u0643\u062a\u0628 \u0627\u0642\u062a\u0631\u0627\u062d\u0643...'
-                                : '\u0627\u0643\u062a\u0628 \u0627\u0644\u0633\u0628\u0628...',
-                            hintStyle: TextStyle(
-                              color: context.colorScheme.outlineVariant,
-                              fontSize: 14,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: context.colorScheme.outlineVariant,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: context.colorScheme.outlineVariant,
-                              ),
-                            ),
-                            contentPadding: EdgeInsets.all(AppSpacing.md),
-                          ),
-                        ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      widget.pageName,
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: context.colorScheme.onSurfaceVariant,
+                        fontSize: 10,
                       ),
-                    ],
-
-                    // Correction fields
-                    if (_showCorrectionFields(_selectedReason)) ...[
-                      SizedBox(height: AppSpacing.md),
-                      _CorrectionFields(
-                        phoneController: _phoneController,
-                        addressController: _addressController,
-                        notesController: _notesController,
-                        isMoved: _selectedReason == 'moved',
-                      ),
-                    ],
-
-                    SizedBox(height: AppSpacing.lg),
+                    ),
                   ],
                 ),
               ),
-
-              // Submit button
-              Padding(
-                padding: EdgeInsets.fromLTRB(
-                    AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.md),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: FilledButton(
-                    onPressed: _canSubmit ? _handleSubmit : null,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: _canSubmit ? _accentColor : null,
-                      disabledBackgroundColor:
-                          context.colorScheme.surfaceContainerHighest,
-                      disabledForegroundColor:
-                          context.colorScheme.outlineVariant,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: Text(submitLabel),
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.surfaceContainerHighest,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.close,
+                    size: 14,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
             ],
           ),
-        );
-      },
+        ),
+
+        Divider(height: 1, color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
+
+        // Scrollable content — auto-expands, scrolls only if needed
+        Flexible(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Info banner for unclaimed pages
+                if (_isUnclaimed) ...[
+                  Container(
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade50,
+                      borderRadius: AppRadius.cardInner,
+                      border: Border.all(
+                        color: Colors.blue.shade100,
+                      ),
+                    ),
+                    child: Text(
+                      '\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u062a\u0645 \u0625\u0646\u0634\u0627\u0624\u0647\u0627 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u064b \u0645\u0646 \u0628\u064a\u0627\u0646\u0627\u062a \u0639\u0627\u0645\u0629.\n\u0628\u0644\u0627\u063a\u0643 \u064a\u0633\u0627\u0639\u062f\u0646\u0627 \u0646\u062d\u0633\u0651\u0646 \u062f\u0642\u0629 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0644\u0644\u062c\u0645\u064a\u0639.',
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: context.colorScheme.onSurfaceVariant,
+                        fontSize: 11,
+                        height: 1.6,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                ],
+
+                // Reason radio buttons
+                ...reasons.map((reason) => _ReasonOption(
+                      reason: reason,
+                      isSelected: _selectedReason == reason.id,
+                      accentColor: _accentColor,
+                      accentBg: _accentBg,
+                      onTap: () =>
+                          setState(() => _selectedReason = reason.id),
+                    )),
+
+                // Other text area
+                if (_selectedReason == 'other') ...[
+                  const SizedBox(height: AppSpacing.sm),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.md),
+                    child: TextField(
+                      controller: _otherController,
+                      onChanged: (_) => setState(() {}),
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        hintText: _isPlatformManaged
+                            ? '\u0627\u0643\u062a\u0628 \u0627\u0642\u062a\u0631\u0627\u062d\u0643...'
+                            : '\u0627\u0643\u062a\u0628 \u0627\u0644\u0633\u0628\u0628...',
+                        hintStyle: TextStyle(
+                          color: context.colorScheme.outlineVariant,
+                          fontSize: 14,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: context.colorScheme.outlineVariant,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: context.colorScheme.outlineVariant,
+                          ),
+                        ),
+                        contentPadding: const EdgeInsets.all(AppSpacing.md),
+                      ),
+                    ),
+                  ),
+                ],
+
+                // Correction fields
+                if (_showCorrectionFields(_selectedReason)) ...[
+                  const SizedBox(height: AppSpacing.md),
+                  _CorrectionFields(
+                    phoneController: _phoneController,
+                    addressController: _addressController,
+                    notesController: _notesController,
+                    isMoved: _selectedReason == 'moved',
+                  ),
+                ],
+
+                const SizedBox(height: AppSpacing.lg),
+              ],
+            ),
+          ),
+        ),
+
+        // Submit button
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.md),
+          child: SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: FilledButton(
+              onPressed: _canSubmit ? _handleSubmit : null,
+              style: FilledButton.styleFrom(
+                backgroundColor: _canSubmit ? _accentColor : null,
+                disabledBackgroundColor:
+                    context.colorScheme.surfaceContainerHighest,
+                disabledForegroundColor:
+                    context.colorScheme.outlineVariant,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text(submitLabel),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

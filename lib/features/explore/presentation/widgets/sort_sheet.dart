@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 enum CategorySortBy { nearest, popular, alphabetical }
 
@@ -20,11 +21,8 @@ Future<CategorySortBy?> showSortSheet(
   required CategorySortBy current,
   bool isGovernment = false,
 }) async {
-  return showModalBottomSheet<CategorySortBy>(
-    context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
+  return showAppSheet<CategorySortBy>(
+    context,
     builder: (context) => _SortSheetContent(
       current: current,
       isGovernment: isGovernment,
@@ -47,12 +45,11 @@ class _SortSheetContent extends StatelessWidget {
         ? [CategorySortBy.popular, CategorySortBy.alphabetical]
         : CategorySortBy.values;
 
-    return SafeArea(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Header row (drag handle provided by theme's showDragHandle: true)
-          Padding(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Header row
+        Padding(
             padding: EdgeInsetsDirectional.fromSTEB(
               AppSpacing.lg,
               AppSpacing.md,
@@ -94,9 +91,8 @@ class _SortSheetContent extends StatelessWidget {
               onTap: () => Navigator.pop(context, sortBy),
             );
           }),
-          SizedBox(height: AppSpacing.sm),
-        ],
-      ),
+        SizedBox(height: AppSpacing.sm),
+      ],
     );
   }
 }

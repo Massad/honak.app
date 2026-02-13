@@ -6,6 +6,7 @@ import 'package:honak/features/business/stories/domain/entities/story_stats.dart
 import 'package:honak/features/business/stories/presentation/providers/my_stories_provider.dart';
 import 'package:honak/features/business/stories/presentation/providers/story_creator_provider.dart';
 import 'package:honak/features/stories/domain/entities/story_slide.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:uuid/uuid.dart';
 
@@ -13,13 +14,8 @@ import 'package:uuid/uuid.dart';
 /// Audience (followers / all) + schedule (now / later) + publish button.
 class PublishSheet {
   static Future<bool> show(BuildContext context) async {
-    final result = await showModalBottomSheet<bool>(
-      context: context,
-      backgroundColor: const Color(0xFF1F2937),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      isScrollControlled: true,
+    final result = await showAppSheet<bool>(
+      context,
       builder: (_) => const _PublishContent(),
     );
     return result ?? false;
@@ -40,13 +36,9 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
     final notifier = ref.read(storyCreatorProvider.notifier);
     final isScheduled = state.scheduledAt != null;
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        20,
-        16,
-        20,
-        16 + MediaQuery.of(context).viewInsets.bottom,
-      ),
+    return Container(
+      color: const Color(0xFF1F2937),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

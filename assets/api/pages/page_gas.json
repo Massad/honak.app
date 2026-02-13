@@ -1,0 +1,126 @@
+{
+  "success": true,
+  "data": {
+    "id": "abu-sulaiman-gas",
+    "owner_id": "usr_002",
+    "business_type_id": "gas_delivery",
+    "business_type_name": "توصيل غاز",
+    "category_name": "خدمات منزلية",
+    "explore_category": "cat_delivery",
+    "name": "غاز أبو سليمان",
+    "name_en": "Abu Sulaiman Gas",
+    "slug": "abu-sulaiman-gas",
+    "handle": "abu-sulaiman-gas",
+    "store_type": "physical",
+    "archetype": "catalog_order",
+    "description": "توصيل اسطوانات غاز لجميع مناطق عمّان الشرقية. خدمة يومية وسريعة.",
+    "avatar_url": "https://images.unsplash.com/photo-1585011664466-b7bbe92f34ef?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1504711434969-e33886168d5c?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000020",
+    "location": {
+      "lat": 31.972,
+      "lng": 35.945,
+      "label": "ماركا الشمالية، بجانب محطة المحروقات",
+      "area": "ماركا الشمالية",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "07:00", "close": "18:00"},
+      "monday": {"enabled": true, "open": "07:00", "close": "18:00"},
+      "tuesday": {"enabled": true, "open": "07:00", "close": "18:00"},
+      "wednesday": {"enabled": true, "open": "07:00", "close": "18:00"},
+      "thursday": {"enabled": true, "open": "07:00", "close": "18:00"},
+      "friday": {"enabled": true, "open": "08:00", "close": "14:00"},
+      "saturday": {"enabled": false, "open": null, "close": null}
+    },
+    "operating_hours": "الأحد - الخميس: ٧:٠٠ ص — ٦:٠٠ م\nالجمعة: ٨:٠٠ ص — ٢:٠٠ م\nالسبت: مغلق",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "claimed",
+    "followers_count": 850,
+    "items_count": 2,
+    "posts_count": 8,
+    "is_following": false,
+    "hours": {
+      "open_time": "07:00",
+      "close_time": "18:00",
+      "open_days": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "trust_score": 90,
+    "trust_metrics": [
+      {"label": "يطلبون شهرياً", "value": "٨٨٪", "icon": "repeat"},
+      {"label": "اسطوانات شهرياً", "value": "٨٠٠", "icon": "local_fire_department"},
+      {"label": "معدل التوصيل", "value": "٤٥ دقيقة", "icon": "schedule"}
+    ],
+    "delivery_available": true,
+    "pickup_available": false,
+    "delivery_fee_cents": 0,
+    "estimated_delivery_minutes": 45,
+    "payment_methods": ["نقداً", "كليك: AbuSulaimanGas"],
+    "cliq_alias": "AbuSulaimanGas",
+    "coverage_zones": ["ماركا الشمالية", "ماركا الجنوبية", "طبربور", "الهاشمي الشمالي", "القويسمة", "أبو علندا"],
+    "member_since": "2022",
+    "team_members_count": 1,
+    "contact_methods": ["chat", "phone", "whatsapp"],
+    "created_at": 1651363200,
+    "engagement_level": "full",
+    "data_synced": true,
+    "catalog_strategy": "full_catalog",
+    "carry_categories": [],
+    "stories": [
+      {"id": "s_gas1", "image_url": "https://picsum.photos/seed/abusulaimanstory1/400/700", "duration": 5, "created_at": 1707800000}
+    ],
+    "blocked_dates": [
+      {"date": "2026-03-30", "reason": "عيد الفطر"}
+    ],
+    "packages": [
+      {
+        "id": "pkg_gas_001",
+        "name": "باقة ١٠ اسطوانات",
+        "description": "١٠ اسطوانات غاز كبيرة ١٢ كغ",
+        "price_cents": 6000,
+        "credits": 10,
+        "credit_label": "اسطوانة",
+        "validity_months": 6,
+        "icon": "local_fire_department",
+        "compare_single_price": 700,
+        "active": true,
+        "model": "visits_and_date"
+      },
+      {
+        "id": "pkg_gas_002",
+        "name": "باقة ٢٠ اسطوانة",
+        "description": "٢٠ اسطوانة — أفضل سعر",
+        "price_cents": 11000,
+        "credits": 20,
+        "credit_label": "اسطوانة",
+        "validity_months": 12,
+        "icon": "local_fire_department",
+        "compare_single_price": 700,
+        "active": true,
+        "model": "visits_and_date"
+      }
+    ],
+    "coverage_zones_structured": [
+      {
+        "city": "عمّان",
+        "areas": [
+          {"name": "ماركا", "neighbourhoods": ["ماركا الشمالية", "ماركا الجنوبية"]},
+          {"name": "طبربور", "neighbourhoods": ["طبربور", "أبو عليا"]},
+          {"name": "الهاشمي", "neighbourhoods": ["الهاشمي الشمالي", "الهاشمي الجنوبي"]},
+          {"name": "القويسمة", "neighbourhoods": ["القويسمة", "أبو علندا"]}
+        ]
+      }
+    ],
+    "return_policy": {
+      "accepts_returns": true,
+      "window_days": 0,
+      "type": "exchange",
+      "cost": "مجاني",
+      "conditions_ar": ["يمكن استبدال الاسطوانة التالفة فوراً عند التوصيل"]
+    }
+  }
+}

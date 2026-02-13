@@ -10,6 +10,7 @@ import 'package:honak/features/business/order_management/presentation/widgets/al
 import 'package:honak/features/business/order_management/presentation/widgets/decline_sheet.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/request_card_sections.dart';
 import 'package:honak/features/business/shared/domain/entities/entities.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 class RequestCard extends ConsumerWidget {
   final BizRequest request;
@@ -141,12 +142,8 @@ class RequestCard extends ConsumerWidget {
   }
 
   Future<void> _handleDecline(BuildContext context) async {
-    final result = await showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    final result = await showAppSheet<bool>(
+      context,
       builder: (_) => DeclineSheet(requestId: request.id),
     );
     if (result == true) {
@@ -155,12 +152,8 @@ class RequestCard extends ConsumerWidget {
   }
 
   Future<void> _handleAlternative(BuildContext context) async {
-    final result = await showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    final result = await showAppSheet<bool>(
+      context,
       builder: (_) => AlternativeSheet(requestId: request.id),
     );
     if (result == true) {

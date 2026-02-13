@@ -2,36 +2,24 @@ import 'package:flutter/material.dart';
 
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 void showPackageFormSheet(
   BuildContext context, {
   Map<String, dynamic>? package,
 }) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (context) => DraggableScrollableSheet(
-      initialChildSize: 0.85,
-      minChildSize: 0.5,
-      maxChildSize: 0.95,
-      expand: false,
-      builder: (context, controller) => _PackageFormContent(
-        scrollController: controller,
-        package: package,
-      ),
+  showAppSheet(
+    context,
+    builder: (_) => _PackageFormContent(
+      package: package,
     ),
   );
 }
 
 class _PackageFormContent extends StatefulWidget {
-  final ScrollController scrollController;
   final Map<String, dynamic>? package;
 
   const _PackageFormContent({
-    required this.scrollController,
     this.package,
   });
 
@@ -128,43 +116,43 @@ class _PackageFormContentState extends State<_PackageFormContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: ListView(
-        controller: widget.scrollController,
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        children: [
-          // Drag handle
-          Center(
-            child: Container(
-              width: 36,
-              height: 4,
-              margin: const EdgeInsets.only(bottom: AppSpacing.lg),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Drag handle
+        Center(
+          child: Container(
+            width: 36,
+            height: 4,
+            margin: const EdgeInsets.only(
+              top: AppSpacing.sm,
+              bottom: AppSpacing.lg,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
             ),
           ),
+        ),
 
-          // Title
-          Text(
-            _isEditing
-                ? '\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u0628\u0627\u0642\u0629'
-                : '\u0625\u0636\u0627\u0641\u0629 \u0628\u0627\u0642\u0629',
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
+        // Title
+        Text(
+          _isEditing
+              ? '\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u0628\u0627\u0642\u0629'
+              : '\u0625\u0636\u0627\u0641\u0629 \u0628\u0627\u0642\u0629',
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
-          const SizedBox(height: AppSpacing.xl),
-
-          // Name
-          TextField(
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        Flexible(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+            children: [
+              // Name
+              TextField(
             controller: _nameCtrl,
             textDirection: TextDirection.rtl,
             decoration: InputDecoration(
@@ -429,9 +417,11 @@ class _PackageFormContentState extends State<_PackageFormContent> {
             ),
           ],
 
-          const SizedBox(height: AppSpacing.xl),
-        ],
-      ),
+              const SizedBox(height: AppSpacing.xl),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

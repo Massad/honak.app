@@ -1,0 +1,52 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 6,
+      "new_followers": 2,
+      "page_views": 30,
+      "today_revenue": 4400
+    },
+    "today_summary": {
+      "completed": 3,
+      "upcoming": 2,
+      "cancelled": 0,
+      "no_show": 0,
+      "total": 6,
+      "revenue": 4400
+    },
+    "live_queue": {
+      "waiting": 2,
+      "in_progress": 1,
+      "completed": 3,
+      "avg_wait_min": 10,
+      "revenue_today_cents": 4400
+    },
+    "today_revenue": {
+      "total": 4400,
+      "completed_count": 3,
+      "items": [
+        { "service": "تبديل إطار", "amount": 300, "time": "07:50" },
+        { "service": "تعبئة نيتروجين", "amount": 400, "time": "08:00" },
+        { "service": "تبديل 4 إطارات", "amount": 1000, "time": "07:40" }
+      ]
+    },
+    "next_in_queue": {
+      "customer_name": "عدنان كمال",
+      "service": "ضبط زوايا",
+      "position": 2,
+      "vehicle": "SUV أسود"
+    },
+    "today_schedule": [
+      { "time": "07:00", "customer": "إياد فهد", "service": "تبديل 4 إطارات", "status": "completed" },
+      { "time": "07:30", "customer": "شادي وليد", "service": "تبديل إطار", "status": "completed" },
+      { "time": "07:45", "customer": "معتز أنور", "service": "تعبئة نيتروجين", "status": "completed" },
+      { "time": "08:30", "customer": "رامي سليم", "service": "تبديل 4 إطارات", "status": "in_progress" },
+      { "time": "09:00", "customer": "عدنان كمال", "service": "ضبط زوايا", "status": "waiting" },
+      { "time": "09:10", "customer": "حاتم زياد", "service": "تصليح بنشر", "status": "waiting" }
+    ],
+    "pending_requests": [
+      { "id": "req_501", "customer": "خلدون سامي", "service": "تبديل 4 إطارات + ضبط زوايا", "date": "2026-02-13", "time": "09:00" }
+    ]
+  }
+}

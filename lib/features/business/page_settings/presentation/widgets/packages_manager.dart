@@ -7,6 +7,7 @@ import 'package:honak/features/business/page_settings/domain/entities/package_mo
 import 'package:honak/features/business/page_settings/presentation/providers/packages_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/confirm_dialog.dart';
 
 class PackagesManager extends ConsumerStatefulWidget {
@@ -114,12 +115,8 @@ class _PackagesManagerState extends ConsumerState<PackagesManager> {
 
   void _showPackageEditor(BuildContext context, WidgetRef ref,
       [BusinessPackage? existing]) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    showAppSheet(
+      context,
       builder: (_) => _PackageEditorSheet(
         existing: existing,
         onSave: (pkg) {
@@ -363,151 +360,151 @@ class _PackageEditorSheetState extends State<_PackageEditorSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.85,
-      maxChildSize: 0.95,
-      minChildSize: 0.5,
-      expand: false,
-      builder: (_, scrollController) => Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: ListView(
-          controller: scrollController,
-          children: [
-            // Handle bar
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Handle bar
+        Center(
+          child: Container(
+            width: 40,
+            height: 4,
+            margin: const EdgeInsets.only(
+              top: AppSpacing.sm,
+              bottom: AppSpacing.lg,
             ),
-            const SizedBox(height: AppSpacing.lg),
-            Text(
-              widget.existing != null ? 'تعديل الباقة' : 'باقة جديدة',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.w600),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
             ),
-            const SizedBox(height: AppSpacing.xl),
-
-            // 1. Name
-            _FieldLabel('اسم الباقة'),
-            _StyledTextField(
-                hint: 'مثال: باقة شهرية', controller: _nameCtrl),
-            const SizedBox(height: AppSpacing.md),
-
-            // 2. Description
-            _FieldLabel('الوصف (اختياري)'),
-            _StyledTextField(
-              hint: 'وصف قصير للباقة',
-              controller: _descCtrl,
-              maxLines: 2,
-            ),
-            const SizedBox(height: AppSpacing.md),
-
-            // 3. Price
-            _FieldLabel('السعر'),
-            _StyledTextField(
-              hint: '0.000',
-              controller: _priceCtrl,
-              keyboardType: TextInputType.number,
-              suffix: 'د.أ',
-            ),
-            const SizedBox(height: AppSpacing.md),
-
-            // 4. Credits
-            _FieldLabel('عدد الاستخدامات'),
-            _CounterField(
-              value: _credits,
-              onChanged: (v) => setState(() => _credits = v),
-              min: 1,
-              max: 999,
-            ),
-            const SizedBox(height: AppSpacing.md),
-
-            // 5. Credit label
-            _FieldLabel('وحدة الاستخدام'),
-            _StyledTextField(
-              hint: 'مثال: توصيلة، جلسة، زيارة',
-              controller: _creditLabelCtrl,
-            ),
-            const SizedBox(height: AppSpacing.md),
-
-            // 6. Validity model
-            _FieldLabel('صلاحية الباقة'),
-            _RadioOption(
-              label: 'عدد + مدة',
-              desc: 'تنتهي عند استخدام الرصيد أو انتهاء المدة',
-              selected: _validityModel == 'visits_date',
-              onTap: () => setState(() => _validityModel = 'visits_date'),
-            ),
-            const SizedBox(height: 6),
-            _RadioOption(
-              label: 'عدد فقط',
-              desc: 'تنتهي فقط عند استخدام كل الرصيد',
-              selected: _validityModel == 'visits_only',
-              onTap: () => setState(() => _validityModel = 'visits_only'),
-            ),
-
-            // 7. Validity months (only for visits_date)
-            if (_validityModel == 'visits_date') ...[
+          ),
+        ),
+        Text(
+          widget.existing != null ? 'تعديل الباقة' : 'باقة جديدة',
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+              fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        Flexible(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+            children: [
+              // 1. Name
+              _FieldLabel('اسم الباقة'),
+              _StyledTextField(
+                  hint: 'مثال: باقة شهرية', controller: _nameCtrl),
               const SizedBox(height: AppSpacing.md),
-              _FieldLabel('المدة (أشهر)'),
-              _CounterField(
-                value: _months,
-                onChanged: (v) => setState(() => _months = v),
-                min: 1,
-                max: 24,
+
+              // 2. Description
+              _FieldLabel('الوصف (اختياري)'),
+              _StyledTextField(
+                hint: 'وصف قصير للباقة',
+                controller: _descCtrl,
+                maxLines: 2,
               ),
-            ],
-            const SizedBox(height: AppSpacing.md),
+              const SizedBox(height: AppSpacing.md),
 
-            // 8. Compare price
-            _FieldLabel('سعر الاستخدام المفرد (اختياري)'),
-            _StyledTextField(
-              hint: 'لإظهار نسبة التوفير',
-              controller: _comparePriceCtrl,
-              keyboardType: TextInputType.number,
-              suffix: 'د.أ',
-            ),
-            const SizedBox(height: AppSpacing.xl),
+              // 3. Price
+              _FieldLabel('السعر'),
+              _StyledTextField(
+                hint: '0.000',
+                controller: _priceCtrl,
+                keyboardType: TextInputType.number,
+                suffix: 'د.أ',
+              ),
+              const SizedBox(height: AppSpacing.md),
 
-            // Save button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _save,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              // 4. Credits
+              _FieldLabel('عدد الاستخدامات'),
+              _CounterField(
+                value: _credits,
+                onChanged: (v) => setState(() => _credits = v),
+                min: 1,
+                max: 999,
+              ),
+              const SizedBox(height: AppSpacing.md),
+
+              // 5. Credit label
+              _FieldLabel('وحدة الاستخدام'),
+              _StyledTextField(
+                hint: 'مثال: توصيلة، جلسة، زيارة',
+                controller: _creditLabelCtrl,
+              ),
+              const SizedBox(height: AppSpacing.md),
+
+              // 6. Validity model
+              _FieldLabel('صلاحية الباقة'),
+              _RadioOption(
+                label: 'عدد + مدة',
+                desc: 'تنتهي عند استخدام الرصيد أو انتهاء المدة',
+                selected: _validityModel == 'visits_date',
+                onTap: () => setState(() => _validityModel = 'visits_date'),
+              ),
+              const SizedBox(height: 6),
+              _RadioOption(
+                label: 'عدد فقط',
+                desc: 'تنتهي فقط عند استخدام كل الرصيد',
+                selected: _validityModel == 'visits_only',
+                onTap: () => setState(() => _validityModel = 'visits_only'),
+              ),
+
+              // 7. Validity months (only for visits_date)
+              if (_validityModel == 'visits_date') ...[
+                const SizedBox(height: AppSpacing.md),
+                _FieldLabel('المدة (أشهر)'),
+                _CounterField(
+                  value: _months,
+                  onChanged: (v) => setState(() => _months = v),
+                  min: 1,
+                  max: 24,
+                ),
+              ],
+              const SizedBox(height: AppSpacing.md),
+
+              // 8. Compare price
+              _FieldLabel('سعر الاستخدام المفرد (اختياري)'),
+              _StyledTextField(
+                hint: 'لإظهار نسبة التوفير',
+                controller: _comparePriceCtrl,
+                keyboardType: TextInputType.number,
+                suffix: 'د.أ',
+              ),
+              const SizedBox(height: AppSpacing.xl),
+
+              // Save button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _save,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    widget.existing != null ? 'حفظ التعديلات' : 'إنشاء الباقة',
                   ),
                 ),
-                child: Text(
-                  widget.existing != null ? 'حفظ التعديلات' : 'إنشاء الباقة',
-                ),
               ),
-            ),
 
-            // Delete button (existing only)
-            if (widget.existing != null) ...[
-              const SizedBox(height: AppSpacing.sm),
-              TextButton(
-                onPressed: _confirmDelete,
-                child: const Text(
-                  'حذف الباقة',
-                  style: TextStyle(color: Colors.red),
+              // Delete button (existing only)
+              if (widget.existing != null) ...[
+                const SizedBox(height: AppSpacing.sm),
+                TextButton(
+                  onPressed: _confirmDelete,
+                  child: const Text(
+                    'حذف الباقة',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
-              ),
+              ],
             ],
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart'
     show iconEmojiForPackage;
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 void showPackageDetailSheet(
   BuildContext context, {
@@ -16,11 +17,8 @@ void showPackageDetailSheet(
   int? existingCredits,
   String? existingCreditLabel,
 }) {
-  showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    backgroundColor: Colors.transparent,
+  showAppSheet<void>(
+    context,
     builder: (_) => PackageDetailSheet(
       pkg: pkg,
       archetype: archetype,
@@ -56,130 +54,119 @@ class PackageDetailSheet extends StatelessWidget {
         : null;
     final howItWorks = _howItWorksSteps;
 
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.9,
-      ),
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Header
-          Container(
-            padding: const EdgeInsetsDirectional.fromSTEB(
-              AppSpacing.lg, AppSpacing.xl, AppSpacing.lg, AppSpacing.md,
-            ),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: context.colorScheme.outlineVariant,
-                  width: 0.5,
-                ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Header
+        Container(
+          padding: const EdgeInsetsDirectional.fromSTEB(
+            AppSpacing.lg, AppSpacing.xl, AppSpacing.lg, AppSpacing.md,
+          ),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: context.colorScheme.outlineVariant,
+                width: 0.5,
               ),
             ),
-            child: Row(
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  pkg.name,
+                  style: context.textTheme.titleMedium,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.surfaceContainerHighest,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.close,
+                    size: 16,
+                    color: context.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Content
+        Flexible(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.lg,
+              AppSpacing.lg,
+              AppSpacing.lg,
+              AppSpacing.sm,
+            ),
+            child: Column(
               children: [
-                Expanded(
-                  child: Text(
-                    pkg.name,
-                    style: context.textTheme.titleMedium,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.surfaceContainerHighest,
-                      shape: BoxShape.circle,
+                // Icon + description
+                _buildIconSection(context),
+                const SizedBox(height: AppSpacing.lg),
+
+                // Bundle items
+                if (pkg.model == 'bundle' && pkg.items.isNotEmpty) ...[
+                  _buildBundleItems(context),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
+
+                // Savings breakdown
+                if (regularTotal != null && savings != null && savings > 0) ...[
+                  _buildSavingsBreakdown(context, regularTotal, price),
+                  const SizedBox(height: AppSpacing.lg),
+                ] else if (pkg.compareSinglePrice != null &&
+                    pkg.model == 'date_only') ...[
+                  _buildDateOnlySavings(context),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
+
+                // Per-unit price
+                if (pkg.credits > 0 && pkg.creditLabel != null) ...[
+                  Center(
+                    child: Text(
+                      '(${Money((pkg.priceCents / pkg.credits).round()).toJodString()} د.أ لكل ${pkg.creditLabel})',
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
                     ),
-                    child: Icon(
-                      Icons.close,
-                      size: 16,
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
                   ),
-                ),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
+
+                // How it works
+                if (howItWorks.isNotEmpty) ...[
+                  _buildHowItWorks(context, howItWorks),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
+
+                // Info notice
+                if (pkg.model != 'bundle') ...[
+                  _buildInfoNotice(context),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
+
+                // Credit extension notice (existing subscription)
+                if (existingCredits != null && pkg.credits > 0) ...[
+                  _buildCreditExtensionNotice(context),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
               ],
             ),
           ),
+        ),
 
-          // Content
-          Flexible(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.lg,
-                AppSpacing.lg,
-                AppSpacing.lg,
-                AppSpacing.sm,
-              ),
-              child: Column(
-                children: [
-                  // Icon + description
-                  _buildIconSection(context),
-                  const SizedBox(height: AppSpacing.lg),
-
-                  // Bundle items
-                  if (pkg.model == 'bundle' && pkg.items.isNotEmpty) ...[
-                    _buildBundleItems(context),
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-
-                  // Savings breakdown
-                  if (regularTotal != null && savings != null && savings > 0) ...[
-                    _buildSavingsBreakdown(context, regularTotal, price),
-                    const SizedBox(height: AppSpacing.lg),
-                  ] else if (pkg.compareSinglePrice != null &&
-                      pkg.model == 'date_only') ...[
-                    _buildDateOnlySavings(context),
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-
-                  // Per-unit price
-                  if (pkg.credits > 0 && pkg.creditLabel != null) ...[
-                    Center(
-                      child: Text(
-                        '(${Money((pkg.priceCents / pkg.credits).round()).toJodString()} د.أ لكل ${pkg.creditLabel})',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-
-                  // How it works
-                  if (howItWorks.isNotEmpty) ...[
-                    _buildHowItWorks(context, howItWorks),
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-
-                  // Info notice
-                  if (pkg.model != 'bundle') ...[
-                    _buildInfoNotice(context),
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-
-                  // Credit extension notice (existing subscription)
-                  if (existingCredits != null && pkg.credits > 0) ...[
-                    _buildCreditExtensionNotice(context),
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-                ],
-              ),
-            ),
-          ),
-
-          // CTA button
-          _buildCta(context, price),
-        ],
-      ),
+        // CTA button
+        _buildCta(context, price),
+      ],
     );
   }
 

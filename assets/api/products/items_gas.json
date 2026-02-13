@@ -1,0 +1,34 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "item_ag01",
+      "name_ar": "اسطوانة غاز كبيرة",
+      "name_en": "Gas Cylinder 12kg",
+      "description_ar": "اسطوانة غاز ١٢ كيلو — استبدال: أعد الفارغة",
+      "price_cents": 700,
+      "images": ["https://picsum.photos/seed/gas1/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "in_stock": true,
+      "page_id": "abu-sulaiman-gas",
+      "sort_order": 1,
+      "option_groups": []
+    },
+    {
+      "id": "item_ag02",
+      "name_ar": "اسطوانة غاز صغيرة",
+      "name_en": "Gas Cylinder 6kg",
+      "description_ar": "اسطوانة غاز ٦ كيلو — للرحلات والتخييم",
+      "price_cents": 400,
+      "images": ["https://picsum.photos/seed/gas2/400/300"],
+      "category_id": null,
+      "category_name": null,
+      "in_stock": true,
+      "page_id": "abu-sulaiman-gas",
+      "sort_order": 2,
+      "option_groups": []
+    }
+  ],
+  "meta": {"total": 2, "has_more": false}
+}

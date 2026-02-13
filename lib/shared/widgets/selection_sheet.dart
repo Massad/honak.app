@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// A single selectable option for [SelectionSheet].
 class SelectionOption<T> {
@@ -27,10 +28,9 @@ Future<T?> showSelectionSheet<T>({
   T? selectedValue,
   int searchThreshold = 8,
 }) {
-  return showModalBottomSheet<T>(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet<T>(
+    context,
+    maxHeightFraction: 0.7,
     builder: (_) => _SelectionSheetBody<T>(
       title: title,
       options: options,
@@ -87,35 +87,54 @@ class _SelectionSheetBodyState<T> extends State<_SelectionSheetBody<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final bottomPadding = MediaQuery.of(context).padding.bottom;
-    // Cap height: search + list shouldn't exceed 70% of screen
-    final maxHeight = MediaQuery.of(context).size.height * 0.7;
-
-    return Container(
-      constraints: BoxConstraints(maxHeight: maxHeight),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Handle bar
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: AppSpacing.sm),
-              width: 36,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: AppRadius.pill,
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Handle bar
+        Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: AppSpacing.sm),
+            width: 36,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: AppRadius.pill,
             ),
           ),
+        ),
 
-          // Title row
+        // Title row
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.lg,
+            AppSpacing.md,
+            AppSpacing.lg,
+            0,
+          ),
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Icon(
+                  Icons.close,
+                  size: 22,
+                  color: Colors.grey.shade500,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                widget.title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Search bar
+        if (widget.showSearch)
           Padding(
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.lg,
@@ -123,143 +142,111 @@ class _SelectionSheetBodyState<T> extends State<_SelectionSheetBody<T>> {
               AppSpacing.lg,
               0,
             ),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.close,
-                    size: 22,
-                    color: Colors.grey.shade500,
-                  ),
+            child: TextField(
+              controller: _searchCtrl,
+              onChanged: _onSearchChanged,
+              decoration: InputDecoration(
+                hintText: 'بحث...',
+                hintStyle: TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey.shade400,
                 ),
-                const Spacer(),
-                Text(
-                  widget.title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  size: 20,
+                  color: Colors.grey.shade400,
                 ),
-              ],
+                isDense: true,
+                filled: true,
+                fillColor: Colors.grey.shade50,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.sm,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: AppRadius.button,
+                  borderSide: BorderSide(color: Colors.grey.shade200),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: AppRadius.button,
+                  borderSide: BorderSide(color: Colors.grey.shade200),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: AppRadius.button,
+                  borderSide: const BorderSide(color: AppColors.primary),
+                ),
+              ),
             ),
           ),
 
-          // Search bar
-          if (widget.showSearch)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.lg,
-                AppSpacing.md,
-                AppSpacing.lg,
-                0,
-              ),
-              child: TextField(
-                controller: _searchCtrl,
-                onChanged: _onSearchChanged,
-                decoration: InputDecoration(
-                  hintText: 'بحث...',
-                  hintStyle: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey.shade400,
-                  ),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    size: 20,
-                    color: Colors.grey.shade400,
-                  ),
-                  isDense: true,
-                  filled: true,
-                  fillColor: Colors.grey.shade50,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.md,
-                    vertical: AppSpacing.sm,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: AppRadius.button,
-                    borderSide: BorderSide(color: Colors.grey.shade200),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: AppRadius.button,
-                    borderSide: BorderSide(color: Colors.grey.shade200),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: AppRadius.button,
-                    borderSide: const BorderSide(color: AppColors.primary),
-                  ),
-                ),
-              ),
-            ),
+        const SizedBox(height: AppSpacing.sm),
 
-          const SizedBox(height: AppSpacing.sm),
+        // Options list
+        Flexible(
+          child: ListView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(bottom: AppSpacing.md),
+            itemCount: _filtered.length,
+            itemBuilder: (context, i) {
+              final option = _filtered[i];
+              final isSelected = option.value == widget.selectedValue;
 
-          // Options list
-          Flexible(
-            child: ListView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.only(bottom: bottomPadding + AppSpacing.md),
-              itemCount: _filtered.length,
-              itemBuilder: (context, i) {
-                final option = _filtered[i];
-                final isSelected = option.value == widget.selectedValue;
-
-                return InkWell(
-                  onTap: () => Navigator.pop(context, option.value),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.lg,
-                      vertical: AppSpacing.md,
-                    ),
-                    color: isSelected
-                        ? AppColors.primary.withValues(alpha: 0.08)
-                        : null,
-                    child: Row(
-                      children: [
-                        if (isSelected)
-                          const Icon(
-                            Icons.check,
-                            size: 18,
-                            color: AppColors.primary,
-                          )
-                        else
-                          const SizedBox(width: 18),
-                        const SizedBox(width: AppSpacing.md),
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional.centerEnd,
-                            child: Text(
-                              option.label,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
-                                color: isSelected
-                                    ? AppColors.primary
-                                    : Colors.grey.shade800,
-                              ),
+              return InkWell(
+                onTap: () => Navigator.pop(context, option.value),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.lg,
+                    vertical: AppSpacing.md,
+                  ),
+                  color: isSelected
+                      ? AppColors.primary.withValues(alpha: 0.08)
+                      : null,
+                  child: Row(
+                    children: [
+                      if (isSelected)
+                        const Icon(
+                          Icons.check,
+                          size: 18,
+                          color: AppColors.primary,
+                        )
+                      else
+                        const SizedBox(width: 18),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: Text(
+                            option.label,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: isSelected
+                                  ? FontWeight.w600
+                                  : FontWeight.normal,
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : Colors.grey.shade800,
                             ),
                           ),
                         ),
-                        if (option.icon != null) ...[
-                          const SizedBox(width: AppSpacing.sm),
-                          Icon(
-                            option.icon,
-                            size: 18,
-                            color: isSelected
-                                ? AppColors.primary
-                                : Colors.grey.shade400,
-                          ),
-                        ],
+                      ),
+                      if (option.icon != null) ...[
+                        const SizedBox(width: AppSpacing.sm),
+                        Icon(
+                          option.icon,
+                          size: 18,
+                          color: isSelected
+                              ? AppColors.primary
+                              : Colors.grey.shade400,
+                        ),
                       ],
-                    ),
+                    ],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

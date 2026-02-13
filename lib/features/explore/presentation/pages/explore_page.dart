@@ -10,6 +10,7 @@ import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/explore/presentation/providers/explore_providers.dart';
 import 'package:honak/features/explore/presentation/providers/filter_provider.dart';
 import 'package:honak/features/explore/presentation/widgets/filter_sheet.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/features/home/domain/entities/nearby_page.dart';
 import 'package:honak/features/stories/presentation/providers/stories_provider.dart'
     show storyContentProvider;
@@ -112,12 +113,8 @@ class _FilterTriggerBar extends ConsumerWidget {
     return Padding(
       padding: AppSpacing.paddingH(AppSpacing.lg),
       child: GestureDetector(
-        onTap: () => showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
+        onTap: () => showAppSheet(
+          context,
           builder: (_) => const ExploreFilterSheet(),
         ),
         child: Container(

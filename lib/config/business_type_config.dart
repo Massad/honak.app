@@ -148,7 +148,8 @@ enum DashboardSectionType {
   recurringTomorrow,
   customerInsights,
   recentlyLinked,
-  liveQueue;
+  liveQueue,
+  liveDropoff;
 
   String get key => switch (this) {
     stats => 'stats',
@@ -170,6 +171,7 @@ enum DashboardSectionType {
     customerInsights => 'customer_insights',
     recentlyLinked => 'recently_linked',
     liveQueue => 'live_queue',
+    liveDropoff => 'live_dropoff',
   };
 
   static DashboardSectionType fromKey(String key) => switch (key) {
@@ -192,6 +194,7 @@ enum DashboardSectionType {
     'customer_insights' => customerInsights,
     'recently_linked' => recentlyLinked,
     'live_queue' => liveQueue,
+    'live_dropoff' => liveDropoff,
     _ => throw ArgumentError('Unknown dashboard section type: $key'),
   };
 }
@@ -599,6 +602,13 @@ class BusinessTypeConfig {
   // ─── Manage tabs ──────────────────────────────────────────
   final List<ManageTab>? manageTabs;
 
+  // ─── Tracking mode ──────────────────────────────────────────
+  /// 'dropoff' for ticket-based tracking (laundry, tailor, etc.).
+  final String? trackingMode;
+
+  /// Config-driven info request templates for dropoff businesses.
+  final List<Map<String, dynamic>>? dropoffInfoTemplates;
+
   // ─── Display flags ────────────────────────────────────────
   final bool hasCustomersTab;
 
@@ -630,6 +640,8 @@ class BusinessTypeConfig {
     required this.qrTargets,
     this.itemManagement,
     this.manageTabs,
+    this.trackingMode,
+    this.dropoffInfoTemplates,
     this.hasCustomersTab = true,
   });
 
@@ -662,6 +674,8 @@ class BusinessTypeConfig {
     List<QRTarget>? qrTargets,
     ItemManagementConfig? itemManagement,
     List<ManageTab>? manageTabs,
+    String? trackingMode,
+    List<Map<String, dynamic>>? dropoffInfoTemplates,
     bool? hasCustomersTab,
   }) {
     return BusinessTypeConfig(
@@ -693,6 +707,8 @@ class BusinessTypeConfig {
       qrTargets: qrTargets ?? this.qrTargets,
       itemManagement: itemManagement ?? this.itemManagement,
       manageTabs: manageTabs ?? this.manageTabs,
+      trackingMode: trackingMode ?? this.trackingMode,
+      dropoffInfoTemplates: dropoffInfoTemplates ?? this.dropoffInfoTemplates,
       hasCustomersTab: hasCustomersTab ?? this.hasCustomersTab,
     );
   }

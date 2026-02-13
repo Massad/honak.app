@@ -85,6 +85,8 @@ BusinessTypeConfig createType({
   List<QRTarget>? qrTargets,
   ItemManagementConfig? itemManagement,
   List<ManageTab>? manageTabs,
+  String? trackingMode,
+  List<Map<String, dynamic>>? dropoffInfoTemplates,
   bool? hasCustomersTab,
 }) {
   final base = archetypeDefault(archetype);
@@ -118,6 +120,8 @@ BusinessTypeConfig createType({
     qrTargets: qrTargets ?? base.qrTargets,
     itemManagement: itemManagement ?? base.itemManagement,
     manageTabs: manageTabs ?? base.manageTabs,
+    trackingMode: trackingMode ?? base.trackingMode,
+    dropoffInfoTemplates: dropoffInfoTemplates ?? base.dropoffInfoTemplates,
     hasCustomersTab: hasCustomersTab ?? base.hasCustomersTab,
   );
 }

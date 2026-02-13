@@ -8,6 +8,7 @@ import 'package:honak/features/business/order_management/domain/entities/truck.d
 import 'package:honak/features/business/order_management/presentation/pages/driving_mode_page.dart';
 import 'package:honak/features/business/order_management/presentation/providers/truck_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 // ═══════════════════════════════════════════════════════════════
 // Show function
@@ -18,19 +19,11 @@ void showTruckDetailOverlay(
   Truck truck,
   String pageSlug,
 ) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
-    builder: (_) => DraggableScrollableSheet(
-      initialChildSize: 0.92,
-      minChildSize: 0.5,
-      maxChildSize: 0.95,
-      builder: (context, scrollController) => _TruckDetailSheet(
-        truck: truck,
-        pageSlug: pageSlug,
-        scrollController: scrollController,
-      ),
+  showAppSheet(
+    context,
+    builder: (_) => _TruckDetailSheet(
+      truck: truck,
+      pageSlug: pageSlug,
     ),
   );
 }
@@ -88,12 +81,10 @@ class _TruckDetailSheet extends ConsumerStatefulWidget {
   const _TruckDetailSheet({
     required this.truck,
     required this.pageSlug,
-    required this.scrollController,
   });
 
   final Truck truck;
   final String pageSlug;
-  final ScrollController scrollController;
 
   @override
   ConsumerState<_TruckDetailSheet> createState() => _TruckDetailSheetState();
@@ -129,51 +120,44 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
         : (_statusMap[truck.today.status] ?? ('غير معروف', Colors.grey));
     final (statusLabel, statusColor) = status;
 
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xxl)),
-      ),
-      child: Column(
-        children: [
-          // Drag handle
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: AppSpacing.sm),
-              width: 36,
-              height: 4,
-              decoration: BoxDecoration(
-                color: AppColors.divider,
-                borderRadius: BorderRadius.circular(2),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Drag handle
+        Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: AppSpacing.sm),
+            width: 36,
+            height: 4,
+            decoration: BoxDecoration(
+              color: AppColors.divider,
+              borderRadius: BorderRadius.circular(2),
             ),
           ),
+        ),
 
-          // Header
-          _buildHeader(truck, truckColor, statusLabel, statusColor),
+        // Header
+        _buildHeader(truck, truckColor, statusLabel, statusColor),
 
-          // Content
-          Expanded(
-            child: _tabIndex == 0
-                ? _OverviewTab(
-                    truck: truck,
-                    pageSlug: widget.pageSlug,
-                    truckColor: truckColor,
-                    isOffToday: _isOffToday,
-                    nextDeliveryDay: _nextDeliveryDay,
-                    scrollController: widget.scrollController,
-                  )
-                : _ActivityTab(
-                    truck: truck,
-                    pageSlug: widget.pageSlug,
-                    scrollController: widget.scrollController,
-                  ),
-          ),
+        // Content
+        Flexible(
+          child: _tabIndex == 0
+              ? _OverviewTab(
+                  truck: truck,
+                  pageSlug: widget.pageSlug,
+                  truckColor: truckColor,
+                  isOffToday: _isOffToday,
+                  nextDeliveryDay: _nextDeliveryDay,
+                )
+              : _ActivityTab(
+                  truck: truck,
+                  pageSlug: widget.pageSlug,
+                ),
+        ),
 
-          // Bottom action
-          _buildBottomAction(truck),
-        ],
-      ),
+        // Bottom action
+        _buildBottomAction(truck),
+      ],
     );
   }
 
@@ -435,7 +419,6 @@ class _OverviewTab extends ConsumerWidget {
     required this.truckColor,
     required this.isOffToday,
     required this.nextDeliveryDay,
-    required this.scrollController,
   });
 
   final Truck truck;
@@ -443,7 +426,6 @@ class _OverviewTab extends ConsumerWidget {
   final Color truckColor;
   final bool isOffToday;
   final String? nextDeliveryDay;
-  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -461,7 +443,6 @@ class _OverviewTab extends ConsumerWidget {
     final progress = total > 0 ? truck.today.deliveredCount / total : 0.0;
 
     return ListView(
-      controller: scrollController,
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
         // Progress card
@@ -964,12 +945,10 @@ class _ActivityTab extends ConsumerWidget {
   const _ActivityTab({
     required this.truck,
     required this.pageSlug,
-    required this.scrollController,
   });
 
   final Truck truck;
   final String pageSlug;
-  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -980,7 +959,6 @@ class _ActivityTab extends ConsumerWidget {
     final activityLog = _buildActivityLog(queue, truck);
 
     return ListView(
-      controller: scrollController,
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
         const Align(

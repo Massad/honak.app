@@ -9,6 +9,7 @@ import 'package:honak/features/business/page_settings/presentation/providers/set
 import 'package:honak/features/business/page_settings/presentation/providers/templates_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/disclaimer_card.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 class SafetyDisclaimers extends ConsumerWidget {
   final VoidCallback onClose;
@@ -165,90 +166,81 @@ class SafetyDisclaimers extends ConsumerWidget {
 
     final list = templates['disclaimer_templates'] as List? ?? [];
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (ctx) => DraggableScrollableSheet(
-        initialChildSize: 0.5,
-        maxChildSize: 0.8,
-        minChildSize: 0.3,
-        expand: false,
-        builder: (ctx, scrollController) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(AppSpacing.lg),
-                child: Text(
-                  'قوالب جاهزة',
-                  style:
-                      ctx.textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+    showAppSheet(
+      context,
+      maxHeightFraction: 0.8,
+      builder: (ctx) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Text(
+                'قوالب جاهزة',
+                style:
+                    ctx.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  controller: scrollController,
-                  itemCount: list.length,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.lg),
-                  itemBuilder: (ctx, i) {
-                    final t =
-                        list[i] as Map<String, dynamic>;
-                    return ListTile(
-                      title: Text(
-                        t['title'] as String? ?? '',
-                        textAlign: TextAlign.end,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500),
+            ),
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: list.length,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.lg),
+                itemBuilder: (ctx, i) {
+                  final t =
+                      list[i] as Map<String, dynamic>;
+                  return ListTile(
+                    title: Text(
+                      t['title'] as String? ?? '',
+                      textAlign: TextAlign.end,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      t['text'] as String? ?? '',
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey.shade500,
                       ),
-                      subtitle: Text(
-                        t['text'] as String? ?? '',
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.grey.shade500,
-                        ),
-                      ),
-                      trailing: DisclaimerTypeBadge(
-                          type: t['type'] as String? ??
-                              'policy'),
-                      onTap: () {
-                        final id =
-                            'disc_${DateTime.now().millisecondsSinceEpoch}';
-                        ref
-                            .read(pageSettingsProvider
-                                .notifier)
-                            .addDisclaimer(
-                              SafetyDisclaimer(
-                                id: id,
-                                type: t['type']
-                                        as String? ??
-                                    'custom',
-                                title: t['title']
-                                        as String? ??
-                                    '',
-                                text: t['text']
-                                        as String? ??
-                                    '',
-                              ),
-                            );
-                        Navigator.pop(ctx);
-                        context.showSnackBar(
-                            'تم إضافة التنبيه');
-                      },
-                    );
-                  },
-                ),
+                    ),
+                    trailing: DisclaimerTypeBadge(
+                        type: t['type'] as String? ??
+                            'policy'),
+                    onTap: () {
+                      final id =
+                          'disc_${DateTime.now().millisecondsSinceEpoch}';
+                      ref
+                          .read(pageSettingsProvider
+                              .notifier)
+                          .addDisclaimer(
+                            SafetyDisclaimer(
+                              id: id,
+                              type: t['type']
+                                      as String? ??
+                                  'custom',
+                              title: t['title']
+                                      as String? ??
+                                  '',
+                              text: t['text']
+                                      as String? ??
+                                  '',
+                            ),
+                          );
+                      Navigator.pop(ctx);
+                      context.showSnackBar(
+                          'تم إضافة التنبيه');
+                    },
+                  );
+                },
               ),
-            ],
-          );
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

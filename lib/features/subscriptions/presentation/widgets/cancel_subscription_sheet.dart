@@ -4,16 +4,14 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 void showCancelSubscriptionSheet(
   BuildContext context,
   Subscription subscription,
 ) {
-  showModalBottomSheet(
-    context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
+  showAppSheet(
+    context,
     builder: (context) =>
         _CancelSubscriptionSheet(subscription: subscription),
   );
@@ -29,84 +27,82 @@ class _CancelSubscriptionSheet extends StatelessWidget {
     final policy = subscription.policy;
     final noticeDays = policy?.cancellationNoticeDays ?? 0;
 
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.xxl),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 36,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(AppSpacing.xxl),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 36,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
             ),
-            const SizedBox(height: AppSpacing.xxl),
-            Container(
-              width: 56,
-              height: 56,
-              decoration: BoxDecoration(
-                color: AppColors.error.withValues(alpha: 0.1),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.cancel_outlined,
-                size: 28,
-                color: AppColors.error,
-              ),
+          ),
+          const SizedBox(height: AppSpacing.xxl),
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: AppColors.error.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
             ),
-            const SizedBox(height: AppSpacing.lg),
-            Text(
-              'إلغاء الاشتراك',
-              style: context.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
-              ),
+            child: const Icon(
+              Icons.cancel_outlined,
+              size: 28,
+              color: AppColors.error,
             ),
-            const SizedBox(height: AppSpacing.lg),
-            _WarningBanner(policy: policy),
-            if (noticeDays > 0) ...[
-              const SizedBox(height: AppSpacing.md),
-              _NoticeBanner(noticeDays: noticeDays),
-            ],
-            const SizedBox(height: AppSpacing.xxl),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  context.showSnackBar('تم إلغاء الاشتراك');
-                },
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.error,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppRadius.button,
-                  ),
-                ),
-                child: const Text('تأكيد الإلغاء'),
-              ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Text(
+            'إلغاء الاشتراك',
+            style: context.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.textPrimary,
             ),
-            const SizedBox(height: AppSpacing.sm),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () => Navigator.pop(context),
-                style: OutlinedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppRadius.button,
-                  ),
-                ),
-                child: const Text('العودة'),
-              ),
-            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          _WarningBanner(policy: policy),
+          if (noticeDays > 0) ...[
+            const SizedBox(height: AppSpacing.md),
+            _NoticeBanner(noticeDays: noticeDays),
           ],
-        ),
+          const SizedBox(height: AppSpacing.xxl),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: () {
+                Navigator.pop(context);
+                context.showSnackBar('تم إلغاء الاشتراك');
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: AppColors.error,
+                padding:
+                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                shape: RoundedRectangleBorder(
+                  borderRadius: AppRadius.button,
+                ),
+              ),
+              child: const Text('تأكيد الإلغاء'),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: () => Navigator.pop(context),
+              style: OutlinedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                shape: RoundedRectangleBorder(
+                  borderRadius: AppRadius.button,
+                ),
+              ),
+              child: const Text('العودة'),
+            ),
+          ),
+        ],
       ),
     );
   }

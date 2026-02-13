@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Shows a bottom sheet for bulk team assignment to multiple items.
 Future<void> showTeamAssignSheet(
@@ -12,10 +13,9 @@ Future<void> showTeamAssignSheet(
   required List<TeamMember> members,
   required ValueChanged<List<String>> onApply,
 }) {
-  return showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet(
+    context,
+    maxHeightFraction: 0.65,
     builder: (_) => _TeamAssignContent(
       selectedCount: selectedCount,
       itemLabelAr: itemLabelAr,
@@ -71,53 +71,43 @@ class _TeamAssignContentState extends State<_TeamAssignContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.65,
-      ),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag handle
-            Center(
-              child: Container(
-                width: 36,
-                height: 4,
-                margin: const EdgeInsets.only(
-                    top: AppSpacing.sm, bottom: AppSpacing.md),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(2),
-                ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Drag handle
+        Center(
+          child: Container(
+            width: 36,
+            height: 4,
+            margin: const EdgeInsets.only(
+                top: AppSpacing.sm, bottom: AppSpacing.md),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+        ),
+
+        // Header
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          child: Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: Text(
+              'تعيين فريق لـ ${widget.selectedCount} ${widget.itemLabelAr}',
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
               ),
             ),
+          ),
+        ),
 
-            // Header
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-              child: Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Text(
-                  'تعيين فريق لـ ${widget.selectedCount} ${widget.itemLabelAr}',
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+        const SizedBox(height: AppSpacing.md),
 
-            const SizedBox(height: AppSpacing.md),
-
-            // Members list
-            Flexible(
-              child: ListView(
+        // Members list
+        Flexible(
+          child: ListView(
                 shrinkWrap: true,
                 padding:
                     const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
@@ -232,9 +222,7 @@ class _TeamAssignContentState extends State<_TeamAssignContent> {
                 ),
               ),
             ),
-          ],
-        ),
-      ),
+      ],
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:honak/features/business/order_management/presentation/widgets/de
 import 'package:honak/features/business/order_management/presentation/widgets/driving_mode_sheets.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/swipe_button.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/walk_up_order_sheet.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Full-screen driver interface during active delivery route.
 /// Designed for one-handed, glanceable usage with big tap targets.
@@ -282,32 +283,8 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
   }
 
   void _showSheet(Widget Function(BuildContext) builder) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (ctx) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(ctx).viewInsets.bottom,
-        ),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(AppRadius.xxl),
-            ),
-          ),
-          child: builder(ctx),
-        ),
-      ),
-    );
-  }
-
-  void _showDraggableSheet(Widget Function(BuildContext) builder) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet(
+      context,
       builder: builder,
     );
   }
@@ -1171,7 +1148,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
           // Quick order
           Expanded(
             child: GestureDetector(
-              onTap: () => _showDraggableSheet(
+              onTap: () => _showSheet(
                 (_) => WalkUpOrderSheet(
                   productName: widget.productName,
                   onAddAndDeliver: _handleWalkUpDeliver,
@@ -1240,7 +1217,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
           const SizedBox(width: 8),
           // End route
           GestureDetector(
-            onTap: () => _showDraggableSheet(
+            onTap: () => _showSheet(
               (_) => DeliverySummary(
                 truck: _updatedTruck,
                 queue: _queue,

@@ -117,37 +117,21 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.85,
-      minChildSize: 0.5,
-      maxChildSize: 0.95,
-      expand: false,
-      builder: (context, scrollController) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: _configuringItem != null
-              ? _buildConfigStep()
-              : _buildBrowseStep(scrollController),
-        );
-      },
-    );
+    return _configuringItem != null
+        ? _buildConfigStep()
+        : _buildBrowseStep();
   }
 
-  Widget _buildBrowseStep(ScrollController scrollController) {
+  Widget _buildBrowseStep() {
     final itemsAsync = ref.watch(businessItemsProvider(widget.pageSlug));
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         _buildHandle(),
         _buildBrowseHeader(),
         _buildSearchBar(),
-        Expanded(
+        Flexible(
           child: itemsAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (e, _) => Center(
@@ -156,7 +140,7 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
                 style: TextStyle(color: AppColors.textSecondary),
               ),
             ),
-            data: (items) => _buildItemList(items, scrollController),
+            data: (items) => _buildItemList(items),
           ),
         ),
         if (widget.mode == ItemPickerMode.multiPick) _buildMultiPickFooter(),
@@ -255,7 +239,7 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
     );
   }
 
-  Widget _buildItemList(List<Item> items, ScrollController controller) {
+  Widget _buildItemList(List<Item> items) {
     final categories = items
         .where((i) => i.categoryName != null)
         .map((i) => i.categoryName!)
@@ -298,7 +282,6 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
                   ),
                 )
               : ListView.separated(
-                  controller: controller,
                   padding: const EdgeInsetsDirectional.symmetric(
                     horizontal: AppSpacing.lg,
                   ),

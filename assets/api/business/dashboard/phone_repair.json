@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 4,
+      "new_followers": 5,
+      "page_views": 85,
+      "today_revenue": 10000
+    },
+    "today_summary": {
+      "completed": 1,
+      "upcoming": 0,
+      "cancelled": 0,
+      "no_show": 0,
+      "total": 4,
+      "revenue": 10000
+    },
+    "live_dropoff": {
+      "received": 1,
+      "processing": 1,
+      "ready": 1,
+      "delivered": 1,
+      "overdue": 0
+    },
+    "today_revenue": {
+      "total": 10000,
+      "completed_count": 2,
+      "items": [
+        { "service": "إصلاح كاميرا — iPhone 14", "amount": 2000, "time": "14:00" },
+        { "service": "تبديل بطارية + حماية شاشة — iPhone 13", "amount": 1800, "time": "18:00" }
+      ]
+    },
+    "pending_requests": [
+      { "id": "req_801", "customer": "نبيل عمران", "service": "تبديل شاشة Samsung Galaxy S23", "date": "2026-02-13", "time": "10:00" }
+    ]
+  }
+}

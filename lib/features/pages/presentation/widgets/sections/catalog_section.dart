@@ -19,6 +19,7 @@ import 'package:honak/shared/widgets/credit_chip.dart';
 import 'package:honak/shared/widgets/credit_history_sheet.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
 import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
 
@@ -201,24 +202,17 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
   }
 
   void _showItemConfigSheet(Item item) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (ctx) => SizedBox(
-        height: MediaQuery.of(ctx).size.height * 0.85,
-        child: ItemConfigurationStep(
-          item: item,
-          confirmLabel: '\u0625\u0636\u0627\u0641\u0629 \u0644\u0644\u0633\u0644\u0629',
-          onConfirm: (selectedItem) {
-            Navigator.of(ctx).pop();
-            setState(() => _cart.add(selectedItem));
-          },
-          onBack: () => Navigator.of(ctx).pop(),
-        ),
+    showAppSheet(
+      context,
+      maxHeightFraction: 0.85,
+      builder: (ctx) => ItemConfigurationStep(
+        item: item,
+        confirmLabel: '\u0625\u0636\u0627\u0641\u0629 \u0644\u0644\u0633\u0644\u0629',
+        onConfirm: (selectedItem) {
+          Navigator.of(ctx).pop();
+          setState(() => _cart.add(selectedItem));
+        },
+        onBack: () => Navigator.of(ctx).pop(),
       ),
     );
   }

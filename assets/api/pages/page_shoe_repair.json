@@ -1,0 +1,83 @@
+{
+  "success": true,
+  "data": {
+    "id": "alaseel-shoe-repair",
+    "owner_id": "usr_003",
+    "business_type_id": "shoe_repair",
+    "business_type_name": "إسكافي",
+    "category_name": "خدمات شخصية",
+    "explore_category": "cat_services",
+    "name": "إسكافي الأصيل",
+    "name_en": "Al Aseel Shoe Repair",
+    "slug": "alaseel-shoe-repair",
+    "handle": "alaseel-shoe-repair",
+    "store_type": "physical",
+    "archetype": "dropoff",
+    "description": "إسكافي متخصص بإصلاح وصيانة الأحذية والحقائب الجلدية. خبرة 15 سنة.",
+    "avatar_url": "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000022",
+    "location": {
+      "lat": 31.953,
+      "lng": 35.910,
+      "label": "وسط البلد، شارع الملك فيصل، قرب سوق البخارية",
+      "area": "وسط البلد",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": { "enabled": true, "open": "08:30", "close": "18:00" },
+      "monday": { "enabled": true, "open": "08:30", "close": "18:00" },
+      "tuesday": { "enabled": true, "open": "08:30", "close": "18:00" },
+      "wednesday": { "enabled": true, "open": "08:30", "close": "18:00" },
+      "thursday": { "enabled": true, "open": "08:30", "close": "18:00" },
+      "friday": { "enabled": false, "open": null, "close": null },
+      "saturday": { "enabled": true, "open": "08:30", "close": "18:00" }
+    },
+    "operating_hours": "السبت - الخميس: ٨:٣٠ ص — ٦:٠٠ م\nالجمعة: مغلق",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "claimed",
+    "followers_count": 290,
+    "items_count": 11,
+    "posts_count": 3,
+    "is_following": false,
+    "hours": {
+      "open_time": "08:30",
+      "close_time": "18:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 85,
+    "trust_metrics": [
+      { "label": "عملاء يعودون", "value": "٨٨٪", "icon": "repeat" },
+      { "label": "قطعة شهرياً", "value": "٨٠", "icon": "handyman" },
+      { "label": "خبرة", "value": "١٥ سنة", "icon": "workspace_premium" }
+    ],
+    "delivery_available": false,
+    "pickup_available": true,
+    "payment_methods": ["نقداً"],
+    "coverage_zones": [],
+    "member_since": "2023",
+    "team_members_count": 1,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1680000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "services": [
+      { "id": "sole_replace", "name": "تبديل نعل", "price_cents": 800, "duration": "يومين" },
+      { "id": "heel_replace", "name": "تبديل كعب", "price_cents": 500, "duration": "يوم واحد" },
+      { "id": "stitch_repair", "name": "خياطة وإصلاح", "price_cents": 300, "duration": "يوم واحد" },
+      { "id": "zipper_fix", "name": "تبديل سحّاب بوت", "price_cents": 600, "duration": "يومين" },
+      { "id": "polish", "name": "تلميع وتنظيف", "price_cents": 200, "duration": "يوم واحد" },
+      { "id": "color_restore", "name": "استعادة لون", "price_cents": 500, "duration": "يومين" },
+      { "id": "waterproof", "name": "طبقة حماية من الماء", "price_cents": 300, "duration": "يوم واحد" },
+      { "id": "bag_repair", "name": "إصلاح حقيبة جلد", "price_cents": 1000, "duration": "3 أيام" },
+      { "id": "stretch", "name": "توسيع حذاء", "price_cents": 400, "duration": "يومين" },
+      { "id": "insole", "name": "تبديل نعل داخلي", "price_cents": 350, "duration": "يوم واحد" }
+    ],
+    "stories": [],
+    "blocked_dates": []
+  }
+}

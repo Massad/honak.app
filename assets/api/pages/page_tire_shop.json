@@ -1,0 +1,79 @@
+{
+  "success": true,
+  "data": {
+    "id": "aljazeera-tires",
+    "owner_id": "usr_003",
+    "business_type_id": "tire_shop",
+    "business_type_name": "محل إطارات",
+    "category_name": "سيارات",
+    "explore_category": "cat_auto",
+    "name": "إطارات الجزيرة",
+    "name_en": "Al Jazeera Tires",
+    "slug": "aljazeera-tires",
+    "handle": "aljazeera-tires",
+    "store_type": "physical",
+    "archetype": "queue",
+    "description": "محل إطارات متخصص — بيع وتركيب وموازنة وترصيص. وكيل ماركات عالمية.",
+    "avatar_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962790000026",
+    "location": {
+      "lat": 31.940,
+      "lng": 35.920,
+      "label": "المقابلين، شارع الشهيد وصفي التل، مقابل محطة توتال",
+      "area": "المقابلين",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": { "enabled": true, "open": "07:30", "close": "19:00" },
+      "monday": { "enabled": true, "open": "07:30", "close": "19:00" },
+      "tuesday": { "enabled": true, "open": "07:30", "close": "19:00" },
+      "wednesday": { "enabled": true, "open": "07:30", "close": "19:00" },
+      "thursday": { "enabled": true, "open": "07:30", "close": "19:00" },
+      "friday": { "enabled": false, "open": null, "close": null },
+      "saturday": { "enabled": true, "open": "07:30", "close": "19:00" }
+    },
+    "operating_hours": "السبت - الخميس: ٧:٣٠ ص — ٧:٠٠ م\nالجمعة: مغلق",
+    "items_label_ar": "الخدمات",
+    "items_label_en": "Services",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "claim_status": "claimed",
+    "followers_count": 440,
+    "items_count": 5,
+    "posts_count": 7,
+    "is_following": false,
+    "hours": {
+      "open_time": "07:30",
+      "close_time": "19:00",
+      "open_days": ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday"]
+    },
+    "trust_score": 86,
+    "trust_metrics": [
+      { "label": "عملاء يعودون", "value": "٧٥٪", "icon": "repeat" },
+      { "label": "سيارة يومياً", "value": "٨", "icon": "directions_car" },
+      { "label": "معدل الانتظار", "value": "١٠ دقائق", "icon": "schedule" }
+    ],
+    "delivery_available": false,
+    "pickup_available": true,
+    "payment_methods": ["نقداً", "كليك: JazeeraTires"],
+    "cliq_alias": "JazeeraTires",
+    "coverage_zones": [],
+    "member_since": "2017",
+    "team_members_count": 3,
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1500000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "services": [
+      { "id": "tire_change", "name": "تبديل إطار", "price_cents": 300, "duration": "15 دقيقة" },
+      { "id": "four_tire", "name": "تبديل 4 إطارات", "price_cents": 1000, "duration": "30 دقيقة" },
+      { "id": "puncture", "name": "تصليح بنشر", "price_cents": 200, "duration": "10 دقائق" },
+      { "id": "alignment", "name": "ضبط زوايا", "price_cents": 1500, "duration": "30 دقيقة" },
+      { "id": "nitrogen", "name": "تعبئة نيتروجين", "price_cents": 400, "duration": "10 دقائق" }
+    ],
+    "stories": [],
+    "blocked_dates": []
+  }
+}

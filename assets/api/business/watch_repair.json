@@ -1,0 +1,169 @@
+{
+  "service_categories": [
+    {
+      "id": "battery",
+      "name_ar": "بطارية",
+      "icon": "🔋",
+      "services": [
+        { "id": "battery_replace", "name_ar": "تبديل بطارية", "price": 3.0, "duration_days": 0 },
+        { "id": "battery_premium", "name_ar": "بطارية أصلية ماركة", "price": 8.0, "duration_days": 1 }
+      ]
+    },
+    {
+      "id": "crystal",
+      "name_ar": "زجاج",
+      "icon": "💎",
+      "services": [
+        { "id": "crystal_replace", "name_ar": "تبديل زجاج", "price": 10.0, "duration_days": 2 },
+        { "id": "crystal_polish", "name_ar": "تلميع زجاج", "price": 3.0, "duration_days": 1 },
+        { "id": "sapphire_replace", "name_ar": "تبديل زجاج سافير", "price": 25.0, "duration_days": 5 }
+      ]
+    },
+    {
+      "id": "band",
+      "name_ar": "سوار",
+      "icon": "⌚",
+      "services": [
+        { "id": "band_replace", "name_ar": "تبديل سوار", "price": 5.0, "duration_days": 1 },
+        { "id": "band_resize", "name_ar": "تعديل مقاس سوار", "price": 3.0, "duration_days": 0 },
+        { "id": "clasp_fix", "name_ar": "إصلاح إبزيم", "price": 4.0, "duration_days": 1 }
+      ]
+    },
+    {
+      "id": "movement",
+      "name_ar": "حركة",
+      "icon": "⚙️",
+      "services": [
+        { "id": "movement_service", "name_ar": "صيانة حركة ميكانيكية", "price": 30.0, "duration_days": 7 },
+        { "id": "movement_replace", "name_ar": "تبديل حركة", "price": 15.0, "duration_days": 3 },
+        { "id": "calibration", "name_ar": "معايرة دقة", "price": 10.0, "duration_days": 2 }
+      ]
+    },
+    {
+      "id": "water",
+      "name_ar": "مقاومة مياه",
+      "icon": "💧",
+      "services": [
+        { "id": "gasket_replace", "name_ar": "تبديل حلقات عزل", "price": 5.0, "duration_days": 1 },
+        { "id": "pressure_test", "name_ar": "فحص ضغط مياه", "price": 3.0, "duration_days": 1 }
+      ]
+    },
+    {
+      "id": "cleaning",
+      "name_ar": "تنظيف",
+      "icon": "✨",
+      "services": [
+        { "id": "ultrasonic_clean", "name_ar": "تنظيف بالموجات فوق الصوتية", "price": 5.0, "duration_days": 1 },
+        { "id": "full_service", "name_ar": "صيانة شاملة", "price": 20.0, "duration_days": 5 }
+      ]
+    }
+  ],
+  "item_types": ["ساعة يد كلاسيكية", "ساعة رياضية", "ساعة ذكية", "ساعة جيب", "ساعة نسائية", "ساعة أوتوماتيكية"],
+  "attributes": [
+    { "id": "brand", "label_ar": "الماركة", "values": ["Casio", "Seiko", "Citizen", "Tissot", "Omega", "Rolex", "Tag Heuer", "Swatch", "Fossil", "Michael Kors"] },
+    { "id": "material", "label_ar": "المعدن", "values": ["ستانلس ستيل", "ذهبي", "فضي", "تيتانيوم", "بلاستيك", "جلد"] }
+  ],
+  "tickets": [
+    {
+      "id": "d-401",
+      "ticket_number": "W-0033",
+      "status": "processing",
+      "source": "walk_in",
+      "customer_name": "باسل نادر",
+      "customer_phone": "0791444555",
+      "items": [
+        { "id": "i-401", "name": "ساعة أوتوماتيكية", "quantity": 1, "service": "صيانة حركة ميكانيكية", "price": 30.0, "attributes": { "brand": "Seiko", "material": "ستانلس ستيل" } }
+      ],
+      "total_price": 30.0,
+      "dropped_off_at": "2026-02-08T10:00:00Z",
+      "estimated_ready_at": "2026-02-15",
+      "started_at": "2026-02-09T09:00:00Z",
+      "notes": "الساعة بتتأخر 5 دقائق باليوم",
+      "urgent": false,
+      "paid": true,
+      "payment_method": "كاش"
+    },
+    {
+      "id": "d-402",
+      "ticket_number": "W-0034",
+      "status": "received",
+      "source": "walk_in",
+      "customer_name": "سلمى عيسى",
+      "customer_phone": "0785667788",
+      "items": [
+        { "id": "i-402", "name": "ساعة نسائية", "quantity": 1, "service": "تبديل بطارية", "price": 3.0, "attributes": { "brand": "Michael Kors", "material": "ذهبي" } },
+        { "id": "i-403", "name": "ساعة نسائية", "quantity": 1, "service": "تعديل مقاس سوار", "price": 3.0, "attributes": { "brand": "Michael Kors", "material": "ذهبي" } }
+      ],
+      "total_price": 6.0,
+      "dropped_off_at": "2026-02-12T11:00:00Z",
+      "estimated_ready_at": "2026-02-12",
+      "urgent": false,
+      "paid": false
+    },
+    {
+      "id": "d-403",
+      "ticket_number": "W-0035",
+      "status": "ready",
+      "source": "phone",
+      "customer_name": "وائل إبراهيم",
+      "customer_phone": "0799223344",
+      "items": [
+        { "id": "i-404", "name": "ساعة يد كلاسيكية", "quantity": 1, "service": "تبديل زجاج", "price": 10.0, "attributes": { "brand": "Tissot", "material": "ستانلس ستيل" } },
+        { "id": "i-405", "name": "ساعة يد كلاسيكية", "quantity": 1, "service": "تنظيف بالموجات فوق الصوتية", "price": 5.0, "attributes": { "brand": "Tissot", "material": "ستانلس ستيل" } }
+      ],
+      "total_price": 15.0,
+      "dropped_off_at": "2026-02-10T14:00:00Z",
+      "estimated_ready_at": "2026-02-12",
+      "started_at": "2026-02-11T08:00:00Z",
+      "completed_at": "2026-02-12T10:00:00Z",
+      "paid": false
+    },
+    {
+      "id": "d-404",
+      "ticket_number": "W-0032",
+      "status": "delivered",
+      "source": "walk_in",
+      "customer_name": "حسام فارس",
+      "customer_phone": "0780998877",
+      "items": [
+        { "id": "i-406", "name": "ساعة رياضية", "quantity": 1, "service": "تبديل سوار", "price": 5.0, "attributes": { "brand": "Casio", "material": "بلاستيك" } },
+        { "id": "i-407", "name": "ساعة رياضية", "quantity": 1, "service": "تبديل بطارية", "price": 3.0, "attributes": { "brand": "Casio", "material": "بلاستيك" } }
+      ],
+      "total_price": 8.0,
+      "dropped_off_at": "2026-02-09T09:30:00Z",
+      "estimated_ready_at": "2026-02-10",
+      "started_at": "2026-02-09T14:00:00Z",
+      "completed_at": "2026-02-10T09:00:00Z",
+      "picked_up_at": "2026-02-10T15:00:00Z",
+      "paid": true,
+      "payment_method": "كاش"
+    },
+    {
+      "id": "d-405",
+      "ticket_number": "W-0036",
+      "status": "processing",
+      "source": "app_request",
+      "customer_name": "رنا جمال",
+      "customer_phone": "0792556677",
+      "items": [
+        { "id": "i-408", "name": "ساعة يد كلاسيكية", "quantity": 1, "service": "صيانة شاملة", "price": 20.0, "attributes": { "brand": "Omega", "material": "ستانلس ستيل" } }
+      ],
+      "total_price": 20.0,
+      "dropped_off_at": "2026-02-10T16:00:00Z",
+      "estimated_ready_at": "2026-02-15",
+      "started_at": "2026-02-11T10:00:00Z",
+      "urgent": false,
+      "paid": false,
+      "notes": "ساعة قديمة — يرجى الحذر عند الفتح"
+    }
+  ],
+  "stats": {
+    "total_today": 5,
+    "received": 1,
+    "processing": 2,
+    "ready": 1,
+    "delivered": 1,
+    "overdue": 0,
+    "revenue_today": 79.0
+  }
+}

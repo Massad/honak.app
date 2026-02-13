@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 4,
+      "new_followers": 2,
+      "page_views": 22,
+      "today_revenue": 3700
+    },
+    "today_summary": {
+      "completed": 1,
+      "upcoming": 0,
+      "cancelled": 0,
+      "no_show": 0,
+      "total": 4,
+      "revenue": 3700
+    },
+    "live_dropoff": {
+      "received": 1,
+      "processing": 1,
+      "ready": 1,
+      "delivered": 1,
+      "overdue": 0
+    },
+    "today_revenue": {
+      "total": 3700,
+      "completed_count": 2,
+      "items": [
+        { "service": "تبديل سحّاب بوت", "amount": 600, "time": "11:00" },
+        { "service": "خياطة وإصلاح × 2", "amount": 600, "time": "17:00" }
+      ]
+    },
+    "pending_requests": []
+  }
+}

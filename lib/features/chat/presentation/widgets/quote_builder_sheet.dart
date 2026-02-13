@@ -56,51 +56,37 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.85,
-      minChildSize: 0.5,
-      maxChildSize: 0.95,
-      expand: false,
-      builder: (context, scrollController) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildHandle(),
+        _buildHeader(context),
+        Flexible(
+          child: SingleChildScrollView(
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.lg,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildLineItems(),
+                const SizedBox(height: AppSpacing.sm),
+                _buildAddButton(),
+                const SizedBox(height: AppSpacing.lg),
+                _buildDiscount(),
+                const SizedBox(height: AppSpacing.lg),
+                _buildNotes(),
+                const SizedBox(height: AppSpacing.lg),
+                _buildValiditySelector(),
+                const SizedBox(height: AppSpacing.lg),
+                _buildTotalPreview(),
+                const SizedBox(height: AppSpacing.xl),
+              ],
             ),
           ),
-          child: Column(
-            children: [
-              _buildHandle(),
-              _buildHeader(context),
-              Expanded(
-                child: ListView(
-                  controller: scrollController,
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.lg,
-                  ),
-                  children: [
-                    _buildLineItems(),
-                    const SizedBox(height: AppSpacing.sm),
-                    _buildAddButton(),
-                    const SizedBox(height: AppSpacing.lg),
-                    _buildDiscount(),
-                    const SizedBox(height: AppSpacing.lg),
-                    _buildNotes(),
-                    const SizedBox(height: AppSpacing.lg),
-                    _buildValiditySelector(),
-                    const SizedBox(height: AppSpacing.lg),
-                    _buildTotalPreview(),
-                    const SizedBox(height: AppSpacing.xl),
-                  ],
-                ),
-              ),
-              _buildSendButton(context),
-            ],
-          ),
-        );
-      },
+        ),
+        _buildSendButton(context),
+      ],
     );
   }
 
@@ -418,25 +404,22 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
   }
 
   Widget _buildSendButton(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
-        child: SizedBox(
-          width: double.infinity,
-          child: FilledButton.icon(
-            onPressed: _isValid ? () => _send(context) : null,
-            icon: const Icon(Icons.send_rounded, size: 18),
-            label: const Text('إرسال عرض السعر'),
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.warning,
-              disabledBackgroundColor: AppColors.divider,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: 14,
-              ),
+    return Padding(
+      padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+      child: SizedBox(
+        width: double.infinity,
+        child: FilledButton.icon(
+          onPressed: _isValid ? () => _send(context) : null,
+          icon: const Icon(Icons.send_rounded, size: 18),
+          label: const Text('إرسال عرض السعر'),
+          style: FilledButton.styleFrom(
+            backgroundColor: AppColors.warning,
+            disabledBackgroundColor: AppColors.divider,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsetsDirectional.symmetric(
+              vertical: 14,
             ),
           ),
         ),

@@ -14,6 +14,7 @@ import 'package:honak/features/chat/presentation/providers/message_action_provid
 import 'package:honak/features/chat/presentation/widgets/alternative_card.dart';
 import 'package:honak/features/chat/presentation/widgets/availability_card_message.dart';
 import 'package:honak/features/chat/presentation/widgets/availability_picker_sheet.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/features/chat/presentation/widgets/chat_detail_skeleton.dart';
 import 'package:honak/features/chat/presentation/widgets/image_message.dart';
 import 'package:honak/features/chat/presentation/widgets/info_request_card.dart';
@@ -79,9 +80,8 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
     final bizCtx = ref.read(businessContextProvider);
     if (bizCtx == null) return;
 
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
+    showAppSheet(
+      context,
       builder: (_) => PowerChatMenu(
         archetype: bizCtx.archetype,
         onSendProduct: () => _openProductPicker(context, bizCtx),
@@ -104,10 +104,8 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
   void _openProductPicker(BuildContext context, BusinessContext bizCtx) {
     final title =
         _pickerTitles[bizCtx.archetype] ?? 'اختر منتج';
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet(
+      context,
       builder: (_) => ItemPickerSheet(
         pageSlug: bizCtx.page.slug,
         title: title,
@@ -117,10 +115,8 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
   }
 
   void _openAvailabilityPicker(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet(
+      context,
       builder: (_) => AvailabilityPickerSheet(
         onSend: _handleSendAvailabilityCard,
       ),
@@ -128,10 +124,8 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
   }
 
   void _openQuoteBuilder(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet(
+      context,
       builder: (_) => QuoteBuilderSheet(
         onSend: _handleSendQuoteCard,
       ),

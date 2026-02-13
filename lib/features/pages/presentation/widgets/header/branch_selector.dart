@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Branch selector widget shown when a page has 2+ branches.
 /// Tapping opens a bottom sheet to pick a different branch.
@@ -83,12 +84,8 @@ class BranchSelector extends StatelessWidget {
   }
 
   void _showBranchPicker(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
+    showAppSheet<void>(
+      context,
       builder: (_) => _BranchPickerSheet(
         branches: branches,
         selectedIndex: selectedIndex,
@@ -114,25 +111,11 @@ class _BranchPickerSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Drag handle
-          Padding(
-            padding: EdgeInsets.only(top: AppSpacing.sm),
-            child: Container(
-              width: 36,
-              height: 4,
-              decoration: BoxDecoration(
-                color: context.colorScheme.outlineVariant,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-          ),
-
-          // Header
-          Padding(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Header
+        Padding(
             padding: EdgeInsets.all(AppSpacing.lg),
             child: Row(
               children: [
@@ -269,9 +252,8 @@ class _BranchPickerSheet extends StatelessWidget {
             );
           }),
 
-          SizedBox(height: AppSpacing.lg),
-        ],
-      ),
+        SizedBox(height: AppSpacing.lg),
+      ],
     );
   }
 }

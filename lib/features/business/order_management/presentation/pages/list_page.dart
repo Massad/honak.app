@@ -9,6 +9,8 @@ import 'package:honak/features/business/order_management/presentation/providers/
 import 'package:honak/features/business/order_management/presentation/widgets/request_card.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/truck_detail_overlay.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/truck_status_cards.dart';
+import 'package:honak/features/business/dropoff/presentation/providers/dropoff_providers.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_board.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/presentation/providers/queue_providers.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_board.dart';
@@ -31,6 +33,11 @@ class _BusinessRequestsPageState extends ConsumerState<BusinessRequestsPage> {
   Widget build(BuildContext context) {
     final bizContext = ref.watch(businessContextProvider);
     if (bizContext == null) return const SizedBox.shrink();
+
+    // Dropoff-based businesses get the DropoffBoard
+    if (isDropoffType(bizContext.config?.id)) {
+      return _DropoffBoardWrapper(pageId: bizContext.page.id);
+    }
 
     // Queue-based businesses get the QueueBoard instead of the standard list
     if (isQueueType(bizContext.config?.id)) {
@@ -610,6 +617,36 @@ class _ErrorState extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Dropoff board wrapper — loads data and renders DropoffBoard
+// ═══════════════════════════════════════════════════════════════
+
+class _DropoffBoardWrapper extends ConsumerWidget {
+  final String pageId;
+
+  const _DropoffBoardWrapper({required this.pageId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dropoffAsync = ref.watch(dropoffDataProvider(pageId));
+
+    return dropoffAsync.when(
+      data: (data) => DropoffBoard(
+        initialTickets: data.tickets,
+        stats: data.stats,
+        serviceCategories: data.serviceCategories,
+        attributes: data.attributes,
+        itemTypes: data.itemTypes,
+      ),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) => _ErrorState(
+        message: error.toString(),
+        onRetry: () => ref.invalidate(dropoffDataProvider(pageId)),
       ),
     );
   }

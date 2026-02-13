@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Sort options for catalog items.
 enum SortOption { defaultSort, priceLowHigh, priceHighLow, newest, popular }
@@ -102,11 +103,8 @@ class CatalogFilterSheet extends StatefulWidget {
     required FilterConfig config,
     required ValueChanged<CatalogFilterState> onApply,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      backgroundColor: Colors.transparent,
+    return showAppSheet(
+      context,
       builder: (_) => CatalogFilterSheet(
         initialState: initialState,
         config: config,
@@ -179,17 +177,9 @@ class _CatalogFilterSheetState extends State<CatalogFilterSheet> {
   Widget build(BuildContext context) {
     final primary = context.colorScheme.primary;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.8,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
           // Drag handle
           Center(
             child: Container(
@@ -438,7 +428,7 @@ class _CatalogFilterSheetState extends State<CatalogFilterSheet> {
               AppSpacing.lg,
               AppSpacing.sm,
               AppSpacing.lg,
-              AppSpacing.lg + MediaQuery.of(context).padding.bottom,
+              AppSpacing.lg,
             ),
             child: SizedBox(
               width: double.infinity,
@@ -458,8 +448,7 @@ class _CatalogFilterSheetState extends State<CatalogFilterSheet> {
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 }
 

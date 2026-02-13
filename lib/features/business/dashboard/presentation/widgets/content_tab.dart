@@ -12,6 +12,7 @@ import 'package:honak/features/business/stories/presentation/widgets/story_previ
 import 'package:honak/features/stories/domain/entities/story_content.dart';
 import 'package:honak/features/stories/presentation/pages/story_viewer_page.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/shimmer_loading.dart';
@@ -527,46 +528,44 @@ class _ContentTabState extends ConsumerState<ContentTab> {
   }
 
   void _republishStory(MyStory story) {
-    showModalBottomSheet<String>(
-      context: context,
-      builder: (ctx) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(AppSpacing.lg),
-              child: Column(
-                children: [
-                  Text(
-                    ctx.l10n.storyRepublishChoiceTitle,
-                    style: ctx.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+    showAppSheet<String>(
+      context,
+      builder: (ctx) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              children: [
+                Text(
+                  ctx.l10n.storyRepublishChoiceTitle,
+                  style: ctx.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: AppSpacing.xs),
-                  Text(
-                    ctx.l10n.storyRepublishChoiceSubtitle,
-                    style: ctx.textTheme.bodySmall?.copyWith(
-                      color: ctx.colorScheme.onSurfaceVariant,
-                    ),
-                    textAlign: TextAlign.center,
+                ),
+                SizedBox(height: AppSpacing.xs),
+                Text(
+                  ctx.l10n.storyRepublishChoiceSubtitle,
+                  style: ctx.textTheme.bodySmall?.copyWith(
+                    color: ctx.colorScheme.onSurfaceVariant,
                   ),
-                ],
-              ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            ListTile(
-              leading: const Icon(Icons.edit_outlined),
-              title: Text(ctx.l10n.storyEditAndRepublish),
-              onTap: () => Navigator.pop(ctx, 'edit'),
-            ),
-            ListTile(
-              leading: const Icon(Icons.replay),
-              title: Text(ctx.l10n.storyRepublishAsIs),
-              onTap: () => Navigator.pop(ctx, 'as_is'),
-            ),
-            SizedBox(height: AppSpacing.md),
-          ],
-        ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.edit_outlined),
+            title: Text(ctx.l10n.storyEditAndRepublish),
+            onTap: () => Navigator.pop(ctx, 'edit'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.replay),
+            title: Text(ctx.l10n.storyRepublishAsIs),
+            onTap: () => Navigator.pop(ctx, 'as_is'),
+          ),
+          SizedBox(height: AppSpacing.md),
+        ],
       ),
     ).then((choice) {
       if (choice == null || !mounted) return;

@@ -1,0 +1,55 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 8,
+      "new_followers": 4,
+      "page_views": 55,
+      "today_revenue": 18000
+    },
+    "today_summary": {
+      "completed": 4,
+      "upcoming": 2,
+      "cancelled": 0,
+      "no_show": 0,
+      "total": 8,
+      "revenue": 18000
+    },
+    "live_queue": {
+      "waiting": 2,
+      "in_progress": 2,
+      "completed": 4,
+      "avg_wait_min": 15,
+      "revenue_today_cents": 18000
+    },
+    "today_revenue": {
+      "total": 18000,
+      "completed_count": 4,
+      "items": [
+        { "service": "زيت عادي", "amount": 1500, "time": "07:55" },
+        { "service": "زيت تخليقي", "amount": 2500, "time": "07:35" },
+        { "service": "خدمة شاملة", "amount": 4000, "time": "08:05" },
+        { "service": "زيت عادي", "amount": 1500, "time": "08:10" }
+      ]
+    },
+    "next_in_queue": {
+      "customer_name": "حمزة رامي",
+      "service": "زيت عادي",
+      "position": 3,
+      "vehicle": "سيدان فضي"
+    },
+    "today_schedule": [
+      { "time": "07:00", "customer": "عامر خليل", "service": "زيت تخليقي", "status": "completed" },
+      { "time": "07:15", "customer": "جمال ناصر", "service": "خدمة شاملة", "status": "completed" },
+      { "time": "07:30", "customer": "مازن صالح", "service": "زيت عادي", "status": "completed" },
+      { "time": "07:45", "customer": "سعد أيمن", "service": "زيت عادي", "status": "completed" },
+      { "time": "08:15", "customer": "فراس حسن", "service": "زيت تخليقي", "status": "in_progress" },
+      { "time": "08:20", "customer": "نضال عبدالرحمن", "service": "خدمة شاملة", "status": "in_progress" },
+      { "time": "09:00", "customer": "حمزة رامي", "service": "زيت عادي", "status": "waiting" },
+      { "time": "09:15", "customer": "زيد محمود", "service": "زيت تخليقي", "status": "waiting" }
+    ],
+    "pending_requests": [
+      { "id": "req_401", "customer": "أمجد سعيد", "service": "خدمة شاملة — SUV", "date": "2026-02-13", "time": "08:00" }
+    ]
+  }
+}

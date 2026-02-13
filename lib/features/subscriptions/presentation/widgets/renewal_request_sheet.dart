@@ -3,15 +3,12 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Opens the renewal request bottom sheet for a subscription.
 void showRenewalRequestSheet(BuildContext context, Subscription subscription) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-    ),
+  showAppSheet(
+    context,
     builder: (context) =>
         _RenewalRequestSheet(subscription: subscription),
   );
@@ -44,161 +41,154 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
   Widget build(BuildContext context) {
     final sub = widget.subscription;
 
-    return SafeArea(
+    return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Drag handle
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+
+            // Header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Drag handle
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(2),
+                Text(
+                  'تجديد الاشتراك',
+                  style: context.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.lg),
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.close, size: 20),
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.grey.shade100,
+                    padding: const EdgeInsets.all(6),
+                    minimumSize: const Size(32, 32),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.lg),
 
-                // Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            if (_submitted)
+              _SuccessState()
+            else ...[
+              // Package info card
+              _PackageInfoCard(sub: sub),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Note field
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  'ملاحظة للمتجر (اختياري)',
+                  style: context.textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              TextField(
+                controller: _noteController,
+                maxLines: 3,
+                decoration: InputDecoration(
+                  hintText: 'هل تريد تغيير موعد التوصيل أو إضافة تفاصيل...',
+                  hintStyle: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey.shade400,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey.shade50,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey.shade200),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey.shade200),
+                  ),
+                  contentPadding: const EdgeInsets.all(AppSpacing.md),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Info banner
+              Container(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'تجديد الاشتراك',
-                      style: context.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Icon(
+                      Icons.inventory_2_outlined,
+                      size: 14,
+                      color: AppColors.primary,
                     ),
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.close, size: 20),
-                      style: IconButton.styleFrom(
-                        backgroundColor: Colors.grey.shade100,
-                        padding: const EdgeInsets.all(6),
-                        minimumSize: const Size(32, 32),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey.shade600,
+                            height: 1.5,
+                          ),
+                          children: [
+                            const TextSpan(
+                              text:
+                                  'سيتم إنشاء طلب تجديد جديد وإرساله للمتجر. ستتمكن من متابعة حالة الطلب من صفحة ',
+                            ),
+                            TextSpan(
+                              text: 'طلباتي',
+                              style: TextStyle(color: AppColors.primary),
+                            ),
+                            const TextSpan(text: '.'),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.lg),
+              ),
+              const SizedBox(height: AppSpacing.xl),
 
-                if (_submitted)
-                  _SuccessState()
-                else ...[
-                  // Package info card
-                  _PackageInfoCard(sub: sub),
-                  const SizedBox(height: AppSpacing.lg),
-
-                  // Note field
-                  Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Text(
-                      'ملاحظة للمتجر (اختياري)',
-                      style: context.textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+              // Submit button
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: _handleSubmit,
+                  icon: const Icon(Icons.send, size: 18),
+                  label: const Text(
+                    'إرسال طلب التجديد',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
-                  TextField(
-                    controller: _noteController,
-                    maxLines: 3,
-                    decoration: InputDecoration(
-                      hintText: 'هل تريد تغيير موعد التوصيل أو إضافة تفاصيل...',
-                      hintStyle: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey.shade400,
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey.shade50,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey.shade200),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey.shade200),
-                      ),
-                      contentPadding: const EdgeInsets.all(AppSpacing.md),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AppSpacing.md,
                     ),
-                  ),
-                  const SizedBox(height: AppSpacing.lg),
-
-                  // Info banner
-                  Container(
-                    padding: const EdgeInsets.all(AppSpacing.md),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.inventory_2_outlined,
-                          size: 14,
-                          color: AppColors.primary,
-                        ),
-                        const SizedBox(width: AppSpacing.sm),
-                        Expanded(
-                          child: Text.rich(
-                            TextSpan(
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey.shade600,
-                                height: 1.5,
-                              ),
-                              children: [
-                                const TextSpan(
-                                  text:
-                                      'سيتم إنشاء طلب تجديد جديد وإرساله للمتجر. ستتمكن من متابعة حالة الطلب من صفحة ',
-                                ),
-                                TextSpan(
-                                  text: 'طلباتي',
-                                  style: TextStyle(color: AppColors.primary),
-                                ),
-                                const TextSpan(text: '.'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                  const SizedBox(height: AppSpacing.xl),
-
-                  // Submit button
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton.icon(
-                      onPressed: _handleSubmit,
-                      icon: const Icon(Icons.send, size: 18),
-                      label: const Text(
-                        'إرسال طلب التجديد',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      style: FilledButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: AppSpacing.md,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
+                ),
+              ),
+            ],
+          ],
         ),
       ),
     );

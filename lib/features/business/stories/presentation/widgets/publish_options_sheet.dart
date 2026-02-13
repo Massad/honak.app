@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 /// Re-publish / publish-options bottom sheet matching Figma.
@@ -32,10 +33,8 @@ class PublishOptionsSheet extends StatefulWidget {
       DateTime? scheduledAt,
     }) onConfirm,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    return showAppSheet(
+      context,
       builder: (_) => PublishOptionsSheet(
         title: title,
         defaultAudience: defaultAudience,
@@ -63,14 +62,9 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
           // Handle
           Center(
             child: Container(
@@ -267,7 +261,6 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
             ),
           ),
         ],
-      ),
     );
   }
 

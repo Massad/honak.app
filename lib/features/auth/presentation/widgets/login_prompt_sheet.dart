@@ -5,6 +5,7 @@ import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 enum LoginPromptTrigger { follow, order, chat, save, general }
 
@@ -61,10 +62,8 @@ Future<void> showLoginPrompt(
   BuildContext context, {
   LoginPromptTrigger trigger = LoginPromptTrigger.general,
 }) {
-  return showModalBottomSheet(
-    context: context,
-    backgroundColor: Colors.transparent,
-    isScrollControlled: true,
+  return showAppSheet(
+    context,
     builder: (context) => _LoginPromptContent(trigger: trigger),
   );
 }
@@ -78,13 +77,7 @@ class _LoginPromptContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final config = _triggerConfigs[trigger] ?? _triggerConfigs[LoginPromptTrigger.general]!;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
+    return Padding(
       padding: const EdgeInsetsDirectional.only(
         start: AppSpacing.xxl,
         end: AppSpacing.xxl,

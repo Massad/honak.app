@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/customer_questions_section.dart';
 import 'package:honak/features/requests/presentation/widgets/inquiry_sheet_sections.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Bottom sheet for the portfolio_inquiry archetype.
 ///
@@ -27,20 +28,12 @@ class InquiryRequestSheet extends StatefulWidget {
     List<QuestionConfig> questions = const [],
     required ValueChanged<Map<String, dynamic>> onSubmit,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => DraggableScrollableSheet(
-        initialChildSize: 0.85,
-        maxChildSize: 0.95,
-        minChildSize: 0.5,
-        builder: (_, controller) => _InquiryBody(
-          pageName: pageName,
-          questions: questions,
-          onSubmit: onSubmit,
-          scrollController: controller,
-        ),
+    return showAppSheet(
+      context,
+      builder: (_) => _InquiryBody(
+        pageName: pageName,
+        questions: questions,
+        onSubmit: onSubmit,
       ),
     );
   }
@@ -64,13 +57,11 @@ class _InquiryBody extends StatefulWidget {
   final String pageName;
   final List<QuestionConfig> questions;
   final ValueChanged<Map<String, dynamic>> onSubmit;
-  final ScrollController? scrollController;
 
   const _InquiryBody({
     required this.pageName,
     required this.questions,
     required this.onSubmit,
-    this.scrollController,
   });
 
   @override
@@ -127,53 +118,46 @@ class _InquiryBodyState extends State<_InquiryBody> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: Column(
-        children: [
-          _buildDragHandle(),
-          _buildHeader(theme),
-          Expanded(
-            child: ListView(
-              controller: widget.scrollController,
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
-              ),
-              children: [
-                _buildBusinessLabel(theme),
-                const SizedBox(height: AppSpacing.xl),
-                InquiryDescriptionSection(
-                  controller: _descController,
-                  onChanged: () => setState(() {}),
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                const InquiryRefPhotosMock(),
-                const SizedBox(height: AppSpacing.xl),
-                InquiryPreferredDateSection(
-                  preferredDate: _preferredDate,
-                  onChanged: (v) => setState(() => _preferredDate = v),
-                  selectedCustomDate: _selectedCustomDate,
-                  onPickCustomDate: _pickCustomDate,
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                CustomerQuestionsSection(
-                  questions: widget.questions,
-                  answers: _questionAnswers,
-                  onChanged: (a) =>
-                      setState(() => _questionAnswers = a),
-                ),
-                const SizedBox(height: AppSpacing.lg),
-              ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildDragHandle(),
+        _buildHeader(theme),
+        Flexible(
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.lg,
             ),
+            children: [
+              _buildBusinessLabel(theme),
+              const SizedBox(height: AppSpacing.xl),
+              InquiryDescriptionSection(
+                controller: _descController,
+                onChanged: () => setState(() {}),
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              const InquiryRefPhotosMock(),
+              const SizedBox(height: AppSpacing.xl),
+              InquiryPreferredDateSection(
+                preferredDate: _preferredDate,
+                onChanged: (v) => setState(() => _preferredDate = v),
+                selectedCustomDate: _selectedCustomDate,
+                onPickCustomDate: _pickCustomDate,
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              CustomerQuestionsSection(
+                questions: widget.questions,
+                answers: _questionAnswers,
+                onChanged: (a) =>
+                    setState(() => _questionAnswers = a),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+            ],
           ),
-          _buildSubmitButton(theme),
-        ],
-      ),
+        ),
+        _buildSubmitButton(theme),
+      ],
     );
   }
 

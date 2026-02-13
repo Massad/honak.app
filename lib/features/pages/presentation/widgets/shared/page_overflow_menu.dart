@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/report_sheet.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Overflow menu bottom sheet for page detail.
 /// Shows: Copy Link, Claim Page (unclaimed only), Report/Suggest Correction.
@@ -28,12 +29,8 @@ class PageOverflowMenu extends StatelessWidget {
     required String pageName,
     VoidCallback? onClaimPage,
   }) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+    showAppSheet<void>(
+      context,
       builder: (_) => PageOverflowMenu._(
         handle: handle,
         claimStatus: claimStatus,
@@ -54,17 +51,16 @@ class PageOverflowMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          AppSpacing.lg,
-          AppSpacing.sm,
-          AppSpacing.lg,
-          AppSpacing.lg,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.sm,
+        AppSpacing.lg,
+        AppSpacing.lg,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
             // Drag handle
             Container(
               width: 40,
@@ -135,8 +131,7 @@ class PageOverflowMenu extends StatelessWidget {
                 });
               },
             ),
-          ],
-        ),
+        ],
       ),
     );
   }

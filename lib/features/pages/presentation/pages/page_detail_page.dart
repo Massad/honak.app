@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:honak/config/archetype.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/features/business/dropoff/presentation/providers/dropoff_providers.dart';
+import 'package:honak/features/business/dropoff/presentation/widgets/customer_dropoff_view.dart';
 import 'package:honak/features/business/queue/presentation/providers/queue_providers.dart';
 import 'package:honak/features/business/queue/presentation/widgets/customer_queue_view.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
@@ -322,12 +324,14 @@ class _PageDetailContent extends StatelessWidget {
         MenuSection(pageId: page.id, page: page),
       Archetype.serviceBooking => isQueueType(page.businessTypeId)
           ? _ServiceBookingWithQueue(page: page)
-          : ServiceBookingSection(
-              pageId: page.id,
-              pageName: page.name,
-              teamMembersCount: page.teamMembersCount,
-              packages: page.packages,
-            ),
+          : isDropoffType(page.businessTypeId)
+              ? _ServiceBookingWithDropoff(page: page)
+              : ServiceBookingSection(
+                  pageId: page.id,
+                  pageName: page.name,
+                  teamMembersCount: page.teamMembersCount,
+                  packages: page.packages,
+                ),
       Archetype.quoteRequest =>
         QuoteRequestSection(pageId: page.id, page: page),
       Archetype.portfolioInquiry =>
@@ -337,6 +341,51 @@ class _PageDetailContent extends StatelessWidget {
       Archetype.followOnly => FollowOnlySection(page: page),
       Archetype.directory => DirectorySection(pageId: page.id, page: page),
     };
+  }
+}
+
+/// Wraps ServiceBookingSection with a CustomerDropoffView for dropoff-based pages.
+class _ServiceBookingWithDropoff extends ConsumerWidget {
+  final PageDetail page;
+
+  const _ServiceBookingWithDropoff({required this.page});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dropoffAsync = ref.watch(customerDropoffDataProvider(page.id));
+
+    return CustomScrollView(
+      slivers: [
+        // Dropoff tracking view (loaded async)
+        SliverToBoxAdapter(
+          child: dropoffAsync.when(
+            data: (data) => Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: CustomerDropoffView(
+                pageName: page.name,
+                pageAvatar: page.avatarUrl,
+                tickets: data.tickets,
+                serviceCategories: data.serviceCategories,
+              ),
+            ),
+            loading: () => const Padding(
+              padding: EdgeInsets.all(AppSpacing.xl),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (_, __) => const SizedBox.shrink(),
+          ),
+        ),
+        // Standard service booking section below
+        SliverToBoxAdapter(
+          child: ServiceBookingSection(
+            pageId: page.id,
+            pageName: page.name,
+            teamMembersCount: page.teamMembersCount,
+            packages: page.packages,
+          ),
+        ),
+      ],
+    );
   }
 }
 
