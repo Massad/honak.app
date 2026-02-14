@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -41,7 +42,7 @@ class _ModificationCardState extends State<ModificationCard> {
   Color get _borderColor {
     return switch (_status) {
       'approved' => AppColors.success,
-      'rejected' || 'expired' => AppColors.textHint,
+      'rejected' || 'expired' => context.colorScheme.onSurfaceVariant,
       _ => AppColors.warning,
     };
   }
@@ -49,7 +50,7 @@ class _ModificationCardState extends State<ModificationCard> {
   Color get _bgColor {
     return switch (_status) {
       'approved' => AppColors.success.withValues(alpha: 0.05),
-      'rejected' || 'expired' => AppColors.background,
+      'rejected' || 'expired' => context.colorScheme.surfaceContainerLowest,
       _ => AppColors.warning.withValues(alpha: 0.05),
     };
   }
@@ -133,9 +134,9 @@ class _ModificationCardState extends State<ModificationCard> {
                     padding: const EdgeInsetsDirectional.only(top: 2),
                     child: Text(
                       'الطلب #$_orderId',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 11,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -186,9 +187,9 @@ class _ModificationCardState extends State<ModificationCard> {
             Expanded(
               child: Text(
                 _note!,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -207,21 +208,21 @@ class _ModificationCardState extends State<ModificationCard> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
+          Text(
             'الإجمالي',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: context.colorScheme.onSurface,
             ),
           ),
           Row(
             children: [
               Text(
                 _formatPrice(_originalTotal),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                   decoration: TextDecoration.lineThrough,
                 ),
               ),

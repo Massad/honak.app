@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -54,11 +55,11 @@ class _TypePickerStepState extends ConsumerState<TypePickerStep> {
             prefixIcon: const Icon(Icons.search),
             border: OutlineInputBorder(
               borderRadius: AppRadius.button,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.button,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.md,
@@ -126,7 +127,7 @@ class _TypePickerStepState extends ConsumerState<TypePickerStep> {
           child: Text(
             'لا توجد نتائج',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ),

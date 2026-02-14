@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -14,6 +15,7 @@ void showMessageActionsMenu(
   WidgetRef ref, {
   VoidCallback? onReport,
 }) {
+  final cs = context.colorScheme;
   final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
   final ageMinutes = (now - message.createdAt) / 60;
   final isText = message.type == 'text';
@@ -30,7 +32,7 @@ void showMessageActionsMenu(
           child: Container(
             width: 260,
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: cs.surface,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -48,7 +50,7 @@ void showMessageActionsMenu(
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSpacing.md),
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: cs.surfaceContainerLowest,
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(16),
                     ),
@@ -57,9 +59,9 @@ void showMessageActionsMenu(
                     isText ? message.content : '📎 مرفق',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: cs.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -159,7 +161,8 @@ class _ActionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = color ?? AppColors.textPrimary;
+    final cs = context.colorScheme;
+    final c = color ?? cs.onSurface;
     return InkWell(
       onTap: onTap,
       borderRadius: isLast

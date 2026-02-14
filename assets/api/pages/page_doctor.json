@@ -76,6 +76,10 @@
       {"id": "tm-30", "name": "د. خالد", "role": "طبيب عام", "service_ids": [1, 2, 3, 4, 5]},
       {"id": "tm-31", "name": "د. سمر", "role": "طبيبة أسنان", "service_ids": [6, 7, 8, 9, 10, 11]}
     ],
+    "venue_id": "shmeisani-center",
+    "venue_name": "مجمع الشميساني",
+    "venue_floor": "الطابق ١",
+    "venue_unit": "105",
     "branches": [
       {
         "id": "br_020",

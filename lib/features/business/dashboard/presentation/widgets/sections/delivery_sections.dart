@@ -33,10 +33,10 @@ class DeliveryRouteSection extends StatelessWidget {
               ),
               child: Text(
                 '$completed/$total مكتمل',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
             ),
@@ -49,7 +49,7 @@ class DeliveryRouteSection extends StatelessWidget {
           child: LinearProgressIndicator(
             value: progress,
             minHeight: 6,
-            backgroundColor: Colors.grey.shade200,
+            backgroundColor: Theme.of(context).colorScheme.outlineVariant,
             valueColor: AlwaysStoppedAnimation(AppColors.primary),
           ),
         ),
@@ -65,7 +65,7 @@ class DeliveryRouteSection extends StatelessWidget {
               ? AppColors.success
               : isPartial
                   ? AppColors.primary
-                  : Colors.grey.shade400;
+                  : Theme.of(context).colorScheme.onSurfaceVariant;
 
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 3),
@@ -90,7 +90,7 @@ class DeliveryRouteSection extends StatelessWidget {
                   m['name'] as String? ?? '',
                   style: context.textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w500,
-                    color: isDone ? Colors.grey.shade400 : null,
+                    color: isDone ? Theme.of(context).colorScheme.onSurfaceVariant : null,
                     decoration: isDone ? TextDecoration.lineThrough : null,
                   ),
                 ),
@@ -268,14 +268,14 @@ class RecurringTomorrowSection extends StatelessWidget {
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
                     m['schedule'] as String? ?? '',
                     style: TextStyle(
                       fontSize: 9,
-                      color: Colors.grey.shade600,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -296,7 +296,7 @@ class RecurringTomorrowSection extends StatelessWidget {
                         m['area'] as String? ?? '',
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -311,7 +311,7 @@ class RecurringTomorrowSection extends StatelessWidget {
           'يتم إنشاء الدور تلقائياً بناءً على جداول التوصيل المتكررة',
           style: TextStyle(
             fontSize: 10,
-            color: Colors.grey.shade400,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ],
@@ -363,7 +363,7 @@ class CustomerInsightsSection extends StatelessWidget {
                       m['message'] as String? ?? '',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -395,7 +395,7 @@ class CustomerInsightsSection extends StatelessWidget {
         'warning' => Colors.amber.shade700,
         'info' => AppColors.primary,
         'positive' => AppColors.success,
-        _ => Colors.grey,
+        _ => Colors.grey.shade500,
       };
 
   Color _typeBg(String type) => switch (type) {

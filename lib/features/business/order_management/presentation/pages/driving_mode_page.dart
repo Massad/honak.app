@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -147,7 +148,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
             ],
           ),
           behavior: SnackBarBehavior.floating,
-          backgroundColor: AppColors.textPrimary,
+          backgroundColor: context.colorScheme.onSurface,
           shape: RoundedRectangleBorder(borderRadius: AppRadius.pill),
           duration: const Duration(seconds: 2),
           margin: const EdgeInsetsDirectional.only(
@@ -298,7 +299,6 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
     final delivered = _deliveredItems;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
@@ -335,9 +335,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         AppSpacing.lg,
         AppSpacing.md,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(bottom: BorderSide(color: AppColors.divider, width: 0.5)),
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -347,16 +347,16 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
             children: [
               Text(
                 widget.pageName,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               Text(
                 '${widget.truck.name} \u2014 ${widget.truck.driverName}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 10,
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -369,23 +369,23 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                 vertical: 6,
               ),
               decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
+                color: context.colorScheme.surfaceVariant,
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
-              child: const Row(
+              child: Row(
                 children: [
                   Text(
                     'الخروج',
                     style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   Icon(
                     Icons.arrow_forward,
                     size: 12,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -412,9 +412,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
           vertical: AppSpacing.md,
         ),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: context.colorScheme.surface,
           borderRadius: AppRadius.cardInner,
-          border: Border.all(color: AppColors.divider.withAlpha(100)),
+          border: Border.all(color: context.colorScheme.outlineVariant.withAlpha(100)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -425,14 +425,14 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
               AppColors.primary,
               Icons.water_drop,
             ),
-            Container(width: 1, height: 24, color: AppColors.divider),
+            Container(width: 1, height: 24, color: context.colorScheme.outlineVariant),
             _inventoryItem(
               'فارغ',
               '$_empty',
-              AppColors.textSecondary,
+              context.colorScheme.onSurfaceVariant,
               Icons.water_drop_outlined,
             ),
-            Container(width: 1, height: 24, color: AppColors.divider),
+            Container(width: 1, height: 24, color: context.colorScheme.outlineVariant),
             _inventoryItem(
               'محجوز',
               '$_reserved',
@@ -462,7 +462,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
             ),
           ],
         ),
-        Text(label, style: const TextStyle(fontSize: 9, color: AppColors.textSecondary)),
+        Text(label, style: TextStyle(fontSize: 9, color: context.colorScheme.onSurfaceVariant)),
       ],
     );
   }
@@ -480,15 +480,15 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'جاري التوجه',
-            style: TextStyle(fontSize: 10, color: AppColors.textSecondary),
+            style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.all(AppSpacing.lg),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: context.colorScheme.surface,
               borderRadius: AppRadius.card,
               border: Border.all(color: AppColors.success, width: 2),
               boxShadow: [
@@ -511,17 +511,17 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                       children: [
                         Text(
                           item.customerName,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: context.colorScheme.onSurface,
                           ),
                         ),
                         Text(
                           item.items.map((i) => '${i.qty} \u00D7 ${i.name}').join(', '),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -567,9 +567,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                 const SizedBox(height: 4),
                 Text(
                   item.address,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
                 if (item.notes != null && item.notes!.isNotEmpty) ...[
@@ -620,15 +620,15 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                       icon: Icons.navigation,
                       label: 'خريطة',
                       color: AppColors.primary,
-                      textColor: AppColors.white,
+                      textColor: Colors.white,
                       onTap: () => _showToast('قريبا\u064B'),
                     ),
                     const SizedBox(width: 8),
                     _actionBtn(
                       icon: Icons.phone,
                       label: 'اتصال',
-                      color: AppColors.surfaceVariant,
-                      textColor: AppColors.textPrimary,
+                      color: context.colorScheme.surfaceVariant,
+                      textColor: context.colorScheme.onSurface,
                       onTap: () => _showToast('قريبا\u064B'),
                     ),
                     const SizedBox(width: 8),
@@ -734,18 +734,18 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         children: [
           const Icon(Icons.check, size: 40, color: AppColors.success),
           const SizedBox(height: AppSpacing.md),
-          const Text(
+          Text(
             'اكتمل المسار!',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: context.colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
+          Text(
             'تم تسليم جميع الطلبات',
-            style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+            style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
           ),
         ],
       ),
@@ -769,7 +769,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
             current != null
                 ? 'الدور (${pending.length} متبقي)'
                 : 'اختر التالي (${pending.length} متبقي)',
-            style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+            style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: 8),
           ...pending.asMap().entries.map(
@@ -802,9 +802,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
               decoration: BoxDecoration(
                 color: isExpanded
                     ? AppColors.primary.withAlpha(8)
-                    : AppColors.surface,
+                    : context.colorScheme.surface,
                 border: Border.all(
-                  color: isExpanded ? AppColors.primary : AppColors.divider.withAlpha(100),
+                  color: isExpanded ? AppColors.primary : context.colorScheme.outlineVariant.withAlpha(100),
                 ),
                 borderRadius: isExpanded
                     ? const BorderRadius.vertical(
@@ -821,16 +821,16 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                       children: [
                         Text(
                           '${index + 1}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.textHint,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                         Text(
                           distLabel,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 8,
-                            color: AppColors.textHint,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -847,9 +847,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                             Flexible(
                               child: Text(
                                 item.customerName,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12,
-                                  color: AppColors.textPrimary,
+                                  color: context.colorScheme.onSurface,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -888,9 +888,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                         ),
                         Text(
                           '${item.items.map((i) => '${i.qty} قارورة').join(', ')} \u00B7 ${item.address.split('\u060C').first}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -900,7 +900,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                   Icon(
                     isExpanded ? Icons.expand_less : Icons.chevron_right,
                     size: 14,
-                    color: AppColors.textHint,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -916,7 +916,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                 AppSpacing.lg,
               ),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: context.colorScheme.surface,
                 border: Border(
                   left: BorderSide(color: AppColors.primary),
                   right: BorderSide(color: AppColors.primary),
@@ -931,9 +931,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                 children: [
                   Text(
                     item.address,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   if (item.notes != null && item.notes!.isNotEmpty) ...[
@@ -974,13 +974,13 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                         _chipBadge(
                           Icons.payments_outlined,
                           'نقدا\u064B',
-                          AppColors.textSecondary,
+                          context.colorScheme.onSurfaceVariant,
                         ),
                       if (item.payment == PaymentType.onAccount)
                         _chipBadge(
                           Icons.description_outlined,
                           'آجل',
-                          AppColors.textSecondary,
+                          context.colorScheme.onSurfaceVariant,
                         ),
                     ],
                   ),
@@ -994,23 +994,23 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
-                              color: AppColors.surfaceVariant,
+                              color: context.colorScheme.surfaceVariant,
                               borderRadius: AppRadius.cardInner,
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
                                   Icons.navigation,
                                   size: 14,
-                                  color: AppColors.textPrimary,
+                                  color: context.colorScheme.onSurface,
                                 ),
-                                SizedBox(width: 4),
+                                const SizedBox(width: 4),
                                 Text(
                                   'خريطة',
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: AppColors.textPrimary,
+                                    color: context.colorScheme.onSurface,
                                   ),
                                 ),
                               ],
@@ -1025,23 +1025,23 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
-                              color: AppColors.surfaceVariant,
+                              color: context.colorScheme.surfaceVariant,
                               borderRadius: AppRadius.cardInner,
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
                                   Icons.phone,
                                   size: 14,
-                                  color: AppColors.textPrimary,
+                                  color: context.colorScheme.onSurface,
                                 ),
-                                SizedBox(width: 4),
+                                const SizedBox(width: 4),
                                 Text(
                                   'اتصال',
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: AppColors.textPrimary,
+                                    color: context.colorScheme.onSurface,
                                   ),
                                 ),
                               ],
@@ -1139,9 +1139,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.md,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.divider, width: 0.5)),
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        border: Border(top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
       ),
       child: Row(
         children: [
@@ -1161,7 +1161,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                   color: AppColors.primary,
                   borderRadius: AppRadius.cardInner,
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add, size: 14, color: AppColors.white),
@@ -1170,7 +1170,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                       'طلب سريع',
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.white,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -1192,22 +1192,22 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
               height: 48,
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.divider),
+                border: Border.all(color: context.colorScheme.outlineVariant),
                 borderRadius: AppRadius.cardInner,
               ),
-              child: const Row(
+              child: Row(
                 children: [
                   Icon(
                     Icons.inventory_2_outlined,
                     size: 14,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
-                  SizedBox(width: 6),
+                  const SizedBox(width: 6),
                   Text(
                     'تحميل',
                     style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -1230,15 +1230,15 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
               height: 48,
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               decoration: BoxDecoration(
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
                 borderRadius: AppRadius.cardInner,
               ),
-              child: const Row(
+              child: Row(
                 children: [
                   Icon(
                     Icons.local_shipping,
                     size: 14,
-                    color: AppColors.white,
+                    color: Colors.white,
                   ),
                   SizedBox(width: 6),
                   Text(

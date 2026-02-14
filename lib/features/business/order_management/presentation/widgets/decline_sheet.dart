@@ -83,7 +83,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: Theme.of(context).colorScheme.outline,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -124,12 +124,12 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppColors.error.withValues(alpha: 0.1)
-                            : Colors.grey.shade50,
+                            : Theme.of(context).colorScheme.surfaceContainerLowest,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: isSelected
                               ? AppColors.error
-                              : Colors.grey.shade200,
+                              : Theme.of(context).colorScheme.outlineVariant,
                         ),
                       ),
                       child: Text(
@@ -140,7 +140,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                               isSelected ? FontWeight.w600 : FontWeight.normal,
                           color: isSelected
                               ? AppColors.error
-                              : Colors.grey.shade700,
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),
@@ -168,7 +168,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                           : FontWeight.normal,
                       color: _selectedReason == 'custom'
                           ? AppColors.error
-                          : Colors.grey.shade600,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
@@ -179,7 +179,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                     size: 18,
                     color: _selectedReason == 'custom'
                         ? AppColors.error
-                        : Colors.grey.shade400,
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -194,16 +194,16 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
                   hintText: 'اكتب السبب...',
-                  hintStyle: TextStyle(color: Colors.grey.shade400),
+                  hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
                   filled: true,
-                  fillColor: Colors.grey.shade50,
+                  fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -222,19 +222,19 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                 onPressed: _canSubmit ? _handleDecline : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.error,
-                  foregroundColor: Colors.white,
-                  disabledBackgroundColor: Colors.grey.shade200,
+                  foregroundColor: Theme.of(context).colorScheme.surface,
+                  disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: _isLoading
-                    ? const SizedBox(
+                    ? SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                       )
                     : const Text(

@@ -114,11 +114,11 @@ class _BusinessSettingsPageState
       children: [
         // Tab bar
         Container(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           child: TabBar(
             controller: _tabController,
             labelColor: AppColors.primary,
-            unselectedLabelColor: Colors.grey.shade400,
+            unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
             indicatorColor: AppColors.primary,
             labelStyle: const TextStyle(
               fontSize: 13,
@@ -643,12 +643,12 @@ class _VerificationCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: isVerified
             ? AppColors.primary.withValues(alpha: 0.05)
-            : Colors.white,
+            : Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: isVerified
               ? AppColors.primary.withValues(alpha: 0.15)
-              : Colors.grey.shade100,
+              : Theme.of(context).colorScheme.surfaceContainerLow,
         ),
       ),
       child: Row(
@@ -712,7 +712,7 @@ class _VerificationCard extends StatelessWidget {
                     : 'احصل على شارة التوثيق لزيادة الثقة',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -721,7 +721,7 @@ class _VerificationCard extends StatelessWidget {
           Icon(
             Icons.verified,
             size: 22,
-            color: isVerified ? AppColors.primary : Colors.grey.shade300,
+            color: isVerified ? AppColors.primary : Theme.of(context).colorScheme.outline,
           ),
         ],
       ),

@@ -147,7 +147,7 @@ class UpcomingBookingCard extends StatelessWidget {
                       Text(
                         request.summary!,
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontSize: 11,
                         ),
                         maxLines: 1,
@@ -157,7 +157,7 @@ class UpcomingBookingCard extends StatelessWidget {
                       Text(
                         request.description!,
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontSize: 11,
                         ),
                         maxLines: 1,
@@ -171,7 +171,7 @@ class UpcomingBookingCard extends StatelessWidget {
                             Text(
                               '${request.guestCount} ضيوف',
                               style: context.textTheme.bodySmall?.copyWith(
-                                color: AppColors.textHint,
+                                color: context.colorScheme.onSurfaceVariant,
                                 fontSize: 10,
                               ),
                             ),
@@ -272,12 +272,12 @@ class OrdersEmptyTabState extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 40, color: Colors.grey.shade300),
+              Icon(icon, size: 40, color: context.colorScheme.outline),
               const SizedBox(height: AppSpacing.lg),
               Text(
                 message,
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

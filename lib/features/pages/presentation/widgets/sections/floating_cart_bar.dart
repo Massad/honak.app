@@ -71,7 +71,7 @@ class FloatingCartBar extends StatelessWidget {
             FilledButton(
               onPressed: onSendOrder,
               style: FilledButton.styleFrom(
-                backgroundColor: Colors.white,
+                backgroundColor: context.colorScheme.surface,
                 foregroundColor: context.colorScheme.primary,
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.xl,

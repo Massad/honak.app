@@ -146,6 +146,7 @@ class PageDetail with _$PageDetail {
 
     // Venue tenant fields
     @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
     @JsonKey(name: 'venue_unit') String? venueUnit,
     @JsonKey(name: 'venue_floor') String? venueFloor,
 
@@ -157,6 +158,7 @@ class PageDetail with _$PageDetail {
     @Default([])
     List<String> featuredTenantIds,
     @JsonKey(name: 'directory_stats') DirectoryStats? directoryStats,
+    @JsonKey(name: 'parking_info') String? parkingInfo,
 
     // Catalog highlights
     @JsonKey(name: 'carry_categories') @Default([]) List<String> carryCategories,

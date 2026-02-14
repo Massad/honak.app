@@ -150,7 +150,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
   Widget _buildCaptionField() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
@@ -172,9 +172,9 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
           hintText: _isStatusType
               ? 'اكتب حالتك...'
               : 'اكتب وصف المنشور...',
-          hintStyle: TextStyle(color: Colors.grey.shade400),
+          hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Theme.of(context).colorScheme.surface,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
             borderSide: BorderSide.none,
@@ -182,7 +182,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
           contentPadding: const EdgeInsets.all(AppSpacing.lg),
           counterStyle: TextStyle(
             fontSize: 11,
-            color: Colors.grey.shade400,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ),
@@ -197,14 +197,14 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: Colors.grey.shade300,
+            color: Theme.of(context).colorScheme.outline,
             style: BorderStyle.solid,
           ),
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
         ),
         child: CustomPaint(
           painter: _DashedBorderPainter(
-            color: Colors.grey.shade300,
+            color: Theme.of(context).colorScheme.outline,
             borderRadius: 14,
           ),
           child: Center(
@@ -214,14 +214,14 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
                 Icon(
                   Icons.add_photo_alternate_outlined,
                   size: 32,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
                   'إضافة صورة',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -236,7 +236,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
@@ -278,7 +278,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
                       color: color,
                       shape: BoxShape.circle,
                       border: isSelected
-                          ? Border.all(color: Colors.white, width: 3)
+                          ? Border.all(color: Theme.of(context).colorScheme.surface, width: 3)
                           : null,
                       boxShadow: isSelected
                           ? [
@@ -291,10 +291,10 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
                           : null,
                     ),
                     child: isSelected
-                        ? const Icon(
+                        ? Icon(
                             Icons.check,
                             size: 20,
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.surface,
                           )
                         : null,
                   ),
@@ -321,7 +321,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
         Text(
           'معاينة',
           style: context.textTheme.bodySmall?.copyWith(
-            color: Colors.grey.shade500,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -330,14 +330,14 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
           width: double.infinity,
           padding: const EdgeInsets.all(AppSpacing.lg),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(14),
             border: statusColor != null
                 ? Border.all(
                     color: statusColor.withValues(alpha: 0.3),
                     width: 2,
                   )
-                : Border.all(color: Colors.grey.shade100),
+                : Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.03),
@@ -417,21 +417,21 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
         onPressed: _canPublish ? _handlePublish : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: Colors.grey.shade200,
-          disabledForegroundColor: Colors.grey.shade400,
+          foregroundColor: Theme.of(context).colorScheme.surface,
+          disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
+          disabledForegroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
           elevation: 0,
         ),
         child: _isPublishing
-            ? const SizedBox(
+            ? SizedBox(
                 width: 22,
                 height: 22,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               )
             : const Text(

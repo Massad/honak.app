@@ -73,7 +73,7 @@ class RecurringCustomersSection extends StatelessWidget {
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade700,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -97,7 +97,7 @@ class RecurringCustomersSection extends StatelessWidget {
             ),
             _ActionButton(
               label: '\u062a\u062e\u0637\u064a',
-              color: Colors.grey,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               onTap: () => _showToast(
                 context,
                 '\u062a\u0645 \u062a\u062e\u0637\u064a \u0637\u0644\u0628 \u0633\u0627\u0631\u0629',
@@ -127,7 +127,7 @@ class RecurringCustomersSection extends StatelessWidget {
             ),
             _ActionButton(
               label: '\u062a\u062e\u0637\u064a',
-              color: Colors.grey,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               onTap: () => _showToast(
                 context,
                 '\u062a\u0645 \u062a\u062e\u0637\u064a \u0637\u0644\u0628 \u0623\u062d\u0645\u062f',
@@ -226,9 +226,9 @@ class _CustomerActionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -258,7 +258,7 @@ class _CustomerActionCard extends StatelessWidget {
                 subtitle,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

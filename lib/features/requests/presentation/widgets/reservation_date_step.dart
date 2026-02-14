@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/reservation_steps.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Date step: check-in/out dates, optional space selector, night count badge,
 /// and time selection (FG6).
@@ -53,7 +54,7 @@ class ReservationDateStep extends StatelessWidget {
           Text(
             'القاعة / المساحة',
             style: theme.textTheme.labelSmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           ...spaces.map((space) {
@@ -70,10 +71,10 @@ class ReservationDateStep extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: selected
                         ? AppColors.primary.withValues(alpha: 0.05)
-                        : Colors.white,
+                        : context.colorScheme.surface,
                     borderRadius: AppRadius.cardInner,
                     border: Border.all(
-                      color: selected ? AppColors.primary : AppColors.divider,
+                      color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
                     ),
                   ),
                   child: Row(
@@ -93,12 +94,12 @@ class ReservationDateStep extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.people,
-                                    size: 10, color: AppColors.textHint),
+                                    size: 10, color: context.colorScheme.onSurfaceVariant),
                                 const SizedBox(width: AppSpacing.xxs),
                                 Text(
                                   'سعة ${space['capacity']}',
                                   style: theme.textTheme.labelSmall?.copyWith(
-                                    color: AppColors.textHint,
+                                    color: context.colorScheme.onSurfaceVariant,
                                     fontSize: 10,
                                   ),
                                 ),
@@ -113,7 +114,7 @@ class ReservationDateStep extends StatelessWidget {
                           style: theme.textTheme.labelSmall?.copyWith(
                             color: selected
                                 ? AppColors.primary
-                                : AppColors.textSecondary,
+                                : context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                     ],
@@ -128,7 +129,7 @@ class ReservationDateStep extends StatelessWidget {
         Text(
           'تاريخ ووقت الحجز',
           style: theme.textTheme.labelSmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         _DateTimeRow(
@@ -179,10 +180,10 @@ class _DateTimeRow extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: context.colorScheme.surfaceContainerLow,
         borderRadius: AppRadius.cardInner,
         border: Border.all(
-          color: hasDate ? AppColors.primary : AppColors.divider,
+          color: hasDate ? AppColors.primary : context.colorScheme.outlineVariant,
         ),
       ),
       child: Row(
@@ -212,12 +213,12 @@ class _DateTimeRow extends StatelessWidget {
                         size: 14,
                         color: hasDate
                             ? AppColors.primary
-                            : AppColors.textHint),
+                            : context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.sm),
                     Text(
                       label,
                       style: theme.textTheme.labelSmall
-                          ?.copyWith(color: AppColors.textHint),
+                          ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                     ),
                     const Spacer(),
                     Text(
@@ -225,7 +226,7 @@ class _DateTimeRow extends StatelessWidget {
                           ? '${date!.day}/${date!.month}/${date!.year}'
                           : 'التاريخ',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: hasDate ? null : AppColors.textHint,
+                        color: hasDate ? null : context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -237,7 +238,7 @@ class _DateTimeRow extends StatelessWidget {
           Container(
             width: 1,
             height: 28,
-            color: hasDate ? AppColors.primary.withValues(alpha: 0.2) : AppColors.divider,
+            color: hasDate ? AppColors.primary.withValues(alpha: 0.2) : context.colorScheme.outlineVariant,
           ),
           // Time portion
           Expanded(
@@ -256,12 +257,12 @@ class _DateTimeRow extends StatelessWidget {
                         size: 14,
                         color: hasTime
                             ? AppColors.primary
-                            : AppColors.textHint),
+                            : context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.xs),
                     Text(
                       hasTime ? time! : 'الوقت',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: hasTime ? null : AppColors.textHint,
+                        color: hasTime ? null : context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],

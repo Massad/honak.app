@@ -78,6 +78,7 @@ flutter:
     - assets/api/generated/
     - assets/api/business/
     - assets/api/business/dashboard/
+    - assets/api/business/directory/
     - assets/api/requests/
     - assets/api/settings/
     - assets/api/wizard/

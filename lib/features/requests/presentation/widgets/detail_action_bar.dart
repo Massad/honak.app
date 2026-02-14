@@ -12,6 +12,7 @@ class DetailActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsetsDirectional.only(
@@ -20,10 +21,10 @@ class DetailActionBar extends StatelessWidget {
         top: AppSpacing.md,
         bottom: AppSpacing.lg,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: cs.surface,
         border: Border(
-          top: BorderSide(color: AppColors.divider, width: 0.5),
+          top: BorderSide(color: cs.outlineVariant, width: 0.5),
         ),
       ),
       child: SafeArea(
@@ -107,13 +108,14 @@ class DetailSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: cs.surface,
         borderRadius: AppRadius.card,
-        border: Border.all(color: AppColors.divider.withValues(alpha: 0.5)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.5)),
       ),
       child: child,
     );
@@ -133,12 +135,13 @@ class DetailBusinessCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: cs.surface,
         borderRadius: AppRadius.card,
-        border: Border.all(color: AppColors.divider.withValues(alpha: 0.5)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.5)),
       ),
       child: Row(
         children: [
@@ -152,14 +155,14 @@ class DetailBusinessCard extends StatelessWidget {
             child: Text(
               businessName,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: AppColors.textPrimary,
+                    color: cs.onSurface,
                   ),
             ),
           ),
-          const Icon(
+          Icon(
             Icons.chevron_right,
             size: 20,
-            color: AppColors.textHint,
+            color: cs.onSurfaceVariant,
           ),
         ],
       ),
@@ -218,13 +221,13 @@ class DetailDeclineCard extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsetsDirectional.all(AppSpacing.md),
             decoration: BoxDecoration(
-              color: AppColors.surface.withValues(alpha: 0.6),
+              color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.6),
               borderRadius: AppRadius.cardInner,
             ),
             child: Text(
               'السبب: $reason',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
             ),
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_colors.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
 
@@ -10,6 +10,7 @@ class SystemMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
@@ -19,14 +20,14 @@ class SystemMessage extends StatelessWidget {
             vertical: AppSpacing.xs,
           ),
           decoration: BoxDecoration(
-            color: AppColors.background,
+            color: cs.surfaceContainerLowest,
             borderRadius: BorderRadius.circular(9999),
           ),
           child: Text(
             message.content,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 11,
-              color: AppColors.textSecondary,
+              color: cs.onSurfaceVariant,
             ),
             textAlign: TextAlign.center,
           ),

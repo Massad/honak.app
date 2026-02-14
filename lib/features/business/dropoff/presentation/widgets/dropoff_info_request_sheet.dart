@@ -72,7 +72,7 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
               // Notes field
               Text(
                 'ملاحظات إضافية (اختياري)',
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               const SizedBox(height: AppSpacing.xs),
               TextField(
@@ -81,20 +81,20 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
                 decoration: InputDecoration(
                   hintText: 'أي توضيح إضافي...',
                   hintStyle:
-                      TextStyle(fontSize: 13, color: Colors.grey.shade300),
+                      TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.outline),
                   filled: true,
-                  fillColor: Colors.grey.shade50,
+                  fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
                   contentPadding: const EdgeInsetsDirectional.symmetric(
                     horizontal: AppSpacing.md,
                     vertical: AppSpacing.md,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: AppRadius.cardInner,
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: AppRadius.cardInner,
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: AppRadius.cardInner,
@@ -123,9 +123,9 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    disabledBackgroundColor: Colors.grey.shade300,
-                    disabledForegroundColor: Colors.white,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
+                    disabledBackgroundColor: Theme.of(context).colorScheme.outline,
+                    disabledForegroundColor: Theme.of(context).colorScheme.surface,
                     padding:
                         const EdgeInsets.symmetric(vertical: AppSpacing.md),
                     shape: RoundedRectangleBorder(
@@ -176,7 +176,7 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
                       ? Icons.keyboard_arrow_up_rounded
                       : Icons.keyboard_arrow_down_rounded,
                   size: 18,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
@@ -219,7 +219,7 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
                     border: Border.all(
                       color: selected
                           ? AppColors.primary
-                          : Colors.grey.shade200,
+                          : Theme.of(context).colorScheme.outlineVariant,
                     ),
                     color: selected ? const Color(0xFFEFF6FF) : null,
                     borderRadius: AppRadius.cardInner,
@@ -236,15 +236,15 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
                           border: Border.all(
                             color: selected
                                 ? AppColors.primary
-                                : Colors.grey.shade300,
+                                : Theme.of(context).colorScheme.outline,
                           ),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: selected
-                            ? const Icon(
+                            ? Icon(
                                 Icons.check,
                                 size: 14,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.surface,
                               )
                             : null,
                       ),
@@ -252,7 +252,7 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
                       Icon(
                         typeIcon,
                         size: 14,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Expanded(
@@ -260,7 +260,7 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
                           item.labelAr,
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey.shade700,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       ),

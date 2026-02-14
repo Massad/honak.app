@@ -147,7 +147,7 @@ class _StatsHeader extends StatelessWidget {
               Text(
                 'الدور الحالي',
                 style: context.textTheme.labelSmall?.copyWith(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
               const Spacer(),
@@ -164,7 +164,7 @@ class _StatsHeader extends StatelessWidget {
                   child: Text(
                     'الدور متوقف مؤقتاً',
                     style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       fontSize: 10,
                     ),
                   ),
@@ -227,12 +227,12 @@ class _StatItem extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 14, color: Colors.white),
+              Icon(icon, size: 14, color: Theme.of(context).colorScheme.surface),
               const SizedBox(width: 4),
               Text(
                 value,
                 style: context.textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -242,7 +242,7 @@ class _StatItem extends StatelessWidget {
           Text(
             value,
             style: context.textTheme.headlineMedium?.copyWith(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               fontWeight: FontWeight.bold,
             ),
           ),

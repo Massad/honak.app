@@ -123,7 +123,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: AppColors.divider,
+              color: context.colorScheme.outlineVariant,
               borderRadius: AppRadius.pill,
             ),
           ),
@@ -237,7 +237,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                   Text(
                     widget.entry.addOns.map((a) => a.name).join('، '),
                     style: context.textTheme.labelSmall?.copyWith(
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
               ],
@@ -262,7 +262,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
         Text(
           'ما الذي تريد تعديله؟',
           style: context.textTheme.labelSmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -299,7 +299,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
         Text(
           'اختر الخدمة الجديدة',
           style: context.textTheme.labelSmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -317,7 +317,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        isSelected ? AppColors.primary : AppColors.divider,
+                        isSelected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                   color: isSelected
                       ? AppColors.primary.withValues(alpha: 0.05)
@@ -338,7 +338,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                           Text(
                             '~${pkg.durationMin} دقيقة',
                             style: context.textTheme.labelSmall?.copyWith(
-                              color: AppColors.textSecondary,
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -347,7 +347,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                     Text(
                       price.toFormattedArabic(),
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textPrimary,
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     if (isSelected) ...[
@@ -375,7 +375,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
         Text(
           'الإضافات',
           style: context.textTheme.labelSmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -401,7 +401,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        isSelected ? AppColors.primary : AppColors.divider,
+                        isSelected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(
@@ -413,7 +413,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                       size: 20,
                       color: isSelected
                           ? AppColors.primary
-                          : AppColors.textHint,
+                          : context.colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -425,7 +425,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                     Text(
                       '+${price.toFormattedArabic()}',
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -445,7 +445,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
         Text(
           'ملاحظة',
           style: context.textTheme.labelSmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -455,15 +455,15 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
           decoration: InputDecoration(
             hintText: 'اكتب ملاحظتك هنا...',
             hintStyle: context.textTheme.bodyMedium?.copyWith(
-              color: AppColors.textHint,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: const BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: const BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
@@ -537,7 +537,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
           Text(
             'سيتم إشعارك عند مراجعة التعديل',
             style: context.textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: AppSpacing.xxl),
@@ -586,7 +586,7 @@ class _ModTypeOption extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: AppRadius.cardInner,
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.divider,
+            color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
           ),
           color: selected ? AppColors.primary.withValues(alpha: 0.05) : null,
         ),
@@ -595,14 +595,14 @@ class _ModTypeOption extends StatelessWidget {
             Icon(
               icon,
               size: 20,
-              color: selected ? AppColors.primary : AppColors.textSecondary,
+              color: selected ? AppColors.primary : context.colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(
               child: Text(
                 label,
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: selected ? AppColors.primary : AppColors.textPrimary,
+                  color: selected ? AppColors.primary : context.colorScheme.onSurface,
                   fontWeight: selected ? FontWeight.w500 : null,
                 ),
               ),

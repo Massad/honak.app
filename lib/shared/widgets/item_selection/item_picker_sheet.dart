@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
@@ -123,24 +124,25 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
   }
 
   Widget _buildBrowseStep() {
+    final cs = Theme.of(context).colorScheme;
     final itemsAsync = ref.watch(businessItemsProvider(widget.pageSlug));
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildHandle(),
-        _buildBrowseHeader(),
-        _buildSearchBar(),
+        _buildHandle(cs),
+        _buildBrowseHeader(cs),
+        _buildSearchBar(cs),
         Flexible(
           child: itemsAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (e, _) => Center(
               child: Text(
                 'حدث خطأ في تحميل المنتجات',
-                style: TextStyle(color: AppColors.textSecondary),
+                style: TextStyle(color: context.colorScheme.onSurfaceVariant),
               ),
             ),
-            data: (items) => _buildItemList(items),
+            data: (items) => _buildItemList(items, cs),
           ),
         ),
         if (widget.mode == ItemPickerMode.multiPick) _buildMultiPickFooter(),
@@ -159,21 +161,21 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
     );
   }
 
-  Widget _buildHandle() {
+  Widget _buildHandle(ColorScheme cs) {
     return Padding(
       padding: const EdgeInsetsDirectional.only(top: AppSpacing.sm),
       child: Container(
         width: 36,
         height: 4,
         decoration: BoxDecoration(
-          color: AppColors.divider,
+          color: cs.outlineVariant,
           borderRadius: BorderRadius.circular(2),
         ),
       ),
     );
   }
 
-  Widget _buildBrowseHeader() {
+  Widget _buildBrowseHeader(ColorScheme cs) {
     return Padding(
       padding: const EdgeInsetsDirectional.only(
         start: AppSpacing.lg,
@@ -186,24 +188,24 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
           Expanded(
             child: Text(
               widget.title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: cs.onSurface,
               ),
             ),
           ),
           IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close, size: 20),
-            color: AppColors.textSecondary,
+            color: cs.onSurfaceVariant,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSearchBar() {
+  Widget _buildSearchBar(ColorScheme cs) {
     return Padding(
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: AppSpacing.lg,
@@ -213,17 +215,17 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
         onChanged: (v) => setState(() => _searchQuery = v),
         decoration: InputDecoration(
           hintText: 'بحث...',
-          hintStyle: const TextStyle(
-            color: AppColors.textHint,
+          hintStyle: TextStyle(
+            color: cs.onSurfaceVariant,
             fontSize: 14,
           ),
-          prefixIcon: const Icon(
+          prefixIcon: Icon(
             Icons.search,
             size: 20,
-            color: AppColors.textHint,
+            color: cs.onSurfaceVariant,
           ),
           filled: true,
-          fillColor: AppColors.background,
+          fillColor: cs.surfaceContainerLowest,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
@@ -239,7 +241,7 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
     );
   }
 
-  Widget _buildItemList(List<Item> items) {
+  Widget _buildItemList(List<Item> items, ColorScheme cs) {
     final categories = items
         .where((i) => i.categoryName != null)
         .map((i) => i.categoryName!)
@@ -272,11 +274,11 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
         const SizedBox(height: AppSpacing.xs),
         Expanded(
           child: filtered.isEmpty
-              ? const Center(
+              ? Center(
                   child: Text(
                     'لا توجد نتائج',
                     style: TextStyle(
-                      color: AppColors.textSecondary,
+                      color: cs.onSurfaceVariant,
                       fontSize: 14,
                     ),
                   ),
@@ -286,9 +288,9 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
                     horizontal: AppSpacing.lg,
                   ),
                   itemCount: filtered.length,
-                  separatorBuilder: (_, __) => const Divider(
+                  separatorBuilder: (_, __) => Divider(
                     height: 1,
-                    color: AppColors.divider,
+                    color: cs.outlineVariant,
                   ),
                   itemBuilder: (context, index) {
                     final item = filtered[index];
@@ -332,20 +334,20 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
         AppSpacing.lg,
         AppSpacing.md + MediaQuery.of(context).padding.bottom,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.white,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         border: Border(
-          top: BorderSide(color: AppColors.divider, width: 0.5),
+          top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5),
         ),
       ),
       child: Row(
         children: [
           Text(
             '${_selections.length} عنصر محدد',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           const Spacer(),

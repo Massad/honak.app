@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -52,17 +53,17 @@ class _LocationStepState extends ConsumerState<LocationStep> {
             width: double.infinity,
             height: 160,
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceVariant,
               borderRadius: AppRadius.cardInner,
             ),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.place, size: 36, color: AppColors.textHint),
+                Icon(Icons.place, size: 36, color: context.colorScheme.onSurfaceVariant),
                 SizedBox(height: AppSpacing.sm),
                 Text(
                   'الخريطة ستظهر هنا',
-                  style: TextStyle(color: AppColors.textHint, fontSize: 13),
+                  style: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 13),
                 ),
               ],
             ),
@@ -117,7 +118,7 @@ class _LocationStepState extends ConsumerState<LocationStep> {
                 style: TextStyle(
                   color: state.isOnlineOnly
                       ? AppColors.primary
-                      : AppColors.textSecondary,
+                      : context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),

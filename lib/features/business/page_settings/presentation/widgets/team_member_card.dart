@@ -36,9 +36,9 @@ class TeamMemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: AppRadius.card,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: InkWell(
         onTap: onTap,
@@ -51,7 +51,7 @@ class TeamMemberCard extends StatelessWidget {
               Icon(
                 Icons.chevron_left,
                 size: 20,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: AppSpacing.xs),
               Container(
@@ -61,7 +61,7 @@ class TeamMemberCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: member.active
                       ? AppColors.success
-                      : Colors.grey.shade300,
+                      : Theme.of(context).colorScheme.outline,
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
@@ -119,7 +119,7 @@ class TeamMemberCard extends StatelessWidget {
                         member.phone!,
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -183,12 +183,12 @@ class _Badge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(AppRadius.sm),
       ),
       child: Text(
         label,
-        style: TextStyle(fontSize: 9, color: Colors.grey.shade500),
+        style: TextStyle(fontSize: 9, color: Theme.of(context).colorScheme.onSurfaceVariant),
       ),
     );
   }

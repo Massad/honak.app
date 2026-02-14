@@ -52,7 +52,7 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: context.colorScheme.outlineVariant,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -72,7 +72,7 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close, size: 20),
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.grey.shade100,
+                    backgroundColor: context.colorScheme.surfaceContainerLow,
                     padding: const EdgeInsets.all(6),
                     minimumSize: const Size(32, 32),
                   ),
@@ -106,17 +106,17 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
                   hintText: 'هل تريد تغيير موعد التوصيل أو إضافة تفاصيل...',
                   hintStyle: TextStyle(
                     fontSize: 13,
-                    color: Colors.grey.shade400,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                   filled: true,
-                  fillColor: Colors.grey.shade50,
+                  fillColor: context.colorScheme.surfaceContainerLowest,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                   ),
                   contentPadding: const EdgeInsets.all(AppSpacing.md),
                 ),
@@ -127,7 +127,7 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
               Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
+                  color: context.colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -144,7 +144,7 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
                         TextSpan(
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey.shade600,
+                            color: context.colorScheme.onSurfaceVariant,
                             height: 1.5,
                           ),
                           children: [
@@ -216,7 +216,7 @@ class _PackageInfoCard extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.colorScheme.surface,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -241,14 +241,14 @@ class _PackageInfoCard extends StatelessWidget {
             sub.pageName,
             style: TextStyle(
               fontSize: 13,
-              color: Colors.grey.shade600,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.colorScheme.surface,
               border: Border.all(color: const Color(0xFFBBDEFB)),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -305,7 +305,7 @@ class _SuccessState extends StatelessWidget {
             'سيظهر الطلب في قائمة طلباتك النشطة بانتظار تأكيد المتجر',
             style: TextStyle(
               fontSize: 13,
-              color: Colors.grey.shade500,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             textAlign: TextAlign.center,
           ),

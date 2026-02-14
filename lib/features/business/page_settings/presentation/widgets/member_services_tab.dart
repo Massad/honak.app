@@ -39,7 +39,7 @@ class _MemberServicesTabState extends ConsumerState<MemberServicesTab> {
       error: (_, __) => Center(
         child: Text(
           'تعذر تحميل الخدمات',
-          style: TextStyle(color: Colors.grey.shade400),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
       ),
       data: (items) {
@@ -47,7 +47,7 @@ class _MemberServicesTabState extends ConsumerState<MemberServicesTab> {
           return Center(
             child: Text(
               'لا توجد خدمات',
-              style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           );
         }
@@ -86,21 +86,21 @@ class _MemberServicesTabState extends ConsumerState<MemberServicesTab> {
                   hintText: 'بحث...',
                   hintStyle: TextStyle(
                     fontSize: 13,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   prefixIcon:
-                      Icon(Icons.search, size: 20, color: Colors.grey.shade400),
+                      Icon(Icons.search, size: 20, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: AppSpacing.md,
                     vertical: AppSpacing.sm,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AppRadius.md),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AppRadius.md),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AppRadius.md),
@@ -120,7 +120,7 @@ class _MemberServicesTabState extends ConsumerState<MemberServicesTab> {
                 alignment: AlignmentDirectional.centerEnd,
                 child: Text(
                   '$assignedCount من ${items.length} خدمات معيّنة',
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+                  style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
               ),
             ),
@@ -227,7 +227,7 @@ class _CategoryGroup extends StatelessWidget {
           const SizedBox(width: AppSpacing.sm),
           Text(
             '$assignedInCat/${items.length}',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const Spacer(),
           Text(
@@ -235,7 +235,7 @@ class _CategoryGroup extends StatelessWidget {
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade700,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],
@@ -286,14 +286,14 @@ class _ServiceRow extends StatelessWidget {
             if (item.price != null)
               Text(
                 item.price!.toFormattedArabic(),
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             const Spacer(),
             Text(
               item.name,
               style: TextStyle(
                 fontSize: 12,
-                color: assigned ? Colors.grey.shade800 : Colors.grey.shade500,
+                color: assigned ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],

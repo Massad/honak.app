@@ -57,7 +57,7 @@ class EngagementSettings extends ConsumerWidget {
                 label: 'تواجد بسيط',
                 desc: 'معلومات أساسية فقط (الاسم، العنوان، الهاتف)',
                 badgeLabel: 'أساسي',
-                badgeColor: Colors.grey,
+                badgeColor: Theme.of(context).colorScheme.onSurfaceVariant,
                 selected: level == 'visibility',
                 onTap: () => ref
                     .read(pageSettingsProvider.notifier)
@@ -103,7 +103,7 @@ class _SectionLabel extends StatelessWidget {
       child: Text(
         text,
         style: context.textTheme.bodySmall?.copyWith(
-          color: AppColors.textSecondary,
+          color: context.colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -129,7 +129,7 @@ class _ApprovalOption extends StatelessWidget {
     return Material(
       color: selected
           ? AppColors.primary.withValues(alpha: 0.05)
-          : Colors.white,
+          : Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -141,7 +141,7 @@ class _ApprovalOption extends StatelessWidget {
             border: Border.all(
               color: selected
                   ? AppColors.primary.withValues(alpha: 0.3)
-                  : Colors.grey.shade100,
+                  : Theme.of(context).colorScheme.surfaceContainerLow,
             ),
           ),
           child: Row(
@@ -153,7 +153,7 @@ class _ApprovalOption extends StatelessWidget {
                 size: 18,
                 color: selected
                     ? AppColors.primary
-                    : Colors.grey.shade300,
+                    : Theme.of(context).colorScheme.outline,
               ),
               const Spacer(),
               Column(
@@ -169,7 +169,7 @@ class _ApprovalOption extends StatelessWidget {
                     desc,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -204,7 +204,7 @@ class _EngagementCard extends StatelessWidget {
     return Material(
       color: selected
           ? badgeColor.withValues(alpha: 0.05)
-          : Colors.white,
+          : Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -216,7 +216,7 @@ class _EngagementCard extends StatelessWidget {
             border: Border.all(
               color: selected
                   ? badgeColor.withValues(alpha: 0.3)
-                  : Colors.grey.shade100,
+                  : Theme.of(context).colorScheme.surfaceContainerLow,
             ),
           ),
           child: Row(
@@ -226,7 +226,7 @@ class _EngagementCard extends StatelessWidget {
                     ? Icons.radio_button_checked
                     : Icons.radio_button_off,
                 size: 18,
-                color: selected ? badgeColor : Colors.grey.shade300,
+                color: selected ? badgeColor : Theme.of(context).colorScheme.outline,
               ),
               const Spacer(),
               Expanded(
@@ -272,7 +272,7 @@ class _EngagementCard extends StatelessWidget {
                       desc,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       textAlign: TextAlign.end,
                     ),

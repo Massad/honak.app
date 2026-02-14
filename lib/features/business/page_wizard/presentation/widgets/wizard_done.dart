@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -31,9 +32,9 @@ class WizardDone extends ConsumerWidget {
                   color: AppColors.success,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.auto_awesome,
-                  color: AppColors.white,
+                  color: Colors.white,
                   size: 44,
                 ),
               ),
@@ -50,7 +51,7 @@ class WizardDone extends ConsumerWidget {
               Text(
                 '\u0634\u0627\u0631\u0643 \u0631\u0627\u0628\u0637\u0643 \u0645\u0639 \u0639\u0645\u0644\u0627\u0626\u0643 \u0648\u0627\u0628\u062f\u0623 \u0627\u0633\u062a\u0642\u0628\u0627\u0644 \u0627\u0644\u0637\u0644\u0628\u0627\u062a',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -61,7 +62,7 @@ class WizardDone extends ConsumerWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceVariant,
+                  color: context.colorScheme.surfaceVariant,
                   borderRadius: AppRadius.card,
                 ),
                 child: Row(

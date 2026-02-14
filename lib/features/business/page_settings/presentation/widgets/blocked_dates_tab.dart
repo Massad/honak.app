@@ -58,10 +58,10 @@ class _BlockedDatesTabState extends ConsumerState<BlockedDatesTab> {
             Container(
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(10),
                 border:
-                    Border.all(color: Colors.grey.shade100),
+                    Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               child: Row(
                 children: [
@@ -74,7 +74,7 @@ class _BlockedDatesTabState extends ConsumerState<BlockedDatesTab> {
                     icon: Icon(
                       Icons.close,
                       size: 16,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const Spacer(),
@@ -90,7 +90,7 @@ class _BlockedDatesTabState extends ConsumerState<BlockedDatesTab> {
                           date.reason!,
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                     ],
@@ -114,7 +114,7 @@ class _BlockedDatesTabState extends ConsumerState<BlockedDatesTab> {
               hintText: 'سبب الإغلاق (اختياري)',
               hintStyle: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               isDense: true,
               contentPadding:
@@ -122,12 +122,12 @@ class _BlockedDatesTabState extends ConsumerState<BlockedDatesTab> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide:
-                    BorderSide(color: Colors.grey.shade200),
+                    BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide:
-                    BorderSide(color: Colors.grey.shade200),
+                    BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
             ),
           ),
@@ -154,7 +154,7 @@ class _BlockedDatesTabState extends ConsumerState<BlockedDatesTab> {
       error: (_, __) => Center(
         child: Text(
           'تعذر تحميل التواريخ',
-          style: TextStyle(color: Colors.grey.shade400),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
       ),
     );

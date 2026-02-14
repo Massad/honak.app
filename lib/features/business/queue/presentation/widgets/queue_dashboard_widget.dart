@@ -84,7 +84,7 @@ class QueueDashboardWidget extends StatelessWidget {
             vertical: AppSpacing.sm,
           ),
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             borderRadius: AppRadius.cardInner,
           ),
           child: Row(
@@ -95,13 +95,13 @@ class QueueDashboardWidget extends StatelessWidget {
                     Icon(
                       Icons.access_time,
                       size: 14,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: AppSpacing.xs + 2),
                     Text(
                       'وقت الانتظار الحالي',
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 12,
                       ),
                     ),
@@ -168,7 +168,7 @@ class _StatTile extends StatelessWidget {
             Text(
               label,
               style: context.textTheme.labelSmall?.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 9,
               ),
               textAlign: TextAlign.center,

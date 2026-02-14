@@ -678,6 +678,23 @@ class MockApiClient implements ApiClient {
       );
     }
 
+    // Business directory data — /v1/biz/pages/:slug/directory
+    final bizDirectoryMatch =
+        RegExp(r'^/v1/biz/pages/([^/]+)/directory$').firstMatch(path);
+    if (bizDirectoryMatch != null) {
+      final pageSlug = bizDirectoryMatch.group(1)!;
+      try {
+        final rawData = await _loadFixture('business/directory/$pageSlug');
+        return _buildResponse<T>(rawData, fromJson, queryParams: queryParams);
+      } catch (_) {
+        // Fallback: return empty directory data
+        return _buildResponse<T>(
+          {'success': true, 'data': {'tenants': [], 'floors': []}},
+          fromJson,
+        );
+      }
+    }
+
     // Category pages — /v1/pages?category=cat_xxx
     if (path == '/v1/pages' && queryParams?['category'] != null) {
       final category = queryParams!['category'] as String;

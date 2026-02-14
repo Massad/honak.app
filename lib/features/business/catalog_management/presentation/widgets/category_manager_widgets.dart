@@ -4,24 +4,24 @@ part of 'category_manager.dart';
 // Sub-widgets for CategoryManager page
 // ═══════════════════════════════════════════════════════════════════════════
 
-InputDecoration _categoryInputDecoration({String? hintText}) {
+InputDecoration _categoryInputDecoration(BuildContext context, {String? hintText}) {
   return InputDecoration(
     hintText: hintText,
-    hintStyle: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+    hintStyle: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
     isDense: true,
     contentPadding: const EdgeInsets.symmetric(
       horizontal: AppSpacing.md,
       vertical: AppSpacing.sm + 2,
     ),
     filled: true,
-    fillColor: Colors.grey.shade50,
+    fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
     border: OutlineInputBorder(
       borderRadius: AppRadius.cardInner,
-      borderSide: BorderSide(color: Colors.grey.shade200),
+      borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: AppRadius.cardInner,
-      borderSide: BorderSide(color: Colors.grey.shade200),
+      borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: AppRadius.cardInner,
@@ -30,11 +30,11 @@ InputDecoration _categoryInputDecoration({String? hintText}) {
   );
 }
 
-BoxDecoration _cardDecoration({Color? borderColor}) {
+BoxDecoration _cardDecoration(BuildContext context, {Color? borderColor}) {
   return BoxDecoration(
-    color: Colors.white,
+    color: Theme.of(context).colorScheme.surface,
     borderRadius: AppRadius.card,
-    border: Border.all(color: borderColor ?? Colors.grey.shade100),
+    border: Border.all(color: borderColor ?? Theme.of(context).colorScheme.outlineVariant),
     boxShadow: [
       BoxShadow(
         color: Colors.black.withValues(alpha: 0.04),
@@ -74,7 +74,7 @@ class _FlashBanner extends StatelessWidget {
               child: Text(
                 message,
                 style: context.textTheme.labelSmall?.copyWith(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -105,7 +105,7 @@ class _SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: _cardDecoration(),
+      decoration: _cardDecoration(context),
       child: Row(
         children: [
           const Icon(Icons.local_offer_outlined, color: AppColors.primary, size: 16),
@@ -122,7 +122,7 @@ class _SummaryCard extends StatelessWidget {
               Text(
                 '$totalItems $itemLabelAr',
                 style: context.textTheme.labelSmall?.copyWith(
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                   fontSize: 10,
                 ),
               ),
@@ -169,7 +169,7 @@ class _AddCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppSpacing.md),
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
-        decoration: _cardDecoration(
+        decoration: _cardDecoration(context,
           borderColor: AppColors.primary.withValues(alpha: 0.3),
         ),
         child: Column(
@@ -178,7 +178,7 @@ class _AddCard extends StatelessWidget {
             Text(
               'اسم التصنيف الجديد',
               style: context.textTheme.labelSmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
@@ -190,7 +190,7 @@ class _AddCard extends StatelessWidget {
                     autofocus: true,
                     textInputAction: TextInputAction.done,
                     onSubmitted: (_) => onConfirm(),
-                    decoration: _categoryInputDecoration(
+                    decoration: _categoryInputDecoration(context,
                       hintText: 'مثال: قص شعر، أطباق رئيسية...',
                     ),
                   ),
@@ -204,8 +204,8 @@ class _AddCard extends StatelessWidget {
                 const SizedBox(width: AppSpacing.sm),
                 _ActionButton(
                   icon: Icons.close,
-                  color: Colors.grey.shade400,
-                  bgColor: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
                   onTap: onCancel,
                 ),
               ],
@@ -221,6 +221,8 @@ class _AddCard extends StatelessWidget {
 
 class _CategoryCard extends StatelessWidget {
   final BizCategory category;
+  final int index;
+  final int totalCount;
   final String itemLabelAr;
   final bool isEditing;
   final TextEditingController? editController;
@@ -228,9 +230,13 @@ class _CategoryCard extends StatelessWidget {
   final VoidCallback onConfirmEdit;
   final VoidCallback onCancelEdit;
   final VoidCallback onDelete;
+  final VoidCallback? onMoveUp;
+  final VoidCallback? onMoveDown;
 
   const _CategoryCard({
     required this.category,
+    required this.index,
+    required this.totalCount,
     required this.itemLabelAr,
     required this.isEditing,
     required this.editController,
@@ -238,13 +244,15 @@ class _CategoryCard extends StatelessWidget {
     required this.onConfirmEdit,
     required this.onCancelEdit,
     required this.onDelete,
+    this.onMoveUp,
+    this.onMoveDown,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: _cardDecoration(
+      decoration: _cardDecoration(context,
         borderColor: isEditing
             ? AppColors.primary.withValues(alpha: 0.3)
             : null,
@@ -256,6 +264,45 @@ class _CategoryCard extends StatelessWidget {
   Widget _buildNormal(BuildContext context) {
     return Row(
       children: [
+        // Up/down arrows
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _ReorderArrow(
+              icon: Icons.arrow_upward,
+              enabled: onMoveUp != null,
+              onTap: onMoveUp ?? () {},
+            ),
+            const SizedBox(height: 2),
+            _ReorderArrow(
+              icon: Icons.arrow_downward,
+              enabled: onMoveDown != null,
+              onTap: onMoveDown ?? () {},
+            ),
+          ],
+        ),
+        const SizedBox(width: AppSpacing.sm),
+        // Index badge
+        Container(
+          width: 28,
+          height: 28,
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            '${index + 1}',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.surface,
+            ),
+          ),
+        ),
+        const SizedBox(width: AppSpacing.sm),
+        Icon(Icons.drag_handle, size: 16, color: Theme.of(context).colorScheme.outline),
+        const SizedBox(width: AppSpacing.xs),
         _SmallIconButton(
           icon: Icons.edit_outlined,
           hoverColor: AppColors.primary.withValues(alpha: 0.08),
@@ -272,12 +319,12 @@ class _CategoryCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 2),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             borderRadius: AppRadius.pill,
           ),
           child: Text(
             '${category.itemCount} $itemLabelAr',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ),
         const SizedBox(width: AppSpacing.sm),
@@ -297,7 +344,7 @@ class _CategoryCard extends StatelessWidget {
           autofocus: true,
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => onConfirmEdit(),
-          decoration: _categoryInputDecoration(),
+          decoration: _categoryInputDecoration(context),
         ),
         const SizedBox(height: AppSpacing.sm),
         Row(
@@ -312,8 +359,8 @@ class _CategoryCard extends StatelessWidget {
             const SizedBox(width: AppSpacing.sm),
             _ActionButton(
               icon: Icons.close,
-              color: Colors.grey.shade400,
-              bgColor: Colors.grey.shade100,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
               small: true,
               onTap: onCancelEdit,
             ),
@@ -336,11 +383,11 @@ class _EmptyState extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.huge),
       child: Column(
         children: [
-          Icon(Icons.local_offer_outlined, size: 40, color: Colors.grey.shade300),
+          Icon(Icons.local_offer_outlined, size: 40, color: Theme.of(context).colorScheme.outline),
           const SizedBox(height: AppSpacing.md),
           Text(
             'لا توجد تصنيفات بعد',
-            style: context.textTheme.bodySmall?.copyWith(color: AppColors.textHint),
+            style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.md),
           TextButton.icon(
@@ -381,12 +428,12 @@ class _RadioOption extends StatelessWidget {
           vertical: AppSpacing.sm + 2,
         ),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary.withValues(alpha: 0.06) : Colors.white,
+          color: selected ? AppColors.primary.withValues(alpha: 0.06) : Theme.of(context).colorScheme.surface,
           borderRadius: AppRadius.cardInner,
           border: Border.all(
             color: selected
                 ? AppColors.primary.withValues(alpha: 0.3)
-                : Colors.grey.shade200,
+                : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -397,7 +444,7 @@ class _RadioOption extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: selected ? AppColors.primary : Colors.grey.shade300,
+                  color: selected ? AppColors.primary : Theme.of(context).colorScheme.outline,
                   width: 2,
                 ),
               ),
@@ -418,14 +465,14 @@ class _RadioOption extends StatelessWidget {
             Text(
               label,
               style: context.textTheme.labelSmall?.copyWith(
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
             ),
             if (trailing != null) ...[
               const Spacer(),
               Text(
                 trailing!,
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ],
@@ -471,6 +518,39 @@ class _ActionButton extends StatelessWidget {
   }
 }
 
+class _ReorderArrow extends StatelessWidget {
+  final IconData icon;
+  final bool enabled;
+  final VoidCallback onTap;
+
+  const _ReorderArrow({
+    required this.icon,
+    required this.enabled,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: enabled ? onTap : null,
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: enabled
+              ? AppColors.primary.withValues(alpha: 0.08)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Icon(
+          icon,
+          size: 14,
+          color: enabled ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
+        ),
+      ),
+    );
+  }
+}
+
 class _SmallIconButton extends StatelessWidget {
   final IconData icon;
   final Color? iconColor;
@@ -495,7 +575,7 @@ class _SmallIconButton extends StatelessWidget {
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(4),
-          child: Icon(icon, size: 14, color: iconColor ?? Colors.grey.shade400),
+          child: Icon(icon, size: 14, color: iconColor ?? Theme.of(context).colorScheme.onSurfaceVariant),
         ),
       ),
     );

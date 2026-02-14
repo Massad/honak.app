@@ -84,7 +84,7 @@ class _MetricCard extends StatelessWidget {
             label,
             style: context.textTheme.bodySmall?.copyWith(
               fontSize: 12,
-              color: Colors.grey.shade600,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -95,7 +95,7 @@ class _MetricCard extends StatelessWidget {
             style: context.textTheme.bodyLarge?.copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Colors.grey.shade900,
+              color: context.colorScheme.onSurface,
             ),
           ),
         ],

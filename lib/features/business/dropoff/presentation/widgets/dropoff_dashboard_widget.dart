@@ -69,7 +69,7 @@ class DropoffDashboardWidget extends StatelessWidget {
             _StatTile(
               icon: Icons.done_all_rounded,
               iconColor: const Color(0xFF616161),
-              bgColor: Colors.grey.shade100,
+              bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
               value: '$delivered',
               valueColor: const Color(0xFF616161),
               label: 'تم التسليم',
@@ -87,7 +87,7 @@ class DropoffDashboardWidget extends StatelessWidget {
             vertical: AppSpacing.sm,
           ),
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             borderRadius: AppRadius.cardInner,
           ),
           child: Row(
@@ -131,13 +131,13 @@ class DropoffDashboardWidget extends StatelessWidget {
                     Icon(
                       Icons.trending_up,
                       size: 14,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: AppSpacing.xs + 2),
                     Text(
                       'إيراد اليوم',
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 12,
                       ),
                     ),
@@ -204,7 +204,7 @@ class _StatTile extends StatelessWidget {
             Text(
               label,
               style: context.textTheme.labelSmall?.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 9,
               ),
               textAlign: TextAlign.center,

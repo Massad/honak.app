@@ -27,7 +27,7 @@ class OccupancySection extends StatelessWidget {
         ? AppColors.success
         : percentage >= 50
             ? Colors.orange
-            : Colors.grey;
+            : Theme.of(context).colorScheme.onSurfaceVariant;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,7 @@ class OccupancySection extends StatelessWidget {
           child: LinearProgressIndicator(
             value: progress,
             minHeight: 10,
-            backgroundColor: Colors.grey.shade100,
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
             valueColor: AlwaysStoppedAnimation(color),
           ),
         ),
@@ -66,14 +66,14 @@ class OccupancySection extends StatelessWidget {
               period,
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             Text(
               '$booked ليلة محجوزة من $total',
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -81,7 +81,7 @@ class OccupancySection extends StatelessWidget {
         // Check-in/out today
         if (checkinToday > 0 || checkoutToday > 0) ...[
           const SizedBox(height: AppSpacing.md),
-          Divider(height: 1, color: Colors.grey.shade100),
+          Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
           const SizedBox(height: AppSpacing.md),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -99,7 +99,7 @@ class OccupancySection extends StatelessWidget {
                   ' :مغادرة اليوم',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.lg),
@@ -117,7 +117,7 @@ class OccupancySection extends StatelessWidget {
                   ' :وصول اليوم',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -152,12 +152,12 @@ class UpcomingReservationsSection extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: AppSpacing.sm),
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: isSoon
                   ? Colors.amber.withValues(alpha: 0.5)
-                  : Colors.grey.shade200,
+                  : Theme.of(context).colorScheme.outlineVariant,
               width: isSoon ? 1.5 : 1,
             ),
           ),
@@ -193,14 +193,14 @@ class UpcomingReservationsSection extends StatelessWidget {
                         Icon(
                           Icons.people_outline,
                           size: 12,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: 2),
                         Text(
                           '${m['guests']}',
                           style: TextStyle(
                             fontSize: 11,
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -212,7 +212,7 @@ class UpcomingReservationsSection extends StatelessWidget {
                         m['space'] as String? ?? '',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.grey.shade600,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                       const SizedBox(width: AppSpacing.sm),
@@ -221,7 +221,7 @@ class UpcomingReservationsSection extends StatelessWidget {
                         size: 12,
                         color: isSoon
                             ? Colors.amber.shade700
-                            : Colors.grey.shade400,
+                            : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: 4),
                       Text(
@@ -231,7 +231,7 @@ class UpcomingReservationsSection extends StatelessWidget {
                           fontWeight: isSoon ? FontWeight.w600 : null,
                           color: isSoon
                               ? Colors.amber.shade700
-                              : Colors.grey.shade500,
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -278,10 +278,10 @@ class RecentlyLinkedSection extends StatelessWidget {
                 ),
                 child: Text(
                   '$unreviewed',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
               ),
@@ -290,7 +290,7 @@ class RecentlyLinkedSection extends StatelessWidget {
                 'بحاجة مراجعة',
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -336,12 +336,12 @@ class RecentlyLinkedSection extends StatelessWidget {
                       height: 36,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.grey.shade100,
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
                       ),
                       child: Icon(
                         Icons.store_outlined,
                         size: 14,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.sm),
@@ -366,7 +366,7 @@ class RecentlyLinkedSection extends StatelessWidget {
                             ].where((s) => s.isNotEmpty).join(' · '),
                             style: TextStyle(
                               fontSize: 10,
-                              color: Colors.grey.shade400,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -390,7 +390,7 @@ class RecentlyLinkedSection extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color: const Color(0xFFBBDEFB),
@@ -427,17 +427,17 @@ class RecentlyLinkedSection extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.check,
                                 size: 10,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.surface,
                               ),
                               const SizedBox(width: 4),
-                              const Text(
+                              Text(
                                 'تمام',
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Colors.white,
+                                  color: Theme.of(context).colorScheme.surface,
                                 ),
                               ),
                             ],

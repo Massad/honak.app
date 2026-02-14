@@ -185,6 +185,7 @@ class PageInfoCard extends StatelessWidget {
           if (page.venueId != null)
             VenueTenantCard(
               venueId: page.venueId!,
+              venueName: page.venueName,
               venueFloor: page.venueFloor,
               venueUnit: page.venueUnit,
             ),

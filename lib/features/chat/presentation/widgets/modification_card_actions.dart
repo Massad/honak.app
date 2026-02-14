@@ -32,8 +32,8 @@ class ModificationPendingFooter extends StatelessWidget {
                 icon: const Icon(Icons.close, size: 16),
                 label: const Text('رفض'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.textSecondary,
-                  side: const BorderSide(color: AppColors.divider),
+                  foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                  side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppSpacing.md),
                   ),
@@ -107,14 +107,15 @@ class ModificationStatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final (icon, label, color) = switch (status) {
       'approved' => (Icons.check_circle_outline, 'تم الموافقة', AppColors.success),
-      'expired' => (Icons.timer_off_outlined, 'منتهي', AppColors.textHint),
-      _ => (Icons.cancel_outlined, 'تم الرفض', AppColors.textSecondary),
+      'expired' => (Icons.timer_off_outlined, 'منتهي', cs.onSurfaceVariant),
+      _ => (Icons.cancel_outlined, 'تم الرفض', cs.onSurfaceVariant),
     };
     final bgColor = status == 'approved'
         ? AppColors.success.withValues(alpha: 0.1)
-        : AppColors.textHint.withValues(alpha: 0.1);
+        : cs.onSurfaceVariant.withValues(alpha: 0.1);
 
     return Container(
       width: double.infinity,
@@ -151,9 +152,9 @@ class ModificationStatusBadge extends StatelessWidget {
               ),
               child: Text(
                 rejectReason!,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 11,
-                  color: AppColors.textSecondary,
+                  color: cs.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.center,
               ),

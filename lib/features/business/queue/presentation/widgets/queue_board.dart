@@ -204,7 +204,7 @@ class _QueueBoardState extends State<QueueBoard> {
         completed.where((e) => e.status == QueueStatus.completed).length;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+
       body: CustomScrollView(
         slivers: [
           // ── Sticky header ──

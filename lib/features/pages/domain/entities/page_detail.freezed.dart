@@ -184,6 +184,8 @@ mixin _$PageDetail {
   bool get dataSynced => throw _privateConstructorUsedError; // Venue tenant fields
   @JsonKey(name: 'venue_id')
   String? get venueId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_name')
+  String? get venueName => throw _privateConstructorUsedError;
   @JsonKey(name: 'venue_unit')
   String? get venueUnit => throw _privateConstructorUsedError;
   @JsonKey(name: 'venue_floor')
@@ -194,7 +196,9 @@ mixin _$PageDetail {
   @JsonKey(name: 'featured_tenant_ids')
   List<String> get featuredTenantIds => throw _privateConstructorUsedError;
   @JsonKey(name: 'directory_stats')
-  DirectoryStats? get directoryStats => throw _privateConstructorUsedError; // Catalog highlights
+  DirectoryStats? get directoryStats => throw _privateConstructorUsedError;
+  @JsonKey(name: 'parking_info')
+  String? get parkingInfo => throw _privateConstructorUsedError; // Catalog highlights
   @JsonKey(name: 'carry_categories')
   List<String> get carryCategories => throw _privateConstructorUsedError;
 
@@ -305,12 +309,14 @@ abstract class $PageDetailCopyWith<$Res> {
     @JsonKey(name: 'blocked_dates') List<BlockedDate> blockedDates,
     @JsonKey(name: 'data_synced') bool dataSynced,
     @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
     @JsonKey(name: 'venue_unit') String? venueUnit,
     @JsonKey(name: 'venue_floor') String? venueFloor,
     @JsonKey(name: 'mall_announcements')
     List<MallAnnouncement> mallAnnouncements,
     @JsonKey(name: 'featured_tenant_ids') List<String> featuredTenantIds,
     @JsonKey(name: 'directory_stats') DirectoryStats? directoryStats,
+    @JsonKey(name: 'parking_info') String? parkingInfo,
     @JsonKey(name: 'carry_categories') List<String> carryCategories,
   });
 
@@ -428,11 +434,13 @@ class _$PageDetailCopyWithImpl<$Res, $Val extends PageDetail>
     Object? blockedDates = null,
     Object? dataSynced = null,
     Object? venueId = freezed,
+    Object? venueName = freezed,
     Object? venueUnit = freezed,
     Object? venueFloor = freezed,
     Object? mallAnnouncements = null,
     Object? featuredTenantIds = null,
     Object? directoryStats = freezed,
+    Object? parkingInfo = freezed,
     Object? carryCategories = null,
   }) {
     return _then(
@@ -789,6 +797,10 @@ class _$PageDetailCopyWithImpl<$Res, $Val extends PageDetail>
                 ? _value.venueId
                 : venueId // ignore: cast_nullable_to_non_nullable
                       as String?,
+            venueName: freezed == venueName
+                ? _value.venueName
+                : venueName // ignore: cast_nullable_to_non_nullable
+                      as String?,
             venueUnit: freezed == venueUnit
                 ? _value.venueUnit
                 : venueUnit // ignore: cast_nullable_to_non_nullable
@@ -809,6 +821,10 @@ class _$PageDetailCopyWithImpl<$Res, $Val extends PageDetail>
                 ? _value.directoryStats
                 : directoryStats // ignore: cast_nullable_to_non_nullable
                       as DirectoryStats?,
+            parkingInfo: freezed == parkingInfo
+                ? _value.parkingInfo
+                : parkingInfo // ignore: cast_nullable_to_non_nullable
+                      as String?,
             carryCategories: null == carryCategories
                 ? _value.carryCategories
                 : carryCategories // ignore: cast_nullable_to_non_nullable
@@ -1044,12 +1060,14 @@ abstract class _$$PageDetailImplCopyWith<$Res>
     @JsonKey(name: 'blocked_dates') List<BlockedDate> blockedDates,
     @JsonKey(name: 'data_synced') bool dataSynced,
     @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
     @JsonKey(name: 'venue_unit') String? venueUnit,
     @JsonKey(name: 'venue_floor') String? venueFloor,
     @JsonKey(name: 'mall_announcements')
     List<MallAnnouncement> mallAnnouncements,
     @JsonKey(name: 'featured_tenant_ids') List<String> featuredTenantIds,
     @JsonKey(name: 'directory_stats') DirectoryStats? directoryStats,
+    @JsonKey(name: 'parking_info') String? parkingInfo,
     @JsonKey(name: 'carry_categories') List<String> carryCategories,
   });
 
@@ -1175,11 +1193,13 @@ class __$$PageDetailImplCopyWithImpl<$Res>
     Object? blockedDates = null,
     Object? dataSynced = null,
     Object? venueId = freezed,
+    Object? venueName = freezed,
     Object? venueUnit = freezed,
     Object? venueFloor = freezed,
     Object? mallAnnouncements = null,
     Object? featuredTenantIds = null,
     Object? directoryStats = freezed,
+    Object? parkingInfo = freezed,
     Object? carryCategories = null,
   }) {
     return _then(
@@ -1536,6 +1556,10 @@ class __$$PageDetailImplCopyWithImpl<$Res>
             ? _value.venueId
             : venueId // ignore: cast_nullable_to_non_nullable
                   as String?,
+        venueName: freezed == venueName
+            ? _value.venueName
+            : venueName // ignore: cast_nullable_to_non_nullable
+                  as String?,
         venueUnit: freezed == venueUnit
             ? _value.venueUnit
             : venueUnit // ignore: cast_nullable_to_non_nullable
@@ -1556,6 +1580,10 @@ class __$$PageDetailImplCopyWithImpl<$Res>
             ? _value.directoryStats
             : directoryStats // ignore: cast_nullable_to_non_nullable
                   as DirectoryStats?,
+        parkingInfo: freezed == parkingInfo
+            ? _value.parkingInfo
+            : parkingInfo // ignore: cast_nullable_to_non_nullable
+                  as String?,
         carryCategories: null == carryCategories
             ? _value._carryCategories
             : carryCategories // ignore: cast_nullable_to_non_nullable
@@ -1668,6 +1696,7 @@ class _$PageDetailImpl implements _PageDetail {
     final List<BlockedDate> blockedDates = const [],
     @JsonKey(name: 'data_synced') this.dataSynced = true,
     @JsonKey(name: 'venue_id') this.venueId,
+    @JsonKey(name: 'venue_name') this.venueName,
     @JsonKey(name: 'venue_unit') this.venueUnit,
     @JsonKey(name: 'venue_floor') this.venueFloor,
     @JsonKey(name: 'mall_announcements')
@@ -1675,6 +1704,7 @@ class _$PageDetailImpl implements _PageDetail {
     @JsonKey(name: 'featured_tenant_ids')
     final List<String> featuredTenantIds = const [],
     @JsonKey(name: 'directory_stats') this.directoryStats,
+    @JsonKey(name: 'parking_info') this.parkingInfo,
     @JsonKey(name: 'carry_categories')
     final List<String> carryCategories = const [],
   }) : _trustMetrics = trustMetrics,
@@ -2127,6 +2157,9 @@ class _$PageDetailImpl implements _PageDetail {
   @JsonKey(name: 'venue_id')
   final String? venueId;
   @override
+  @JsonKey(name: 'venue_name')
+  final String? venueName;
+  @override
   @JsonKey(name: 'venue_unit')
   final String? venueUnit;
   @override
@@ -2157,6 +2190,9 @@ class _$PageDetailImpl implements _PageDetail {
   @override
   @JsonKey(name: 'directory_stats')
   final DirectoryStats? directoryStats;
+  @override
+  @JsonKey(name: 'parking_info')
+  final String? parkingInfo;
   // Catalog highlights
   final List<String> _carryCategories;
   // Catalog highlights
@@ -2170,7 +2206,7 @@ class _$PageDetailImpl implements _PageDetail {
 
   @override
   String toString() {
-    return 'PageDetail(id: $id, name: $name, nameEn: $nameEn, slug: $slug, handle: $handle, description: $description, descriptionEn: $descriptionEn, avatarUrl: $avatarUrl, coverUrl: $coverUrl, archetype: $archetype, businessTypeId: $businessTypeId, businessTypeName: $businessTypeName, categoryId: $categoryId, categoryName: $categoryName, exploreCategory: $exploreCategory, itemsLabelAr: $itemsLabelAr, itemsLabelEn: $itemsLabelEn, storeType: $storeType, engagementLevel: $engagementLevel, requiresApproval: $requiresApproval, trustScore: $trustScore, trustMetrics: $trustMetrics, responseTime: $responseTime, completionRate: $completionRate, totalOrders: $totalOrders, memberSince: $memberSince, isVerified: $isVerified, isOpen: $isOpen, pageStatus: $pageStatus, claimStatus: $claimStatus, temporarilyClosed: $temporarilyClosed, relocated: $relocated, permanentlyClosed: $permanentlyClosed, operatingHours: $operatingHours, workingHours: $workingHours, paymentMethods: $paymentMethods, cliqAlias: $cliqAlias, bankInfo: $bankInfo, coverageZones: $coverageZones, branches: $branches, coverageZonesStructured: $coverageZonesStructured, returnPolicy: $returnPolicy, cancellationPolicy: $cancellationPolicy, externalLinks: $externalLinks, deliveryAvailable: $deliveryAvailable, pickupAvailable: $pickupAvailable, bookingAvailable: $bookingAvailable, minimumOrderCents: $minimumOrderCents, deliveryFeeCents: $deliveryFeeCents, estimatedDeliveryMinutes: $estimatedDeliveryMinutes, followersCount: $followersCount, postsCount: $postsCount, itemsCount: $itemsCount, isFollowing: $isFollowing, teamMembersCount: $teamMembersCount, phone: $phone, whatsapp: $whatsapp, address: $address, location: $location, hours: $hours, catalogStrategy: $catalogStrategy, featuredItemsCount: $featuredItemsCount, contactMethods: $contactMethods, specials: $specials, modifiersNote: $modifiersNote, activePriceChange: $activePriceChange, packages: $packages, galleryImages: $galleryImages, amenities: $amenities, pricing: $pricing, houseRules: $houseRules, checkIn: $checkIn, checkOut: $checkOut, maxGuests: $maxGuests, bedrooms: $bedrooms, bathrooms: $bathrooms, servicesOffered: $servicesOffered, priceRange: $priceRange, serviceAreas: $serviceAreas, alerts: $alerts, aboutExtended: $aboutExtended, servicesLinks: $servicesLinks, pinnedPosts: $pinnedPosts, stories: $stories, weeklySchedule: $weeklySchedule, blockedDates: $blockedDates, dataSynced: $dataSynced, venueId: $venueId, venueUnit: $venueUnit, venueFloor: $venueFloor, mallAnnouncements: $mallAnnouncements, featuredTenantIds: $featuredTenantIds, directoryStats: $directoryStats, carryCategories: $carryCategories)';
+    return 'PageDetail(id: $id, name: $name, nameEn: $nameEn, slug: $slug, handle: $handle, description: $description, descriptionEn: $descriptionEn, avatarUrl: $avatarUrl, coverUrl: $coverUrl, archetype: $archetype, businessTypeId: $businessTypeId, businessTypeName: $businessTypeName, categoryId: $categoryId, categoryName: $categoryName, exploreCategory: $exploreCategory, itemsLabelAr: $itemsLabelAr, itemsLabelEn: $itemsLabelEn, storeType: $storeType, engagementLevel: $engagementLevel, requiresApproval: $requiresApproval, trustScore: $trustScore, trustMetrics: $trustMetrics, responseTime: $responseTime, completionRate: $completionRate, totalOrders: $totalOrders, memberSince: $memberSince, isVerified: $isVerified, isOpen: $isOpen, pageStatus: $pageStatus, claimStatus: $claimStatus, temporarilyClosed: $temporarilyClosed, relocated: $relocated, permanentlyClosed: $permanentlyClosed, operatingHours: $operatingHours, workingHours: $workingHours, paymentMethods: $paymentMethods, cliqAlias: $cliqAlias, bankInfo: $bankInfo, coverageZones: $coverageZones, branches: $branches, coverageZonesStructured: $coverageZonesStructured, returnPolicy: $returnPolicy, cancellationPolicy: $cancellationPolicy, externalLinks: $externalLinks, deliveryAvailable: $deliveryAvailable, pickupAvailable: $pickupAvailable, bookingAvailable: $bookingAvailable, minimumOrderCents: $minimumOrderCents, deliveryFeeCents: $deliveryFeeCents, estimatedDeliveryMinutes: $estimatedDeliveryMinutes, followersCount: $followersCount, postsCount: $postsCount, itemsCount: $itemsCount, isFollowing: $isFollowing, teamMembersCount: $teamMembersCount, phone: $phone, whatsapp: $whatsapp, address: $address, location: $location, hours: $hours, catalogStrategy: $catalogStrategy, featuredItemsCount: $featuredItemsCount, contactMethods: $contactMethods, specials: $specials, modifiersNote: $modifiersNote, activePriceChange: $activePriceChange, packages: $packages, galleryImages: $galleryImages, amenities: $amenities, pricing: $pricing, houseRules: $houseRules, checkIn: $checkIn, checkOut: $checkOut, maxGuests: $maxGuests, bedrooms: $bedrooms, bathrooms: $bathrooms, servicesOffered: $servicesOffered, priceRange: $priceRange, serviceAreas: $serviceAreas, alerts: $alerts, aboutExtended: $aboutExtended, servicesLinks: $servicesLinks, pinnedPosts: $pinnedPosts, stories: $stories, weeklySchedule: $weeklySchedule, blockedDates: $blockedDates, dataSynced: $dataSynced, venueId: $venueId, venueName: $venueName, venueUnit: $venueUnit, venueFloor: $venueFloor, mallAnnouncements: $mallAnnouncements, featuredTenantIds: $featuredTenantIds, directoryStats: $directoryStats, parkingInfo: $parkingInfo, carryCategories: $carryCategories)';
   }
 
   @override
@@ -2371,6 +2407,8 @@ class _$PageDetailImpl implements _PageDetail {
             (identical(other.dataSynced, dataSynced) ||
                 other.dataSynced == dataSynced) &&
             (identical(other.venueId, venueId) || other.venueId == venueId) &&
+            (identical(other.venueName, venueName) ||
+                other.venueName == venueName) &&
             (identical(other.venueUnit, venueUnit) ||
                 other.venueUnit == venueUnit) &&
             (identical(other.venueFloor, venueFloor) ||
@@ -2385,6 +2423,8 @@ class _$PageDetailImpl implements _PageDetail {
             ) &&
             (identical(other.directoryStats, directoryStats) ||
                 other.directoryStats == directoryStats) &&
+            (identical(other.parkingInfo, parkingInfo) ||
+                other.parkingInfo == parkingInfo) &&
             const DeepCollectionEquality().equals(
               other._carryCategories,
               _carryCategories,
@@ -2483,11 +2523,13 @@ class _$PageDetailImpl implements _PageDetail {
     const DeepCollectionEquality().hash(_blockedDates),
     dataSynced,
     venueId,
+    venueName,
     venueUnit,
     venueFloor,
     const DeepCollectionEquality().hash(_mallAnnouncements),
     const DeepCollectionEquality().hash(_featuredTenantIds),
     directoryStats,
+    parkingInfo,
     const DeepCollectionEquality().hash(_carryCategories),
   ]);
 
@@ -2600,12 +2642,14 @@ abstract class _PageDetail implements PageDetail {
     @JsonKey(name: 'blocked_dates') final List<BlockedDate> blockedDates,
     @JsonKey(name: 'data_synced') final bool dataSynced,
     @JsonKey(name: 'venue_id') final String? venueId,
+    @JsonKey(name: 'venue_name') final String? venueName,
     @JsonKey(name: 'venue_unit') final String? venueUnit,
     @JsonKey(name: 'venue_floor') final String? venueFloor,
     @JsonKey(name: 'mall_announcements')
     final List<MallAnnouncement> mallAnnouncements,
     @JsonKey(name: 'featured_tenant_ids') final List<String> featuredTenantIds,
     @JsonKey(name: 'directory_stats') final DirectoryStats? directoryStats,
+    @JsonKey(name: 'parking_info') final String? parkingInfo,
     @JsonKey(name: 'carry_categories') final List<String> carryCategories,
   }) = _$PageDetailImpl;
 
@@ -2857,6 +2901,9 @@ abstract class _PageDetail implements PageDetail {
   @JsonKey(name: 'venue_id')
   String? get venueId;
   @override
+  @JsonKey(name: 'venue_name')
+  String? get venueName;
+  @override
   @JsonKey(name: 'venue_unit')
   String? get venueUnit;
   @override
@@ -2870,7 +2917,10 @@ abstract class _PageDetail implements PageDetail {
   List<String> get featuredTenantIds;
   @override
   @JsonKey(name: 'directory_stats')
-  DirectoryStats? get directoryStats; // Catalog highlights
+  DirectoryStats? get directoryStats;
+  @override
+  @JsonKey(name: 'parking_info')
+  String? get parkingInfo; // Catalog highlights
   @override
   @JsonKey(name: 'carry_categories')
   List<String> get carryCategories;

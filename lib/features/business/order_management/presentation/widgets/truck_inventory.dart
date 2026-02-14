@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
@@ -81,21 +82,21 @@ class _CompactInventory extends StatelessWidget {
         const SizedBox(width: 6),
         Text(
           '$full ممتلئ',
-          style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+          style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
         ),
         const _Dot(),
         // Empty count
-        Icon(Icons.inventory_2_outlined, size: 12, color: Colors.grey.shade400),
+        Icon(Icons.inventory_2_outlined, size: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
         const SizedBox(width: 6),
         Text(
           '$empty فارغ',
-          style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+          style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
         const _Dot(),
         // Reserved
         Text(
           '$reserved محجوز',
-          style: const TextStyle(fontSize: 12, color: AppColors.textHint),
+          style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(width: AppSpacing.sm),
         // Progress bar
@@ -105,7 +106,7 @@ class _CompactInventory extends StatelessWidget {
             child: LinearProgressIndicator(
               value: pct,
               minHeight: 5,
-              backgroundColor: Colors.grey.shade100,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
               valueColor: AlwaysStoppedAnimation<Color>(_barColor(pct)),
             ),
           ),
@@ -142,9 +143,9 @@ class _ExpandedInventory extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: AppShadows.sm,
       ),
       clipBehavior: Clip.hardEdge,
@@ -173,21 +174,21 @@ class _ExpandedInventory extends StatelessWidget {
                 VerticalDivider(
                   width: 1,
                   thickness: 1,
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                 ),
                 // Empty counter
                 Expanded(
                   child: _CounterColumn(
                     icon: Icons.inventory_2_outlined,
-                    iconColor: Colors.grey.shade400,
+                    iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
                     label: 'فارغ',
                     count: empty,
-                    countColor: AppColors.textSecondary,
+                    countColor: context.colorScheme.onSurfaceVariant,
                     subtitle: 'تم جمعها اليوم',
                     onDecrement:
                         empty > 0 ? () => onEmptyChange?.call(-1) : null,
                     onIncrement: () => onEmptyChange?.call(1),
-                    incrementColor: Colors.grey.shade300,
+                    incrementColor: Theme.of(context).colorScheme.outline,
                   ),
                 ),
               ],
@@ -196,7 +197,7 @@ class _ExpandedInventory extends StatelessWidget {
 
           // ── Reserved / Available bar ──────────────────
           Container(
-            color: Colors.grey.shade50,
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.lg,
               vertical: AppSpacing.sm,
@@ -208,7 +209,7 @@ class _ExpandedInventory extends StatelessWidget {
                   '$available متاح لطلبات جديدة',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Text(
@@ -293,7 +294,7 @@ class _CounterColumn extends StatelessWidget {
                 label,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: 4),
@@ -311,8 +312,8 @@ class _CounterColumn extends StatelessWidget {
                 icon: Icons.add,
                 color: incrementColor,
                 foregroundColor: incrementColor == AppColors.primary
-                    ? AppColors.surface
-                    : AppColors.textSecondary,
+                    ? context.colorScheme.surface
+                    : context.colorScheme.onSurfaceVariant,
                 onTap: onIncrement,
               ),
               const SizedBox(width: AppSpacing.md),
@@ -332,8 +333,8 @@ class _CounterColumn extends StatelessWidget {
               // Decrement (visually left in RTL)
               _RoundButton(
                 icon: Icons.remove,
-                color: Colors.grey.shade100,
-                foregroundColor: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
+                foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                 onTap: onDecrement,
               ),
             ],
@@ -345,7 +346,7 @@ class _CounterColumn extends StatelessWidget {
             subtitle,
             style: TextStyle(
               fontSize: 9,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -449,7 +450,7 @@ class _Dot extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
       child: Text(
         '·',
-        style: TextStyle(color: Colors.grey.shade300, fontSize: 14),
+        style: TextStyle(color: Theme.of(context).colorScheme.outline, fontSize: 14),
       ),
     );
   }

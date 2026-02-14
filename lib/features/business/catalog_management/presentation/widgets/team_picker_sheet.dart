@@ -94,7 +94,7 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
             margin: const EdgeInsets.only(
                 top: AppSpacing.sm, bottom: AppSpacing.md),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -189,7 +189,7 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
                   onPressed: () => Navigator.pop(context, _selected.toList()),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
                     padding:
                         const EdgeInsets.symmetric(vertical: AppSpacing.md),
                     shape: RoundedRectangleBorder(
@@ -234,12 +234,12 @@ class _MemberPickerRow extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.primary.withValues(alpha: 0.04)
-              : Colors.white,
+              : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected
                 ? AppColors.primary.withValues(alpha: 0.3)
-                : Colors.grey.shade200,
+                : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -248,7 +248,7 @@ class _MemberPickerRow extends StatelessWidget {
             Icon(
               isSelected ? Icons.check_box : Icons.check_box_outline_blank,
               size: 20,
-              color: isSelected ? AppColors.primary : Colors.grey.shade300,
+              color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.outline,
             ),
             const Spacer(),
             // Name + role
@@ -261,8 +261,8 @@ class _MemberPickerRow extends StatelessWidget {
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: isSelected
-                        ? Colors.grey.shade800
-                        : Colors.grey.shade600,
+                        ? Theme.of(context).colorScheme.onSurface
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 if (member.role != null)
@@ -270,7 +270,7 @@ class _MemberPickerRow extends StatelessWidget {
                     member.role!,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
               ],

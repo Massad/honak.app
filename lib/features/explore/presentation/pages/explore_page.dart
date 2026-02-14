@@ -124,7 +124,7 @@ class _FilterTriggerBar extends ConsumerWidget {
             vertical: AppSpacing.md,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: context.colorScheme.surface,
             borderRadius: BorderRadius.circular(AppRadius.lg),
             border: Border.all(color: const Color(0xFFF3F4F6)), // gray-100
             boxShadow: [
@@ -473,7 +473,7 @@ class _NearbyCard extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.colorScheme.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
           border: Border.all(color: const Color(0xFFF3F4F6)), // gray-100
           boxShadow: [

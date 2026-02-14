@@ -31,7 +31,7 @@ class TicketActivityLog extends StatelessWidget {
         child: Text(
           'لا يوجد نشاط بعد',
           style: context.textTheme.bodySmall?.copyWith(
-            color: Colors.grey.shade400,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontSize: 12,
           ),
         ),
@@ -108,7 +108,7 @@ class _PreviewPill extends StatelessWidget {
             child: Text(
               entry.action.labelAr,
               style: context.textTheme.labelSmall?.copyWith(
-                color: Colors.grey.shade600,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 10,
               ),
               maxLines: 1,
@@ -118,7 +118,7 @@ class _PreviewPill extends StatelessWidget {
           Text(
             time,
             style: context.textTheme.labelSmall?.copyWith(
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 9,
             ),
           ),
@@ -159,7 +159,7 @@ class _TimelineRow extends StatelessWidget {
             child: Column(
               children: [
                 if (!isFirst)
-                  Expanded(child: Container(width: 1, color: Colors.grey.shade200)),
+                  Expanded(child: Container(width: 1, color: Theme.of(context).colorScheme.outlineVariant)),
                 Container(
                   width: 24,
                   height: 24,
@@ -170,7 +170,7 @@ class _TimelineRow extends StatelessWidget {
                   child: Icon(icon, size: 12, color: color),
                 ),
                 if (!isLast)
-                  Expanded(child: Container(width: 1, color: Colors.grey.shade200)),
+                  Expanded(child: Container(width: 1, color: Theme.of(context).colorScheme.outlineVariant)),
               ],
             ),
           ),
@@ -182,7 +182,7 @@ class _TimelineRow extends StatelessWidget {
               margin: const EdgeInsetsDirectional.only(bottom: AppSpacing.md),
               padding: const EdgeInsetsDirectional.all(AppSpacing.md),
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 borderRadius: AppRadius.cardInner,
               ),
               child: Column(
@@ -202,7 +202,7 @@ class _TimelineRow extends StatelessWidget {
                       Text(
                         time,
                         style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 10,
                         ),
                       ),
@@ -214,7 +214,7 @@ class _TimelineRow extends StatelessWidget {
                   Text(
                     entry.actorName,
                     style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontSize: 10,
                     ),
                   ),
@@ -225,14 +225,14 @@ class _TimelineRow extends StatelessWidget {
                     Row(
                       children: [
                         _StatusChip(label: entry.from!, faded: true),
-                        const Padding(
-                          padding: EdgeInsetsDirectional.symmetric(
+                        Padding(
+                          padding: const EdgeInsetsDirectional.symmetric(
                             horizontal: AppSpacing.xs,
                           ),
                           child: Icon(
                             Icons.arrow_forward_rounded,
                             size: 12,
-                            color: AppColors.textHint,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                         _StatusChip(label: entry.to!, faded: false),
@@ -246,7 +246,7 @@ class _TimelineRow extends StatelessWidget {
                     Text(
                       entry.note!,
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),
@@ -291,13 +291,13 @@ class _StatusChip extends StatelessWidget {
         vertical: 2,
       ),
       decoration: BoxDecoration(
-        color: faded ? Colors.grey.shade100 : const Color(0xFFEFF6FF),
+        color: faded ? Theme.of(context).colorScheme.surfaceContainerLow : const Color(0xFFEFF6FF),
         borderRadius: AppRadius.pill,
       ),
       child: Text(
         label,
         style: context.textTheme.labelSmall?.copyWith(
-          color: faded ? Colors.grey.shade400 : AppColors.primary,
+          color: faded ? Theme.of(context).colorScheme.onSurfaceVariant : AppColors.primary,
           fontSize: 9,
         ),
       ),

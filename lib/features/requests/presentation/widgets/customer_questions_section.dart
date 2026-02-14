@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// A single question definition from the business config.
 class QuestionConfig {
@@ -128,7 +129,7 @@ class _QuestionField extends StatelessWidget {
           text: TextSpan(
             text: config.question,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             children: [
               if (config.required)
@@ -142,15 +143,17 @@ class _QuestionField extends StatelessWidget {
         const SizedBox(height: AppSpacing.sm),
         // Input based on type
         switch (config.type) {
-          'number' => _buildNumberInput(theme),
-          'select' => _buildSelectChips(theme),
-          _ => _buildTextInput(theme),
+          'number' => _buildNumberInput(context),
+          'select' => _buildSelectChips(context),
+          _ => _buildTextInput(context),
         },
       ],
     );
   }
 
-  Widget _buildTextInput(ThemeData theme) {
+  Widget _buildTextInput(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = Theme.of(context).colorScheme;
     return TextFormField(
       initialValue: value,
       onChanged: onChanged,
@@ -158,17 +161,17 @@ class _QuestionField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: 'اكتب إجابتك...',
         hintStyle: theme.textTheme.bodySmall?.copyWith(
-          color: AppColors.textHint,
+          color: cs.onSurfaceVariant,
         ),
         filled: true,
-        fillColor: AppColors.surfaceVariant,
+        fillColor: cs.surfaceContainerLow,
         border: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
-          borderSide: BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: cs.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
-          borderSide: BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: cs.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
@@ -182,7 +185,9 @@ class _QuestionField extends StatelessWidget {
     );
   }
 
-  Widget _buildNumberInput(ThemeData theme) {
+  Widget _buildNumberInput(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = Theme.of(context).colorScheme;
     return TextFormField(
       initialValue: value,
       onChanged: onChanged,
@@ -191,17 +196,17 @@ class _QuestionField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: '0',
         hintStyle: theme.textTheme.bodySmall?.copyWith(
-          color: AppColors.textHint,
+          color: cs.onSurfaceVariant,
         ),
         filled: true,
-        fillColor: AppColors.surfaceVariant,
+        fillColor: cs.surfaceContainerLow,
         border: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
-          borderSide: BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: cs.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
-          borderSide: BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: cs.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
@@ -215,7 +220,9 @@ class _QuestionField extends StatelessWidget {
     );
   }
 
-  Widget _buildSelectChips(ThemeData theme) {
+  Widget _buildSelectChips(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = Theme.of(context).colorScheme;
     return Wrap(
       spacing: AppSpacing.sm,
       runSpacing: AppSpacing.sm,
@@ -226,12 +233,12 @@ class _QuestionField extends StatelessWidget {
           selected: selected,
           onSelected: (_) => onChanged(value == opt ? '' : opt),
           selectedColor: AppColors.primary.withValues(alpha: 0.12),
-          backgroundColor: AppColors.surfaceVariant,
+          backgroundColor: cs.surfaceContainerLow,
           labelStyle: theme.textTheme.bodySmall?.copyWith(
-            color: selected ? AppColors.primary : AppColors.textSecondary,
+            color: selected ? AppColors.primary : cs.onSurfaceVariant,
           ),
           side: BorderSide(
-            color: selected ? AppColors.primary : AppColors.divider,
+            color: selected ? AppColors.primary : cs.outlineVariant,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: AppRadius.cardInner,

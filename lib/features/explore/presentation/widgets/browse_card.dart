@@ -28,7 +28,7 @@ class BrowseCard extends ConsumerWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: AppRadius.card,
-        side: BorderSide(color: Colors.grey.shade100),
+        side: BorderSide(color: context.colorScheme.outlineVariant),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -149,7 +149,7 @@ class BrowseCard extends ConsumerWidget {
             parts.join(' · '),
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade500,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -207,7 +207,7 @@ class BrowseCard extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: context.colorScheme.surfaceContainerLowest,
         borderRadius: AppRadius.pill,
       ),
       child: Row(
@@ -219,7 +219,7 @@ class BrowseCard extends ConsumerWidget {
             '${metric.value} ${metric.label}',
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey.shade600,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -241,7 +241,7 @@ class BrowseCard extends ConsumerWidget {
           Icon(
             Icons.label_outline,
             size: 10,
-            color: Colors.grey.shade300,
+            color: context.colorScheme.outline,
           ),
           const SizedBox(width: AppSpacing.xs),
           Expanded(
@@ -261,17 +261,17 @@ class BrowseCard extends ConsumerWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade50,
+                                color: context.colorScheme.surfaceContainerLowest,
                                 borderRadius: AppRadius.pill,
                                 border: Border.all(
-                                  color: Colors.grey.shade100,
+                                  color: context.colorScheme.surfaceContainerLow,
                                 ),
                               ),
                               child: Text(
                                 cat,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Colors.grey.shade600,
+                                  color: context.colorScheme.onSurfaceVariant,
                                 ),
                               ),
                             ),

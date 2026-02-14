@@ -68,9 +68,9 @@ class BusinessDashboardPage extends ConsumerWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: Colors.grey.shade100),
+                border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: const RecurringCustomersSection(),
@@ -140,7 +140,7 @@ class _StatsRow extends StatelessWidget {
                   Text(
                     stat.label,
                     style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.grey.shade600,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontSize: 10,
                     ),
                     textAlign: TextAlign.center,
@@ -193,7 +193,7 @@ class _QuickActionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -201,7 +201,7 @@ class _QuickActionCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.grey.shade100),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -216,7 +216,7 @@ class _QuickActionCard extends StatelessWidget {
                 action.labelAr,
                 style: context.textTheme.labelSmall?.copyWith(
                   fontSize: 9,
-                  color: Colors.grey.shade700,
+                  color: Theme.of(context).colorScheme.onSurface,
                   height: 1.3,
                 ),
                 textAlign: TextAlign.center,
@@ -293,9 +293,9 @@ class _SectionCard extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
@@ -331,13 +331,13 @@ class _SectionCard extends StatelessWidget {
                     Icon(
                       Icons.inbox_outlined,
                       size: 28,
-                      color: Colors.grey.shade300,
+                      color: Theme.of(context).colorScheme.outline,
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'لا توجد بيانات بعد',
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 11,
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -33,13 +34,13 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
 
   Color get _borderColor => switch (_status) {
         'accepted' => AppColors.success,
-        'declined' || 'expired' => AppColors.textHint,
+        'declined' || 'expired' => context.colorScheme.onSurfaceVariant,
         _ => AppColors.warning,
       };
 
   Color get _bgColor => switch (_status) {
         'accepted' => AppColors.success.withValues(alpha: 0.04),
-        'declined' || 'expired' => AppColors.background,
+        'declined' || 'expired' => context.colorScheme.surfaceContainerLowest,
         _ => AppColors.warning.withValues(alpha: 0.04),
       };
 
@@ -132,28 +133,28 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
                 Expanded(
                   child: Text(
                     item.description,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
-                      color: AppColors.textPrimary,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                 ),
                 if (item.quantity > 1) ...[
                   Text(
                     '×${item.quantity}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
                 ],
                 Text(
                   Money(item.totalCents).toFormattedArabic(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -166,10 +167,10 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
 
   Widget _buildTotals() {
     return Padding(
-      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+      padding: EdgeInsetsDirectional.all(AppSpacing.md),
       child: Column(
         children: [
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.colorScheme.outlineVariant),
           const SizedBox(height: AppSpacing.sm),
           if (_quote.discountCents != null && _quote.discountCents! > 0) ...[
             _totalRow(
@@ -211,7 +212,7 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
           style: TextStyle(
             fontSize: isBold ? 14 : 12,
             fontWeight: isBold ? FontWeight.w600 : FontWeight.w400,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         Text(
@@ -219,7 +220,7 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
           style: TextStyle(
             fontSize: isBold ? 15 : 12,
             fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
-            color: color ?? AppColors.textPrimary,
+            color: color ?? context.colorScheme.onSurface,
           ),
         ),
       ],
@@ -237,14 +238,14 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
         width: double.infinity,
         padding: const EdgeInsetsDirectional.all(AppSpacing.sm),
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
+          color: context.colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
           _quote.notes!,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
       ),
@@ -289,12 +290,12 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
   Widget _buildStatusBadge() {
     final (icon, label, color) = switch (_status) {
       'accepted' => (Icons.check_circle_outline, 'مقبول', AppColors.success),
-      'expired' => (Icons.timer_off_outlined, 'منتهي', AppColors.textHint),
-      _ => (Icons.cancel_outlined, 'مرفوض', AppColors.textSecondary),
+      'expired' => (Icons.timer_off_outlined, 'منتهي', context.colorScheme.onSurfaceVariant),
+      _ => (Icons.cancel_outlined, 'مرفوض', context.colorScheme.onSurfaceVariant),
     };
     final bgColor = _status == 'accepted'
         ? AppColors.success.withValues(alpha: 0.1)
-        : AppColors.textHint.withValues(alpha: 0.1);
+        : context.colorScheme.onSurfaceVariant.withValues(alpha: 0.1);
 
     return Container(
       width: double.infinity,
@@ -332,8 +333,8 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
             child: OutlinedButton(
               onPressed: () => setState(() => _status = 'declined'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textSecondary,
-                side: const BorderSide(color: AppColors.divider),
+                foregroundColor: context.colorScheme.onSurfaceVariant,
+                side: BorderSide(color: context.colorScheme.outlineVariant),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSpacing.md),
                 ),
@@ -381,9 +382,9 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
       ),
       child: Text(
         time,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 10,
-          color: AppColors.textHint,
+          color: context.colorScheme.onSurfaceVariant,
         ),
       ),
     );

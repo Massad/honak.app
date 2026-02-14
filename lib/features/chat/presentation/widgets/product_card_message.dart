@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -57,10 +58,10 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildHeader(),
-          _buildProductInfo(),
+          _buildProductInfo(context),
           if (!widget.isBusinessMode && _status == 'sent') _buildAction(),
           if (_status == 'added') _buildAddedBadge(),
-          _buildTimestamp(),
+          _buildTimestamp(context),
         ],
       ),
     );
@@ -103,7 +104,8 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
     );
   }
 
-  Widget _buildProductInfo() {
+  Widget _buildProductInfo(BuildContext context) {
+    final cs = context.colorScheme;
     return Padding(
       padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       child: Row(
@@ -131,10 +133,10 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
                     Expanded(
                       child: Text(
                         _product.name,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
+                          color: cs.onSurface,
                         ),
                       ),
                     ),
@@ -164,9 +166,9 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
                   const SizedBox(height: 2),
                   Text(
                     _product.optionsSummary!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: cs.onSurfaceVariant,
                       fontStyle: FontStyle.italic,
                     ),
                     maxLines: 2,
@@ -181,14 +183,14 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
                       vertical: 1,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.surfaceVariant,
+                      color: cs.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
                       _product.category!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 10,
-                        color: AppColors.textSecondary,
+                        color: cs.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -197,17 +199,17 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
                   const SizedBox(height: 2),
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.schedule,
                         size: 12,
-                        color: AppColors.textHint,
+                        color: cs.onSurfaceVariant,
                       ),
                       const SizedBox(width: 2),
                       Text(
                         _product.duration!,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
-                          color: AppColors.textSecondary,
+                          color: cs.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -217,9 +219,9 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
                   const SizedBox(height: 4),
                   Text(
                     _product.description!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: cs.onSurfaceVariant,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -296,7 +298,8 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
     );
   }
 
-  Widget _buildTimestamp() {
+  Widget _buildTimestamp(BuildContext context) {
+    final cs = context.colorScheme;
     final date =
         DateTime.fromMillisecondsSinceEpoch(widget.message.createdAt * 1000);
     final hour = date.hour % 12 == 0 ? 12 : date.hour % 12;
@@ -312,9 +315,9 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
       ),
       child: Text(
         time,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 10,
-          color: AppColors.textHint,
+          color: cs.onSurfaceVariant,
         ),
       ),
     );

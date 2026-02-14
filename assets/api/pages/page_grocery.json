@@ -79,6 +79,10 @@
       {"platform": "talabat", "label": "اطلب عبر طلبات", "url": "https://www.talabat.com/jordan/coffee/hara-coffee"},
       {"platform": "instagram", "label": "@hara.coffee.jo", "url": "https://instagram.com/hara.coffee.jo"}
     ],
+    "venue_id": "city-mall",
+    "venue_name": "City Mall",
+    "venue_floor": "الطابق ١",
+    "venue_unit": "F1-22",
     "specials": ["عرض الصباح — قهوة + كرواسون بـ ١.٥٠ د.أ حتى ١٠ صباحاً"],
     "coverage_zones_structured": [
       {

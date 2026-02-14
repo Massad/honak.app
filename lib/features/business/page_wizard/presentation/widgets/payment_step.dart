@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -88,7 +89,7 @@ class _PaymentStepState extends ConsumerState<PaymentStep> {
         Text(
           '\u0627\u062e\u062a\u0631 \u0637\u0631\u0642 \u0627\u0644\u062f\u0641\u0639 \u0627\u0644\u062a\u064a \u062a\u0642\u0628\u0644\u0647\u0627',
           style: theme.textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.xxl),
@@ -159,7 +160,7 @@ class _PaymentTile extends StatelessWidget {
           color: selected ? AppColors.primary.withAlpha(15) : null,
           borderRadius: AppRadius.cardInner,
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.divider,
+            color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
             width: selected ? 1.5 : 1,
           ),
         ),
@@ -167,13 +168,13 @@ class _PaymentTile extends StatelessWidget {
           children: [
             Icon(
               selected ? Icons.check_box : Icons.check_box_outline_blank,
-              color: selected ? AppColors.primary : AppColors.textHint,
+              color: selected ? AppColors.primary : context.colorScheme.onSurfaceVariant,
               size: 22,
             ),
             const SizedBox(width: AppSpacing.md),
             Icon(
               option.icon,
-              color: selected ? AppColors.primary : AppColors.textSecondary,
+              color: selected ? AppColors.primary : context.colorScheme.onSurfaceVariant,
               size: 22,
             ),
             const SizedBox(width: AppSpacing.md),
@@ -185,15 +186,15 @@ class _PaymentTile extends StatelessWidget {
                     option.title,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: selected ? AppColors.primary : AppColors.textPrimary,
+                      color: selected ? AppColors.primary : context.colorScheme.onSurface,
                       fontSize: 14,
                     ),
                   ),
                   Text(
                     option.subtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],

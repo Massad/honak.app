@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
@@ -117,7 +118,7 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
     final truckColor = _parseColor(truck.color);
     final status = _isOffToday
         ? ('عطلة اليوم', const Color(0xFF9E9E9E))
-        : (_statusMap[truck.today.status] ?? ('غير معروف', Colors.grey));
+        : (_statusMap[truck.today.status] ?? ('غير معروف', Theme.of(context).colorScheme.onSurfaceVariant));
     final (statusLabel, statusColor) = status;
 
     return Column(
@@ -130,7 +131,7 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
             width: 36,
             height: 4,
             decoration: BoxDecoration(
-              color: AppColors.divider,
+              color: context.colorScheme.outlineVariant,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -174,7 +175,7 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
         AppSpacing.lg,
         0,
       ),
-      color: AppColors.surface,
+      color: context.colorScheme.surface,
       child: Column(
         children: [
           // Title row
@@ -209,10 +210,10 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
                     children: [
                       Text(
                         truck.name,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
+                          color: context.colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(width: AppSpacing.sm),
@@ -229,9 +230,9 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
                   const SizedBox(height: 2),
                   Text(
                     truck.driverName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -266,9 +267,9 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
     if (_isOffToday) {
       return Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
-        decoration: const BoxDecoration(
-          color: AppColors.surface,
-          border: Border(top: BorderSide(color: AppColors.divider, width: 0.5)),
+        decoration: BoxDecoration(
+          color: context.colorScheme.surface,
+          border: Border(top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
         ),
         child: Container(
           padding: const EdgeInsets.all(AppSpacing.md),
@@ -282,17 +283,17 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const Text(
+                    Text(
                       'الشاحنة في عطلة اليوم',
-                      style: TextStyle(fontSize: 12, color: AppColors.textPrimary),
+                      style: TextStyle(fontSize: 12, color: context.colorScheme.onSurface),
                     ),
                     Text(
                       _nextDeliveryDay != null
                           ? 'الطلبات ستنتقل لـ $_nextDeliveryDay'
                           : 'لا توجد أيام توصيل محددة',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 10,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -324,9 +325,9 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.divider, width: 0.5)),
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        border: Border(top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
       ),
       child: SizedBox(
         width: double.infinity,
@@ -399,7 +400,7 @@ class _TabChip extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 12,
-            color: isActive ? Colors.white : AppColors.textSecondary,
+            color: isActive ? Colors.white : context.colorScheme.onSurfaceVariant,
             fontWeight: isActive ? FontWeight.w500 : FontWeight.normal,
           ),
         ),
@@ -454,16 +455,16 @@ class _OverviewTab extends ConsumerWidget {
                 children: [
                   Text(
                     '${truck.today.deliveredCount}/$total تسليم',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  const Text(
+                  Text(
                     'تقدم المسار',
                     style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textPrimary,
+                      color: context.colorScheme.onSurface,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -495,7 +496,7 @@ class _OverviewTab extends ConsumerWidget {
                   _StatCell(
                     value: '${pending.length}',
                     label: 'متبقي',
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                   _StatCell(
                     value: '${skipped.length}',
@@ -515,12 +516,12 @@ class _OverviewTab extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text(
+                Text(
                   'المخزون',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -531,17 +532,17 @@ class _OverviewTab extends ConsumerWidget {
                         children: [
                           Text(
                             '${truck.today.currentEmpty}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
+                              color: context.colorScheme.onSurface,
                             ),
                           ),
-                          const Text(
+                          Text(
                             'فارغ تم جمعه',
                             style: TextStyle(
                               fontSize: 10,
-                              color: AppColors.textSecondary,
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -560,9 +561,9 @@ class _OverviewTab extends ConsumerWidget {
                           ),
                           Text(
                             'ممتلئ (من ${truck.capacityFull})',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 10,
-                              color: AppColors.textSecondary,
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -603,11 +604,11 @@ class _OverviewTab extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text(
+                    Text(
                       'الشاحنة في عطلة اليوم',
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textPrimary,
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.sm),
@@ -620,9 +621,9 @@ class _OverviewTab extends ConsumerWidget {
                   pending.isNotEmpty
                       ? '${pending.length} طلب سيتم ترحيلهم تلقائيا إلى ${nextDeliveryDay ?? 'يوم التوصيل القادم'}'
                       : 'لا توجد طلبات معلقة',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -639,12 +640,12 @@ class _OverviewTab extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Text(
+                  Text(
                     'السائق',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textPrimary,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.xs),
@@ -671,17 +672,17 @@ class _OverviewTab extends ConsumerWidget {
                   const SizedBox(width: AppSpacing.sm),
                   Text(
                     truck.driverPhone,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const Spacer(),
                   Text(
                     truck.driverName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
-                      color: AppColors.textPrimary,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -700,12 +701,12 @@ class _OverviewTab extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text(
+                    Text(
                       'مناطق التغطية',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textPrimary,
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.xs),
@@ -730,17 +731,17 @@ class _OverviewTab extends ConsumerWidget {
                         children: [
                           Text(
                             '${zone.approximateAreaKm2} كم²',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 10,
-                              color: AppColors.textHint,
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                           const Spacer(),
                           Text(
                             zone.name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
-                              color: AppColors.textPrimary,
+                              color: context.colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(width: AppSpacing.sm),
@@ -771,12 +772,12 @@ class _OverviewTab extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Text(
+                  Text(
                     'الجدول',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textPrimary,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.xs),
@@ -792,16 +793,16 @@ class _OverviewTab extends ConsumerWidget {
                     children: [
                       Text(
                         '${truck.routeWindow!.start} – ${truck.routeWindow!.end}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
-                      const Text(
+                      Text(
                         'ساعات العمل',
                         style: TextStyle(
                           fontSize: 10,
-                          color: AppColors.textPrimary,
+                          color: context.colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -828,7 +829,7 @@ class _OverviewTab extends ConsumerWidget {
                       label,
                       style: TextStyle(
                         fontSize: 9,
-                        color: isActive ? Colors.white : AppColors.textHint,
+                        color: isActive ? Colors.white : context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   );
@@ -847,12 +848,12 @@ class _OverviewTab extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Text(
+                  Text(
                     'السعة',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textPrimary,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.xs),
@@ -874,17 +875,17 @@ class _OverviewTab extends ConsumerWidget {
                         children: [
                           Text(
                             '${truck.capacityEmpty}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
+                              color: context.colorScheme.onSurface,
                             ),
                           ),
-                          const Text(
+                          Text(
                             'فوارغ',
                             style: TextStyle(
                               fontSize: 9,
-                              color: AppColors.textSecondary,
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -903,17 +904,17 @@ class _OverviewTab extends ConsumerWidget {
                         children: [
                           Text(
                             '${truck.capacityFull}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
+                              color: context.colorScheme.onSurface,
                             ),
                           ),
-                          const Text(
+                          Text(
                             'ممتلئ',
                             style: TextStyle(
                               fontSize: 9,
-                              color: AppColors.textSecondary,
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -963,12 +964,12 @@ class _ActivityTab extends ConsumerWidget {
       children: [
         const Align(
           alignment: AlignmentDirectional.centerEnd,
-          child: Text(
+          child: const Text(
             'نشاط اليوم',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
-              color: AppColors.textPrimary,
+              color: Color(0xFF111827),
             ),
           ),
         ),
@@ -981,13 +982,13 @@ class _ActivityTab extends ConsumerWidget {
                 child: Column(
                   children: [
                     Icon(Icons.schedule,
-                        size: 32, color: AppColors.divider),
+                        size: 32, color: context.colorScheme.outlineVariant),
                     const SizedBox(height: AppSpacing.sm),
-                    const Text(
+                    Text(
                       'لم يبدأ المسار بعد',
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textHint,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -1056,7 +1057,7 @@ class _ActivityEntryRow extends StatelessWidget {
                       width: 1,
                       constraints:
                           const BoxConstraints(minHeight: AppSpacing.lg),
-                      color: AppColors.divider,
+                      color: context.colorScheme.outlineVariant,
                     ),
                   ),
               ],
@@ -1080,17 +1081,17 @@ class _ActivityEntryRow extends StatelessWidget {
                       if (entry.time.isNotEmpty)
                         Text(
                           _formatTime(entry.time),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 9,
-                            color: AppColors.textHint,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       Flexible(
                         child: Text(
                           entry.label,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.textPrimary,
+                            color: context.colorScheme.onSurface,
                           ),
                           textAlign: TextAlign.end,
                         ),
@@ -1100,9 +1101,9 @@ class _ActivityEntryRow extends StatelessWidget {
                   // Detail
                   Text(
                     entry.detail,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                     textAlign: TextAlign.end,
                   ),
@@ -1161,9 +1162,9 @@ class _ActivityEntryRow extends StatelessWidget {
                         entry.rescheduled == 'tomorrow'
                             ? '← تم ترحيله للغد'
                             : '← تم ترحيله إلى ${entry.rescheduled}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 9,
-                          color: AppColors.textHint,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         textAlign: TextAlign.end,
                       ),
@@ -1210,9 +1211,9 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
             children: [
               Text(
                 'المسارات السابقة (${history.length})',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -1220,7 +1221,7 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
               Icon(
                 _expanded ? Icons.expand_less : Icons.expand_more,
                 size: 14,
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
             ],
           ),
@@ -1284,14 +1285,14 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
                           children: [
                             Text(
                               h.date,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textPrimary,
+                                color: context.colorScheme.onSurface,
                               ),
                             ),
                             const SizedBox(width: AppSpacing.xs),
-                            const Icon(Icons.calendar_today,
-                                size: 10, color: AppColors.textHint),
+                            Icon(Icons.calendar_today,
+                                size: 10, color: context.colorScheme.onSurfaceVariant),
                           ],
                         ),
                       ],
@@ -1302,16 +1303,16 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
                       children: [
                         Text(
                           '${h.startedAt} – ${h.endedAt} (${h.durationMinutes ~/ 60}س ${h.durationMinutes % 60}د)',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                         Text(
                           h.driver,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -1343,7 +1344,7 @@ class _Card extends StatelessWidget {
       width: double.infinity,
       padding: padding ?? const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
         border: Border.all(color: const Color(0xFFF1F3F5)),
         boxShadow: AppShadows.sm,
@@ -1379,9 +1380,9 @@ class _StatCell extends StatelessWidget {
           ),
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 9,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -1409,13 +1410,13 @@ class _BadgeChip extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 8,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(width: 2),
-          Icon(icon, size: 8, color: AppColors.textHint),
+          Icon(icon, size: 8, color: context.colorScheme.onSurfaceVariant),
         ],
       ),
     );

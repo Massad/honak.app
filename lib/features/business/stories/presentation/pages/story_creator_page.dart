@@ -101,8 +101,8 @@ class _StoryCreatorPageState extends ConsumerState<StoryCreatorPage> {
             _isEditMode
                 ? context.l10n.storyEditTitle
                 : context.l10n.storyCreate,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.surface,
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
@@ -130,7 +130,7 @@ class _StoryCreatorPageState extends ConsumerState<StoryCreatorPage> {
                   backgroundColor: hasContent
                       ? const Color(0xFF43A047)
                       : const Color(0xFF43A047).withValues(alpha: 0.4),
-                  foregroundColor: Colors.white,
+                  foregroundColor: Theme.of(context).colorScheme.surface,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   minimumSize: const Size(0, 32),
                   textStyle: const TextStyle(

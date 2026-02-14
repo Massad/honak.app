@@ -73,9 +73,9 @@ class _CancellationPolicyState
               Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: Colors.grey.shade100),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: Column(
                   children: [
@@ -95,7 +95,7 @@ class _CancellationPolicyState
                           'يمكن للعميل الإلغاء قبل',
                           style: TextStyle(
                             fontSize: 11,
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -124,10 +124,10 @@ class _CancellationPolicyState
                   horizontal: AppSpacing.md,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(10),
                   border:
-                      Border.all(color: Colors.grey.shade200),
+                      Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: DropdownButton<String>(
                   value: noShowAction,
@@ -209,7 +209,7 @@ class _CancellationPolicyState
                         : 'النسبة المئوية',
                     hintStyle: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     suffixText:
                         feeType == 'percent' ? '%' : 'د.أ',
@@ -219,12 +219,12 @@ class _CancellationPolicyState
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
-                          color: Colors.grey.shade200),
+                          color: Theme.of(context).colorScheme.outlineVariant),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
-                          color: Colors.grey.shade200),
+                          color: Theme.of(context).colorScheme.outlineVariant),
                     ),
                   ),
                   onChanged: (v) {
@@ -241,9 +241,9 @@ class _CancellationPolicyState
               const SizedBox(height: AppSpacing.sm),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: Colors.grey.shade100),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: TextField(
                   textAlign: TextAlign.end,
@@ -256,7 +256,7 @@ class _CancellationPolicyState
                         'رسالة تظهر للعميل عند الإلغاء المتأخر',
                     hintStyle: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     isDense: true,
                     contentPadding:
@@ -264,12 +264,12 @@ class _CancellationPolicyState
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide:
-                          BorderSide(color: Colors.grey.shade100),
+                          BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide:
-                          BorderSide(color: Colors.grey.shade100),
+                          BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
@@ -306,7 +306,7 @@ class _FeeTypeOption extends StatelessWidget {
     return Material(
       color: selected
           ? AppColors.primary.withValues(alpha: 0.05)
-          : Colors.white,
+          : Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
@@ -321,7 +321,7 @@ class _FeeTypeOption extends StatelessWidget {
             border: Border.all(
               color: selected
                   ? AppColors.primary.withValues(alpha: 0.3)
-                  : Colors.grey.shade200,
+                  : Theme.of(context).colorScheme.outlineVariant,
             ),
           ),
           child: Row(
@@ -333,7 +333,7 @@ class _FeeTypeOption extends StatelessWidget {
                 size: 18,
                 color: selected
                     ? AppColors.primary
-                    : Colors.grey.shade300,
+                    : Theme.of(context).colorScheme.outline,
               ),
               const Spacer(),
               Text(
@@ -363,7 +363,7 @@ class _SectionLabel extends StatelessWidget {
       child: Text(
         text,
         style: context.textTheme.bodySmall?.copyWith(
-          color: AppColors.textSecondary,
+          color: context.colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w500,
         ),
       ),

@@ -7,6 +7,7 @@ import 'package:honak/features/business/dashboard/presentation/pages/business_da
 import 'package:honak/features/business/dashboard/presentation/widgets/content_tab.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/features/business/catalog_management/presentation/pages/manage_page.dart';
+import 'package:honak/features/business/directory_management/presentation/pages/directory_manage_page.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 
 /// Business Home screen with horizontal sub-tabs.
@@ -62,8 +63,8 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
     if (bizContext == null) return [];
 
     final archetype = bizContext.archetype;
-    final isReduced = archetype == Archetype.followOnly ||
-        archetype == Archetype.directory;
+    final isReduced = archetype == Archetype.followOnly;
+    final isDirectory = archetype == Archetype.directory;
 
     final tabs = <_HomeTab>[
       _HomeTab(
@@ -75,8 +76,8 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
 
     if (!isReduced) {
       tabs.add(_HomeTab(
-        id: 'manage',
-        icon: Icons.inventory_2_outlined,
+        id: isDirectory ? 'directory_manage' : 'manage',
+        icon: isDirectory ? Icons.store_outlined : Icons.inventory_2_outlined,
         label: context.l10n.bizTabManage,
       ));
     }
@@ -87,7 +88,7 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
       label: context.l10n.bizTabContent,
     ));
 
-    if (!isReduced) {
+    if (!isReduced && !isDirectory) {
       tabs.add(_HomeTab(
         id: 'customers',
         icon: Icons.people_outlined,
@@ -115,7 +116,7 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
             isScrollable: true,
             tabAlignment: TabAlignment.start,
             labelColor: AppColors.primary,
-            unselectedLabelColor: Colors.grey.shade400,
+            unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
             indicatorColor: AppColors.primary,
             indicatorSize: TabBarIndicatorSize.tab,
             labelStyle: const TextStyle(
@@ -155,6 +156,7 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
     return switch (tabId) {
       'dashboard' => const BusinessDashboardPage(),
       'manage' => const BusinessManagePage(),
+      'directory_manage' => const DirectoryManagePage(),
       'content' => const ContentTab(),
       'customers' => EmptyState(
           icon: Icons.people_outlined,

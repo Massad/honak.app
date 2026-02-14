@@ -119,7 +119,7 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
               // Description
               Text(
                 'اربط منصاتك الخارجية لدفع منتجاتك وأسعارك تلقائياً.',
-                style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 textAlign: TextAlign.right,
               ),
               const SizedBox(height: AppSpacing.xl),
@@ -147,12 +147,12 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: platform.isConnected
               ? AppColors.success.withValues(alpha: 0.3)
-              : Colors.grey.shade100,
+              : Theme.of(context).colorScheme.surfaceContainerLow,
         ),
       ),
       child: Column(
@@ -174,13 +174,13 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
                       Icon(
                         Icons.keyboard_arrow_up,
                         size: 20,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       )
                     else
                       Icon(
                         Icons.keyboard_arrow_down,
                         size: 20,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     const SizedBox(width: AppSpacing.sm),
                     const AppBadge.small(
@@ -209,7 +209,7 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
                           'غير مربوط',
                           style: TextStyle(
                             fontSize: 11,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                     ],
@@ -236,7 +236,7 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
 
           // Expanded stats section — only when connected + expanded
           if (platform.isConnected && platform.isExpanded) ...[
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
             Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: Column(
@@ -268,7 +268,7 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
                       label: 'آخر مزامنة',
                       value: _formatLastSync(platform.lastSync!),
                       icon: Icons.access_time,
-                      iconColor: Colors.grey.shade500,
+                      iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(height: AppSpacing.lg),
                   ],
@@ -280,7 +280,7 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
                       vertical: AppSpacing.xs,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
+                      color: Theme.of(context).colorScheme.surfaceContainerLowest,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -437,7 +437,7 @@ class _ConnectButton extends StatelessWidget {
         onPressed: onTap,
         style: FilledButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
+          foregroundColor: Theme.of(context).colorScheme.surface,
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -474,7 +474,7 @@ class _StatRow extends StatelessWidget {
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w600,
-            color: valueColor ?? AppColors.textPrimary,
+            color: valueColor ?? context.colorScheme.onSurface,
           ),
         ),
         const Spacer(),
@@ -482,7 +482,7 @@ class _StatRow extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 12,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(width: AppSpacing.sm),

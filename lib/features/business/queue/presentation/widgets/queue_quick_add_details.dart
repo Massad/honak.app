@@ -219,7 +219,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         TextField(
           controller: _nameCtrl,
           onChanged: (_) => setState(() {}),
-          decoration: _inputDecoration(
+          decoration: _inputDecoration(context,
             hint: 'مثال: أحمد',
             prefixIcon: Icons.person_outline,
           ),
@@ -233,7 +233,7 @@ class _DetailsStepState extends State<_DetailsStep> {
           controller: _phoneCtrl,
           keyboardType: TextInputType.phone,
           textDirection: TextDirection.ltr,
-          decoration: _inputDecoration(
+          decoration: _inputDecoration(context,
             hint: '07XXXXXXXX',
             prefixIcon: Icons.phone_outlined,
           ),
@@ -256,7 +256,7 @@ class _DetailsStepState extends State<_DetailsStep> {
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: _vehicleTypeOtherCtrl,
-            decoration: _inputDecoration(hint: 'أدخل نوع السيارة...'),
+            decoration: _inputDecoration(context, hint: 'أدخل نوع السيارة...'),
           ),
         ],
         const SizedBox(height: AppSpacing.lg),
@@ -277,7 +277,7 @@ class _DetailsStepState extends State<_DetailsStep> {
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: _vehicleColorOtherCtrl,
-            decoration: _inputDecoration(hint: 'أدخل لون السيارة...'),
+            decoration: _inputDecoration(context, hint: 'أدخل لون السيارة...'),
           ),
         ],
         const SizedBox(height: AppSpacing.lg),
@@ -288,7 +288,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         TextField(
           controller: _plateCtrl,
           textDirection: TextDirection.ltr,
-          decoration: _inputDecoration(hint: '42-12345'),
+          decoration: _inputDecoration(context, hint: '42-12345'),
         ),
         const SizedBox(height: AppSpacing.lg),
 
@@ -311,7 +311,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     color:
-                        selected ? AppColors.primary : Colors.grey.shade200,
+                        selected ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
                   ),
                   color: selected
                       ? const Color(0xFFEFF6FF)
@@ -329,13 +329,13 @@ class _DetailsStepState extends State<_DetailsStep> {
                         border: Border.all(
                           color: selected
                               ? AppColors.primary
-                              : Colors.grey.shade300,
+                              : Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: selected
-                          ? const Icon(Icons.check, size: 14,
-                              color: Colors.white)
+                          ? Icon(Icons.check, size: 14,
+                              color: Theme.of(context).colorScheme.surface)
                           : null,
                     ),
                     const SizedBox(width: AppSpacing.md),
@@ -344,7 +344,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                         addon.name,
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey.shade700,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),
@@ -352,7 +352,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                       '+${Money(addon.priceCents).toFormattedArabic()}',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -373,7 +373,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         TextField(
           controller: _notesCtrl,
           maxLines: 2,
-          decoration: _inputDecoration(hint: 'أي ملاحظات خاصة...'),
+          decoration: _inputDecoration(context, hint: 'أي ملاحظات خاصة...'),
         ),
         const SizedBox(height: AppSpacing.lg),
 
@@ -393,9 +393,9 @@ class _DetailsStepState extends State<_DetailsStep> {
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.grey.shade300,
-              disabledForegroundColor: Colors.white,
+              foregroundColor: Theme.of(context).colorScheme.surface,
+              disabledBackgroundColor: Theme.of(context).colorScheme.outline,
+              disabledForegroundColor: Theme.of(context).colorScheme.surface,
               padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
               shape: RoundedRectangleBorder(
                 borderRadius: AppRadius.cardInner,
@@ -427,7 +427,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                   size: 16,
                   color: _hasDiscount
                       ? const Color(0xFFFF9800)
-                      : Colors.grey.shade400,
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
@@ -438,7 +438,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                       fontWeight: FontWeight.w600,
                       color: _hasDiscount
                           ? const Color(0xFFFF9800)
-                          : Colors.grey.shade700,
+                          : Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -469,7 +469,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                       ? Icons.keyboard_arrow_up_rounded
                       : Icons.keyboard_arrow_down_rounded,
                   size: 18,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ],
             ),
@@ -503,7 +503,7 @@ class _DetailsStepState extends State<_DetailsStep> {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: (_) => setState(() {}),
             textDirection: TextDirection.ltr,
-            decoration: _inputDecoration(
+            decoration: _inputDecoration(context,
               hint: _discountType == 'percentage' ? '10' : '1.5',
               prefixIcon: _discountType == 'percentage'
                   ? Icons.percent
@@ -532,11 +532,11 @@ class _DetailsStepState extends State<_DetailsStep> {
                   decoration: BoxDecoration(
                     color: selected
                         ? const Color(0xFFFFF8E1)
-                        : Colors.grey.shade50,
+                        : Theme.of(context).colorScheme.surfaceContainerLowest,
                     border: Border.all(
                       color: selected
                           ? const Color(0xFFFF9800)
-                          : Colors.grey.shade200,
+                          : Theme.of(context).colorScheme.outlineVariant,
                     ),
                     borderRadius: AppRadius.pill,
                   ),
@@ -546,7 +546,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                       fontSize: 11,
                       color: selected
                           ? const Color(0xFFFF9800)
-                          : Colors.grey.shade600,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -559,7 +559,7 @@ class _DetailsStepState extends State<_DetailsStep> {
             const SizedBox(height: AppSpacing.sm),
             TextField(
               controller: _discountNoteCtrl,
-              decoration: _inputDecoration(hint: 'سبب الخصم...'),
+              decoration: _inputDecoration(context, hint: 'سبب الخصم...'),
             ),
           ],
           const SizedBox(height: AppSpacing.md),
@@ -581,7 +581,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                         'المجموع قبل الخصم',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                       const Spacer(),
@@ -589,7 +589,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                         _subtotal.toFormattedArabic(),
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
@@ -671,14 +671,14 @@ class _DetailsStepState extends State<_DetailsStep> {
             children: [
               Text(
                 'المجموع قبل الخصم',
-                style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               const Spacer(),
               Text(
                 _subtotal.toFormattedArabic(),
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   decoration: TextDecoration.lineThrough,
                 ),
               ),
@@ -735,7 +735,7 @@ class _DetailsStepState extends State<_DetailsStep> {
               'الإجمالي',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const Spacer(),
@@ -777,11 +777,11 @@ class _DiscountTypeChip extends StatelessWidget {
         child: Container(
           padding: const EdgeInsetsDirectional.symmetric(vertical: 8),
           decoration: BoxDecoration(
-            color: selected ? const Color(0xFFFFF8E1) : Colors.grey.shade50,
+            color: selected ? const Color(0xFFFFF8E1) : Theme.of(context).colorScheme.surfaceContainerLowest,
             border: Border.all(
               color: selected
                   ? const Color(0xFFFF9800)
-                  : Colors.grey.shade200,
+                  : Theme.of(context).colorScheme.outlineVariant,
             ),
             borderRadius: AppRadius.cardInner,
           ),
@@ -793,7 +793,7 @@ class _DiscountTypeChip extends StatelessWidget {
               fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
               color: selected
                   ? const Color(0xFFFF9800)
-                  : Colors.grey.shade600,
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ),

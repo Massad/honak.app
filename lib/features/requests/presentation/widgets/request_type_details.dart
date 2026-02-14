@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/customer_request.dart';
 import 'package:honak/features/requests/presentation/widgets/request_info_sections.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Config-driven detail section factory — maps request type → widget.
 /// Centralizes the type→section mapping so widgets don't switch on type.
@@ -39,13 +40,13 @@ class QuoteDetailsSection extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsetsDirectional.all(AppSpacing.md),
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceContainerLow,
               borderRadius: AppRadius.cardInner,
             ),
             child: Text(
               request.description!,
               style: textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
@@ -99,7 +100,7 @@ class ReservationDetailsSection extends StatelessWidget {
             child: Text(
               request.dateRange!,
               style: textTheme.bodySmall?.copyWith(
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
             ),
           ),
@@ -154,7 +155,7 @@ class _UrgencyBadge extends StatelessWidget {
     final (label, color) = switch (urgency) {
       'asap' => ('\u0637\u0627\u0631\u0626', AppColors.error),
       'soon' => ('\u0642\u0631\u064a\u0628\u0627\u064b', const Color(0xFFFF8F00)),
-      _ => ('\u063a\u064a\u0631 \u0645\u0633\u062a\u0639\u062c\u0644', AppColors.textSecondary),
+      _ => ('\u063a\u064a\u0631 \u0645\u0633\u062a\u0639\u062c\u0644', context.colorScheme.onSurfaceVariant),
     };
 
     return Container(
@@ -192,23 +193,23 @@ class _ReservationStatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: context.colorScheme.surfaceContainerLow,
         borderRadius: AppRadius.cardInner,
       ),
       child: Column(
         children: [
-          Icon(icon, size: 14, color: AppColors.textHint),
+          Icon(icon, size: 14, color: context.colorScheme.onSurfaceVariant),
           const SizedBox(height: AppSpacing.xs),
           Text(
             value,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                 ),
           ),
           Text(
             label,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                   fontSize: 9,
                 ),
           ),

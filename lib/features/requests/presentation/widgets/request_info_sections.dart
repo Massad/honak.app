@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/customer_request.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Order items list with subtotal — for type == 'order'.
 class OrderDetailsSection extends StatelessWidget {
@@ -29,7 +30,7 @@ class OrderDetailsSection extends StatelessWidget {
               vertical: AppSpacing.sm,
             ),
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceContainerLow,
               borderRadius: AppRadius.cardInner,
             ),
             child: Row(
@@ -58,7 +59,7 @@ class OrderDetailsSection extends StatelessWidget {
                       Text(
                         item.name,
                         style: textTheme.bodySmall?.copyWith(
-                          color: AppColors.textPrimary,
+                          color: context.colorScheme.onSurface,
                         ),
                       ),
                       if (item.variation != null)
@@ -74,7 +75,7 @@ class OrderDetailsSection extends StatelessWidget {
                 Text(
                   lineTotal,
                   style: textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -83,7 +84,7 @@ class OrderDetailsSection extends StatelessWidget {
         }),
         // Total
         if (request.total != null) ...[
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.colorScheme.outlineVariant),
           const SizedBox(height: AppSpacing.sm),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +92,7 @@ class OrderDetailsSection extends StatelessWidget {
               Text(
                 '\u0627\u0644\u0645\u062c\u0645\u0648\u0639',
                 style: textTheme.bodySmall?.copyWith(
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               Text(
@@ -169,18 +170,18 @@ class InfoDetailRow extends StatelessWidget {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: context.colorScheme.surfaceContainerLow,
         borderRadius: AppRadius.cardInner,
       ),
       child: Row(
         children: [
-          Icon(icon, size: 14, color: AppColors.textHint),
+          Icon(icon, size: 14, color: context.colorScheme.onSurfaceVariant),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               text,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
             ),
           ),
@@ -203,12 +204,12 @@ class InfoIconLabel extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSpacing.xs),
       child: Row(
         children: [
-          Icon(icon, size: 12, color: AppColors.textHint),
+          Icon(icon, size: 12, color: context.colorScheme.onSurfaceVariant),
           const SizedBox(width: AppSpacing.xs),
           Text(
             text,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
           ),
         ],

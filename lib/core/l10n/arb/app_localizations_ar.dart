@@ -185,6 +185,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settings => 'الإعدادات';
 
   @override
+  String get appLanguage => 'لغة التطبيق';
+
+  @override
+  String get appearance => 'المظهر';
+
+  @override
+  String get aboutApp => 'حول التطبيق';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get deleteAccountConfirm =>
+      'هل أنت متأكد من حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
   String get feed => 'آخر الأخبار';
 
   @override

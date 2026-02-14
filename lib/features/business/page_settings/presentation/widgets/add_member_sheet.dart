@@ -116,7 +116,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
               bottom: AppSpacing.md,
             ),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -158,7 +158,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                         hintText: '07XXXXXXXX',
                         hintStyle: TextStyle(
                           fontSize: 13,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         isDense: true,
                         contentPadding: const EdgeInsets.symmetric(
@@ -168,15 +168,15 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                         prefixIcon: Icon(
                           Icons.phone_outlined,
                           size: 18,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey.shade200),
+                          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey.shade200),
+                          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -217,7 +217,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                                 border: Border.all(
                                   color: isSelected
                                       ? AppColors.primary
-                                      : Colors.grey.shade300,
+                                      : Theme.of(context).colorScheme.outline,
                                 ),
                               ),
                               child: Text(
@@ -226,7 +226,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                                   fontSize: 12,
                                   color: isSelected
                                       ? AppColors.primary
-                                      : Colors.grey.shade600,
+                                      : Theme.of(context).colorScheme.onSurfaceVariant,
                                   fontWeight: isSelected
                                       ? FontWeight.w600
                                       : FontWeight.normal,
@@ -246,7 +246,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                         hintText: 'أو اكتب الدور...',
                         hintStyle: TextStyle(
                           fontSize: 13,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         isDense: true,
                         contentPadding: const EdgeInsets.symmetric(
@@ -255,11 +255,11 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey.shade200),
+                          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey.shade200),
+                          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -307,8 +307,8 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: hasIt
-                                          ? Colors.grey.shade800
-                                          : Colors.grey.shade400,
+                                          ? Theme.of(context).colorScheme.onSurface
+                                          : Theme.of(context).colorScheme.onSurfaceVariant,
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
@@ -318,7 +318,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                                     size: 16,
                                     color: hasIt
                                         ? AppColors.primary.withValues(alpha: 0.6)
-                                        : Colors.grey.shade300,
+                                        : Theme.of(context).colorScheme.outline,
                                   ),
                                 ],
                               ),
@@ -342,8 +342,8 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                     onPressed: _canAdd ? _submit : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
-                      disabledBackgroundColor: Colors.grey.shade200,
+                      foregroundColor: Theme.of(context).colorScheme.surface,
+                      disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
                       padding: const EdgeInsets.symmetric(
                           vertical: AppSpacing.md),
                       shape: RoundedRectangleBorder(
@@ -377,7 +377,7 @@ class _FieldLabel extends StatelessWidget {
       style: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w600,
-        color: Colors.grey.shade700,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }

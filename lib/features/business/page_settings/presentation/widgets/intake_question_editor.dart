@@ -70,7 +70,7 @@ class _IntakeQuestionEditorState extends State<IntakeQuestionEditor> {
           decoration: InputDecoration(
             hintText: 'نص السؤال',
             hintStyle:
-                TextStyle(fontSize: 13, color: Colors.grey.shade400),
+                TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -158,10 +158,10 @@ class _IntakeQuestionEditorState extends State<IntakeQuestionEditor> {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
+                        color: Theme.of(context).colorScheme.surfaceContainerLowest,
                         borderRadius: BorderRadius.circular(8),
                         border:
-                            Border.all(color: Colors.grey.shade200),
+                            Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                       ),
                       child: Text(
                         widget.question.options[i],
@@ -196,7 +196,7 @@ class _IntakeQuestionEditorState extends State<IntakeQuestionEditor> {
                     hintText: 'أضف خيار جديد',
                     hintStyle: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -287,12 +287,12 @@ class _FieldTypeChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.primary.withValues(alpha: 0.08)
-              : Colors.white,
+              : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: isSelected
                 ? AppColors.primary.withValues(alpha: 0.3)
-                : Colors.grey.shade200,
+                : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -313,7 +313,7 @@ class _FieldTypeChip extends StatelessWidget {
               size: 14,
               color: isSelected
                   ? AppColors.primary
-                  : Colors.grey.shade400,
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ],
         ),

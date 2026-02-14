@@ -36,7 +36,7 @@ class _CancelSubscriptionSheet extends StatelessWidget {
             width: 36,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -59,7 +59,7 @@ class _CancelSubscriptionSheet extends StatelessWidget {
             'إلغاء الاشتراك',
             style: context.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: context.colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: AppSpacing.lg),

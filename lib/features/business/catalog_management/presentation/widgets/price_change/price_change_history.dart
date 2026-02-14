@@ -14,11 +14,11 @@ Color _statusColor(String status) {
     case 'scheduled':
       return AppColors.primary;
     case 'expired':
-      return Colors.grey;
+      return Colors.grey.shade500;
     case 'cancelled':
       return AppColors.error;
     default:
-      return Colors.grey;
+      return Colors.grey.shade500;
   }
 }
 
@@ -106,7 +106,7 @@ class _PriceChangeHistoryState extends State<PriceChangeHistory> {
     final isEmpty = activeOrScheduled == null && pastChanges.isEmpty;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+
       body: Column(
         children: [
           SubScreenAppBar(
@@ -173,11 +173,11 @@ class _EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.local_offer_outlined, size: 48, color: Colors.grey.shade300),
+          Icon(Icons.local_offer_outlined, size: 48, color: Theme.of(context).colorScheme.outline),
           const SizedBox(height: AppSpacing.md),
           Text(
             'لا توجد تغييرات أسعار بعد',
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ],
       ),
@@ -199,7 +199,7 @@ class _SectionHeader extends StatelessWidget {
       style: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w600,
-        color: Colors.grey.shade600,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
       ),
     );
   }
@@ -226,9 +226,9 @@ class _ChangeCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,7 +252,7 @@ class _ChangeCard extends StatelessWidget {
                   _scopeText(change),
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -283,7 +283,7 @@ class _ChangeCard extends StatelessWidget {
             const SizedBox(height: AppSpacing.xs),
             Text(
               change.reason,
-              style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+              style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ],
           const SizedBox(height: AppSpacing.sm),
@@ -291,13 +291,13 @@ class _ChangeCard extends StatelessWidget {
           Row(
             children: [
               Icon(Icons.calendar_today_outlined,
-                  size: 11, color: Colors.grey.shade400),
+                  size: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
               const SizedBox(width: 4),
               Text(
                 change.endsAt != null
                     ? '${formatDateAr(change.startsAt)} - ${formatDateAr(change.endsAt!)}'
                     : '${formatDateAr(change.startsAt)} - مفتوح',
-                style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               const Spacer(),
               Icon(
@@ -305,12 +305,12 @@ class _ChangeCard extends StatelessWidget {
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
                 size: 11,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: 2),
               Text(
                 change.isPublic ? 'عام' : 'خاص',
-                style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -321,8 +321,8 @@ class _ChangeCard extends StatelessWidget {
               Expanded(
                 child: _CardButton(
                   label: 'عرض',
-                  color: Colors.grey.shade600,
-                  bgColor: Colors.grey.shade50,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  bgColor: Theme.of(context).colorScheme.surfaceContainerLowest,
                   onTap: onView,
                 ),
               ),
@@ -375,7 +375,7 @@ class _ChangeDetail extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+
       body: Column(
         children: [
           // Header
@@ -387,9 +387,9 @@ class _ChangeDetail extends StatelessWidget {
               bottom: AppSpacing.sm,
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               border: Border(
-                bottom: BorderSide(color: Colors.grey.shade100),
+                bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
             ),
             child: Row(
@@ -517,14 +517,14 @@ class _ChangeDetail extends StatelessWidget {
                                 ? Icons.visibility_outlined
                                 : Icons.visibility_off_outlined,
                             size: 14,
-                            color: Colors.grey.shade600,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             change.isPublic ? 'عام للعملاء' : 'خاص (داخلي)',
                             style: TextStyle(
                               fontSize: 13,
-                              color: Colors.grey.shade700,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                         ],
@@ -544,12 +544,12 @@ class _ChangeDetail extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       alignment: Alignment.center,
-                      child: const Text(
+                      child: Text(
                         'إعادة استخدام هذا التغيير',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                       ),
                     ),
@@ -576,9 +576,9 @@ class _DetailCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(children: children),
     );
@@ -603,7 +603,7 @@ class _DetailRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+            style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           child ??
               Text(
@@ -611,7 +611,7 @@ class _DetailRow extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade700,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
         ],
@@ -625,7 +625,7 @@ class _DetailRow extends StatelessWidget {
 class _DetailDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Divider(height: 1, color: Colors.grey.shade100);
+    return Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant);
   }
 }
 

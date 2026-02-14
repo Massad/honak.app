@@ -42,7 +42,7 @@ class StepIndicator extends StatelessWidget {
                     ? AppColors.primary
                     : isDone
                         ? AppColors.primary.withValues(alpha: 0.4)
-                        : Colors.grey.shade200,
+                        : Theme.of(context).colorScheme.outlineVariant,
                 borderRadius: AppRadius.pill,
               ),
             ),
@@ -110,10 +110,10 @@ class WizardStepBasics extends StatelessWidget {
             child: Container(
               height: 120,
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 borderRadius: AppRadius.cardInner,
                 border: Border.all(
-                  color: Colors.grey.shade200,
+                  color: Theme.of(context).colorScheme.outlineVariant,
                   style: BorderStyle.solid,
                 ),
               ),
@@ -124,14 +124,14 @@ class WizardStepBasics extends StatelessWidget {
                     Icon(
                       Icons.add_photo_alternate_outlined,
                       size: 32,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'إضافة صورة',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -280,7 +280,7 @@ class WizardStepAvailability extends StatelessWidget {
             ),
             _StatusChip(
               label: 'مخفي',
-              color: Colors.grey,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               isSelected: status == 'hidden',
               onTap: () => onStatusChanged('hidden'),
             ),
@@ -398,8 +398,8 @@ class WizardBottomNav extends StatelessWidget {
         AppSpacing.md + bottomPadding,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade100)),
+        color: Theme.of(context).colorScheme.surface,
+        border: Border(top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       child: Row(
         textDirection: TextDirection.ltr,
@@ -410,7 +410,7 @@ class WizardBottomNav extends StatelessWidget {
             child: Text(
               currentStep == 0 ? 'إلغاء' : 'السابق',
               style: TextStyle(
-                color: Colors.grey.shade600,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),
@@ -419,12 +419,12 @@ class WizardBottomNav extends StatelessWidget {
           FilledButton(
             onPressed: canGoNext && !saving ? onNext : null,
             child: saving
-                ? const SizedBox(
+                ? SizedBox(
                     width: 18,
                     height: 18,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   )
                 : Text(isFinal ? 'حفظ' : 'التالي'),
@@ -450,7 +450,7 @@ class _FieldLabel extends StatelessWidget {
       label,
       style: context.textTheme.bodySmall?.copyWith(
         fontWeight: FontWeight.w600,
-        color: Colors.grey.shade700,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }
@@ -462,7 +462,7 @@ InputDecoration wizardInputDecoration({required String hint}) {
     hintText: hint,
     hintStyle: TextStyle(
       fontSize: 13,
-      color: Colors.grey.shade400,
+      color: Colors.grey.shade500,
     ),
     isDense: true,
     contentPadding: AppSpacing.inputPadding,
@@ -506,7 +506,7 @@ class _StatusChip extends StatelessWidget {
               isSelected ? color.withValues(alpha: 0.12) : Colors.grey.shade50,
           borderRadius: AppRadius.pill,
           border: Border.all(
-            color: isSelected ? color : Colors.grey.shade200,
+            color: isSelected ? color : Theme.of(context).colorScheme.outlineVariant,
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -515,7 +515,7 @@ class _StatusChip extends StatelessWidget {
           style: TextStyle(
             fontSize: 13,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-            color: isSelected ? color : Colors.grey.shade500,
+            color: isSelected ? color : Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ),
@@ -580,21 +580,21 @@ class _CategoryTapField extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: AppRadius.button,
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Row(
           children: [
             Icon(
               Icons.keyboard_arrow_down,
               size: 20,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const Spacer(),
             Text(
               _displayText,
               style: TextStyle(
                 fontSize: 13,
-                color: isSelected ? Colors.grey.shade800 : Colors.grey.shade400,
+                color: isSelected ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],

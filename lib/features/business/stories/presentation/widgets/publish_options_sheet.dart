@@ -72,7 +72,7 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: Theme.of(context).colorScheme.outlineVariant,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -98,19 +98,19 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.grey.shade100,
+                      color: Theme.of(context).colorScheme.surfaceContainerLow,
                     ),
                     child: Icon(
                       Icons.close,
                       size: 18,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          Divider(height: 1, color: Colors.grey.shade100),
+          Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
 
           // Body
           Padding(
@@ -123,7 +123,7 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
                   context.l10n.storyAudience,
                   style: TextStyle(
                     fontSize: 11,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -161,7 +161,7 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
                   context.l10n.storyPublishTime,
                   style: TextStyle(
                     fontSize: 11,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -203,9 +203,9 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
+                      color: Theme.of(context).colorScheme.surfaceContainerLowest,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.grey.shade100),
+                      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                     ),
                     child: Column(
                       children: [
@@ -332,7 +332,7 @@ class _OptionCard extends StatelessWidget {
               : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: selected ? selectedColor : Colors.grey.shade200,
+            color: selected ? selectedColor : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -340,7 +340,7 @@ class _OptionCard extends StatelessWidget {
             Icon(
               icon,
               size: 16,
-              color: selected ? selectedColor : Colors.grey.shade500,
+              color: selected ? selectedColor : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -353,7 +353,7 @@ class _OptionCard extends StatelessWidget {
                       fontSize: 12,
                       color: selected
                           ? selectedColor
-                          : Colors.grey.shade500,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   Text(
@@ -362,7 +362,7 @@ class _OptionCard extends StatelessWidget {
                       fontSize: 10,
                       color: selected
                           ? selectedColor.withValues(alpha: 0.6)
-                          : Colors.grey.shade400,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -408,7 +408,7 @@ class _TimingButton extends StatelessWidget {
               : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: selected ? selectedColor : Colors.grey.shade200,
+            color: selected ? selectedColor : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -417,14 +417,14 @@ class _TimingButton extends StatelessWidget {
             Icon(
               icon,
               size: 14,
-              color: selected ? selectedColor : Colors.grey.shade500,
+              color: selected ? selectedColor : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: 8),
             Text(
               label,
               style: TextStyle(
                 fontSize: 12,
-                color: selected ? selectedColor : Colors.grey.shade500,
+                color: selected ? selectedColor : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -459,16 +459,16 @@ class _DateTimeRow extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           const Spacer(),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             child: Text(
               value,

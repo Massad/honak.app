@@ -8,6 +8,7 @@ import 'package:honak/features/requests/presentation/widgets/inquiry_request_she
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
+import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Gallery grid with category pills, inquiry CTA, and custom work CTA.
@@ -33,20 +34,27 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
   int _visibleCount = _pageSize;
 
   List<Item> _filterItems(List<Item> items) {
-    if (_selectedCategory == null) return items;
-    return items
-        .where((item) => item.categoryName == _selectedCategory)
-        .toList();
+    var filtered = items;
+    if (_selectedCategory != null) {
+      filtered = filtered
+          .where((item) => item.categoryName == _selectedCategory)
+          .toList();
+    }
+    return filtered.sortedByOrder((i) => i.sortOrder);
   }
 
   List<String> _extractCategories(List<Item> items) {
-    final categories = <String>{};
-    for (final item in items) {
-      if (item.categoryName != null && item.categoryName!.isNotEmpty) {
+    final sorted = items.sortedByOrder((i) => i.sortOrder);
+    final categories = <String>[];
+    final seen = <String>{};
+    for (final item in sorted) {
+      if (item.categoryName != null &&
+          item.categoryName!.isNotEmpty &&
+          seen.add(item.categoryName!)) {
         categories.add(item.categoryName!);
       }
     }
-    return categories.toList();
+    return categories;
   }
 
   void _openInquirySheet(BuildContext context) {

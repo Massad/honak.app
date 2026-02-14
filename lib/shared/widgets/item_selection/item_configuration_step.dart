@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
@@ -115,11 +116,12 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return Column(
       children: [
         // Back arrow + item header
-        _buildHeader(),
-        const Divider(height: 1, color: AppColors.divider),
+        _buildHeader(context, cs),
+        Divider(height: 1, color: cs.outlineVariant),
 
         // Scrollable content
         Expanded(
@@ -129,7 +131,7 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Item info
-                _buildItemInfo(),
+                _buildItemInfo(context, cs),
                 if (widget.item.optionGroups.isNotEmpty) ...[
                   const SizedBox(height: AppSpacing.lg),
                   ItemOptionSelector(
@@ -143,7 +145,7 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
                 ],
                 if (widget.showQuantity) ...[
                   const SizedBox(height: AppSpacing.md),
-                  _buildQuantityStepper(),
+                  _buildQuantityStepper(context, cs),
                 ],
               ],
             ),
@@ -151,12 +153,12 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
         ),
 
         // Bottom: total + confirm
-        _buildBottomBar(),
+        _buildBottomBar(context, cs),
       ],
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context, ColorScheme cs) {
     return Padding(
       padding: const EdgeInsetsDirectional.only(
         start: AppSpacing.sm,
@@ -172,16 +174,16 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
               child: Icon(Icons.arrow_forward_ios, size: 18),
             ),
             onPressed: widget.onBack,
-            color: AppColors.textSecondary,
+            color: cs.onSurfaceVariant,
             visualDensity: VisualDensity.compact,
           ),
           Expanded(
             child: Text(
               widget.item.nameAr,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: cs.onSurface,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -192,7 +194,7 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
     );
   }
 
-  Widget _buildItemInfo() {
+  Widget _buildItemInfo(BuildContext context, ColorScheme cs) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -215,19 +217,19 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
             children: [
               Text(
                 widget.item.nameAr,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: cs.onSurface,
                 ),
               ),
               if (widget.item.descriptionAr != null) ...[
                 const SizedBox(height: 4),
                 Text(
                   widget.item.descriptionAr!,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
-                    color: AppColors.textSecondary,
+                    color: cs.onSurfaceVariant,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -249,21 +251,21 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
     );
   }
 
-  Widget _buildQuantityStepper() {
+  Widget _buildQuantityStepper(BuildContext context, ColorScheme cs) {
     return Row(
       children: [
-        const Text(
+        Text(
           'الكمية',
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: cs.onSurface,
           ),
         ),
         const Spacer(),
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(color: cs.outlineVariant),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
@@ -271,6 +273,7 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
             children: [
               _StepperButton(
                 icon: Icons.remove,
+                cs: cs,
                 onTap: _quantity > 1
                     ? () => setState(() => _quantity--)
                     : null,
@@ -280,16 +283,17 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
                 child: Center(
                   child: Text(
                     '$_quantity',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: cs.onSurface,
                     ),
                   ),
                 ),
               ),
               _StepperButton(
                 icon: Icons.add,
+                cs: cs,
                 onTap: () => setState(() => _quantity++),
               ),
             ],
@@ -299,7 +303,7 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
     );
   }
 
-  Widget _buildBottomBar() {
+  Widget _buildBottomBar(BuildContext context, ColorScheme cs) {
     return Container(
       padding: EdgeInsetsDirectional.fromSTEB(
         AppSpacing.lg,
@@ -307,10 +311,10 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
         AppSpacing.lg,
         AppSpacing.md + MediaQuery.of(context).padding.bottom,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.white,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         border: Border(
-          top: BorderSide(color: AppColors.divider, width: 0.5),
+          top: BorderSide(color: cs.outlineVariant, width: 0.5),
         ),
       ),
       child: Row(
@@ -319,19 +323,19 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 'المجموع',
                 style: TextStyle(
                   fontSize: 11,
-                  color: AppColors.textSecondary,
+                  color: cs.onSurfaceVariant,
                 ),
               ),
               Text(
                 Money(_totalPrice).toFormattedArabic(),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: cs.onSurface,
                 ),
               ),
             ],
@@ -366,9 +370,10 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
 
 class _StepperButton extends StatelessWidget {
   final IconData icon;
+  final ColorScheme cs;
   final VoidCallback? onTap;
 
-  const _StepperButton({required this.icon, this.onTap});
+  const _StepperButton({required this.icon, required this.cs, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -380,7 +385,7 @@ class _StepperButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 18,
-          color: onTap != null ? AppColors.textPrimary : AppColors.divider,
+          color: onTap != null ? cs.onSurface : cs.outlineVariant,
         ),
       ),
     );

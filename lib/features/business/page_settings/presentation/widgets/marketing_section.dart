@@ -16,9 +16,9 @@ class MarketingSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -51,12 +51,12 @@ class MarketingSection extends StatelessWidget {
                 vertical: AppSpacing.sm,
               ),
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.copy, size: 14, color: Colors.grey.shade400),
+                  Icon(Icons.copy, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   const Spacer(),
                   Directionality(
                     textDirection: TextDirection.ltr,
@@ -69,7 +69,7 @@ class MarketingSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
-                  Icon(Icons.link, size: 14, color: Colors.grey.shade400),
+                  Icon(Icons.link, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ],
               ),
             ),
@@ -82,8 +82,8 @@ class MarketingSection extends StatelessWidget {
                 child: _ShareButton(
                   label: 'مشاركة',
                   icon: Icons.share_outlined,
-                  color: Colors.grey.shade600,
-                  bgColor: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
                   onTap: () => context.showSnackBar('قريباً: مشاركة'),
                 ),
               ),
@@ -92,8 +92,8 @@ class MarketingSection extends StatelessWidget {
                 child: _ShareButton(
                   label: 'رمز QR',
                   icon: Icons.qr_code,
-                  color: Colors.grey.shade600,
-                  bgColor: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
                   onTap: () => context.showSnackBar('قريباً: رمز QR'),
                 ),
               ),
@@ -102,7 +102,7 @@ class MarketingSection extends StatelessWidget {
                 child: _ShareButton(
                   label: 'واتساب',
                   icon: Icons.chat,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   bgColor: const Color(0xFF25D366),
                   onTap: () => context.showSnackBar('قريباً: واتساب'),
                 ),
@@ -116,7 +116,7 @@ class MarketingSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: page.isVerified
                   ? AppColors.primary.withValues(alpha: 0.05)
-                  : Colors.grey.shade50,
+                  : Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -125,7 +125,7 @@ class MarketingSection extends StatelessWidget {
                   Icon(
                     Icons.chevron_left,
                     size: 16,
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.outline,
                   ),
                 const Spacer(),
                 Column(
@@ -169,7 +169,7 @@ class MarketingSection extends StatelessWidget {
                           : 'احصل على شارة التوثيق لزيادة الثقة',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -180,7 +180,7 @@ class MarketingSection extends StatelessWidget {
                   size: 20,
                   color: page.isVerified
                       ? AppColors.primary
-                      : Colors.grey.shade300,
+                      : Theme.of(context).colorScheme.outline,
                 ),
               ],
             ),

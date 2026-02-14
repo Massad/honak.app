@@ -86,6 +86,11 @@
   "createPost": "نشر",
   "catalog": "المنتجات",
   "settings": "الإعدادات",
+  "appLanguage": "لغة التطبيق",
+  "appearance": "المظهر",
+  "aboutApp": "حول التطبيق",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountConfirm": "هل أنت متأكد من حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.",
 
   "feed": "آخر الأخبار",
   "newPost": "منشور جديد",

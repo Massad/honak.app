@@ -88,7 +88,7 @@ class _CategoryItem extends StatelessWidget {
             child: Icon(
               icon,
               size: 20,
-              color: Colors.white,
+              color: context.colorScheme.surface,
             ),
           ),
           SizedBox(height: AppSpacing.xs + 2), // 6px

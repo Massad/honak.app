@@ -120,16 +120,16 @@ class _BranchCardState extends ConsumerState<BranchCard> {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
           // Collapsed header — always visible
           Material(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             child: InkWell(
               onTap: () => setState(() => _expanded = !_expanded),
               child: Padding(
@@ -141,7 +141,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
                           ? Icons.keyboard_arrow_up
                           : Icons.keyboard_arrow_down,
                       size: 20,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const Spacer(),
                     Column(
@@ -161,7 +161,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
                                 .join('، '),
                             style: TextStyle(
                               fontSize: 11,
-                              color: Colors.grey.shade500,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                       ],
@@ -189,7 +189,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
 
           // Expanded editing section
           if (_expanded) ...[
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
             Padding(
               padding: const EdgeInsets.all(AppSpacing.md),
               child: Column(
@@ -256,7 +256,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
                     'حالة الفرع',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -329,7 +329,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
           label,
           style: TextStyle(
             fontSize: 11,
-            color: Colors.grey.shade500,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -350,11 +350,11 @@ class _BranchCardState extends ConsumerState<BranchCard> {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
           ),
         ),
@@ -376,7 +376,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
           label,
           style: TextStyle(
             fontSize: 11,
-            color: Colors.grey.shade500,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -386,8 +386,8 @@ class _BranchCardState extends ConsumerState<BranchCard> {
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey.shade200),
-            color: enabled ? Colors.white : Colors.grey.shade50,
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+            color: enabled ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.surfaceContainerLowest,
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
@@ -398,7 +398,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
                 'اختر',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               items: items.map((item) {
@@ -453,7 +453,7 @@ class _StatusToggle extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                color: isSelected ? color : Colors.grey.shade500,
+                color: isSelected ? color : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),

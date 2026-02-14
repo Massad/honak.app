@@ -406,7 +406,7 @@ class _GradientSwatches extends StatelessWidget {
                 end: Alignment.bottomRight,
               ),
               border:
-                  isSel ? Border.all(color: Colors.white, width: 2.5) : null,
+                  isSel ? Border.all(color: Theme.of(context).colorScheme.surface, width: 2.5) : null,
             ),
           ),
         );
@@ -439,7 +439,7 @@ class _SolidSwatches extends StatelessWidget {
               color: _parseHex(c),
               borderRadius: BorderRadius.circular(10),
               border:
-                  isSel ? Border.all(color: Colors.white, width: 2.5) : null,
+                  isSel ? Border.all(color: Theme.of(context).colorScheme.surface, width: 2.5) : null,
             ),
           ),
         );
@@ -512,7 +512,7 @@ class _FontPanel extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
-                      color: isSel ? Colors.white : Colors.white10,
+                      color: isSel ? Theme.of(context).colorScheme.surface : Colors.white10,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     alignment: Alignment.center,
@@ -558,7 +558,7 @@ class _FontPanel extends StatelessWidget {
                     child: Text(
                       'أ',
                       style: TextStyle(
-                        color: isSel ? Colors.white : Colors.white54,
+                        color: isSel ? Theme.of(context).colorScheme.surface : Colors.white54,
                         fontSize: _previewSizes[i],
                         fontWeight: FontWeight.w600,
                       ),

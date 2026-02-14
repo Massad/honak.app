@@ -136,13 +136,13 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
           Icon(
             Icons.inbox_outlined,
             size: 36,
-            color: Colors.grey.shade300,
+            color: Theme.of(context).colorScheme.outline,
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
             'لا توجد قطع قيد المعالجة حالياً',
             style: context.textTheme.bodySmall?.copyWith(
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 12,
             ),
           ),
@@ -151,7 +151,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
             'يمكنك إحضار قطعك للمحل وسنتابع حالتها هنا',
             textAlign: TextAlign.center,
             style: context.textTheme.labelSmall?.copyWith(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               fontSize: 10,
             ),
           ),
@@ -199,14 +199,14 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                         vertical: AppSpacing.xxs,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
                         borderRadius: AppRadius.pill,
                       ),
                       child: Text(
                         ticket.ticketNumber,
                         textDirection: TextDirection.ltr,
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: Colors.grey.shade700,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -217,7 +217,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                       child: Text(
                         '${ticket.items.length} قطع',
                         style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 10,
                         ),
                       ),
@@ -229,7 +229,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                           ? Icons.keyboard_arrow_up_rounded
                           : Icons.keyboard_arrow_down_rounded,
                       size: 18,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ],
                 ),
@@ -284,14 +284,14 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                           Icon(
                             Icons.checkroom_rounded,
                             size: 12,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: AppSpacing.xs),
                           Expanded(
                             child: Text(
                               '${item.name} × ${item.quantity}',
                               style: context.textTheme.labelSmall?.copyWith(
-                                color: Colors.grey.shade600,
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 fontSize: 10,
                               ),
                             ),
@@ -299,7 +299,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                           Text(
                             item.service,
                             style: context.textTheme.labelSmall?.copyWith(
-                              color: Colors.grey.shade400,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                               fontSize: 10,
                             ),
                           ),
@@ -322,13 +322,13 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                         Icon(
                           Icons.event_rounded,
                           size: 12,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           'الموعد المتوقع: ${_formatDate(ticket.estimatedReadyAt)}',
                           style: context.textTheme.labelSmall?.copyWith(
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                             fontSize: 10,
                           ),
                         ),
@@ -342,13 +342,13 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                         Icon(
                           Icons.payments_outlined,
                           size: 12,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           'الإجمالي: ${Money(ticket.totalPrice).toFormattedArabic()}',
                           style: context.textTheme.labelSmall?.copyWith(
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                             fontSize: 10,
                           ),
                         ),
@@ -405,7 +405,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
               height: 2,
               color: stepIdx < activeIdx
                   ? _statusColor(steps[stepIdx])
-                  : Colors.grey.shade200,
+                  : Theme.of(context).colorScheme.outlineVariant,
             ),
           );
         }
@@ -418,7 +418,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
           decoration: BoxDecoration(
             color: isActive
                 ? _statusColor(steps[stepIdx])
-                : Colors.grey.shade200,
+                : Theme.of(context).colorScheme.outlineVariant,
             shape: BoxShape.circle,
           ),
         );
@@ -446,19 +446,19 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                       ? Icons.keyboard_arrow_up_rounded
                       : Icons.keyboard_arrow_down_rounded,
                   size: 14,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
                   'طلبات سابقة (${_pastTickets.length})',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     fontSize: 12,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
-                  child: Divider(color: Colors.grey.shade100, height: 1),
+                  child: Divider(color: Theme.of(context).colorScheme.outlineVariant, height: 1),
                 ),
               ],
             ),
@@ -481,7 +481,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
         child: Container(
           padding: const EdgeInsetsDirectional.all(AppSpacing.md),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade100),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             borderRadius: AppRadius.cardInner,
           ),
           child: Row(
@@ -490,7 +490,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
                 child: Icon(
@@ -508,13 +508,13 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                       ticket.ticketNumber,
                       textDirection: TextDirection.ltr,
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     Text(
                       '${ticket.items.length} قطع · ${price.toFormattedArabic()}',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),
@@ -524,7 +524,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
               Text(
                 _formatDate(ticket.pickedUpAt ?? ticket.completedAt ?? ''),
                 style: context.textTheme.labelSmall?.copyWith(
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 10,
                 ),
               ),
@@ -556,21 +556,21 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
         DropoffStatus.received => const Color(0xFFEFF6FF),
         DropoffStatus.processing => const Color(0xFFFFF8E1),
         DropoffStatus.ready => const Color(0xFFF0FDF4),
-        _ => Colors.grey.shade50,
+        _ => Theme.of(context).colorScheme.surfaceContainerLowest,
       };
 
   Color _statusTextColor(DropoffStatus status) => switch (status) {
         DropoffStatus.received => const Color(0xFF1A73E8),
         DropoffStatus.processing => const Color(0xFFFF9800),
         DropoffStatus.ready => const Color(0xFF43A047),
-        _ => Colors.grey.shade500,
+        _ => Theme.of(context).colorScheme.onSurfaceVariant,
       };
 
   Color _statusBorderColor(DropoffStatus status) => switch (status) {
         DropoffStatus.received => const Color(0xFFBFDBFE),
         DropoffStatus.processing => const Color(0xFFFFE082),
         DropoffStatus.ready => const Color(0xFFBBF7D0),
-        _ => Colors.grey.shade100,
+        _ => Theme.of(context).colorScheme.surfaceContainerLow,
       };
 
   String _formatDate(String timestamp) {

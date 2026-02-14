@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -84,19 +85,19 @@ class DeliverySummary extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'ملخص المسار',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     Text(
                       '${truck.name} \u2014 ${truck.driverName} \u00B7 $today',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 10,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -107,21 +108,21 @@ class DeliverySummary extends StatelessWidget {
                 child: Container(
                   width: 32,
                   height: 32,
-                  decoration: const BoxDecoration(
-                    color: AppColors.surfaceVariant,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.surfaceVariant,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
                     size: 14,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
             ],
           ),
         ),
-        const Divider(height: 1, color: AppColors.divider),
+        Divider(height: 1, color: context.colorScheme.outlineVariant),
         // Content
         Flexible(
           child: ListView(
@@ -140,9 +141,9 @@ class DeliverySummary extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(
                           'المدة: $hours ساعة${mins > 0 ? ' $mins دقيقة' : ''}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.textPrimary,
+                            color: context.colorScheme.onSurface,
                           ),
                         ),
                       ],
@@ -257,7 +258,7 @@ class DeliverySummary extends StatelessWidget {
                           label: 'على الحساب',
                           value: '$accountUnits وحدة',
                           leadingIcon: Icons.description_outlined,
-                          leadingIconColor: AppColors.textHint,
+                          leadingIconColor: context.colorScheme.onSurfaceVariant,
                         ),
                         const Divider(height: 16),
                         _Row(
@@ -301,9 +302,9 @@ class DeliverySummary extends StatelessWidget {
                                   children: [
                                     Text(
                                       q.customerName,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 10,
-                                        color: AppColors.textSecondary,
+                                        color: context.colorScheme.onSurfaceVariant,
                                       ),
                                     ),
                                     Text(
@@ -327,18 +328,18 @@ class DeliverySummary extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(AppSpacing.md),
                         decoration: BoxDecoration(
-                          color: AppColors.surfaceVariant,
-                          border: Border.all(color: AppColors.divider),
+                          color: context.colorScheme.surfaceVariant,
+                          border: Border.all(color: context.colorScheme.outlineVariant),
                           borderRadius: AppRadius.cardInner,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'ملاحظات السائق:',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textPrimary,
+                                color: context.colorScheme.onSurface,
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -352,16 +353,16 @@ class DeliverySummary extends StatelessWidget {
                                     children: [
                                       TextSpan(
                                         text: '${q.customerName}: ',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 10,
-                                          color: AppColors.textPrimary,
+                                          color: context.colorScheme.onSurface,
                                         ),
                                       ),
                                       TextSpan(
                                         text: q.deliveryNote,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 10,
-                                          color: AppColors.textSecondary,
+                                          color: context.colorScheme.onSurfaceVariant,
                                         ),
                                       ),
                                     ],
@@ -400,18 +401,18 @@ class DeliverySummary extends StatelessWidget {
                                       const SizedBox(width: 4),
                                       Text(
                                         '${sourceLabels[e.key] ?? e.key.name}: ${e.value}',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 12,
-                                          color: AppColors.textPrimary,
+                                          color: context.colorScheme.onSurface,
                                         ),
                                       ),
                                     ],
                                   ),
                                   Text(
                                     '$pct%',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 12,
-                                      color: AppColors.textHint,
+                                      color: context.colorScheme.onSurfaceVariant,
                                     ),
                                   ),
                                 ],
@@ -455,9 +456,9 @@ class DeliverySummary extends StatelessWidget {
                                   children: [
                                     Text(
                                       '${q.customerName} \u2014 ${_skipReasonLabel(q.skipReason)}',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 10,
-                                        color: AppColors.textSecondary,
+                                        color: context.colorScheme.onSurfaceVariant,
                                       ),
                                     ),
                                     Text(
@@ -493,7 +494,7 @@ class DeliverySummary extends StatelessWidget {
                               label: const Text('إنهاء المسار'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.primary,
-                                foregroundColor: AppColors.white,
+                                foregroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: AppRadius.cardInner,
                                 ),
@@ -515,13 +516,13 @@ class DeliverySummary extends StatelessWidget {
                             width: 48,
                             height: 48,
                             decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.divider),
+                              border: Border.all(color: context.colorScheme.outlineVariant),
                               borderRadius: AppRadius.cardInner,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.share,
                               size: 16,
-                              color: AppColors.textSecondary,
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
@@ -584,9 +585,9 @@ class _StatCard extends StatelessWidget {
             ),
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 9,
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -616,12 +617,12 @@ class _SectionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border.all(color: AppColors.divider.withAlpha(100)),
+        color: context.colorScheme.surface,
+        border: Border.all(color: context.colorScheme.outlineVariant.withAlpha(100)),
         borderRadius: AppRadius.cardInner,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withAlpha(8),
+            color: Theme.of(context).colorScheme.onSurface.withAlpha(8),
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
@@ -636,10 +637,10 @@ class _SectionCard extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
             ],
@@ -689,7 +690,7 @@ class _Row extends StatelessWidget {
                 label,
                 style: TextStyle(
                   fontSize: 12,
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                   fontWeight: bold ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
@@ -699,7 +700,7 @@ class _Row extends StatelessWidget {
             value,
             style: TextStyle(
               fontSize: 12,
-              color: valueColor ?? AppColors.textSecondary,
+              color: valueColor ?? context.colorScheme.onSurfaceVariant,
               fontWeight: bold ? FontWeight.w600 : FontWeight.normal,
             ),
           ),

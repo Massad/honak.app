@@ -45,7 +45,7 @@ class MemberPermissionsTab extends ConsumerWidget {
             padding: const EdgeInsets.only(bottom: AppSpacing.md),
             child: Text(
               'المشرف الرئيسي يملك جميع الصلاحيات',
-              style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
               textAlign: TextAlign.end,
             ),
           ),
@@ -114,14 +114,14 @@ class _PermissionRow extends StatelessWidget {
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                     color:
-                        enabled ? Colors.grey.shade800 : Colors.grey.shade400,
+                        enabled ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Text(
                   perm.descAr,
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -134,7 +134,7 @@ class _PermissionRow extends StatelessWidget {
             size: 20,
             color: enabled
                 ? AppColors.primary.withValues(alpha: 0.6)
-                : Colors.grey.shade300,
+                : Theme.of(context).colorScheme.outline,
           ),
         ],
       ),

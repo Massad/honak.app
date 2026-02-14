@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Drag handle bar at the top of the booking bottom sheet.
 class BookingSheetDragHandle extends StatelessWidget {
@@ -17,7 +18,7 @@ class BookingSheetDragHandle extends StatelessWidget {
           width: 40,
           height: 4,
           decoration: BoxDecoration(
-            color: AppColors.divider,
+            color: context.colorScheme.outlineVariant,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -51,7 +52,7 @@ class BookingSheetHeader extends StatelessWidget {
             onPressed: onClose,
             icon: const Icon(Icons.close, size: 20),
             style: IconButton.styleFrom(
-              foregroundColor: AppColors.textHint,
+              foregroundColor: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -74,7 +75,7 @@ class BookingBusinessLabel extends StatelessWidget {
         Text(
           'حجز في',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(width: AppSpacing.sm),
         Text(
@@ -103,7 +104,7 @@ class BookingNoteField extends StatelessWidget {
           'ملاحظة (اختياري)',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -114,16 +115,16 @@ class BookingNoteField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'أي ملاحظات إضافية...',
             hintStyle: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
             filled: true,
-            fillColor: AppColors.surfaceVariant,
+            fillColor: context.colorScheme.surfaceContainerLow,
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,

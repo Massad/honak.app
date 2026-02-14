@@ -60,7 +60,7 @@ class _TeamManagementState extends ConsumerState<TeamManagement> {
             error: (_, __) => Center(
               child: Text(
                 'تعذر تحميل الفريق',
-                style: TextStyle(color: Colors.grey.shade400),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ),
           ),
@@ -217,7 +217,7 @@ class _OwnerCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 'جميع الصلاحيات',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -239,7 +239,7 @@ class _OwnerCard extends StatelessWidget {
                     owner.phone!,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -344,14 +344,14 @@ class _EmptyTeamState extends StatelessWidget {
           Text(
             'لا يوجد أعضاء بعد',
             style: context.textTheme.bodyMedium?.copyWith(
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             'أضف أعضاء فريقك وحدد صلاحيات كل واحد',
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ],
       ),

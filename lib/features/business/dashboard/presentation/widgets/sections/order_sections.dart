@@ -34,7 +34,7 @@ class ActiveQueueSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: isPreparing
                   ? Colors.orange.shade50
-                  : Colors.grey.shade50,
+                  : Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -46,7 +46,7 @@ class ActiveQueueSection extends StatelessWidget {
                       : 'بانتظار',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
@@ -55,7 +55,7 @@ class ActiveQueueSection extends StatelessWidget {
                   child: Text(
                     '$customer — $orderItems',
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: Colors.grey.shade800,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     textAlign: TextAlign.end,
                     maxLines: 1,
@@ -71,7 +71,7 @@ class ActiveQueueSection extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: isPreparing
                         ? Colors.orange
-                        : Colors.grey.shade300,
+                        : Theme.of(context).colorScheme.outline,
                   ),
                 ),
               ],
@@ -191,7 +191,7 @@ class BestSellersSection extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: i < 3
                       ? AppColors.success.withValues(alpha: 0.1)
-                      : Colors.grey.shade100,
+                      : Theme.of(context).colorScheme.surfaceContainerLow,
                 ),
                 child: Center(
                   child: Text(
@@ -199,7 +199,7 @@ class BestSellersSection extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      color: i < 3 ? AppColors.success : Colors.grey.shade500,
+                      color: i < 3 ? AppColors.success : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -248,6 +248,6 @@ class BestSellersSection extends StatelessWidget {
   Color _trendColor(String trend) => switch (trend) {
         'up' => AppColors.success,
         'down' => AppColors.error,
-        _ => Colors.grey,
+        _ => Colors.grey.shade500,
       };
 }

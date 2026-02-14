@@ -84,7 +84,11 @@ class _FeaturedTenantCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: item != null
-          ? () => context.push(Routes.productPath(item!.id))
+          ? () => context.push(
+                item!.pageId != null
+                    ? Routes.pagePath(item!.pageId!)
+                    : Routes.productPath(item!.id),
+              )
           : null,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -122,6 +126,21 @@ class _FeaturedTenantCell extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
+          // Floor · Unit
+          if (item?.categoryName != null || item?.descriptionAr != null)
+            Text(
+              [
+                if (item?.categoryName != null) item!.categoryName!,
+                if (item?.descriptionAr != null) item!.descriptionAr!,
+              ].join(' \u00b7 '),
+              style: context.textTheme.labelSmall?.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+                fontSize: 9,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
         ],
       ),
     );

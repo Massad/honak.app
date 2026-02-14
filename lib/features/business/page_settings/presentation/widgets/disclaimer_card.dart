@@ -25,9 +25,9 @@ class DisclaimerCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -64,7 +64,7 @@ class DisclaimerCard extends StatelessWidget {
               hintText: 'عنوان التنبيه',
               hintStyle: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               isDense: true,
               contentPadding: const EdgeInsets.symmetric(
@@ -74,12 +74,12 @@ class DisclaimerCard extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide:
-                    BorderSide(color: Colors.grey.shade200),
+                    BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide:
-                    BorderSide(color: Colors.grey.shade200),
+                    BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
             ),
           ),
@@ -94,7 +94,7 @@ class DisclaimerCard extends StatelessWidget {
               hintText: 'نص التنبيه',
               hintStyle: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               isDense: true,
               contentPadding: const EdgeInsets.symmetric(
@@ -104,12 +104,12 @@ class DisclaimerCard extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide:
-                    BorderSide(color: Colors.grey.shade200),
+                    BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide:
-                    BorderSide(color: Colors.grey.shade200),
+                    BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
             ),
           ),

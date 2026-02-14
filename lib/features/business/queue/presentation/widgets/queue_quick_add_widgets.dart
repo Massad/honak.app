@@ -16,10 +16,10 @@ class _PackageCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(AppSpacing.lg),
+        padding: EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
-          color: AppColors.surface,
-          border: Border.all(color: Colors.grey.shade200),
+          color: context.colorScheme.surface,
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           borderRadius: AppRadius.cardInner,
         ),
         child: Row(
@@ -29,7 +29,7 @@ class _PackageCard extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 borderRadius: AppRadius.cardInner,
               ),
               alignment: Alignment.center,
@@ -65,12 +65,12 @@ class _PackageCard extends StatelessWidget {
                             color: AppColors.primary,
                             borderRadius: AppRadius.pill,
                           ),
-                          child: const Text(
+                          child: Text(
                             'الأكثر طلباً',
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.surface,
                             ),
                           ),
                         ),
@@ -83,7 +83,7 @@ class _PackageCard extends StatelessWidget {
                       package.descriptionAr!,
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -100,14 +100,14 @@ class _PackageCard extends StatelessWidget {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade50,
+                                  color: Theme.of(context).colorScheme.surfaceContainerLowest,
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
                                   f,
                                   style: TextStyle(
                                     fontSize: 9,
-                                    color: Colors.grey.shade400,
+                                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                               ),
@@ -117,7 +117,7 @@ class _PackageCard extends StatelessWidget {
                             '+${package.features.length - 3}',
                             style: TextStyle(
                               fontSize: 9,
-                              color: Colors.grey.shade400,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                       ],
@@ -141,7 +141,7 @@ class _PackageCard extends StatelessWidget {
                   'د.أ',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.xs),
@@ -149,7 +149,7 @@ class _PackageCard extends StatelessWidget {
                   '~${package.durationMin} د',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -176,7 +176,7 @@ class _PackageSummary extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: AppRadius.cardInner,
       ),
       child: Row(
@@ -185,7 +185,7 @@ class _PackageSummary extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(AppRadius.sm),
             ),
             alignment: Alignment.center,
@@ -210,7 +210,7 @@ class _PackageSummary extends StatelessWidget {
                   '~${package.durationMin} دقيقة',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -254,7 +254,7 @@ class _FieldLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+      style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
     );
   }
 }
@@ -290,7 +290,7 @@ class _ChipGroup extends StatelessWidget {
                 vertical: AppSpacing.sm,
               ),
               decoration: BoxDecoration(
-                color: isSelected ? AppColors.primary : Colors.grey.shade100,
+                color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: AppRadius.pill,
               ),
               child: Text(
@@ -298,7 +298,7 @@ class _ChipGroup extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
-                  color: isSelected ? Colors.white : Colors.grey.shade500,
+                  color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -315,7 +315,7 @@ class _ChipGroup extends StatelessWidget {
               decoration: BoxDecoration(
                 color: selected == _kOtherValue
                     ? AppColors.primary
-                    : Colors.grey.shade100,
+                    : Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: AppRadius.pill,
               ),
               child: Row(
@@ -326,7 +326,7 @@ class _ChipGroup extends StatelessWidget {
                     size: 14,
                     color: selected == _kOtherValue
                         ? Colors.white
-                        : Colors.grey.shade500,
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 4),
                   Text(
@@ -336,7 +336,7 @@ class _ChipGroup extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       color: selected == _kOtherValue
                           ? Colors.white
-                          : Colors.grey.shade500,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -348,29 +348,29 @@ class _ChipGroup extends StatelessWidget {
   }
 }
 
-InputDecoration _inputDecoration({
+InputDecoration _inputDecoration(BuildContext context, {
   String? hint,
   IconData? prefixIcon,
 }) {
   return InputDecoration(
     hintText: hint,
-    hintStyle: TextStyle(fontSize: 13, color: Colors.grey.shade300),
+    hintStyle: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.outline),
     prefixIcon: prefixIcon != null
-        ? Icon(prefixIcon, size: 16, color: Colors.grey.shade300)
+        ? Icon(prefixIcon, size: 16, color: Theme.of(context).colorScheme.outline)
         : null,
     filled: true,
-    fillColor: Colors.grey.shade50,
+    fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
     contentPadding: const EdgeInsetsDirectional.symmetric(
       horizontal: AppSpacing.md,
       vertical: AppSpacing.md,
     ),
     border: OutlineInputBorder(
       borderRadius: AppRadius.cardInner,
-      borderSide: BorderSide(color: Colors.grey.shade200),
+      borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: AppRadius.cardInner,
-      borderSide: BorderSide(color: Colors.grey.shade200),
+      borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: AppRadius.cardInner,

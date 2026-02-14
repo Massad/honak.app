@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// FG2: Branch selector for booking sheet (when multiple branches exist).
 class BookingBranchSelector extends StatelessWidget {
@@ -27,7 +28,7 @@ class BookingBranchSelector extends StatelessWidget {
           'الفرع',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -51,12 +52,12 @@ class BookingBranchSelector extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppColors.primary
-                          : Colors.white,
+                          : context.colorScheme.surface,
                       borderRadius: AppRadius.cardInner,
                       border: Border.all(
                         color: isSelected
                             ? AppColors.primary
-                            : AppColors.divider,
+                            : context.colorScheme.outlineVariant,
                       ),
                     ),
                     child: Row(
@@ -66,7 +67,7 @@ class BookingBranchSelector extends StatelessWidget {
                             size: 12,
                             color: isSelected
                                 ? Colors.white
-                                : AppColors.textSecondary),
+                                : context.colorScheme.onSurfaceVariant),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           branch,
@@ -74,7 +75,7 @@ class BookingBranchSelector extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: isSelected
                                 ? Colors.white
-                                : AppColors.textSecondary,
+                                : context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],

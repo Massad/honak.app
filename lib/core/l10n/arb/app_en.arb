@@ -86,6 +86,11 @@
   "createPost": "Post",
   "catalog": "Catalog",
   "settings": "Settings",
+  "appLanguage": "App Language",
+  "appearance": "Appearance",
+  "aboutApp": "About",
+  "deleteAccount": "Delete Account",
+  "deleteAccountConfirm": "Are you sure you want to delete your account? This action cannot be undone.",
 
   "feed": "Feed",
   "newPost": "New Post",

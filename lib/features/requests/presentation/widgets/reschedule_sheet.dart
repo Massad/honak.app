@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/customer_request.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Bottom sheet for rescheduling a booking or reservation.
 class RescheduleSheet extends StatefulWidget {
@@ -40,8 +41,8 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height * 0.85,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(AppRadius.xxl)),
       ),
@@ -55,7 +56,7 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: AppColors.divider,
+                color: context.colorScheme.outlineVariant,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -82,7 +83,7 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
               ],
             ),
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.colorScheme.outlineVariant),
           // Content
           Flexible(
             child: ListView(
@@ -147,10 +148,10 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
               top: AppSpacing.md,
               bottom: AppSpacing.lg,
             ),
-            decoration: const BoxDecoration(
-              color: AppColors.surface,
+            decoration: BoxDecoration(
+              color: context.colorScheme.surface,
               border: Border(
-                  top: BorderSide(color: AppColors.divider, width: 0.5)),
+                  top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
             ),
             child: SafeArea(
               top: false,
@@ -162,7 +163,7 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
                   label: const Text('\u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628 \u0627\u0644\u062a\u0639\u062f\u064a\u0644'),
                   style: FilledButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    disabledBackgroundColor: AppColors.divider,
+                    disabledBackgroundColor: context.colorScheme.outlineVariant,
                     padding: const EdgeInsets.symmetric(
                         vertical: AppSpacing.md),
                     shape: RoundedRectangleBorder(
@@ -181,7 +182,7 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
   Widget _buildFieldLabel(TextTheme textTheme, String text) {
     return Text(
       text,
-      style: textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+      style: textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurfaceVariant),
     );
   }
 
@@ -199,16 +200,16 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: textTheme.bodySmall?.copyWith(color: AppColors.textHint),
+        hintStyle: textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurfaceVariant),
         filled: true,
-        fillColor: AppColors.surfaceVariant,
+        fillColor: context.colorScheme.surfaceContainerLow,
         border: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
-          borderSide: const BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: context.colorScheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
-          borderSide: const BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: context.colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: AppRadius.cardInner,
@@ -238,16 +239,16 @@ class _CurrentBookingCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: context.colorScheme.surfaceContainerLow,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: AppColors.divider.withValues(alpha: 0.5)),
+        border: Border.all(color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '\u0627\u0644\u062d\u062c\u0632 \u0627\u0644\u062d\u0627\u0644\u064a',
-            style: textTheme.labelSmall?.copyWith(color: AppColors.textHint),
+            style: textTheme.labelSmall?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           if (request.description != null)
@@ -282,13 +283,13 @@ class _InfoRow extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Row(
         children: [
-          Icon(icon, size: 14, color: AppColors.textHint),
+          Icon(icon, size: 14, color: context.colorScheme.onSurfaceVariant),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               text,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
             ),
           ),

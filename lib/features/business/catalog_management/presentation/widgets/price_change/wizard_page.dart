@@ -169,7 +169,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
           _buildHeader(context),
@@ -190,8 +190,8 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
         bottom: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+        color: Theme.of(context).colorScheme.surface,
+        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       child: Column(
         children: [
@@ -220,7 +220,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
                 child: Text(
                   '${_step + 1} من 5',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -240,7 +240,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
                   decoration: BoxDecoration(
                     color: isFilled
                         ? AppColors.primary
-                        : Colors.grey.shade200,
+                        : Theme.of(context).colorScheme.outlineVariant,
                     borderRadius: AppRadius.pill,
                   ),
                 ),
@@ -345,8 +345,8 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
         AppSpacing.md + bottomPadding,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade100)),
+        color: Theme.of(context).colorScheme.surface,
+        border: Border(top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       child: Row(
         textDirection: TextDirection.ltr,
@@ -355,7 +355,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
             onPressed: _onBack,
             child: Text(
               _step == 0 ? 'إلغاء' : 'السابق',
-              style: TextStyle(color: Colors.grey.shade600),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ),
           const Spacer(),

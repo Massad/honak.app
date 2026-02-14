@@ -25,7 +25,6 @@ class AccountPage extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -134,7 +133,6 @@ class _GuestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxxl),
@@ -146,12 +144,12 @@ class _GuestView extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.grey.shade200,
+                  color: context.colorScheme.surfaceContainer,
                 ),
                 child: Icon(
                   Icons.person_outline,
                   size: 40,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),
@@ -165,7 +163,7 @@ class _GuestView extends StatelessWidget {
               Text(
                 '\u0633\u062c\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0644\u0625\u062f\u0627\u0631\u0629 \u062d\u0633\u0627\u0628\u0643 \u0648\u0637\u0644\u0628\u0627\u062a\u0643',
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: Colors.grey.shade600,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -195,7 +193,7 @@ class _SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),

@@ -148,7 +148,7 @@ class CatalogStrategy extends ConsumerWidget {
               Text(
                 'اختر طريقة عرض منتجاتك للعملاء',
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.end,
               ),
@@ -279,7 +279,7 @@ class _CategoryPills extends StatelessWidget {
             decoration: BoxDecoration(
               color: isSelected
                   ? AppColors.primary
-                  : Colors.grey.shade100,
+                  : Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Text(
@@ -287,7 +287,7 @@ class _CategoryPills extends StatelessWidget {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
-                color: isSelected ? Colors.white : Colors.grey.shade700,
+                color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -317,7 +317,7 @@ class _StrategyCard extends StatelessWidget {
     return Material(
       color: selected
           ? AppColors.primary.withValues(alpha: 0.04)
-          : Colors.white,
+          : Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -329,7 +329,7 @@ class _StrategyCard extends StatelessWidget {
             border: Border.all(
               color: selected
                   ? AppColors.primary.withValues(alpha: 0.3)
-                  : Colors.grey.shade100,
+                  : Theme.of(context).colorScheme.surfaceContainerLow,
             ),
           ),
           child: Row(
@@ -344,15 +344,15 @@ class _StrategyCard extends StatelessWidget {
                   border: Border.all(
                     color: selected
                         ? AppColors.primary
-                        : Colors.grey.shade300,
+                        : Theme.of(context).colorScheme.outline,
                     width: 2,
                   ),
                 ),
                 child: selected
-                    ? const Icon(
+                    ? Icon(
                         Icons.check,
                         size: 14,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       )
                     : null,
               ),
@@ -375,7 +375,7 @@ class _StrategyCard extends StatelessWidget {
                       desc,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       textAlign: TextAlign.end,
                     ),
@@ -389,7 +389,7 @@ class _StrategyCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: selected
                       ? AppColors.primary.withValues(alpha: 0.1)
-                      : Colors.grey.shade50,
+                      : Theme.of(context).colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
@@ -397,7 +397,7 @@ class _StrategyCard extends StatelessWidget {
                   size: 20,
                   color: selected
                       ? AppColors.primary
-                      : Colors.grey.shade400,
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

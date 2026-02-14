@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/cart.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 export 'order_delivery_sections.dart';
 
@@ -22,13 +23,13 @@ class OrderCartSummary extends StatelessWidget {
         Text(
           'المنتجات',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         Container(
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
+            color: context.colorScheme.surfaceContainerLow,
             borderRadius: AppRadius.cardInner,
           ),
           child: Column(
@@ -68,7 +69,7 @@ class OrderCartSummary extends StatelessWidget {
                                 Text(
                                   item.variation!,
                                   style: theme.textTheme.labelSmall?.copyWith(
-                                    color: AppColors.textHint,
+                                    color: context.colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                             ],
@@ -77,7 +78,7 @@ class OrderCartSummary extends StatelessWidget {
                         Text(
                           item.lineTotal.toFormattedArabic(),
                           style: theme.textTheme.bodySmall
-                              ?.copyWith(color: AppColors.textSecondary),
+                              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                         ),
                       ],
                     ),
@@ -123,7 +124,7 @@ class DeliveryToggle extends StatelessWidget {
         Text(
           'طريقة الاستلام',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         Row(
@@ -169,17 +170,17 @@ class _ToggleButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary : Colors.white,
+          color: selected ? AppColors.primary : context.colorScheme.surface,
           borderRadius: AppRadius.cardInner,
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.divider,
+            color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
           ),
         ),
         alignment: Alignment.center,
         child: Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: selected ? Colors.white : AppColors.textSecondary,
+                color: selected ? Colors.white : context.colorScheme.onSurfaceVariant,
               ),
         ),
       ),
@@ -203,7 +204,7 @@ class OrderNoteField extends StatelessWidget {
         Text(
           'ملاحظة (اختياري)',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         TextFormField(
@@ -213,16 +214,16 @@ class OrderNoteField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'مثال: الرجاء التوصيل الصباح...',
             hintStyle: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
             filled: true,
-            fillColor: AppColors.surfaceVariant,
+            fillColor: context.colorScheme.surfaceContainerLow,
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,

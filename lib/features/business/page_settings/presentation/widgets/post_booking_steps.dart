@@ -27,47 +27,41 @@ class PostBookingSteps extends ConsumerWidget {
           onClose: onClose,
         ),
         Expanded(
-          child: ReorderableListView.builder(
+          child: ListView(
             padding: const EdgeInsets.all(AppSpacing.lg),
-            itemCount: steps.length + 2,
-            onReorder: (oldIndex, newIndex) {
-              if (oldIndex >= steps.length ||
-                  newIndex > steps.length) {
-                return;
-              }
-              if (newIndex > oldIndex) newIndex--;
-              final reordered =
-                  List<PostBookingStep>.from(steps);
-              final item = reordered.removeAt(oldIndex);
-              reordered.insert(newIndex, item);
-              ref
-                  .read(pageSettingsProvider.notifier)
-                  .reorderPostBookingSteps(reordered);
-            },
-            itemBuilder: (context, index) {
-              // Add button
-              if (index == steps.length) {
-                return _AddStepButton(
-                  key: const ValueKey('add_button'),
-                  stepsCount: steps.length,
-                );
-              }
-
-              // Templates button
-              if (index == steps.length + 1) {
-                return _TemplatesButton(
-                  key: const ValueKey('template_button'),
-                );
-              }
-
-              final step = steps[index];
-              return _StepItem(
-                key: ValueKey('step_${step.id}'),
-                step: step,
-                index: index,
-                isLast: index == steps.length - 1,
-              );
-            },
+            children: [
+              for (var index = 0; index < steps.length; index++)
+                _StepItem(
+                  key: ValueKey('step_${steps[index].id}'),
+                  step: steps[index],
+                  index: index,
+                  isLast: index == steps.length - 1,
+                  onMoveUp: index > 0
+                      ? () {
+                          final reordered =
+                              List<PostBookingStep>.from(steps);
+                          final item = reordered.removeAt(index);
+                          reordered.insert(index - 1, item);
+                          ref
+                              .read(pageSettingsProvider.notifier)
+                              .reorderPostBookingSteps(reordered);
+                        }
+                      : null,
+                  onMoveDown: index < steps.length - 1
+                      ? () {
+                          final reordered =
+                              List<PostBookingStep>.from(steps);
+                          final item = reordered.removeAt(index);
+                          reordered.insert(index + 1, item);
+                          ref
+                              .read(pageSettingsProvider.notifier)
+                              .reorderPostBookingSteps(reordered);
+                        }
+                      : null,
+                ),
+              _AddStepButton(stepsCount: steps.length),
+              const _TemplatesButton(),
+            ],
           ),
         ),
       ],
@@ -85,7 +79,7 @@ class _AddStepButton extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(top: AppSpacing.lg),
       child: Material(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         child: InkWell(
           borderRadius: BorderRadius.circular(14),
@@ -145,7 +139,7 @@ class _TemplatesButton extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(top: AppSpacing.sm),
       child: Material(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         child: InkWell(
           borderRadius: BorderRadius.circular(14),
@@ -156,7 +150,7 @@ class _TemplatesButton extends ConsumerWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
-                color: Colors.grey.shade200,
+                color: Theme.of(context).colorScheme.outlineVariant,
               ),
             ),
             child: Row(
@@ -166,7 +160,7 @@ class _TemplatesButton extends ConsumerWidget {
                   'من القوالب الجاهزة',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.grey.shade600,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -174,7 +168,7 @@ class _TemplatesButton extends ConsumerWidget {
                 Icon(
                   Icons.library_books_outlined,
                   size: 18,
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ],
             ),
@@ -189,12 +183,16 @@ class _StepItem extends ConsumerWidget {
   final PostBookingStep step;
   final int index;
   final bool isLast;
+  final VoidCallback? onMoveUp;
+  final VoidCallback? onMoveDown;
 
   const _StepItem({
     super.key,
     required this.step,
     required this.index,
     required this.isLast,
+    this.onMoveUp,
+    this.onMoveDown,
   });
 
   @override
@@ -206,17 +204,50 @@ class _StepItem extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Row(
           children: [
-            Icon(
-              Icons.drag_handle,
-              size: 18,
-              color: Colors.grey.shade300,
+            // Up/down arrows
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _ReorderArrow(
+                  icon: Icons.arrow_upward,
+                  enabled: onMoveUp != null,
+                  onTap: onMoveUp ?? () {},
+                ),
+                const SizedBox(height: 2),
+                _ReorderArrow(
+                  icon: Icons.arrow_downward,
+                  enabled: onMoveDown != null,
+                  onTap: onMoveDown ?? () {},
+                ),
+              ],
             ),
+            const SizedBox(width: AppSpacing.sm),
+            // Index badge
+            Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                '${index + 1}',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.surface,
+                ),
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Icon(Icons.drag_handle, size: 16, color: Theme.of(context).colorScheme.outline),
             const SizedBox(width: AppSpacing.sm),
             Switch(
               value: step.isActive,
@@ -242,30 +273,6 @@ class _StepItem extends ConsumerWidget {
               constraints: const BoxConstraints(),
             ),
             const Spacer(),
-            Container(
-              width: 22,
-              height: 22,
-              decoration: BoxDecoration(
-                color: step.isActive
-                    ? AppColors.primary
-                        .withValues(alpha: 0.1)
-                    : Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Center(
-                child: Text(
-                  '${index + 1}',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: step.isActive
-                        ? AppColors.primary
-                        : Colors.grey.shade400,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Text(
                 step.text.isEmpty
@@ -273,7 +280,7 @@ class _StepItem extends ConsumerWidget {
                     : step.text,
                 style: context.textTheme.bodySmall?.copyWith(
                   color: step.text.isEmpty
-                      ? Colors.grey.shade400
+                      ? Theme.of(context).colorScheme.onSurfaceVariant
                       : null,
                 ),
                 textAlign: TextAlign.end,
@@ -282,6 +289,41 @@ class _StepItem extends ConsumerWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ── Reorder Arrow ────────────────────────────────────────────────────────────
+
+class _ReorderArrow extends StatelessWidget {
+  final IconData icon;
+  final bool enabled;
+  final VoidCallback onTap;
+
+  const _ReorderArrow({
+    required this.icon,
+    required this.enabled,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: enabled ? onTap : null,
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: enabled
+              ? AppColors.primary.withValues(alpha: 0.08)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Icon(
+          icon,
+          size: 14,
+          color: enabled ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
     );

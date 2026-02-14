@@ -52,7 +52,7 @@ class _QueueCancelSheet extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: AppColors.divider,
+                color: context.colorScheme.outlineVariant,
                 borderRadius: AppRadius.pill,
               ),
             ),
@@ -100,13 +100,13 @@ class _QueueCancelSheet extends StatelessWidget {
                       Text(
                         entry.packageName,
                         style: context.textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                       Text(
                         price.toFormattedArabic(),
                         style: context.textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -117,7 +117,7 @@ class _QueueCancelSheet extends StatelessWidget {
                 Text(
                   'لن يتم احتساب أي رسوم.',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.xxl),
@@ -147,8 +147,8 @@ class _QueueCancelSheet extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () => Navigator.pop(context),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.textSecondary,
-                      side: const BorderSide(color: AppColors.divider),
+                      foregroundColor: context.colorScheme.onSurfaceVariant,
+                      side: BorderSide(color: context.colorScheme.outlineVariant),
                       padding:
                           const EdgeInsets.symmetric(vertical: AppSpacing.md),
                       shape: RoundedRectangleBorder(

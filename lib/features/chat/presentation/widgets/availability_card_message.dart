@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -36,12 +37,12 @@ class _AvailabilityCardMessageState extends State<AvailabilityCardMessage> {
 
   Color get _borderColor => switch (_status) {
         'selected' => AppColors.success,
-        'expired' => AppColors.textHint,
+        'expired' => context.colorScheme.onSurfaceVariant,
         _ => AppColors.success,
       };
 
   Color get _bgColor => switch (_status) {
-        'expired' => AppColors.background,
+        'expired' => context.colorScheme.surfaceContainerLowest,
         _ => AppColors.success.withValues(alpha: 0.04),
       };
 
@@ -150,10 +151,10 @@ class _AvailabilityCardMessageState extends State<AvailabilityCardMessage> {
             children: [
               Text(
                 entry.key,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: AppSpacing.xs),
@@ -223,19 +224,19 @@ class _AvailabilityCardMessageState extends State<AvailabilityCardMessage> {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.textHint.withValues(alpha: 0.1),
+        color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.1),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.timer_off_outlined, size: 16, color: AppColors.textHint),
+          Icon(Icons.timer_off_outlined, size: 16, color: context.colorScheme.onSurfaceVariant),
           SizedBox(width: AppSpacing.xs),
           Text(
             'انتهت الصلاحية',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppColors.textHint,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -259,9 +260,9 @@ class _AvailabilityCardMessageState extends State<AvailabilityCardMessage> {
       ),
       child: Text(
         time,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 10,
-          color: AppColors.textHint,
+          color: context.colorScheme.onSurfaceVariant,
         ),
       ),
     );
@@ -283,10 +284,10 @@ class _SlotChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isSelected ? AppColors.success : AppColors.textSecondary;
+    final color = isSelected ? AppColors.success : context.colorScheme.onSurfaceVariant;
     final bg = isSelected
         ? AppColors.success.withValues(alpha: 0.12)
-        : AppColors.surfaceVariant;
+        : context.colorScheme.surfaceContainerLow;
 
     return GestureDetector(
       onTap: isDisabled ? null : onTap,
@@ -301,7 +302,7 @@ class _SlotChip extends StatelessWidget {
           border: Border.all(
             color: isSelected
                 ? AppColors.success
-                : AppColors.divider,
+                : context.colorScheme.outlineVariant,
             width: isSelected ? 1.5 : 1,
           ),
           borderRadius: BorderRadius.circular(10),

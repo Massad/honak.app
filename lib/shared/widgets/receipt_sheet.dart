@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -121,28 +122,28 @@ class _ReceiptSheetContent extends StatelessWidget {
             ),
             children: [
               // Business header
-              _buildBusinessHeader(),
+              _buildBusinessHeader(context),
               const SizedBox(height: AppSpacing.lg),
 
               // Customer
-              _buildCustomerSection(),
+              _buildCustomerSection(context),
               const SizedBox(height: AppSpacing.lg),
 
               // Items
-              _buildItemsSection(),
+              _buildItemsSection(context),
               const SizedBox(height: AppSpacing.lg),
 
               // Totals
-              _buildTotalsSection(),
+              _buildTotalsSection(context),
               const SizedBox(height: AppSpacing.md),
 
               // Status & payment
-              _buildStatusPayment(),
+              _buildStatusPayment(context),
 
               // Notes
               if (notes != null && notes!.isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.md),
-                _buildNotes(),
+                _buildNotes(context),
               ],
 
               const SizedBox(height: AppSpacing.lg),
@@ -157,13 +158,13 @@ class _ReceiptSheetContent extends StatelessWidget {
     );
   }
 
-  Widget _buildBusinessHeader() {
+  Widget _buildBusinessHeader(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Colors.grey.shade200,
+            color: context.colorScheme.outlineVariant,
             style: BorderStyle.solid,
           ),
         ),
@@ -183,7 +184,7 @@ class _ReceiptSheetContent extends StatelessWidget {
             'تذكرة #$referenceNumber',
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey.shade400,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           if (date != null)
@@ -193,7 +194,7 @@ class _ReceiptSheetContent extends StatelessWidget {
                 '$date${time != null ? ' · $time' : ''}',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -202,23 +203,23 @@ class _ReceiptSheetContent extends StatelessWidget {
     );
   }
 
-  Widget _buildCustomerSection() {
+  Widget _buildCustomerSection(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(bottom: AppSpacing.md),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: Colors.grey.shade100),
+          bottom: BorderSide(color: context.colorScheme.outlineVariant),
         ),
       ),
       child: Row(
         children: [
-          Icon(Icons.person_outline_rounded, size: 12, color: Colors.grey.shade400),
+          Icon(Icons.person_outline_rounded, size: 12, color: context.colorScheme.onSurfaceVariant),
           const SizedBox(width: AppSpacing.sm),
           Text(
             customerName,
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade700,
+              color: context.colorScheme.onSurface,
             ),
           ),
           if (customerPhone != null) ...[
@@ -229,7 +230,7 @@ class _ReceiptSheetContent extends StatelessWidget {
                 customerPhone!,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -239,30 +240,30 @@ class _ReceiptSheetContent extends StatelessWidget {
     );
   }
 
-  Widget _buildItemsSection() {
+  Widget _buildItemsSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Icon(Icons.inventory_2_outlined, size: 10, color: Colors.grey.shade400),
+            Icon(Icons.inventory_2_outlined, size: 10, color: context.colorScheme.onSurfaceVariant),
             const SizedBox(width: AppSpacing.xs),
             Text(
               'القطع',
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
-        ...items.map(_buildItemRow),
+        ...items.map((item) => _buildItemRow(context, item)),
       ],
     );
   }
 
-  Widget _buildItemRow(ReceiptLineItem item) {
+  Widget _buildItemRow(BuildContext context, ReceiptLineItem item) {
     final lineTotal = Money(item.priceCents * item.quantity);
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -276,7 +277,7 @@ class _ReceiptSheetContent extends StatelessWidget {
                     item.name,
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade700,
+                      color: context.colorScheme.onSurface,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -289,14 +290,14 @@ class _ReceiptSheetContent extends StatelessWidget {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
+                      color: context.colorScheme.surfaceContainerLowest,
                       borderRadius: BorderRadius.circular(AppRadius.xxs),
                     ),
                     child: Text(
                       item.service!,
                       style: TextStyle(
                         fontSize: 9,
-                        color: Colors.grey.shade400,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -306,7 +307,7 @@ class _ReceiptSheetContent extends StatelessWidget {
                   '×${item.quantity}',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey.shade400,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -316,7 +317,7 @@ class _ReceiptSheetContent extends StatelessWidget {
             lineTotal.toFormattedArabic(),
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade700,
+              color: context.colorScheme.onSurface,
             ),
           ),
         ],
@@ -324,7 +325,7 @@ class _ReceiptSheetContent extends StatelessWidget {
     );
   }
 
-  Widget _buildTotalsSection() {
+  Widget _buildTotalsSection(BuildContext context) {
     final hasDiscount =
         discountCents != null && discountCents! > 0 && subtotalCents != null;
 
@@ -332,8 +333,8 @@ class _ReceiptSheetContent extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: Colors.grey.shade200),
-          bottom: BorderSide(color: Colors.grey.shade200),
+          top: BorderSide(color: context.colorScheme.outlineVariant),
+          bottom: BorderSide(color: context.colorScheme.outlineVariant),
         ),
       ),
       child: Column(
@@ -347,14 +348,14 @@ class _ReceiptSheetContent extends StatelessWidget {
                   'المجموع الفرعي',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey.shade500,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Text(
                   Money(subtotalCents!).toFormattedArabic(),
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey.shade500,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -409,7 +410,7 @@ class _ReceiptSheetContent extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusPayment() {
+  Widget _buildStatusPayment(BuildContext context) {
     return Column(
       children: [
         if (statusLabel != null)
@@ -420,13 +421,13 @@ class _ReceiptSheetContent extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.access_time_rounded, size: 10, color: Colors.grey.shade400),
+                    Icon(Icons.access_time_rounded, size: 10, color: context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.xs),
                     Text(
                       'الحالة',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade500,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -447,13 +448,13 @@ class _ReceiptSheetContent extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.credit_card_rounded, size: 10, color: Colors.grey.shade400),
+                  Icon(Icons.credit_card_rounded, size: 10, color: context.colorScheme.onSurfaceVariant),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     'الدفع',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade500,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -462,7 +463,7 @@ class _ReceiptSheetContent extends StatelessWidget {
                 paymentMethod!,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade700,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
             ],
@@ -471,12 +472,12 @@ class _ReceiptSheetContent extends StatelessWidget {
     );
   }
 
-  Widget _buildNotes() {
+  Widget _buildNotes(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: context.colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(AppRadius.sm),
       ),
       child: Column(
@@ -486,7 +487,7 @@ class _ReceiptSheetContent extends StatelessWidget {
             'ملاحظات',
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey.shade400,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: 2),
@@ -494,7 +495,7 @@ class _ReceiptSheetContent extends StatelessWidget {
             notes!,
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade600,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -515,7 +516,7 @@ class _ReceiptSheetContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: AppRadius.cardInner,
-                border: Border.all(color: Colors.grey.shade200),
+                border: Border.all(color: context.colorScheme.outlineVariant),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -523,14 +524,14 @@ class _ReceiptSheetContent extends StatelessWidget {
                   Icon(
                     Icons.share_outlined,
                     size: 14,
-                    color: Colors.grey.shade600,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 6),
                   Text(
                     'مشاركة',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.grey.shade600,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],

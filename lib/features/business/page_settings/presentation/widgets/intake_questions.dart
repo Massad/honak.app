@@ -203,12 +203,12 @@ class _QuestionCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: question.active ? Colors.white : Colors.grey.shade50,
+          color: question.active ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: question.active
-                ? Colors.grey.shade200
-                : Colors.grey.shade100,
+                ? Theme.of(context).colorScheme.outlineVariant
+                : Theme.of(context).colorScheme.surfaceContainerLow,
           ),
         ),
         child: Column(
@@ -220,19 +220,48 @@ class _QuestionCard extends StatelessWidget {
                 Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more,
                   size: 20,
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
 
-                // Reorder buttons
-                const SizedBox(width: 2),
-                _ReorderButton(
-                  icon: Icons.keyboard_arrow_up,
-                  onTap: onMoveUp,
+                // Up/down arrows
+                const SizedBox(width: 4),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _ReorderArrow(
+                      icon: Icons.arrow_upward,
+                      enabled: onMoveUp != null,
+                      onTap: onMoveUp ?? () {},
+                    ),
+                    const SizedBox(height: 2),
+                    _ReorderArrow(
+                      icon: Icons.arrow_downward,
+                      enabled: onMoveDown != null,
+                      onTap: onMoveDown ?? () {},
+                    ),
+                  ],
                 ),
-                _ReorderButton(
-                  icon: Icons.keyboard_arrow_down,
-                  onTap: onMoveDown,
+                const SizedBox(width: 4),
+                // Index badge
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    '${index + 1}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                  ),
                 ),
+                const SizedBox(width: 4),
+                Icon(Icons.drag_handle, size: 16, color: Theme.of(context).colorScheme.outline),
 
                 // Active toggle
                 SizedBox(
@@ -257,7 +286,7 @@ class _QuestionCard extends StatelessWidget {
                         )
                       : AppBadge.small(
                           label: 'اختياري',
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                 ),
                 const SizedBox(width: AppSpacing.xs),
@@ -279,7 +308,7 @@ class _QuestionCard extends StatelessWidget {
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: question.question.isEmpty
-                          ? Colors.grey.shade400
+                          ? Theme.of(context).colorScheme.onSurfaceVariant
                           : null,
                     ),
                     overflow: TextOverflow.ellipsis,
@@ -304,7 +333,7 @@ class _QuestionCard extends StatelessWidget {
                     for (final opt in question.options)
                       AppBadge.small(
                         label: opt,
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                   ],
                 ),
@@ -327,27 +356,35 @@ class _QuestionCard extends StatelessWidget {
   }
 }
 
-// ── Reorder Button ───────────────────────────────────────────────────────────
+// ── Reorder Arrow ────────────────────────────────────────────────────────────
 
-class _ReorderButton extends StatelessWidget {
+class _ReorderArrow extends StatelessWidget {
   final IconData icon;
-  final VoidCallback? onTap;
+  final bool enabled;
+  final VoidCallback onTap;
 
-  const _ReorderButton({required this.icon, this.onTap});
+  const _ReorderArrow({
+    required this.icon,
+    required this.enabled,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final isDisabled = onTap == null;
     return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 1),
+      onTap: enabled ? onTap : null,
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: enabled
+              ? AppColors.primary.withValues(alpha: 0.08)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: Icon(
           icon,
-          size: 18,
-          color: isDisabled
-              ? Colors.grey.shade300
-              : Colors.grey.shade600,
+          size: 14,
+          color: enabled ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
     );
@@ -364,7 +401,7 @@ class _AddQuestionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: onTap,
@@ -415,5 +452,5 @@ Color _fieldTypeColor(String type) => switch (type) {
       'text' => Colors.blue,
       'select' => Colors.orange,
       'number' => Colors.green,
-      _ => Colors.grey,
+      _ => Colors.grey.shade500,
     };

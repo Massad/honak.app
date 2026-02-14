@@ -57,13 +57,13 @@ class CategoryFilterPills extends StatelessWidget {
                   vertical: 7,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Icon(
                   Icons.settings_outlined,
                   size: 16,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -93,15 +93,15 @@ class _FilterPill extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : Colors.white,
+          color: isActive ? AppColors.primary : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
-          border: isActive ? null : Border.all(color: Colors.grey.shade200),
+          border: isActive ? null : Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
-            color: isActive ? Colors.white : Colors.grey.shade600,
+            color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
             fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
           ),
         ),

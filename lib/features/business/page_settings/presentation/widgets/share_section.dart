@@ -17,9 +17,9 @@ class ShareSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -52,12 +52,12 @@ class ShareSection extends StatelessWidget {
                 vertical: AppSpacing.sm,
               ),
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.copy, size: 14, color: Colors.grey.shade400),
+                  Icon(Icons.copy, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   const Spacer(),
                   Directionality(
                     textDirection: TextDirection.ltr,
@@ -70,7 +70,7 @@ class ShareSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
-                  Icon(Icons.link, size: 14, color: Colors.grey.shade400),
+                  Icon(Icons.link, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ],
               ),
             ),
@@ -83,8 +83,8 @@ class ShareSection extends StatelessWidget {
                 child: _ShareButton(
                   label: 'مشاركة',
                   icon: Icons.share_outlined,
-                  color: Colors.grey.shade600,
-                  bgColor: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
                   onTap: () => context.showSnackBar('قريباً: مشاركة'),
                 ),
               ),
@@ -93,8 +93,8 @@ class ShareSection extends StatelessWidget {
                 child: _ShareButton(
                   label: 'رمز QR',
                   icon: Icons.qr_code,
-                  color: Colors.grey.shade600,
-                  bgColor: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
                   onTap: onOpenQrCode ?? () => context.showSnackBar('قريباً: رمز QR'),
                 ),
               ),
@@ -103,7 +103,7 @@ class ShareSection extends StatelessWidget {
                 child: _ShareButton(
                   label: 'واتساب',
                   icon: Icons.chat,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   bgColor: const Color(0xFF25D366),
                   onTap: () => context.showSnackBar('قريباً: واتساب'),
                 ),

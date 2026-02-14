@@ -150,7 +150,7 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
                       Text(
                         'سبب الإغلاق',
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -164,8 +164,8 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           border:
-                              Border.all(color: Colors.grey.shade200),
-                          color: Colors.white,
+                              Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
@@ -176,7 +176,7 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
                               'اختر السبب',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.grey.shade400,
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                               ),
                             ),
                             items: _tempClosureReasons.map((reason) {
@@ -199,7 +199,7 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
                       Text(
                         'رسالة للعملاء (اختياري)',
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -211,7 +211,7 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
                           hintText: 'مثال: إجازة حتى ١٥ شباط',
                           hintStyle: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           isDense: true,
                           contentPadding: const EdgeInsets.symmetric(
@@ -221,12 +221,12 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide:
-                                BorderSide(color: Colors.grey.shade200),
+                                BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide:
-                                BorderSide(color: Colors.grey.shade200),
+                                BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                           ),
                         ),
                       ),
@@ -296,9 +296,9 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
             top: AppSpacing.md,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             border: Border(
-              top: BorderSide(color: Colors.grey.shade100),
+              top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
           ),
           child: SizedBox(
@@ -307,7 +307,7 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
               onPressed: _save,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
+                foregroundColor: Theme.of(context).colorScheme.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -346,7 +346,7 @@ class _StatusOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: selected ? color.withValues(alpha: 0.05) : Colors.white,
+      color: selected ? color.withValues(alpha: 0.05) : Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -358,7 +358,7 @@ class _StatusOption extends StatelessWidget {
             border: Border.all(
               color: selected
                   ? color.withValues(alpha: 0.3)
-                  : Colors.grey.shade100,
+                  : Theme.of(context).colorScheme.surfaceContainerLow,
             ),
           ),
           child: Row(
@@ -370,7 +370,7 @@ class _StatusOption extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: selected ? color : Colors.grey.shade300,
+                    color: selected ? color : Theme.of(context).colorScheme.outline,
                     width: 2,
                   ),
                 ),
@@ -402,7 +402,7 @@ class _StatusOption extends StatelessWidget {
                     desc,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],

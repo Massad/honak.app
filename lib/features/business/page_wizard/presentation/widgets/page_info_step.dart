@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -50,19 +51,19 @@ class _PageInfoStepState extends ConsumerState<PageInfoStep> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: AppColors.divider,
+                color: context.colorScheme.outlineVariant,
                 width: 1.5,
                 strokeAlign: BorderSide.strokeAlignInside,
               ),
             ),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.camera_alt_outlined, color: AppColors.textHint, size: 24),
+                Icon(Icons.camera_alt_outlined, color: context.colorScheme.onSurfaceVariant, size: 24),
                 SizedBox(height: 2),
                 Text(
                   'الشعار',
-                  style: TextStyle(fontSize: 10, color: AppColors.textHint),
+                  style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
                 ),
               ],
             ),
@@ -77,19 +78,19 @@ class _PageInfoStepState extends ConsumerState<PageInfoStep> {
           decoration: BoxDecoration(
             borderRadius: AppRadius.cardInner,
             border: Border.all(
-              color: AppColors.divider,
+              color: context.colorScheme.outlineVariant,
               width: 1.5,
               strokeAlign: BorderSide.strokeAlignInside,
             ),
           ),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.camera_alt_outlined, color: AppColors.textHint, size: 28),
+              Icon(Icons.camera_alt_outlined, color: context.colorScheme.onSurfaceVariant, size: 28),
               SizedBox(height: AppSpacing.xs),
               Text(
                 'صورة الغلاف',
-                style: TextStyle(fontSize: 12, color: AppColors.textHint),
+                style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
               ),
             ],
           ),

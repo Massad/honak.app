@@ -159,7 +159,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: AppRadius.cardInner,
         border: Border.all(color: _cardBorder),
         boxShadow: const [
@@ -252,7 +252,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: AppRadius.cardInner,
         border: Border.all(color: _cardBorder),
         boxShadow: const [
@@ -670,12 +670,12 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                     children: [
                       if (widget.advanceIcon != null) ...[
                         Icon(widget.advanceIcon,
-                            size: 14, color: Colors.white),
+                            size: 14, color: Theme.of(context).colorScheme.surface),
                         const SizedBox(width: 6),
                       ],
                       Text(widget.advanceLabel ?? '',
                           style: context.textTheme.bodySmall
-                              ?.copyWith(color: Colors.white, fontSize: 12)),
+                              ?.copyWith(color: Theme.of(context).colorScheme.surface, fontSize: 12)),
                     ],
                   ),
                 ),
@@ -746,7 +746,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
               size: 18, color: _gray600),
         ),
         if (entry.isSubscriber)
-          const PositionedDirectional(
+          PositionedDirectional(
             top: -4,
             end: -4,
             child: DecoratedBox(
@@ -756,7 +756,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                 width: 16,
                 height: 16,
                 child: Icon(Icons.workspace_premium_rounded,
-                    size: 9, color: Colors.white),
+                    size: 9, color: Theme.of(context).colorScheme.surface),
               ),
             ),
           ),

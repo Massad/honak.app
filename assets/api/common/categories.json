@@ -137,11 +137,25 @@
       ]
     },
     {
+      "id": "cat_malls",
+      "name_ar": "مراكز تجارية",
+      "name_en": "Shopping Centers",
+      "icon_name": "store",
+      "sort_order": 6,
+      "types": [
+        {
+          "id": "directory",
+          "name": "دليل مجمع",
+          "icon": "🏬"
+        }
+      ]
+    },
+    {
       "id": "cat_retail",
       "name_ar": "تسوق وأزياء",
       "name_en": "Shopping & Fashion",
       "icon_name": "checkroom",
-      "sort_order": 6,
+      "sort_order": 7,
       "types": [
         {
           "id": "kids_store",
@@ -152,11 +166,6 @@
           "id": "electronics_store",
           "name": "إلكترونيات",
           "icon": "📱"
-        },
-        {
-          "id": "directory",
-          "name": "دليل مجمع",
-          "icon": "🏬"
         },
         {
           "id": "perfume_shop",
@@ -195,7 +204,7 @@
       "name_ar": "خدمات منزلية",
       "name_en": "Home Services",
       "icon_name": "home_repair_service",
-      "sort_order": 7,
+      "sort_order": 8,
       "types": [
         {
           "id": "ac_repair",
@@ -229,7 +238,7 @@
       "name_ar": "سيارات",
       "name_en": "Automotive",
       "icon_name": "directions_car",
-      "sort_order": 8,
+      "sort_order": 9,
       "types": [
         {
           "id": "oil_change",
@@ -258,7 +267,7 @@
       "name_ar": "إقامة وسياحة",
       "name_en": "Stays & Tourism",
       "icon_name": "hotel",
-      "sort_order": 9,
+      "sort_order": 10,
       "types": [
         {
           "id": "villa_rental",
@@ -282,7 +291,7 @@
       "name_ar": "فعاليات وترفيه",
       "name_en": "Events & Entertainment",
       "icon_name": "celebration",
-      "sort_order": 10,
+      "sort_order": 11,
       "types": [
         {
           "id": "event_venue",
@@ -296,7 +305,7 @@
       "name_ar": "إبداع وعمل حر",
       "name_en": "Creative & Freelance",
       "icon_name": "palette",
-      "sort_order": 11,
+      "sort_order": 12,
       "types": [
         {
           "id": "photographer",
@@ -310,7 +319,7 @@
       "name_ar": "جهات حكومية",
       "name_en": "Government",
       "icon_name": "account_balance",
-      "sort_order": 12,
+      "sort_order": 13,
       "types": [
         {
           "id": "government",
@@ -329,7 +338,7 @@
       "name_ar": "خدمات عامة",
       "name_en": "General Services",
       "icon_name": "build",
-      "sort_order": 13,
+      "sort_order": 14,
       "types": [
         {
           "id": "shoe_repair",
@@ -353,7 +362,7 @@
       "name_ar": "إلكترونيات وصيانة",
       "name_en": "Electronics & Repair",
       "icon_name": "phonelink",
-      "sort_order": 14,
+      "sort_order": 15,
       "types": [
         {
           "id": "mobile_repair",
@@ -367,7 +376,7 @@
       "name_ar": "بقالة وسوبرماركت",
       "name_en": "Grocery",
       "icon_name": "shopping_cart",
-      "sort_order": 15,
+      "sort_order": 16,
       "types": [
         {
           "id": "grocery",
@@ -378,7 +387,7 @@
     }
   ],
   "meta": {
-    "total": 15,
+    "total": 16,
     "has_more": false
   }
 }

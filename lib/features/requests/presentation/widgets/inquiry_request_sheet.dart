@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/customer_questions_section.dart';
 import 'package:honak/features/requests/presentation/widgets/inquiry_sheet_sections.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Bottom sheet for the portfolio_inquiry archetype.
 ///
@@ -170,7 +170,7 @@ class _InquiryBodyState extends State<_InquiryBody> {
           width: 40,
           height: 4,
           decoration: BoxDecoration(
-            color: AppColors.divider,
+            color: context.colorScheme.outlineVariant,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -195,7 +195,7 @@ class _InquiryBodyState extends State<_InquiryBody> {
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.close, size: 20),
             style: IconButton.styleFrom(
-              foregroundColor: AppColors.textHint,
+              foregroundColor: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -209,7 +209,7 @@ class _InquiryBodyState extends State<_InquiryBody> {
         Text(
           'استفسار لـ',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(width: AppSpacing.sm),
         Text(

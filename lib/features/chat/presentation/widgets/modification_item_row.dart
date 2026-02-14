@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
@@ -9,6 +10,7 @@ class ModificationItemRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
     final name = change['name'] as String? ?? '';
     final changes =
         (change['changes'] as List?)?.cast<Map<String, dynamic>>() ?? [];
@@ -20,10 +22,10 @@ class ModificationItemRow extends StatelessWidget {
         children: [
           Text(
             name,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
-              color: AppColors.textPrimary,
+              color: cs.onSurface,
             ),
           ),
           ...changes.map((c) {
@@ -40,16 +42,16 @@ class ModificationItemRow extends StatelessWidget {
                 children: [
                   Text(
                     '$field: ',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: cs.onSurfaceVariant,
                     ),
                   ),
                   Text(
                     from,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textHint,
+                      color: cs.onSurfaceVariant,
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
@@ -66,10 +68,10 @@ class ModificationItemRow extends StatelessWidget {
                   ),
                   Text(
                     to,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: cs.onSurface,
                     ),
                   ),
                 ],

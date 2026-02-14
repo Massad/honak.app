@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/router/app_router.dart';
 import 'package:honak/core/theme/app_theme.dart';
 import 'package:honak/shared/providers/locale_provider.dart';
+import 'package:honak/shared/providers/theme_mode_provider.dart';
 
 class HonakApp extends ConsumerWidget {
   const HonakApp({super.key});
@@ -12,14 +13,16 @@ class HonakApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    final locale = ref.watch(localeProvider);
+    final locale = ref.watch(localeProvider).valueOrNull ?? const Locale('ar');
+    final themeMode =
+        ref.watch(themeModeProvider).valueOrNull ?? ThemeMode.system;
 
     return MaterialApp.router(
       title: 'حنك',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

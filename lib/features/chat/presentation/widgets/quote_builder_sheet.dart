@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
@@ -97,7 +98,7 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
         width: 36,
         height: 4,
         decoration: BoxDecoration(
-          color: AppColors.divider,
+          color: context.colorScheme.outlineVariant,
           borderRadius: BorderRadius.circular(2),
         ),
       ),
@@ -114,20 +115,20 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
       ),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: Text(
               'عرض سعر',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
             ),
           ),
           IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close, size: 20),
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ],
       ),
@@ -138,12 +139,12 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'البنود',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -174,7 +175,7 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
         ),
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.divider,
+            color: context.colorScheme.outlineVariant,
             style: BorderStyle.solid,
           ),
           borderRadius: BorderRadius.circular(10),
@@ -202,12 +203,12 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'خصم (اختياري)',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.xs),
@@ -217,14 +218,14 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
           onChanged: (_) => setState(() {}),
           decoration: InputDecoration(
             hintText: '0.00',
-            hintStyle: const TextStyle(color: AppColors.textHint),
+            hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant),
             suffixText: 'د.أ',
-            suffixStyle: const TextStyle(
-              color: AppColors.textSecondary,
+            suffixStyle: TextStyle(
+              color: context.colorScheme.onSurfaceVariant,
               fontSize: 13,
             ),
             filled: true,
-            fillColor: AppColors.background,
+            fillColor: context.colorScheme.surfaceContainerLowest,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -245,12 +246,12 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'ملاحظات (اختياري)',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.xs),
@@ -260,9 +261,9 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
           minLines: 2,
           decoration: InputDecoration(
             hintText: 'أي ملاحظات إضافية...',
-            hintStyle: const TextStyle(color: AppColors.textHint, fontSize: 14),
+            hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
             filled: true,
-            fillColor: AppColors.background,
+            fillColor: context.colorScheme.surfaceContainerLowest,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -280,12 +281,12 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'صلاحية العرض',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -305,11 +306,11 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
                   decoration: BoxDecoration(
                     color: isSelected
                         ? AppColors.warning.withValues(alpha: 0.12)
-                        : AppColors.surfaceVariant,
+                        : context.colorScheme.surfaceContainerLow,
                     border: Border.all(
                       color: isSelected
                           ? AppColors.warning
-                          : AppColors.divider,
+                          : context.colorScheme.outlineVariant,
                       width: isSelected ? 1.5 : 1,
                     ),
                     borderRadius: BorderRadius.circular(10),
@@ -322,7 +323,7 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
                           isSelected ? FontWeight.w600 : FontWeight.w400,
                       color: isSelected
                           ? AppColors.warning
-                          : AppColors.textPrimary,
+                          : context.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -358,9 +359,9 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
               '- ${Money(_discountCents).toFormattedArabic()}',
               color: AppColors.success,
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsetsDirectional.symmetric(vertical: 6),
-              child: Divider(height: 1, color: AppColors.divider),
+              child: Divider(height: 1, color: context.colorScheme.outlineVariant),
             ),
           ],
           _previewRow(
@@ -388,7 +389,7 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
           style: TextStyle(
             fontSize: isBold ? 14 : 12,
             fontWeight: isBold ? FontWeight.w600 : FontWeight.w400,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         Text(
@@ -396,7 +397,7 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
           style: TextStyle(
             fontSize: isBold ? 16 : 13,
             fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
-            color: color ?? AppColors.textPrimary,
+            color: color ?? context.colorScheme.onSurface,
           ),
         ),
       ],
@@ -414,7 +415,7 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
           label: const Text('إرسال عرض السعر'),
           style: FilledButton.styleFrom(
             backgroundColor: AppColors.warning,
-            disabledBackgroundColor: AppColors.divider,
+            disabledBackgroundColor: context.colorScheme.outlineVariant,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -498,7 +499,7 @@ class _LineItemRow extends StatelessWidget {
       margin: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
       padding: const EdgeInsetsDirectional.all(AppSpacing.sm),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -509,10 +510,10 @@ class _LineItemRow extends StatelessWidget {
                 child: TextField(
                   controller: item.descriptionController,
                   onChanged: (_) => onChanged(),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'وصف البند',
                     hintStyle:
-                        TextStyle(color: AppColors.textHint, fontSize: 13),
+                        TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 13),
                     border: InputBorder.none,
                     contentPadding: EdgeInsetsDirectional.symmetric(
                       horizontal: AppSpacing.sm,
@@ -526,7 +527,7 @@ class _LineItemRow extends StatelessWidget {
                 IconButton(
                   onPressed: onRemove,
                   icon: const Icon(Icons.close, size: 16),
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                   constraints: const BoxConstraints(
                     minWidth: 32,
                     minHeight: 32,
@@ -534,14 +535,14 @@ class _LineItemRow extends StatelessWidget {
                 ),
             ],
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.colorScheme.outlineVariant),
           const SizedBox(height: AppSpacing.xs),
           Row(
             children: [
               // Quantity stepper
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.divider),
+                  border: Border.all(color: context.colorScheme.outlineVariant),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -587,13 +588,13 @@ class _LineItemRow extends StatelessWidget {
                       const TextInputType.numberWithOptions(decimal: true),
                   onChanged: (_) => onChanged(),
                   textAlign: TextAlign.end,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: '0.00',
                     hintStyle:
-                        TextStyle(color: AppColors.textHint, fontSize: 13),
+                        TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 13),
                     suffixText: 'د.أ',
                     suffixStyle: TextStyle(
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                       fontSize: 12,
                     ),
                     border: InputBorder.none,
@@ -630,7 +631,7 @@ class _StepperButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 16,
-          color: onTap != null ? AppColors.textPrimary : AppColors.textHint,
+          color: onTap != null ? context.colorScheme.onSurface : context.colorScheme.onSurfaceVariant,
         ),
       ),
     );

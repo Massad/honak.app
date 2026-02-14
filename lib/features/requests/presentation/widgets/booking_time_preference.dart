@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Time preference section with radio options and day/period pickers.
 class BookingTimePreference extends StatelessWidget {
@@ -40,7 +41,7 @@ class BookingTimePreference extends StatelessWidget {
           'الوقت المفضل',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -81,13 +82,13 @@ class BookingTimePreference extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: selected
                               ? AppColors.primary
-                              : AppColors.surfaceVariant,
+                              : context.colorScheme.surfaceContainerLow,
                           borderRadius:
                               BorderRadius.circular(AppRadius.sm),
                           border: Border.all(
                             color: selected
                                 ? AppColors.primary
-                                : AppColors.divider,
+                                : context.colorScheme.outlineVariant,
                           ),
                         ),
                         child: Text(
@@ -96,7 +97,7 @@ class BookingTimePreference extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: selected
                                 ? Colors.white
-                                : AppColors.textSecondary,
+                                : context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -123,13 +124,13 @@ class BookingTimePreference extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: selected
                                   ? AppColors.primary
-                                  : AppColors.surfaceVariant,
+                                  : context.colorScheme.surfaceContainerLow,
                               borderRadius:
                                   BorderRadius.circular(AppRadius.sm),
                               border: Border.all(
                                 color: selected
                                     ? AppColors.primary
-                                    : AppColors.divider,
+                                    : context.colorScheme.outlineVariant,
                               ),
                             ),
                             alignment: Alignment.center,
@@ -140,7 +141,7 @@ class BookingTimePreference extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: selected
                                     ? Colors.white
-                                    : AppColors.textSecondary,
+                                    : context.colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ),
@@ -169,16 +170,16 @@ class BookingTimePreference extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'حدد الوقت المفضل...',
               hintStyle: theme.textTheme.bodySmall
-                  ?.copyWith(color: AppColors.textHint),
+                  ?.copyWith(color: context.colorScheme.onSurfaceVariant),
               filled: true,
-              fillColor: AppColors.surfaceVariant,
+              fillColor: context.colorScheme.surfaceContainerLow,
               border: OutlineInputBorder(
                 borderRadius: AppRadius.cardInner,
-                borderSide: BorderSide(color: AppColors.divider),
+                borderSide: BorderSide(color: context.colorScheme.outlineVariant),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: AppRadius.cardInner,
-                borderSide: BorderSide(color: AppColors.divider),
+                borderSide: BorderSide(color: context.colorScheme.outlineVariant),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: AppRadius.cardInner,
@@ -219,17 +220,17 @@ class _TimeOption extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected
               ? AppColors.primary.withValues(alpha: 0.05)
-              : Colors.white,
+              : context.colorScheme.surface,
           borderRadius: AppRadius.cardInner,
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.divider,
+            color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
           ),
         ),
         child: Text(
           label,
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: selected ? AppColors.primary : AppColors.textSecondary,
+            color: selected ? AppColors.primary : context.colorScheme.onSurfaceVariant,
           ),
         ),
       ),

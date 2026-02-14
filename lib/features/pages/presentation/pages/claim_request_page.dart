@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:flutter/services.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/shared/widgets/app_image.dart';
@@ -135,7 +136,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
 
   Widget _buildStepScreen(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
@@ -238,8 +239,8 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
   Widget _buildHeader(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+        color: context.colorScheme.surface,
+        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
@@ -254,7 +255,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                   padding: const EdgeInsets.all(4),
                   child: Directionality(
                     textDirection: TextDirection.ltr,
-                    child: Icon(Icons.arrow_back_ios_new, size: 20, color: Colors.grey.shade600),
+                    child: Icon(Icons.arrow_back_ios_new, size: 20, color: context.colorScheme.onSurfaceVariant),
                   ),
                 ),
               ),
@@ -285,7 +286,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                       Container(
                         height: 4,
                         decoration: BoxDecoration(
-                          color: isActive ? _primary : Colors.grey.shade200,
+                          color: isActive ? _primary : context.colorScheme.surfaceContainer,
                           borderRadius: BorderRadius.circular(2),
                         ),
                       ),
@@ -294,7 +295,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                         _stepLabels[i],
                         style: TextStyle(
                           fontSize: 9,
-                          color: isCurrent ? _primary : Colors.grey.shade400,
+                          color: isCurrent ? _primary : context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -311,14 +312,14 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
   Widget _buildBottomAction(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade100)),
+        color: context.colorScheme.surface,
+        border: Border(top: BorderSide(color: context.colorScheme.outlineVariant)),
       ),
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
       child: SizedBox(
         width: double.infinity,
         child: Material(
-          color: _canProceed ? _primary : Colors.grey.shade200,
+          color: _canProceed ? _primary : context.colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(12),
           child: InkWell(
             borderRadius: BorderRadius.circular(12),
@@ -329,7 +330,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (_step == 4) ...[
-                    Icon(Icons.shield_outlined, size: 16, color: _canProceed ? Colors.white : Colors.grey.shade400),
+                    Icon(Icons.shield_outlined, size: 16, color: _canProceed ? Colors.white : context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: 8),
                   ],
                   Text(
@@ -341,12 +342,12 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: _canProceed ? Colors.white : Colors.grey.shade400,
+                      color: _canProceed ? Colors.white : context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   if (_step > 1 && _step < 4) ...[
                     const SizedBox(width: 4),
-                    Icon(Icons.chevron_left, size: 16, color: _canProceed ? Colors.white : Colors.grey.shade400),
+                    Icon(Icons.chevron_left, size: 16, color: _canProceed ? Colors.white : context.colorScheme.onSurfaceVariant),
                   ],
                 ],
               ),
@@ -362,7 +363,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
   Widget _buildDoneScreen(BuildContext context) {
     final isInPerson = _verificationMethod == 'in_person';
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colorScheme.surface,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -568,7 +569,7 @@ class _StepIntro extends StatelessWidget {
                   width: 56,
                   height: 56,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: context.colorScheme.surface,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 4),
@@ -600,12 +601,12 @@ class _StepIntro extends StatelessWidget {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            Icon(Icons.location_on, size: 10, color: Colors.grey.shade400),
+                            Icon(Icons.location_on, size: 10, color: context.colorScheme.onSurfaceVariant),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
                                 page.location!.label!,
-                                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                                style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -634,7 +635,7 @@ class _StepIntro extends StatelessWidget {
           // What you get
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.colorScheme.surface,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: const Color(0xFFF3F4F6)),
             ),
@@ -646,7 +647,7 @@ class _StepIntro extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFFF9FAFB),
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                    border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+                    border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
                   ),
                   child: const Text(
                     'بعد إثبات الملكية ستتمكن من:',
@@ -816,17 +817,17 @@ class _StepInfo extends StatelessWidget {
             controller: nameController,
             decoration: InputDecoration(
               hintText: 'كما هو في الهوية الشخصية',
-              hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
-              prefixIcon: Icon(Icons.person_outline, size: 16, color: Colors.grey.shade400),
+              hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
+              prefixIcon: Icon(Icons.person_outline, size: 16, color: context.colorScheme.onSurfaceVariant),
               filled: true,
               fillColor: const Color(0xFFF9FAFB),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
+                borderSide: BorderSide(color: context.colorScheme.outlineVariant),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
+                borderSide: BorderSide(color: context.colorScheme.outlineVariant),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -853,17 +854,17 @@ class _StepInfo extends StatelessWidget {
                     onChanged: (_) => onPhoneChanged(),
                     decoration: InputDecoration(
                       hintText: '07XXXXXXXX',
-                      hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
-                      prefixIcon: Icon(Icons.phone_outlined, size: 16, color: Colors.grey.shade400),
+                      hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
+                      prefixIcon: Icon(Icons.phone_outlined, size: 16, color: context.colorScheme.onSurfaceVariant),
                       filled: true,
                       fillColor: const Color(0xFFF9FAFB),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey.shade200),
+                        borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey.shade200),
+                        borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -871,7 +872,7 @@ class _StepInfo extends StatelessWidget {
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey.shade200),
+                        borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                       ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     ),
@@ -940,16 +941,16 @@ class _StepInfo extends StatelessWidget {
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                         hintText: '------',
-                        hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14, letterSpacing: 8),
+                        hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14, letterSpacing: 8),
                         filled: true,
                         fillColor: const Color(0xFFF9FAFB),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey.shade200),
+                          borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey.shade200),
+                          borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -988,7 +989,7 @@ class _StepInfo extends StatelessWidget {
               textDirection: TextDirection.rtl,
               child: Text(
                 'في النسخة التجريبية: أي ٦ أرقام مقبولة',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
               ),
             ),
           ],
@@ -1216,7 +1217,7 @@ class _StepVerify extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(time.label, style: const TextStyle(fontSize: 14, color: Color(0xFF111827))),
-                                      Text(time.desc, style: TextStyle(fontSize: 10, color: Colors.grey.shade500)),
+                                      Text(time.desc, style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
                                     ],
                                   ),
                                 ),
@@ -1230,7 +1231,7 @@ class _StepVerify extends StatelessWidget {
                   }),
                   Text(
                     'سنتصل بك قبل الزيارة لتأكيد الموعد بالضبط',
-                    style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                    style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
                   ),
                 ],
               ),
@@ -1239,7 +1240,7 @@ class _StepVerify extends StatelessWidget {
 
           // Document Upload
           if (verificationMethod == 'document') ...[
-            Text('اختر نوع المستند', style: TextStyle(fontSize: 10, color: Colors.grey.shade400)),
+            Text('اختر نوع المستند', style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
             const SizedBox(height: 8),
             ...List.generate(_documentTypes.length, (i) {
               final doc = _documentTypes[i];
@@ -1271,7 +1272,7 @@ class _StepVerify extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 24),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.grey.shade300, width: 2),
+                      border: Border.all(color: context.colorScheme.outline, width: 2),
                     ),
                     child: Column(
                       children: [
@@ -1280,14 +1281,14 @@ class _StepVerify extends StatelessWidget {
                           height: 40,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.grey.shade100,
+                            color: context.colorScheme.surfaceContainerLow,
                           ),
-                          child: Icon(Icons.upload_outlined, size: 18, color: Colors.grey.shade400),
+                          child: Icon(Icons.upload_outlined, size: 18, color: context.colorScheme.onSurfaceVariant),
                         ),
                         const SizedBox(height: 8),
-                        Text('اضغط لرفع صورة أو مستند', style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
+                        Text('اضغط لرفع صورة أو مستند', style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant)),
                         const SizedBox(height: 4),
-                        Text('JPG, PNG, PDF — حتى ١٠ ميغابايت', style: TextStyle(fontSize: 10, color: Colors.grey.shade400)),
+                        Text('JPG, PNG, PDF — حتى ١٠ ميغابايت', style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
                       ],
                     ),
                   ),
@@ -1326,7 +1327,7 @@ class _StepVerify extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () => onDocumentUploaded(false),
-                        child: Icon(Icons.close, size: 16, color: Colors.grey.shade400),
+                        child: Icon(Icons.close, size: 16, color: context.colorScheme.onSurfaceVariant),
                       ),
                     ],
                   ),
@@ -1376,7 +1377,7 @@ class _StepVerify extends StatelessWidget {
             children: [
               const Text('ملاحظات إضافية', style: TextStyle(fontSize: 14, color: Color(0xFF374151))),
               const SizedBox(width: 4),
-              Text('(اختياري)', style: TextStyle(fontSize: 10, color: Colors.grey.shade400)),
+              Text('(اختياري)', style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
             ],
           ),
           const SizedBox(height: 8),
@@ -1385,16 +1386,16 @@ class _StepVerify extends StatelessWidget {
             maxLines: 2,
             decoration: InputDecoration(
               hintText: 'أي معلومات تساعدنا...',
-              hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+              hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
               filled: true,
               fillColor: const Color(0xFFF9FAFB),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
+                borderSide: BorderSide(color: context.colorScheme.outlineVariant),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
+                borderSide: BorderSide(color: context.colorScheme.outlineVariant),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -1471,14 +1472,14 @@ class _StepReview extends StatelessWidget {
           // Summary card
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.colorScheme.surface,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(color: context.colorScheme.outlineVariant),
             ),
             child: Column(
               children: [
                 // Page
-                _reviewSection(
+                _reviewSection(context, 
                   'الصفحة المطلوبة',
                   hasBorder: true,
                   child: Row(
@@ -1505,51 +1506,51 @@ class _StepReview extends StatelessWidget {
                 ),
 
                 // Personal info
-                _reviewSection(
+                _reviewSection(context, 
                   'بياناتك',
                   hasBorder: true,
                   child: Column(
                     children: [
-                      _reviewRow('الاسم', fullName),
+                      _reviewRow(context, 'الاسم', fullName),
                       const SizedBox(height: 6),
-                      _reviewRow('الهاتف', phone, trailing: const Icon(Icons.check_circle, size: 10, color: _green)),
+                      _reviewRow(context, 'الهاتف', phone, trailing: const Icon(Icons.check_circle, size: 10, color: _green)),
                       const SizedBox(height: 6),
-                      _reviewRow('الصفة', _roleName),
+                      _reviewRow(context, 'الصفة', _roleName),
                     ],
                   ),
                 ),
 
                 // Verification
-                _reviewSection(
+                _reviewSection(context, 
                   'التحقق',
                   child: Column(
                     children: [
-                      _reviewRow(
+                      _reviewRow(context, 
                         'الموقع (GPS)',
                         gpsCaptured ? 'تم التحديد' : 'لم يُحدد',
                         trailing: gpsCaptured ? const Icon(Icons.check_circle, size: 12, color: _green) : null,
-                        valueColor: gpsCaptured ? _green : Colors.grey.shade400,
+                        valueColor: gpsCaptured ? _green : context.colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(height: 6),
-                      _reviewRow('طريقة التحقق', _methodName),
+                      _reviewRow(context, 'طريقة التحقق', _methodName),
                       if (verificationMethod == 'document' && _docName.isNotEmpty) ...[
                         const SizedBox(height: 6),
-                        _reviewRow('المستند', _docName, trailing: const Icon(Icons.check_circle, size: 12, color: _green), valueColor: _green),
+                        _reviewRow(context, 'المستند', _docName, trailing: const Icon(Icons.check_circle, size: 12, color: _green), valueColor: _green),
                       ],
                       if (verificationMethod == 'in_person' && preferredVisitTime.isNotEmpty) ...[
                         const SizedBox(height: 6),
-                        _reviewRow('وقت الزيارة', _visitTimeName),
+                        _reviewRow(context, 'وقت الزيارة', _visitTimeName),
                       ],
                       if (notes.isNotEmpty) ...[
                         const SizedBox(height: 8),
-                        Divider(color: Colors.grey.shade100, height: 1),
+                        Divider(color: context.colorScheme.outlineVariant, height: 1),
                         const SizedBox(height: 8),
                         Align(
                           alignment: AlignmentDirectional.centerStart,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('ملاحظات', style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
+                              Text('ملاحظات', style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant)),
                               const SizedBox(height: 4),
                               Text(notes, style: const TextStyle(fontSize: 14, color: Color(0xFF374151))),
                             ],
@@ -1569,7 +1570,7 @@ class _StepReview extends StatelessWidget {
             children: [
               Expanded(
                 child: Material(
-                  color: Colors.grey.shade100,
+                  color: context.colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(8),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(8),
@@ -1584,7 +1585,7 @@ class _StepReview extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Material(
-                  color: Colors.grey.shade100,
+                  color: context.colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(8),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(8),
@@ -1617,10 +1618,10 @@ class _StepReview extends StatelessWidget {
                     width: 20,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: agreedToTerms ? _primary : Colors.white,
+                      color: agreedToTerms ? _primary : context.colorScheme.surface,
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
-                        color: agreedToTerms ? _primary : Colors.grey.shade300,
+                        color: agreedToTerms ? _primary : context.colorScheme.outline,
                         width: 2,
                       ),
                     ),
@@ -1673,13 +1674,13 @@ class _StepReview extends StatelessWidget {
 
           Row(
             children: [
-              Icon(Icons.access_time, size: 12, color: Colors.grey.shade400),
+              Icon(Icons.access_time, size: 12, color: context.colorScheme.onSurfaceVariant),
               const SizedBox(width: 8),
               Text(
                 verificationMethod == 'in_person'
                     ? 'سنتواصل معك خلال ٢٤ ساعة لتأكيد الزيارة'
                     : 'مدة المراجعة: ٢٤ ساعة',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -1688,17 +1689,17 @@ class _StepReview extends StatelessWidget {
     );
   }
 
-  Widget _reviewSection(String title, {required Widget child, bool hasBorder = false}) {
+  Widget _reviewSection(BuildContext context, String title, {required Widget child, bool hasBorder = false}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: hasBorder ? Border(bottom: BorderSide(color: Colors.grey.shade100)) : null,
+        border: hasBorder ? Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)) : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: TextStyle(fontSize: 10, color: Colors.grey.shade400)),
+          Text(title, style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
           const SizedBox(height: 8),
           child,
         ],
@@ -1706,10 +1707,10 @@ class _StepReview extends StatelessWidget {
     );
   }
 
-  Widget _reviewRow(String label, String value, {Widget? trailing, Color? valueColor}) {
+  Widget _reviewRow(BuildContext context, String label, String value, {Widget? trailing, Color? valueColor}) {
     return Row(
       children: [
-        Text(label, style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
+        Text(label, style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant)),
         const Spacer(),
         if (trailing != null) ...[trailing, const SizedBox(width: 4)],
         Text(value, style: TextStyle(fontSize: 14, color: valueColor ?? const Color(0xFF111827))),
@@ -1754,7 +1755,7 @@ class _SelectableCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isSelected ? _primary : Colors.grey.shade200,
+              color: isSelected ? _primary : context.colorScheme.surfaceContainer,
             ),
             boxShadow: isSelected
                 ? [BoxShadow(color: _primary.withValues(alpha: 0.08), blurRadius: 4)]
@@ -1766,13 +1767,13 @@ class _SelectableCard extends StatelessWidget {
                 width: compact ? 36 : 40,
                 height: compact ? 36 : 40,
                 decoration: BoxDecoration(
-                  color: isSelected ? _primary.withValues(alpha: 0.1) : Colors.grey.shade100,
+                  color: isSelected ? _primary.withValues(alpha: 0.1) : context.colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(compact ? 8 : 10),
                 ),
                 child: Icon(
                   icon,
                   size: compact ? 16 : 18,
-                  color: isSelected ? _primary : Colors.grey.shade400,
+                  color: isSelected ? _primary : context.colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: 12),
@@ -1808,7 +1809,7 @@ class _SelectableCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       description,
-                      style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+                      style: TextStyle(fontSize: 11, color: context.colorScheme.onSurfaceVariant),
                     ),
                   ],
                 ),

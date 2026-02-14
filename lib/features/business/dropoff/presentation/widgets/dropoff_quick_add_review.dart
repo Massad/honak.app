@@ -49,7 +49,7 @@ class _ReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsetsDirectional.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             borderRadius: AppRadius.cardInner,
           ),
           child: Row(
@@ -59,14 +59,14 @@ class _ReviewStep extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: AppColors.surface,
+                  color: context.colorScheme.surface,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: Icon(
                   Icons.person_outline_rounded,
                   size: 16,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -87,7 +87,7 @@ class _ReviewStep extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                   ],
@@ -122,7 +122,7 @@ class _ReviewStep extends StatelessWidget {
             margin: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
             padding: const EdgeInsetsDirectional.all(AppSpacing.md),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade100),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               borderRadius: AppRadius.cardInner,
             ),
             child: Row(
@@ -137,7 +137,7 @@ class _ReviewStep extends StatelessWidget {
                   child: Icon(
                     Icons.inventory_2_outlined,
                     size: 14,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Expanded(
@@ -158,7 +158,7 @@ class _ReviewStep extends StatelessWidget {
                           Text(
                             price.toFormattedArabic(),
                             style: context.textTheme.bodySmall?.copyWith(
-                              color: Colors.grey.shade600,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                               fontSize: 12,
                             ),
                           ),
@@ -188,17 +188,17 @@ class _ReviewStep extends StatelessWidget {
                                         vertical: 2,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: Colors.grey.shade50,
+                                        color: Theme.of(context).colorScheme.surfaceContainerLowest,
                                         borderRadius: AppRadius.pill,
                                         border: Border.all(
-                                          color: Colors.grey.shade100,
+                                          color: Theme.of(context).colorScheme.surfaceContainerLow,
                                         ),
                                       ),
                                       child: Text(
                                         e.value,
                                         style: context.textTheme.labelSmall
                                             ?.copyWith(
-                                          color: Colors.grey.shade500,
+                                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                                           fontSize: 9,
                                         ),
                                       ),
@@ -248,7 +248,7 @@ class _ReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsetsDirectional.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             borderRadius: AppRadius.cardInner,
           ),
           child: Row(
@@ -273,7 +273,7 @@ class _ReviewStep extends StatelessWidget {
                     Text(
                       'بعد $estimatedDays ${estimatedDays == 1 ? 'يوم' : 'أيام'}',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),
@@ -315,11 +315,11 @@ class _ReviewStep extends StatelessWidget {
             decoration: BoxDecoration(
               color: urgent
                   ? const Color(0xFFFEF2F2)
-                  : Colors.grey.shade50,
+                  : Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: AppRadius.cardInner,
               border: urgent
                   ? Border.all(color: const Color(0xFFE53935))
-                  : Border.all(color: Colors.grey.shade200),
+                  : Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             child: Row(
               children: [
@@ -328,7 +328,7 @@ class _ReviewStep extends StatelessWidget {
                   size: 18,
                   color: urgent
                       ? const Color(0xFFE53935)
-                      : Colors.grey.shade400,
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: AppSpacing.md),
                 Expanded(
@@ -345,7 +345,7 @@ class _ReviewStep extends StatelessWidget {
                       Text(
                         'أولوية معالجة أعلى',
                         style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 10,
                         ),
                       ),
@@ -364,15 +364,15 @@ class _ReviewStep extends StatelessWidget {
                     border: Border.all(
                       color: urgent
                           ? const Color(0xFFE53935)
-                          : Colors.grey.shade300,
+                          : Theme.of(context).colorScheme.outline,
                       width: 2,
                     ),
                   ),
                   child: urgent
-                      ? const Icon(
+                      ? Icon(
                           Icons.check_rounded,
                           size: 14,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                         )
                       : null,
                 ),
@@ -401,7 +401,7 @@ class _ReviewStep extends StatelessWidget {
               'الإجمالي',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const Spacer(),
@@ -423,7 +423,7 @@ class _ReviewStep extends StatelessWidget {
             decoration: BoxDecoration(
               color: items.isNotEmpty
                   ? const Color(0xFF1A73E8)
-                  : Colors.grey.shade300,
+                  : Theme.of(context).colorScheme.outline,
               borderRadius: AppRadius.cardInner,
             ),
             child: Row(
@@ -433,10 +433,10 @@ class _ReviewStep extends StatelessWidget {
                 const SizedBox(width: 6),
                 Text(
                   'إنشاء تذكرة $ticketNumber',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
               ],

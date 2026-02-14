@@ -96,8 +96,8 @@ class _TextLayerEditorState extends ConsumerState<TextLayerEditor> {
                                   children: [
                                     Text(
                                       bizContext.page.name,
-                                      style: const TextStyle(
-                                        color: Colors.white,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.surface,
                                         fontSize: 12,
                                         shadows: [
                                           Shadow(

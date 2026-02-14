@@ -6,7 +6,7 @@
     "business_type_id": "directory",
     "business_type_name": "دليل مجمع",
     "category_name": "مراكز تجارية",
-    "explore_category": "cat_retail",
+    "explore_category": "cat_malls",
     "name": "City Mall",
     "name_en": "City Mall",
     "slug": "city-mall",
@@ -77,8 +77,8 @@
     ],
     "directory_stats": {
       "total_tenants": 26,
-      "claimed_tenants": 26,
-      "unclaimed_tenants": 0,
+      "on_honak": 23,
+      "open_now": 18,
       "floors": 4
     },
     "featured_tenant_ids": ["t-12", "t-13", "t-19", "t-6", "t-20", "t-24"],

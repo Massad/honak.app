@@ -192,6 +192,7 @@ _$PageDetailImpl _$$PageDetailImplFromJson(
       const [],
   dataSynced: json['data_synced'] as bool? ?? true,
   venueId: json['venue_id'] as String?,
+  venueName: json['venue_name'] as String?,
   venueUnit: json['venue_unit'] as String?,
   venueFloor: json['venue_floor'] as String?,
   mallAnnouncements:
@@ -209,6 +210,7 @@ _$PageDetailImpl _$$PageDetailImplFromJson(
       : DirectoryStats.fromJson(
           json['directory_stats'] as Map<String, dynamic>,
         ),
+  parkingInfo: json['parking_info'] as String?,
   carryCategories:
       (json['carry_categories'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -306,10 +308,12 @@ Map<String, dynamic> _$$PageDetailImplToJson(_$PageDetailImpl instance) =>
       'blocked_dates': instance.blockedDates,
       'data_synced': instance.dataSynced,
       'venue_id': instance.venueId,
+      'venue_name': instance.venueName,
       'venue_unit': instance.venueUnit,
       'venue_floor': instance.venueFloor,
       'mall_announcements': instance.mallAnnouncements,
       'featured_tenant_ids': instance.featuredTenantIds,
       'directory_stats': instance.directoryStats,
+      'parking_info': instance.parkingInfo,
       'carry_categories': instance.carryCategories,
     };

@@ -80,9 +80,9 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
             bottom: AppSpacing.sm,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             border: Border(
-              bottom: BorderSide(color: Colors.grey.shade100),
+              bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
           ),
           child: Row(
@@ -127,7 +127,7 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
             error: (_, __) => Center(
               child: Text(
                 'تعذر تحميل البيانات',
-                style: TextStyle(color: Colors.grey.shade400),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ),
           ),
@@ -148,13 +148,13 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Icon(
                   Icons.store,
                   size: 32,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               Positioned(
@@ -167,10 +167,10 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.camera_alt,
                     size: 12,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
               ),
@@ -182,9 +182,9 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
         Container(
           height: 100,
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey.shade200),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Center(
             child: Column(
@@ -193,14 +193,14 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
                 Icon(
                   Icons.add_photo_alternate_outlined,
                   size: 24,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'صورة الغلاف',
                   style: TextStyle(
                     fontSize: 11,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -309,12 +309,12 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.primary.withValues(alpha: 0.08)
-              : Colors.white,
+              : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected
                 ? AppColors.primary.withValues(alpha: 0.3)
-                : Colors.grey.shade200,
+                : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -334,7 +334,7 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
               size: 16,
               color: isSelected
                   ? AppColors.primary
-                  : Colors.grey.shade400,
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ],
         ),
@@ -362,17 +362,17 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
             hintText: 'اسم طريقة الدفع',
             hintStyle: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             isDense: true,
             contentPadding: const EdgeInsets.all(AppSpacing.md),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -388,7 +388,7 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
                 onPressed: () => Navigator.of(ctx).pop(),
                 child: Text(
                   'إلغاء',
-                  style: TextStyle(color: Colors.grey.shade500),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
               ),
               TextButton(
@@ -429,7 +429,7 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
         hintText: hintText,
         hintStyle: TextStyle(
           fontSize: 12,
-          color: Colors.grey.shade400,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
@@ -437,11 +437,11 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -463,7 +463,7 @@ class _FieldLabel extends StatelessWidget {
       child: Text(
         text,
         style: context.textTheme.bodySmall?.copyWith(
-          color: AppColors.textSecondary,
+          color: context.colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w500,
         ),
       ),

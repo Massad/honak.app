@@ -21,7 +21,7 @@ class ScheduleTab extends ConsumerWidget {
       error: (_, __) => Center(
         child: Text(
           'تعذر تحميل الجدول',
-          style: TextStyle(color: Colors.grey.shade400),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
       ),
     );
@@ -59,7 +59,7 @@ class _HoursList extends ConsumerWidget {
             },
           ),
           if (i < hours.length - 1)
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
         ],
       ],
     );
@@ -98,7 +98,7 @@ class _DayRow extends StatelessWidget {
                   'مغلق',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               const Spacer(),
@@ -143,7 +143,7 @@ class _DayRow extends StatelessWidget {
                       'وردية ${i + 1}',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],

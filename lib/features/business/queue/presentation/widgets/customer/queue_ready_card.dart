@@ -34,7 +34,7 @@ class QueueReadyCard extends StatelessWidget {
           Text(
             'سيارتك جاهزة!',
             style: context.textTheme.titleMedium?.copyWith(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -54,14 +54,14 @@ class QueueReadyCard extends StatelessWidget {
                     Text(
                       entry.packageName,
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Text(
                       total.toFormattedArabic(),
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -114,7 +114,7 @@ class QueueReadyCard extends StatelessWidget {
                     child: Text(
                       'ادفع عند الاستلام — ${entry.paymentMethods.join(' / ')}',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ),
                   ),

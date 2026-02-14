@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
@@ -30,9 +31,9 @@ class ActivityPostCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.colorScheme.surface,
           borderRadius: AppRadius.card,
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: context.colorScheme.outlineVariant),
           boxShadow: AppShadows.sm,
         ),
         clipBehavior: Clip.antiAlias,
@@ -79,7 +80,7 @@ class ActivityPostCard extends StatelessWidget {
                         timeAgo(post.createdAt),
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey.shade400,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -91,7 +92,7 @@ class ActivityPostCard extends StatelessWidget {
                     post.content,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey.shade800,
+                      color: context.colorScheme.onSurface,
                       height: 1.625,
                     ),
                   ),
@@ -191,8 +192,8 @@ class _TypeBadge extends StatelessWidget {
     ),
     _ => (
       label: '\u062d\u0627\u0644\u0629',
-      color: Colors.grey.shade600,
-      bg: Colors.grey.shade100,
+      color: const Color(0xFF757575),
+      bg: const Color(0xFFF5F5F5),
       icon: Icons.description_outlined,
     ),
   };

@@ -1,37 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/providers/locale_provider.dart';
+import 'package:honak/shared/providers/theme_mode_provider.dart';
 
-class SettingsPage extends ConsumerStatefulWidget {
+class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
   @override
-  ConsumerState<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends ConsumerState<SettingsPage> {
-  // Local state for theme (Phase 2)
-  String _themeMode = 'system';
-  bool _notificationsEnabled = true;
-
-  @override
-  Widget build(BuildContext context) {
-    final locale = ref.watch(localeProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider).valueOrNull ?? const Locale('ar');
     final isArabic = locale.languageCode == 'ar';
     final authState = ref.watch(authProvider).valueOrNull;
     final isAuthenticated = authState is Authenticated;
+    final themeMode =
+        ref.watch(themeModeProvider).valueOrNull ?? ThemeMode.system;
+    final cs = context.colorScheme;
 
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
         appBar: AppBar(
-          title: const Text('\u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a'),
+          title: Text(context.l10n.settings),
           centerTitle: true,
           leading: IconButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -44,16 +38,16 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             padding: const EdgeInsets.all(AppSpacing.lg),
             children: [
               // Language section
-              _SectionHeader(title: '\u0627\u0644\u0644\u063a\u0629'),
+              _SectionHeader(title: context.l10n.language),
               const SizedBox(height: AppSpacing.sm),
               _SettingsCard(
                 child: Row(
                   children: [
-                    const Icon(Icons.language, size: 20, color: AppColors.primary),
+                    Icon(Icons.language, size: 20, color: cs.primary),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Text(
-                        '\u0644\u063a\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642',
+                        context.l10n.appLanguage,
                         style: context.textTheme.bodyMedium,
                       ),
                     ),
@@ -63,7 +57,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       items: const [
                         DropdownMenuItem(
                           value: 'ar',
-                          child: Text('\u0627\u0644\u0639\u0631\u0628\u064a\u0629'),
+                          child: Text('العربية'),
                         ),
                         DropdownMenuItem(
                           value: 'en',
@@ -72,7 +66,9 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       ],
                       onChanged: (value) {
                         if (value != null) {
-                          ref.read(localeProvider.notifier).state = Locale(value);
+                          ref
+                              .read(localeProvider.notifier)
+                              .setLocale(Locale(value));
                         }
                       },
                     ),
@@ -83,40 +79,42 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               const SizedBox(height: AppSpacing.xxl),
 
               // Theme section
-              _SectionHeader(title: '\u0627\u0644\u0645\u0638\u0647\u0631'),
+              _SectionHeader(title: context.l10n.appearance),
               const SizedBox(height: AppSpacing.sm),
               _SettingsCard(
                 child: Row(
                   children: [
-                    const Icon(Icons.palette_outlined, size: 20, color: AppColors.primary),
+                    Icon(Icons.palette_outlined, size: 20, color: cs.primary),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Text(
-                        '\u0627\u0644\u0645\u0638\u0647\u0631',
+                        context.l10n.appearance,
                         style: context.textTheme.bodyMedium,
                       ),
                     ),
-                    SegmentedButton<String>(
+                    SegmentedButton<ThemeMode>(
                       segments: const [
                         ButtonSegment(
-                          value: 'light',
+                          value: ThemeMode.light,
                           icon: Icon(Icons.light_mode, size: 16),
                         ),
                         ButtonSegment(
-                          value: 'system',
+                          value: ThemeMode.system,
                           icon: Icon(Icons.settings_suggest, size: 16),
                         ),
                         ButtonSegment(
-                          value: 'dark',
+                          value: ThemeMode.dark,
                           icon: Icon(Icons.dark_mode, size: 16),
                         ),
                       ],
-                      selected: {_themeMode},
+                      selected: {themeMode},
                       onSelectionChanged: (value) {
-                        setState(() => _themeMode = value.first);
+                        ref
+                            .read(themeModeProvider.notifier)
+                            .setThemeMode(value.first);
                       },
                       showSelectedIcon: false,
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                         visualDensity: VisualDensity.compact,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
@@ -127,34 +125,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
               const SizedBox(height: AppSpacing.xxl),
 
-              // Notifications section
-              _SectionHeader(title: '\u0627\u0644\u0625\u0634\u0639\u0627\u0631\u0627\u062a'),
-              const SizedBox(height: AppSpacing.sm),
-              _SettingsCard(
-                child: Row(
-                  children: [
-                    const Icon(Icons.notifications_outlined, size: 20, color: AppColors.primary),
-                    const SizedBox(width: AppSpacing.md),
-                    Expanded(
-                      child: Text(
-                        '\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0625\u0634\u0639\u0627\u0631\u0627\u062a',
-                        style: context.textTheme.bodyMedium,
-                      ),
-                    ),
-                    Switch(
-                      value: _notificationsEnabled,
-                      onChanged: (value) {
-                        setState(() => _notificationsEnabled = value);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: AppSpacing.xxl),
-
               // About section
-              _SectionHeader(title: '\u062d\u0648\u0644 \u0627\u0644\u062a\u0637\u0628\u064a\u0642'),
+              _SectionHeader(title: context.l10n.aboutApp),
               const SizedBox(height: AppSpacing.sm),
               _SettingsCard(
                 child: Column(
@@ -162,10 +134,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.info_outline, size: 20, color: AppColors.primary),
+                        Icon(Icons.info_outline, size: 20, color: cs.primary),
                         const SizedBox(width: AppSpacing.md),
                         Text(
-                          '\u062d\u064f\u0646\u064e\u0643',
+                          'حُنَك',
                           style: context.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -178,7 +150,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       child: Text(
                         '1.0.0 (Phase 1)',
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: Colors.grey.shade500,
+                          color: cs.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -193,9 +165,9 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   child: TextButton(
                     onPressed: () => _confirmDeleteAccount(context),
                     child: Text(
-                      '\u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628',
+                      context.l10n.deleteAccount,
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.error,
+                        color: cs.error,
                       ),
                     ),
                   ),
@@ -210,27 +182,31 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   }
 
   void _confirmDeleteAccount(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
     showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('\u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628'),
-        content: const Text(
-          '\u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u062d\u0630\u0641 \u062d\u0633\u0627\u0628\u0643\u061f \u0644\u0627 \u064a\u0645\u0643\u0646 \u0627\u0644\u062a\u0631\u0627\u062c\u0639 \u0639\u0646 \u0647\u0630\u0627 \u0627\u0644\u0625\u062c\u0631\u0627\u0621.',
-        ),
+        title: Text(l10n.deleteAccount),
+        content: Text(l10n.deleteAccountConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(context.l10n.cancel),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: AppColors.error,
+              backgroundColor: cs.error,
             ),
             onPressed: () {
               Navigator.pop(ctx);
-              context.showSnackBar('\u0642\u0631\u064a\u0628\u0627\u064b');
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(content: Text(l10n.comingSoon)),
+                );
             },
-            child: const Text('\u062d\u0630\u0641'),
+            child: Text(l10n.delete),
           ),
         ],
       ),
@@ -251,7 +227,7 @@ class _SectionHeader extends StatelessWidget {
       title,
       style: context.textTheme.titleSmall?.copyWith(
         fontWeight: FontWeight.w600,
-        color: Colors.grey.shade600,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
       ),
     );
   }
@@ -266,13 +242,14 @@ class _SettingsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: cs.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: cs.outlineVariant),
       ),
       child: child,
     );

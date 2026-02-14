@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -106,7 +107,7 @@ class TypeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: selected ? AppColors.primary.withAlpha(25) : AppColors.surfaceVariant,
+      color: selected ? AppColors.primary.withAlpha(25) : context.colorScheme.surfaceVariant,
       borderRadius: AppRadius.pill,
       child: InkWell(
         onTap: onTap,
@@ -125,7 +126,7 @@ class TypeChip extends StatelessWidget {
           child: Text(
             type.name,
             style: TextStyle(
-              color: selected ? AppColors.primary : AppColors.textPrimary,
+              color: selected ? AppColors.primary : context.colorScheme.onSurface,
               fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
               fontSize: 13,
             ),
@@ -191,7 +192,7 @@ class _CategorySectionState extends State<CategorySection> {
                 ),
                 Icon(
                   _expanded ? Icons.expand_less : Icons.expand_more,
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ],
             ),
@@ -256,7 +257,7 @@ class TypeListTile extends StatelessWidget {
                 type.name,
                 style: TextStyle(
                   fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                  color: selected ? AppColors.primary : AppColors.textPrimary,
+                  color: selected ? AppColors.primary : context.colorScheme.onSurface,
                 ),
               ),
             ),
@@ -266,14 +267,14 @@ class TypeListTile extends StatelessWidget {
                 vertical: AppSpacing.xxs,
               ),
               decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
+                color: context.colorScheme.surfaceVariant,
                 borderRadius: AppRadius.badge,
               ),
               child: Text(
                 type.archetypeLabel,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 11,
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -323,9 +324,9 @@ class ArchetypeInfoBox extends StatelessWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             explanation,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 13,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],

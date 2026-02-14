@@ -50,11 +50,11 @@ class _AvailabilityManagerState
         ),
         // Inner tabs
         Container(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           child: TabBar(
             controller: _tabController,
             labelColor: AppColors.primary,
-            unselectedLabelColor: Colors.grey.shade400,
+            unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
             indicatorColor: AppColors.primary,
             labelStyle: const TextStyle(
               fontSize: 12,

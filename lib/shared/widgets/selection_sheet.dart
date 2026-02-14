@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -97,7 +98,7 @@ class _SelectionSheetBodyState<T> extends State<_SelectionSheetBody<T>> {
             width: 36,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.colorScheme.outline,
               borderRadius: AppRadius.pill,
             ),
           ),
@@ -118,7 +119,7 @@ class _SelectionSheetBodyState<T> extends State<_SelectionSheetBody<T>> {
                 child: Icon(
                   Icons.close,
                   size: 22,
-                  color: Colors.grey.shade500,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
               const Spacer(),
@@ -149,27 +150,27 @@ class _SelectionSheetBodyState<T> extends State<_SelectionSheetBody<T>> {
                 hintText: 'بحث...',
                 hintStyle: TextStyle(
                   fontSize: 13,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 prefixIcon: Icon(
                   Icons.search,
                   size: 20,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 isDense: true,
                 filled: true,
-                fillColor: Colors.grey.shade50,
+                fillColor: context.colorScheme.surfaceContainerLowest,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.md,
                   vertical: AppSpacing.sm,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: AppRadius.button,
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: AppRadius.button,
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: AppRadius.button,
@@ -224,7 +225,7 @@ class _SelectionSheetBodyState<T> extends State<_SelectionSheetBody<T>> {
                                   : FontWeight.normal,
                               color: isSelected
                                   ? AppColors.primary
-                                  : Colors.grey.shade800,
+                                  : context.colorScheme.onSurface,
                             ),
                           ),
                         ),
@@ -236,7 +237,7 @@ class _SelectionSheetBodyState<T> extends State<_SelectionSheetBody<T>> {
                           size: 18,
                           color: isSelected
                               ? AppColors.primary
-                              : Colors.grey.shade400,
+                              : context.colorScheme.onSurfaceVariant,
                         ),
                       ],
                     ],

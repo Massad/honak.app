@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -20,6 +21,7 @@ class NotificationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
     final unreadBg = const Color(0xFFEBF2FD);
     final unreadBorder = AppColors.primary.withValues(alpha: 0.2);
 
@@ -28,7 +30,7 @@ class NotificationCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: isRead ? AppColors.surface : unreadBg,
+          color: isRead ? cs.surface : unreadBg,
           borderRadius: AppRadius.cardInner,
           border: Border.all(
             color: isRead ? const Color(0xFFE5E7EB) : unreadBorder,
@@ -53,7 +55,7 @@ class NotificationCard extends StatelessWidget {
                         fontSize: 13,
                         fontWeight:
                             isRead ? FontWeight.w500 : FontWeight.w700,
-                        color: AppColors.textPrimary,
+                        color: cs.onSurface,
                       ),
                     ),
                   if (notification.pageName != null)
@@ -64,7 +66,7 @@ class NotificationCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: cs.onSurfaceVariant,
                       height: 1.4,
                     ),
                   ),
@@ -73,7 +75,7 @@ class NotificationCard extends StatelessWidget {
                     _formatTime(notification.createdAt),
                     style: TextStyle(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: cs.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -164,6 +166,6 @@ class _TypeIconBadge extends StatelessWidget {
         'new_follower' => (Icons.person_add, AppColors.success),
         'new_post' => (Icons.description, const Color(0xFF7C3AED)),
         'promotion' => (Icons.local_offer, AppColors.warning),
-        _ => (Icons.notifications, AppColors.textHint),
+        _ => (Icons.notifications, const Color(0xFF9CA3AF)),
       };
 }

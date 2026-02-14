@@ -93,7 +93,7 @@ class _RelocationSettingsState extends State<RelocationSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(AppRadius.md),
       ),
       child: Row(
@@ -123,7 +123,7 @@ class _RelocationSettingsState extends State<RelocationSettings> {
                       : 'عند التفعيل، سيظهر إعلان "انتقلنا!" على صفحتك لمدة 30 يوم',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -149,7 +149,7 @@ class _RelocationSettingsState extends State<RelocationSettings> {
           'العنوان الجديد:',
           style: TextStyle(
             fontSize: 12,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -160,19 +160,19 @@ class _RelocationSettingsState extends State<RelocationSettings> {
           style: const TextStyle(fontSize: 13),
           decoration: InputDecoration(
             hintText: 'مثال: شارع المدينة المنورة، عمّان',
-            hintStyle: TextStyle(fontSize: 12, color: Colors.grey.shade300),
+            hintStyle: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline),
             prefixIcon: Icon(
               Icons.location_on_outlined,
               size: 18,
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.md),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.md),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.md),
@@ -215,8 +215,8 @@ class _RelocationSettingsState extends State<RelocationSettings> {
               child: OutlinedButton(
                 onPressed: _onCancelConfirmation,
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.grey.shade700,
-                  side: BorderSide(color: Colors.grey.shade200),
+                  foregroundColor: Theme.of(context).colorScheme.onSurface,
+                  side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppRadius.md),
@@ -231,8 +231,8 @@ class _RelocationSettingsState extends State<RelocationSettings> {
                 onPressed: hasAddress ? _onConfirmActivation : null,
                 style: FilledButton.styleFrom(
                   backgroundColor: AppColors.primary,
-                  disabledBackgroundColor: Colors.grey.shade200,
-                  disabledForegroundColor: Colors.grey.shade400,
+                  disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
+                  disabledForegroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppRadius.md),
@@ -267,25 +267,25 @@ class _RelocationSettingsState extends State<RelocationSettings> {
         Container(
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           child: Row(
             children: [
-              Icon(Icons.timer_outlined, size: 16, color: Colors.grey.shade500),
+              Icon(Icons.timer_outlined, size: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 'متبقي $_daysRemaining يوم',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               const Spacer(),
               Text(
                 'سيختفي البانر تلقائياً',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -331,7 +331,7 @@ class _RelocationSettingsState extends State<RelocationSettings> {
         children: [
           Text(
             'معاينة البانر:',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           // The actual banner
@@ -355,12 +355,12 @@ class _RelocationSettingsState extends State<RelocationSettings> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'انتقلنا!',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
+                          color: context.colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -368,7 +368,7 @@ class _RelocationSettingsState extends State<RelocationSettings> {
                         'العنوان الجديد: $address',
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey.shade600,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -422,9 +422,9 @@ class _RelocationSettingsState extends State<RelocationSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -450,7 +450,7 @@ class _RelocationSettingsState extends State<RelocationSettings> {
                   'سيتم إشعار جميع المتابعين بالعنوان الجديد',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -485,8 +485,8 @@ class _RelocationSettingsState extends State<RelocationSettings> {
               if (!_isActive && !_showConfirmation) ...[
                 const SizedBox(height: AppSpacing.md),
                 _buildInfoNote(
-                  color: Colors.grey.shade500,
-                  bgColor: Colors.grey.shade50,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  bgColor: Theme.of(context).colorScheme.surfaceContainerLowest,
                   icon: Icons.info_outline,
                   text:
                       'عند التفعيل، سيظهر إعلان "انتقلنا!" على صفحتك لمدة 30 يوم لإبلاغ الزوار والمتابعين بعنوانك الجديد.',

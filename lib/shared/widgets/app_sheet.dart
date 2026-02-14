@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_colors.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
@@ -38,8 +38,8 @@ class AppSheetOverlay extends StatelessWidget {
               onTap: () {}, // absorb taps on the sheet itself
               child: Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.surface,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(20)),
                 ),
@@ -91,7 +91,7 @@ class AppSheetHeader extends StatelessWidget {
             height: 4,
             margin: const EdgeInsets.only(bottom: AppSpacing.lg),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -123,13 +123,13 @@ class AppSheetHeader extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: context.colorScheme.surfaceContainerLow,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.close,
                         size: 18,
-                        color: Colors.grey.shade600,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -175,9 +175,9 @@ Future<T?> showAppSheet<T>(
             maxHeight: MediaQuery.of(ctx).size.height * maxHeightFraction,
           ),
           child: Container(
-            decoration: const BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.vertical(
+            decoration: BoxDecoration(
+              color: Theme.of(ctx).colorScheme.surface,
+              borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(AppRadius.xxl),
               ),
             ),

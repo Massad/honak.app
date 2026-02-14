@@ -422,6 +422,36 @@ abstract class AppLocalizations {
   /// **'الإعدادات'**
   String get settings;
 
+  /// No description provided for @appLanguage.
+  ///
+  /// In ar, this message translates to:
+  /// **'لغة التطبيق'**
+  String get appLanguage;
+
+  /// No description provided for @appearance.
+  ///
+  /// In ar, this message translates to:
+  /// **'المظهر'**
+  String get appearance;
+
+  /// No description provided for @aboutApp.
+  ///
+  /// In ar, this message translates to:
+  /// **'حول التطبيق'**
+  String get aboutApp;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الحساب'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل أنت متأكد من حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.'**
+  String get deleteAccountConfirm;
+
   /// No description provided for @feed.
   ///
   /// In ar, this message translates to:

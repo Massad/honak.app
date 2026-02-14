@@ -21,8 +21,8 @@ class PageSelectorSheet extends ConsumerWidget {
     final activePage = ref.watch(currentBusinessPageProvider).valueOrNull;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: SafeArea(
@@ -35,7 +35,7 @@ class PageSelectorSheet extends ConsumerWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: Theme.of(context).colorScheme.outline,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -81,7 +81,7 @@ class PageSelectorSheet extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: Material(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(14),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(14),
@@ -96,7 +96,7 @@ class PageSelectorSheet extends ConsumerWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.grey.shade100),
+                      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -146,7 +146,7 @@ class _PageTile extends StatelessWidget {
         vertical: AppSpacing.xs,
       ),
       child: Material(
-        color: isActive ? const Color(0xFFF0F7FF) : Colors.white,
+        color: isActive ? const Color(0xFFF0F7FF) : Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         child: InkWell(
           borderRadius: BorderRadius.circular(14),
@@ -158,7 +158,7 @@ class _PageTile extends StatelessWidget {
               border: Border.all(
                 color: isActive
                     ? AppColors.primary.withValues(alpha: 0.3)
-                    : Colors.grey.shade100,
+                    : Theme.of(context).colorScheme.surfaceContainerLow,
               ),
             ),
             child: Row(
@@ -174,7 +174,7 @@ class _PageTile extends StatelessWidget {
                   Icon(
                     Icons.chevron_left,
                     size: 18,
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.outline,
                   ),
                 const SizedBox(width: AppSpacing.sm),
 
@@ -211,7 +211,7 @@ class _PageTile extends StatelessWidget {
                         Text(
                           '@${page.slug} · ${page.businessTypeName}',
                           style: context.textTheme.labelSmall?.copyWith(
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                             fontSize: 10,
                           ),
                           textAlign: TextAlign.end,
@@ -228,8 +228,8 @@ class _PageTile extends StatelessWidget {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100,
-                    border: Border.all(color: Colors.grey.shade200),
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
+                    border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   child: AppImage(
                     url: page.avatarUrl,

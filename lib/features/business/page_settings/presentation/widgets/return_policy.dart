@@ -64,10 +64,10 @@ class ReturnPolicy extends ConsumerWidget {
                 Container(
                   padding: const EdgeInsets.all(AppSpacing.md),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(14),
                     border:
-                        Border.all(color: Colors.grey.shade100),
+                        Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   child: Row(
                     children: [
@@ -109,7 +109,7 @@ class ReturnPolicy extends ConsumerWidget {
                         'يوم',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -154,9 +154,9 @@ class ReturnPolicy extends ConsumerWidget {
                 const SizedBox(height: AppSpacing.sm),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: Colors.grey.shade100),
+                    border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   child: TextField(
                     textAlign: TextAlign.end,
@@ -169,7 +169,7 @@ class ReturnPolicy extends ConsumerWidget {
                           'مثال: يجب أن يكون المنتج بحالته الأصلية...',
                       hintStyle: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       isDense: true,
                       contentPadding:
@@ -177,12 +177,12 @@ class ReturnPolicy extends ConsumerWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide:
-                            BorderSide(color: Colors.grey.shade100),
+                            BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide:
-                            BorderSide(color: Colors.grey.shade100),
+                            BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
@@ -222,9 +222,9 @@ class _ToggleRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -247,7 +247,7 @@ class _ToggleRow extends StatelessWidget {
                 desc,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -274,7 +274,7 @@ class _RadioOption extends StatelessWidget {
     return Material(
       color: selected
           ? AppColors.primary.withValues(alpha: 0.05)
-          : Colors.white,
+          : Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
@@ -289,7 +289,7 @@ class _RadioOption extends StatelessWidget {
             border: Border.all(
               color: selected
                   ? AppColors.primary.withValues(alpha: 0.3)
-                  : Colors.grey.shade200,
+                  : Theme.of(context).colorScheme.outlineVariant,
             ),
           ),
           child: Row(
@@ -301,7 +301,7 @@ class _RadioOption extends StatelessWidget {
                 size: 18,
                 color: selected
                     ? AppColors.primary
-                    : Colors.grey.shade300,
+                    : Theme.of(context).colorScheme.outline,
               ),
               const Spacer(),
               Text(
@@ -330,7 +330,7 @@ class _SectionLabel extends StatelessWidget {
       child: Text(
         text,
         style: context.textTheme.bodySmall?.copyWith(
-          color: AppColors.textSecondary,
+          color: context.colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w500,
         ),
       ),

@@ -187,7 +187,7 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
       ),
       child: TextField(
         controller: _searchController,
@@ -200,11 +200,11 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
           prefixIcon: Icon(
             Icons.search,
             size: 14,
-            color: Colors.grey.shade400,
+            color: context.colorScheme.onSurfaceVariant,
           ),
           suffixIcon: _searchQuery.isNotEmpty
               ? IconButton(
-                  icon: Icon(Icons.close, size: 14, color: Colors.grey.shade300),
+                  icon: Icon(Icons.close, size: 14, color: context.colorScheme.outline),
                   onPressed: () {
                     _searchController.clear();
                     setState(() => _searchQuery = '');
@@ -212,14 +212,14 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
                 )
               : null,
           filled: true,
-          fillColor: Colors.grey.shade50,
+          fillColor: context.colorScheme.surfaceContainerLowest,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppRadius.md),
-            borderSide: BorderSide(color: Colors.grey.shade100),
+            borderSide: BorderSide(color: context.colorScheme.outlineVariant),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppRadius.md),
-            borderSide: BorderSide(color: Colors.grey.shade100),
+            borderSide: BorderSide(color: context.colorScheme.outlineVariant),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppRadius.md),
@@ -248,7 +248,7 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
       ),
       child: SizedBox(
         height: 30,
@@ -283,7 +283,7 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
       ),
       child: SizedBox(
         height: 30,
@@ -328,7 +328,7 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
                 : '$filteredCount من $totalCount صفحة',
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey.shade400,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           _SortTrigger(
@@ -401,7 +401,7 @@ class _TypeChip extends StatelessWidget {
             border: Border.all(
               color: isActive
                   ? const Color(0xFF1A73E8)
-                  : Colors.grey.shade200,
+                  : context.colorScheme.surfaceContainer,
             ),
           ),
           child: Text(
@@ -410,7 +410,7 @@ class _TypeChip extends StatelessWidget {
               fontSize: 12,
               color: isActive
                   ? const Color(0xFF1A73E8)
-                  : Colors.grey.shade400,
+                  : context.colorScheme.onSurfaceVariant,
             ),
           ),
         ),
@@ -432,7 +432,7 @@ class _SortTrigger extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: context.colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),
         child: Row(
@@ -441,21 +441,21 @@ class _SortTrigger extends StatelessWidget {
             Icon(
               Icons.tune,
               size: 11,
-              color: Colors.grey.shade500,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: 4),
             Text(
               label,
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.grey.shade500,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(width: 2),
             Icon(
               Icons.expand_more,
               size: 10,
-              color: Colors.grey.shade500,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ],
         ),

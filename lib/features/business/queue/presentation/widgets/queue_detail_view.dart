@@ -96,12 +96,12 @@ class _QueueDetailViewState extends State<QueueDetailView> {
   Widget _buildHeader(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(AppRadius.xxl),
         ),
         border: Border(
-          bottom: BorderSide(color: Colors.grey.shade100),
+          bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
       ),
       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -119,7 +119,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
             height: 4,
             margin: const EdgeInsets.only(bottom: AppSpacing.md),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -131,7 +131,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                 child: Icon(
                   Icons.arrow_back_rounded,
                   size: 22,
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -172,7 +172,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                       'وصول: ${_formatTime(entry.checkedInAt)} · ${entry.packageName}',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -242,7 +242,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                       decoration: BoxDecoration(
                         color: i < currentIdx
                             ? const Color(0xFF43A047)
-                            : Colors.grey.shade200,
+                            : Theme.of(context).colorScheme.outlineVariant,
                         borderRadius: BorderRadius.circular(1),
                       ),
                     ),
@@ -282,7 +282,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                     '${_elapsedMinutes(entry.startedAt!)} د مضت · من أصل ~${entry.estimatedDurationMin} د',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -331,7 +331,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         children: [
           Text(
             'العميل',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(
@@ -341,13 +341,13 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.person_rounded,
                   size: 20,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -370,7 +370,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                           Icon(
                             Icons.phone_rounded,
                             size: 10,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
                           Directionality(
@@ -379,7 +379,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                               entry.customerPhone!,
                               style: TextStyle(
                                 fontSize: 11,
-                                color: Colors.grey.shade500,
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ),
@@ -460,7 +460,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         children: [
           Text(
             'السيارة',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(
@@ -469,13 +469,13 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
+                  color: Theme.of(context).colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
                 child: Icon(
                   Icons.directions_car_rounded,
                   size: 22,
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -498,7 +498,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                           '· ${entry.vehicleColor!}',
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -512,7 +512,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                         entry.plateNumber!,
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey.shade700,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),
@@ -540,7 +540,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         children: [
           Text(
             'الخدمة',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
 
@@ -569,21 +569,21 @@ class _QueueDetailViewState extends State<QueueDetailView> {
           // Duration
           Row(
             children: [
-              Icon(Icons.access_time_rounded, size: 10, color: Colors.grey.shade500),
+              Icon(Icons.access_time_rounded, size: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               const SizedBox(width: 4),
               Text(
                 'مدة متوقعة: ~${entry.estimatedDurationMin} دقيقة',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ),
 
           // Add-ons
           if (entry.addOns.isNotEmpty) ...[
-            Divider(height: AppSpacing.lg, color: Colors.grey.shade50),
+            Divider(height: AppSpacing.lg, color: Theme.of(context).colorScheme.surfaceContainerLowest),
             Text(
               'إضافات',
-              style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: AppSpacing.xs),
             ...entry.addOns.map(
@@ -596,14 +596,14 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                       addon.name,
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade700,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     Text(
                       '+${Money(addon.price).toFormattedArabic()}',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -613,7 +613,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
           ],
 
           // Total + discount
-          Divider(height: AppSpacing.lg, color: Colors.grey.shade100),
+          Divider(height: AppSpacing.lg, color: Theme.of(context).colorScheme.outlineVariant),
           if (hasDiscount) ...[
             // Before discount
             Row(
@@ -621,13 +621,13 @@ class _QueueDetailViewState extends State<QueueDetailView> {
               children: [
                 Text(
                   'المجموع قبل الخصم',
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+                  style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
                 Text(
                   Money(entry.priceBeforeDiscount!).toFormattedArabic(),
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),
@@ -684,7 +684,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
             children: [
               Text(
                 'الإجمالي',
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               Text(
                 Money(entry.totalPrice).toFormattedArabic(),
@@ -717,7 +717,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         children: [
           Text(
             'صور التوثيق',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(
@@ -786,7 +786,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
               entry.notes!,
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade700,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -806,7 +806,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         children: [
           Text(
             'التوقيتات',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           _TimingRow(label: 'الوصول', epoch: entry.checkedInAt),
@@ -851,9 +851,9 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         vertical: AppSpacing.md,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         border: Border(
-          top: BorderSide(color: Colors.grey.shade100),
+          top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
       ),
       child: SafeArea(
@@ -868,7 +868,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(AppRadius.lg),
-                    border: Border.all(color: Colors.grey.shade200),
+                    border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -876,14 +876,14 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                       Icon(
                         Icons.chat_rounded,
                         size: 14,
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: 6),
                       Text(
                         'محادثة',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey.shade600,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -953,9 +953,9 @@ class _SectionCard extends StatelessWidget {
       ),
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -995,8 +995,8 @@ class _SourceBadge extends StatelessWidget {
       QueueSource.walkIn => (
           Icons.directions_walk_rounded,
           'حضوري',
-          Colors.grey.shade500,
-          Colors.grey.shade100,
+          Theme.of(context).colorScheme.onSurfaceVariant,
+          Theme.of(context).colorScheme.surfaceContainerLow,
         ),
     };
 
@@ -1086,10 +1086,10 @@ class _ProgressCircle extends StatelessWidget {
       );
       labelColor = const Color(0xFF43A047);
     } else {
-      bgColor = Colors.grey.shade50;
-      borderColor = Colors.grey.shade200;
-      iconWidget = Icon(conf.icon, size: 14, color: Colors.grey.shade300);
-      labelColor = Colors.grey.shade300;
+      bgColor = Theme.of(context).colorScheme.surfaceContainerLowest;
+      borderColor = Theme.of(context).colorScheme.outlineVariant;
+      iconWidget = Icon(conf.icon, size: 14, color: Theme.of(context).colorScheme.outline);
+      labelColor = Theme.of(context).colorScheme.outline;
     }
 
     return Column(
@@ -1138,10 +1138,10 @@ class _PhotoButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: captured ? activeBg : Colors.grey.shade50,
+        color: captured ? activeBg : Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         border: Border.all(
-          color: captured ? activeColor : Colors.grey.shade200,
+          color: captured ? activeColor : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
       child: Column(
@@ -1149,14 +1149,14 @@ class _PhotoButton extends StatelessWidget {
           Icon(
             icon,
             size: 20,
-            color: captured ? activeColor : Colors.grey.shade400,
+            color: captured ? activeColor : Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           const SizedBox(height: 4),
           Text(
             label,
             style: TextStyle(
               fontSize: 10,
-              color: captured ? activeColor : Colors.grey.shade500,
+              color: captured ? activeColor : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           if (captured)
@@ -1196,18 +1196,18 @@ class _TimingRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           Row(
             children: [
               Text(
                 time,
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade700),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurface),
               ),
               const SizedBox(width: 6),
               Text(
                 date,
-                style: TextStyle(fontSize: 9, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 9, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -1243,9 +1243,9 @@ class _AdvanceButton extends StatelessWidget {
       QueueStatus.ready => (
           'تم الاستلام',
           Icons.check_circle_rounded,
-          Colors.grey.shade700,
+          Theme.of(context).colorScheme.onSurface,
         ),
-      _ => ('', Icons.check, Colors.grey),
+      _ => ('', Icons.check, Theme.of(context).colorScheme.onSurfaceVariant),
     };
 
     return GestureDetector(
@@ -1259,7 +1259,7 @@ class _AdvanceButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 14, color: Colors.white),
+            Icon(icon, size: 14, color: Theme.of(context).colorScheme.surface),
             const SizedBox(width: 6),
             Text(
               label,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 // Re-export individual step files so callers can import just this barrel.
 export 'reservation_confirm_step.dart';
@@ -65,7 +66,7 @@ class ReservationStepIndicator extends StatelessWidget {
                         ? AppColors.primary
                         : isDone
                             ? AppColors.success.withValues(alpha: 0.1)
-                            : AppColors.surfaceVariant,
+                            : context.colorScheme.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
                   child: Row(
@@ -79,7 +80,7 @@ class ReservationStepIndicator extends StatelessWidget {
                             ? Colors.white
                             : isDone
                                 ? AppColors.success
-                                : AppColors.textHint,
+                                : context.colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: AppSpacing.xxs),
                       Flexible(
@@ -91,7 +92,7 @@ class ReservationStepIndicator extends StatelessWidget {
                                 ? Colors.white
                                 : isDone
                                     ? AppColors.success
-                                    : AppColors.textHint,
+                                    : context.colorScheme.onSurfaceVariant,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),

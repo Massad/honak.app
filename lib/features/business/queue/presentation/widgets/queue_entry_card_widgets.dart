@@ -292,8 +292,8 @@ class _StatusPickerSheet extends StatelessWidget {
     ];
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: SafeArea(
@@ -420,7 +420,7 @@ class _StatusPickerSheet extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: isBack
                                 ? const Color(0xFFFFF7ED)
-                                : Colors.white,
+                                : Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(
                                 AppRadius.md),
                             border: Border.all(

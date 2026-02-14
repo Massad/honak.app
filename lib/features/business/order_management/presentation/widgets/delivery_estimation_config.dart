@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -172,7 +173,7 @@ class _SectionLabel extends StatelessWidget {
     return Text(
       text,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: AppColors.textSecondary,
+        color: context.colorScheme.onSurfaceVariant,
         fontSize: 12,
       ),
     );
@@ -201,7 +202,7 @@ class _ModeCard extends StatelessWidget {
     return Material(
       color: selected
           ? AppColors.primary.withValues(alpha: 0.06)
-          : AppColors.surface,
+          : context.colorScheme.surface,
       borderRadius: AppRadius.cardInner,
       child: InkWell(
         borderRadius: AppRadius.cardInner,
@@ -214,7 +215,7 @@ class _ModeCard extends StatelessWidget {
             border: Border.all(
               color: selected
                   ? AppColors.primary
-                  : AppColors.divider,
+                  : context.colorScheme.outlineVariant,
             ),
           ),
           child: Column(
@@ -223,7 +224,7 @@ class _ModeCard extends StatelessWidget {
               Text(
                 label,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: selected ? AppColors.primary : AppColors.textPrimary,
+                  color: selected ? AppColors.primary : context.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -231,7 +232,7 @@ class _ModeCard extends StatelessWidget {
               Text(
                 desc,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                   fontSize: 10,
                 ),
               ),
@@ -271,7 +272,7 @@ class _ToggleRow extends StatelessWidget {
       child: Material(
         color: value && !disabled
             ? AppColors.primary.withValues(alpha: 0.04)
-            : AppColors.surface,
+            : context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
         child: InkWell(
           borderRadius: AppRadius.cardInner,
@@ -284,7 +285,7 @@ class _ToggleRow extends StatelessWidget {
               border: Border.all(
                 color: value && !disabled
                     ? AppColors.primary
-                    : AppColors.divider,
+                    : context.colorScheme.outlineVariant,
               ),
             ),
             child: Row(
@@ -341,7 +342,7 @@ class _ToggleRow extends StatelessWidget {
                             Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: value && !disabled
                               ? AppColors.primary
-                              : AppColors.textPrimary,
+                              : context.colorScheme.onSurface,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -349,7 +350,7 @@ class _ToggleRow extends StatelessWidget {
                         desc,
                         style:
                             Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontSize: 10,
                         ),
                         textAlign: TextAlign.end,
@@ -391,7 +392,7 @@ class _ConfigTextField extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
             fontSize: 12,
           ),
         ),
@@ -403,21 +404,21 @@ class _ConfigTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: placeholder,
             hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.textHint,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             filled: true,
-            fillColor: AppColors.surfaceVariant,
+            fillColor: context.colorScheme.surfaceVariant,
             contentPadding: const EdgeInsetsDirectional.symmetric(
               horizontal: AppSpacing.md,
               vertical: 10,
             ),
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: const BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: const BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
@@ -444,9 +445,9 @@ class _PreviewSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: context.colorScheme.surfaceVariant,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: context.colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -454,12 +455,12 @@ class _PreviewSection extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.visibility_outlined, size: 9, color: AppColors.textHint),
+              Icon(Icons.visibility_outlined, size: 9, color: context.colorScheme.onSurfaceVariant),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'كيف يراها العميل',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                   fontSize: 10,
                 ),
               ),

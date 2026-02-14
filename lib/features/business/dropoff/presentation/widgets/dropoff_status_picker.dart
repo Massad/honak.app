@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
@@ -85,8 +84,8 @@ class _StatusPickerSheet extends StatelessWidget {
         DropoffStatusConfig.allStatuses.indexOf(ticket.status);
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(AppRadius.xxl),
         ),
@@ -102,7 +101,7 @@ class _StatusPickerSheet extends StatelessWidget {
               height: 4,
               margin: const EdgeInsets.only(top: AppSpacing.sm),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: Theme.of(context).colorScheme.outlineVariant,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -133,7 +132,7 @@ class _StatusPickerSheet extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -145,13 +144,13 @@ class _StatusPickerSheet extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.close,
                         size: 16,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -159,7 +158,7 @@ class _StatusPickerSheet extends StatelessWidget {
               ),
             ),
 
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
 
             // Current status highlight
             Padding(
@@ -176,7 +175,7 @@ class _StatusPickerSheet extends StatelessWidget {
                     'الحالة الحالية',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
@@ -214,7 +213,7 @@ class _StatusPickerSheet extends StatelessWidget {
                           'الحالية',
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.grey.shade300,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                         ),
                       ],
@@ -239,7 +238,7 @@ class _StatusPickerSheet extends StatelessWidget {
                     'نقل إلى',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
@@ -266,12 +265,12 @@ class _StatusPickerSheet extends StatelessWidget {
                                 ? const Color(0xFFFFF8E1).withValues(
                                     alpha: 0.5,
                                   )
-                                : AppColors.surface,
+                                : context.colorScheme.surface,
                             borderRadius: AppRadius.cardInner,
                             border: Border.all(
                               color: isBackward
                                   ? const Color(0xFFFFE082)
-                                  : Colors.grey.shade100,
+                                  : Theme.of(context).colorScheme.surfaceContainerLow,
                             ),
                           ),
                           child: Row(
@@ -322,7 +321,7 @@ class _StatusPickerSheet extends StatelessWidget {
 
             // Activity log preview — reuses shared widget
             if (activityLog.isNotEmpty) ...[
-              Divider(height: 1, color: Colors.grey.shade100),
+              Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
               Padding(
                 padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
                 child: ActivityLogPreview(

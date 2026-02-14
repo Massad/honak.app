@@ -61,9 +61,9 @@ class DropoffEntryCard extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -82,13 +82,13 @@ class DropoffEntryCard extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
                 child: Icon(
                   Icons.local_laundry_service_outlined,
                   size: 14,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -102,14 +102,14 @@ class DropoffEntryCard extends StatelessWidget {
                           ticket.ticketNumber,
                           textDirection: TextDirection.ltr,
                           style: context.textTheme.bodySmall?.copyWith(
-                            color: Colors.grey.shade700,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Text(
                           ticket.customerName,
                           style: context.textTheme.bodySmall?.copyWith(
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -118,7 +118,7 @@ class DropoffEntryCard extends StatelessWidget {
                     Text(
                       '${ticket.items.length} قطع · ${price.toFormattedArabic()}',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),
@@ -141,14 +141,14 @@ class DropoffEntryCard extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
         border: Border.all(
           color: isOverdue
               ? const Color(0xFFFEE2E2)
               : ticket.urgent
                   ? const Color(0xFFFEF2F2)
-                  : Colors.grey.shade100,
+                  : Theme.of(context).colorScheme.surfaceContainerLow,
         ),
         boxShadow: const [
           BoxShadow(
@@ -210,7 +210,7 @@ class DropoffEntryCard extends StatelessWidget {
               vertical: 2,
             ),
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(
@@ -219,7 +219,7 @@ class DropoffEntryCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey.shade900,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -388,13 +388,13 @@ class DropoffEntryCard extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.person_outline_rounded,
               size: 13,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
@@ -418,7 +418,7 @@ class DropoffEntryCard extends StatelessWidget {
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
               ],
@@ -444,7 +444,7 @@ class DropoffEntryCard extends StatelessWidget {
                     'د.أ',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -500,15 +500,15 @@ class DropoffEntryCard extends StatelessWidget {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
+                        color: Theme.of(context).colorScheme.surfaceContainerLowest,
                         borderRadius: AppRadius.pill,
-                        border: Border.all(color: Colors.grey.shade100),
+                        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                       ),
                       child: Text(
                         '${item.name} ×${item.quantity}',
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey.shade600,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     )),
@@ -523,7 +523,7 @@ class DropoffEntryCard extends StatelessWidget {
                       '+${ticket.items.length - 3} أخرى',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -537,14 +537,14 @@ class DropoffEntryCard extends StatelessWidget {
               Icon(
                 Icons.inventory_2_outlined,
                 size: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: 2),
               Text(
                 '$totalItems قطعة',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -567,14 +567,14 @@ class DropoffEntryCard extends StatelessWidget {
           Icon(
             Icons.schedule_rounded,
             size: 10,
-            color: Colors.grey.shade400,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           const SizedBox(width: 4),
           Text(
             'استلام: ${_timeAgo(ticket.droppedOffAt)}',
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(width: AppSpacing.md),
@@ -584,7 +584,7 @@ class DropoffEntryCard extends StatelessWidget {
               fontSize: 10,
               color: _isOverdue
                   ? const Color(0xFFE53935)
-                  : Colors.grey.shade400,
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -644,7 +644,7 @@ class DropoffEntryCard extends StatelessWidget {
                   border: Border.all(
                     color: hasPhotoBefore
                         ? const Color(0xFF1A73E8)
-                        : Colors.grey.shade200,
+                        : Theme.of(context).colorScheme.outlineVariant,
                     width: 2,
                     // Dashed border simulated by checking hasPhoto
                   ),
@@ -657,7 +657,7 @@ class DropoffEntryCard extends StatelessWidget {
                       size: 13,
                       color: hasPhotoBefore
                           ? const Color(0xFF1A73E8)
-                          : Colors.grey.shade400,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -666,7 +666,7 @@ class DropoffEntryCard extends StatelessWidget {
                         fontSize: 11,
                         color: hasPhotoBefore
                             ? const Color(0xFF1A73E8)
-                            : Colors.grey.shade400,
+                            : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     if (hasPhotoBefore) ...[
@@ -698,7 +698,7 @@ class DropoffEntryCard extends StatelessWidget {
                   border: Border.all(
                     color: hasPhotoAfter
                         ? const Color(0xFF43A047)
-                        : Colors.grey.shade200,
+                        : Theme.of(context).colorScheme.outlineVariant,
                     width: 2,
                   ),
                 ),
@@ -710,7 +710,7 @@ class DropoffEntryCard extends StatelessWidget {
                       size: 13,
                       color: hasPhotoAfter
                           ? const Color(0xFF43A047)
-                          : Colors.grey.shade400,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -719,7 +719,7 @@ class DropoffEntryCard extends StatelessWidget {
                         fontSize: 11,
                         color: hasPhotoAfter
                             ? const Color(0xFF43A047)
-                            : Colors.grey.shade400,
+                            : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     if (hasPhotoAfter) ...[
@@ -811,14 +811,14 @@ class DropoffEntryCard extends StatelessWidget {
               Icon(
                 buttonIcon,
                 size: 14,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
               ),
               const SizedBox(width: 6),
               Text(
                 action.label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
             ],

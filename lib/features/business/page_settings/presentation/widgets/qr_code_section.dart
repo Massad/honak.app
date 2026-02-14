@@ -94,7 +94,7 @@ class _QrCodeSectionState extends State<QrCodeSection> {
                 'عند مسح الرمز، العميل يصل إلى:',
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -113,7 +113,7 @@ class _QrCodeSectionState extends State<QrCodeSection> {
                   vertical: AppSpacing.xxl,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
+                  color: Theme.of(context).colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(AppRadius.md),
                 ),
                 child: Column(
@@ -139,9 +139,9 @@ class _QrCodeSectionState extends State<QrCodeSection> {
                         vertical: AppSpacing.xs + 2,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(AppRadius.sm),
-                        border: Border.all(color: Colors.grey.shade200),
+                        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -153,7 +153,7 @@ class _QrCodeSectionState extends State<QrCodeSection> {
                               size: 14,
                               color: _copied
                                   ? AppColors.success
-                                  : Colors.grey.shade400,
+                                  : Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                           const SizedBox(width: AppSpacing.sm),
@@ -262,7 +262,7 @@ class _TargetChips extends StatelessWidget {
               vertical: AppSpacing.xs + 2,
             ),
             decoration: BoxDecoration(
-              color: isActive ? AppColors.primary : Colors.grey.shade100,
+              color: isActive ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: AppRadius.pill,
             ),
             child: Row(
@@ -271,14 +271,14 @@ class _TargetChips extends StatelessWidget {
                 Icon(
                   _mapIcon(t.icon),
                   size: 14,
-                  color: isActive ? Colors.white : Colors.grey.shade600,
+                  color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: AppSpacing.xs + 2),
                 Text(
                   t.labelAr,
                   style: TextStyle(
                     fontSize: 12,
-                    color: isActive ? Colors.white : Colors.grey.shade600,
+                    color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                     fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
@@ -311,7 +311,7 @@ class _ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: filled ? AppColors.primary : Colors.grey.shade100,
+      color: filled ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
       borderRadius: BorderRadius.circular(AppRadius.sm),
       child: InkWell(
         onTap: onTap,
@@ -324,7 +324,7 @@ class _ActionButton extends StatelessWidget {
               Icon(
                 icon,
                 size: 16,
-                color: filled ? Colors.white : Colors.grey.shade600,
+                color: filled ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: AppSpacing.xs + 2),
               Text(
@@ -332,7 +332,7 @@ class _ActionButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: filled ? Colors.white : Colors.grey.shade600,
+                  color: filled ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

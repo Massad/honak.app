@@ -54,7 +54,7 @@ class TodaySummarySection extends StatelessWidget {
             Text(
               'إيراد اليوم',
               style: context.textTheme.labelSmall?.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 10,
               ),
             ),
@@ -123,7 +123,7 @@ class TodayRevenueSection extends StatelessWidget {
             Text(
               '${data['completed_count'] ?? 0} خدمات',
               style: context.textTheme.bodySmall?.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             Text(
@@ -149,7 +149,7 @@ class TodayRevenueSection extends StatelessWidget {
                     m['time'] as String? ?? '',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
@@ -212,7 +212,7 @@ class PendingRequestsSection extends StatelessWidget {
                     m['date'] as String? ?? '',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   Text(
@@ -239,7 +239,7 @@ class PendingRequestsSection extends StatelessWidget {
                     m['service'] as String? ?? '',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.grey.shade600,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],

@@ -30,7 +30,7 @@ class SettingsSection extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),

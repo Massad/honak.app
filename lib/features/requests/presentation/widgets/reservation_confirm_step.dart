@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Confirm step: summary card, price estimation (FG7), deposit notice (FG8),
 /// payment methods, safety disclaimers (FG5).
@@ -40,7 +41,6 @@ class ReservationConfirmStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final space = spaces.cast<Map<String, dynamic>?>().firstWhere(
           (s) => s?['id']?.toString() == activeSpaceId,
           orElse: () => null,
@@ -49,22 +49,22 @@ class ReservationConfirmStep extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSummaryCard(theme, space),
+        _buildSummaryCard(context, space),
         // FG7: Price estimation
         if (pricePerNightCents != null &&
             nightCount != null &&
             nightCount! > 0) ...[
           const SizedBox(height: AppSpacing.md),
-          _buildPriceEstimation(theme),
+          _buildPriceEstimation(context),
         ],
         // FG8: Deposit notice
         if (depositCents != null && depositCents! > 0) ...[
           const SizedBox(height: AppSpacing.md),
-          _buildDepositNotice(theme),
+          _buildDepositNotice(context),
         ],
         const SizedBox(height: AppSpacing.xl),
         // Payment methods
-        if (paymentMethods.isNotEmpty) _buildPaymentMethods(theme),
+        if (paymentMethods.isNotEmpty) _buildPaymentMethods(context),
         // FG5: Safety disclaimers
         if (disclaimers != null && disclaimers!.isNotEmpty) ...[
           const SizedBox(height: AppSpacing.xl),
@@ -83,7 +83,8 @@ class ReservationConfirmStep extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryCard(ThemeData theme, Map<String, dynamic>? space) {
+  Widget _buildSummaryCard(BuildContext context, Map<String, dynamic>? space) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
@@ -108,44 +109,46 @@ class ReservationConfirmStep extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           if (space != null)
             _summaryRow(
-                theme, 'المكان', space['name'] as String? ?? ''),
+                context, 'المكان', space['name'] as String? ?? ''),
           if (checkIn != null)
             _summaryRow(
-              theme,
+              context,
               'الوصول',
               '${checkIn!.day}/${checkIn!.month}/${checkIn!.year}',
             ),
           if (checkOut != null)
             _summaryRow(
-              theme,
+              context,
               'المغادرة',
               '${checkOut!.day}/${checkOut!.month}/${checkOut!.year}',
             ),
           if (nightCount != null && nightCount! > 0)
             _summaryRow(
-              theme,
+              context,
               'المدة',
               '$nightCount ${nightCount == 1 ? 'ليلة' : nightCount == 2 ? 'ليلتين' : 'ليالي'}',
               valueColor: AppColors.primary,
             ),
-          _summaryRow(theme, 'الضيوف', '$guestCount'),
+          _summaryRow(context, 'الضيوف', '$guestCount'),
           if (occasion.isNotEmpty)
-            _summaryRow(theme, 'المناسبة', occasion),
+            _summaryRow(context, 'المناسبة', occasion),
         ],
       ),
     );
   }
 
-  Widget _buildPriceEstimation(ThemeData theme) {
+  Widget _buildPriceEstimation(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = Theme.of(context).colorScheme;
     final total = Money(pricePerNightCents! * nightCount!);
     final perNight = Money(pricePerNightCents!);
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: cs.surfaceContainerLow,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: cs.outlineVariant),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,7 +156,7 @@ class ReservationConfirmStep extends StatelessWidget {
           Text(
             '${perNight.toFormattedArabic()} × $nightCount ${nightCount == 1 ? 'ليلة' : 'ليالي'}',
             style: theme.textTheme.labelSmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: cs.onSurfaceVariant),
           ),
           Text(
             total.toFormattedArabic(),
@@ -167,7 +170,7 @@ class ReservationConfirmStep extends StatelessWidget {
     );
   }
 
-  Widget _buildDepositNotice(ThemeData theme) {
+  Widget _buildDepositNotice(BuildContext context) {
     final deposit = Money(depositCents!);
 
     return Container(
@@ -195,25 +198,27 @@ class ReservationConfirmStep extends StatelessWidget {
     );
   }
 
-  Widget _buildPaymentMethods(ThemeData theme) {
+  Widget _buildPaymentMethods(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: cs.surfaceContainerLow,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: cs.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.payment, size: 12, color: AppColors.textHint),
+              Icon(Icons.payment, size: 12, color: cs.onSurfaceVariant),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 'طرق الدفع المتاحة',
                 style: theme.textTheme.labelSmall
-                    ?.copyWith(color: AppColors.textHint),
+                    ?.copyWith(color: cs.onSurfaceVariant),
               ),
             ],
           ),
@@ -228,14 +233,14 @@ class ReservationConfirmStep extends StatelessWidget {
                   vertical: AppSpacing.xs,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.colorScheme.surface,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
-                  border: Border.all(color: AppColors.divider),
+                  border: Border.all(color: cs.outlineVariant),
                 ),
                 child: Text(
                   m,
                   style: theme.textTheme.labelSmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                     fontSize: 10,
                   ),
                 ),
@@ -248,11 +253,13 @@ class ReservationConfirmStep extends StatelessWidget {
   }
 
   Widget _summaryRow(
-    ThemeData theme,
+    BuildContext context,
     String label,
     String value, {
     Color? valueColor,
   }) {
+    final theme = Theme.of(context);
+    final cs = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.xs),
       child: Row(
@@ -261,7 +268,7 @@ class ReservationConfirmStep extends StatelessWidget {
           Text(
             label,
             style: theme.textTheme.labelSmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: cs.onSurfaceVariant),
           ),
           Text(
             value,

@@ -20,7 +20,7 @@ class StatusBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     if (permanentlyClosed) {
       return _Banner(
-        color: Colors.grey,
+        color: context.colorScheme.onSurfaceVariant,
         icon: Icons.warning_amber_rounded,
         title: '\u0645\u063a\u0644\u0642 \u0646\u0647\u0627\u0626\u064a\u0627\u064b',
         subtitle: '\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u0645 \u062a\u0639\u062f \u0646\u0634\u0637\u0629',

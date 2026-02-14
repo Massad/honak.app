@@ -67,7 +67,7 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
               // Description
               Text(
                 'اربط تقويمك الشخصي لمزامنة مواعيدك تلقائياً مع حجوزات العملاء.',
-                style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 textAlign: TextAlign.right,
               ),
               const SizedBox(height: AppSpacing.xl),
@@ -92,9 +92,9 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         children: [
@@ -116,7 +116,7 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
                     'مزامنة الحجوزات مع تقويم جوجل',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -145,7 +145,7 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
               label: const Text('ربط'),
               style: FilledButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
+                foregroundColor: Theme.of(context).colorScheme.surface,
                 padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -162,7 +162,7 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: AppColors.success.withValues(alpha: 0.3)),
       ),
@@ -193,7 +193,7 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
                     'مزامنة الحجوزات مع تقويم جوجل',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -227,14 +227,14 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
                   'آخر مزامنة: ${_formatLastSync(_lastSync!)}',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey.shade600,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Icon(
                   Icons.access_time,
                   size: 14,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ],
             ),

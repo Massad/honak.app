@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/customer_request.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Editable item state used by the edit order sheet.
 class EditableItem {
@@ -49,10 +50,10 @@ class EditOrderItemRow extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.sm),
       padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
         border:
-            Border.all(color: AppColors.divider.withValues(alpha: 0.5)),
+            Border.all(color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,15 +64,15 @@ class EditOrderItemRow extends StatelessWidget {
               Text(
                 item.original.name,
                 style: textTheme.bodySmall
-                    ?.copyWith(color: AppColors.textPrimary),
+                    ?.copyWith(color: context.colorScheme.onSurface),
               ),
               InkWell(
                 onTap: onRemove,
                 borderRadius: BorderRadius.circular(12),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(4),
                   child: Icon(Icons.delete_outline,
-                      size: 16, color: AppColors.textHint),
+                      size: 16, color: context.colorScheme.onSurfaceVariant),
                 ),
               ),
             ],
@@ -109,7 +110,7 @@ class EditOrderItemRow extends StatelessWidget {
               Text(
                 lineTotal.toFormattedArabic(),
                 style: textTheme.bodySmall
-                    ?.copyWith(color: AppColors.textSecondary),
+                    ?.copyWith(color: context.colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -143,14 +144,14 @@ class QtyButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isAccent ? AppColors.primary : AppColors.divider,
+            color: isAccent ? AppColors.primary : context.colorScheme.outlineVariant,
           ),
         ),
         alignment: Alignment.center,
         child: Icon(
           icon,
           size: 12,
-          color: isAccent ? AppColors.primary : AppColors.textSecondary,
+          color: isAccent ? AppColors.primary : context.colorScheme.onSurfaceVariant,
         ),
       ),
     );
@@ -220,7 +221,7 @@ class EditOrderChangesDiff extends StatelessWidget {
                 child: Text(
                   '${c.name}: ${c.field} ${c.from} ← ${c.to}',
                   style: textTheme.labelSmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                     fontSize: 10,
                   ),
                 ),
@@ -252,10 +253,10 @@ class EditOrderTotal extends StatelessWidget {
     return Container(
       padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
         border:
-            Border.all(color: AppColors.divider.withValues(alpha: 0.5)),
+            Border.all(color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -263,7 +264,7 @@ class EditOrderTotal extends StatelessWidget {
           Text(
             'المجموع',
             style: textTheme.bodySmall
-                ?.copyWith(color: AppColors.textPrimary),
+                ?.copyWith(color: context.colorScheme.onSurface),
           ),
           Row(
             children: [
@@ -271,7 +272,7 @@ class EditOrderTotal extends StatelessWidget {
                 Text(
                   originalTotal.toFormattedArabic(),
                   style: textTheme.labelSmall?.copyWith(
-                    color: AppColors.textHint,
+                    color: context.colorScheme.onSurfaceVariant,
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),

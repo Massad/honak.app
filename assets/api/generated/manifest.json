@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-02-13T19:53:05.821675Z",
+  "_generated": "2026-02-13T23:28:50.351575Z",
   "pages": {
     "abu-ahmad-water": {
       "fixture": "pages/page_water",
@@ -225,6 +225,11 @@
       "fixture": "pages/page_spa",
       "business_type_id": "spa",
       "archetype": "service_booking"
+    },
+    "shmeisani-center": {
+      "fixture": "pages/page_center",
+      "business_type_id": "directory",
+      "archetype": "directory"
     },
     "smart-fix-mobiles": {
       "fixture": "pages/page_mobile_repair",

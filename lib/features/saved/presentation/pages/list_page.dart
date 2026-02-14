@@ -19,7 +19,6 @@ class SavedListPage extends ConsumerWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
         appBar: AppBar(
           title: const Text('\u0627\u0644\u0645\u062d\u0641\u0648\u0638\u0627\u062a'),
           centerTitle: true,
@@ -36,7 +35,7 @@ class SavedListPage extends ConsumerWidget {
               child: Text(
                 '\u062d\u062f\u062b \u062e\u0637\u0623',
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: Colors.grey.shade500,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -79,13 +78,13 @@ class _EmptyState extends StatelessWidget {
           Icon(
             Icons.favorite_outline,
             size: 48,
-            color: Colors.grey.shade300,
+            color: context.colorScheme.outline,
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(
             '\u0644\u0627 \u062a\u0648\u062c\u062f \u0635\u0641\u062d\u0627\u062a \u0645\u062d\u0641\u0648\u0638\u0629',
             style: context.textTheme.bodyLarge?.copyWith(
-              color: Colors.grey.shade500,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -105,7 +104,7 @@ class _SavedPageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -118,7 +117,7 @@ class _SavedPageCard extends StatelessWidget {
               Icon(
                 Icons.chevron_left,
                 size: 18,
-                color: Colors.grey.shade300,
+                color: context.colorScheme.outline,
               ),
               const Spacer(),
 
@@ -178,7 +177,7 @@ class _SavedPageCard extends StatelessWidget {
                           Text(
                             '@${page.handle}',
                             style: context.textTheme.labelSmall?.copyWith(
-                              color: Colors.grey.shade400,
+                              color: context.colorScheme.onSurfaceVariant,
                               fontSize: 10,
                             ),
                           ),
@@ -196,12 +195,12 @@ class _SavedPageCard extends StatelessWidget {
                 height: 44,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.shade100,
-                  border: Border.all(color: Colors.grey.shade200),
+                  color: context.colorScheme.surfaceContainerLow,
+                  border: Border.all(color: context.colorScheme.outlineVariant),
                 ),
                 child: Icon(
                   Icons.store,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

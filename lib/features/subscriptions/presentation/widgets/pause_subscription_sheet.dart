@@ -53,7 +53,7 @@ class _PauseSubscriptionSheetState extends State<_PauseSubscriptionSheet> {
               width: 36,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: context.colorScheme.outline,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -82,7 +82,7 @@ class _PauseSubscriptionSheetState extends State<_PauseSubscriptionSheet> {
             Text(
               'اختر مدة الإيقاف المؤقت',
               style: context.textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: AppSpacing.xxl),
@@ -106,11 +106,11 @@ class _PauseSubscriptionSheetState extends State<_PauseSubscriptionSheet> {
               children: [
                 Text(
                   '1 يوم',
-                  style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                  style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
                 ),
                 Text(
                   '$_maxDays يوم',
-                  style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                  style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
                 ),
               ],
             ),

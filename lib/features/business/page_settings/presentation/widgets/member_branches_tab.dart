@@ -25,7 +25,7 @@ class MemberBranchesTab extends ConsumerWidget {
       error: (_, __) => Center(
         child: Text(
           'تعذر تحميل الفروع',
-          style: TextStyle(color: Colors.grey.shade400),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
       ),
       data: (branches) {
@@ -33,7 +33,7 @@ class MemberBranchesTab extends ConsumerWidget {
           return Center(
             child: Text(
               'لا توجد فروع',
-              style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           );
         }
@@ -95,12 +95,12 @@ class _BranchRow extends StatelessWidget {
         decoration: BoxDecoration(
           color: assigned
               ? AppColors.primary.withValues(alpha: 0.04)
-              : Colors.white,
+              : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
           border: Border.all(
             color: assigned
                 ? AppColors.primary.withValues(alpha: 0.2)
-                : Colors.grey.shade100,
+                : Theme.of(context).colorScheme.surfaceContainerLow,
           ),
         ),
         child: Row(
@@ -151,7 +151,7 @@ class _BranchRow extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
-                            color: Colors.grey.shade800,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -163,7 +163,7 @@ class _BranchRow extends StatelessWidget {
                       subtitle,
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                 ],
@@ -175,7 +175,7 @@ class _BranchRow extends StatelessWidget {
               size: 20,
               color: assigned
                   ? AppColors.primary.withValues(alpha: 0.6)
-                  : Colors.grey.shade300,
+                  : Theme.of(context).colorScheme.outline,
             ),
           ],
         ),

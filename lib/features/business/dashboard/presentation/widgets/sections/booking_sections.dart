@@ -35,7 +35,7 @@ class TodayScheduleSection extends StatelessWidget {
                 m['time'] as String? ?? '',
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -44,7 +44,7 @@ class TodayScheduleSection extends StatelessWidget {
                 m['service'] as String? ?? '',
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const Spacer(),
@@ -55,7 +55,7 @@ class TodayScheduleSection extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     decoration:
                         isCompleted ? TextDecoration.lineThrough : null,
-                    color: isCompleted ? Colors.grey.shade400 : null,
+                    color: isCompleted ? Theme.of(context).colorScheme.onSurfaceVariant : null,
                   ),
                   textAlign: TextAlign.end,
                   maxLines: 1,
@@ -125,7 +125,7 @@ class NextAppointmentSection extends StatelessWidget {
                 Text(
                   data['service'] as String? ?? '',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade600,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 if (data['provider'] != null)
@@ -133,7 +133,7 @@ class NextAppointmentSection extends StatelessWidget {
                     'مع ${data['provider']}',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
               ],
@@ -219,7 +219,7 @@ class ActiveQuotesSection extends StatelessWidget {
                       m['description'] as String? ?? '',
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -238,7 +238,7 @@ class ActiveQuotesSection extends StatelessWidget {
         'pending_quote' => Colors.amber.shade700,
         'quoted' => AppColors.primary,
         'accepted' => AppColors.success,
-        _ => Colors.grey,
+        _ => Colors.grey.shade500,
       };
 
   Color _statusBg(String status) => switch (status) {

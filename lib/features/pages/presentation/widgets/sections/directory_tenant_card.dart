@@ -17,7 +17,11 @@ class DirectoryTenantCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () => context.push(Routes.productPath(item.id)),
+        onTap: () => context.push(
+          item.pageId != null
+              ? Routes.pagePath(item.pageId!)
+              : Routes.productPath(item.id),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Row(

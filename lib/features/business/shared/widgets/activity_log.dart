@@ -102,7 +102,7 @@ class ActivityLogPreview extends StatelessWidget {
               'آخر الإجراءات',
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const Spacer(),
@@ -141,7 +141,7 @@ class _CompactRow extends StatelessWidget {
           vertical: 6,
         ),
         decoration: BoxDecoration(
-          color: Colors.grey.shade50,
+          color: Theme.of(context).colorScheme.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(AppRadius.md),
         ),
         child: Row(
@@ -161,7 +161,7 @@ class _CompactRow extends StatelessWidget {
                 entry.label,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade700,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -171,7 +171,7 @@ class _CompactRow extends StatelessWidget {
               entry.actorName,
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
@@ -179,7 +179,7 @@ class _CompactRow extends StatelessWidget {
               formatTimeAgo(entry.timestamp),
               style: TextStyle(
                 fontSize: 9,
-                color: Colors.grey.shade300,
+                color: Theme.of(context).colorScheme.outline,
               ),
             ),
           ],
@@ -220,8 +220,8 @@ class _ActivityLogSheet extends StatelessWidget {
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height * 0.85,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(AppRadius.xxl),
         ),
@@ -237,7 +237,7 @@ class _ActivityLogSheet extends StatelessWidget {
               height: 4,
               margin: const EdgeInsets.only(top: AppSpacing.sm),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: Theme.of(context).colorScheme.outlineVariant,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -283,7 +283,7 @@ class _ActivityLogSheet extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -295,13 +295,13 @@ class _ActivityLogSheet extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.close,
                         size: 16,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -309,7 +309,7 @@ class _ActivityLogSheet extends StatelessWidget {
               ),
             ),
 
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
 
             // Activity timeline
             if (sorted.isEmpty)
@@ -320,14 +320,14 @@ class _ActivityLogSheet extends StatelessWidget {
                     Icon(
                       Icons.receipt_long_rounded,
                       size: 40,
-                      color: Colors.grey.shade200,
+                      color: Theme.of(context).colorScheme.outlineVariant,
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'لا يوجد نشاط بعد',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -382,20 +382,20 @@ class _DateSeparator extends StatelessWidget {
               vertical: 2,
             ),
             decoration: BoxDecoration(
-              color: Colors.grey.shade50,
+              color: Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: AppRadius.pill,
             ),
             child: Text(
               label,
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: Divider(height: 1, color: Colors.grey.shade100),
+            child: Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
           ),
         ],
       ),
@@ -441,7 +441,7 @@ class _TimelineEntry extends StatelessWidget {
                 Container(
                   width: 1.5,
                   height: 24,
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                 ),
             ],
           ),
@@ -468,7 +468,7 @@ class _TimelineEntry extends StatelessWidget {
                       formatTimeAgo(entry.timestamp),
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -482,7 +482,7 @@ class _TimelineEntry extends StatelessWidget {
                       entry.actorName,
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     if (entry.actorRole != null) ...[
@@ -493,14 +493,14 @@ class _TimelineEntry extends StatelessWidget {
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
+                          color: Theme.of(context).colorScheme.surfaceContainerLow,
                           borderRadius: AppRadius.pill,
                         ),
                         child: Text(
                           entry.actorRole!,
                           style: TextStyle(
                             fontSize: 9,
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -510,7 +510,7 @@ class _TimelineEntry extends StatelessWidget {
                       formatTime(entry.timestamp),
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade300,
+                        color: Theme.of(context).colorScheme.outline,
                       ),
                     ),
                   ],
@@ -549,17 +549,17 @@ class _DetailBox extends StatelessWidget {
         children: [
           _StatusPill(
             label: entry.from!,
-            color: Colors.grey.shade400,
-            bgColor: Colors.grey.shade100,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
           ),
-          const Padding(
-            padding: EdgeInsetsDirectional.symmetric(
+          Padding(
+            padding: const EdgeInsetsDirectional.symmetric(
               horizontal: AppSpacing.xs,
             ),
             child: Icon(
               Icons.arrow_forward_rounded,
               size: 10,
-              color: AppColors.textHint,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           _StatusPill(
@@ -579,14 +579,14 @@ class _DetailBox extends StatelessWidget {
         vertical: 6,
       ),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(AppRadius.sm),
       ),
       child: Text(
         text,
         style: TextStyle(
           fontSize: 10,
-          color: Colors.grey.shade400,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
         ),
       ),
     );

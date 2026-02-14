@@ -33,7 +33,7 @@ class RequestCustomerHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
@@ -50,7 +50,7 @@ class RequestCustomerHeader extends StatelessWidget {
               customer.phone!,
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           const Spacer(),
@@ -68,7 +68,7 @@ class RequestCustomerHeader extends StatelessWidget {
                 requestTimeAgo(createdAt),
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -141,7 +141,7 @@ class RequestItemsList extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(14),
         ),
         child: Align(
@@ -150,7 +150,7 @@ class RequestItemsList extends StatelessWidget {
             '$itemsCount أصناف',
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ),
@@ -159,7 +159,7 @@ class RequestItemsList extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
@@ -217,7 +217,7 @@ class _RequestItemRow extends StatelessWidget {
       decoration: BoxDecoration(
         border: isLast
             ? null
-            : Border(bottom: BorderSide(color: Colors.grey.shade100)),
+            : Border(bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       child: Row(
         children: [
@@ -246,7 +246,7 @@ class _RequestItemRow extends StatelessWidget {
                   item.variation!,
                   style: TextStyle(
                     fontSize: 11,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -257,7 +257,7 @@ class _RequestItemRow extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(8),
             ),
             alignment: Alignment.center,
@@ -348,7 +348,7 @@ class RequestNoteSection extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey.shade700,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               const SizedBox(width: AppSpacing.xs),
@@ -365,7 +365,7 @@ class RequestNoteSection extends StatelessWidget {
             textDirection: TextDirection.rtl,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade800,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],
@@ -422,7 +422,7 @@ class RequestDeclineReasonSection extends StatelessWidget {
             textDirection: TextDirection.rtl,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade800,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],

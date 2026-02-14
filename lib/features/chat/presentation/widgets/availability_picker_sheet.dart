@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
@@ -110,7 +111,7 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
         width: 36,
         height: 4,
         decoration: BoxDecoration(
-          color: AppColors.divider,
+          color: context.colorScheme.outlineVariant,
           borderRadius: BorderRadius.circular(2),
         ),
       ),
@@ -127,20 +128,20 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
       ),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: Text(
               'أوقات متاحة',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
             ),
           ),
           IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close, size: 20),
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ],
       ),
@@ -151,12 +152,12 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'اسم الخدمة (اختياري)',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.xs),
@@ -164,12 +165,12 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
           controller: _serviceController,
           decoration: InputDecoration(
             hintText: 'مثل: قص شعر، كشف طبي...',
-            hintStyle: const TextStyle(
-              color: AppColors.textHint,
+            hintStyle: TextStyle(
+              color: context.colorScheme.onSurfaceVariant,
               fontSize: 14,
             ),
             filled: true,
-            fillColor: AppColors.background,
+            fillColor: context.colorScheme.surfaceContainerLowest,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -190,12 +191,12 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'اختر اليوم',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -218,11 +219,11 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppColors.success.withValues(alpha: 0.1)
-                          : AppColors.surfaceVariant,
+                          : context.colorScheme.surfaceContainerLow,
                       border: Border.all(
                         color: isSelected
                             ? AppColors.success
-                            : AppColors.divider,
+                            : context.colorScheme.outlineVariant,
                         width: isSelected ? 1.5 : 1,
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -236,7 +237,7 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
                             fontWeight: FontWeight.w600,
                             color: isSelected
                                 ? AppColors.success
-                                : AppColors.textPrimary,
+                                : context.colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -246,7 +247,7 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
                             fontSize: 11,
                             color: isSelected
                                 ? AppColors.success
-                                : AppColors.textHint,
+                                : context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -265,12 +266,12 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'اختر الأوقات',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -302,11 +303,11 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppColors.success.withValues(alpha: 0.12)
-                      : AppColors.surfaceVariant,
+                      : context.colorScheme.surfaceContainerLow,
                   border: Border.all(
                     color: isSelected
                         ? AppColors.success
-                        : AppColors.divider,
+                        : context.colorScheme.outlineVariant,
                     width: isSelected ? 1.5 : 1,
                   ),
                   borderRadius: BorderRadius.circular(10),
@@ -320,7 +321,7 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
                         isSelected ? FontWeight.w600 : FontWeight.w400,
                     color: isSelected
                         ? AppColors.success
-                        : AppColors.textPrimary,
+                        : context.colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -347,7 +348,7 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
           ),
           style: FilledButton.styleFrom(
             backgroundColor: AppColors.success,
-            disabledBackgroundColor: AppColors.divider,
+            disabledBackgroundColor: context.colorScheme.outlineVariant,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),

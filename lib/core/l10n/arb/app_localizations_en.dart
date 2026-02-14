@@ -185,6 +185,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
+  String get appLanguage => 'App Language';
+
+  @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get aboutApp => 'About';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Are you sure you want to delete your account? This action cannot be undone.';
+
+  @override
   String get feed => 'Feed';
 
   @override

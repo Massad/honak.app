@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -88,12 +89,12 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
           child: Row(
             children: [
               const Expanded(
-                child: Text(
+                child: const Text(
                   'طلب سريع',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
+                    color: Color(0xFF111827),
                   ),
                 ),
               ),
@@ -102,21 +103,21 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                 child: Container(
                   width: 32,
                   height: 32,
-                  decoration: const BoxDecoration(
-                    color: AppColors.surfaceVariant,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.surfaceVariant,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
                     size: 14,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
             ],
           ),
         ),
-        const Divider(height: 1, color: AppColors.divider),
+        Divider(height: 1, color: context.colorScheme.outlineVariant),
         // Scrollable content
         Flexible(
           child: ListView(
@@ -124,11 +125,11 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
             padding: const EdgeInsets.all(AppSpacing.lg),
                   children: [
                     // Source selector
-                    const Text(
+                    Text(
                       'مصدر الطلب',
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -149,7 +150,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                 decoration: BoxDecoration(
                                   color: active
                                       ? AppColors.primary
-                                      : AppColors.surfaceVariant,
+                                      : context.colorScheme.surfaceVariant,
                                   borderRadius:
                                       BorderRadius.circular(AppRadius.sm),
                                 ),
@@ -160,7 +161,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                       size: 14,
                                       color: active
                                           ? AppColors.white
-                                          : AppColors.textSecondary,
+                                          : context.colorScheme.onSurfaceVariant,
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
@@ -169,7 +170,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                         fontSize: 10,
                                         color: active
                                             ? AppColors.white
-                                            : AppColors.textSecondary,
+                                            : context.colorScheme.onSurfaceVariant,
                                       ),
                                     ),
                                   ],
@@ -186,12 +187,12 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                       controller: _nameController,
                       decoration: InputDecoration(
                         hintText: 'اسم الزبون',
-                        hintStyle: const TextStyle(
+                        hintStyle: TextStyle(
                           fontSize: 14,
-                          color: AppColors.textHint,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         filled: true,
-                        fillColor: AppColors.surfaceVariant,
+                        fillColor: context.colorScheme.surfaceVariant,
                         border: OutlineInputBorder(
                           borderRadius: AppRadius.cardInner,
                           borderSide: BorderSide.none,
@@ -210,12 +211,12 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                       textDirection: TextDirection.ltr,
                       decoration: InputDecoration(
                         hintText: 'رقم الهاتف (اختياري)',
-                        hintStyle: const TextStyle(
+                        hintStyle: TextStyle(
                           fontSize: 14,
-                          color: AppColors.textHint,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         filled: true,
-                        fillColor: AppColors.surfaceVariant,
+                        fillColor: context.colorScheme.surfaceVariant,
                         border: OutlineInputBorder(
                           borderRadius: AppRadius.cardInner,
                           borderSide: BorderSide.none,
@@ -230,9 +231,9 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     // Quantity
                     Text(
                       widget.productName,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -241,7 +242,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                         vertical: AppSpacing.md,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.surfaceVariant,
+                        color: context.colorScheme.surfaceVariant,
                         borderRadius: AppRadius.cardInner,
                       ),
                       child: Row(
@@ -249,8 +250,8 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                         children: [
                           _circleBtn(
                             icon: Icons.remove,
-                            color: AppColors.surface,
-                            iconColor: AppColors.textPrimary,
+                            color: context.colorScheme.surface,
+                            iconColor: context.colorScheme.onSurface,
                             onTap: () => setState(
                               () => _qty = (_qty - 1).clamp(1, 999),
                             ),
@@ -260,17 +261,17 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                             child: Text(
                               '$_qty',
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.w500,
-                                color: AppColors.textPrimary,
+                                color: context.colorScheme.onSurface,
                               ),
                             ),
                           ),
                           _circleBtn(
                             icon: Icons.add,
                             color: AppColors.primary,
-                            iconColor: AppColors.white,
+                            iconColor: Colors.white,
                             onTap: () => setState(() => _qty++),
                           ),
                         ],
@@ -278,11 +279,11 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     // Empties
-                    const Text(
+                    Text(
                       'فوارغ للجمع',
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -291,8 +292,8 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                       children: [
                         _circleBtn(
                           icon: Icons.remove,
-                          color: AppColors.surfaceVariant,
-                          iconColor: AppColors.textPrimary,
+                          color: context.colorScheme.surfaceVariant,
+                          iconColor: context.colorScheme.onSurface,
                           onTap: () => setState(
                             () => _emptyQty = (_emptyQty - 1).clamp(0, 999),
                           ),
@@ -303,17 +304,17 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                           child: Text(
                             '$_emptyQty',
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
-                              color: AppColors.textPrimary,
+                              color: context.colorScheme.onSurface,
                             ),
                           ),
                         ),
                         _circleBtn(
                           icon: Icons.add,
-                          color: Colors.grey.shade300,
-                          iconColor: AppColors.textPrimary,
+                          color: Theme.of(context).colorScheme.outline,
+                          iconColor: context.colorScheme.onSurface,
                           onTap: () => setState(() => _emptyQty++),
                           size: 40,
                         ),
@@ -321,11 +322,11 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     // Payment
-                    const Text(
+                    Text(
                       'الدفع',
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -344,7 +345,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                 decoration: BoxDecoration(
                                   color: active
                                       ? AppColors.primary
-                                      : AppColors.surfaceVariant,
+                                      : context.colorScheme.surfaceVariant,
                                   borderRadius: BorderRadius.circular(
                                     AppRadius.sm,
                                   ),
@@ -356,7 +357,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                       fontSize: 12,
                                       color: active
                                           ? AppColors.white
-                                          : AppColors.textSecondary,
+                                          : context.colorScheme.onSurfaceVariant,
                                     ),
                                   ),
                                 ),
@@ -372,12 +373,12 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                       controller: _noteController,
                       decoration: InputDecoration(
                         hintText: 'ملاحظة (اختياري)',
-                        hintStyle: const TextStyle(
+                        hintStyle: TextStyle(
                           fontSize: 14,
-                          color: AppColors.textHint,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         filled: true,
-                        fillColor: AppColors.surfaceVariant,
+                        fillColor: context.colorScheme.surfaceVariant,
                         border: OutlineInputBorder(
                           borderRadius: AppRadius.cardInner,
                           borderSide: BorderSide.none,
@@ -411,11 +412,11 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                   const Text('أضف وسل\u0651م الآن'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.success,
-                                foregroundColor: AppColors.white,
+                                foregroundColor: Colors.white,
                                 disabledBackgroundColor:
-                                    AppColors.surfaceVariant,
+                                    context.colorScheme.surfaceVariant,
                                 disabledForegroundColor:
-                                    AppColors.textHint,
+                                    context.colorScheme.onSurfaceVariant,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: AppRadius.cardInner,
                                 ),
@@ -445,7 +446,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                 side: BorderSide(
                                   color: _canSubmit
                                       ? AppColors.primary
-                                      : AppColors.divider,
+                                      : context.colorScheme.outlineVariant,
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: AppRadius.cardInner,
@@ -479,8 +480,8 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
         decoration: BoxDecoration(
           color: color,
           shape: BoxShape.circle,
-          border: color == AppColors.surface
-              ? Border.all(color: AppColors.divider)
+          border: color == context.colorScheme.surface
+              ? Border.all(color: context.colorScheme.outlineVariant)
               : null,
         ),
         child: Icon(icon, size: size * 0.375, color: iconColor),

@@ -10,6 +10,7 @@ import 'package:honak/features/requests/presentation/widgets/request_type_detail
 import 'package:honak/features/requests/presentation/widgets/reschedule_sheet.dart';
 import 'package:honak/features/requests/presentation/widgets/status_timeline.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Full request detail page (customer view).
 class CustomerRequestDetailPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _CustomerRequestDetailPageState
     'accepted': ('تم القبول', AppColors.success),
     'in_progress': ('قيد التنفيذ', AppColors.primary),
     'preparing': ('قيد التحضير', AppColors.primary),
-    'completed': ('مكتمل', AppColors.textSecondary),
+    'completed': ('مكتمل', Color(0xFF6B7280)),
     'declined': ('مرفوض', AppColors.error),
     'cancelled_by_customer': ('ملغي', AppColors.error),
     'cancelled_by_business': ('ملغي من المتجر', AppColors.error),
@@ -70,7 +71,7 @@ class _CustomerRequestDetailPageState
     final typeLabel = _typeLabels[_request.type] ?? 'طلب';
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -80,7 +81,7 @@ class _CustomerRequestDetailPageState
             Text(
               '$typeLabel #${_request.id}',
               style: textTheme.labelSmall?.copyWith(
-                color: AppColors.textHint,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -143,7 +144,7 @@ class _CustomerRequestDetailPageState
                 Text(
                   'تفاصيل الطلب',
                   style: textTheme.titleSmall?.copyWith(
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -215,7 +216,7 @@ class _CustomerRequestDetailPageState
           child: Text(
             'لا يمكن الإلغاء بعد بدء التنفيذ',
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
           ),
         ),
@@ -252,7 +253,7 @@ class _CustomerRequestDetailPageState
           child: Text(
             'تم إلغاء هذا الطلب',
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
           ),
         ),
@@ -445,7 +446,7 @@ class _NoteCard extends StatelessWidget {
             TextSpan(
               text: note,
               style: textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ],

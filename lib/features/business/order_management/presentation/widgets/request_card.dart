@@ -38,12 +38,12 @@ class RequestCard extends ConsumerWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isPending
                 ? const Color(0xFFFF9800).withValues(alpha: 0.3)
-                : Colors.grey.shade100,
+                : Theme.of(context).colorScheme.surfaceContainerLow,
           ),
           boxShadow: [
             BoxShadow(
@@ -77,7 +77,7 @@ class RequestCard extends ConsumerWidget {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(14),
         ),

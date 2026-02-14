@@ -20,7 +20,7 @@ class InactiveSubscriptionCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
           borderRadius: AppRadius.card,
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: context.colorScheme.outlineVariant),
         ),
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Row(
@@ -48,7 +48,7 @@ class InactiveSubscriptionCard extends StatelessWidget {
                   Text(
                     subscription.packageName,
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                       fontSize: 11,
                     ),
                     overflow: TextOverflow.ellipsis,
@@ -89,7 +89,7 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = _labelForStatus(status);
-    final color = _colorForStatus(status);
+    final color = _colorForStatus(context, status);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -121,16 +121,16 @@ class _StatusChip extends StatelessWidget {
     }
   }
 
-  Color _colorForStatus(SubscriptionStatus status) {
+  Color _colorForStatus(BuildContext context, SubscriptionStatus status) {
     switch (status) {
       case SubscriptionStatus.depleted:
         return AppColors.warning;
       case SubscriptionStatus.expired:
-        return Colors.grey;
+        return context.colorScheme.onSurfaceVariant;
       case SubscriptionStatus.cancelled:
         return AppColors.error;
       default:
-        return Colors.grey;
+        return context.colorScheme.onSurfaceVariant;
     }
   }
 }

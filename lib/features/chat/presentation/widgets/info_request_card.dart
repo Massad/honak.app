@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -17,6 +18,7 @@ class InfoRequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
     final question = message.metadata['question'] as String? ?? message.content;
 
     return Container(
@@ -68,9 +70,9 @@ class InfoRequestCard extends StatelessWidget {
                       const SizedBox(height: AppSpacing.xs),
                       Text(
                         question,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
-                          color: AppColors.textPrimary,
+                          color: cs.onSurface,
                         ),
                       ),
                     ],
@@ -80,7 +82,7 @@ class InfoRequestCard extends StatelessWidget {
             ),
           ),
           if (_infoItems.isNotEmpty) ...[
-            const Divider(height: 1, color: AppColors.divider),
+            Divider(height: 1, color: cs.outlineVariant),
             Padding(
               padding: const EdgeInsetsDirectional.only(
                 start: AppSpacing.md,
@@ -114,18 +116,18 @@ class InfoRequestCard extends StatelessWidget {
                             children: [
                               Text(
                                 label,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColors.textPrimary,
+                                  color: cs.onSurface,
                                 ),
                               ),
                               if (description != null)
                                 Text(
                                   description,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 11,
-                                    color: AppColors.textSecondary,
+                                    color: cs.onSurfaceVariant,
                                   ),
                                 ),
                             ],

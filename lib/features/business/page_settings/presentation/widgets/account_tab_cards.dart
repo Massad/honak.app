@@ -17,9 +17,9 @@ class AccountProfileCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -33,7 +33,7 @@ class AccountProfileCard extends StatelessWidget {
           Icon(
             Icons.chevron_left,
             size: 16,
-            color: Colors.grey.shade300,
+            color: Theme.of(context).colorScheme.outline,
           ),
           const Spacer(),
           Column(
@@ -49,7 +49,7 @@ class AccountProfileCard extends StatelessWidget {
                 user.phone,
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -84,7 +84,7 @@ class AccountPageItem extends StatelessWidget {
     return Material(
       color: isActive
           ? AppColors.primary.withValues(alpha: 0.05)
-          : Colors.white,
+          : Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -96,7 +96,7 @@ class AccountPageItem extends StatelessWidget {
             border: Border.all(
               color: isActive
                   ? AppColors.primary.withValues(alpha: 0.3)
-                  : Colors.grey.shade100,
+                  : Theme.of(context).colorScheme.surfaceContainerLow,
             ),
           ),
           child: Row(
@@ -124,7 +124,7 @@ class AccountPageItem extends StatelessWidget {
                 Icon(
                   Icons.chevron_left,
                   size: 16,
-                  color: Colors.grey.shade300,
+                  color: Theme.of(context).colorScheme.outline,
                 ),
               const Spacer(),
               Column(
@@ -156,7 +156,7 @@ class AccountPageItem extends StatelessWidget {
                       page.businessTypeName!,
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                 ],

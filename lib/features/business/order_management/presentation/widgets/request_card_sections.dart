@@ -47,7 +47,7 @@ Color requestStatusTextColor(String status) {
     'delivered' => const Color(0xFF43A047),
     'completed' => const Color(0xFF43A047),
     'declined' => AppColors.error,
-    _ => Colors.grey,
+    _ => Colors.grey.shade500,
   };
 }
 
@@ -105,7 +105,7 @@ class RequestCardHeader extends StatelessWidget {
                 requestTimeAgo(request.createdAt),
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -126,7 +126,7 @@ class RequestCardHeader extends StatelessWidget {
                 '${request.itemsCount} أصناف',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -174,7 +174,7 @@ class RequestCardNotePreview extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -183,7 +183,7 @@ class RequestCardNotePreview extends StatelessWidget {
             Icon(
               Icons.note_outlined,
               size: 12,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ],
         ),

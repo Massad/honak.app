@@ -120,7 +120,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                     vertical: AppSpacing.sm,
                   ),
                   decoration: BoxDecoration(
-                    color: isSelected ? AppColors.primary : Colors.grey.shade100,
+                    color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
                     borderRadius: AppRadius.pill,
                   ),
                   child: Text(
@@ -128,7 +128,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: isSelected ? Colors.white : Colors.grey.shade500,
+                      color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -148,7 +148,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                 decoration: BoxDecoration(
                   color: _showCustomItemType
                       ? AppColors.primary
-                      : Colors.grey.shade100,
+                      : Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: AppRadius.pill,
                 ),
                 child: Text(
@@ -158,7 +158,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                     fontWeight: FontWeight.w500,
                     color: _showCustomItemType
                         ? Colors.white
-                        : Colors.grey.shade500,
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -235,7 +235,7 @@ class _ItemsStepState extends State<_ItemsStep> {
               border: Border.all(
                 color: _canAddItem
                     ? const Color(0xFF1A73E8)
-                    : Colors.grey.shade200,
+                    : Theme.of(context).colorScheme.outlineVariant,
               ),
             ),
             child: Row(
@@ -246,7 +246,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                   size: 14,
                   color: _canAddItem
                       ? const Color(0xFF1A73E8)
-                      : Colors.grey.shade300,
+                      : Theme.of(context).colorScheme.outline,
                 ),
                 const SizedBox(width: 6),
                 Text(
@@ -255,7 +255,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                     fontSize: 12,
                     color: _canAddItem
                         ? const Color(0xFF1A73E8)
-                        : Colors.grey.shade300,
+                        : Theme.of(context).colorScheme.outline,
                   ),
                 ),
               ],
@@ -292,17 +292,17 @@ class _ItemsStepState extends State<_ItemsStep> {
                 children: [
                   Text(
                     'مراجعة الطلب (${widget.items.length} قطعة — ${_totalPrice.toFormattedArabic()})',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
-                  const Icon(
+                  Icon(
                     Icons.chevron_left_rounded,
                     size: 16,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ],
               ),
@@ -326,7 +326,7 @@ class _ItemsStepState extends State<_ItemsStep> {
               cat.nameAr,
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -346,7 +346,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                   vertical: AppSpacing.sm,
                 ),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.primary : Colors.grey.shade100,
+                  color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: AppRadius.pill,
                 ),
                 child: Row(
@@ -358,7 +358,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                         color:
-                            isSelected ? Colors.white : Colors.grey.shade600,
+                            isSelected ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.xs),
@@ -367,7 +367,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                       style: TextStyle(
                         fontSize: 10,
                         color:
-                            isSelected ? Colors.white70 : Colors.grey.shade400,
+                            isSelected ? Colors.white70 : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -408,7 +408,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                   ),
                   decoration: BoxDecoration(
                     color:
-                        isSelected ? AppColors.primary : Colors.grey.shade100,
+                        isSelected ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
                     borderRadius: AppRadius.pill,
                   ),
                   child: Text(
@@ -416,7 +416,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: isSelected ? Colors.white : Colors.grey.shade500,
+                      color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -432,7 +432,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                   vertical: AppSpacing.sm,
                 ),
                 decoration: BoxDecoration(
-                  color: showCustom ? AppColors.primary : Colors.grey.shade100,
+                  color: showCustom ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: AppRadius.pill,
                 ),
                 child: Text(
@@ -440,7 +440,7 @@ class _ItemsStepState extends State<_ItemsStep> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                    color: showCustom ? Colors.white : Colors.grey.shade500,
+                    color: showCustom ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -487,13 +487,13 @@ class _QuantityButton extends StatelessWidget {
         width: 36,
         height: 36,
         decoration: BoxDecoration(
-          color: enabled ? Colors.grey.shade100 : Colors.grey.shade50,
+          color: enabled ? Theme.of(context).colorScheme.surfaceContainerLow : Theme.of(context).colorScheme.surfaceContainerLowest,
           shape: BoxShape.circle,
         ),
         child: Icon(
           icon,
           size: 18,
-          color: enabled ? Colors.grey.shade600 : Colors.grey.shade300,
+          color: enabled ? Theme.of(context).colorScheme.onSurfaceVariant : Theme.of(context).colorScheme.outline,
         ),
       ),
     );
@@ -544,7 +544,7 @@ class _AddedItemCard extends StatelessWidget {
                 Text(
                   '${item.service} · ${price.toFormattedArabic()}',
                   style: context.textTheme.labelSmall?.copyWith(
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     fontSize: 10,
                   ),
                 ),

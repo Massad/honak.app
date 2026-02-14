@@ -40,7 +40,6 @@ class RequestConfirmationPage extends StatelessWidget {
     final typeLabel = _typeLabels[requestType] ?? 'الطلب';
 
     return Scaffold(
-      backgroundColor: AppColors.surface,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -58,7 +57,7 @@ class RequestConfirmationPage extends StatelessWidget {
                 Text(
                   showPending ? 'تم الإرسال!' : 'تم التأكيد!',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
@@ -67,7 +66,7 @@ class RequestConfirmationPage extends StatelessWidget {
                 Text(
                   'تم إرسال $typeLabel إلى',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                 ),
                 const SizedBox(height: AppSpacing.xs),
@@ -89,7 +88,7 @@ class RequestConfirmationPage extends StatelessWidget {
                       ? 'ستصلك إشعار عندما يردون على طلبك'
                       : 'ستصلك إشعار عندما يكون طلبك جاهز',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textHint,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                 ),
                 const SizedBox(height: AppSpacing.xxl),

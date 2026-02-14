@@ -19,6 +19,8 @@ extension ContextExt on BuildContext {
 
   double get screenHeight => MediaQuery.of(this).size.height;
 
+  bool get isDark => Theme.of(this).brightness == Brightness.dark;
+
   bool get isRtl => Directionality.of(this) == TextDirection.rtl;
 
   void showSnackBar(String message, {bool isError = false}) {

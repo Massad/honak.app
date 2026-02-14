@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
@@ -97,18 +98,18 @@ class _HeaderRow extends StatelessWidget {
         ],
         Text(
           '$totalDelivered تسليم · $totalRemaining متبقي',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 10,
-            color: AppColors.textHint,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const Spacer(),
         // Title on the right side (in RTL, visually right)
-        const Text(
+        Text(
           'الشاحنات',
           style: TextStyle(
             fontSize: 12,
-            color: AppColors.textPrimary,
+            color: context.colorScheme.onSurface,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -153,9 +154,9 @@ class _TruckCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: context.colorScheme.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           boxShadow: AppShadows.sm,
         ),
         clipBehavior: Clip.hardEdge,
@@ -174,10 +175,10 @@ class _TruckCard extends StatelessWidget {
                       Row(
                         children: [
                           // Status badge + chevron
-                          const Icon(
+                          Icon(
                             Icons.chevron_left,
                             size: 12,
-                            color: AppColors.textHint,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
                           _StatusBadge(info: statusInfo),
@@ -185,9 +186,9 @@ class _TruckCard extends StatelessWidget {
                           // Truck name + driver
                           Text(
                             '${truck.name} — ${truck.driverName}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
-                              color: AppColors.textPrimary,
+                              color: context.colorScheme.onSurface,
                             ),
                           ),
                         ],
@@ -205,18 +206,18 @@ class _TruckCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            const Text(
+                            Text(
                               'الطلبات ستنتقل ليوم التوصيل القادم',
                               style: TextStyle(
                                 fontSize: 10,
-                                color: AppColors.textHint,
+                                color: context.colorScheme.onSurfaceVariant,
                               ),
                             ),
                             const SizedBox(width: 4),
                             Icon(
                               Icons.calendar_today,
                               size: 9,
-                              color: Colors.grey.shade400,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ],
                         ),
@@ -253,9 +254,9 @@ class _ProgressRow extends StatelessWidget {
       children: [
         Text(
           '$delivered/$total',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 10,
-            color: AppColors.textHint,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(width: AppSpacing.sm),
@@ -265,7 +266,7 @@ class _ProgressRow extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 5,
-              backgroundColor: Colors.grey.shade100,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
               valueColor:
                   const AlwaysStoppedAnimation<Color>(AppColors.primary),
             ),

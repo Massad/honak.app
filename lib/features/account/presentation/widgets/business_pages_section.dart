@@ -61,7 +61,7 @@ class BusinessPagesSection extends ConsumerWidget {
 
           // Create new page
           Material(
-            color: Colors.white,
+            color: context.colorScheme.surface,
             borderRadius: BorderRadius.circular(14),
             child: InkWell(
               borderRadius: BorderRadius.circular(14),
@@ -74,7 +74,7 @@ class BusinessPagesSection extends ConsumerWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: Colors.grey.shade200,
+                    color: context.colorScheme.outlineVariant,
                     width: 2,
                     strokeAlign: BorderSide.strokeAlignInside,
                   ),
@@ -85,14 +85,14 @@ class BusinessPagesSection extends ConsumerWidget {
                     Text(
                       '\u0625\u0646\u0634\u0627\u0621 \u0635\u0641\u062d\u0629 \u062c\u062f\u064a\u062f\u0629',
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade500,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.xs),
                     Icon(
                       Icons.add,
                       size: 18,
-                      color: Colors.grey.shade500,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ],
                 ),
@@ -177,7 +177,7 @@ class _PageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -186,7 +186,7 @@ class _PageCard extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.grey.shade100),
+            border: Border.all(color: context.colorScheme.outlineVariant),
           ),
           child: Row(
             children: [
@@ -255,7 +255,7 @@ class _PageCard extends StatelessWidget {
                       Text(
                         '@${page.slug} \u00b7 ${page.businessTypeName}',
                         style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade400,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontSize: 10,
                         ),
                         textAlign: TextAlign.end,
@@ -272,8 +272,8 @@ class _PageCard extends StatelessWidget {
                 height: 44,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.shade100,
-                  border: Border.all(color: Colors.grey.shade200),
+                  color: context.colorScheme.surfaceContainerLow,
+                  border: Border.all(color: context.colorScheme.outlineVariant),
                 ),
                 child: AppImage(
                   url: page.avatarUrl,

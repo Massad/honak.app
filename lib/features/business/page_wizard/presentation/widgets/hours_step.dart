@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -115,14 +116,14 @@ class _HoursOption extends StatelessWidget {
           color: selected ? AppColors.primary.withAlpha(15) : null,
           borderRadius: AppRadius.cardInner,
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.divider,
+            color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
             width: selected ? 1.5 : 1,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: selected ? AppColors.primary : AppColors.textPrimary,
+            color: selected ? AppColors.primary : context.colorScheme.onSurface,
             fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
             fontSize: 15,
           ),

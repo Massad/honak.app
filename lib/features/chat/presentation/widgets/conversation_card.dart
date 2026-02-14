@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/extensions/date_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
@@ -44,16 +45,16 @@ class ConversationCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildAvatar(theme),
+            _buildAvatar(context, theme),
             SizedBox(width: AppSpacing.md),
-            Expanded(child: _buildContent(theme)),
+            Expanded(child: _buildContent(context, theme)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildAvatar(ThemeData theme) {
+  Widget _buildAvatar(BuildContext context, ThemeData theme) {
     final avatarUrl = conversation.displayAvatar(isBusinessMode: isBusinessMode);
     final displayName =
         conversation.displayName(isBusinessMode: isBusinessMode);
@@ -83,7 +84,7 @@ class ConversationCard extends StatelessWidget {
                 color: AppColors.error,
                 borderRadius: AppRadius.pill,
                 border: Border.all(
-                  color: AppColors.white,
+                  color: context.colorScheme.surface,
                   width: 1.5,
                 ),
               ),
@@ -109,13 +110,13 @@ class ConversationCard extends StatelessWidget {
     return avatar;
   }
 
-  Widget _buildContent(ThemeData theme) {
+  Widget _buildContent(BuildContext context, ThemeData theme) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildNameRow(theme),
+        _buildNameRow(context, theme),
         SizedBox(height: AppSpacing.xs),
-        _buildMessagePreview(theme),
+        _buildMessagePreview(context, theme),
         if (conversation.needsInfo) ...[
           SizedBox(height: AppSpacing.xs),
           _buildNeedsInfoIndicator(theme),
@@ -124,7 +125,7 @@ class ConversationCard extends StatelessWidget {
     );
   }
 
-  Widget _buildNameRow(ThemeData theme) {
+  Widget _buildNameRow(BuildContext context, ThemeData theme) {
     final displayName =
         conversation.displayName(isBusinessMode: isBusinessMode);
     final isExpired = conversation.isExpired;
@@ -139,7 +140,7 @@ class ConversationCard extends StatelessWidget {
                   displayName,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: _isUnread ? FontWeight.w700 : FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -154,7 +155,7 @@ class ConversationCard extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: isExpired
-                        ? AppColors.textHint.withValues(alpha: 0.12)
+                        ? context.colorScheme.onSurfaceVariant.withValues(alpha: 0.12)
                         : AppColors.primary.withValues(alpha: 0.08),
                     borderRadius: AppRadius.pill,
                   ),
@@ -163,7 +164,7 @@ class ConversationCard extends StatelessWidget {
                         ? 'منتهي'
                         : 'طلب #${conversation.requestId!.replaceAll('req_', '')}',
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: isExpired ? AppColors.textHint : AppColors.primary,
+                      color: isExpired ? context.colorScheme.onSurfaceVariant : AppColors.primary,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -176,7 +177,7 @@ class ConversationCard extends StatelessWidget {
         Text(
           _lastMessageTime.toRelative(),
           style: theme.textTheme.bodySmall?.copyWith(
-            color: _isUnread ? AppColors.primary : AppColors.textHint,
+            color: _isUnread ? AppColors.primary : context.colorScheme.onSurfaceVariant,
             fontWeight: _isUnread ? FontWeight.w600 : FontWeight.w400,
           ),
         ),
@@ -184,7 +185,7 @@ class ConversationCard extends StatelessWidget {
     );
   }
 
-  Widget _buildMessagePreview(ThemeData theme) {
+  Widget _buildMessagePreview(BuildContext context, ThemeData theme) {
     final prefix = isBusinessMode
         ? (conversation.lastMessageFrom != 'business' ? 'العميل: ' : '')
         : (conversation.lastMessageFrom == 'business' ? 'الرد: ' : '');
@@ -193,7 +194,7 @@ class ConversationCard extends StatelessWidget {
     return Text(
       '$prefix$message',
       style: theme.textTheme.bodyMedium?.copyWith(
-        color: _isUnread ? AppColors.textPrimary : AppColors.textSecondary,
+        color: _isUnread ? context.colorScheme.onSurface : context.colorScheme.onSurfaceVariant,
         fontWeight: _isUnread ? FontWeight.w500 : FontWeight.w400,
       ),
       maxLines: 1,

@@ -43,7 +43,7 @@ class _OrdersPageState extends ConsumerState<OrdersPage>
     final activeSubs = ref.watch(activeSubscriptionsProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('طلباتي'),
@@ -177,11 +177,11 @@ class _OrdersBody extends StatelessWidget {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                 ),
               ),
               onChanged: onSearchChanged,
@@ -247,7 +247,7 @@ class _OrdersTabBar extends StatelessWidget {
       isScrollable: true,
       tabAlignment: TabAlignment.center,
       labelColor: AppColors.primary,
-      unselectedLabelColor: AppColors.textSecondary,
+      unselectedLabelColor: context.colorScheme.onSurfaceVariant,
       indicatorColor: AppColors.primary,
       indicatorSize: TabBarIndicatorSize.label,
       labelStyle: context.textTheme.bodySmall?.copyWith(
@@ -362,13 +362,13 @@ class _ErrorState extends StatelessWidget {
             Icon(
               Icons.error_outline,
               size: 48,
-              color: Colors.grey.shade300,
+              color: context.colorScheme.outline,
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
               'حدث خطأ أثناء تحميل الطلبات',
               style: context.textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: AppSpacing.lg),

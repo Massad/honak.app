@@ -1,12 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/config/archetype.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/features/business/dashboard/presentation/providers/dashboard_provider.dart';
+import 'package:honak/features/business/insights/presentation/widgets/directory_dashboard_section.dart';
+import 'package:honak/features/business/insights/presentation/widgets/directory_insights_cards.dart';
+import 'package:honak/shared/providers/business_page_provider.dart';
 
 // Placeholder insights/analytics page for business mode.
 // Will be replaced with real analytics when backend is ready.
 
-class BusinessInsightsPage extends StatelessWidget {
+class BusinessInsightsPage extends ConsumerWidget {
   const BusinessInsightsPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bizContext = ref.watch(businessContextProvider);
+
+    // Directory archetype gets specialized insights
+    if (bizContext != null && bizContext.archetype == Archetype.directory) {
+      return _DirectoryInsightsContent(pageId: bizContext.page.id);
+    }
+
+    return _DefaultInsightsContent();
+  }
+}
+
+class _DirectoryInsightsContent extends ConsumerWidget {
+  final String pageId;
+
+  const _DirectoryInsightsContent({required this.pageId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dashData = ref.watch(dashboardStatsProvider(pageId));
+
+    return dashData.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (_, __) => const _DefaultInsightsContent(),
+      data: (data) {
+        return ListView(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          children: [
+            DirectoryDashboardSection(data: data),
+            const SizedBox(height: AppSpacing.xl),
+            if (data['insights'] != null)
+              DirectoryInsightsCards(
+                insights: data['insights'] as Map<String, dynamic>,
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _DefaultInsightsContent extends StatelessWidget {
+  const _DefaultInsightsContent();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +87,7 @@ class BusinessInsightsPage extends StatelessWidget {
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -43,7 +95,7 @@ class BusinessInsightsPage extends StatelessWidget {
           'ستتوفر الإحصائيات والتحليلات قريباً',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
         ),
         const SizedBox(height: AppSpacing.xxl),
@@ -93,9 +145,9 @@ class _PreviewCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -103,10 +155,10 @@ class _PreviewCard extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icon, size: 20, color: AppColors.textHint),
+            child: Icon(icon, size: 20, color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
@@ -117,14 +169,14 @@ class _PreviewCard extends StatelessWidget {
                   title,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   subtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textHint,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                 ),
               ],
@@ -134,7 +186,7 @@ class _PreviewCard extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -142,7 +194,7 @@ class _PreviewCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textHint,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ),

@@ -18,7 +18,7 @@ class RequestDetailSkeleton extends StatelessWidget {
           const SizedBox(height: AppSpacing.xl),
 
           // Timeline placeholder
-          _buildTimelineSkeleton(),
+          _buildTimelineSkeleton(context),
           const SizedBox(height: AppSpacing.xl),
 
           // Info card (items / details)
@@ -34,7 +34,7 @@ class RequestDetailSkeleton extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -64,7 +64,7 @@ class RequestDetailSkeleton extends StatelessWidget {
     );
   }
 
-  Widget _buildTimelineSkeleton() {
+  Widget _buildTimelineSkeleton(BuildContext context) {
     return Column(
       children: List.generate(3, (index) {
         return Padding(
@@ -90,7 +90,7 @@ class RequestDetailSkeleton extends StatelessWidget {
                         vertical: AppSpacing.xs,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: Theme.of(context).colorScheme.outlineVariant,
                         borderRadius: BorderRadius.circular(1),
                       ),
                     ),
@@ -120,7 +120,7 @@ class RequestDetailSkeleton extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,

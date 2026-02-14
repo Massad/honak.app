@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 export 'quote_urgency_date_sections.dart';
 
@@ -27,7 +28,7 @@ class QuoteDescriptionSection extends StatelessWidget {
           'وصف المشكلة',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -40,16 +41,16 @@ class QuoteDescriptionSection extends StatelessWidget {
             hintText:
                 'اشرح المشكلة بالتفصيل... مثال: تسريب مياه من أنبوب المطبخ تحت المغسلة',
             hintStyle: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
             filled: true,
-            fillColor: AppColors.surfaceVariant,
+            fillColor: context.colorScheme.surfaceContainerLow,
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
@@ -78,7 +79,7 @@ class QuotePhotosMock extends StatelessWidget {
           'إرفاق صور (اختياري)',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -93,10 +94,10 @@ class QuotePhotosMock extends StatelessWidget {
             width: 72,
             height: 72,
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceContainerLow,
               borderRadius: AppRadius.cardInner,
               border: Border.all(
-                color: AppColors.divider,
+                color: context.colorScheme.outlineVariant,
                 width: 2,
                 strokeAlign: BorderSide.strokeAlignInside,
               ),
@@ -104,13 +105,13 @@ class QuotePhotosMock extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.camera_alt, size: 20, color: AppColors.textHint),
+                Icon(Icons.camera_alt, size: 20, color: context.colorScheme.onSurfaceVariant),
                 const SizedBox(height: AppSpacing.xxs),
                 Text(
                   'إضافة',
                   style: theme.textTheme.labelSmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textHint,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -137,7 +138,7 @@ class QuoteLocationSection extends StatelessWidget {
           'الموقع',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -145,9 +146,9 @@ class QuoteLocationSection extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
+            color: context.colorScheme.surfaceContainerLow,
             borderRadius: AppRadius.cardInner,
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(color: context.colorScheme.outlineVariant),
           ),
           child: Row(
             children: [

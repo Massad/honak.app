@@ -22,6 +22,7 @@ import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
+import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
 
 /// Product list with category filtering, search, cart, and pagination.
@@ -133,11 +134,10 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
         filtered = [...filtered]
           ..sort((a, b) => b.price.cents.compareTo(a.price.cents));
       case SortOption.newest:
-        filtered = [...filtered]
-          ..sort((a, b) => b.sortOrder.compareTo(a.sortOrder));
       case SortOption.popular:
-      case SortOption.defaultSort:
         break;
+      case SortOption.defaultSort:
+        filtered = filtered.sortedByOrder((i) => i.sortOrder);
     }
 
     return filtered;
@@ -163,13 +163,17 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
   }
 
   List<String> _extractCategories(List<Item> items) {
-    final categories = <String>{};
-    for (final item in items) {
-      if (item.categoryName != null && item.categoryName!.isNotEmpty) {
+    final sorted = items.sortedByOrder((i) => i.sortOrder);
+    final categories = <String>[];
+    final seen = <String>{};
+    for (final item in sorted) {
+      if (item.categoryName != null &&
+          item.categoryName!.isNotEmpty &&
+          seen.add(item.categoryName!)) {
         categories.add(item.categoryName!);
       }
     }
-    return categories.toList();
+    return categories;
   }
 
   int get _cartItemCount =>

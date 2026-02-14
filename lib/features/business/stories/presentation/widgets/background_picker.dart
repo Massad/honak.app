@@ -206,7 +206,7 @@ class _GradientSwatches extends StatelessWidget {
                   end: Alignment.bottomRight,
                 ),
                 border: isSelected
-                    ? Border.all(color: Colors.white, width: 2.5)
+                    ? Border.all(color: Theme.of(context).colorScheme.surface, width: 2.5)
                     : null,
               ),
             ),
@@ -247,7 +247,7 @@ class _SolidSwatches extends StatelessWidget {
                 color: _parseColor(color),
                 borderRadius: BorderRadius.circular(12),
                 border: isSelected
-                    ? Border.all(color: Colors.white, width: 2.5)
+                    ? Border.all(color: Theme.of(context).colorScheme.surface, width: 2.5)
                     : null,
               ),
             ),

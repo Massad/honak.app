@@ -125,11 +125,11 @@ class _MemberDetailScreenState extends ConsumerState<MemberDetailScreen>
         // Tab bar (skip if only 1 tab)
         if (_tabs.length > 1)
           Container(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             child: TabBar(
               controller: _tabController,
               labelColor: AppColors.primary,
-              unselectedLabelColor: Colors.grey.shade400,
+              unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
               indicatorColor: AppColors.primary,
               labelStyle: const TextStyle(
                 fontSize: 12,
@@ -196,9 +196,9 @@ class _MemberHeader extends StatelessWidget {
         vertical: AppSpacing.md,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         border: Border(
-          bottom: BorderSide(color: Colors.grey.shade100),
+          bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
       ),
       child: Row(
@@ -221,7 +221,7 @@ class _MemberHeader extends StatelessWidget {
             active ? 'نشط' : 'معطّل',
             style: TextStyle(
               fontSize: 11,
-              color: active ? AppColors.success : Colors.grey.shade400,
+              color: active ? AppColors.success : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
 
@@ -269,7 +269,7 @@ class _MemberHeader extends StatelessWidget {
                     phone!,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),

@@ -17,7 +17,7 @@ class ProfileHeader extends ConsumerWidget {
     final user = authState is Authenticated ? authState.user : null;
 
     return Container(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       padding: EdgeInsetsDirectional.fromSTEB(
         AppSpacing.lg,
         MediaQuery.of(context).padding.top + AppSpacing.lg,
@@ -31,7 +31,7 @@ class ProfileHeader extends ConsumerWidget {
             onPressed: () => context.push(Routes.settings),
             icon: Icon(
               Icons.settings_outlined,
-              color: Colors.grey.shade400,
+              color: context.colorScheme.onSurfaceVariant,
               size: 24,
             ),
           ),
@@ -53,7 +53,7 @@ class ProfileHeader extends ConsumerWidget {
                   child: Text(
                     user!.phone,
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: Colors.grey.shade500,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -67,8 +67,8 @@ class ProfileHeader extends ConsumerWidget {
             height: 64,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.grey.shade100,
-              border: Border.all(color: Colors.white, width: 2),
+              color: context.colorScheme.surfaceContainerLow,
+              border: Border.all(color: context.colorScheme.surface, width: 2),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.08),

@@ -120,10 +120,10 @@ class _WaitingCard extends StatelessWidget {
               const SizedBox(height: AppSpacing.sm),
               Text(
                 '${entry.position}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
               Text(
@@ -178,7 +178,7 @@ class _WaitingCard extends StatelessWidget {
         Text(
           value,
           style: context.textTheme.titleMedium?.copyWith(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -230,7 +230,7 @@ class _WaitingCard extends StatelessWidget {
                 Text(
                   'أنت في الطريق',
                   style: context.textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -252,8 +252,8 @@ class _WaitingCard extends StatelessWidget {
             icon: const Icon(Icons.edit_outlined, size: 14),
             label: const Text('طلب تعديل'),
             style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.textSecondary,
-              side: const BorderSide(color: AppColors.divider),
+              foregroundColor: context.colorScheme.onSurfaceVariant,
+              side: BorderSide(color: context.colorScheme.outlineVariant),
               padding: const EdgeInsets.symmetric(vertical: 10),
               shape: RoundedRectangleBorder(
                 borderRadius: AppRadius.button,
@@ -274,7 +274,7 @@ class _WaitingCard extends StatelessWidget {
             label: const Text('إلغاء الحجز'),
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.error,
-              side: const BorderSide(color: AppColors.divider),
+              side: BorderSide(color: context.colorScheme.outlineVariant),
               padding: const EdgeInsets.symmetric(vertical: 10),
               shape: RoundedRectangleBorder(
                 borderRadius: AppRadius.button,
@@ -367,7 +367,7 @@ class _InProgressCardState extends State<_InProgressCard> {
                   Text(
                     'جاري العمل على سيارتك',
                     style: context.textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -434,8 +434,8 @@ class _InProgressCardState extends State<_InProgressCard> {
             icon: const Icon(Icons.edit_outlined, size: 14),
             label: const Text('طلب تعديل'),
             style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.textSecondary,
-              side: const BorderSide(color: AppColors.divider),
+              foregroundColor: context.colorScheme.onSurfaceVariant,
+              side: BorderSide(color: context.colorScheme.outlineVariant),
               padding: const EdgeInsets.symmetric(vertical: 10),
               shape: RoundedRectangleBorder(
                 borderRadius: AppRadius.button,
@@ -448,7 +448,7 @@ class _InProgressCardState extends State<_InProgressCard> {
           'لا يمكن الإلغاء بعد بدء الخدمة — تواصل عبر المحادثة',
           textAlign: TextAlign.center,
           style: context.textTheme.labelSmall?.copyWith(
-            color: AppColors.textHint,
+            color: context.colorScheme.onSurfaceVariant,
             fontSize: 10,
           ),
         ),
@@ -492,8 +492,8 @@ class _PulsingDotState extends State<_PulsingDot>
       child: Container(
         width: 8,
         height: 8,
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
           shape: BoxShape.circle,
         ),
       ),

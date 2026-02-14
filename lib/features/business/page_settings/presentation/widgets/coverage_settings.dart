@@ -96,9 +96,9 @@ class _DefaultFeeCard extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -146,7 +146,7 @@ class _DefaultFeeCard extends ConsumerWidget {
               ),
               Text(
                 'تُطبق على المناطق بدون رسوم خاصة',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -220,12 +220,12 @@ class _NeighborhoodItem extends ConsumerWidget {
       decoration: BoxDecoration(
         color: isActive
             ? AppColors.primary.withValues(alpha: 0.04)
-            : Colors.white,
+            : Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: isActive
               ? AppColors.primary.withValues(alpha: 0.2)
-              : Colors.grey.shade200,
+              : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
       child: Row(
@@ -239,7 +239,7 @@ class _NeighborhoodItem extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: zone.deliveryFee != null
                       ? AppColors.primary.withValues(alpha: 0.1)
-                      : Colors.grey.shade100,
+                      : Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -250,7 +250,7 @@ class _NeighborhoodItem extends ConsumerWidget {
                     fontSize: 10,
                     color: zone.deliveryFee != null
                         ? AppColors.primary
-                        : Colors.grey,
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),

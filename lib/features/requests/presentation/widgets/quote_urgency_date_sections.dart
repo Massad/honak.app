@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Urgency option data.
 class UrgencyOption {
@@ -42,7 +43,7 @@ class QuoteUrgencySection extends StatelessWidget {
           'درجة الاستعجال',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -64,12 +65,12 @@ class QuoteUrgencySection extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: selected
                           ? opt.color.withValues(alpha: 0.1)
-                          : AppColors.surfaceVariant,
+                          : context.colorScheme.surfaceContainerLow,
                       borderRadius: AppRadius.cardInner,
                       border: Border.all(
                         color: selected
                             ? opt.color.withValues(alpha: 0.5)
-                            : AppColors.divider,
+                            : context.colorScheme.outlineVariant,
                       ),
                     ),
                     alignment: Alignment.center,
@@ -82,7 +83,7 @@ class QuoteUrgencySection extends StatelessWidget {
                               size: 12,
                               color: selected
                                   ? opt.color
-                                  : AppColors.textHint),
+                                  : context.colorScheme.onSurfaceVariant),
                           const SizedBox(width: AppSpacing.xxs),
                         ],
                         Text(
@@ -91,7 +92,7 @@ class QuoteUrgencySection extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: selected
                                 ? opt.color
-                                : AppColors.textHint,
+                                : context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -149,14 +150,14 @@ class QuotePreferredDateSection extends StatelessWidget {
           'تاريخ مفضل',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.xxs),
         Text(
           'اختياري — يساعد في تقليل التنسيق',
           style: theme.textTheme.labelSmall
-              ?.copyWith(color: AppColors.textHint),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         Wrap(
@@ -177,11 +178,11 @@ class QuotePreferredDateSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: selected
                       ? AppColors.primary.withValues(alpha: 0.05)
-                      : AppColors.surfaceVariant,
+                      : context.colorScheme.surfaceContainerLow,
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        selected ? AppColors.primary : AppColors.divider,
+                        selected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                 ),
                 alignment: Alignment.center,
@@ -191,7 +192,7 @@ class QuotePreferredDateSection extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: selected
                         ? AppColors.primary
-                        : AppColors.textSecondary,
+                        : context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -206,20 +207,20 @@ class QuotePreferredDateSection extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
+                border: Border.all(color: context.colorScheme.outline),
                 borderRadius: AppRadius.cardInner,
               ),
               child: Row(
                 children: [
                   Icon(Icons.calendar_today,
-                      size: 14, color: AppColors.textSecondary),
+                      size: 14, color: context.colorScheme.onSurfaceVariant),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     selectedCustomDate ?? 'اختر تاريخ',
                     style: TextStyle(
                       color: selectedCustomDate != null
-                          ? AppColors.textPrimary
-                          : AppColors.textHint,
+                          ? context.colorScheme.onSurface
+                          : context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],

@@ -2,52 +2,68 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 0,
-      "new_followers": 8,
-      "page_views": 234,
-      "today_revenue": 0
+      "page_views": { "value": 4520, "change": 12 },
+      "new_followers": { "value": 34, "change": 8 },
+      "claimed_tenants": { "claimed": 26, "total": 26 },
+      "new_this_week": { "value": 2 }
     },
     "recently_linked": [
       {
-        "id": "ln_1",
-        "name": "مطعم الفينيق",
-        "unit": "محل 12 — الطابق الأرضي",
-        "category": "مطاعم",
-        "logo_url": "https://picsum.photos/seed/phoenix/80/80",
-        "color": "blue",
-        "status": "unreviewed",
-        "time": "منذ ساعتين"
+        "id": "t-25",
+        "name": "نور فاشن",
+        "floor": "الطابق ٢",
+        "unit": "F2-40",
+        "logo_url": "https://picsum.photos/seed/nourfashion/80/80",
+        "linked_at": 1707800000
       },
       {
-        "id": "ln_2",
-        "name": "صيدلية الشفاء",
-        "unit": "محل 5 — الطابق الأرضي",
-        "category": "صيدليات",
-        "logo_url": "https://picsum.photos/seed/pharmacy/80/80",
-        "color": "blue",
-        "status": "unreviewed",
-        "time": "منذ 4 ساعات"
+        "id": "t-samsung",
+        "name": "Samsung Jordan",
+        "floor": "الأرضي",
+        "unit": "G-18",
+        "logo_url": "https://picsum.photos/seed/samsungjo/80/80",
+        "linked_at": 1707700000
       },
       {
-        "id": "ln_3",
-        "name": "بوتيك ليلى",
-        "unit": "محل 23 — الطابق الأول",
-        "category": "ملابس",
-        "logo_url": "https://picsum.photos/seed/boutique/80/80",
-        "color": "green",
-        "status": "reviewed",
-        "time": "أمس"
+        "id": "t-12",
+        "name": "زارا",
+        "floor": "الطابق ١",
+        "unit": "F1-12",
+        "logo_url": "https://picsum.photos/seed/zarajo/80/80",
+        "linked_at": 1707600000
       },
       {
-        "id": "ln_4",
-        "name": "كافيه لاتيه",
-        "unit": "محل 8 — الطابق الأرضي",
-        "category": "مقاهي",
-        "logo_url": "https://picsum.photos/seed/caffelatte/80/80",
-        "color": "green",
-        "status": "reviewed",
-        "time": "أمس"
+        "id": "t-6",
+        "name": "ملك الشاورما",
+        "floor": "الأرضي",
+        "unit": "G-06",
+        "logo_url": "https://picsum.photos/seed/shawarmaking/80/80",
+        "linked_at": 1707500000
       }
-    ]
+    ],
+    "insights": {
+      "total_tenants": { "claimed": 26, "unclaimed": 0, "invited": 0 },
+      "follower_growth": { "total": 2300, "this_month": 34, "change_percent": 8 },
+      "open_now": { "open": 24, "total": 26 },
+      "floor_visits": [
+        { "floor": "الأرضي", "visits": 1200 },
+        { "floor": "الطابق ١", "visits": 2100 },
+        { "floor": "الطابق ٢", "visits": 3400 },
+        { "floor": "الطابق ٣", "visits": 1800 }
+      ],
+      "directory_views": { "total": 4520, "this_week": 890 },
+      "tenant_clicks": [
+        { "id": "t-12", "name": "زارا", "clicks": 450, "logo_url": "https://picsum.photos/seed/zarajo/100" },
+        { "id": "t-19", "name": "سينما سيتي", "clicks": 380, "logo_url": "https://picsum.photos/seed/cinemacity/100" },
+        { "id": "t-6", "name": "ملك الشاورما", "clicks": 320, "logo_url": "https://picsum.photos/seed/shawarmaking/100" },
+        { "id": "t-13", "name": "H&M", "clicks": 290, "logo_url": "https://picsum.photos/seed/hmjo/100" },
+        { "id": "t-20", "name": "جولدز جيم", "clicks": 250, "logo_url": "https://picsum.photos/seed/goldsgym/100" }
+      ],
+      "top_floors": [
+        { "floor": "الطابق ٢", "visits": 3400, "percent": 40 },
+        { "floor": "الطابق ١", "visits": 2100, "percent": 25 },
+        { "floor": "الأرضي", "visits": 1200, "percent": 14 }
+      ]
+    }
   }
 }

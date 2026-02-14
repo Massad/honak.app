@@ -224,9 +224,9 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Row(
           children: [
@@ -235,7 +235,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                   ? Icons.keyboard_arrow_up
                   : Icons.keyboard_arrow_down,
               size: 18,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const Spacer(),
             Column(
@@ -243,10 +243,10 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
                 if (count != null)
@@ -254,7 +254,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                     '$count عنصر',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
               ],
@@ -264,7 +264,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
               child: Icon(
@@ -286,9 +286,9 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: _editingPricing
           ? _buildPricingEditMode()
@@ -319,7 +319,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       'نهاية الأسبوع',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.xxs),
@@ -335,7 +335,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       'د.أ/ليلة',
                       style: TextStyle(
                         fontSize: 9,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -358,7 +358,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       'أيام الأسبوع',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.xxs),
@@ -374,7 +374,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       'د.أ/ليلة',
                       style: TextStyle(
                         fontSize: 9,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -406,7 +406,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                     'نهاية الأسبوع',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.xs),
@@ -424,7 +424,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                     'أيام الأسبوع',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.xs),
@@ -464,9 +464,9 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: _editingSpecs
           ? _buildSpecsEditMode()
@@ -503,9 +503,9 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: Colors.grey.shade50,
+          color: Theme.of(context).colorScheme.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(AppRadius.sm),
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -516,7 +516,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                 label,
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -588,7 +588,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
           label,
           style: TextStyle(
             fontSize: 12,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(width: AppSpacing.sm),
@@ -604,16 +604,16 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             'اختر المرافق المتوفرة في المكان',
-            style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+            style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.md),
           Wrap(
@@ -640,12 +640,12 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                   decoration: BoxDecoration(
                     color: selected
                         ? AppColors.primary.withValues(alpha: 0.08)
-                        : Colors.grey.shade50,
+                        : Theme.of(context).colorScheme.surfaceContainerLowest,
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
                       color: selected
                           ? AppColors.primary.withValues(alpha: 0.3)
-                          : Colors.grey.shade200,
+                          : Theme.of(context).colorScheme.outlineVariant,
                     ),
                   ),
                   child: Row(
@@ -657,7 +657,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                           fontSize: 12,
                           color: selected
                               ? AppColors.primary
-                              : Colors.grey.shade700,
+                              : Theme.of(context).colorScheme.onSurface,
                           fontWeight:
                               selected ? FontWeight.w500 : FontWeight.normal,
                         ),
@@ -668,7 +668,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                         size: 16,
                         color: selected
                             ? AppColors.primary
-                            : Colors.grey.shade400,
+                            : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ],
                   ),
@@ -688,9 +688,9 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -714,7 +714,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                     child: Icon(
                       Icons.delete_outline,
                       size: 14,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const Spacer(),
@@ -723,7 +723,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       _rules[i],
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade700,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       textAlign: TextAlign.right,
                     ),
@@ -747,9 +747,9 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
               vertical: AppSpacing.xs,
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             child: Row(
               children: [
@@ -761,10 +761,10 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       color: Colors.amber.shade500,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.add,
                       size: 16,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 ),
@@ -807,9 +807,9 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: _editingTimes
           ? _buildTimesEditMode()
@@ -843,16 +843,16 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       'المغادرة (Check-out)',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
                       _checkOut,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textPrimary,
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                   ],
@@ -881,16 +881,16 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                       'الوصول (Check-in)',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
                       _checkIn,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textPrimary,
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                   ],
@@ -922,7 +922,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                     'وقت المغادرة (Check-out)',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.xs),
@@ -940,7 +940,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                     'وقت الوصول (Check-in)',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.xs),
@@ -980,16 +980,16 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         children: [
           Icon(
             Icons.photo_library_outlined,
             size: 32,
-            color: Colors.grey.shade300,
+            color: Theme.of(context).colorScheme.outline,
           ),
           const SizedBox(height: AppSpacing.sm),
           const Text(
@@ -1001,7 +1001,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
             'أضف صور للمكان لجذب العملاء',
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: AppSpacing.md),
@@ -1026,34 +1026,34 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Row(
           children: [
             Icon(
               Icons.arrow_back_ios,
               size: 14,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const Spacer(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text(
+                Text(
                   'الجدول والتوفر',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
                 Text(
                   'إدارة التقويم والتواريخ المحجوزة',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -1063,7 +1063,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
               child: const Icon(
@@ -1091,7 +1091,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
         decoration: BoxDecoration(
-          color: Colors.grey.shade50,
+          color: Theme.of(context).colorScheme.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),
         child: Row(
@@ -1101,14 +1101,14 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
               label,
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade600,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(width: 6),
             Icon(
               Icons.edit_outlined,
               size: 12,
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ],
         ),
@@ -1131,14 +1131,14 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
               vertical: AppSpacing.sm,
             ),
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(AppRadius.sm),
             ),
             child: Text(
               'إلغاء',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade600,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),
@@ -1153,7 +1153,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -1161,7 +1161,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                   SizedBox(width: 4),
@@ -1184,18 +1184,18 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
       style: const TextStyle(fontSize: 13),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.grey.shade50,
+        fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,
           vertical: AppSpacing.sm,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),
@@ -1213,18 +1213,18 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
       style: const TextStyle(fontSize: 13),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.grey.shade50,
+        fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,
           vertical: AppSpacing.sm,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),

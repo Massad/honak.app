@@ -16,16 +16,29 @@ class LocationHoursRow extends StatelessWidget {
     required this.archetype,
   });
 
+  /// Build venue location text like "City Mall، الأرضي G-01"
+  String _venueLocationText() {
+    final name = page.venueName ?? page.venueId ?? '';
+    final parts = <String>[];
+    if (page.venueFloor != null) parts.add(page.venueFloor!);
+    if (page.venueUnit != null) parts.add(page.venueUnit!);
+    if (parts.isEmpty) return name;
+    return '$name\u060c ${parts.join(' ')}';
+  }
+
   @override
   Widget build(BuildContext context) {
-    final locationText =
-        page.location?.label ?? page.location?.area ?? page.address ?? '';
+    // When page is inside a venue, show venue + floor + unit instead of address
+    final locationText = page.venueId != null
+        ? _venueLocationText()
+        : page.location?.label ?? page.location?.area ?? page.address ?? '';
     final hasLocation = locationText.isNotEmpty;
     final hasHours = page.hours != null ||
         page.operatingHours != null ||
         page.weeklySchedule != null;
 
     if (!hasLocation && !hasHours) return const SizedBox.shrink();
+
 
     return Wrap(
       spacing: AppSpacing.lg,
@@ -198,12 +211,12 @@ class HoursChip extends StatelessWidget {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.access_time_outlined, size: 12, color: Colors.grey),
+          Icon(Icons.access_time_outlined, size: 12, color: context.colorScheme.onSurfaceVariant),
           SizedBox(width: AppSpacing.xxs),
           Text(
             hoursText,
             style: context.textTheme.bodySmall?.copyWith(
-              color: Colors.grey,
+              color: context.colorScheme.onSurfaceVariant,
               fontSize: 12,
             ),
           ),

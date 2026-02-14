@@ -39,7 +39,7 @@ class RequestListCard extends StatelessWidget {
           border: Border.all(
             color: isCancelled
                 ? AppColors.error.withValues(alpha: 0.15)
-                : Colors.grey.shade100,
+                : context.colorScheme.outlineVariant,
           ),
         ),
         child: Column(
@@ -64,7 +64,7 @@ class RequestListCard extends StatelessWidget {
                       child: Text(
                         _summaryText,
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontSize: 12,
                         ),
                         maxLines: 1,
@@ -152,7 +152,7 @@ class _BusinessRow extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: statusStyle.background,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 1.5),
+                  border: Border.all(color: context.colorScheme.surface, width: 1.5),
                 ),
                 child: Icon(typeIcon, size: 10, color: statusStyle.foreground),
               ),
@@ -174,7 +174,7 @@ class _BusinessRow extends StatelessWidget {
               Text(
                 _formatTimeAgo(request.createdAt),
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                   fontSize: 10,
                 ),
               ),
@@ -280,9 +280,9 @@ class _BottomRow extends StatelessWidget {
           ],
           const Spacer(),
           // Chat + chevron
-          Icon(Icons.chat_bubble_outline, size: 16, color: Colors.grey.shade400),
+          Icon(Icons.chat_bubble_outline, size: 16, color: context.colorScheme.onSurfaceVariant),
           const SizedBox(width: AppSpacing.sm),
-          Icon(Icons.chevron_left, size: 18, color: Colors.grey.shade300),
+          Icon(Icons.chevron_left, size: 18, color: context.colorScheme.outline),
         ],
       ),
     );
@@ -417,7 +417,7 @@ class _ProgressBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isDone
                       ? AppColors.primary
-                      : Colors.grey.shade200,
+                      : context.colorScheme.outlineVariant,
                   borderRadius: BorderRadius.only(
                     bottomLeft: i == 0
                         ? const Radius.circular(16)

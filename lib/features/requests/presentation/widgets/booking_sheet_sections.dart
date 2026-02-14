@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 export 'booking_branch_selector.dart';
 export 'booking_time_preference.dart';
@@ -30,7 +31,7 @@ class BookingServiceSelector extends StatelessWidget {
           'الخدمة',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -48,11 +49,11 @@ class BookingServiceSelector extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: selected
                       ? AppColors.primary.withValues(alpha: 0.05)
-                      : Colors.white,
+                      : context.colorScheme.surface,
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        selected ? AppColors.primary : AppColors.divider,
+                        selected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(
@@ -74,12 +75,12 @@ class BookingServiceSelector extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.access_time,
-                                    size: 10, color: AppColors.textHint),
+                                    size: 10, color: context.colorScheme.onSurfaceVariant),
                                 const SizedBox(width: AppSpacing.xxs),
                                 Text(
                                   '${service['duration']}',
                                   style: theme.textTheme.labelSmall
-                                      ?.copyWith(color: AppColors.textHint),
+                                      ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                                 ),
                               ],
                             ),
@@ -93,7 +94,7 @@ class BookingServiceSelector extends StatelessWidget {
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: selected
                               ? AppColors.primary
-                              : AppColors.textSecondary,
+                              : context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                   ],
@@ -131,7 +132,7 @@ class BookingTeamSelector extends StatelessWidget {
           'مع (اختياري)',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -190,10 +191,10 @@ class _TeamChip extends StatelessWidget {
             vertical: AppSpacing.sm,
           ),
           decoration: BoxDecoration(
-            color: selected ? AppColors.primary : Colors.white,
+            color: selected ? AppColors.primary : context.colorScheme.surface,
             borderRadius: AppRadius.cardInner,
             border: Border.all(
-              color: selected ? AppColors.primary : AppColors.divider,
+              color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
             ),
           ),
           child: Row(
@@ -204,7 +205,7 @@ class _TeamChip extends StatelessWidget {
                     size: 12,
                     color: selected
                         ? Colors.white
-                        : AppColors.textSecondary),
+                        : context.colorScheme.onSurfaceVariant),
                 const SizedBox(width: AppSpacing.xs),
               ],
               Text(
@@ -212,7 +213,7 @@ class _TeamChip extends StatelessWidget {
                 style: theme.textTheme.labelSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color:
-                      selected ? Colors.white : AppColors.textSecondary,
+                      selected ? Colors.white : context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

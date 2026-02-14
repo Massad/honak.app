@@ -4,35 +4,31 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 
-/// Horizontal scroll of floor cards with tenant counts.
+/// Horizontal scroll of floor cards with tenant counts and category tags.
+/// Matches Figma: floor icon, name, label, category chips, tenant count.
 class DirectoryFloorsPreview extends StatelessWidget {
-  final int floorCount;
+  final List<({String id, String name, int count})> floors;
   final List<Item> allItems;
-  final ValueChanged<String> onFloorSelected;
-
-  /// Static floor names matching the directory filter chips.
-  static const _floorNames = [
-    // "\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u0623\u0631\u0636\u064a" = الطابق الأرضي
-    '\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u0623\u0631\u0636\u064a',
-    // "\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u0623\u0648\u0644" = الطابق الأول
-    '\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u0623\u0648\u0644',
-    // "\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u062b\u0627\u0646\u064a" = الطابق الثاني
-    '\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u062b\u0627\u0646\u064a',
-    // "\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u062b\u0627\u0644\u062b" = الطابق الثالث
-    '\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u062b\u0627\u0644\u062b',
-  ];
 
   const DirectoryFloorsPreview({
     super.key,
-    required this.floorCount,
+    required this.floors,
     required this.allItems,
-    required this.onFloorSelected,
   });
+
+  /// Get unique category tags for items on this floor.
+  List<String> _floorCategories(String floorName) {
+    return allItems
+        .where((item) => item.categoryName == floorName)
+        .map((item) => item.categoryName)
+        .whereType<String>()
+        .toSet()
+        .take(3)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final floors = _floorNames.take(floorCount).toList();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,7 +46,7 @@ class DirectoryFloorsPreview extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                // "\u0627\u0644\u0637\u0648\u0627\u0628\u0642" = الطوابق
+                // "الطوابق"
                 '\u0627\u0644\u0637\u0648\u0627\u0628\u0642',
                 style: context.textTheme.titleSmall,
               ),
@@ -60,7 +56,7 @@ class DirectoryFloorsPreview extends StatelessWidget {
         const SizedBox(height: AppSpacing.sm),
         // Cards
         SizedBox(
-          height: 80,
+          height: 90,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsetsDirectional.symmetric(
@@ -69,23 +65,11 @@ class DirectoryFloorsPreview extends StatelessWidget {
             itemCount: floors.length,
             separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.sm),
             itemBuilder: (context, index) {
-              final floorName = floors[index];
-              final tenantCount = allItems
-                  .where((item) => item.categoryName == floorName)
-                  .length;
-              final categories = allItems
-                  .where((item) => item.categoryName == floorName)
-                  .map((item) => item.descriptionAr)
-                  .whereType<String>()
-                  .toSet()
-                  .take(3)
-                  .toList();
-
+              final floor = floors[index];
               return _FloorCard(
-                floorName: floorName,
-                tenantCount: tenantCount,
-                categories: categories,
-                onTap: () => onFloorSelected(floorName),
+                floorName: floor.name,
+                tenantCount: floor.count,
+                label: _floorLabel(floor.name),
               );
             },
           ),
@@ -93,86 +77,85 @@ class DirectoryFloorsPreview extends StatelessWidget {
       ],
     );
   }
+
+  /// Get the floor label from page fixture data (via items description).
+  String? _floorLabel(String floorName) {
+    // Find the first item on this floor and check for label-like metadata
+    // For now, derive from items' tags or return null
+    final categories = _floorCategories(floorName);
+    return categories.isNotEmpty ? categories.join(' \u00b7 ') : null;
+  }
 }
 
 class _FloorCard extends StatelessWidget {
   final String floorName;
   final int tenantCount;
-  final List<String> categories;
-  final VoidCallback onTap;
+  final String? label;
 
   const _FloorCard({
     required this.floorName,
     required this.tenantCount,
-    required this.categories,
-    required this.onTap,
+    this.label,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        constraints: const BoxConstraints(minWidth: 140),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: context.colorScheme.surfaceContainerHighest
-              .withValues(alpha: 0.5),
-          border: Border.all(
-            color: context.colorScheme.outlineVariant.withValues(alpha: 0.5),
-          ),
-          borderRadius: AppRadius.cardInner,
+    return Container(
+      constraints: const BoxConstraints(minWidth: 140),
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: context.colorScheme.surfaceContainerHighest
+            .withValues(alpha: 0.5),
+        border: Border.all(
+          color: context.colorScheme.outlineVariant.withValues(alpha: 0.5),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: Text(
-                    floorName,
-                    style: context.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+        borderRadius: AppRadius.cardInner,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.location_on_outlined,
+                size: 16,
+                color: context.colorScheme.primary,
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Flexible(
+                child: Text(
+                  floorName,
+                  style: context.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(width: AppSpacing.sm),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sm,
-                    vertical: AppSpacing.xxs,
-                  ),
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.primaryContainer,
-                    borderRadius: AppRadius.badge,
-                  ),
-                  child: Text(
-                    '$tenantCount',
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: context.colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            if (categories.isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                categories.join(' \u00b7 '),
-                style: context.textTheme.labelSmall?.copyWith(
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
             ],
+          ),
+          if (label != null) ...[
+            const SizedBox(height: AppSpacing.xxs),
+            Text(
+              label!,
+              style: context.textTheme.labelSmall?.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
-        ),
+          const Spacer(),
+          Text(
+            // "{count} متجر"
+            '$tenantCount \u0645\u062a\u062c\u0631',
+            style: context.textTheme.labelSmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -162,9 +162,9 @@ class _EmptyCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -178,13 +178,13 @@ class _EmptyCard extends StatelessWidget {
           Icon(
             Icons.local_offer_outlined,
             size: 14,
-            color: Colors.grey.shade400,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               'تغييرات الأسعار',
-              style: TextStyle(fontSize: 14, color: Colors.grey.shade500),
+              style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ),
           GestureDetector(
@@ -195,7 +195,7 @@ class _EmptyCard extends StatelessWidget {
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.add, size: 12, color: Colors.white),
@@ -205,7 +205,7 @@ class _EmptyCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 ],
@@ -360,7 +360,7 @@ class _ActiveCard extends StatelessWidget {
               Expanded(
                 child: _ActionButton(
                   label: 'تعديل',
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   bgColor: Colors.white.withValues(alpha: 0.7),
                   onTap: onEdit,
                 ),
@@ -463,7 +463,7 @@ class _ScheduledCard extends StatelessWidget {
               Expanded(
                 child: _ActionButton(
                   label: 'تعديل',
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   bgColor: Colors.white.withValues(alpha: 0.7),
                   onTap: onEdit,
                 ),
@@ -502,14 +502,14 @@ class _HistoryLink extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.access_time, size: 10, color: Colors.grey.shade400),
+            Icon(Icons.access_time, size: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
             const SizedBox(width: 4),
             Text(
               'سجل تغييرات الأسعار ($count)',
-              style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(width: 2),
-            Icon(Icons.chevron_left, size: 10, color: Colors.grey.shade400),
+            Icon(Icons.chevron_left, size: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ],
         ),
       ),

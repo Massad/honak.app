@@ -27,6 +27,7 @@ import 'package:honak/features/business/catalog_management/presentation/widgets/
     as pc_wizard;
 import 'package:honak/features/business/catalog_management/presentation/widgets/team_assign_sheet.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/team_provider.dart';
+import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 
 enum _ManageMode { normal, select, reorder }
@@ -389,11 +390,23 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
       grouped.putIfAbsent(item.categoryId, () => []).add(item);
     }
 
+    // Sort items within each category group by sortOrder
+    for (final group in grouped.values) {
+      group.sortByOrder((i) => i.sortOrder);
+    }
+
+    // Build a map of categoryId → sortOrder from the categories list
+    final catOrderMap = <String, int>{
+      for (final c in categories) c.id: c.sortOrder,
+    };
+
     final sortedKeys = grouped.keys.toList()
       ..sort((a, b) {
         if (a == null) return 1;
         if (b == null) return -1;
-        return 0;
+        final orderA = catOrderMap[a] ?? 999;
+        final orderB = catOrderMap[b] ?? 999;
+        return orderA.compareTo(orderB);
       });
 
     final widgets = <Widget>[];
@@ -412,7 +425,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ));
@@ -501,9 +514,9 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
           child: Container(
             padding: const EdgeInsets.all(AppSpacing.sm),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.grey.shade100),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.03),
@@ -525,15 +538,15 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                   alignment: Alignment.center,
                   child: Text(
                     '${index + 1}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                Icon(Icons.drag_handle, size: 16, color: Colors.grey.shade300),
+                Icon(Icons.drag_handle, size: 16, color: Theme.of(context).colorScheme.outline),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Column(
@@ -553,7 +566,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                           item.categoryName!,
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                     ],
@@ -737,7 +750,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                             : '${filtered.length} من ${items.length} $itemLabel',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -933,14 +946,14 @@ class _ManageTabStrip extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                 decoration: BoxDecoration(
-                  color: isActive ? AppColors.primary : Colors.grey.shade100,
+                  color: isActive ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   tabs[i].labelAr,
                   style: TextStyle(
                     fontSize: 12,
-                    color: isActive ? Colors.white : Colors.grey.shade500,
+                    color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                     fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
                   ),
                 ),
@@ -990,12 +1003,12 @@ class _SectionHeader extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.grey.shade100,
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
                 '$count',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ),
           ],
@@ -1017,10 +1030,10 @@ class _SectionHeader extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       addLabel,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ),
                   ],
@@ -1165,7 +1178,7 @@ class _Toolbar extends StatelessWidget {
         const Spacer(),
         Text(
           'اسحب لتغيير الترتيب',
-          style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+          style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
         ),
       ],
     );
@@ -1194,7 +1207,7 @@ class _ToolbarChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: active
               ? AppColors.primary.withValues(alpha: 0.08)
-              : Colors.grey.shade100,
+              : Theme.of(context).colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -1202,13 +1215,13 @@ class _ToolbarChip extends StatelessWidget {
           children: [
             Icon(icon,
                 size: 11,
-                color: active ? AppColors.primary : Colors.grey.shade600),
+                color: active ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant),
             const SizedBox(width: 4),
             Text(
               label,
               style: TextStyle(
                 fontSize: 11,
-                color: active ? AppColors.primary : Colors.grey.shade600,
+                color: active ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -1248,7 +1261,7 @@ class _ArrowButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 14,
-          color: enabled ? AppColors.primary : Colors.grey.shade200,
+          color: enabled ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
     );
@@ -1295,14 +1308,14 @@ class _EmptyItemState extends StatelessWidget {
           Text(
             'لا يوجد $label بعد',
             style: context.textTheme.bodyMedium?.copyWith(
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             'أضف $label لتظهر في صفحتك',
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.xl),
           Material(
@@ -1319,8 +1332,8 @@ class _EmptyItemState extends StatelessWidget {
                   children: [
                     Text(
                       addLabel,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),
@@ -1357,14 +1370,14 @@ class _FilteredEmptyState extends StatelessWidget {
           Icon(
             Icons.inventory_2_outlined,
             size: 32,
-            color: Colors.grey.shade200,
+            color: Theme.of(context).colorScheme.outlineVariant,
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
             query.isNotEmpty
                 ? 'لا توجد نتائج لـ "$query"'
                 : 'لا يوجد عناصر بهذه التصفية',
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.md),
           GestureDetector(
@@ -1409,7 +1422,7 @@ class _ErrorState extends StatelessWidget {
           Text(
             message,
             style: context.textTheme.bodyMedium
-                ?.copyWith(color: Colors.grey.shade600),
+                ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.lg),
           TextButton.icon(

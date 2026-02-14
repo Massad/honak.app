@@ -100,7 +100,7 @@ class _TenantBody extends ConsumerWidget {
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
           Text(t.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
           Text([if (t.unit.isNotEmpty) t.unit, if (t.businessType.isNotEmpty) t.businessType].join(' • '),
-              style: TextStyle(fontSize: 10, color: Colors.grey.shade400)),
+              style: TextStyle(fontSize: 10, color: Colors.grey.shade500)),
         ]),
       ]),
     );
@@ -154,14 +154,14 @@ class _TenantBody extends ConsumerWidget {
                         decoration: BoxDecoration(
                           color: status == s ? _statusColor(s).withValues(alpha: 0.1) : Colors.grey.shade50,
                           borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: status == s ? _statusColor(s) : Colors.grey.shade200),
+                          border: Border.all(color: status == s ? _statusColor(s) : Theme.of(context).colorScheme.outlineVariant),
                         ),
-                        child: Text(_statusLabel(s), style: TextStyle(fontSize: 11, color: status == s ? _statusColor(s) : Colors.grey.shade600)),
+                        child: Text(_statusLabel(s), style: TextStyle(fontSize: 11, color: status == s ? _statusColor(s) : Theme.of(context).colorScheme.onSurfaceVariant)),
                       ),
                     ),
                   ),
                 const Spacer(),
-                Text('الحالة', style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+                Text('الحالة', style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant)),
               ]),
             ]),
           ),
@@ -199,5 +199,5 @@ class _TenantBody extends ConsumerWidget {
   }
 }
 
-Color _statusColor(String s) => switch (s) { 'active' => Colors.green, 'coming_soon' => Colors.orange, 'closed' => Colors.red, _ => Colors.grey };
+Color _statusColor(String s) => switch (s) { 'active' => Colors.green, 'coming_soon' => Colors.orange, 'closed' => Colors.red, _ => Colors.grey.shade500 };
 String _statusLabel(String s) => switch (s) { 'active' => 'نشط', 'coming_soon' => 'قريباً', 'closed' => 'مغلق', _ => s };

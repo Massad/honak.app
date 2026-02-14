@@ -92,7 +92,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
     final isOverdue = _isOverdue(ticket);
 
     return Container(
-      color: AppColors.surface,
+      color: context.colorScheme.surface,
       child: Column(
         children: [
           // Drag handle
@@ -101,7 +101,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
             height: 4,
             margin: const EdgeInsets.only(top: AppSpacing.sm),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: Theme.of(context).colorScheme.outlineVariant,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -120,7 +120,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                   child: Icon(
                     Icons.arrow_forward_rounded,
                     size: 22,
-                    color: Colors.grey.shade600,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.md),
@@ -223,7 +223,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
               ],
             ),
           ),
-          Divider(height: 1, color: Colors.grey.shade100),
+          Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
         ],
       ),
     );
@@ -244,9 +244,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       ),
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -279,7 +279,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                       decoration: BoxDecoration(
                         color: i < currentIdx
                             ? const Color(0xFF43A047)
-                            : Colors.grey.shade200,
+                            : Theme.of(context).colorScheme.outlineVariant,
                         borderRadius: BorderRadius.circular(1),
                       ),
                     ),
@@ -315,14 +315,14 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 ? conf.bgColor
                 : isComplete
                     ? const Color(0xFF43A047).withValues(alpha: 0.1)
-                    : Colors.grey.shade50,
+                    : Theme.of(context).colorScheme.surfaceContainerLowest,
             shape: BoxShape.circle,
             border: Border.all(
               color: isCurrent
                   ? conf.borderColor
                   : isComplete
                       ? const Color(0xFF43A047)
-                      : Colors.grey.shade200,
+                      : Theme.of(context).colorScheme.outlineVariant,
               width: 2,
             ),
           ),
@@ -333,7 +333,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 ? conf.color
                 : isComplete
                     ? const Color(0xFF43A047)
-                    : Colors.grey.shade300,
+                    : Theme.of(context).colorScheme.outline,
           ),
         ),
         const SizedBox(height: 4),
@@ -345,7 +345,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 ? conf.color
                 : isComplete
                     ? const Color(0xFF43A047)
-                    : Colors.grey.shade300,
+                    : Theme.of(context).colorScheme.outline,
           ),
         ),
       ],
@@ -384,7 +384,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
               'الموعد المتوقع: ${_formatShortDate(ticket.estimatedReadyAt)}',
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -405,9 +405,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       ),
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -421,7 +421,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
         children: [
           Text(
             'العميل',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(
@@ -430,13 +430,13 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.person_outline_rounded,
                   size: 20,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -457,7 +457,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                           Icon(
                             Icons.phone_outlined,
                             size: 10,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
                           Text(
@@ -465,7 +465,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                             textDirection: TextDirection.ltr,
                             style: TextStyle(
                               fontSize: 11,
-                              color: Colors.grey.shade500,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -483,20 +483,20 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                   color: const Color(0xFF1A73E8),
                   borderRadius: AppRadius.cardInner,
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       Icons.chat_bubble_outline_rounded,
                       size: 13,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     SizedBox(width: 6),
                     Text(
                       'محادثة',
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ),
                   ],
@@ -525,9 +525,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       ),
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -545,7 +545,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 'القطع ($totalItems قطعة)',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const Spacer(),
@@ -567,7 +567,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
               ),
               padding: const EdgeInsetsDirectional.all(AppSpacing.md),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade100),
+                border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 borderRadius: AppRadius.cardInner,
               ),
               child: Column(
@@ -579,7 +579,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                       Icon(
                         Icons.inventory_2_outlined,
                         size: 14,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Expanded(
@@ -597,7 +597,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                               '×${item.quantity}',
                               style: TextStyle(
                                 fontSize: 10,
-                                color: Colors.grey.shade400,
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ],
@@ -607,7 +607,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                         '${price.toFormattedArabic()} د.أ',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey.shade700,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -619,9 +619,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                     spacing: 4,
                     runSpacing: 4,
                     children: [
-                      _buildChip(item.service, Colors.grey.shade500),
+                      _buildChip(item.service, Theme.of(context).colorScheme.onSurfaceVariant),
                       ...item.attributes.entries.map(
-                        (e) => _buildChip(e.value, Colors.grey.shade500),
+                        (e) => _buildChip(e.value, Theme.of(context).colorScheme.onSurfaceVariant),
                       ),
                     ],
                   ),
@@ -639,13 +639,13 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                           decoration: BoxDecoration(
                             color: item.photoBefore != null
                                 ? const Color(0xFFEFF6FF)
-                                : Colors.grey.shade50,
+                                : Theme.of(context).colorScheme.surfaceContainerLowest,
                             borderRadius:
                                 BorderRadius.circular(AppRadius.md),
                             border: Border.all(
                               color: item.photoBefore != null
                                   ? const Color(0xFFBFDBFE)
-                                  : Colors.grey.shade100,
+                                  : Theme.of(context).colorScheme.surfaceContainerLow,
                             ),
                           ),
                           child: Row(
@@ -655,7 +655,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                                 size: 11,
                                 color: item.photoBefore != null
                                     ? const Color(0xFF1A73E8)
-                                    : Colors.grey.shade300,
+                                    : Theme.of(context).colorScheme.outline,
                               ),
                               const SizedBox(width: 6),
                               Text(
@@ -666,7 +666,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                                   fontSize: 10,
                                   color: item.photoBefore != null
                                       ? const Color(0xFF1A73E8)
-                                      : Colors.grey.shade300,
+                                      : Theme.of(context).colorScheme.outline,
                                 ),
                               ),
                             ],
@@ -683,13 +683,13 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                           decoration: BoxDecoration(
                             color: item.photoAfter != null
                                 ? const Color(0xFFF0FDF4)
-                                : Colors.grey.shade50,
+                                : Theme.of(context).colorScheme.surfaceContainerLowest,
                             borderRadius:
                                 BorderRadius.circular(AppRadius.md),
                             border: Border.all(
                               color: item.photoAfter != null
                                   ? const Color(0xFFBBF7D0)
-                                  : Colors.grey.shade100,
+                                  : Theme.of(context).colorScheme.surfaceContainerLow,
                             ),
                           ),
                           child: Row(
@@ -699,7 +699,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                                 size: 11,
                                 color: item.photoAfter != null
                                     ? const Color(0xFF43A047)
-                                    : Colors.grey.shade300,
+                                    : Theme.of(context).colorScheme.outline,
                               ),
                               const SizedBox(width: 6),
                               Text(
@@ -710,7 +710,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                                   fontSize: 10,
                                   color: item.photoAfter != null
                                       ? const Color(0xFF43A047)
-                                      : Colors.grey.shade300,
+                                      : Theme.of(context).colorScheme.outline,
                                 ),
                               ),
                             ],
@@ -759,7 +759,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
         vertical: 2,
       ),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: AppRadius.pill,
       ),
       child: Text(
@@ -783,9 +783,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       ),
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -802,7 +802,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 'الدفع',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const Spacer(),
@@ -842,14 +842,14 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade50,
+                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
                     borderRadius: AppRadius.pill,
                   ),
                   child: Text(
                     'لم يتم الدفع بعد',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -862,7 +862,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 'الإجمالي',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const Spacer(),
@@ -876,7 +876,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
           ),
           if (ticket.notes != null) ...[
             const SizedBox(height: AppSpacing.md),
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
             const SizedBox(height: AppSpacing.md),
             Align(
               alignment: AlignmentDirectional.centerStart,
@@ -884,7 +884,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 'ملاحظات',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -895,7 +895,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 ticket.notes!,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade700,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ),
@@ -919,9 +919,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       ),
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -935,19 +935,19 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
         children: [
           Text(
             'المواعيد',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           _buildTimingRow(
             icon: Icons.schedule_rounded,
-            iconColor: Colors.grey.shade400,
+            iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
             label: 'استلام القطع',
             value: _formatDateTime(ticket.droppedOffAt),
           ),
           const SizedBox(height: AppSpacing.sm),
           _buildTimingRow(
             icon: Icons.schedule_rounded,
-            iconColor: Colors.grey.shade400,
+            iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
             label: 'الموعد المتوقع',
             value: _formatShortDate(ticket.estimatedReadyAt),
             valueColor: isOverdue ? const Color(0xFFE53935) : null,
@@ -975,7 +975,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
             const SizedBox(height: AppSpacing.sm),
             _buildTimingRow(
               icon: Icons.local_shipping_rounded,
-              iconColor: Colors.grey.shade400,
+              iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
               label: 'تسليم العميل',
               value: _formatDateTime(ticket.pickedUpAt!),
             ),
@@ -999,14 +999,14 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
         const SizedBox(width: 6),
         Text(
           label,
-          style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+          style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
         const Spacer(),
         Text(
           '$value${suffix ?? ''}',
           style: TextStyle(
             fontSize: 11,
-            color: valueColor ?? Colors.grey.shade700,
+            color: valueColor ?? Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ],
@@ -1028,9 +1028,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
       ),
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -1047,14 +1047,14 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
               Icon(
                 Icons.history_rounded,
                 size: 10,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: 4),
               Text(
                 'سجل النشاط (${entries.length} إجراء)',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const Spacer(),
@@ -1110,8 +1110,8 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
         AppSpacing.lg,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: Colors.grey.shade100)),
+        color: context.colorScheme.surface,
+        border: Border(top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       child: SafeArea(
         top: false,
@@ -1127,7 +1127,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: AppRadius.cardInner,
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -1135,14 +1135,14 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                     Icon(
                       Icons.chat_bubble_outline_rounded,
                       size: 14,
-                      color: Colors.grey.shade700,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     const SizedBox(width: 6),
                     Text(
                       'محادثة',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade700,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ],
@@ -1166,13 +1166,13 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(buttonIcon, size: 14, color: Colors.white),
+                      Icon(buttonIcon, size: 14, color: Theme.of(context).colorScheme.surface),
                       const SizedBox(width: 6),
                       Text(
                         action.label,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                       ),
                     ],
@@ -1196,8 +1196,8 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
         AppSpacing.lg,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: Colors.grey.shade100)),
+        color: context.colorScheme.surface,
+        border: Border(top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       child: SafeArea(
         top: false,
@@ -1211,7 +1211,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
                     borderRadius: AppRadius.cardInner,
-                    border: Border.all(color: Colors.grey.shade200),
+                    border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1219,14 +1219,14 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                       Icon(
                         Icons.chat_bubble_outline_rounded,
                         size: 14,
-                        color: Colors.grey.shade700,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       const SizedBox(width: 6),
                       Text(
                         'محادثة',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey.shade700,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -1245,20 +1245,20 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                     color: AppColors.primary,
                     borderRadius: AppRadius.cardInner,
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.receipt_long_rounded,
                         size: 14,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                       SizedBox(width: 6),
                       Text(
                         'إرسال إيصال',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                       ),
                     ],

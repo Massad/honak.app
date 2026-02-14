@@ -6,6 +6,7 @@ import 'package:honak/features/requests/domain/entities/customer_request.dart';
 import 'package:honak/features/requests/presentation/widgets/edit_order_chrome.dart';
 import 'package:honak/features/requests/presentation/widgets/edit_order_sections.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Bottom sheet for editing an order before business accepts.
 class EditOrderSheet extends StatefulWidget {
@@ -97,8 +98,8 @@ class _EditOrderSheetState extends State<EditOrderSheet> {
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height * 0.9,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.background,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surfaceContainerLowest,
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(AppRadius.xxl)),
       ),
@@ -111,7 +112,7 @@ class _EditOrderSheetState extends State<EditOrderSheet> {
             businessName: widget.request.businessName,
             onClose: () => Navigator.pop(context),
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.colorScheme.outlineVariant),
           Flexible(
             child: ListView(
               padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
@@ -167,16 +168,16 @@ class _EditOrderSheetState extends State<EditOrderSheet> {
               decoration: InputDecoration(
                 hintText: 'أضف ملاحظة للمتجر...',
                 hintStyle: textTheme.bodySmall
-                    ?.copyWith(color: AppColors.textHint),
+                    ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                 filled: true,
-                fillColor: AppColors.surface,
+                fillColor: context.colorScheme.surface,
                 border: OutlineInputBorder(
                   borderRadius: AppRadius.cardInner,
-                  borderSide: const BorderSide(color: AppColors.divider),
+                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: AppRadius.cardInner,
-                  borderSide: const BorderSide(color: AppColors.divider),
+                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: AppRadius.cardInner,

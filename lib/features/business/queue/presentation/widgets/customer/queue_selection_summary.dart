@@ -21,9 +21,9 @@ class QueueSelectionSummary extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: context.colorScheme.outlineVariant),
       ),
       child: Column(
         children: [
@@ -33,14 +33,14 @@ class QueueSelectionSummary extends StatelessWidget {
               Text(
                 entry.packageName,
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 packagePrice.toFormattedArabic(),
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
             ],
@@ -57,13 +57,13 @@ class QueueSelectionSummary extends StatelessWidget {
                     Text(
                       '+ ${a.name}',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     Text(
                       Money(a.price).toFormattedArabic(),
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -77,7 +77,7 @@ class QueueSelectionSummary extends StatelessWidget {
                 Text(
                   'المجموع',
                   style: context.textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

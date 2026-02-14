@@ -22,7 +22,7 @@ class HistoryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         borderRadius: AppRadius.card,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: context.colorScheme.outlineVariant),
       ),
       child: Column(
         children: [
@@ -53,7 +53,7 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           _buildSummary(),
                           style: context.textTheme.bodySmall?.copyWith(
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                             fontSize: 11,
                           ),
                           overflow: TextOverflow.ellipsis,
@@ -65,7 +65,7 @@ class HistoryCard extends StatelessWidget {
                     Text(
                       request.total!.toFormattedArabic(),
                       style: context.textTheme.titleSmall?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                         fontSize: 13,
                       ),
                     ),
@@ -125,7 +125,7 @@ class _HistoryAvatar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.success,
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
+                border: Border.all(color: context.colorScheme.surface, width: 2),
               ),
               child: const Icon(Icons.check, size: 9, color: Colors.white),
             ),
@@ -144,7 +144,7 @@ class _HistoryActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.grey.shade50)),
+        border: Border(top: BorderSide(color: context.colorScheme.surfaceContainerLowest)),
       ),
       child: Row(
         children: [
@@ -171,7 +171,7 @@ class _HistoryActions extends StatelessWidget {
               ),
             ),
           ),
-          Container(width: 1, height: 20, color: Colors.grey.shade50),
+          Container(width: 1, height: 20, color: context.colorScheme.surfaceContainerLowest),
           Expanded(
             child: GestureDetector(
               onTap: () => context.showSnackBar(
@@ -183,12 +183,12 @@ class _HistoryActions extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.description_outlined,
-                        size: 12, color: AppColors.textSecondary),
+                        size: 12, color: context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.xs),
                     Text(
                       '\u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644',
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),

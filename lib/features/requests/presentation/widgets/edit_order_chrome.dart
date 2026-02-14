@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Drag handle for the edit-order bottom sheet.
 class EditOrderDragHandle extends StatelessWidget {
@@ -15,7 +16,7 @@ class EditOrderDragHandle extends StatelessWidget {
         width: 40,
         height: 4,
         decoration: BoxDecoration(
-          color: AppColors.divider,
+          color: context.colorScheme.outlineVariant,
           borderRadius: BorderRadius.circular(2),
         ),
       ),
@@ -58,7 +59,7 @@ class EditOrderHeader extends StatelessWidget {
                 Text(
                   businessName,
                   style: textTheme.labelSmall
-                      ?.copyWith(color: AppColors.textHint),
+                      ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                 ),
               ],
             ),
@@ -99,7 +100,7 @@ class EditOrderInfoNotice extends StatelessWidget {
               child: Text(
                 'تعديل الطلب يتطلب موافقة المتجر. سيتم إعلامك عند الرد.',
                 style: textTheme.labelSmall
-                    ?.copyWith(color: AppColors.textSecondary),
+                    ?.copyWith(color: context.colorScheme.onSurfaceVariant),
               ),
             ),
           ],
@@ -136,7 +137,7 @@ class EditOrderEmptyWarning extends StatelessWidget {
           Text(
             'أضف منتجات أو قم بإلغاء الطلب',
             style: textTheme.labelSmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
         ],
       ),
@@ -166,10 +167,10 @@ class EditOrderActions extends StatelessWidget {
         top: AppSpacing.md,
         bottom: AppSpacing.lg,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         border:
-            Border(top: BorderSide(color: AppColors.divider, width: 0.5)),
+            Border(top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
       ),
       child: SafeArea(
         top: false,
@@ -195,7 +196,7 @@ class EditOrderActions extends StatelessWidget {
                 label: const Text('إرسال طلب التعديل'),
                 style: FilledButton.styleFrom(
                   backgroundColor: AppColors.primary,
-                  disabledBackgroundColor: AppColors.divider,
+                  disabledBackgroundColor: context.colorScheme.outlineVariant,
                   padding:
                       const EdgeInsets.symmetric(vertical: AppSpacing.md),
                   shape: RoundedRectangleBorder(

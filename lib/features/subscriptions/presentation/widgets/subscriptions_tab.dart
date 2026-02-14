@@ -45,7 +45,7 @@ class SubscriptionsTab extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           _SectionHeader(
             icon: Icons.access_time,
-            iconColor: Colors.grey,
+            iconColor: context.colorScheme.onSurfaceVariant,
             iconSize: 14,
             label: 'منتهية',
             count: inactive.length,
@@ -78,7 +78,7 @@ class _SummaryBar extends StatelessWidget {
         const SizedBox(width: AppSpacing.sm),
         _StatChip(
           label: '$inactiveCount منتهية',
-          color: Colors.grey,
+          color: context.colorScheme.onSurfaceVariant,
         ),
       ],
     );
@@ -141,7 +141,7 @@ class _SectionHeader extends StatelessWidget {
         const SizedBox(width: AppSpacing.xs),
         Text(
           '($count)',
-          style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+          style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
         ),
       ],
     );
@@ -160,20 +160,20 @@ class _EmptyState extends StatelessWidget {
             Icon(
               Icons.card_membership_outlined,
               size: 56,
-              color: Colors.grey.shade200,
+              color: context.colorScheme.outlineVariant,
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
               'لا توجد اشتراكات',
               style: context.textTheme.bodyLarge?.copyWith(
-                color: Colors.grey.shade500,
+                color: context.colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
               'عند اشتراكك في باقات المتاجر ستظهر هنا',
-              style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
               textAlign: TextAlign.center,
             ),
           ],

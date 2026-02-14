@@ -23,7 +23,7 @@ class SubscriptionCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
           borderRadius: AppRadius.card,
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: context.colorScheme.outlineVariant),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.04),
@@ -82,7 +82,7 @@ class _CardHeader extends StatelessWidget {
                 Text(
                   subscription.packageName,
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                     fontSize: 11,
                   ),
                   overflow: TextOverflow.ellipsis,

@@ -55,6 +55,16 @@
         "role": "owner"
       },
       {
+        "id": "shmeisani-center",
+        "name": "مجمع الشميساني",
+        "slug": "shmeisani-center",
+        "avatar_url": "https://images.unsplash.com/photo-1567449303078-57ad995bd329?auto=format&fit=crop&w=200&q=80",
+        "business_type_name": "دليل مجمع",
+        "business_type_id": "directory",
+        "is_verified": true,
+        "role": "owner"
+      },
+      {
         "id": "alnajjar-tailor",
         "name": "خياط النجار",
         "slug": "alnajjar-tailor",

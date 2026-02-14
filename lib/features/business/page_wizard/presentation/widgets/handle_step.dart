@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -48,7 +49,7 @@ class _HandleStepState extends ConsumerState<HandleStep> {
           Text(
             'هذا هو الرابط الذي ستشاركه مع عملائك',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: AppSpacing.xxl),
@@ -62,7 +63,7 @@ class _HandleStepState extends ConsumerState<HandleStep> {
               decoration: InputDecoration(
                 prefixText: 'honak.app/@',
                 prefixStyle: TextStyle(
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                   fontSize: 15,
                 ),
                 hintText: 'اسم_المستخدم',
@@ -90,10 +91,10 @@ class _HandleStepState extends ConsumerState<HandleStep> {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   ),
                   SizedBox(width: AppSpacing.sm),
-                  Text(
+                  const Text(
                     'جارٍ التحقق...',
                     style: TextStyle(
-                      color: AppColors.textSecondary,
+                      color: Color(0xFF9CA3AF),
                       fontSize: 13,
                     ),
                   ),

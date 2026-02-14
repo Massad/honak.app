@@ -52,8 +52,8 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+        color: context.colorScheme.surface,
+        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       padding: const EdgeInsetsDirectional.fromSTEB(
         AppSpacing.lg,
@@ -97,10 +97,10 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
                         ),
                       ],
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.add,
                       size: 18,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 ),
@@ -207,7 +207,7 @@ class _StatChip extends StatelessWidget {
           Text(
             label,
             style: context.textTheme.labelSmall?.copyWith(
-              color: isActive ? Colors.white70 : Colors.grey.shade500,
+              color: isActive ? Colors.white70 : Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 10,
             ),
           ),
@@ -253,7 +253,7 @@ class _PauseToggleButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: isPaused
               ? const Color(0xFFFEF2F2)
-              : Colors.grey.shade100,
+              : Theme.of(context).colorScheme.surfaceContainerLow,
           borderRadius: AppRadius.pill,
         ),
         child: Row(
@@ -262,13 +262,13 @@ class _PauseToggleButton extends StatelessWidget {
             Icon(
               isPaused ? Icons.block_rounded : Icons.schedule_rounded,
               size: 12,
-              color: isPaused ? AppColors.error : Colors.grey.shade500,
+              color: isPaused ? AppColors.error : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: AppSpacing.xs),
             Text(
               isPaused ? 'الدور متوقف' : 'إيقاف الدور',
               style: context.textTheme.bodySmall?.copyWith(
-                color: isPaused ? AppColors.error : Colors.grey.shade500,
+                color: isPaused ? AppColors.error : Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 12,
               ),
             ),
@@ -453,7 +453,7 @@ class _QueueColumn extends StatelessWidget {
               child: Text(
                 emptyText,
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: Colors.grey.shade300,
+                  color: Theme.of(context).colorScheme.outline,
                   fontSize: 12,
                 ),
               ),
@@ -525,20 +525,20 @@ class _CompletedSection extends StatelessWidget {
                     ? Icons.keyboard_arrow_up_rounded
                     : Icons.keyboard_arrow_down_rounded,
                 size: 14,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 'مكتمل اليوم (${entries.length})',
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: Divider(
-                  color: Colors.grey.shade100,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   height: 1,
                 ),
               ),
@@ -556,7 +556,7 @@ class _CompletedSection extends StatelessWidget {
                 child: Text(
                   'لا توجد طلبات مكتملة اليوم',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.outline,
                     fontSize: 12,
                   ),
                 ),
@@ -601,9 +601,9 @@ class _RevenueSummary extends StatelessWidget {
     return Container(
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -621,7 +621,7 @@ class _RevenueSummary extends StatelessWidget {
               Text(
                 'ملخص اليوم',
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 12,
                 ),
               ),
@@ -651,7 +651,7 @@ class _RevenueSummary extends StatelessWidget {
                     Text(
                       'إجمالي السيارات',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),
@@ -673,7 +673,7 @@ class _RevenueSummary extends StatelessWidget {
                     Text(
                       'إيراد مكتمل (د.أ)',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),
@@ -695,7 +695,7 @@ class _RevenueSummary extends StatelessWidget {
                     Text(
                       'إيراد قادم (د.أ)',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
                       ),
                     ),

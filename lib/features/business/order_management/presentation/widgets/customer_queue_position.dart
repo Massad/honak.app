@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -92,10 +93,10 @@ class CustomerQueuePosition extends StatelessWidget {
                   color: AppColors.success,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.check,
                   size: 16,
-                  color: AppColors.white,
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -108,7 +109,7 @@ class CustomerQueuePosition extends StatelessWidget {
               'تم التسليم الساعة $deliveredAt'
               '${driverName != null ? ' بواسطة $driverName' : ''}',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
                 fontSize: 12,
               ),
               textAlign: TextAlign.end,
@@ -122,7 +123,7 @@ class CustomerQueuePosition extends StatelessWidget {
               '$deliveredQty قارورة تم تسليمها'
               '${emptiesCollected != null ? ' · $emptiesCollected فارغة تم جمعها' : ''}',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
                 fontSize: 10,
               ),
               textAlign: TextAlign.end,
@@ -179,7 +180,7 @@ class CustomerQueuePosition extends StatelessWidget {
             Text(
               skipReason!,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
                 fontSize: 12,
               ),
               textAlign: TextAlign.end,
@@ -203,7 +204,7 @@ class CustomerQueuePosition extends StatelessWidget {
 
   // ── Active status config ───────────────────────────────────
 
-  _StatusConfig _configForStatus() {
+  _StatusConfig _configForStatus(BuildContext context) {
     return switch (status) {
       DeliveryTrackingStatus.queued => _StatusConfig(
           bg: const Color(0xFFF5F5F5),
@@ -213,8 +214,8 @@ class CustomerQueuePosition extends StatelessWidget {
           desc: estimatedMinutes != null
               ? 'المتوقع: $estimatedMinutes — ${estimatedMinutes! + 20} دقيقة'
               : 'سيتم التوصيل اليوم',
-          labelColor: const Color(0xFF616161),
-          descColor: AppColors.textSecondary,
+          labelColor: Color(0xFF616161),
+          descColor: context.colorScheme.onSurfaceVariant,
           icon: Icons.local_shipping_outlined,
         ),
       DeliveryTrackingStatus.onRoute => _StatusConfig(
@@ -226,7 +227,7 @@ class CustomerQueuePosition extends StatelessWidget {
               ? 'المتوقع: $estimatedMinutes — ${estimatedMinutes! + 15} دقيقة'
               : 'السائق يقترب',
           labelColor: AppColors.primary,
-          descColor: AppColors.textSecondary,
+          descColor: context.colorScheme.onSurfaceVariant,
           icon: Icons.local_shipping_outlined,
         ),
       DeliveryTrackingStatus.next => _StatusConfig(
@@ -246,7 +247,7 @@ class CustomerQueuePosition extends StatelessWidget {
   // ── Compact variant (for LiveOrderCard) ────────────────────
 
   Widget _buildCompact(BuildContext context) {
-    final c = _configForStatus();
+    final c = _configForStatus(context);
 
     return Container(
       padding: const EdgeInsetsDirectional.symmetric(
@@ -312,7 +313,7 @@ class CustomerQueuePosition extends StatelessWidget {
   // ── Full variant (for RequestDetail) ───────────────────────
 
   Widget _buildFull(BuildContext context) {
-    final c = _configForStatus();
+    final c = _configForStatus(context);
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -461,7 +462,7 @@ class CustomerQueuePosition extends StatelessWidget {
                   Text(
                     'السائق: $driverName',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                       fontSize: 12,
                     ),
                   ),
@@ -469,7 +470,7 @@ class CustomerQueuePosition extends StatelessWidget {
                   Icon(
                     Icons.local_shipping_outlined,
                     size: 11,
-                    color: AppColors.textHint,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -482,7 +483,7 @@ class CustomerQueuePosition extends StatelessWidget {
             Text(
               truckName!,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textHint,
+                color: context.colorScheme.onSurfaceVariant,
                 fontSize: 10,
               ),
               textAlign: TextAlign.center,
@@ -525,7 +526,7 @@ class _CallButton extends StatelessWidget {
               Text(
                 'اتصال',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   fontSize: 10,
                 ),
               ),

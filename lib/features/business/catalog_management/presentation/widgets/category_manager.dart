@@ -84,6 +84,21 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
 
   void _notifyChanged() => widget.onChanged(_categories);
 
+  // ── Reorder ────────────────────────────────────────────────────────────
+
+  void _moveCategory(int index, int direction) {
+    final newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= _categories.length) return;
+    setState(() {
+      final cat = _categories.removeAt(index);
+      _categories.insert(newIndex, cat);
+      for (int i = 0; i < _categories.length; i++) {
+        _categories[i] = _categories[i].copyWith(sortOrder: i);
+      }
+    });
+    _notifyChanged();
+  }
+
   // ── Add ──────────────────────────────────────────────────────────────────
 
   void _confirmAdd() {
@@ -178,7 +193,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                 Text(
                   'يوجد ${cat.itemCount} ${widget.itemLabelAr} في هذا التصنيف. اختر تصنيفاً لنقلهم إليه:',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -201,7 +216,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                 Text(
                   'هذا التصنيف فارغ ويمكن حذفه مباشرة.',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               const SizedBox(height: AppSpacing.lg),
@@ -214,7 +229,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                         shape: RoundedRectangleBorder(borderRadius: AppRadius.cardInner),
-                        side: BorderSide(color: Colors.grey.shade200),
+                        side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                       ),
                       child: const Text('إلغاء'),
                     ),
@@ -256,7 +271,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+
       appBar: AppBar(
         title: const Text('إدارة التصنيفات'),
         centerTitle: true,
@@ -279,13 +294,16 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                 onConfirm: _confirmAdd,
                 onCancel: _cancelAdd,
               ),
-            if (_categories.isNotEmpty)
-              ..._categories.map((cat) {
+            for (var index = 0; index < _categories.length; index++) ...[
+              Builder(builder: (context) {
+                final cat = _categories[index];
                 final isEditing = _editingId == cat.id;
                 return Padding(
                   padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                   child: _CategoryCard(
                     category: cat,
+                    index: index,
+                    totalCount: _categories.length,
                     itemLabelAr: widget.itemLabelAr,
                     isEditing: isEditing,
                     editController: isEditing ? _editController : null,
@@ -293,9 +311,16 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                     onConfirmEdit: _confirmEdit,
                     onCancelEdit: _cancelEdit,
                     onDelete: () => _showDeleteSheet(cat),
+                    onMoveUp: index > 0
+                        ? () => _moveCategory(index, -1)
+                        : null,
+                    onMoveDown: index < _categories.length - 1
+                        ? () => _moveCategory(index, 1)
+                        : null,
                   ),
                 );
               }),
+            ],
             if (_categories.isEmpty && !_addMode)
               _EmptyState(onAdd: () => setState(() => _addMode = true)),
           ],

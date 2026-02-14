@@ -33,7 +33,7 @@ class _PackagesManagerState extends ConsumerState<PackagesManager> {
             error: (_, __) => Center(
               child: Text(
                 'تعذر تحميل الباقات',
-                style: TextStyle(color: Colors.grey.shade400),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ),
           ),
@@ -155,12 +155,12 @@ class _PackageCard extends StatelessWidget {
       margin: const EdgeInsetsDirectional.only(bottom: 10),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: pkg.active ? Colors.white : Colors.grey.shade50,
+        color: pkg.active ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: pkg.active
               ? AppColors.primary.withValues(alpha: 0.15)
-              : Colors.grey.shade100,
+              : Theme.of(context).colorScheme.surfaceContainerLow,
         ),
       ),
       child: Column(
@@ -189,7 +189,7 @@ class _PackageCard extends StatelessWidget {
               child: Text(
                 pkg.description,
                 style:
-                    TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                    TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 textAlign: TextAlign.right,
               ),
             ),
@@ -373,7 +373,7 @@ class _PackageEditorSheetState extends State<_PackageEditorSheet> {
               bottom: AppSpacing.lg,
             ),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -478,7 +478,7 @@ class _PackageEditorSheetState extends State<_PackageEditorSheet> {
                   onPressed: _save,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -526,7 +526,7 @@ class _FieldLabel extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
-            color: Colors.grey.shade700,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ),
@@ -558,11 +558,11 @@ class _StyledTextField extends StatelessWidget {
       textAlign: TextAlign.end,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+        hintStyle: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
         prefixText: suffix,
         prefixStyle: TextStyle(
           fontSize: 12,
-          color: Colors.grey.shade500,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w500,
         ),
         isDense: true,
@@ -572,11 +572,11 @@ class _StyledTextField extends StatelessWidget {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -604,7 +604,7 @@ class _CounterField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -668,12 +668,12 @@ class _RadioOption extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected
               ? AppColors.primary.withValues(alpha: 0.05)
-              : Colors.white,
+              : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: selected
                 ? AppColors.primary.withValues(alpha: 0.3)
-                : Colors.grey.shade200,
+                : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -683,7 +683,7 @@ class _RadioOption extends StatelessWidget {
                   ? Icons.radio_button_checked
                   : Icons.radio_button_off,
               size: 18,
-              color: selected ? AppColors.primary : Colors.grey.shade400,
+              color: selected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const Spacer(),
             Column(
@@ -694,14 +694,14 @@ class _RadioOption extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: selected ? AppColors.primary : Colors.grey.shade700,
+                    color: selected ? AppColors.primary : Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   desc,
                   style: TextStyle(
-                      fontSize: 10, color: Colors.grey.shade500),
+                      fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
               ],
             ),

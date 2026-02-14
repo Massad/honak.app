@@ -129,7 +129,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
               bottom: AppSpacing.lg,
             ),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -200,7 +200,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade700,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -271,7 +271,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppColors.primary
-                          : Colors.grey.shade100,
+                          : Theme.of(context).colorScheme.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -279,7 +279,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
-                        color: isSelected ? Colors.white : Colors.grey.shade600,
+                        color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -296,7 +296,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey.shade600,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
@@ -315,7 +315,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppColors.primary
-                          : Colors.grey.shade100,
+                          : Theme.of(context).colorScheme.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -323,7 +323,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
-                        color: isSelected ? Colors.white : Colors.grey.shade600,
+                        color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -377,7 +377,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
+                foregroundColor: Theme.of(context).colorScheme.surface,
                 padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),

@@ -46,7 +46,7 @@ class BranchManager extends ConsumerWidget {
             error: (_, __) => Center(
               child: Text(
                 'تعذر تحميل الفروع',
-                style: TextStyle(color: Colors.grey.shade400),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ),
           ),
@@ -101,9 +101,9 @@ class _BranchListState extends ConsumerState<_BranchList> {
               Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: Colors.grey.shade100),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -119,14 +119,14 @@ class _BranchListState extends ConsumerState<_BranchList> {
                         ),
                         const SizedBox(width: AppSpacing.xs),
                         Icon(Icons.access_time,
-                            size: 16, color: Colors.grey.shade500),
+                            size: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
                     // Toggle bar
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(
@@ -159,7 +159,7 @@ class _BranchListState extends ConsumerState<_BranchList> {
                           hintText: 'مثال: 9:00 ص - 9:00 م',
                           hintStyle: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           isDense: true,
                           contentPadding: const EdgeInsets.symmetric(
@@ -169,12 +169,12 @@ class _BranchListState extends ConsumerState<_BranchList> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide:
-                                BorderSide(color: Colors.grey.shade200),
+                                BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide:
-                                BorderSide(color: Colors.grey.shade200),
+                                BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                           ),
                         ),
                       ),
@@ -250,9 +250,9 @@ class _BranchListState extends ConsumerState<_BranchList> {
             top: AppSpacing.md,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             border: Border(
-              top: BorderSide(color: Colors.grey.shade100),
+              top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
           ),
           child: SizedBox(
@@ -261,7 +261,7 @@ class _BranchListState extends ConsumerState<_BranchList> {
               onPressed: _save,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
+                foregroundColor: Theme.of(context).colorScheme.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -315,7 +315,7 @@ class _ToggleOption extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
-              color: selected ? AppColors.primary : Colors.grey.shade500,
+              color: selected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ),

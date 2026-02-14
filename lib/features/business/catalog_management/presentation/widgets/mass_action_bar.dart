@@ -53,8 +53,8 @@ class MassActionBar extends StatelessWidget {
       _ActionItem(
         label: 'إخفاء',
         icon: Icons.visibility_off_outlined,
-        bgColor: Colors.grey.shade100,
-        iconColor: Colors.grey.shade600,
+        bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
+        iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
         onTap: () => onStatusChange('hidden'),
       ),
       _ActionItem(
@@ -108,7 +108,7 @@ class MassActionBar extends StatelessWidget {
               height: 4,
               margin: const EdgeInsets.only(bottom: AppSpacing.lg),
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: Theme.of(context).colorScheme.outline,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -126,10 +126,10 @@ class MassActionBar extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '$selectedCount',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ),
                   ),
@@ -150,13 +150,13 @@ class MassActionBar extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
+                      color: Theme.of(context).colorScheme.surfaceContainerLow,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.close,
                       size: 18,
-                      color: Colors.grey.shade600,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -307,7 +307,7 @@ class _MassDiscountContentState extends State<_MassDiscountContent> {
                     height: 4,
                     margin: const EdgeInsets.only(bottom: AppSpacing.lg),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
+                      color: Theme.of(context).colorScheme.outline,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -349,8 +349,8 @@ class _MassDiscountContentState extends State<_MassDiscountContent> {
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange.shade700,
-                      foregroundColor: Colors.white,
-                      disabledBackgroundColor: Colors.grey.shade200,
+                      foregroundColor: Theme.of(context).colorScheme.surface,
+                      disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
                       padding: const EdgeInsets.symmetric(
                           vertical: AppSpacing.md),
                       shape: RoundedRectangleBorder(

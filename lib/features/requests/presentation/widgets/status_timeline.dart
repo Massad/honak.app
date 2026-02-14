@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/customer_request.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Vertical timeline stepper showing request status progression.
 class StatusTimeline extends StatelessWidget {
@@ -24,7 +25,7 @@ class StatusTimeline extends StatelessWidget {
         Text(
           'حالة الطلب',
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
         ),
         const SizedBox(height: AppSpacing.lg),
@@ -52,7 +53,7 @@ class _TimelineStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = _stepConfig(event);
+    final config = _stepConfig(context, event);
 
     return IntrinsicHeight(
       child: Row(
@@ -84,7 +85,7 @@ class _TimelineStep extends StatelessWidget {
                           const EdgeInsets.symmetric(vertical: AppSpacing.xxs),
                       color: config.isDone
                           ? AppColors.success.withValues(alpha: 0.3)
-                          : AppColors.divider,
+                          : Theme.of(context).colorScheme.outlineVariant,
                     ),
                   ),
               ],
@@ -122,7 +123,7 @@ class _TimelineStep extends StatelessWidget {
                     Text(
                       _formatTimestamp(event.timestamp),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: AppColors.textHint,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                     ),
                   ],
@@ -131,7 +132,7 @@ class _TimelineStep extends StatelessWidget {
                     Text(
                       event.detail!,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: AppColors.textSecondary,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                     ),
                   ],
@@ -144,7 +145,8 @@ class _TimelineStep extends StatelessWidget {
     );
   }
 
-  _StepConfig _stepConfig(TimelineEvent event) {
+  _StepConfig _stepConfig(BuildContext context, TimelineEvent event) {
+    final cs = Theme.of(context).colorScheme;
     switch (event.status) {
       case 'cancelled_by_customer' || 'cancelled_by_business':
         return _StepConfig(
@@ -190,15 +192,15 @@ class _TimelineStep extends StatelessWidget {
             icon: Icons.check_circle_outline,
             iconColor: AppColors.success,
             bgColor: AppColors.success.withValues(alpha: 0.1),
-            labelColor: AppColors.textPrimary,
+            labelColor: cs.onSurface,
             isDone: true,
           );
         }
         return _StepConfig(
           icon: Icons.circle_outlined,
-          iconColor: AppColors.textHint,
-          bgColor: AppColors.surfaceVariant,
-          labelColor: AppColors.textHint,
+          iconColor: cs.onSurfaceVariant,
+          bgColor: cs.surfaceContainerLow,
+          labelColor: cs.onSurfaceVariant,
           isDone: false,
         );
     }

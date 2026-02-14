@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/late_cancel_sheet.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Bottom sheet confirming cancellation.
 ///
@@ -61,8 +62,8 @@ class _SimpleCancelSheet extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(AppRadius.xxl)),
       ),
@@ -85,14 +86,14 @@ class _SimpleCancelSheet extends StatelessWidget {
             Text(
               '\u0625\u0644\u063a\u0627\u0621 \u0627\u0644\u0637\u0644\u0628',
               style: textTheme.titleSmall?.copyWith(
-                color: AppColors.textPrimary,
+                color: context.colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
               '\u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u0625\u0644\u063a\u0627\u0621 \u0647\u0630\u0627 \u0627\u0644\u0637\u0644\u0628\u061f',
               style: textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
               textAlign: TextAlign.center,
             ),

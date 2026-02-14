@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/customer_questions_section.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Details step: guest count, occasion (venues), notes.
 class ReservationDetailsStep extends StatelessWidget {
@@ -52,7 +53,7 @@ class ReservationDetailsStep extends StatelessWidget {
         Text(
           'عدد الضيوف',
           style: theme.textTheme.labelSmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         Row(
@@ -73,11 +74,11 @@ class ReservationDetailsStep extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: selected
                           ? AppColors.primary
-                          : AppColors.surfaceVariant,
+                          : context.colorScheme.surfaceContainerLow,
                       borderRadius: AppRadius.cardInner,
                       border: Border.all(
                         color:
-                            selected ? AppColors.primary : AppColors.divider,
+                            selected ? AppColors.primary : context.colorScheme.outlineVariant,
                       ),
                     ),
                     alignment: Alignment.center,
@@ -86,7 +87,7 @@ class ReservationDetailsStep extends StatelessWidget {
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: selected
                             ? Colors.white
-                            : AppColors.textSecondary,
+                            : context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -108,16 +109,16 @@ class ReservationDetailsStep extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'أدخل عدد آخر...',
             hintStyle: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
             filled: true,
-            fillColor: AppColors.surfaceVariant,
+            fillColor: context.colorScheme.surfaceContainerLow,
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
@@ -141,7 +142,7 @@ class ReservationDetailsStep extends StatelessWidget {
           Text(
             'نوع المناسبة',
             style: theme.textTheme.labelSmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           Wrap(
@@ -161,11 +162,11 @@ class ReservationDetailsStep extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: selected
                         ? AppColors.primary
-                        : AppColors.surfaceVariant,
+                        : context.colorScheme.surfaceContainerLow,
                     borderRadius: AppRadius.cardInner,
                     border: Border.all(
                       color:
-                          selected ? AppColors.primary : AppColors.divider,
+                          selected ? AppColors.primary : context.colorScheme.outlineVariant,
                     ),
                   ),
                   child: Text(
@@ -174,7 +175,7 @@ class ReservationDetailsStep extends StatelessWidget {
                       fontSize: 10,
                       color: selected
                           ? Colors.white
-                          : AppColors.textSecondary,
+                          : context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -187,7 +188,7 @@ class ReservationDetailsStep extends StatelessWidget {
         Text(
           'ملاحظات (اختياري)',
           style: theme.textTheme.labelSmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         TextFormField(
@@ -197,16 +198,16 @@ class ReservationDetailsStep extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'أي طلبات خاصة أو استفسارات...',
             hintStyle: theme.textTheme.labelSmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
             filled: true,
-            fillColor: AppColors.surfaceVariant,
+            fillColor: context.colorScheme.surfaceContainerLow,
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
@@ -254,7 +255,7 @@ class ReservationQuestionsStep extends StatelessWidget {
         Text(
           'ساعدنا نجهّز لك أفضل تجربة بالإجابة على هذه الأسئلة',
           style: theme.textTheme.labelSmall
-              ?.copyWith(color: AppColors.textHint),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.lg),
         CustomerQuestionsSection(

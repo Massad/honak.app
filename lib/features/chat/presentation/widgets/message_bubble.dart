@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -21,6 +22,7 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
     final time = DateTime.fromMillisecondsSinceEpoch(message.createdAt * 1000);
     final timeStr =
         '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
@@ -52,7 +54,7 @@ class MessageBubble extends StatelessWidget {
                 ? (isMine
                     ? AppColors.primary.withValues(alpha: 0.8)
                     : AppColors.primary.withValues(alpha: 0.08))
-                : (isMine ? AppColors.primary : AppColors.white),
+                : (isMine ? AppColors.primary : cs.surface),
             borderRadius: BorderRadiusDirectional.only(
               topStart: const Radius.circular(16),
               topEnd: const Radius.circular(16),
@@ -79,7 +81,7 @@ class MessageBubble extends StatelessWidget {
                 content,
                 style: TextStyle(
                   fontSize: 14,
-                  color: isMine ? Colors.white : AppColors.textPrimary,
+                  color: isMine ? Colors.white : cs.onSurface,
                   height: 1.4,
                 ),
               ),
@@ -93,7 +95,7 @@ class MessageBubble extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10,
                         fontStyle: FontStyle.italic,
-                        color: isMine ? Colors.white60 : AppColors.textHint,
+                        color: isMine ? Colors.white60 : cs.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(width: 4),
@@ -102,7 +104,7 @@ class MessageBubble extends StatelessWidget {
                     timeStr,
                     style: TextStyle(
                       fontSize: 10,
-                      color: isMine ? Colors.white70 : AppColors.textHint,
+                      color: isMine ? Colors.white70 : cs.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -123,6 +125,7 @@ class DeletedBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
     return Align(
       alignment: isMine
           ? AlignmentDirectional.centerEnd
@@ -139,15 +142,15 @@ class DeletedBubble extends StatelessWidget {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
+          color: cs.surfaceContainerLow,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Text(
+        child: Text(
           'تم حذف هذه الرسالة',
           style: TextStyle(
             fontSize: 13,
             fontStyle: FontStyle.italic,
-            color: AppColors.textHint,
+            color: cs.onSurfaceVariant,
           ),
         ),
       ),

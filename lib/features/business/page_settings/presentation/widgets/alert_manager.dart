@@ -57,15 +57,15 @@ class _AlertBody extends ConsumerWidget {
             padding: const EdgeInsets.all(AppSpacing.xxl),
             child: Column(children: [
               Icon(Icons.notifications_none,
-                  size: 48, color: Colors.grey.shade300),
+                  size: 48, color: Theme.of(context).colorScheme.outline),
               const SizedBox(height: AppSpacing.md),
               Text('لا توجد تنبيهات',
                   style: TextStyle(
-                      fontSize: 14, color: Colors.grey.shade500)),
+                      fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant)),
               const SizedBox(height: 4),
               Text('أضف تنبيهات لإبلاغ المتابعين بالمستجدات',
                   style: TextStyle(
-                      fontSize: 11, color: Colors.grey.shade400)),
+                      fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
             ]),
           ),
         const SizedBox(height: AppSpacing.lg),
@@ -87,7 +87,7 @@ class _AlertBody extends ConsumerWidget {
               borderRadius: BorderRadius.circular(6)),
           child: Text('$count',
               style: TextStyle(
-                  fontSize: 10, color: Colors.grey.shade600)),
+                  fontSize: 10, color: Colors.grey.shade500)),
         ),
         const Spacer(),
         Text(title,
@@ -161,20 +161,20 @@ class _AlertBody extends ConsumerWidget {
                                 color: severity == s
                                     ? _severityColor(s)
                                         .withValues(alpha: 0.1)
-                                    : Colors.grey.shade50,
+                                    : Theme.of(context).colorScheme.surfaceContainerLowest,
                                 borderRadius:
                                     BorderRadius.circular(6),
                                 border: Border.all(
                                     color: severity == s
                                         ? _severityColor(s)
-                                        : Colors.grey.shade200),
+                                        : Theme.of(context).colorScheme.outlineVariant),
                               ),
                               child: Text(_severityLabel(s),
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: severity == s
                                           ? _severityColor(s)
-                                          : Colors.grey.shade600,
+                                          : Theme.of(context).colorScheme.onSurfaceVariant,
                                       fontWeight: severity == s
                                           ? FontWeight.w500
                                           : FontWeight.normal)),
@@ -185,7 +185,7 @@ class _AlertBody extends ConsumerWidget {
                       Text('الأهمية',
                           style: TextStyle(
                               fontSize: 12,
-                              color: Colors.grey.shade600)),
+                              color: Theme.of(context).colorScheme.onSurfaceVariant)),
                     ]),
                 const SizedBox(height: AppSpacing.md),
                 GestureDetector(
@@ -201,14 +201,14 @@ class _AlertBody extends ConsumerWidget {
                                   : 'بدون انتهاء',
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.grey.shade600)),
+                                  color: Theme.of(context).colorScheme.onSurfaceVariant)),
                           const SizedBox(width: 4),
                           Icon(
                               hasExpiry
                                   ? Icons.event
                                   : Icons.all_inclusive,
                               size: 16,
-                              color: Colors.grey.shade400),
+                              color: Theme.of(context).colorScheme.onSurfaceVariant),
                         ]),
                   ),
                 ),
@@ -237,7 +237,7 @@ class _AlertBody extends ConsumerWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
+                      foregroundColor: Theme.of(context).colorScheme.surface,
                       padding:
                           const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
@@ -284,7 +284,7 @@ class _AlertCard extends ConsumerWidget {
       margin: const EdgeInsetsDirectional.only(bottom: 10),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: alert.active ? Colors.white : Colors.grey.shade50,
+        color: alert.active ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
             color: _severityColor(alert.severity)
@@ -317,7 +317,7 @@ class _AlertCard extends ConsumerWidget {
         // Body text
         Text(alert.body,
             style:
-                TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
             textAlign: TextAlign.right),
         const SizedBox(height: 8),
 
@@ -331,7 +331,7 @@ class _AlertCard extends ConsumerWidget {
               for (final area in alert.targetAreas)
                 AppBadge.small(
                   label: area,
-                  color: Colors.grey.shade600,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   icon: Icons.location_on_outlined,
                 ),
             ],
@@ -344,17 +344,17 @@ class _AlertCard extends ConsumerWidget {
           // Creation date
           Text('أُنشئ: ${_fmtDate(alert.createdAt)}',
               style: TextStyle(
-                  fontSize: 9, color: Colors.grey.shade400)),
+                  fontSize: 9, color: Theme.of(context).colorScheme.onSurfaceVariant)),
           const Spacer(),
 
           // View count
           Row(mainAxisSize: MainAxisSize.min, children: [
             Text('${alert.views}',
                 style: TextStyle(
-                    fontSize: 10, color: Colors.grey.shade500)),
+                    fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant)),
             const SizedBox(width: 3),
             Icon(Icons.visibility_outlined,
-                size: 13, color: Colors.grey.shade400),
+                size: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ]),
 
           // Countdown timer for active alerts with expiry
@@ -368,7 +368,7 @@ class _AlertCard extends ConsumerWidget {
             const SizedBox(width: AppSpacing.md),
             Text('انتهى: ${_fmtDate(alert.expiresAt!)}',
                 style: TextStyle(
-                    fontSize: 9, color: Colors.grey.shade400)),
+                    fontSize: 9, color: Theme.of(context).colorScheme.onSurfaceVariant)),
           ],
         ]),
 
@@ -427,7 +427,7 @@ class _CountdownBadge extends StatelessWidget {
     if (remaining <= 0) {
       return AppBadge.small(
         label: 'منتهي',
-        color: Colors.grey,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
         icon: Icons.timer_off_outlined,
       );
     }
@@ -456,7 +456,7 @@ Color _severityColor(String s) => switch (s) {
       'info' => Colors.blue,
       'warning' => Colors.orange,
       'urgent' => Colors.red,
-      _ => Colors.grey,
+      _ => Colors.grey.shade500,
     };
 
 String _severityLabel(String s) => switch (s) {

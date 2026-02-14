@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -42,19 +43,19 @@ class CatalogSearchBar extends StatelessWidget {
                 hintText: hintText ?? 'بحث...',
                 hintStyle: TextStyle(
                   fontSize: 13,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 prefixIcon: Icon(
                   Icons.search,
                   size: 20,
-                  color: Colors.grey.shade400,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 suffixIcon: (query != null && query!.isNotEmpty)
                     ? IconButton(
                         icon: Icon(
                           Icons.close,
                           size: 18,
-                          color: Colors.grey.shade400,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         onPressed: () => onChanged(''),
                       )
@@ -65,7 +66,7 @@ class CatalogSearchBar extends StatelessWidget {
                   vertical: AppSpacing.sm,
                 ),
                 filled: true,
-                fillColor: Colors.grey.shade50,
+                fillColor: context.colorScheme.surfaceContainerLowest,
                 border: OutlineInputBorder(
                   borderRadius: AppRadius.button,
                   borderSide: BorderSide.none,
@@ -117,10 +118,10 @@ class _FilterButton extends StatelessWidget {
           onPressed: onTap,
           icon: Icon(
             Icons.tune,
-            color: Colors.grey.shade500,
+            color: context.colorScheme.onSurfaceVariant,
           ),
           style: IconButton.styleFrom(
-            backgroundColor: Colors.grey.shade50,
+            backgroundColor: context.colorScheme.surfaceContainerLowest,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppRadius.md),
               side: BorderSide.none,

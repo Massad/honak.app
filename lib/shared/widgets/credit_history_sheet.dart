@@ -85,7 +85,7 @@ class CreditHistorySheet extends StatelessWidget {
           width: 36,
           height: 4,
           decoration: BoxDecoration(
-            color: Colors.grey.shade300,
+            color: context.colorScheme.outline,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -99,7 +99,7 @@ class CreditHistorySheet extends StatelessWidget {
           onClose: () => Navigator.of(context).pop(),
         ),
 
-        Divider(height: 1, color: Colors.grey.shade100),
+        Divider(height: 1, color: context.colorScheme.outlineVariant),
 
         // Content
         Flexible(
@@ -144,7 +144,7 @@ class CreditHistorySheet extends StatelessWidget {
           Icon(
             Icons.receipt_long_outlined,
             size: 40,
-            color: Colors.grey.shade200,
+            color: context.colorScheme.outlineVariant,
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
@@ -152,7 +152,7 @@ class CreditHistorySheet extends StatelessWidget {
             '\u0644\u0627 \u064a\u0648\u062c\u062f \u0633\u062c\u0644 \u0628\u0639\u062f',
             style: TextStyle(
               fontSize: 13,
-              color: Colors.grey.shade400,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -238,13 +238,13 @@ class _Header extends StatelessWidget {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: context.colorScheme.surfaceContainerLow,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.close,
                     size: 18,
-                    color: Colors.grey.shade600,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -269,7 +269,7 @@ class _Header extends StatelessWidget {
               _formatDateRange(),
               style: TextStyle(
                 fontSize: 10,
-                color: Colors.grey.shade400,
+                color: context.colorScheme.onSurfaceVariant,
               ),
               textAlign: TextAlign.center,
             ),
@@ -357,7 +357,7 @@ class _MonthHeader extends StatelessWidget {
         label,
         style: TextStyle(
           fontSize: 11,
-          color: Colors.grey.shade400,
+          color: context.colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -381,7 +381,7 @@ class _EntryRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: Colors.grey.shade50),
+          bottom: BorderSide(color: context.colorScheme.surfaceContainerLowest),
         ),
       ),
       child: Row(
@@ -404,7 +404,7 @@ class _EntryRow extends StatelessWidget {
                   DateFormat('d MMMM', 'ar').format(entry.date),
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.grey.shade400,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],

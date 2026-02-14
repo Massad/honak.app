@@ -1,0 +1,148 @@
+{
+  "success": true,
+  "data": {
+    "tenants": [
+      {
+        "id": "sc-1",
+        "name": "شاورما الشام",
+        "name_en": "Sham Shawarma",
+        "category": "طعام",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "page_id": "sham-shawarma",
+        "logo_url": "https://picsum.photos/seed/shamshawarma/100",
+        "linked_at": "2025-10-01T10:00:00Z",
+        "tags": ["شاورما", "مطعم"]
+      },
+      {
+        "id": "sc-2",
+        "name": "كنافة حبيبة",
+        "name_en": "Habibah Knafeh",
+        "category": "طعام",
+        "floor_id": "ground",
+        "unit": "G-02",
+        "is_open": true,
+        "page_id": "habibah-knafeh",
+        "logo_url": "https://picsum.photos/seed/habibahknafeh/100",
+        "linked_at": "2025-10-05T10:00:00Z",
+        "tags": ["حلويات"]
+      },
+      {
+        "id": "sc-3",
+        "name": "صيدلية الحياة",
+        "name_en": "Hayat Pharmacy",
+        "category": "صحة",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "page_id": "hayat-pharmacy",
+        "logo_url": "https://picsum.photos/seed/hayatpharmacy/100",
+        "linked_at": "2025-10-10T10:00:00Z",
+        "tags": ["صيدلية"]
+      },
+      {
+        "id": "sc-4",
+        "name": "سوبرماركت فريش",
+        "name_en": "Fresh Supermarket",
+        "category": "بقالة",
+        "floor_id": "ground",
+        "unit": "G-04",
+        "is_open": true,
+        "page_id": "fresh-supermarket",
+        "logo_url": "https://picsum.photos/seed/freshsuper/100",
+        "linked_at": "2025-11-01T10:00:00Z",
+        "tags": ["بقالة", "سوبرماركت"]
+      },
+      {
+        "id": "sc-5",
+        "name": "مكتبة الأمل",
+        "name_en": "Al-Amal Bookstore",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "page_id": "alamal-bookstore",
+        "logo_url": "https://picsum.photos/seed/alamalbookstore/100",
+        "linked_at": "2025-11-15T10:00:00Z",
+        "tags": ["مكتبة"]
+      },
+      {
+        "id": "sc-6",
+        "name": "عيادة د. خالد",
+        "name_en": "Dr. Khaled Clinic",
+        "category": "صحة",
+        "floor_id": "f1",
+        "unit": "105",
+        "is_open": true,
+        "page_id": "dr-khaled-clinic",
+        "logo_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=100&q=80",
+        "linked_at": "2025-10-01T10:00:00Z",
+        "tags": ["طب", "عيادة"]
+      },
+      {
+        "id": "sc-7",
+        "name": "عيادة أسنان الابتسامة",
+        "name_en": "Smile Dental",
+        "category": "صحة",
+        "floor_id": "f1",
+        "unit": "106",
+        "is_open": true,
+        "invited_at": "2026-02-01T10:00:00Z",
+        "logo_url": "https://picsum.photos/seed/smiledental/100",
+        "tags": ["أسنان"]
+      },
+      {
+        "id": "sc-8",
+        "name": "مكتب محاماة الحق",
+        "name_en": "Al-Haq Law Office",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "107",
+        "is_open": true,
+        "page_id": "alhaq-law",
+        "logo_url": "https://picsum.photos/seed/alhaqlaw/100",
+        "linked_at": "2025-12-01T10:00:00Z",
+        "tags": ["محاماة"]
+      },
+      {
+        "id": "sc-9",
+        "name": "مختبر الشميساني",
+        "name_en": "Shmeisani Lab",
+        "category": "صحة",
+        "floor_id": "f1",
+        "unit": "108",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/shmeisanilab/100",
+        "tags": ["مختبر"]
+      },
+      {
+        "id": "sc-10",
+        "name": "صالون ليلى",
+        "name_en": "Layla Salon",
+        "category": "تجميل",
+        "floor_id": "f1",
+        "unit": "110",
+        "is_open": true,
+        "page_id": "layla-salon",
+        "logo_url": "https://picsum.photos/seed/laylasalon/100",
+        "linked_at": "2025-12-15T10:00:00Z",
+        "tags": ["صالون", "تجميل"]
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "مطاعم وخدمات", "tenant_count": 5},
+      {"id": "f1", "name": "الطابق ١", "label": "عيادات ومكاتب", "tenant_count": 5}
+    ],
+    "categories": ["طعام", "صحة", "خدمات", "بقالة", "تجميل"],
+    "amenities": ["مواقف", "مصعد", "مصلى قريب"],
+    "featured_tenant_ids": ["sc-1", "sc-4", "sc-6"],
+    "stats": {
+      "total": 10,
+      "claimed": 8,
+      "invited": 1,
+      "unclaimed": 1,
+      "new_this_week": 0
+    }
+  }
+}

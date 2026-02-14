@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/cart.dart';
 import 'package:honak/features/requests/presentation/widgets/order_sheet_sections.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Bottom sheet for catalog_order + menu_order archetypes.
 ///
@@ -193,7 +193,7 @@ class _OrderBodyState extends State<_OrderBody> {
           width: 40,
           height: 4,
           decoration: BoxDecoration(
-            color: AppColors.divider,
+            color: context.colorScheme.outlineVariant,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -214,7 +214,7 @@ class _OrderBodyState extends State<_OrderBody> {
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.close, size: 20),
             style: IconButton.styleFrom(
-              foregroundColor: AppColors.textHint,
+              foregroundColor: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -228,7 +228,7 @@ class _OrderBodyState extends State<_OrderBody> {
         Text(
           'الطلب من',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(width: AppSpacing.sm),
         Text(

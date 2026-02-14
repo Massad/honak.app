@@ -41,9 +41,9 @@ class ItemListSkeleton extends StatelessWidget {
               child: Container(
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: Colors.grey.shade100),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 padding: const EdgeInsets.all(AppSpacing.md),
                 child: const Row(

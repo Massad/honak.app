@@ -97,7 +97,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: AppColors.divider,
+                color: context.colorScheme.outlineVariant,
                 borderRadius: AppRadius.pill,
               ),
             ),
@@ -181,9 +181,9 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
         _buildOptionCard(
           context,
           icon: Icons.calendar_month,
-          iconBgColor: AppColors.textHint.withValues(alpha: 0.1),
-          iconColor: AppColors.textSecondary,
-          borderColor: AppColors.divider,
+          iconBgColor: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.1),
+          iconColor: context.colorScheme.onSurfaceVariant,
+          borderColor: context.colorScheme.outlineVariant,
           bgColor: null,
           title: 'موعد لاحق',
           subtitle: 'اختر يوم ووقت يناسبك',
@@ -251,18 +251,18 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                         Text(
                           subtitle,
                           style: context.textTheme.bodySmall?.copyWith(
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const Directionality(
+                  Directionality(
                     textDirection: TextDirection.ltr,
                     child: Icon(
                       Icons.chevron_left,
                       size: 20,
-                      color: AppColors.textHint,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -385,7 +385,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        isSelected ? AppColors.primary : AppColors.divider,
+                        isSelected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(
@@ -397,7 +397,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                       size: 20,
                       color: isSelected
                           ? AppColors.primary
-                          : AppColors.textHint,
+                          : context.colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -409,7 +409,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                     Text(
                       '+${price.toFormattedArabic()}',
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -453,8 +453,8 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
               child: OutlinedButton(
                 onPressed: () => setState(() => _step = 'choice'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.textSecondary,
-                  side: const BorderSide(color: AppColors.divider),
+                  foregroundColor: context.colorScheme.onSurfaceVariant,
+                  side: BorderSide(color: context.colorScheme.outlineVariant),
                   padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadius.button,

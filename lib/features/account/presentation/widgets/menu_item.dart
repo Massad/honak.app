@@ -19,7 +19,7 @@ class AccountMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -34,14 +34,14 @@ class AccountMenuItem extends StatelessWidget {
               Icon(
                 Icons.chevron_left,
                 size: 18,
-                color: Colors.grey.shade300,
+                color: context.colorScheme.outline,
               ),
               if (subtitle != null) ...[
                 const SizedBox(width: AppSpacing.sm),
                 Text(
                   subtitle!,
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade400,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -50,14 +50,14 @@ class AccountMenuItem extends StatelessWidget {
                 label,
                 style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey.shade700,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
               Icon(
                 icon,
                 size: 20,
-                color: Colors.grey.shade400,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Late cancellation warning with fee info and reschedule option.
 class LateCancelSheet extends StatelessWidget {
@@ -25,8 +26,8 @@ class LateCancelSheet extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(AppRadius.xxl)),
       ),
@@ -77,7 +78,7 @@ class LateCancelSheet extends StatelessWidget {
                       lateCancelMessage ??
                           '\u0627\u0644\u0625\u0644\u063a\u0627\u0621 \u0627\u0644\u0645\u062a\u0623\u062e\u0631 \u0642\u062f \u064a\u0624\u062b\u0631 \u0639\u0644\u0649 \u0623\u0648\u0644\u0648\u064a\u062a\u0643 \u0641\u064a \u0627\u0644\u062d\u062c\u0648\u0632\u0627\u062a \u0627\u0644\u0645\u0633\u062a\u0642\u0628\u0644\u064a\u0629',
                       style: textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),

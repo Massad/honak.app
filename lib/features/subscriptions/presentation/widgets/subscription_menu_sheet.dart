@@ -44,7 +44,7 @@ class _SubscriptionMenuSheet extends StatelessWidget {
             width: 36,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -88,7 +88,7 @@ class _SubscriptionMenuSheet extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.receipt_long_outlined,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             title: const Text('سجل الاستخدام'),
             onTap: () {
@@ -99,7 +99,7 @@ class _SubscriptionMenuSheet extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.open_in_new,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
             title: const Text('زيارة الصفحة'),
             onTap: () {

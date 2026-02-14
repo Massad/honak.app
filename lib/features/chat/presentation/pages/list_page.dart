@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:honak/core/router/routes.dart';
@@ -108,16 +109,16 @@ class _ChatListPageState extends ConsumerState<ChatListPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.error_outline,
                       size: 48,
-                      color: AppColors.textHint,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                     SizedBox(height: AppSpacing.md),
                     Text(
                       'حدث خطأ أثناء تحميل المحادثات',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                     ),
                     SizedBox(height: AppSpacing.lg),
@@ -219,7 +220,7 @@ class _ChatListPageState extends ConsumerState<ChatListPage> {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : AppColors.surfaceVariant,
+          color: isActive ? AppColors.primary : context.colorScheme.surfaceContainerLow,
           borderRadius: AppRadius.pill,
         ),
         child: Row(
@@ -229,7 +230,7 @@ class _ChatListPageState extends ConsumerState<ChatListPage> {
               label,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color:
-                        isActive ? AppColors.white : AppColors.textSecondary,
+                        isActive ? AppColors.white : context.colorScheme.onSurfaceVariant,
                     fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
                   ),
             ),
@@ -242,7 +243,7 @@ class _ChatListPageState extends ConsumerState<ChatListPage> {
                   fontWeight: FontWeight.w600,
                   color: isActive
                       ? AppColors.white.withValues(alpha: 0.7)
-                      : AppColors.textHint,
+                      : context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

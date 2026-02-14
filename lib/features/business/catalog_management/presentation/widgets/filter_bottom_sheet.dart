@@ -97,7 +97,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                   height: 4,
                   margin: const EdgeInsets.only(bottom: AppSpacing.lg),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.outline,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -121,13 +121,13 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.close,
                         size: 18,
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -213,7 +213,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                       '$_filteredCount من ${widget.totalCount} ${widget.itemLabelAr}',
                       style: TextStyle(
                         fontSize: 13,
-                        color: Colors.grey.shade600,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -244,7 +244,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
                     padding:
                         const EdgeInsets.symmetric(vertical: AppSpacing.md),
                     shape: RoundedRectangleBorder(
@@ -285,15 +285,15 @@ class _Chip extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : Colors.white,
+          color: isActive ? AppColors.primary : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
-          border: isActive ? null : Border.all(color: Colors.grey.shade200),
+          border: isActive ? null : Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
-            color: isActive ? Colors.white : Colors.grey.shade600,
+            color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
             fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
           ),
         ),

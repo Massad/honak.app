@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -72,6 +73,7 @@ class _MessageInputState extends State<MessageInput> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
     final isEditing = widget.editingMessage != null;
 
     return Column(
@@ -84,10 +86,10 @@ class _MessageInputState extends State<MessageInput> {
               horizontal: AppSpacing.md,
               vertical: AppSpacing.sm,
             ),
-            decoration: const BoxDecoration(
-              color: AppColors.white,
+            decoration: BoxDecoration(
+              color: cs.surface,
               border: Border(
-                top: BorderSide(color: AppColors.divider, width: 0.5),
+                top: BorderSide(color: cs.outlineVariant, width: 0.5),
               ),
             ),
             child: Row(
@@ -110,10 +112,10 @@ class _MessageInputState extends State<MessageInput> {
                 ),
                 GestureDetector(
                   onTap: widget.onCancelEdit,
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
                     size: 18,
-                    color: AppColors.textSecondary,
+                    color: cs.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -127,11 +129,11 @@ class _MessageInputState extends State<MessageInput> {
             bottom: AppSpacing.sm + MediaQuery.of(context).padding.bottom,
           ),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: cs.surface,
             border: isEditing
                 ? null
-                : const Border(
-                    top: BorderSide(color: AppColors.divider, width: 0.5),
+                : Border(
+                    top: BorderSide(color: cs.outlineVariant, width: 0.5),
                   ),
           ),
           child: Row(
@@ -139,7 +141,7 @@ class _MessageInputState extends State<MessageInput> {
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.attach_file_rounded),
-                color: AppColors.textSecondary,
+                color: cs.onSurfaceVariant,
                 iconSize: 22,
                 constraints: const BoxConstraints(
                   minWidth: 40,
@@ -149,7 +151,7 @@ class _MessageInputState extends State<MessageInput> {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: cs.surfaceContainerLowest,
                     borderRadius: BorderRadius.circular(9999),
                   ),
                   child: TextField(
@@ -158,14 +160,14 @@ class _MessageInputState extends State<MessageInput> {
                     onSubmitted: (_) => _handleSend(),
                     maxLines: 4,
                     minLines: 1,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'اكتب رسالة...',
                       hintStyle: TextStyle(
-                        color: AppColors.textHint,
+                        color: cs.onSurfaceVariant,
                         fontSize: 14,
                       ),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsetsDirectional.only(
+                      contentPadding: const EdgeInsetsDirectional.only(
                         start: AppSpacing.lg,
                         end: AppSpacing.lg,
                         top: AppSpacing.sm,
@@ -173,9 +175,9 @@ class _MessageInputState extends State<MessageInput> {
                       ),
                       isDense: true,
                     ),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.textPrimary,
+                      color: cs.onSurface,
                     ),
                   ),
                 ),
@@ -207,7 +209,7 @@ class _MessageInputState extends State<MessageInput> {
                 width: 40,
                 height: 40,
                 child: Material(
-                  color: _hasText ? AppColors.primary : AppColors.textHint,
+                  color: _hasText ? AppColors.primary : cs.onSurfaceVariant,
                   shape: const CircleBorder(),
                   child: InkWell(
                     onTap: _hasText ? _handleSend : null,

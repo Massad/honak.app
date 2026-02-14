@@ -11,6 +11,7 @@ import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
+import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Service list with categories, search, pricing, duration, and team members.
@@ -72,17 +73,21 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
       }).toList();
     }
 
-    return filtered;
+    return filtered.sortedByOrder((i) => i.sortOrder);
   }
 
   List<String> _extractCategories(List<Item> items) {
-    final categories = <String>{};
-    for (final item in items) {
-      if (item.categoryName != null && item.categoryName!.isNotEmpty) {
+    final sorted = items.sortedByOrder((i) => i.sortOrder);
+    final categories = <String>[];
+    final seen = <String>{};
+    for (final item in sorted) {
+      if (item.categoryName != null &&
+          item.categoryName!.isNotEmpty &&
+          seen.add(item.categoryName!)) {
         categories.add(item.categoryName!);
       }
     }
-    return categories.toList();
+    return categories;
   }
 
   /// Builds the sliver list for the service booking section.

@@ -43,7 +43,7 @@ class QuickStatsCard extends ConsumerWidget {
                 pageName,
                 style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
             ),
@@ -104,7 +104,7 @@ class _StatItem extends StatelessWidget {
           value,
           style: context.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
           ),
         ),
         Text(

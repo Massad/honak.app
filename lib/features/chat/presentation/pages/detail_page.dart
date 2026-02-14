@@ -240,7 +240,7 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
                     Text(
                       'حدث خطأ في تحميل الرسائل',
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -374,7 +374,7 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage> {
                       ? '$count رسالة محددة'
                       : 'اختر رسالة أو أكثر',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
                 GestureDetector(
@@ -553,8 +553,8 @@ class _ReportSelectionFooter extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: const Border(
-          top: BorderSide(color: AppColors.divider, width: 0.5),
+        border: Border(
+          top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5),
         ),
       ),
       child: SafeArea(
@@ -594,7 +594,7 @@ class _RequestBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final status = conversation.requestStatus ?? '';
     final statusLabel = _statusLabel(status);
-    final statusColor = _statusColor(status);
+    final statusColor = _statusColor(status, context);
 
     return GestureDetector(
       onTap: () {
@@ -611,10 +611,10 @@ class _RequestBanner extends StatelessWidget {
           horizontal: AppSpacing.md,
           vertical: 6,
         ),
-        decoration: const BoxDecoration(
-          color: Color(0xFFF5F8FF),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF5F8FF),
           border: Border(
-            bottom: BorderSide(color: AppColors.divider, width: 0.5),
+            bottom: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5),
           ),
         ),
         child: Row(
@@ -658,7 +658,7 @@ class _RequestBanner extends StatelessWidget {
                   ? Icons.chevron_left
                   : Icons.chevron_right,
               size: 14,
-              color: AppColors.textHint,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ],
         ),
@@ -676,13 +676,13 @@ class _RequestBanner extends StatelessWidget {
     };
   }
 
-  Color _statusColor(String status) {
+  Color _statusColor(String status, BuildContext context) {
     return switch (status) {
       'pending' => AppColors.warning,
       'confirmed' => AppColors.primary,
       'in_progress' => AppColors.info,
       'quoted' => AppColors.info,
-      _ => AppColors.textSecondary,
+      _ => context.colorScheme.onSurfaceVariant,
     };
   }
 }
@@ -726,22 +726,22 @@ class _MessageList extends ConsumerWidget {
             Icon(
               Icons.chat_bubble_outline_rounded,
               size: 48,
-              color: AppColors.textHint.withValues(alpha: 0.5),
+              color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
             ),
             const SizedBox(height: AppSpacing.md),
-            const Text(
+            Text(
               'لا توجد رسائل بعد',
               style: TextStyle(
                 fontSize: 14,
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: AppSpacing.xs),
-            const Text(
+            Text(
               'ابدأ المحادثة الآن',
               style: TextStyle(
                 fontSize: 12,
-                color: AppColors.textHint,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -910,14 +910,14 @@ class _DateHeader extends StatelessWidget {
             vertical: 4,
           ),
           decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
+            color: context.colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 11,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
@@ -33,7 +34,7 @@ class _AlternativeCardState extends State<AlternativeCard> {
   Color get _borderColor {
     return switch (_status) {
       'accepted' => AppColors.success,
-      'declined' || 'expired' => AppColors.textHint,
+      'declined' || 'expired' => context.colorScheme.onSurfaceVariant,
       _ => AppColors.primary,
     };
   }
@@ -41,7 +42,7 @@ class _AlternativeCardState extends State<AlternativeCard> {
   Color get _bgColor {
     return switch (_status) {
       'accepted' => AppColors.success.withValues(alpha: 0.05),
-      'declined' || 'expired' => AppColors.background,
+      'declined' || 'expired' => context.colorScheme.surfaceContainerLowest,
       _ => AppColors.primary.withValues(alpha: 0.05),
     };
   }
@@ -115,9 +116,9 @@ class _AlternativeCardState extends State<AlternativeCard> {
                     padding: const EdgeInsetsDirectional.only(top: 2),
                     child: Text(
                       _reason,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -150,21 +151,21 @@ class _AlternativeCardState extends State<AlternativeCard> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
+          Text(
             'الإجمالي',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: context.colorScheme.onSurface,
             ),
           ),
           Row(
             children: [
               Text(
                 _formatPrice(_originalTotal),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                   decoration: TextDecoration.lineThrough,
                 ),
               ),
@@ -208,12 +209,12 @@ class _AlternativeCardState extends State<AlternativeCard> {
   Widget _buildStatusBadge() {
     final (icon, label, color) = switch (_status) {
       'accepted' => (Icons.check_circle_outline, 'تم القبول', AppColors.success),
-      'expired' => (Icons.timer_off_outlined, 'منتهي', AppColors.textHint),
-      _ => (Icons.cancel_outlined, 'تم الرفض', AppColors.textSecondary),
+      'expired' => (Icons.timer_off_outlined, 'منتهي', context.colorScheme.onSurfaceVariant),
+      _ => (Icons.cancel_outlined, 'تم الرفض', context.colorScheme.onSurfaceVariant),
     };
     final bgColor = _status == 'accepted'
         ? AppColors.success.withValues(alpha: 0.1)
-        : AppColors.textHint.withValues(alpha: 0.1);
+        : context.colorScheme.onSurfaceVariant.withValues(alpha: 0.1);
 
     return Container(
       width: double.infinity,
@@ -259,8 +260,8 @@ class _AlternativeCardState extends State<AlternativeCard> {
               icon: const Icon(Icons.close, size: 16),
               label: const Text('رفض'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textSecondary,
-                side: const BorderSide(color: AppColors.divider),
+                foregroundColor: context.colorScheme.onSurfaceVariant,
+                side: BorderSide(color: context.colorScheme.outlineVariant),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSpacing.md),
                 ),

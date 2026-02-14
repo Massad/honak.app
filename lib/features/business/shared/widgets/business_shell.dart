@@ -211,7 +211,7 @@ class _BusinessBottomNav extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
@@ -321,7 +321,7 @@ class _CenterNavButton extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: _centerOrange,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 3),
+                  border: Border.all(color: Theme.of(context).colorScheme.surface, width: 3),
                   boxShadow: [
                     BoxShadow(
                       color: _centerOrange.withValues(alpha: 0.3),
@@ -333,7 +333,7 @@ class _CenterNavButton extends StatelessWidget {
                 child: Icon(
                   isSelected ? selectedIcon : icon,
                   size: 24,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
             ),
@@ -345,7 +345,7 @@ class _CenterNavButton extends StatelessWidget {
                   fontSize: 10,
                   fontWeight:
                       isSelected ? FontWeight.w600 : FontWeight.normal,
-                  color: isSelected ? _centerOrange : Colors.grey.shade500,
+                  color: isSelected ? _centerOrange : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -408,7 +408,7 @@ class _BottomNavItem extends StatelessWidget {
                     isSelected ? selectedIcon : icon,
                     size: 22,
                     color:
-                        isSelected ? AppColors.primary : Colors.grey.shade400,
+                        isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 if (badge > 0)
@@ -424,15 +424,15 @@ class _BottomNavItem extends StatelessWidget {
                         color: AppColors.error,
                         borderRadius: BorderRadius.circular(9),
                         border: Border.all(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                           width: 2,
                         ),
                       ),
                       child: Center(
                         child: Text(
                           badge > 99 ? '+99' : '$badge',
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
                             fontSize: 9,
                             fontWeight: FontWeight.w600,
                           ),
@@ -450,7 +450,7 @@ class _BottomNavItem extends StatelessWidget {
                 fontWeight:
                     isSelected ? FontWeight.w600 : FontWeight.normal,
                 color:
-                    isSelected ? AppColors.primary : Colors.grey.shade500,
+                    isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

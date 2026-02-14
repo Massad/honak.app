@@ -21,6 +21,7 @@ import 'package:honak/features/pages/presentation/widgets/info/info.dart';
 import 'package:honak/features/pages/presentation/widgets/page_skeleton.dart';
 import 'package:honak/features/pages/presentation/widgets/page_tab_bar.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/sections.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/directory_tab.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/booking_wizard_sheet.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/shared.dart';
 import 'package:honak/features/pages/presentation/pages/claim_request_page.dart';
@@ -308,7 +309,7 @@ class _PageDetailContent extends StatelessWidget {
           pinnedPosts: page.pinnedPosts,
         ),
       'info' => InfoTab(page: page),
-      'directory' => DirectorySection(pageId: page.id, page: page),
+      'directory' => DirectoryTab(pageId: page.id, page: page),
       _ => const SizedBox.shrink(),
     };
   }

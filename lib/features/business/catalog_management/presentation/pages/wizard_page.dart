@@ -211,7 +211,7 @@ class _ItemWizardPageState extends ConsumerState<ItemWizardPage> {
     final title = isEdit ? 'تعديل $itemLabel' : 'إضافة $itemLabel';
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(title),

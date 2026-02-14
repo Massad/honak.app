@@ -218,25 +218,25 @@ class _DropoffQuickAddSheetState extends State<_DropoffQuickAddSheet> {
             decoration: BoxDecoration(
               color: _canProceedStep1
                   ? const Color(0xFF1A73E8)
-                  : Colors.grey.shade300,
+                  : Theme.of(context).colorScheme.outline,
               borderRadius: AppRadius.cardInner,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'التالي — إضافة القطع',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                const Icon(
+                Icon(
                   Icons.chevron_left_rounded,
                   size: 16,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ],
             ),
@@ -283,7 +283,7 @@ class _SheetHeader extends StatelessWidget {
             height: 4,
             margin: const EdgeInsets.only(bottom: AppSpacing.md),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -299,7 +299,7 @@ class _SheetHeader extends StatelessWidget {
                     child: Icon(
                       Icons.arrow_forward_rounded,
                       size: 20,
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -317,7 +317,7 @@ class _SheetHeader extends StatelessWidget {
                 '${step + 1}/3',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -327,13 +327,13 @@ class _SheetHeader extends StatelessWidget {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.close,
                     size: 16,
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -352,7 +352,7 @@ class _SheetHeader extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: i <= step
                         ? AppColors.primary
-                        : Colors.grey.shade200,
+                        : Theme.of(context).colorScheme.outlineVariant,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -379,7 +379,7 @@ class _FieldLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+      style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
     );
   }
 }

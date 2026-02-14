@@ -121,7 +121,7 @@ class WelcomePage extends ConsumerWidget {
     final pagesMap = ref.watch(_demoAccountPagesProvider).valueOrNull ?? {};
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: context.colorScheme.surface,
       body: Stack(
         children: [
           // Background blob top-left
@@ -456,7 +456,7 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
         width: double.infinity,
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.colorScheme.surface,
           border: Border.all(color: const Color(0xFFF3F4F6)),
           borderRadius: BorderRadius.circular(AppRadius.md),
           boxShadow: const [

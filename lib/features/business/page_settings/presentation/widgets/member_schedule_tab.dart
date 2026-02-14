@@ -24,7 +24,7 @@ class MemberScheduleTab extends ConsumerWidget {
       error: (_, __) => Center(
         child: Text(
           'تعذر تحميل الجدول',
-          style: TextStyle(color: Colors.grey.shade400),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
       ),
       data: (hours) => ListView(
@@ -66,7 +66,7 @@ class MemberScheduleTab extends ConsumerWidget {
           // 7-day schedule
           for (final day in hours) ...[
             _DayRow(hours: day),
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
           ],
 
           const SizedBox(height: AppSpacing.lg),
@@ -79,8 +79,8 @@ class MemberScheduleTab extends ConsumerWidget {
               icon: const Icon(Icons.edit_calendar_outlined, size: 18),
               label: const Text('تخصيص جدول — قريباً'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.grey.shade400,
-                side: BorderSide(color: Colors.grey.shade200),
+                foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                 padding:
                     const EdgeInsets.symmetric(vertical: AppSpacing.md),
                 shape: RoundedRectangleBorder(
@@ -124,7 +124,7 @@ class _DayRow extends StatelessWidget {
           else
             Text(
               'مغلق',
-              style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           const Spacer(),
           // Day name

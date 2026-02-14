@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/features/explore/domain/entities/category.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/home/domain/entities/nearby_page.dart';
+import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/providers/api_provider.dart';
 
 final categoriesProvider = FutureProvider<List<Category>>((ref) async {
@@ -46,7 +47,10 @@ final activeCategoriesProvider = FutureProvider<List<Category>>((ref) async {
   final pages = await ref.watch(trendingPagesProvider.future);
   final activeIds =
       pages.map((p) => p.exploreCategory).whereType<String>().toSet();
-  return categories.where((c) => activeIds.contains(c.id)).toList();
+  return categories
+      .where((c) => activeIds.contains(c.id))
+      .toList()
+      .sortedByOrder((c) => c.sortOrder);
 });
 
 final searchQueryProvider = StateProvider<String>((ref) => '');

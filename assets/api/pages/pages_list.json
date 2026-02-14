@@ -772,7 +772,7 @@
       "cover_url": "https://images.unsplash.com/photo-1763663501401-00c4f2704dc4?auto=format&fit=crop&w=800&q=80",
       "business_type_name": "دليل مجمع",
       "business_type_id": "directory",
-      "explore_category": "cat_retail",
+      "explore_category": "cat_malls",
       "archetype": "directory",
       "engagement_level": "full",
       "is_open": true,
@@ -803,6 +803,48 @@
       },
       "distance": null,
       "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "shmeisani-center",
+      "name": "مجمع الشميساني",
+      "slug": "shmeisani-center",
+      "avatar_url": "https://images.unsplash.com/photo-1567449303078-57ad995bd329?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1555636222-cae831e670b3?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "دليل مجمع",
+      "business_type_id": "directory",
+      "explore_category": "cat_malls",
+      "archetype": "directory",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 450,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "١٠",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "١٠",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٢",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
       "monthly_metric": null,
       "sub_category": null
     },
@@ -1849,49 +1891,6 @@
       "claim_status": "claimed"
     },
     {
-      "id": "smart-fix-phones",
-      "name": "سمارت فيكس",
-      "slug": "smart-fix-phones",
-      "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
-      "cover_url": "https://images.unsplash.com/photo-1580910051074-3eb694886571?auto=format&fit=crop&w=800&q=80",
-      "business_type_name": "صيانة موبايلات",
-      "business_type_id": "mobile_repair",
-      "explore_category": "cat_electronics",
-      "archetype": "service_booking",
-      "engagement_level": "full",
-      "is_open": true,
-      "store_type": "physical",
-      "is_verified": true,
-      "is_following": false,
-      "followers_count": 1100,
-      "trust_metrics": [
-        {
-          "label": "عملاء يعودون",
-          "value": "٧٨٪",
-          "icon": "repeat"
-        },
-        {
-          "label": "جهاز شهرياً",
-          "value": "٢٠٠",
-          "icon": "phone_android"
-        },
-        {
-          "label": "ضمان",
-          "value": "٣٠ يوم",
-          "icon": "verified"
-        }
-      ],
-      "location": {
-        "area": "الشميساني",
-        "city": "عمّان"
-      },
-      "distance": null,
-      "has_active_stories": false,
-      "monthly_metric": null,
-      "sub_category": null,
-      "claim_status": "claimed"
-    },
-    {
       "id": "smart-fix-mobiles",
       "name": "سمارت فيكس",
       "slug": "smart-fix-mobiles",
@@ -1916,6 +1915,49 @@
         {
           "label": "جهاز شهرياً",
           "value": "١٥٠",
+          "icon": "phone_android"
+        },
+        {
+          "label": "ضمان",
+          "value": "٣٠ يوم",
+          "icon": "verified"
+        }
+      ],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "claimed"
+    },
+    {
+      "id": "smart-fix-phones",
+      "name": "سمارت فيكس",
+      "slug": "smart-fix-phones",
+      "avatar_url": "https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1580910051074-3eb694886571?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "صيانة موبايلات",
+      "business_type_id": "mobile_repair",
+      "explore_category": "cat_electronics",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 1100,
+      "trust_metrics": [
+        {
+          "label": "عملاء يعودون",
+          "value": "٧٨٪",
+          "icon": "repeat"
+        },
+        {
+          "label": "جهاز شهرياً",
+          "value": "٢٠٠",
           "icon": "phone_android"
         },
         {

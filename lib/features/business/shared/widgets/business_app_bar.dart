@@ -21,7 +21,7 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
     final page = bizContext?.page;
 
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       // "← عميل" back button
@@ -70,7 +70,7 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   Icon(
                     Icons.keyboard_arrow_down,
                     size: 20,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 4),
                   Flexible(
@@ -104,7 +104,7 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
                           Text(
                             bizContext!.config!.requestLabelAr,
                             style: context.textTheme.labelSmall?.copyWith(
-                              color: Colors.grey.shade400,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                               fontSize: 10,
                             ),
                           ),
@@ -118,9 +118,9 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     height: 36,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.grey.shade100,
+                      color: Theme.of(context).colorScheme.surfaceContainerLow,
                       border: Border.all(
-                        color: Colors.grey.shade200,
+                        color: Theme.of(context).colorScheme.outlineVariant,
                       ),
                     ),
                     child: AppImage.avatar(
@@ -140,7 +140,7 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
           onPressed: () => context.showSnackBar('قريباً: الإشعارات'),
           icon: Icon(
             Icons.notifications_outlined,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ],

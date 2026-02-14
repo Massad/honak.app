@@ -73,7 +73,7 @@ class PackageManagerSection extends StatelessWidget {
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.add, size: 14, color: Colors.white),
@@ -83,7 +83,7 @@ class PackageManagerSection extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                       ),
                     ],
@@ -118,14 +118,14 @@ class PackageManagerSection extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               style: BorderStyle.solid,
             ),
           ),
           foregroundDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
               style: BorderStyle.solid,
             ),
           ),
@@ -134,14 +134,14 @@ class PackageManagerSection extends StatelessWidget {
               Icon(
                 Icons.card_membership_outlined,
                 size: 28,
-                color: Colors.grey.shade300,
+                color: Theme.of(context).colorScheme.outline,
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 '\u0625\u0636\u0627\u0641\u0629 \u0628\u0627\u0642\u0629 \u0623\u0648 \u0627\u0634\u062a\u0631\u0627\u0643 \u0644\u0639\u0645\u0644\u0627\u0626\u0643',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -169,9 +169,9 @@ class PackageManagerSection extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.grey.shade100),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.03),
@@ -191,7 +191,7 @@ class PackageManagerSection extends StatelessWidget {
                   child: Icon(
                     Icons.edit_outlined,
                     size: 16,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
@@ -205,7 +205,7 @@ class PackageManagerSection extends StatelessWidget {
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
                     size: 16,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -228,7 +228,7 @@ class PackageManagerSection extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: active
                               ? AppColors.success.withValues(alpha: 0.1)
-                              : Colors.grey.shade100,
+                              : Theme.of(context).colorScheme.surfaceContainerLow,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -240,7 +240,7 @@ class PackageManagerSection extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: active
                                 ? AppColors.success
-                                : Colors.grey.shade500,
+                                : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -271,14 +271,14 @@ class PackageManagerSection extends StatelessWidget {
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
+                          color: Theme.of(context).colorScheme.surfaceContainerLow,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
                           _modelLabel(model),
                           style: TextStyle(
                             fontSize: 9,
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -288,7 +288,7 @@ class PackageManagerSection extends StatelessWidget {
                         '$credits $label',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                       const SizedBox(width: AppSpacing.sm),

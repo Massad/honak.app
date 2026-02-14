@@ -87,6 +87,10 @@
     "temporarily_closed": {
       "reason": "صيانة وتجديد المحل",
       "reopen_date": "2025-02-20"
-    }
+    },
+    "venue_id": "city-mall",
+    "venue_name": "City Mall",
+    "venue_floor": "الطابق ٢",
+    "venue_unit": "F2-40"
   }
 }

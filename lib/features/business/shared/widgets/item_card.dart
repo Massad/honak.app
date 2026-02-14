@@ -66,10 +66,10 @@ class ItemCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.primary.withValues(alpha: 0.03)
-              : Colors.white,
+              : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: isSelected ? AppColors.primary : Colors.grey.shade100,
+            color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
           ),
           boxShadow: isSelected
               ? null
@@ -95,7 +95,7 @@ class ItemCard extends StatelessWidget {
                         : Icons.check_box_outline_blank,
                     size: 22,
                     color:
-                        isSelected ? AppColors.primary : Colors.grey.shade300,
+                        isSelected ? AppColors.primary : Theme.of(context).colorScheme.outline,
                   ),
                   const SizedBox(width: AppSpacing.sm),
                 ],
@@ -151,7 +151,7 @@ class ItemCard extends StatelessWidget {
                           _variantSummary!,
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.grey.shade400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -183,7 +183,7 @@ class ItemCard extends StatelessWidget {
                     child: Icon(
                       Icons.chevron_left,
                       size: 20,
-                      color: Colors.grey.shade300,
+                      color: Theme.of(context).colorScheme.outline,
                     ),
                   ),
               ],
@@ -242,10 +242,10 @@ class _ItemImage extends StatelessWidget {
               ),
               child: Text(
                 '${item.discountPercent}%-',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 9,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
             ),
@@ -269,8 +269,8 @@ class _StatusBadge extends StatelessWidget {
     final (label, color) = switch (status) {
       'active' => ('متاح', AppColors.success),
       'out_of_stock' => ('نفذ', AppColors.warning),
-      'hidden' => ('مخفي', Colors.grey.shade500),
-      _ => ('غير معروف', Colors.grey.shade500),
+      'hidden' => ('مخفي', Theme.of(context).colorScheme.onSurfaceVariant),
+      _ => ('غير معروف', Theme.of(context).colorScheme.onSurfaceVariant),
     };
 
     return AppBadge.small(label: label, color: color, pill: true);
@@ -295,7 +295,7 @@ class _PriceRow extends StatelessWidget {
         ? AppColors.error
         : item.status == 'active'
             ? AppColors.primary
-            : AppColors.textPrimary;
+            : context.colorScheme.onSurface;
 
     return Row(
       children: [
@@ -312,9 +312,9 @@ class _PriceRow extends StatelessWidget {
             item.originalPrice!.toFormattedArabic(),
             style: TextStyle(
               fontSize: 11,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               decoration: TextDecoration.lineThrough,
-              decorationColor: Colors.grey.shade400,
+              decorationColor: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ],

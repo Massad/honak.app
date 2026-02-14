@@ -68,7 +68,7 @@ class SafetyDisclaimers extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Material(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(14),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(14),
@@ -123,7 +123,7 @@ class SafetyDisclaimers extends ConsumerWidget {
                   ),
                   const SizedBox(width: AppSpacing.sm),
                   Material(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(14),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(14),
@@ -136,7 +136,7 @@ class SafetyDisclaimers extends ConsumerWidget {
                           borderRadius:
                               BorderRadius.circular(14),
                           border: Border.all(
-                            color: Colors.grey.shade200,
+                            color: Theme.of(context).colorScheme.outlineVariant,
                           ),
                         ),
                         child: Icon(
@@ -204,7 +204,7 @@ class SafetyDisclaimers extends ConsumerWidget {
                       textAlign: TextAlign.end,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     trailing: DisclaimerTypeBadge(

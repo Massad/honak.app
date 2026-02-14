@@ -123,7 +123,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: Theme.of(context).colorScheme.outline,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -162,7 +162,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
             'اختر نوع الاقتراح',
             style: TextStyle(
               fontSize: 13,
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ),
@@ -182,12 +182,12 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppColors.primary.withValues(alpha: 0.05)
-                      : Colors.grey.shade50,
+                      : Theme.of(context).colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: isSelected
                         ? AppColors.primary
-                        : Colors.grey.shade200,
+                        : Theme.of(context).colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(
@@ -202,7 +202,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
                             : FontWeight.normal,
                         color: isSelected
                             ? AppColors.primary
-                            : Colors.grey.shade700,
+                            : Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.md),
@@ -213,7 +213,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
                       size: 20,
                       color: isSelected
                           ? AppColors.primary
-                          : Colors.grey.shade400,
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ],
                 ),
@@ -230,8 +230,8 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
             onPressed: _selectedReason != null ? _goNext : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.grey.shade200,
+              foregroundColor: Theme.of(context).colorScheme.surface,
+              disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -264,7 +264,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
             'اختر البدائل المقترحة',
             style: TextStyle(
               fontSize: 13,
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ),
@@ -306,8 +306,8 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
                 _pickedItems.isNotEmpty ? () => setState(() => _step = 2) : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.grey.shade200,
+              foregroundColor: Theme.of(context).colorScheme.surface,
+              disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -346,7 +346,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey.shade700,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -381,7 +381,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
             'أضف ملاحظة للعميل',
             style: TextStyle(
               fontSize: 13,
-              color: Colors.grey.shade600,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ),
@@ -395,16 +395,16 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
           onChanged: (_) => setState(() {}),
           decoration: InputDecoration(
             hintText: 'مثال: الصنف غير متوفر، لكن يوجد بديل مشابه...',
-            hintStyle: TextStyle(color: Colors.grey.shade400),
+            hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
             filled: true,
-            fillColor: Colors.grey.shade50,
+            fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -421,19 +421,19 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
             onPressed: _canSend ? _handleSend : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: Colors.grey.shade200,
+              foregroundColor: Theme.of(context).colorScheme.surface,
+              disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
             child: _isLoading
-                ? const SizedBox(
+                ? SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   )
                 : const Text(
@@ -515,9 +515,9 @@ class _SelectedItemRow extends StatelessWidget {
                 if (item.optionsSummary.isNotEmpty)
                   Text(
                     item.optionsSummary,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: AppColors.textSecondary,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
               ],
@@ -534,10 +534,10 @@ class _SelectedItemRow extends StatelessWidget {
           const SizedBox(width: AppSpacing.sm),
           GestureDetector(
             onTap: onRemove,
-            child: const Icon(
+            child: Icon(
               Icons.close,
               size: 16,
-              color: AppColors.textHint,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],

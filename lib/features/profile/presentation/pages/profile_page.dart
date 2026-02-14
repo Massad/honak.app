@@ -140,7 +140,7 @@ class _ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       padding: EdgeInsets.fromLTRB(
         AppSpacing.lg,
         MediaQuery.of(context).padding.top + AppSpacing.lg,
@@ -155,7 +155,7 @@ class _ProfileHeader extends StatelessWidget {
                 context.showSnackBar('قريباً: الإعدادات'),
             icon: Icon(
               Icons.settings_outlined,
-              color: Colors.grey.shade400,
+              color: context.colorScheme.onSurfaceVariant,
               size: 24,
             ),
           ),
@@ -179,7 +179,7 @@ class _ProfileHeader extends StatelessWidget {
                   child: Text(
                     user!.phone,
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: Colors.grey.shade500,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -193,8 +193,8 @@ class _ProfileHeader extends StatelessWidget {
             height: 60,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.grey.shade100,
-              border: Border.all(color: Colors.white, width: 2),
+              color: context.colorScheme.surfaceContainerLow,
+              border: Border.all(color: context.colorScheme.surface, width: 2),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.08),
@@ -213,7 +213,7 @@ class _ProfileHeader extends StatelessWidget {
                   : Icon(
                       isGuest ? Icons.person_outline : Icons.person,
                       size: 32,
-                      color: Colors.grey.shade400,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
             ),
           ),
@@ -279,7 +279,7 @@ class _MyPagesSection extends ConsumerWidget {
 
           // Create new page
           Material(
-            color: Colors.white,
+            color: context.colorScheme.surface,
             borderRadius: BorderRadius.circular(14),
             child: InkWell(
               borderRadius: BorderRadius.circular(14),
@@ -293,7 +293,7 @@ class _MyPagesSection extends ConsumerWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: Colors.grey.shade200,
+                    color: context.colorScheme.outlineVariant,
                     width: 2,
                     strokeAlign: BorderSide.strokeAlignInside,
                   ),
@@ -304,14 +304,14 @@ class _MyPagesSection extends ConsumerWidget {
                     Text(
                       'إنشاء صفحة جديدة',
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade500,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.xs),
                     Icon(
                       Icons.add,
                       size: 18,
-                      color: Colors.grey.shade500,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ],
                 ),
@@ -333,7 +333,7 @@ class _PageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -342,7 +342,7 @@ class _PageCard extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.grey.shade100),
+            border: Border.all(color: context.colorScheme.outlineVariant),
           ),
           child: Row(
             children: [
@@ -411,7 +411,7 @@ class _PageCard extends StatelessWidget {
                       Text(
                         '@${page.slug} · ${page.businessTypeName}',
                         style: context.textTheme.labelSmall?.copyWith(
-                          color: Colors.grey.shade400,
+                          color: context.colorScheme.onSurfaceVariant,
                           fontSize: 10,
                         ),
                         textAlign: TextAlign.end,
@@ -428,8 +428,8 @@ class _PageCard extends StatelessWidget {
                 height: 44,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.shade100,
-                  border: Border.all(color: Colors.grey.shade200),
+                  color: context.colorScheme.surfaceContainerLow,
+                  border: Border.all(color: context.colorScheme.outlineVariant),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
@@ -441,7 +441,7 @@ class _PageCard extends StatelessWidget {
                         )
                       : Icon(
                           Icons.store,
-                          color: Colors.grey.shade400,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                 ),
               ),
@@ -473,7 +473,7 @@ class _MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -488,14 +488,14 @@ class _MenuItem extends StatelessWidget {
               Icon(
                 Icons.chevron_left,
                 size: 18,
-                color: Colors.grey.shade300,
+                color: context.colorScheme.outline,
               ),
               if (subtitle != null) ...[
                 const SizedBox(width: AppSpacing.sm),
                 Text(
                   subtitle!,
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade400,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -504,14 +504,14 @@ class _MenuItem extends StatelessWidget {
                 label,
                 style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey.shade700,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
               Icon(
                 icon,
                 size: 20,
-                color: Colors.grey.shade400,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ],
           ),
@@ -533,7 +533,7 @@ class _SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),

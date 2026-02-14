@@ -1,0 +1,197 @@
+{
+  "success": true,
+  "data": {
+    "id": "shmeisani-center",
+    "owner_id": "usr_003",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "مراكز تجارية",
+    "explore_category": "cat_malls",
+    "name": "مجمع الشميساني",
+    "name_en": "Shmeisani Complex",
+    "slug": "shmeisani-center",
+    "handle": "shmeisani-center",
+    "store_type": "physical",
+    "archetype": "directory",
+    "description": "مجمع الشميساني التجاري — مجمع حيّ متعدد الخدمات في قلب الشميساني. ١٠ محلات على طابقين، عيادات ومطاعم ومحلات خدمات.",
+    "avatar_url": "https://images.unsplash.com/photo-1567449303078-57ad995bd329?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1555636222-cae831e670b3?auto=format&fit=crop&w=800&q=80",
+    "phone": "+962 6 568 1234",
+    "location": {
+      "lat": 31.962,
+      "lng": 35.897,
+      "label": "الشميساني، شارع ابن خلدون",
+      "area": "الشميساني",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "08:00", "close": "21:00"},
+      "monday": {"enabled": true, "open": "08:00", "close": "21:00"},
+      "tuesday": {"enabled": true, "open": "08:00", "close": "21:00"},
+      "wednesday": {"enabled": true, "open": "08:00", "close": "21:00"},
+      "thursday": {"enabled": true, "open": "08:00", "close": "21:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "21:00"},
+      "saturday": {"enabled": true, "open": "08:00", "close": "21:00"}
+    },
+    "operating_hours": "السبت — الخميس: ٨:٠٠ ص — ٩:٠٠ م\nالجمعة: ١٠:٠٠ ص — ٩:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 450,
+    "views_count": 8200,
+    "posts_count": 12,
+    "is_following": false,
+    "trust_score": 80,
+    "trust_metrics": [
+      {"label": "عدد المحلات", "value": "١٠", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "١٠", "icon": "verified"},
+      {"label": "الطوابق", "value": "٢", "icon": "layers"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1709000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [],
+    "blocked_dates": [],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف — ٦٠ موقف"},
+      {"icon": "elevator", "label": "مصعد"},
+      {"icon": "mosque", "label": "مصلى قريب"}
+    ],
+    "parking_info": "مواقف أمامية — ٦٠ موقف",
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "مطاعم وخدمات", "tenant_count": 5},
+      {"id": "f1", "name": "الطابق ١", "label": "عيادات ومكاتب", "tenant_count": 5}
+    ],
+    "directory_stats": {
+      "total_tenants": 10,
+      "claimed_tenants": 10,
+      "unclaimed_tenants": 0,
+      "floors": 2
+    },
+    "featured_tenant_ids": ["sc-1", "sc-4", "sc-6"],
+    "mall_announcements": [
+      {
+        "id": "ann_sc1",
+        "type": "info",
+        "title": "ساعات رمضان",
+        "body": "خلال شهر رمضان: ١٠:٠٠ ص — ١١:٠٠ م. المطاعم تفتح بعد الإفطار.",
+        "badge": "رمضان",
+        "valid_until": "2026-04-01"
+      }
+    ],
+    "tenants": [
+      {
+        "id": "sc-1",
+        "name": "شاورما الشام",
+        "name_en": "Sham Shawarma",
+        "category": "طعام",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "page_id": "sham-shawarma",
+        "logo_url": "https://picsum.photos/seed/shamshawarma/100"
+      },
+      {
+        "id": "sc-2",
+        "name": "كنافة حبيبة",
+        "name_en": "Habibah Knafeh",
+        "category": "طعام",
+        "floor_id": "ground",
+        "unit": "G-02",
+        "is_open": true,
+        "page_id": "habibah-knafeh",
+        "logo_url": "https://picsum.photos/seed/habibahknafeh/100"
+      },
+      {
+        "id": "sc-3",
+        "name": "صيدلية الحياة",
+        "name_en": "Hayat Pharmacy",
+        "category": "صحة",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "page_id": "hayat-pharmacy",
+        "logo_url": "https://picsum.photos/seed/hayatpharmacy/100"
+      },
+      {
+        "id": "sc-4",
+        "name": "سوبرماركت فريش",
+        "name_en": "Fresh Supermarket",
+        "category": "بقالة",
+        "floor_id": "ground",
+        "unit": "G-04",
+        "is_open": true,
+        "page_id": "fresh-supermarket",
+        "logo_url": "https://picsum.photos/seed/freshsuper/100"
+      },
+      {
+        "id": "sc-5",
+        "name": "مكتبة الأمل",
+        "name_en": "Al-Amal Bookstore",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "page_id": "alamal-bookstore",
+        "logo_url": "https://picsum.photos/seed/alamalbookstore/100"
+      },
+      {
+        "id": "sc-6",
+        "name": "عيادة د. خالد",
+        "name_en": "Dr. Khaled Clinic",
+        "category": "صحة",
+        "floor_id": "f1",
+        "unit": "105",
+        "is_open": true,
+        "page_id": "dr-khaled-clinic",
+        "logo_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=100&q=80"
+      },
+      {
+        "id": "sc-7",
+        "name": "عيادة أسنان الابتسامة",
+        "name_en": "Smile Dental",
+        "category": "صحة",
+        "floor_id": "f1",
+        "unit": "106",
+        "is_open": true,
+        "page_id": "smile-dental",
+        "logo_url": "https://picsum.photos/seed/smiledental/100"
+      },
+      {
+        "id": "sc-8",
+        "name": "مكتب محاماة الحق",
+        "name_en": "Al-Haq Law Office",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "107",
+        "is_open": true,
+        "page_id": "alhaq-law",
+        "logo_url": "https://picsum.photos/seed/alhaqlaw/100"
+      },
+      {
+        "id": "sc-9",
+        "name": "مختبر الشميساني",
+        "name_en": "Shmeisani Lab",
+        "category": "صحة",
+        "floor_id": "f1",
+        "unit": "108",
+        "is_open": true,
+        "page_id": "shmeisani-lab",
+        "logo_url": "https://picsum.photos/seed/shmeisanilab/100"
+      },
+      {
+        "id": "sc-10",
+        "name": "صالون ليلى",
+        "name_en": "Layla Salon",
+        "category": "تجميل",
+        "floor_id": "f1",
+        "unit": "110",
+        "is_open": true,
+        "page_id": "layla-salon",
+        "logo_url": "https://picsum.photos/seed/laylasalon/100"
+      }
+    ]
+  }
+}

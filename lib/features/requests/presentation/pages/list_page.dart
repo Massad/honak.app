@@ -25,7 +25,6 @@ class _RequestListPageState extends ConsumerState<RequestListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
@@ -120,13 +119,13 @@ class _TabChip extends StatelessWidget {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : Colors.grey.shade100,
+          color: isSelected ? AppColors.primary : context.colorScheme.surfaceContainerLow,
           borderRadius: AppRadius.pill,
         ),
         child: Text(
           label,
           style: context.textTheme.bodySmall?.copyWith(
-            color: isSelected ? Colors.white : AppColors.textSecondary,
+            color: isSelected ? Colors.white : context.colorScheme.onSurfaceVariant,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
             fontSize: 12,
           ),
@@ -234,12 +233,12 @@ class _EmptyState extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.shopping_bag_outlined,
-                size: 48, color: Colors.grey.shade300),
+                size: 48, color: context.colorScheme.outline),
             const SizedBox(height: AppSpacing.lg),
             Text(
               '\u0644\u0627 \u062a\u0648\u062c\u062f \u0637\u0644\u0628\u0627\u062a',
               style: context.textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -262,12 +261,12 @@ class _ErrorState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline, size: 48, color: Colors.grey.shade300),
+            Icon(Icons.error_outline, size: 48, color: context.colorScheme.outline),
             const SizedBox(height: AppSpacing.lg),
             Text(
               '\u062d\u062f\u062b \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0637\u0644\u0628\u0627\u062a',
               style: context.textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: AppSpacing.lg),

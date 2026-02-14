@@ -329,12 +329,12 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
             children: [
               TextSpan(
                 text: widget.conversationName,
-                style: const TextStyle(color: AppColors.textPrimary),
+                style: TextStyle(color: context.colorScheme.onSurface),
               ),
             ],
           ),
           style: context.textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -398,7 +398,7 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
         Text(
           'ما سبب الإبلاغ؟',
           style: context.textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -520,7 +520,7 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
                   height: 20,
                   margin: const EdgeInsets.only(top: 2),
                   decoration: BoxDecoration(
-                    color: _allowRead ? AppColors.primary : Colors.white,
+                    color: _allowRead ? AppColors.primary : context.colorScheme.surface,
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
                       color: _allowRead
@@ -547,7 +547,7 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
                             size: 14,
                             color: _allowRead
                                 ? AppColors.primary
-                                : AppColors.textHint,
+                                : context.colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 6),
                           Expanded(
@@ -555,8 +555,8 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
                               'أسمح لفريق هناك بقراءة المحادثة',
                               style: context.textTheme.bodySmall?.copyWith(
                                 color: _allowRead
-                                    ? AppColors.textPrimary
-                                    : AppColors.textSecondary,
+                                    ? context.colorScheme.onSurface
+                                    : context.colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ),
@@ -568,7 +568,7 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
                         '${_scope == 'specific' ? ' الرسائل المحددة' : ' المحادثة'}',
                         style: TextStyle(
                           fontSize: 10,
-                          color: AppColors.textHint,
+                          color: context.colorScheme.onSurfaceVariant,
                           height: 1.6,
                         ),
                       ),
@@ -631,14 +631,14 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
                 'ملخص البلاغ',
                 style: TextStyle(
                   fontSize: 10,
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 6),
               // Scope
               _SummaryRow(
                 icon: Icons.message_outlined,
-                iconColor: AppColors.textHint,
+                iconColor: context.colorScheme.onSurfaceVariant,
                 text: _scope == 'all'
                     ? 'المحادثة بالكامل'
                     : '${_selectedIds.length} رسالة محددة',
@@ -647,7 +647,7 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
               // Reason
               _SummaryRow(
                 icon: Icons.flag_outlined,
-                iconColor: AppColors.textHint,
+                iconColor: context.colorScheme.onSurfaceVariant,
                 text: _reasonId == 'other' &&
                         _customReasonController.text.trim().isNotEmpty
                     ? '${reason.label}: ${_customReasonController.text.trim()}'
@@ -658,9 +658,9 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
               _SummaryRow(
                 icon: Icons.visibility_outlined,
                 iconColor:
-                    _allowRead ? AppColors.primary : AppColors.textHint,
+                    _allowRead ? AppColors.primary : context.colorScheme.onSurfaceVariant,
                 text: _allowRead ? 'مسموح بالقراءة' : 'غير مسموح بالقراءة',
-                textColor: _allowRead ? AppColors.primary : AppColors.textHint,
+                textColor: _allowRead ? AppColors.primary : context.colorScheme.onSurfaceVariant,
               ),
             ],
           ),
@@ -793,7 +793,7 @@ class _ScopeOption extends StatelessWidget {
                     subtitle,
                     style: TextStyle(
                       fontSize: 10,
-                      color: AppColors.textHint,
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -879,7 +879,7 @@ class _ReasonOption extends StatelessWidget {
               child: Text(
                 reason.label,
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -916,7 +916,7 @@ class _SummaryRow extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 12,
-              color: textColor ?? AppColors.textSecondary,
+              color: textColor ?? context.colorScheme.onSurfaceVariant,
             ),
           ),
         ),

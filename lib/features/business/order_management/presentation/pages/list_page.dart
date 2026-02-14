@@ -171,7 +171,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       padding: const EdgeInsetsDirectional.fromSTEB(
         AppSpacing.lg,
         AppSpacing.md,
@@ -262,7 +262,7 @@ class _FilterBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       padding: const EdgeInsetsDirectional.fromSTEB(
         AppSpacing.lg,
         AppSpacing.xs,
@@ -292,11 +292,11 @@ class _FilterBar extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: isActive ? AppColors.primary : Colors.white,
+                    color: isActive ? AppColors.primary : Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20),
                     border: isActive
                         ? null
-                        : Border.all(color: Colors.grey.shade200),
+                        : Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -307,7 +307,7 @@ class _FilterBar extends StatelessWidget {
                           fontSize: 12,
                           color: isActive
                               ? Colors.white
-                              : Colors.grey.shade600,
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
                           fontWeight: isActive
                               ? FontWeight.w600
                               : FontWeight.normal,
@@ -322,7 +322,7 @@ class _FilterBar extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isActive
                               ? Colors.white.withValues(alpha: 0.2)
-                              : Colors.grey.shade100,
+                              : Theme.of(context).colorScheme.surfaceContainerLow,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -332,7 +332,7 @@ class _FilterBar extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: isActive
                                 ? Colors.white
-                                : Colors.grey.shade500,
+                                : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -366,7 +366,7 @@ class _TruckSection extends ConsumerWidget {
         if (data == null || data.trucks.isEmpty) return const SizedBox.shrink();
         final summary = ref.watch(truckSummaryProvider(pageSlug));
         return Container(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -454,9 +454,9 @@ class _RequestCardSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         children: [
@@ -499,7 +499,7 @@ class _RequestCardSkeleton extends StatelessWidget {
               vertical: AppSpacing.sm,
             ),
             decoration: BoxDecoration(
-              color: Colors.grey.shade50,
+              color: Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(14),
               ),
@@ -552,20 +552,20 @@ class _EmptyRequestState extends StatelessWidget {
               width: 64,
               height: 64,
               decoration: BoxDecoration(
-                color: Colors.grey.shade100,
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.inbox_outlined,
                 size: 28,
-                color: Colors.grey.shade300,
+                color: Theme.of(context).colorScheme.outline,
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
               'لا توجد $label',
               style: context.textTheme.bodyMedium?.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -574,7 +574,7 @@ class _EmptyRequestState extends StatelessWidget {
               'ستظهر الطلبات هنا عند وصولها',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -605,13 +605,13 @@ class _ErrorState extends StatelessWidget {
             Icon(
               Icons.error_outline,
               size: 48,
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.outline,
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
               'حدث خطأ في تحميل الطلبات',
               style: context.textTheme.bodyMedium?.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: AppSpacing.lg),

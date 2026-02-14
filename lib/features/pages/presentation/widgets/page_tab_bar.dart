@@ -30,7 +30,7 @@ class PageTabBarDelegate extends SliverPersistentHeaderDelegate {
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         border: Border(
-          top: BorderSide(color: Colors.grey.shade100),
+          top: BorderSide(color: context.colorScheme.outlineVariant),
         ),
       ),
       child: TabBar(

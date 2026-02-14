@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Delivery address display with FG1 coverage zone info row.
 class DeliveryAddressSection extends StatelessWidget {
@@ -19,16 +20,16 @@ class DeliveryAddressSection extends StatelessWidget {
         Text(
           'عنوان التوصيل',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
+            color: context.colorScheme.surfaceContainerLow,
             borderRadius: AppRadius.cardInner,
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(color: context.colorScheme.outlineVariant),
           ),
           child: Row(
             children: [
@@ -41,8 +42,8 @@ class DeliveryAddressSection extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
               ),
-              const Icon(Icons.keyboard_arrow_down,
-                  size: 16, color: AppColors.textHint),
+              Icon(Icons.keyboard_arrow_down,
+                  size: 16, color: context.colorScheme.onSurfaceVariant),
             ],
           ),
         ),
@@ -71,7 +72,7 @@ class DeliveryAddressSection extends StatelessWidget {
           Text(
             'رسوم التوصيل: $deliveryFee',
             style: theme.textTheme.labelSmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
         ],
       ],
@@ -102,7 +103,7 @@ class OrderPaymentMethods extends StatelessWidget {
         Text(
           'طريقة الدفع',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         ...paymentMethods.asMap().entries.map((entry) {
@@ -120,11 +121,11 @@ class OrderPaymentMethods extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: selected
                       ? AppColors.primary.withValues(alpha: 0.05)
-                      : Colors.white,
+                      : context.colorScheme.surface,
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        selected ? AppColors.primary : AppColors.divider,
+                        selected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(
@@ -133,7 +134,7 @@ class OrderPaymentMethods extends StatelessWidget {
                         size: 16,
                         color: selected
                             ? AppColors.primary
-                            : AppColors.textSecondary),
+                            : context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.sm),
                     Text(
                       method,
@@ -175,7 +176,7 @@ class OrderBranchSelector extends StatelessWidget {
         Text(
           'اختر فرع الاستلام',
           style: theme.textTheme.bodySmall
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         ...locations.asMap().entries.map((entry) {
@@ -193,11 +194,11 @@ class OrderBranchSelector extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: selected
                       ? AppColors.primary.withValues(alpha: 0.05)
-                      : Colors.white,
+                      : context.colorScheme.surface,
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        selected ? AppColors.primary : AppColors.divider,
+                        selected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(
@@ -207,7 +208,7 @@ class OrderBranchSelector extends StatelessWidget {
                         size: 14,
                         color: selected
                             ? AppColors.primary
-                            : AppColors.textHint),
+                            : context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
                       child: Column(
@@ -223,7 +224,7 @@ class OrderBranchSelector extends StatelessWidget {
                             Text(
                               loc['address'] as String,
                               style: theme.textTheme.labelSmall
-                                  ?.copyWith(color: AppColors.textHint),
+                                  ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                             ),
                         ],
                       ),
@@ -252,7 +253,7 @@ class OrderSingleBranch extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: context.colorScheme.surfaceContainerLow,
         borderRadius: AppRadius.cardInner,
       ),
       child: Row(
@@ -269,7 +270,7 @@ class OrderSingleBranch extends StatelessWidget {
                   Text(
                     location['address'] as String,
                     style: theme.textTheme.labelSmall
-                        ?.copyWith(color: AppColors.textHint),
+                        ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                   ),
               ],
             ),

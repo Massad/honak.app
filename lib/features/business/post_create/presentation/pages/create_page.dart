@@ -43,7 +43,7 @@ class CreatePostPage extends ConsumerWidget {
             'اختر نوع المنشور الذي تريد إنشاءه',
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey.shade500,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
         ),
@@ -180,10 +180,10 @@ class _StoryButton extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text(
+                  Text(
                     'ستوري جديدة',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
@@ -206,10 +206,10 @@ class _StoryButton extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.add_a_photo_outlined,
                   size: 20,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
             ],
@@ -232,7 +232,7 @@ class _PostTypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -250,14 +250,14 @@ class _PostTypeCard extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.grey.shade100),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Row(
             children: [
               Icon(
                 Icons.chevron_left,
                 size: 16,
-                color: Colors.grey.shade300,
+                color: Theme.of(context).colorScheme.outline,
               ),
               const Spacer(),
               // Label + desc
@@ -277,7 +277,7 @@ class _PostTypeCard extends StatelessWidget {
                       type.desc,
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       textAlign: TextAlign.end,
                     ),
@@ -319,7 +319,7 @@ class _PromotedPostButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),

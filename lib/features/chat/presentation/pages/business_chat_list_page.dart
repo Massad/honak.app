@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:honak/core/router/routes.dart';
@@ -112,10 +113,10 @@ class _BusinessChatListPageState extends ConsumerState<BusinessChatListPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.error_outline,
                     size: 48,
-                    color: AppColors.textHint,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(height: AppSpacing.md),
                   Text(
@@ -123,7 +124,7 @@ class _BusinessChatListPageState extends ConsumerState<BusinessChatListPage> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium
-                        ?.copyWith(color: AppColors.textSecondary),
+                        ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                   ),
                   const SizedBox(height: AppSpacing.lg),
                   TextButton(
@@ -186,7 +187,7 @@ class _BusinessChatListPageState extends ConsumerState<BusinessChatListPage> {
             icon: Icon(
               _showSearch ? Icons.close : Icons.search,
               size: 20,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -205,14 +206,14 @@ class _BusinessChatListPageState extends ConsumerState<BusinessChatListPage> {
         decoration: InputDecoration(
           hintText: 'ابحث بالاسم أو رقم الطلب...',
           hintStyle:
-              const TextStyle(color: AppColors.textHint, fontSize: 14),
-          prefixIcon: const Icon(
+              TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
+          prefixIcon: Icon(
             Icons.search,
             size: 20,
-            color: AppColors.textHint,
+            color: context.colorScheme.onSurfaceVariant,
           ),
           filled: true,
-          fillColor: AppColors.background,
+          fillColor: context.colorScheme.surfaceContainerLowest,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
@@ -301,7 +302,7 @@ class _FilterChip extends StatelessWidget {
           vertical: 6,
         ),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : AppColors.surfaceVariant,
+          color: isActive ? AppColors.primary : context.colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -315,7 +316,7 @@ class _FilterChip extends StatelessWidget {
                     isActive ? FontWeight.w600 : FontWeight.w500,
                 color: isActive
                     ? AppColors.white
-                    : AppColors.textSecondary,
+                    : context.colorScheme.onSurfaceVariant,
               ),
             ),
             if (count > 0) ...[
@@ -327,7 +328,7 @@ class _FilterChip extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: isActive
                       ? AppColors.white.withValues(alpha: 0.7)
-                      : AppColors.textHint,
+                      : context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],

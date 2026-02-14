@@ -51,7 +51,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
     final durationMin = widget.entry.estimatedDurationMin;
 
     return _BannerCard(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       borderColor: AppColors.success.withValues(alpha: 0.3),
       onDismiss: _dismiss,
       child: Column(
@@ -88,7 +88,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
                     Text(
                       '${widget.entry.packageName} • ${total.toFormattedArabic()} • $durationMin دقيقة',
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -118,8 +118,8 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
                   child: OutlinedButton(
                     onPressed: widget.onViewDetail,
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.textSecondary,
-                      side: const BorderSide(color: AppColors.divider),
+                      foregroundColor: context.colorScheme.onSurfaceVariant,
+                      side: BorderSide(color: context.colorScheme.outlineVariant),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: AppRadius.button,
@@ -197,8 +197,8 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
 
   Widget _buildCancelledBanner(BuildContext context) {
     return _BannerCard(
-      backgroundColor: AppColors.border,
-      borderColor: AppColors.divider,
+      backgroundColor: context.colorScheme.outlineVariant,
+      borderColor: context.colorScheme.outlineVariant,
       onDismiss: _dismiss,
       child: Column(
         children: [
@@ -208,14 +208,14 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: AppColors.textHint.withValues(alpha: 0.15),
+                  color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
-                child: const Icon(
+                child: Icon(
                   Icons.cancel_outlined,
                   size: 24,
-                  color: AppColors.textSecondary,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -224,7 +224,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
                   'تم إلغاء الحجز',
                   style: context.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -289,10 +289,10 @@ class _BannerCard extends StatelessWidget {
             end: 0,
             child: GestureDetector(
               onTap: onDismiss,
-              child: const Icon(
+              child: Icon(
                 Icons.close,
                 size: 16,
-                color: AppColors.textHint,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ),

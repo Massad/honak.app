@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Drag handle, title ("طلب حجز"), page name, and close button.
 class ReservationSheetHeader extends StatelessWidget {
@@ -29,7 +29,7 @@ class ReservationSheetHeader extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: AppColors.divider,
+                color: context.colorScheme.outlineVariant,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -45,7 +45,7 @@ class ReservationSheetHeader extends StatelessWidget {
                   Text(
                     pageName,
                     style: theme.textTheme.labelSmall
-                        ?.copyWith(color: AppColors.textHint),
+                        ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                   ),
                 ],
               ),
@@ -53,7 +53,7 @@ class ReservationSheetHeader extends StatelessWidget {
                 onPressed: onClose,
                 icon: const Icon(Icons.close, size: 20),
                 style: IconButton.styleFrom(
-                  foregroundColor: AppColors.textHint,
+                  foregroundColor: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -115,7 +115,7 @@ class ReservationSheetFooter extends StatelessWidget {
               Text(
                 _hintText(),
                 style: theme.textTheme.labelSmall
-                    ?.copyWith(color: AppColors.textHint),
+                    ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                 textAlign: TextAlign.center,
               ),
             ],

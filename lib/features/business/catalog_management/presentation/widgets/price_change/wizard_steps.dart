@@ -124,11 +124,11 @@ class StepValue extends StatelessWidget {
                   hintText: '0',
                   hintStyle: context.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.outline,
                   ),
                   suffixText: isPercentage ? '%' : 'د.أ',
                   suffixStyle: context.textTheme.titleMedium?.copyWith(
-                    color: Colors.grey.shade500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   isDense: true,
                   contentPadding: const EdgeInsets.symmetric(
@@ -137,11 +137,11 @@ class StepValue extends StatelessWidget {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -316,22 +316,22 @@ class _StepScopeState extends State<StepScope> {
                 hintText: 'بحث...',
                 hintStyle: TextStyle(
                   fontSize: 13,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 prefixIcon: Icon(
                   Icons.search,
                   size: 18,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 isDense: true,
                 contentPadding: AppSpacing.inputPadding,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -599,7 +599,7 @@ class StepVisibility extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.grey.shade100),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Row(
             children: [
@@ -607,7 +607,7 @@ class StepVisibility extends StatelessWidget {
                 value: isPublic,
                 onChanged: onPublicChanged,
                 activeTrackColor: AppColors.primary,
-                activeThumbColor: Colors.white,
+                activeThumbColor: Theme.of(context).colorScheme.surface,
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -636,7 +636,7 @@ class StepVisibility extends StatelessWidget {
           )
         else
           _InfoBox(
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             text: 'سيتم تحديث الأسعار بدون إشعار. '
                 'لن يرى العملاء السعر القديم أو نسبة التغيير.',
           ),
@@ -655,17 +655,17 @@ class StepVisibility extends StatelessWidget {
               hintText: 'مثال: تخفيضات الصيف...',
               hintStyle: TextStyle(
                 fontSize: 13,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               isDense: true,
               contentPadding: AppSpacing.inputPadding,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -872,7 +872,7 @@ class StepConfirm extends StatelessWidget {
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: Colors.grey.shade100),
+                border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               ),
               child: Row(
                 children: [
@@ -916,7 +916,7 @@ class StepConfirm extends StatelessWidget {
                               '${originalJod.toStringAsFixed(2)} د.أ',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.grey.shade400,
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 decoration: TextDecoration.lineThrough,
                               ),
                             ),
@@ -968,7 +968,7 @@ class _SectionLabel extends StatelessWidget {
       label,
       style: context.textTheme.bodySmall?.copyWith(
         fontWeight: FontWeight.w600,
-        color: Colors.grey.shade700,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }
@@ -1004,10 +1004,10 @@ class _OptionCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.primary.withValues(alpha: 0.05)
-              : Colors.white,
+              : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: isSelected ? AppColors.primary : Colors.grey.shade200,
+            color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -1021,7 +1021,7 @@ class _OptionCard extends StatelessWidget {
                 suffix!,
                 style: context.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: isSelected ? AppColors.primary : Colors.grey.shade400,
+                  color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             if (suffix != null) const SizedBox(height: AppSpacing.xs),
@@ -1031,7 +1031,7 @@ class _OptionCard extends StatelessWidget {
               style: context.textTheme.bodySmall?.copyWith(
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 color:
-                    isSelected ? AppColors.primary : Colors.grey.shade600,
+                    isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -1064,10 +1064,10 @@ class _QuickPickChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.primary.withValues(alpha: 0.1)
-              : Colors.grey.shade50,
+              : Theme.of(context).colorScheme.surfaceContainerLowest,
           borderRadius: AppRadius.pill,
           border: Border.all(
-            color: isSelected ? AppColors.primary : Colors.grey.shade200,
+            color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Text(
@@ -1075,7 +1075,7 @@ class _QuickPickChip extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-            color: isSelected ? AppColors.primary : Colors.grey.shade600,
+            color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ),
@@ -1109,7 +1109,7 @@ class _RadioOption extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(
                   color:
-                      isSelected ? AppColors.primary : Colors.grey.shade300,
+                      isSelected ? AppColors.primary : Theme.of(context).colorScheme.outline,
                   width: 2,
                 ),
               ),
@@ -1176,7 +1176,7 @@ class _CheckboxRow extends StatelessWidget {
                 border: Border.all(
                   color: isChecked
                       ? AppColors.primary
-                      : Colors.grey.shade300,
+                      : Theme.of(context).colorScheme.outline,
                   width: 1.5,
                 ),
               ),
@@ -1201,7 +1201,7 @@ class _CheckboxRow extends StatelessWidget {
                       subtitle!,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                 ],
@@ -1285,14 +1285,14 @@ class _DateTimePickerField extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Row(
           children: [
             Icon(
               Icons.calendar_today_outlined,
               size: 16,
-              color: Colors.grey.shade400,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
@@ -1300,7 +1300,7 @@ class _DateTimePickerField extends StatelessWidget {
                 display,
                 style: TextStyle(
                   fontSize: 13,
-                  color: hasDate ? Colors.grey.shade800 : Colors.grey.shade400,
+                  color: hasDate ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -1308,7 +1308,7 @@ class _DateTimePickerField extends StatelessWidget {
               Icon(
                 Icons.access_time_outlined,
                 size: 16,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
           ],
         ),
@@ -1330,13 +1330,13 @@ class _SummaryRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: Colors.grey.shade500),
+        Icon(icon, size: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),
         const SizedBox(width: AppSpacing.sm),
         Expanded(
           child: Text(
             text,
             style: context.textTheme.bodySmall?.copyWith(
-              color: Colors.grey.shade700,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),

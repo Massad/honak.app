@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -35,51 +36,51 @@ class SourceBadge extends StatelessWidget {
 
   const SourceBadge({super.key, required this.source, this.small = false});
 
-  static const _sourceConfig = {
-    OrderSource.recurringAuto: (
-      label: 'تلقائي',
-      icon: Icons.refresh,
-      color: Color(0xFF7B1FA2),
-    ),
-    OrderSource.appOrder: (
-      label: 'طلب تطبيق',
-      icon: Icons.smartphone,
-      color: AppColors.primary,
-    ),
-    OrderSource.walkUp: (
-      label: 'طلب شارع',
-      icon: Icons.person,
-      color: AppColors.success,
-    ),
-    OrderSource.phoneCall: (
-      label: 'اتصال',
-      icon: Icons.phone,
-      color: AppColors.secondary,
-    ),
-    OrderSource.balcony: (
-      label: 'بلكونة',
-      icon: Icons.home_outlined,
-      color: Color(0xFF00897B),
-    ),
-    OrderSource.whatsapp: (
-      label: 'واتساب',
-      icon: Icons.chat,
-      color: Color(0xFF25D366),
-    ),
-    OrderSource.adHoc: (
-      label: 'يدوي',
-      icon: Icons.add,
-      color: AppColors.textSecondary,
-    ),
-  };
-
   @override
   Widget build(BuildContext context) {
+    final _sourceConfig = {
+      OrderSource.recurringAuto: (
+        label: 'تلقائي',
+        icon: Icons.refresh,
+        color: Color(0xFF7B1FA2),
+      ),
+      OrderSource.appOrder: (
+        label: 'طلب تطبيق',
+        icon: Icons.smartphone,
+        color: AppColors.primary,
+      ),
+      OrderSource.walkUp: (
+        label: 'طلب شارع',
+        icon: Icons.person,
+        color: AppColors.success,
+      ),
+      OrderSource.phoneCall: (
+        label: 'اتصال',
+        icon: Icons.phone,
+        color: AppColors.secondary,
+      ),
+      OrderSource.balcony: (
+        label: 'بلكونة',
+        icon: Icons.home_outlined,
+        color: Color(0xFF00897B),
+      ),
+      OrderSource.whatsapp: (
+        label: 'واتساب',
+        icon: Icons.chat,
+        color: Color(0xFF25D366),
+      ),
+      OrderSource.adHoc: (
+        label: 'يدوي',
+        icon: Icons.add,
+        color: context.colorScheme.onSurfaceVariant,
+      ),
+    };
+
     final config = _sourceConfig[source] ??
-        (label: source.name, icon: Icons.add, color: AppColors.textSecondary);
+        (label: source.name, icon: Icons.add, color: context.colorScheme.onSurfaceVariant);
 
     if (small) {
-      return Icon(config.icon, size: 10, color: AppColors.textHint);
+      return Icon(config.icon, size: 10, color: context.colorScheme.onSurfaceVariant);
     }
 
     return Container(
@@ -141,14 +142,14 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                 Icon(
                   _open ? Icons.expand_less : Icons.expand_more,
                   size: 10,
-                  color: AppColors.textHint,
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   'تم التسليم (${widget.items.length})',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
-                    color: AppColors.textHint,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -168,7 +169,7 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                       vertical: AppSpacing.sm,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.surface,
+                      color: context.colorScheme.surface,
                       borderRadius: AppRadius.cardInner,
                     ),
                     child: Row(
@@ -181,18 +182,18 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                         const SizedBox(width: 8),
                         Text(
                           d.customerName,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.textSecondary,
+                            color: context.colorScheme.onSurfaceVariant,
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
                         const Spacer(),
                         Text(
                           '$totalQty وحدة',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
-                            color: AppColors.textHint,
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -234,10 +235,10 @@ class _SheetHeader extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
                 if (subtitle != null)
@@ -245,9 +246,9 @@ class _SheetHeader extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 2),
                     child: Text(
                       subtitle!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.textSecondary,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -259,14 +260,14 @@ class _SheetHeader extends StatelessWidget {
             child: Container(
               width: 32,
               height: 32,
-              decoration: const BoxDecoration(
-                color: AppColors.surfaceVariant,
+              decoration: BoxDecoration(
+                color: context.colorScheme.surfaceVariant,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.close,
                 size: 14,
-                color: AppColors.textSecondary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
@@ -303,7 +304,7 @@ class _Counter extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+          style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: 8),
         Row(
@@ -311,8 +312,8 @@ class _Counter extends StatelessWidget {
           children: [
             _circleButton(
               icon: Icons.remove,
-              color: AppColors.surfaceVariant,
-              iconColor: AppColors.textPrimary,
+              color: context.colorScheme.surfaceVariant,
+              iconColor: context.colorScheme.onSurface,
               onTap: () => onChanged((value - step).clamp(min, 9999)),
             ),
             SizedBox(
@@ -320,17 +321,17 @@ class _Counter extends StatelessWidget {
               child: Text(
                 '$value',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textPrimary,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
             ),
             _circleButton(
               icon: Icons.add,
               color: incrementColor,
-              iconColor: AppColors.white,
+              iconColor: Colors.white,
               onTap: () => onChanged(value + step),
             ),
           ],
@@ -423,7 +424,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
           Container(
             padding: const EdgeInsets.all(AppSpacing.md),
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceVariant,
               borderRadius: AppRadius.cardInner,
             ),
             child: Column(
@@ -438,9 +439,9 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                 ),
                 Text(
                   '$qty قارورة \u00B7 ${widget.item.address.split('\u060C').first}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -463,7 +464,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                   label: 'فوارغ تم جمعها',
                   value: _emptyCol,
                   onChanged: (v) => setState(() => _emptyCol = v),
-                  incrementColor: AppColors.textSecondary,
+                  incrementColor: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -489,11 +490,11 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                         color: AppColors.secondary,
                       ),
                       const SizedBox(width: 4),
-                      const Text(
+                      Text(
                         'فرق الاستبدال',
                         style: TextStyle(
                           fontSize: 12,
-                          color: AppColors.textPrimary,
+                          color: context.colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -527,7 +528,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                     child: Container(
                       height: 44,
                       decoration: BoxDecoration(
-                        color: active ? AppColors.primary : AppColors.surfaceVariant,
+                        color: active ? AppColors.primary : context.colorScheme.surfaceVariant,
                         borderRadius: AppRadius.cardInner,
                       ),
                       child: Row(
@@ -536,14 +537,14 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                           Icon(
                             opt.icon,
                             size: 13,
-                            color: active ? AppColors.white : AppColors.textSecondary,
+                            color: active ? Colors.white : context.colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 6),
                           Text(
                             opt.label,
                             style: TextStyle(
                               fontSize: 12,
-                              color: active ? AppColors.white : AppColors.textSecondary,
+                              color: active ? Colors.white : context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -591,12 +592,12 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
             controller: _noteController,
             decoration: InputDecoration(
               hintText: 'ملاحظة (اختياري)',
-              hintStyle: const TextStyle(
+              hintStyle: TextStyle(
                 fontSize: 14,
-                color: AppColors.textHint,
+                color: context.colorScheme.onSurfaceVariant,
               ),
               filled: true,
-              fillColor: AppColors.surfaceVariant,
+              fillColor: context.colorScheme.surfaceVariant,
               border: OutlineInputBorder(
                 borderRadius: AppRadius.cardInner,
                 borderSide: BorderSide.none,
@@ -625,7 +626,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
               label: const Text('تأكيد التسليم'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.success,
-                foregroundColor: AppColors.white,
+                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.cardInner,
                 ),
@@ -646,9 +647,9 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
           Text(label, style: TextStyle(fontSize: 10, color: color)),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 10,
-              color: AppColors.textSecondary,
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
@@ -698,7 +699,7 @@ class _SkipSheetState extends State<SkipSheet> {
           Container(
             padding: const EdgeInsets.all(AppSpacing.md),
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: context.colorScheme.surfaceVariant,
               borderRadius: AppRadius.cardInner,
             ),
             child: Column(
@@ -713,9 +714,9 @@ class _SkipSheetState extends State<SkipSheet> {
                 ),
                 Text(
                   '${widget.item.items.map((i) => '${i.qty} قارورة').join(', ')} \u00B7 ${widget.item.address.split('\u060C').first}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
-                    color: AppColors.textSecondary,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -739,11 +740,11 @@ class _SkipSheetState extends State<SkipSheet> {
                   decoration: BoxDecoration(
                     color: selected
                         ? AppColors.primary.withAlpha(15)
-                        : AppColors.surface,
+                        : context.colorScheme.surface,
                     border: Border.all(
                       color: selected
                           ? AppColors.primary
-                          : AppColors.divider,
+                          : context.colorScheme.outlineVariant,
                     ),
                     borderRadius: AppRadius.cardInner,
                   ),
@@ -753,7 +754,7 @@ class _SkipSheetState extends State<SkipSheet> {
                       fontSize: 14,
                       color: selected
                           ? AppColors.primary
-                          : AppColors.textPrimary,
+                          : context.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -767,12 +768,12 @@ class _SkipSheetState extends State<SkipSheet> {
                 controller: _otherController,
                 decoration: InputDecoration(
                   hintText: 'السبب...',
-                  hintStyle: const TextStyle(
+                  hintStyle: TextStyle(
                     fontSize: 14,
-                    color: AppColors.textHint,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                   filled: true,
-                  fillColor: AppColors.surfaceVariant,
+                  fillColor: context.colorScheme.surfaceVariant,
                   border: OutlineInputBorder(
                     borderRadius: AppRadius.cardInner,
                     borderSide: BorderSide.none,
@@ -785,9 +786,9 @@ class _SkipSheetState extends State<SkipSheet> {
               ),
             ),
           const SizedBox(height: AppSpacing.sm),
-          const Text(
+          Text(
             'نقل إلى:',
-            style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+            style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(
@@ -804,7 +805,7 @@ class _SkipSheetState extends State<SkipSheet> {
                       decoration: BoxDecoration(
                         color: selected
                             ? AppColors.primary
-                            : AppColors.surfaceVariant,
+                            : context.colorScheme.surfaceVariant,
                         borderRadius: BorderRadius.circular(AppRadius.sm),
                       ),
                       child: Center(
@@ -814,7 +815,7 @@ class _SkipSheetState extends State<SkipSheet> {
                             fontSize: 12,
                             color: selected
                                 ? AppColors.white
-                                : AppColors.textSecondary,
+                                : context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -839,7 +840,7 @@ class _SkipSheetState extends State<SkipSheet> {
               label: const Text('تخطي والتالي'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.secondary,
-                foregroundColor: AppColors.white,
+                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.cardInner,
                 ),
@@ -910,7 +911,7 @@ class _ReloadSheetState extends State<ReloadSheet> {
             label: 'فوارغ تم تنزيلها',
             value: _emptiesDrop,
             onChanged: (v) => setState(() => _emptiesDrop = v),
-            incrementColor: AppColors.textSecondary,
+            incrementColor: context.colorScheme.onSurfaceVariant,
             step: 5,
           ),
           const SizedBox(height: AppSpacing.xxl),
@@ -925,7 +926,7 @@ class _ReloadSheetState extends State<ReloadSheet> {
               label: const Text('تأكيد \u2014 بداية جديدة'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: AppColors.white,
+                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.cardInner,
                 ),

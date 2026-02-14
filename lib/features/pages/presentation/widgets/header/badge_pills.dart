@@ -41,7 +41,7 @@ class BadgePills extends StatelessWidget {
           ),
         if (categoryName != null)
           _Pill(
-            color: Colors.grey.shade600,
+            color: context.colorScheme.onSurfaceVariant,
             label: categoryName!,
             showTrailingSearch: onSearchCategory != null,
             onTap: onSearchCategory != null
@@ -63,10 +63,10 @@ class BadgePills extends StatelessWidget {
     );
   }
 
-  static Color _storeTypeColor(String type) => switch (type) {
+  Color _storeTypeColor(String type) => switch (type) {
     'online' => Colors.purple,
     'hybrid' => Colors.indigo,
-    _ => Colors.grey.shade600,
+    _ => const Color(0xFF757575),
   };
 
   static String _storeTypeLabel(String type) => switch (type) {

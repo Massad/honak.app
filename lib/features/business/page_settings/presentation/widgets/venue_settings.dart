@@ -65,9 +65,9 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
         Container(
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.grey.shade100),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -81,14 +81,14 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
               const SizedBox(width: AppSpacing.lg),
               Column(children: [
                 Text('$_capacity', style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppColors.primary)),
-                Text('شخص', style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
+                Text('شخص', style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
               ]),
               const SizedBox(width: AppSpacing.lg),
               IconButton(
                 onPressed: _capacity > 10 ? () => setState(() => _capacity -= 10) : null,
                 icon: const Icon(Icons.remove, size: 18),
                 constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-                style: IconButton.styleFrom(backgroundColor: Colors.grey.shade50),
+                style: IconButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest),
               ),
             ],
           ),
@@ -103,7 +103,7 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
       children: [
         const Text('أنماط الترتيب', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
         const SizedBox(height: AppSpacing.sm),
-        Text('اختر أنماط الترتيب المتاحة', style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
+        Text('اختر أنماط الترتيب المتاحة', style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
         const SizedBox(height: AppSpacing.md),
         Wrap(
           spacing: 8, runSpacing: 8, alignment: WrapAlignment.end,
@@ -129,9 +129,9 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
           border: Border.all(color: on ? AppColors.primary.withValues(alpha: 0.3) : Colors.grey.shade200),
         ),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(label, style: TextStyle(fontSize: 12, color: on ? AppColors.primary : Colors.grey.shade700, fontWeight: on ? FontWeight.w500 : FontWeight.normal)),
+          Text(label, style: TextStyle(fontSize: 12, color: on ? AppColors.primary : Theme.of(context).colorScheme.onSurface, fontWeight: on ? FontWeight.w500 : FontWeight.normal)),
           const SizedBox(width: 4),
-          Icon(icon, size: 16, color: on ? AppColors.primary : Colors.grey.shade400),
+          Icon(icon, size: 16, color: on ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant),
         ]),
       ),
     );
@@ -143,7 +143,7 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
       children: [
         Container(
           padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), border: Border.all(color: Colors.grey.shade100)),
+          decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: BorderRadius.circular(14), border: Border.all(color: Theme.of(context).colorScheme.outlineVariant)),
           child: Row(children: [
             Switch(value: _requiresDeposit, onChanged: (v) => setState(() => _requiresDeposit = v), activeTrackColor: AppColors.primary),
             const Spacer(),
@@ -154,7 +154,7 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
           const SizedBox(height: AppSpacing.md),
           Container(
             padding: const EdgeInsets.all(AppSpacing.md),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), border: Border.all(color: Colors.grey.shade100)),
+            decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: BorderRadius.circular(14), border: Border.all(color: Theme.of(context).colorScheme.outlineVariant)),
             child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               _depositRadio('percentage', 'نسبة من المبلغ'),
               if (_depositType == 'percentage') ...[
@@ -172,7 +172,7 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(color: _depositPercentage == p ? AppColors.primary.withValues(alpha: 0.3) : Colors.grey.shade200),
                           ),
-                          child: Text('$p%', style: TextStyle(fontSize: 12, fontWeight: _depositPercentage == p ? FontWeight.w600 : FontWeight.normal, color: _depositPercentage == p ? AppColors.primary : Colors.grey.shade700)),
+                          child: Text('$p%', style: TextStyle(fontSize: 12, fontWeight: _depositPercentage == p ? FontWeight.w600 : FontWeight.normal, color: _depositPercentage == p ? AppColors.primary : Theme.of(context).colorScheme.onSurface)),
                         ),
                       ),
                     ),
@@ -208,7 +208,7 @@ class _VenueSettingsState extends ConsumerState<VenueSettings> {
     return GestureDetector(
       onTap: () => setState(() => _depositType = value),
       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-        Text(label, style: TextStyle(fontSize: 13, color: _depositType == value ? AppColors.primary : Colors.grey.shade700)),
+        Text(label, style: TextStyle(fontSize: 13, color: _depositType == value ? AppColors.primary : Theme.of(context).colorScheme.onSurface)),
         const SizedBox(width: 8),
         Radio<String>(value: value, groupValue: _depositType, onChanged: (v) => setState(() => _depositType = v!), activeColor: AppColors.primary, visualDensity: VisualDensity.compact),
       ]),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Description textarea for inquiry request.
 class InquiryDescriptionSection extends StatelessWidget {
@@ -25,7 +26,7 @@ class InquiryDescriptionSection extends StatelessWidget {
           'ماذا تريد؟',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -38,16 +39,16 @@ class InquiryDescriptionSection extends StatelessWidget {
             hintText:
                 'اشرح ماذا تريد بالتفصيل... مثال: أريد تصوير حفل تخرج في حديقة، ٣٠ شخص تقريباً',
             hintStyle: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textHint),
+                ?.copyWith(color: context.colorScheme.onSurfaceVariant),
             filled: true,
-            fillColor: AppColors.surfaceVariant,
+            fillColor: context.colorScheme.surfaceContainerLow,
             border: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
-              borderSide: BorderSide(color: AppColors.divider),
+              borderSide: BorderSide(color: context.colorScheme.outlineVariant),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.cardInner,
@@ -76,7 +77,7 @@ class InquiryRefPhotosMock extends StatelessWidget {
           'صور مرجعية (اختياري)',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -117,7 +118,7 @@ class InquiryRefPhotosMock extends StatelessWidget {
         Text(
           'أرفق صور لأعمال مشابهة لما تريد',
           style: theme.textTheme.labelSmall
-              ?.copyWith(color: AppColors.textHint),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
       ],
     );
@@ -158,14 +159,14 @@ class InquiryPreferredDateSection extends StatelessWidget {
           'التاريخ المطلوب',
           style: theme.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: AppSpacing.xxs),
         Text(
           'اختياري — متى تحتاج الخدمة؟',
           style: theme.textTheme.labelSmall
-              ?.copyWith(color: AppColors.textHint),
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(height: AppSpacing.sm),
         Wrap(
@@ -187,11 +188,11 @@ class InquiryPreferredDateSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: selected
                       ? AppColors.primary.withValues(alpha: 0.05)
-                      : AppColors.surfaceVariant,
+                      : context.colorScheme.surfaceContainerLow,
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
                     color:
-                        selected ? AppColors.primary : AppColors.divider,
+                        selected ? AppColors.primary : context.colorScheme.outlineVariant,
                   ),
                 ),
                 alignment: Alignment.center,
@@ -201,7 +202,7 @@ class InquiryPreferredDateSection extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: selected
                         ? AppColors.primary
-                        : AppColors.textSecondary,
+                        : context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -216,20 +217,20 @@ class InquiryPreferredDateSection extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
+                border: Border.all(color: context.colorScheme.outline),
                 borderRadius: AppRadius.cardInner,
               ),
               child: Row(
                 children: [
                   Icon(Icons.calendar_today,
-                      size: 14, color: AppColors.textSecondary),
+                      size: 14, color: context.colorScheme.onSurfaceVariant),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     selectedCustomDate ?? 'اختر تاريخ',
                     style: TextStyle(
                       color: selectedCustomDate != null
-                          ? AppColors.textPrimary
-                          : AppColors.textHint,
+                          ? context.colorScheme.onSurface
+                          : context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],

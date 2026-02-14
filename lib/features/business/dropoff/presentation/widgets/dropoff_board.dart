@@ -232,13 +232,12 @@ class _DropoffBoardState extends State<DropoffBoard> {
     final overdueCount = _overdueCount;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: CustomScrollView(
         slivers: [
           // ── Sticky header ──
           SliverToBoxAdapter(
             child: Container(
-              color: AppColors.surface,
+              color: context.colorScheme.surface,
               child: SafeArea(
                 bottom: false,
                 child: Column(
@@ -248,7 +247,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                     _buildStatsRow(context),
                     _buildFilterTabs(context),
                     const SizedBox(height: AppSpacing.sm),
-                    Divider(height: 1, color: Colors.grey.shade100),
+                    Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
                   ],
                 ),
               ),
@@ -336,7 +335,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                       '${_active.length} تذكرة نشطة',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey.shade400,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     if (overdueCount > 0) ...[
@@ -371,13 +370,13 @@ class _DropoffBoardState extends State<DropoffBoard> {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: Colors.grey.shade100,
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: AppRadius.cardInner,
               ),
               child: Icon(
                 _searchActive ? Icons.close : Icons.search_rounded,
                 size: 16,
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),
@@ -401,11 +400,11 @@ class _DropoffBoardState extends State<DropoffBoard> {
                   children: [
                     const Icon(Icons.add, size: 14, color: Colors.white),
                     const SizedBox(width: 6),
-                    const Text(
+                    Text(
                       'استلام جديد',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ),
                   ],
@@ -430,20 +429,20 @@ class _DropoffBoardState extends State<DropoffBoard> {
         autofocus: true,
         decoration: InputDecoration(
           hintText: 'بحث بالاسم أو رقم التذكرة...',
-          hintStyle: TextStyle(fontSize: 13, color: Colors.grey.shade300),
+          hintStyle: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.outline),
           filled: true,
-          fillColor: Colors.grey.shade50,
+          fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
           contentPadding: const EdgeInsetsDirectional.symmetric(
             horizontal: AppSpacing.md,
             vertical: AppSpacing.sm,
           ),
           border: OutlineInputBorder(
             borderRadius: AppRadius.cardInner,
-            borderSide: BorderSide(color: Colors.grey.shade200),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: AppRadius.cardInner,
-            borderSide: BorderSide(color: Colors.grey.shade200),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: AppRadius.cardInner,
@@ -506,7 +505,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                         s.$3,
                         style: TextStyle(
                           fontSize: 9,
-                          color: Colors.grey.shade400,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -560,7 +559,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                 decoration: BoxDecoration(
                   color: isActive
                       ? const Color(0xFF1A73E8)
-                      : Colors.grey.shade100,
+                      : Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: AppRadius.pill,
                 ),
                 child: Row(
@@ -569,7 +568,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                     Icon(
                       f.$2,
                       size: 12,
-                      color: isActive ? Colors.white : Colors.grey.shade500,
+                      color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -577,7 +576,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                       style: TextStyle(
                         fontSize: 12,
                         color:
-                            isActive ? Colors.white : Colors.grey.shade500,
+                            isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     if (count > 0) ...[
@@ -588,7 +587,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                           fontSize: 10,
                           color: isActive
                               ? Colors.white.withValues(alpha: 0.8)
-                              : Colors.grey.shade400,
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -614,7 +613,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
             Icon(
               Icons.inventory_2_outlined,
               size: 40,
-              color: Colors.grey.shade200,
+              color: Theme.of(context).colorScheme.outlineVariant,
             ),
             const SizedBox(height: AppSpacing.md),
             Text(
@@ -623,7 +622,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                   : 'لا توجد تذاكر',
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -663,19 +662,19 @@ class _DeliveredSection extends StatelessWidget {
                     ? Icons.keyboard_arrow_up_rounded
                     : Icons.keyboard_arrow_down_rounded,
                 size: 14,
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 'تم التسليم (${tickets.length})',
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
-                child: Divider(color: Colors.grey.shade100, height: 1),
+                child: Divider(color: Theme.of(context).colorScheme.outlineVariant, height: 1),
               ),
             ],
           ),
@@ -689,7 +688,7 @@ class _DeliveredSection extends StatelessWidget {
                 child: Text(
                   'لا توجد تذاكر مسلّمة اليوم',
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.outline,
                     fontSize: 12,
                   ),
                 ),

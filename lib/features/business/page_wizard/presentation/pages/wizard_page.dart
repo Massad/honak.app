@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -138,7 +139,7 @@ class _ProgressBar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isCompleted || isCurrent
                     ? AppColors.primary
-                    : AppColors.divider,
+                    : context.colorScheme.outlineVariant,
                 borderRadius: AppRadius.pill,
               ),
             ),
