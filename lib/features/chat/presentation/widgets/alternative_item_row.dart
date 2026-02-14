@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/widgets/app_image.dart';

@@ -53,7 +53,7 @@ class _LocationStepState extends ConsumerState<LocationStep> {
             width: double.infinity,
             height: 160,
             decoration: BoxDecoration(
-              color: context.colorScheme.surfaceVariant,
+              color: context.colorScheme.surfaceContainerHighest,
               borderRadius: AppRadius.cardInner,
             ),
             child: Column(

@@ -98,6 +98,19 @@ class _StatsRow extends StatelessWidget {
 
   const _StatsRow({required this.stats, this.statsData});
 
+  /// Format stat value — handles nested maps and fraction format.
+  String _formatStatValue(String key, Map<String, dynamic>? data) {
+    if (data == null) return '0';
+    final raw = data[key];
+    // Fraction: "claimed_tenants" → "18/25" using "total_tenants"
+    if (key == 'claimed_tenants' && data.containsKey('total_tenants')) {
+      return '${raw ?? 0}/${data['total_tenants'] ?? 0}';
+    }
+    // Nested map: extract 'value' field
+    if (raw is Map) return '${raw['value'] ?? 0}';
+    return '${raw ?? 0}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -130,7 +143,7 @@ class _StatsRow extends StatelessWidget {
                   Icon(style.icon, size: 18, color: style.fg),
                   const SizedBox(height: AppSpacing.xs),
                   Text(
-                    '${statsData?[stat.key] ?? 0}',
+                    _formatStatValue(stat.key, statsData),
                     style: context.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: style.fg,

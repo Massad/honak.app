@@ -2,43 +2,42 @@
   "success": true,
   "data": {
     "stats": {
-      "page_views": { "value": 4520, "change": 12 },
-      "new_followers": { "value": 34, "change": 8 },
-      "claimed_tenants": { "claimed": 26, "total": 26 },
-      "new_this_week": { "value": 2 }
+      "page_views": 1250,
+      "new_followers": 85,
+      "claimed_tenants": 18,
+      "total_tenants": 25,
+      "new_this_week": 2
     },
     "recently_linked": [
       {
-        "id": "t-25",
-        "name": "نور فاشن",
-        "floor": "الطابق ٢",
-        "unit": "F2-40",
-        "logo_url": "https://picsum.photos/seed/nourfashion/80/80",
-        "linked_at": 1707800000
-      },
-      {
         "id": "t-samsung",
         "name": "Samsung Jordan",
-        "floor": "الأرضي",
         "unit": "G-18",
+        "category": "إلكترونيات",
+        "time": "منذ 3 أيام",
+        "page_id": "samsung-jo",
         "logo_url": "https://picsum.photos/seed/samsungjo/80/80",
-        "linked_at": 1707700000
+        "status": "unreviewed"
       },
       {
-        "id": "t-12",
-        "name": "زارا",
-        "floor": "الطابق ١",
-        "unit": "F1-12",
-        "logo_url": "https://picsum.photos/seed/zarajo/80/80",
-        "linked_at": 1707600000
+        "id": "t-25",
+        "name": "نور فاشن",
+        "unit": "F2-40",
+        "category": "أزياء",
+        "time": "منذ 5 أيام",
+        "page_id": "nour-fashion",
+        "logo_url": "https://picsum.photos/seed/nourfashion/80/80",
+        "status": "unreviewed"
       },
       {
-        "id": "t-6",
-        "name": "ملك الشاورما",
-        "floor": "الأرضي",
-        "unit": "G-06",
-        "logo_url": "https://picsum.photos/seed/shawarmaking/80/80",
-        "linked_at": 1707500000
+        "id": "t-24",
+        "name": "قهوة الحارة",
+        "unit": "F1-22",
+        "category": "طعام",
+        "time": "منذ أسبوع",
+        "page_id": "hara-coffee",
+        "logo_url": "https://picsum.photos/seed/haracoffee/80/80",
+        "status": "reviewed"
       }
     ],
     "insights": {

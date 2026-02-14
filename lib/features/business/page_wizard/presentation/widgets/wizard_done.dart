@@ -62,7 +62,7 @@ class WizardDone extends ConsumerWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 decoration: BoxDecoration(
-                  color: context.colorScheme.surfaceVariant,
+                  color: context.colorScheme.surfaceContainerHighest,
                   borderRadius: AppRadius.card,
                 ),
                 child: Row(

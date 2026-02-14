@@ -104,7 +104,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: context.colorScheme.surfaceVariant,
+                    color: context.colorScheme.surfaceContainerHighest,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -150,7 +150,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                 decoration: BoxDecoration(
                                   color: active
                                       ? AppColors.primary
-                                      : context.colorScheme.surfaceVariant,
+                                      : context.colorScheme.surfaceContainerHighest,
                                   borderRadius:
                                       BorderRadius.circular(AppRadius.sm),
                                 ),
@@ -192,7 +192,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                           color: context.colorScheme.onSurfaceVariant,
                         ),
                         filled: true,
-                        fillColor: context.colorScheme.surfaceVariant,
+                        fillColor: context.colorScheme.surfaceContainerHighest,
                         border: OutlineInputBorder(
                           borderRadius: AppRadius.cardInner,
                           borderSide: BorderSide.none,
@@ -216,7 +216,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                           color: context.colorScheme.onSurfaceVariant,
                         ),
                         filled: true,
-                        fillColor: context.colorScheme.surfaceVariant,
+                        fillColor: context.colorScheme.surfaceContainerHighest,
                         border: OutlineInputBorder(
                           borderRadius: AppRadius.cardInner,
                           borderSide: BorderSide.none,
@@ -242,7 +242,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                         vertical: AppSpacing.md,
                       ),
                       decoration: BoxDecoration(
-                        color: context.colorScheme.surfaceVariant,
+                        color: context.colorScheme.surfaceContainerHighest,
                         borderRadius: AppRadius.cardInner,
                       ),
                       child: Row(
@@ -292,7 +292,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                       children: [
                         _circleBtn(
                           icon: Icons.remove,
-                          color: context.colorScheme.surfaceVariant,
+                          color: context.colorScheme.surfaceContainerHighest,
                           iconColor: context.colorScheme.onSurface,
                           onTap: () => setState(
                             () => _emptyQty = (_emptyQty - 1).clamp(0, 999),
@@ -345,7 +345,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                 decoration: BoxDecoration(
                                   color: active
                                       ? AppColors.primary
-                                      : context.colorScheme.surfaceVariant,
+                                      : context.colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(
                                     AppRadius.sm,
                                   ),
@@ -378,7 +378,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                           color: context.colorScheme.onSurfaceVariant,
                         ),
                         filled: true,
-                        fillColor: context.colorScheme.surfaceVariant,
+                        fillColor: context.colorScheme.surfaceContainerHighest,
                         border: OutlineInputBorder(
                           borderRadius: AppRadius.cardInner,
                           borderSide: BorderSide.none,
@@ -414,7 +414,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                 backgroundColor: AppColors.success,
                                 foregroundColor: Colors.white,
                                 disabledBackgroundColor:
-                                    context.colorScheme.surfaceVariant,
+                                    context.colorScheme.surfaceContainerHighest,
                                 disabledForegroundColor:
                                     context.colorScheme.onSurfaceVariant,
                                 shape: RoundedRectangleBorder(

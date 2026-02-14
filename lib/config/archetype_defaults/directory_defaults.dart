@@ -20,6 +20,16 @@ const directoryDefault = BusinessTypeConfig(
   dashboard: DashboardConfig(
     statsLabels: [
       DashboardStatLabel(
+        key: 'new_this_week',
+        label: 'جديد هذا الأسبوع',
+        icon: 'user-plus',
+      ),
+      DashboardStatLabel(
+        key: 'claimed_tenants',
+        label: 'مربوط',
+        icon: 'store',
+      ),
+      DashboardStatLabel(
         key: 'new_followers',
         label: 'متابع جديد',
         icon: 'users',
@@ -28,11 +38,6 @@ const directoryDefault = BusinessTypeConfig(
         key: 'page_views',
         label: 'مشاهدة',
         icon: 'eye',
-      ),
-      DashboardStatLabel(
-        key: 'tenants',
-        label: 'مستأجرين',
-        icon: 'store',
       ),
     ],
     sections: [
@@ -48,10 +53,16 @@ const directoryDefault = BusinessTypeConfig(
         color: 'bg-blue-50 text-[#1A73E8]',
       ),
       DashboardAction(
+        id: 'edit_featured',
+        labelAr: 'المميزون',
+        icon: 'sparkles',
+        color: 'bg-orange-50 text-[#FF9800]',
+      ),
+      DashboardAction(
         id: 'create_post',
-        labelAr: 'نشر تحديث',
+        labelAr: 'منشور جديد',
         icon: 'edit-3',
-        color: 'bg-purple-50 text-purple-600',
+        color: 'bg-green-50 text-[#43A047]',
       ),
     ],
   ),

@@ -107,7 +107,7 @@ class TypeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: selected ? AppColors.primary.withAlpha(25) : context.colorScheme.surfaceVariant,
+      color: selected ? AppColors.primary.withAlpha(25) : context.colorScheme.surfaceContainerHighest,
       borderRadius: AppRadius.pill,
       child: InkWell(
         onTap: onTap,
@@ -267,7 +267,7 @@ class TypeListTile extends StatelessWidget {
                 vertical: AppSpacing.xxs,
               ),
               decoration: BoxDecoration(
-                color: context.colorScheme.surfaceVariant,
+                color: context.colorScheme.surfaceContainerHighest,
                 borderRadius: AppRadius.badge,
               ),
               child: Text(

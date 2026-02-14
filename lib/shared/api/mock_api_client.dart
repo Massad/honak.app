@@ -335,6 +335,8 @@ class MockApiClient implements ApiClient {
           return await _resolvePageSubFixture(pageId, 'queue');
         case 'dropoff':
           return await _resolvePageSubFixture(pageId, 'dropoff');
+        case 'directory':
+          return 'business/directory/$pageId';
         case 'posts':
           return 'feed/feed_home';
         case 'team':
