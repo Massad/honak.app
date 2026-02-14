@@ -28,8 +28,8 @@ class _SourceBadge extends StatelessWidget {
         ),
       QueueSource.walkIn => (
           'حضوري',
-          const Color(0xFF6B7280),
-          const Color(0xFFF3F4F6),
+          context.colorScheme.onSurfaceVariant,
+          context.colorScheme.surfaceContainerLow,
           Icons.directions_walk_rounded,
         ),
     };
@@ -238,7 +238,7 @@ class _PhotoToggle extends StatelessWidget {
         color: active ? const Color(0xFFEFF6FF) : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: active ? _activeColor : const Color(0xFFE5E7EB),
+          color: active ? _activeColor : context.colorScheme.outlineVariant,
           width: active ? 2 : 1,
         ),
       ),
@@ -247,11 +247,11 @@ class _PhotoToggle extends StatelessWidget {
         children: [
           Icon(icon,
               size: 12,
-              color: active ? _activeColor : const Color(0xFF9CA3AF)),
+              color: active ? _activeColor : context.colorScheme.onSurfaceVariant),
           const SizedBox(width: 6),
           Text(label,
               style: context.textTheme.labelSmall?.copyWith(
-                  color: active ? _activeColor : const Color(0xFF9CA3AF),
+                  color: active ? _activeColor : context.colorScheme.onSurfaceVariant,
                   fontSize: 11)),
           if (active) ...[
             const SizedBox(width: 4),
@@ -307,7 +307,7 @@ class _StatusPickerSheet extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: const Color(0xFFE5E7EB),
+                color: context.colorScheme.outlineVariant,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -323,12 +323,12 @@ class _StatusPickerSheet extends StatelessWidget {
                       children: [
                         Text('تغيير حالة الطلب',
                             style: context.textTheme.bodySmall?.copyWith(
-                                color: const Color(0xFF111827),
+                                color: context.colorScheme.onSurface,
                                 fontSize: 14)),
                         const SizedBox(height: 2),
                         Text('$customerName — $packageName',
                             style: context.textTheme.labelSmall?.copyWith(
-                                color: const Color(0xFF9CA3AF),
+                                color: context.colorScheme.onSurfaceVariant,
                                 fontSize: 10)),
                       ],
                     ),
@@ -339,18 +339,18 @@ class _StatusPickerSheet extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3F4F6),
+                        color: context.colorScheme.surfaceContainerLow,
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Icon(Icons.close,
-                          size: 16, color: Color(0xFF6B7280)),
+                      child: Icon(Icons.close,
+                          size: 16, color: context.colorScheme.onSurfaceVariant),
                     ),
                   ),
                 ],
               ),
             ),
 
-            const Divider(height: 1, color: Color(0xFFF3F4F6)),
+            Divider(height: 1, color: context.colorScheme.surfaceContainerLow),
 
             // Current status
             Padding(
@@ -360,7 +360,7 @@ class _StatusPickerSheet extends StatelessWidget {
                 children: [
                   Text('الحالة الحالية',
                       style: context.textTheme.labelSmall?.copyWith(
-                          color: const Color(0xFF9CA3AF), fontSize: 10)),
+                          color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
                   const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsetsDirectional.symmetric(
@@ -383,7 +383,7 @@ class _StatusPickerSheet extends StatelessWidget {
                         const Spacer(),
                         Text('الحالية',
                             style: context.textTheme.labelSmall?.copyWith(
-                                color: const Color(0xFFD1D5DB),
+                                color: context.colorScheme.outline,
                                 fontSize: 10)),
                       ],
                     ),
@@ -400,7 +400,7 @@ class _StatusPickerSheet extends StatelessWidget {
                 children: [
                   Text('نقل إلى',
                       style: context.textTheme.labelSmall?.copyWith(
-                          color: const Color(0xFF9CA3AF), fontSize: 10)),
+                          color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
                   const SizedBox(height: 8),
                   ...pickerStatuses
                       .where((s) => s != currentStatus)
@@ -426,7 +426,7 @@ class _StatusPickerSheet extends StatelessWidget {
                             border: Border.all(
                               color: isBack
                                   ? const Color(0xFFFED7AA)
-                                  : const Color(0xFFF3F4F6),
+                                  : context.colorScheme.surfaceContainerLow,
                             ),
                           ),
                           child: Row(

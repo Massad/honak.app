@@ -85,7 +85,7 @@ class StatusCardBody extends StatelessWidget {
                             post.page.name,
                             style: context.textTheme.bodySmall?.copyWith(
                               fontSize: 12,
-                              color: const Color(0xFF374151),
+                              color: context.colorScheme.onSurface,
                               fontWeight: FontWeight.w500,
                             ),
                           ),

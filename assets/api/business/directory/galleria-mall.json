@@ -1,0 +1,133 @@
+{
+  "success": true,
+  "data": {
+    "tenants": [
+      {
+        "id": "t-pharmacy",
+        "name": "صيدلية سلامة",
+        "name_en": "Salama Pharmacy",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/salama-pharmacy/100",
+        "tags": ["صيدلية"]
+      },
+      {
+        "id": "t-minimarket",
+        "name": "ميني ماركت",
+        "name_en": "Mini Market",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/minimarket/100",
+        "tags": ["سوبرماركت"]
+      },
+      {
+        "id": "t-pinky",
+        "name": "بينكي نيلز",
+        "name_en": "Pinky Nails",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/pinkynails/100",
+        "tags": ["تجميل", "أظافر"]
+      },
+      {
+        "id": "t-maxfashion",
+        "name": "ماكس فاشن",
+        "name_en": "Max Fashion",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/maxfashion/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-terranova",
+        "name": "تيرانوفا",
+        "name_en": "Terranova",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/terranova/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-gulf-shoes",
+        "name": "أحذية الخليج",
+        "name_en": "Gulf Shoes",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-10",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/gulfshoes/100",
+        "tags": ["أحذية"]
+      },
+      {
+        "id": "t-subway",
+        "name": "صب واي",
+        "name_en": "Subway",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/subway/100",
+        "tags": ["ساندويشات"]
+      },
+      {
+        "id": "t-juice-time",
+        "name": "عصير تايم",
+        "name_en": "Juice Time",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-05",
+        "is_open": true,
+        "invited_at": "2026-02-05T10:00:00Z",
+        "logo_url": "https://picsum.photos/seed/juicetime/100",
+        "tags": ["عصائر"]
+      },
+      {
+        "id": "t-baskin",
+        "name": "باسكن روبنز",
+        "name_en": "Baskin Robbins",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-08",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/baskinrobbins/100",
+        "tags": ["آيس كريم"]
+      },
+      {
+        "id": "t-bookstore",
+        "name": "مكتبة أوراق",
+        "name_en": "Awraq Bookstore",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-08",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/awraq-bookstore/100",
+        "tags": ["مكتبة", "قرطاسية"]
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات", "tenant_count": 4},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء", "tenant_count": 3},
+      {"id": "f2", "name": "الطابق ٢", "label": "طعام", "tenant_count": 3}
+    ],
+    "categories": ["خدمات", "أزياء", "طعام"],
+    "amenities": ["مواقف مجانية", "مصاعد", "مصلى"],
+    "featured_tenant_ids": ["t-maxfashion", "t-subway"],
+    "stats": {
+      "total": 10,
+      "claimed": 0,
+      "invited": 1,
+      "unclaimed": 9,
+      "new_this_week": 0
+    }
+  }
+}

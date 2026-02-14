@@ -1,0 +1,109 @@
+{
+  "success": true,
+  "data": {
+    "tenants": [
+      {
+        "id": "t-dutyfree",
+        "name": "السوق الحرة",
+        "name_en": "Duty Free",
+        "category": "تسوق",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/dutyfree/100",
+        "tags": ["تسوق", "هدايا"]
+      },
+      {
+        "id": "t-souvenir",
+        "name": "محل تذكارات",
+        "name_en": "Souvenir Shop",
+        "category": "تسوق",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/souvenirshop/100",
+        "tags": ["تذكارات", "هدايا"]
+      },
+      {
+        "id": "t-beachcafe",
+        "name": "كافيه الشاطئ",
+        "name_en": "Beach Café",
+        "category": "مطاعم",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/beachcafe/100",
+        "tags": ["كافيه"]
+      },
+      {
+        "id": "t-bahar",
+        "name": "مطعم البحر",
+        "name_en": "Al Bahar Restaurant",
+        "category": "مطاعم",
+        "floor_id": "ground",
+        "unit": "G-07",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/albahar/100",
+        "tags": ["مطعم", "مأكولات بحرية"]
+      },
+      {
+        "id": "t-diveshop",
+        "name": "متجر الغوص",
+        "name_en": "Dive Shop",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/diveshop/100",
+        "tags": ["غوص", "رياضة"]
+      },
+      {
+        "id": "t-spa",
+        "name": "سبا أيلة",
+        "name_en": "Spa Ayla",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-03",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/spaayla/100",
+        "tags": ["سبا", "تدليك"]
+      },
+      {
+        "id": "t-fayrouz",
+        "name": "فيروز فاشن",
+        "name_en": "Fayrouz Fashion",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/fayrouzfashion/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-icecream",
+        "name": "آيس كريم كورنر",
+        "name_en": "Ice Cream Corner",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-07",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/icecreamcorner/100",
+        "tags": ["آيس كريم"]
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "تسوق ومطاعم", "tenant_count": 4},
+      {"id": "f1", "name": "الطابق ١", "label": "خدمات", "tenant_count": 4}
+    ],
+    "categories": ["تسوق", "مطاعم", "خدمات"],
+    "amenities": ["مواقف مجانية", "واي فاي", "مصاعد", "مصلى"],
+    "featured_tenant_ids": ["t-beachcafe", "t-spa"],
+    "stats": {
+      "total": 8,
+      "claimed": 0,
+      "invited": 0,
+      "unclaimed": 8,
+      "new_this_week": 0
+    }
+  }
+}

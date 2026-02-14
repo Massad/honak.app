@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "data": {
+    "id": "cinema-city",
+    "business_type_id": "cinema",
+    "business_type_name": "سينما",
+    "category_name": "ترفيه",
+    "explore_category": "cat_entertainment",
+    "name": "سينما سيتي",
+    "name_en": "Cinema City",
+    "slug": "cinema-city",
+    "handle": "cinema-city",
+    "store_type": "physical",
+    "archetype": "reservation",
+    "description": "سينما سيتي — ٨ صالات عرض بتقنية IMAX و Dolby Atmos. أحدث الأفلام العربية والعالمية. حجز المقاعد مسبقاً متاح.",
+    "avatar_url": "https://picsum.photos/seed/cinemacity/200",
+    "cover_url": "https://picsum.photos/seed/cinemacity-cover/800/400",
+    "phone": "+96265922250",
+    "location": {
+      "lat": 31.957,
+      "lng": 35.882,
+      "label": "City Mall — الطابق ٣، F3-01",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "venue_id": "city-mall",
+    "venue_floor": "الطابق ٣",
+    "venue_unit": "F3-01",
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "11:00", "close": "00:00"},
+      "monday": {"enabled": true, "open": "11:00", "close": "00:00"},
+      "tuesday": {"enabled": true, "open": "11:00", "close": "00:00"},
+      "wednesday": {"enabled": true, "open": "11:00", "close": "00:00"},
+      "thursday": {"enabled": true, "open": "11:00", "close": "01:00"},
+      "friday": {"enabled": true, "open": "11:00", "close": "01:00"},
+      "saturday": {"enabled": true, "open": "11:00", "close": "00:00"}
+    },
+    "operating_hours": "يومياً: ١١:٠٠ ص – ١٢:٠٠ ص | خميس وجمعة حتى ١:٠٠ ص",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 15200,
+    "posts_count": 95,
+    "is_following": false,
+    "trust_score": 92,
+    "trust_metrics": [
+      {"label": "صالات عرض", "value": "٨", "icon": "theaters"},
+      {"label": "تقنية", "value": "IMAX + Dolby", "icon": "surround_sound"},
+      {"label": "حجز مسبق", "value": "متاح", "icon": "event_seat"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": [
+      {"id": "s_cinema1", "image_url": "https://picsum.photos/seed/cinemastory1/400/700", "duration": 5, "created_at": 1707800000}
+    ]
+  }
+}

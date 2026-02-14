@@ -259,11 +259,11 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                   ),
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Text(
                   'إثبات ملكية',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14, color: Color(0xFF111827)),
+                  style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
                 ),
               ),
               const SizedBox(width: 28), // balance
@@ -384,9 +384,9 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                 ),
                 const SizedBox(height: 20),
 
-                const Text(
+                Text(
                   'تم إرسال طلبك بنجاح',
-                  style: TextStyle(fontSize: 20, color: Color(0xFF111827)),
+                  style: TextStyle(fontSize: 20, color: context.colorScheme.onSurface),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -394,9 +394,9 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                       ? 'سنتواصل معك لتأكيد موعد الزيارة.\nفريقنا سيساعدك بتفعيل الصفحة بالكامل.'
                       : 'سيراجع فريق هناك طلبك خلال ٢٤ ساعة.\nسنتواصل معك عبر الرقم المسجل.',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
-                    color: Color(0xFF6B7280),
+                    color: context.colorScheme.onSurfaceVariant,
                     height: 1.6,
                   ),
                 ),
@@ -408,16 +408,16 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                   constraints: const BoxConstraints(maxWidth: 340),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF9FAFB),
+                    color: context.colorScheme.surfaceContainerLowest,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFFF3F4F6)),
+                    border: Border.all(color: context.colorScheme.outlineVariant),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'ماذا بعد؟',
-                        style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                        style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
                       ),
                       const SizedBox(height: 12),
                       ...(isInPerson
@@ -463,12 +463,12 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                           children: [
                             Text(
                               widget.page.name,
-                              style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
+                              style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               '@${widget.page.handle ?? widget.page.slug}',
-                              style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280)),
+                              style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
                             ),
                           ],
                         ),
@@ -533,7 +533,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: Text(text, style: const TextStyle(fontSize: 14, color: Color(0xFF374151))),
+          child: Text(text, style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
         ),
       ],
     );
@@ -590,12 +590,12 @@ class _StepIntro extends StatelessWidget {
                     children: [
                       Text(
                         page.name,
-                        style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
+                        style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
                       ),
                       const SizedBox(height: 2),
                       Text(
                         '@${page.handle ?? page.slug}',
-                        style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                        style: TextStyle(fontSize: 11, color: context.colorScheme.onSurfaceVariant),
                       ),
                       if (page.location?.label != null) ...[
                         const SizedBox(height: 4),
@@ -621,14 +621,14 @@ class _StepIntro extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          const Text(
+          Text(
             'إثبات ملكية هذه الصفحة',
-            style: TextStyle(fontSize: 18, color: Color(0xFF111827)),
+            style: TextStyle(fontSize: 18, color: context.colorScheme.onSurface),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             'تم إنشاء هذه الصفحة تلقائياً من بيانات عامة.\nإذا كنت صاحب هذا النشاط أو مفوّضاً بإدارته،\nيمكنك إثبات ملكيتك للتحكم الكامل بالصفحة.',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.6),
+            style: TextStyle(fontSize: 14, color: context.colorScheme.onSurfaceVariant, height: 1.6),
           ),
           const SizedBox(height: 24),
 
@@ -637,7 +637,7 @@ class _StepIntro extends StatelessWidget {
             decoration: BoxDecoration(
               color: context.colorScheme.surface,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFF3F4F6)),
+              border: Border.all(color: context.colorScheme.outlineVariant),
             ),
             child: Column(
               children: [
@@ -645,26 +645,26 @@ class _StepIntro extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF9FAFB),
+                    color: context.colorScheme.surfaceContainerLowest,
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                     border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
                   ),
-                  child: const Text(
+                  child: Text(
                     'بعد إثبات الملكية ستتمكن من:',
-                    style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                    style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      _benefitRow(Icons.storefront, 'إدارة معلومات الصفحة وتحديثها'),
+                      _benefitRow(context, Icons.storefront, 'إدارة معلومات الصفحة وتحديثها'),
                       const SizedBox(height: 12),
-                      _benefitRow(Icons.description_outlined, 'إضافة منتجاتك أو خدماتك أو قائمتك'),
+                      _benefitRow(context, Icons.description_outlined, 'إضافة منتجاتك أو خدماتك أو قائمتك'),
                       const SizedBox(height: 12),
-                      _benefitRow(Icons.shield_outlined, 'تفعيل استقبال الطلبات عبر هناك'),
+                      _benefitRow(context, Icons.shield_outlined, 'تفعيل استقبال الطلبات عبر هناك'),
                       const SizedBox(height: 12),
-                      _benefitRow(Icons.person_outline, 'إدارة فريق العمل والصلاحيات'),
+                      _benefitRow(context, Icons.person_outline, 'إدارة فريق العمل والصلاحيات'),
                     ],
                   ),
                 ),
@@ -686,18 +686,18 @@ class _StepIntro extends StatelessWidget {
               children: [
                 Icon(Icons.directions_car_outlined, size: 16, color: _green),
                 const SizedBox(width: 10),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'نجي نزورك!',
-                        style: TextStyle(fontSize: 14, color: Color(0xFF111827)),
+                        style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
                       ),
                       SizedBox(height: 4),
                       Text(
                         'فريقنا بزور المحلات لمساعدة أصحابها بتفعيل صفحاتهم.\nبنتحقق منك شخصياً وبنساعدك تعبّي كل شي.',
-                        style: TextStyle(fontSize: 12, color: Color(0xFF6B7280), height: 1.5),
+                        style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant, height: 1.5),
                       ),
                     ],
                   ),
@@ -720,18 +720,18 @@ class _StepIntro extends StatelessWidget {
               children: [
                 Icon(Icons.access_time, size: 16, color: Colors.amber.shade700),
                 const SizedBox(width: 10),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'العملية بسيطة ومجانية',
-                        style: TextStyle(fontSize: 14, color: Color(0xFF111827)),
+                        style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
                       ),
                       SizedBox(height: 4),
                       Text(
                         'بياناتك + تحقق من الرقم + إثبات بسيط = صفحتك جاهزة.',
-                        style: TextStyle(fontSize: 12, color: Color(0xFF6B7280), height: 1.5),
+                        style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant, height: 1.5),
                       ),
                     ],
                   ),
@@ -744,7 +744,7 @@ class _StepIntro extends StatelessWidget {
     );
   }
 
-  Widget _benefitRow(IconData icon, String text) {
+  Widget _benefitRow(BuildContext context, IconData icon, String text) {
     return Row(
       children: [
         Container(
@@ -758,7 +758,7 @@ class _StepIntro extends StatelessWidget {
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: Text(text, style: const TextStyle(fontSize: 14, color: Color(0xFF374151))),
+          child: Text(text, style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
         ),
       ],
     );
@@ -805,13 +805,13 @@ class _StepInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('بياناتك الشخصية', style: TextStyle(fontSize: 18, color: Color(0xFF111827))),
+          Text('بياناتك الشخصية', style: TextStyle(fontSize: 18, color: context.colorScheme.onSurface)),
           const SizedBox(height: 4),
-          const Text('حدّثنا عنك وعن علاقتك بهذا النشاط', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          Text('حدّثنا عنك وعن علاقتك بهذا النشاط', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurfaceVariant)),
           const SizedBox(height: 24),
 
           // Full Name
-          const Text('الاسم الكامل', style: TextStyle(fontSize: 14, color: Color(0xFF374151))),
+          Text('الاسم الكامل', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
           const SizedBox(height: 8),
           TextField(
             controller: nameController,
@@ -820,7 +820,7 @@ class _StepInfo extends StatelessWidget {
               hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
               prefixIcon: Icon(Icons.person_outline, size: 16, color: context.colorScheme.onSurfaceVariant),
               filled: true,
-              fillColor: const Color(0xFFF9FAFB),
+              fillColor: context.colorScheme.surfaceContainerLowest,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: context.colorScheme.outlineVariant),
@@ -835,12 +835,12 @@ class _StepInfo extends StatelessWidget {
               ),
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             ),
-            style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
+            style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
           ),
           const SizedBox(height: 20),
 
           // Phone
-          const Text('رقم الهاتف', style: TextStyle(fontSize: 14, color: Color(0xFF374151))),
+          Text('رقم الهاتف', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
           const SizedBox(height: 8),
           Directionality(
             textDirection: TextDirection.ltr,
@@ -857,7 +857,7 @@ class _StepInfo extends StatelessWidget {
                       hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
                       prefixIcon: Icon(Icons.phone_outlined, size: 16, color: context.colorScheme.onSurfaceVariant),
                       filled: true,
-                      fillColor: const Color(0xFFF9FAFB),
+                      fillColor: context.colorScheme.surfaceContainerLowest,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(color: context.colorScheme.outlineVariant),
@@ -876,7 +876,7 @@ class _StepInfo extends StatelessWidget {
                       ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     ),
-                    style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
+                    style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(10)],
                   ),
                 ),
@@ -926,7 +926,7 @@ class _StepInfo extends StatelessWidget {
               textDirection: TextDirection.rtl,
               child: Text(
                 'أدخل الرمز المرسل إلى ${phoneController.text}',
-                style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                style: TextStyle(fontSize: 11, color: context.colorScheme.onSurfaceVariant),
               ),
             ),
             const SizedBox(height: 8),
@@ -943,7 +943,7 @@ class _StepInfo extends StatelessWidget {
                         hintText: '------',
                         hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14, letterSpacing: 8),
                         filled: true,
-                        fillColor: const Color(0xFFF9FAFB),
+                        fillColor: context.colorScheme.surfaceContainerLowest,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: context.colorScheme.outlineVariant),
@@ -958,7 +958,7 @@ class _StepInfo extends StatelessWidget {
                         ),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                       ),
-                      style: const TextStyle(fontSize: 14, letterSpacing: 8, color: Color(0xFF111827)),
+                      style: TextStyle(fontSize: 14, letterSpacing: 8, color: context.colorScheme.onSurface),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(6)],
                     ),
                   ),
@@ -1007,7 +1007,7 @@ class _StepInfo extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Role Selection
-          const Text('علاقتك بالنشاط', style: TextStyle(fontSize: 14, color: Color(0xFF374151))),
+          Text('علاقتك بالنشاط', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
           const SizedBox(height: 8),
           ...List.generate(_roles.length, (i) {
             final role = _roles[i];
@@ -1069,9 +1069,9 @@ class _StepVerify extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('إثبات الملكية', style: TextStyle(fontSize: 18, color: Color(0xFF111827))),
+          Text('إثبات الملكية', style: TextStyle(fontSize: 18, color: context.colorScheme.onSurface)),
           const SizedBox(height: 4),
-          const Text('اختر طريقة التحقق المناسبة لك', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          Text('اختر طريقة التحقق المناسبة لك', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurfaceVariant)),
           const SizedBox(height: 20),
 
           // GPS capture
@@ -1099,11 +1099,11 @@ class _StepVerify extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('تحديد الموقع', style: TextStyle(fontSize: 14, color: Color(0xFF111827))),
+                      Text('تحديد الموقع', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
                       const SizedBox(height: 4),
-                      const Text(
+                      Text(
                         'شارك موقعك الحالي لنتأكد إنك بالمحل. هالخطوة إلزامية لجميع الأنشطة.',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280), height: 1.5),
+                        style: TextStyle(fontSize: 11, color: context.colorScheme.onSurfaceVariant, height: 1.5),
                       ),
                       const SizedBox(height: 12),
                       if (!gpsCaptured)
@@ -1159,7 +1159,7 @@ class _StepVerify extends StatelessWidget {
           const SizedBox(height: 20),
 
           // Verification method selection
-          const Text('اختر طريقة التحقق', style: TextStyle(fontSize: 14, color: Color(0xFF374151))),
+          Text('اختر طريقة التحقق', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
           const SizedBox(height: 12),
           ...List.generate(_verificationMethods.length, (i) {
             final method = _verificationMethods[i];
@@ -1190,7 +1190,7 @@ class _StepVerify extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('متى نزوركم؟', style: TextStyle(fontSize: 14, color: Color(0xFF111827))),
+                  Text('متى نزوركم؟', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
                   const SizedBox(height: 12),
                   ..._visitTimes.map((time) {
                     final isSelected = preferredVisitTime == time.id;
@@ -1216,7 +1216,7 @@ class _StepVerify extends StatelessWidget {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(time.label, style: const TextStyle(fontSize: 14, color: Color(0xFF111827))),
+                                      Text(time.label, style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
                                       Text(time.desc, style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
                                     ],
                                   ),
@@ -1261,7 +1261,7 @@ class _StepVerify extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 'رفع ${_documentTypes.firstWhere((d) => d.id == selectedDocType).label}',
-                style: const TextStyle(fontSize: 14, color: Color(0xFF374151)),
+                style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
               ),
               const SizedBox(height: 8),
               if (!documentUploaded)
@@ -1319,9 +1319,9 @@ class _StepVerify extends StatelessWidget {
                           children: [
                             Text(
                               _documentTypes.firstWhere((d) => d.id == selectedDocType).label,
-                              style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
+                              style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
                             ),
-                            const Text('تم الرفع بنجاح', style: TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+                            Text('تم الرفع بنجاح', style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
                           ],
                         ),
                       ),
@@ -1349,20 +1349,20 @@ class _StepVerify extends StatelessWidget {
                 children: [
                   Icon(Icons.videocam_outlined, size: 18, color: Colors.purple.shade600),
                   const SizedBox(width: 12),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('مكالمة فيديو قصيرة', style: TextStyle(fontSize: 14, color: Color(0xFF111827))),
+                        Text('مكالمة فيديو قصيرة', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
                         SizedBox(height: 4),
                         Text(
                           'سنتصل بك مكالمة فيديو وأنت بالمحل. نشوف المكان ونتحقق\nمن هويتك — مدة المكالمة ٢-٣ دقائق فقط.',
-                          style: TextStyle(fontSize: 11, color: Color(0xFF6B7280), height: 1.5),
+                          style: TextStyle(fontSize: 11, color: context.colorScheme.onSurfaceVariant, height: 1.5),
                         ),
                         SizedBox(height: 8),
                         Text(
                           'سنتواصل معك لتحديد الموعد بعد إرسال الطلب',
-                          style: TextStyle(fontSize: 10, color: Color(0xFF9CA3AF)),
+                          style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
                         ),
                       ],
                     ),
@@ -1375,7 +1375,7 @@ class _StepVerify extends StatelessWidget {
           const SizedBox(height: 20),
           Row(
             children: [
-              const Text('ملاحظات إضافية', style: TextStyle(fontSize: 14, color: Color(0xFF374151))),
+              Text('ملاحظات إضافية', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
               const SizedBox(width: 4),
               Text('(اختياري)', style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
             ],
@@ -1388,7 +1388,7 @@ class _StepVerify extends StatelessWidget {
               hintText: 'أي معلومات تساعدنا...',
               hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
               filled: true,
-              fillColor: const Color(0xFFF9FAFB),
+              fillColor: context.colorScheme.surfaceContainerLowest,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: context.colorScheme.outlineVariant),
@@ -1403,7 +1403,7 @@ class _StepVerify extends StatelessWidget {
               ),
               contentPadding: const EdgeInsets.all(12),
             ),
-            style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
+            style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface),
           ),
         ],
       ),
@@ -1464,9 +1464,9 @@ class _StepReview extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('مراجعة وإرسال', style: TextStyle(fontSize: 18, color: Color(0xFF111827))),
+          Text('مراجعة وإرسال', style: TextStyle(fontSize: 18, color: context.colorScheme.onSurface)),
           const SizedBox(height: 4),
-          const Text('تأكد من صحة البيانات قبل الإرسال', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          Text('تأكد من صحة البيانات قبل الإرسال', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurfaceVariant)),
           const SizedBox(height: 20),
 
           // Summary card
@@ -1496,8 +1496,8 @@ class _StepReview extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(page.name, style: const TextStyle(fontSize: 14, color: Color(0xFF111827))),
-                            Text('@${page.handle ?? page.slug}', style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+                            Text(page.name, style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
+                            Text('@${page.handle ?? page.slug}', style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant)),
                           ],
                         ),
                       ),
@@ -1552,7 +1552,7 @@ class _StepReview extends StatelessWidget {
                             children: [
                               Text('ملاحظات', style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant)),
                               const SizedBox(height: 4),
-                              Text(notes, style: const TextStyle(fontSize: 14, color: Color(0xFF374151))),
+                              Text(notes, style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
                             ],
                           ),
                         ),
@@ -1575,9 +1575,9 @@ class _StepReview extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(8),
                     onTap: onEditInfo,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: Text('تعديل البيانات', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Color(0xFF4B5563))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text('تعديل البيانات', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant)),
                     ),
                   ),
                 ),
@@ -1590,9 +1590,9 @@ class _StepReview extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(8),
                     onTap: onEditVerify,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: Text('تعديل التحقق', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Color(0xFF4B5563))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text('تعديل التحقق', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant)),
                     ),
                   ),
                 ),
@@ -1605,9 +1605,9 @@ class _StepReview extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFFF9FAFB),
+              color: context.colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFF3F4F6)),
+              border: Border.all(color: context.colorScheme.outlineVariant),
             ),
             child: GestureDetector(
               onTap: () => onAgreedChanged(!agreedToTerms),
@@ -1628,11 +1628,11 @@ class _StepReview extends StatelessWidget {
                     child: agreedToTerms ? const Icon(Icons.check, size: 12, color: Colors.white) : null,
                   ),
                   const SizedBox(width: 12),
-                  const Expanded(
+                  Expanded(
                     child: Text.rich(
                       TextSpan(
                         text: 'أقر بأن المعلومات المقدمة صحيحة وأنني صاحب هذا النشاط أو مفوّض رسمياً بإدارته. أوافق على ',
-                        style: TextStyle(fontSize: 12, color: Color(0xFF4B5563), height: 1.5),
+                        style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant, height: 1.5),
                         children: [
                           TextSpan(text: 'شروط الاستخدام', style: TextStyle(color: _primary)),
                           TextSpan(text: ' و'),
@@ -1661,10 +1661,10 @@ class _StepReview extends StatelessWidget {
               children: [
                 Icon(Icons.error_outline, size: 14, color: Colors.red.shade600),
                 const SizedBox(width: 8),
-                const Expanded(
+                Expanded(
                   child: Text(
                     'تقديم معلومات كاذبة لإثبات ملكية صفحة لا تخصك يُعتبر مخالفة صريحة ويؤدي لحظر حسابك نهائياً مع إمكانية اتخاذ إجراء قانوني.',
-                    style: TextStyle(fontSize: 10, color: Color(0xFF4B5563), height: 1.5),
+                    style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant, height: 1.5),
                   ),
                 ),
               ],
@@ -1713,7 +1713,7 @@ class _StepReview extends StatelessWidget {
         Text(label, style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant)),
         const Spacer(),
         if (trailing != null) ...[trailing, const SizedBox(width: 4)],
-        Text(value, style: TextStyle(fontSize: 14, color: valueColor ?? const Color(0xFF111827))),
+        Text(value, style: TextStyle(fontSize: 14, color: valueColor ?? context.colorScheme.onSurface)),
       ],
     );
   }
@@ -1745,7 +1745,7 @@ class _SelectableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: isSelected ? _primary.withValues(alpha: 0.05) : const Color(0xFFF9FAFB),
+      color: isSelected ? _primary.withValues(alpha: 0.05) : context.colorScheme.surfaceContainerLowest,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -1787,7 +1787,7 @@ class _SelectableCard extends StatelessWidget {
                           label,
                           style: TextStyle(
                             fontSize: 14,
-                            color: isSelected ? _primary : const Color(0xFF111827),
+                            color: isSelected ? _primary : context.colorScheme.onSurface,
                           ),
                         ),
                         if (badge != null) ...[

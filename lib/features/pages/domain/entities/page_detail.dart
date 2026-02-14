@@ -167,3 +167,41 @@ class PageDetail with _$PageDetail {
   factory PageDetail.fromJson(Map<String, dynamic> json) =>
       _$PageDetailFromJson(json);
 }
+
+/// Lightweight venue info resolved from page-level or branch-level fields.
+class VenueInfo {
+  final String id;
+  final String? name;
+  final String? floor;
+  final String? unit;
+  const VenueInfo({required this.id, this.name, this.floor, this.unit});
+}
+
+extension PageDetailVenues on PageDetail {
+  /// Collects all venue references: page-level (single-location) or
+  /// branch-level (multi-location like Arab Bank in multiple malls).
+  List<VenueInfo> get venues {
+    final result = <VenueInfo>[];
+    // Page-level venue (single-location businesses with no branches)
+    if (venueId != null && branches.isEmpty) {
+      result.add(VenueInfo(
+        id: venueId!,
+        name: venueName,
+        floor: venueFloor,
+        unit: venueUnit,
+      ));
+    }
+    // Branch-level venues (multi-location businesses)
+    for (final b in branches) {
+      if (b.venueId != null) {
+        result.add(VenueInfo(
+          id: b.venueId!,
+          name: b.venueName,
+          floor: b.venueFloor,
+          unit: b.venueUnit,
+        ));
+      }
+    }
+    return result;
+  }
+}

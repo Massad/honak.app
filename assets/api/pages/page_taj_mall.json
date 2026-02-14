@@ -1,0 +1,229 @@
+{
+  "success": true,
+  "data": {
+    "id": "taj-mall",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "مراكز تجارية",
+    "explore_category": "cat_malls",
+    "name": "تاج مول",
+    "name_en": "Taj Mall",
+    "slug": "taj-mall",
+    "handle": "taj-mall",
+    "store_type": "physical",
+    "archetype": "directory",
+    "description": "تاج مول — مجمع تجاري متكامل في عبدون الجنوبي على طريق المطار. ٤ طوابق تضم إلكترونيات، أزياء، ساحة طعام كبيرة، ومرافق ترفيهية.",
+    "avatar_url": "https://picsum.photos/seed/taj-mall-avatar/200",
+    "cover_url": "https://picsum.photos/seed/taj-mall-cover/800/400",
+    "phone": "+962 6 585 3333",
+    "location": {
+      "lat": 31.949,
+      "lng": 35.870,
+      "label": "عبدون الجنوبي — طريق المطار",
+      "area": "عبدون الجنوبي",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ١٠:٠٠ ص — ١٠:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 2800,
+    "views_count": 41000,
+    "posts_count": 0,
+    "is_following": false,
+    "trust_score": 90,
+    "trust_metrics": [
+      {"label": "عدد المحلات", "value": "١٢", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "٢", "icon": "verified"},
+      {"label": "الطوابق", "value": "٤", "icon": "layers"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "claim_status": "unclaimed",
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "blocked_dates": [],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف — ٦٠٠ موقف"},
+      {"icon": "wifi", "label": "واي فاي مجاني"},
+      {"icon": "elevator", "label": "مصاعد"},
+      {"icon": "mosque", "label": "مصلى"},
+      {"icon": "atm", "label": "صراف آلي"}
+    ],
+    "parking_info": "مواقف تحت الأرض — ٦٠٠ موقف",
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات", "tenant_count": 3},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء", "tenant_count": 4},
+      {"id": "f2", "name": "الطابق ٢", "label": "إلكترونيات وترفيه", "tenant_count": 3},
+      {"id": "f3", "name": "الطابق ٣", "label": "طعام", "tenant_count": 3}
+    ],
+    "directory_stats": {
+      "total_tenants": 12,
+      "on_honak": 2,
+      "open_now": 11,
+      "floors": 4
+    },
+    "featured_tenant_ids": ["tj-1", "tj-3", "tj-4"],
+    "mall_announcements": [
+      {
+        "id": "ann_tj1",
+        "type": "promotion",
+        "title": "عروض الإلكترونيات",
+        "body": "خصومات حصرية على أجهزة آبل في iStore و Virgin Megastore",
+        "badge": "عرض خاص",
+        "valid_until": "2026-03-15"
+      },
+      {
+        "id": "ann_tj2",
+        "type": "event",
+        "title": "يوم العائلة",
+        "body": "أنشطة مجانية للأطفال في Fun City كل يوم جمعة",
+        "badge": "كل جمعة",
+        "valid_until": "2026-03-31"
+      },
+      {
+        "id": "ann_tj3",
+        "type": "info",
+        "title": "ساعات رمضان",
+        "body": "خلال شهر رمضان: ١٠:٠٠ ص — ١٢:٠٠ ص. ساحة الطعام تفتح بعد الإفطار.",
+        "badge": "رمضان",
+        "valid_until": "2026-04-01"
+      }
+    ],
+    "tenants": [
+      {
+        "id": "tj-1",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-02",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100"
+      },
+      {
+        "id": "tj-2",
+        "name": "كارفور",
+        "name_en": "Carrefour",
+        "category": "بقالة",
+        "floor_id": "ground",
+        "unit": "G-10",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/carrefour/100"
+      },
+      {
+        "id": "tj-3",
+        "name": "Virgin Megastore",
+        "name_en": "Virgin Megastore",
+        "category": "إلكترونيات",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/virginmegastore/100"
+      },
+      {
+        "id": "tj-4",
+        "name": "iStore",
+        "name_en": "iStore",
+        "category": "إلكترونيات",
+        "floor_id": "f2",
+        "unit": "F2-10",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/istore/100"
+      },
+      {
+        "id": "tj-5",
+        "name": "Pull & Bear",
+        "name_en": "Pull & Bear",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/pullandbear/100"
+      },
+      {
+        "id": "tj-6",
+        "name": "سبلاش",
+        "name_en": "Splash",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-12",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/splash/100"
+      },
+      {
+        "id": "tj-7",
+        "name": "ماركس آند سبنسر",
+        "name_en": "Marks & Spencer",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-20",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/marksandspencer/100"
+      },
+      {
+        "id": "tj-8",
+        "name": "برغر كينغ",
+        "name_en": "Burger King",
+        "category": "طعام",
+        "floor_id": "f3",
+        "unit": "F3-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/burgerking/100"
+      },
+      {
+        "id": "tj-9",
+        "name": "شاورمر",
+        "name_en": "Shawarmer",
+        "category": "طعام",
+        "floor_id": "f3",
+        "unit": "F3-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/shawarmer/100"
+      },
+      {
+        "id": "tj-10",
+        "name": "كوستا كوفي",
+        "name_en": "Costa Coffee",
+        "category": "طعام",
+        "floor_id": "f3",
+        "unit": "F3-10",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/costacoffee/100"
+      },
+      {
+        "id": "tj-11",
+        "name": "فن سيتي",
+        "name_en": "Fun City",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-20",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/funcity/100"
+      },
+      {
+        "id": "tj-12",
+        "name": "موموسو",
+        "name_en": "Mumuso",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-25",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/mumuso/100"
+      }
+    ]
+  }
+}

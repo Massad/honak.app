@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
@@ -145,10 +146,10 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                         Flexible(
                           child: Text(
                             entry.customerName,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xFF111827),
+                              color: context.colorScheme.onSurface,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -358,9 +359,9 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                   children: [
                     Text(
                       entry.customerName,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: Color(0xFF111827),
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     if (entry.customerPhone != null) ...[
@@ -487,9 +488,9 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                       if (entry.vehicleType != null)
                         Text(
                           entry.vehicleType!,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: Color(0xFF111827),
+                            color: context.colorScheme.onSurface,
                           ),
                         ),
                       if (entry.vehicleColor != null) ...[
@@ -550,9 +551,9 @@ class _QueueDetailViewState extends State<QueueDetailView> {
             children: [
               Text(
                 entry.packageName,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
-                  color: Color(0xFF111827),
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               Text(
@@ -693,7 +694,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                   fontWeight: FontWeight.w600,
                   color: hasDiscount
                       ? const Color(0xFF43A047)
-                      : const Color(0xFF111827),
+                      : context.colorScheme.onSurface,
                 ),
               ),
             ],

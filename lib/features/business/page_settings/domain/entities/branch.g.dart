@@ -18,6 +18,11 @@ _$BranchImpl _$$BranchImplFromJson(Map<String, dynamic> json) => _$BranchImpl(
   longitude: (json['longitude'] as num?)?.toDouble(),
   isMain: json['is_main'] as bool? ?? false,
   active: json['active'] as bool? ?? true,
+  locationType: json['location_type'] as String? ?? 'standalone',
+  venueId: json['venue_id'] as String?,
+  venueName: json['venue_name'] as String?,
+  venueFloor: json['venue_floor'] as String?,
+  venueUnit: json['venue_unit'] as String?,
 );
 
 Map<String, dynamic> _$$BranchImplToJson(_$BranchImpl instance) =>
@@ -33,4 +38,9 @@ Map<String, dynamic> _$$BranchImplToJson(_$BranchImpl instance) =>
       'longitude': instance.longitude,
       'is_main': instance.isMain,
       'active': instance.active,
+      'location_type': instance.locationType,
+      'venue_id': instance.venueId,
+      'venue_name': instance.venueName,
+      'venue_floor': instance.venueFloor,
+      'venue_unit': instance.venueUnit,
     };

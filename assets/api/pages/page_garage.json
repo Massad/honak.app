@@ -68,7 +68,9 @@
         "city": "الزرقاء",
         "city_id": "zarqa",
         "neighborhood_id": "downtown",
-        "address": "الزرقاء، شارع الملك حسين"
+        "address": "الزرقاء، شارع الملك حسين",
+        "lat": 32.0560,
+        "lng": 36.0940
       }
     ]
   }

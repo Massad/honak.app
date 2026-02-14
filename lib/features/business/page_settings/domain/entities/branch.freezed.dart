@@ -33,6 +33,16 @@ mixin _$Branch {
   @JsonKey(name: 'is_main')
   bool get isMain => throw _privateConstructorUsedError;
   bool get active => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location_type')
+  String get locationType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_id')
+  String? get venueId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_name')
+  String? get venueName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_floor')
+  String? get venueFloor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_unit')
+  String? get venueUnit => throw _privateConstructorUsedError;
 
   /// Serializes this Branch to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,6 +70,11 @@ abstract class $BranchCopyWith<$Res> {
     double? longitude,
     @JsonKey(name: 'is_main') bool isMain,
     bool active,
+    @JsonKey(name: 'location_type') String locationType,
+    @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
+    @JsonKey(name: 'venue_floor') String? venueFloor,
+    @JsonKey(name: 'venue_unit') String? venueUnit,
   });
 }
 
@@ -89,6 +104,11 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
     Object? longitude = freezed,
     Object? isMain = null,
     Object? active = null,
+    Object? locationType = null,
+    Object? venueId = freezed,
+    Object? venueName = freezed,
+    Object? venueFloor = freezed,
+    Object? venueUnit = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -136,6 +156,26 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
                 ? _value.active
                 : active // ignore: cast_nullable_to_non_nullable
                       as bool,
+            locationType: null == locationType
+                ? _value.locationType
+                : locationType // ignore: cast_nullable_to_non_nullable
+                      as String,
+            venueId: freezed == venueId
+                ? _value.venueId
+                : venueId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            venueName: freezed == venueName
+                ? _value.venueName
+                : venueName // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            venueFloor: freezed == venueFloor
+                ? _value.venueFloor
+                : venueFloor // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            venueUnit: freezed == venueUnit
+                ? _value.venueUnit
+                : venueUnit // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -162,6 +202,11 @@ abstract class _$$BranchImplCopyWith<$Res> implements $BranchCopyWith<$Res> {
     double? longitude,
     @JsonKey(name: 'is_main') bool isMain,
     bool active,
+    @JsonKey(name: 'location_type') String locationType,
+    @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
+    @JsonKey(name: 'venue_floor') String? venueFloor,
+    @JsonKey(name: 'venue_unit') String? venueUnit,
   });
 }
 
@@ -190,6 +235,11 @@ class __$$BranchImplCopyWithImpl<$Res>
     Object? longitude = freezed,
     Object? isMain = null,
     Object? active = null,
+    Object? locationType = null,
+    Object? venueId = freezed,
+    Object? venueName = freezed,
+    Object? venueFloor = freezed,
+    Object? venueUnit = freezed,
   }) {
     return _then(
       _$BranchImpl(
@@ -237,6 +287,26 @@ class __$$BranchImplCopyWithImpl<$Res>
             ? _value.active
             : active // ignore: cast_nullable_to_non_nullable
                   as bool,
+        locationType: null == locationType
+            ? _value.locationType
+            : locationType // ignore: cast_nullable_to_non_nullable
+                  as String,
+        venueId: freezed == venueId
+            ? _value.venueId
+            : venueId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        venueName: freezed == venueName
+            ? _value.venueName
+            : venueName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        venueFloor: freezed == venueFloor
+            ? _value.venueFloor
+            : venueFloor // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        venueUnit: freezed == venueUnit
+            ? _value.venueUnit
+            : venueUnit // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -257,6 +327,11 @@ class _$BranchImpl implements _Branch {
     this.longitude,
     @JsonKey(name: 'is_main') this.isMain = false,
     this.active = true,
+    @JsonKey(name: 'location_type') this.locationType = 'standalone',
+    @JsonKey(name: 'venue_id') this.venueId,
+    @JsonKey(name: 'venue_name') this.venueName,
+    @JsonKey(name: 'venue_floor') this.venueFloor,
+    @JsonKey(name: 'venue_unit') this.venueUnit,
   });
 
   factory _$BranchImpl.fromJson(Map<String, dynamic> json) =>
@@ -287,10 +362,25 @@ class _$BranchImpl implements _Branch {
   @override
   @JsonKey()
   final bool active;
+  @override
+  @JsonKey(name: 'location_type')
+  final String locationType;
+  @override
+  @JsonKey(name: 'venue_id')
+  final String? venueId;
+  @override
+  @JsonKey(name: 'venue_name')
+  final String? venueName;
+  @override
+  @JsonKey(name: 'venue_floor')
+  final String? venueFloor;
+  @override
+  @JsonKey(name: 'venue_unit')
+  final String? venueUnit;
 
   @override
   String toString() {
-    return 'Branch(id: $id, name: $name, address: $address, phone: $phone, city: $city, neighborhood: $neighborhood, status: $status, latitude: $latitude, longitude: $longitude, isMain: $isMain, active: $active)';
+    return 'Branch(id: $id, name: $name, address: $address, phone: $phone, city: $city, neighborhood: $neighborhood, status: $status, latitude: $latitude, longitude: $longitude, isMain: $isMain, active: $active, locationType: $locationType, venueId: $venueId, venueName: $venueName, venueFloor: $venueFloor, venueUnit: $venueUnit)';
   }
 
   @override
@@ -311,7 +401,16 @@ class _$BranchImpl implements _Branch {
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
             (identical(other.isMain, isMain) || other.isMain == isMain) &&
-            (identical(other.active, active) || other.active == active));
+            (identical(other.active, active) || other.active == active) &&
+            (identical(other.locationType, locationType) ||
+                other.locationType == locationType) &&
+            (identical(other.venueId, venueId) || other.venueId == venueId) &&
+            (identical(other.venueName, venueName) ||
+                other.venueName == venueName) &&
+            (identical(other.venueFloor, venueFloor) ||
+                other.venueFloor == venueFloor) &&
+            (identical(other.venueUnit, venueUnit) ||
+                other.venueUnit == venueUnit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -329,6 +428,11 @@ class _$BranchImpl implements _Branch {
     longitude,
     isMain,
     active,
+    locationType,
+    venueId,
+    venueName,
+    venueFloor,
+    venueUnit,
   );
 
   /// Create a copy of Branch
@@ -358,6 +462,11 @@ abstract class _Branch implements Branch {
     final double? longitude,
     @JsonKey(name: 'is_main') final bool isMain,
     final bool active,
+    @JsonKey(name: 'location_type') final String locationType,
+    @JsonKey(name: 'venue_id') final String? venueId,
+    @JsonKey(name: 'venue_name') final String? venueName,
+    @JsonKey(name: 'venue_floor') final String? venueFloor,
+    @JsonKey(name: 'venue_unit') final String? venueUnit,
   }) = _$BranchImpl;
 
   factory _Branch.fromJson(Map<String, dynamic> json) = _$BranchImpl.fromJson;
@@ -385,6 +494,21 @@ abstract class _Branch implements Branch {
   bool get isMain;
   @override
   bool get active;
+  @override
+  @JsonKey(name: 'location_type')
+  String get locationType;
+  @override
+  @JsonKey(name: 'venue_id')
+  String? get venueId;
+  @override
+  @JsonKey(name: 'venue_name')
+  String? get venueName;
+  @override
+  @JsonKey(name: 'venue_floor')
+  String? get venueFloor;
+  @override
+  @JsonKey(name: 'venue_unit')
+  String? get venueUnit;
 
   /// Create a copy of Branch
   /// with the given fields replaced by the non-null parameter values.

@@ -131,15 +131,6 @@ class QueueEntryCard extends StatefulWidget {
 class _QueueEntryCardState extends State<QueueEntryCard> {
   bool _expanded = false;
 
-  static const _cardBorder = Color(0xFFF3F4F6); // gray-100
-  static const _gray50 = Color(0xFFF9FAFB);
-  static const _gray100 = Color(0xFFF3F4F6);
-  static const _gray300 = Color(0xFFD1D5DB);
-  static const _gray400 = Color(0xFF9CA3AF);
-  static const _gray500 = Color(0xFF6B7280);
-  static const _gray600 = Color(0xFF4B5563);
-  static const _gray700 = Color(0xFF374151);
-  static const _gray900 = Color(0xFF111827);
   static const _blue = Color(0xFF1A73E8);
   static const _blue50 = Color(0xFFEFF6FF);
   static const _amber = Color(0xFFFF9800);
@@ -161,7 +152,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: _cardBorder),
+        border: Border.all(color: context.colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
               color: Color(0x0D000000), blurRadius: 2, offset: Offset(0, 1)),
@@ -177,11 +168,11 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: _gray100,
+                  color: context.colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
-                child: const Icon(Icons.directions_car_rounded,
-                    size: 14, color: _gray400),
+                child: Icon(Icons.directions_car_rounded,
+                    size: 14, color: context.colorScheme.onSurfaceVariant),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -192,7 +183,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                       children: [
                         Text(entry.customerName,
                             style: context.textTheme.bodySmall
-                                ?.copyWith(color: _gray700)),
+                                ?.copyWith(color: context.colorScheme.onSurface)),
                         const SizedBox(width: AppSpacing.sm),
                         _SourceBadge(source: entry.source),
                         if (entry.status == QueueStatus.noShow) ...[
@@ -216,7 +207,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                     Text(
                         '${entry.packageName} · ${price.toFormattedArabic()}',
                         style: context.textTheme.labelSmall
-                            ?.copyWith(color: _gray400, fontSize: 10)),
+                            ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
                   ],
                 ),
               ),
@@ -230,11 +221,11 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                     width: 28,
                     height: 28,
                     decoration: BoxDecoration(
-                      color: _gray100,
+                      color: context.colorScheme.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(AppRadius.sm),
                     ),
-                    child: const Icon(Icons.swap_horiz_rounded,
-                        size: 11, color: _gray400),
+                    child: Icon(Icons.swap_horiz_rounded,
+                        size: 11, color: context.colorScheme.onSurfaceVariant),
                   ),
                 ),
               ],
@@ -254,7 +245,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: AppRadius.cardInner,
-        border: Border.all(color: _cardBorder),
+        border: Border.all(color: context.colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
               color: Color(0x0D000000), blurRadius: 2, offset: Offset(0, 1)),
@@ -331,11 +322,11 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                 width: 28,
                 height: 28,
                 decoration: BoxDecoration(
-                  color: _gray100,
+                  color: context.colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
-                child: const Icon(Icons.chat_bubble_outline_rounded,
-                    size: 13, color: _gray500),
+                child: Icon(Icons.chat_bubble_outline_rounded,
+                    size: 13, color: context.colorScheme.onSurfaceVariant),
               ),
             ),
           ],
@@ -347,7 +338,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           else
             Text('~${entry.estimatedDurationMin} د',
                 style: context.textTheme.labelSmall
-                    ?.copyWith(color: _gray400, fontSize: 10)),
+                    ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         ],
       ),
     );
@@ -383,7 +374,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                       children: [
                         Text(entry.customerName,
                             style: context.textTheme.bodySmall
-                                ?.copyWith(color: _gray900, fontSize: 14)),
+                                ?.copyWith(color: context.colorScheme.onSurface, fontSize: 14)),
                         _SourceBadge(source: entry.source),
                         if (entry.status == QueueStatus.onTheWay)
                           _OnTheWayBadge(),
@@ -440,7 +431,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                           ? Icons.keyboard_arrow_up_rounded
                           : Icons.keyboard_arrow_down_rounded,
                       size: 14,
-                      color: _gray300,
+                      color: context.colorScheme.outline,
                     ),
                   ),
                 ],
@@ -456,20 +447,20 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                 padding: const EdgeInsetsDirectional.symmetric(
                     horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: _gray50,
+                  color: context.colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.sticky_note_2_outlined,
-                        size: 10, color: _gray400),
+                    Icon(Icons.sticky_note_2_outlined,
+                        size: 10, color: context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.xs),
                     Expanded(
                       child: Text(entry.notes!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: context.textTheme.labelSmall
-                              ?.copyWith(color: _gray400, fontSize: 10)),
+                              ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
                     ),
                   ],
                 ),
@@ -491,15 +482,15 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           padding:
               const EdgeInsetsDirectional.symmetric(horizontal: 8, vertical: 2),
           decoration: BoxDecoration(
-              color: _gray100, borderRadius: AppRadius.pill),
+              color: context.colorScheme.surfaceContainerLow, borderRadius: AppRadius.pill),
           child: Text(entry.packageName,
               style: context.textTheme.labelSmall
-                  ?.copyWith(color: _gray600, fontSize: 10)),
+                  ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         ),
         if (entry.discount != null && entry.priceBeforeDiscount != null) ...[
           Text(Money(entry.priceBeforeDiscount!).toFormattedArabic(),
               style: context.textTheme.labelSmall?.copyWith(
-                  color: _gray300,
+                  color: context.colorScheme.outline,
                   fontSize: 10,
                   decoration: TextDecoration.lineThrough)),
           Text(price.toFormattedArabic(),
@@ -523,7 +514,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
         ] else
           Text(price.toFormattedArabic(),
               style: context.textTheme.labelSmall
-                  ?.copyWith(color: _gray500, fontSize: 10)),
+                  ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         if (entry.addOns.isNotEmpty)
           Text('+${entry.addOns.length} إضافة',
               style: context.textTheme.labelSmall
@@ -565,8 +556,8 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
     return Container(
       margin: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 12),
       padding: const EdgeInsetsDirectional.only(top: 8),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: _gray50)),
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: context.colorScheme.surfaceContainerLowest)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -574,12 +565,12 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           if (entry.customerPhone != null) ...[
             Row(
               children: [
-                const Icon(Icons.phone_outlined, size: 12, color: _gray400),
+                Icon(Icons.phone_outlined, size: 12, color: context.colorScheme.onSurfaceVariant),
                 const SizedBox(width: AppSpacing.sm),
                 Text(entry.customerPhone!,
                     textDirection: TextDirection.ltr,
                     style: context.textTheme.bodySmall
-                        ?.copyWith(color: _gray600)),
+                        ?.copyWith(color: context.colorScheme.onSurfaceVariant)),
                 const Spacer(),
                 Text('اتصال',
                     style: context.textTheme.labelSmall
@@ -612,7 +603,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                   const SizedBox(height: AppSpacing.xs),
                   Text(entry.notes!,
                       style: context.textTheme.bodySmall
-                          ?.copyWith(color: _gray700)),
+                          ?.copyWith(color: context.colorScheme.onSurface)),
                 ],
               ),
             ),
@@ -621,7 +612,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           if (entry.addOns.isNotEmpty) ...[
             Text('إضافات:',
                 style: context.textTheme.labelSmall
-                    ?.copyWith(color: _gray400, fontSize: 10)),
+                    ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
             const SizedBox(height: AppSpacing.xs),
             for (final addon in entry.addOns)
               Padding(
@@ -634,7 +625,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                             ?.copyWith(fontSize: 10)),
                     Text('+${Money(addon.price).toFormattedArabic()}',
                         style: context.textTheme.labelSmall
-                            ?.copyWith(color: _gray500, fontSize: 10)),
+                            ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
                   ],
                 ),
               ),
@@ -643,7 +634,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           Text(
               'وقت الوصول: ${_formatCheckinTime(entry.checkedInAt)}',
               style: context.textTheme.labelSmall
-                  ?.copyWith(color: _gray400, fontSize: 10)),
+                  ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         ],
       ),
     );
@@ -653,8 +644,8 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
 
   Widget _buildActionButtons(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: _gray50)),
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: context.colorScheme.surfaceContainerLowest)),
       ),
       child: Row(
         children: [
@@ -684,10 +675,10 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           ),
           if (widget.onNoShow != null)
             Container(
-              decoration: const BoxDecoration(
-                color: _gray50,
+              decoration: BoxDecoration(
+                color: context.colorScheme.surfaceContainerLowest,
                 border:
-                    BorderDirectional(start: BorderSide(color: _gray100)),
+                    BorderDirectional(start: BorderSide(color: context.colorScheme.surfaceContainerLow)),
               ),
               child: InkWell(
                 onTap: widget.onNoShow,
@@ -696,12 +687,12 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                       horizontal: 16, vertical: 10),
                   child: Row(
                     children: [
-                      const Icon(Icons.block_rounded,
-                          size: 12, color: _gray400),
+                      Icon(Icons.block_rounded,
+                          size: 12, color: context.colorScheme.onSurfaceVariant),
                       const SizedBox(width: AppSpacing.xs),
                       Text('لم يحضر',
                           style: context.textTheme.labelSmall
-                              ?.copyWith(color: _gray400, fontSize: 10)),
+                              ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
                     ],
                   ),
                 ),
@@ -709,18 +700,18 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
             ),
           if (widget.onRemove != null && widget.onNoShow == null)
             Container(
-              decoration: const BoxDecoration(
-                color: _gray50,
+              decoration: BoxDecoration(
+                color: context.colorScheme.surfaceContainerLowest,
                 border:
-                    BorderDirectional(start: BorderSide(color: _gray100)),
+                    BorderDirectional(start: BorderSide(color: context.colorScheme.surfaceContainerLow)),
               ),
               child: InkWell(
                 onTap: widget.onRemove,
-                child: const Padding(
-                  padding: EdgeInsetsDirectional.symmetric(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.symmetric(
                       horizontal: 16, vertical: 10),
                   child: Icon(Icons.close_rounded,
-                      size: 12, color: _gray400),
+                      size: 12, color: context.colorScheme.onSurfaceVariant),
                 ),
               ),
             ),
@@ -739,11 +730,11 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: _gray50,
+            color: context.colorScheme.surfaceContainerLowest,
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
-          child: const Icon(Icons.directions_car_rounded,
-              size: 18, color: _gray600),
+          child: Icon(Icons.directions_car_rounded,
+              size: 18, color: context.colorScheme.onSurfaceVariant),
         ),
         if (entry.isSubscriber)
           PositionedDirectional(
@@ -779,16 +770,16 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
         if (parts.isNotEmpty)
           Text(parts.join(' · '),
               style: context.textTheme.labelSmall
-                  ?.copyWith(color: _gray500, fontSize: 10)),
+                  ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         if (entry.plateNumber != null) ...[
           if (parts.isNotEmpty)
             Text(' · ',
                 style: context.textTheme.labelSmall
-                    ?.copyWith(color: _gray500, fontSize: 10)),
+                    ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
           Text(entry.plateNumber!,
               textDirection: TextDirection.ltr,
               style: context.textTheme.labelSmall
-                  ?.copyWith(color: _gray600, fontSize: 10)),
+                  ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         ],
       ],
     );

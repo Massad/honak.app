@@ -83,18 +83,18 @@ class _HandleStepState extends ConsumerState<HandleStep> {
           // Status indicator
           if (state.handle.length >= 3) ...[
             if (state.handleChecking)
-              const Row(
+              Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   ),
-                  SizedBox(width: AppSpacing.sm),
-                  const Text(
+                  const SizedBox(width: AppSpacing.sm),
+                  Text(
                     'جارٍ التحقق...',
                     style: TextStyle(
-                      color: Color(0xFF9CA3AF),
+                      color: context.colorScheme.onSurfaceVariant,
                       fontSize: 13,
                     ),
                   ),

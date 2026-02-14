@@ -70,10 +70,10 @@ class _MetricCard extends StatelessWidget {
       constraints: const BoxConstraints(minWidth: 100),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF9FAFB),
+        color: context.colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: const Color(0xFFF3F4F6),
+          color: context.colorScheme.outlineVariant,
         ),
       ),
       child: Column(

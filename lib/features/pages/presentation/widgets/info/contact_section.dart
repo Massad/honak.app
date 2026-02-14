@@ -110,6 +110,8 @@ class _ExternalLinkTile extends StatelessWidget {
     'twitter' => Icons.alternate_email,
     'website' => Icons.language,
     'tiktok' => Icons.music_note_outlined,
+    'app' => Icons.phone_android_outlined,
+    'atm' => Icons.atm_outlined,
     _ => Icons.link,
   };
 

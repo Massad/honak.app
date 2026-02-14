@@ -52,6 +52,12 @@ class Branch with _$Branch {
     String? city,
     String? neighborhood,
     @Default([]) List<String> coverage,
+    double? lat,
+    double? lng,
+    @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
+    @JsonKey(name: 'venue_floor') String? venueFloor,
+    @JsonKey(name: 'venue_unit') String? venueUnit,
   }) = _Branch;
 
   factory Branch.fromJson(Map<String, dynamic> json) =>

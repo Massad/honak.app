@@ -142,15 +142,15 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                   child: Container(
                     width: 40,
                     height: 40,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFF9FAFB),
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.surfaceContainerLowest,
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
-                    child: const Icon(
+                    child: Icon(
                       Icons.arrow_back,
                       size: 20,
-                      color: Color(0xFF111827),
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -173,7 +173,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                       'تحقق من رقمك',
                       style: context.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFF111827),
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -181,7 +181,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                     Text(
                       'أدخل الرمز المرسل إلى $_formattedPhone',
                       style: context.textTheme.titleSmall?.copyWith(
-                        color: const Color(0xFF6B7280),
+                        color: context.colorScheme.onSurfaceVariant,
                         fontWeight: FontWeight.normal,
                       ),
                       textDirection: TextDirection.rtl,
@@ -196,7 +196,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                         decoration: BoxDecoration(
                           color: _focusNode.hasFocus
                               ? AppColors.white
-                              : const Color(0xFFF9FAFB),
+                              : context.colorScheme.surfaceContainerLowest,
                           borderRadius:
                               BorderRadius.circular(AppRadius.md),
                           border: Border.all(
@@ -215,7 +215,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                           style: context.textTheme.headlineMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                             letterSpacing: 16,
-                            color: const Color(0xFF111827),
+                            color: context.colorScheme.onSurface,
                           ),
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
@@ -225,7 +225,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                             hintText: '______',
                             hintStyle:
                                 context.textTheme.headlineMedium?.copyWith(
-                              color: const Color(0xFF9CA3AF),
+                              color: context.colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 16,
                             ),
@@ -251,7 +251,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                         Text(
                           'لم يصلك الرمز؟',
                           style: context.textTheme.titleSmall?.copyWith(
-                            color: const Color(0xFF9CA3AF),
+                            color: context.colorScheme.onSurfaceVariant,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -263,7 +263,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                                 : 'إعادة الإرسال',
                             style: context.textTheme.titleSmall?.copyWith(
                               color: _resendCountdown > 0
-                                  ? const Color(0xFF9CA3AF)
+                                  ? context.colorScheme.onSurfaceVariant
                                   : AppColors.primary,
                               fontWeight: FontWeight.bold,
                             ),

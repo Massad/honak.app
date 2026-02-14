@@ -32,13 +32,14 @@ class TenantCoverageBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '$combinedPercent% تغطية',
+              'تغطية المستأجرين $combinedPercent%',
               style: context.textTheme.titleSmall,
             ),
             Text(
-              '${stats.claimed + stats.invited} من $total وحدة',
+              '${stats.claimed} مربوط',
               style: context.textTheme.bodySmall?.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
+                color: const Color(0xFF16A34A),
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],
@@ -76,22 +77,27 @@ class TenantCoverageBar extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.sm),
 
-        // Legend
+        // Legend row
         Row(
           children: [
             _LegendDot(
-              color: Color(0xFF16A34A),
-              label: 'مربوط (${stats.claimed})',
+              color: const Color(0xFF16A34A),
+              label: '${stats.claimed} مربوط',
             ),
             const SizedBox(width: AppSpacing.lg),
-            _LegendDot(
-              color: Color(0xFFF59E0B),
-              label: 'مدعو (${stats.invited})',
-            ),
-            SizedBox(width: AppSpacing.lg),
-            _LegendDot(
-              color: context.colorScheme.surfaceContainerHighest,
-              label: 'غير مربوط (${stats.unclaimed})',
+            if (stats.invited > 0) ...[
+              _LegendDot(
+                color: const Color(0xFFF59E0B),
+                label: '${stats.invited} مدعو',
+              ),
+              const SizedBox(width: AppSpacing.lg),
+            ],
+            const Spacer(),
+            Text(
+              '${stats.claimed + stats.invited} من $total وحدة',
+              style: context.textTheme.labelSmall?.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
         ),

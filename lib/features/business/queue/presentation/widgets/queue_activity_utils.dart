@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_source.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
@@ -79,7 +80,7 @@ Color activityActionColor(QueueActivityAction action) => switch (action) {
       QueueActivityAction.photoAfter => const Color(0xFF43A047),
       QueueActivityAction.noShow => const Color(0xFFE53935),
       QueueActivityAction.paymentMarked => const Color(0xFF43A047),
-      QueueActivityAction.noteAdded => const Color(0xFF6B7280),
+      QueueActivityAction.noteAdded => AppColors.textSecondary,
       QueueActivityAction.onTheWay => const Color(0xFF43A047),
     };
 

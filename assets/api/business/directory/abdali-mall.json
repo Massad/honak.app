@@ -1,0 +1,160 @@
+{
+  "success": true,
+  "data": {
+    "tenants": [
+      {
+        "id": "t-arab-bank",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100",
+        "linked_at": "2025-04-10T10:00:00Z",
+        "tags": ["بنك", "صراف"]
+      },
+      {
+        "id": "t-zara",
+        "name": "زارا",
+        "name_en": "Zara",
+        "category": "أزياء",
+        "floor_id": "ground",
+        "unit": "G-10",
+        "is_open": true,
+        "page_id": "zara-jo",
+        "logo_url": "https://picsum.photos/seed/zarajo/100",
+        "linked_at": "2025-06-01T10:00:00Z",
+        "tags": ["أزياء", "ماركات"]
+      },
+      {
+        "id": "t-hm",
+        "name": "H&M",
+        "name_en": "H&M",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/hmjo/100",
+        "tags": ["أزياء", "ماركات"]
+      },
+      {
+        "id": "t-massimo",
+        "name": "ماسيمو دوتي",
+        "name_en": "Massimo Dutti",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-12",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/massimodutti/100",
+        "tags": ["أزياء", "ماركات"]
+      },
+      {
+        "id": "t-bershka",
+        "name": "بيرشكا",
+        "name_en": "Bershka",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-18",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/bershka/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-lcw",
+        "name": "LC Waikiki",
+        "name_en": "LC Waikiki",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-22",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/lcwaikiki/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-starbucks",
+        "name": "ستاربكس",
+        "name_en": "Starbucks",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/starbucks/100",
+        "tags": ["قهوة"]
+      },
+      {
+        "id": "t-mcdonalds",
+        "name": "ماكدونالدز",
+        "name_en": "McDonald's",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/mcdonalds/100",
+        "tags": ["وجبات سريعة"]
+      },
+      {
+        "id": "t-cinnabon",
+        "name": "سينابون",
+        "name_en": "Cinnabon",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-08",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/cinnabon/100",
+        "tags": ["حلويات"]
+      },
+      {
+        "id": "t-cinema",
+        "name": "سينما برايم",
+        "name_en": "Cinema Prime",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-15",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/cinemaprime/100",
+        "tags": ["سينما", "ترفيه"]
+      },
+      {
+        "id": "t-kidzania",
+        "name": "كيدزانيا",
+        "name_en": "KidZania",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-20",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/kidzania/100",
+        "tags": ["أطفال", "ترفيه"]
+      },
+      {
+        "id": "t-stc",
+        "name": "STC",
+        "name_en": "STC",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-15",
+        "is_open": true,
+        "page_id": "stc-jo",
+        "logo_url": "https://picsum.photos/seed/stcjo/100",
+        "linked_at": "2025-09-20T10:00:00Z",
+        "tags": ["اتصالات"]
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات وبنوك", "tenant_count": 4},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء", "tenant_count": 4},
+      {"id": "f2", "name": "الطابق ٢", "label": "طعام وترفيه", "tenant_count": 4}
+    ],
+    "categories": ["خدمات", "أزياء", "طعام", "ترفيه"],
+    "amenities": ["مواقف مجانية", "واي فاي", "مصاعد", "مصلى", "صراف آلي", "منطقة أطفال"],
+    "featured_tenant_ids": ["t-zara", "t-starbucks", "t-kidzania"],
+    "stats": {
+      "total": 12,
+      "claimed": 3,
+      "invited": 1,
+      "unclaimed": 8,
+      "new_this_week": 0
+    }
+  }
+}

@@ -173,10 +173,10 @@ class _ReceiptSheetContent extends StatelessWidget {
         children: [
           Text(
             businessName,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF111827),
+              color: context.colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: AppSpacing.xxs),
@@ -387,20 +387,20 @@ class _ReceiptSheetContent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'الإجمالي',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF111827),
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               Text(
                 Money(totalCents).toFormattedArabic(),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF111827),
+                  color: context.colorScheme.onSurface,
                 ),
               ),
             ],

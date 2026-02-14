@@ -126,7 +126,7 @@ class _FilterTriggerBar extends ConsumerWidget {
           decoration: BoxDecoration(
             color: context.colorScheme.surface,
             borderRadius: BorderRadius.circular(AppRadius.lg),
-            border: Border.all(color: const Color(0xFFF3F4F6)), // gray-100
+            border: Border.all(color: context.colorScheme.outlineVariant),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.04),
@@ -151,7 +151,7 @@ class _FilterTriggerBar extends ConsumerWidget {
                   Text(
                     context.l10n.filterAndSort,
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: const Color(0xFF374151), // gray-700
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                   if (activeCount > 0) ...[
@@ -184,14 +184,14 @@ class _FilterTriggerBar extends ConsumerWidget {
                   Icon(
                     Icons.location_on,
                     size: 10,
-                    color: const Color(0xFF9CA3AF), // gray-400
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                   SizedBox(width: AppSpacing.xxs),
                   Text(
                     sortLabel,
                     style: context.textTheme.bodySmall?.copyWith(
                       fontSize: 10,
-                      color: const Color(0xFF9CA3AF), // gray-400
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -222,7 +222,7 @@ class _CategoriesSection extends ConsumerWidget {
           child: Text(
             context.l10n.categories,
             style: context.textTheme.titleMedium?.copyWith(
-              color: const Color(0xFF111827), // gray-900
+              color: context.colorScheme.onSurface,
             ),
           ),
         ),
@@ -340,10 +340,10 @@ class _CategoryTile extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: const Color(0xFFF9FAFB), // gray-50
+              color: context.colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(16), // rounded-2xl
               border: Border.all(
-                color: const Color(0xFFF3F4F6), // gray-100
+                color: context.colorScheme.outlineVariant,
               ),
               boxShadow: [
                 BoxShadow(
@@ -356,7 +356,7 @@ class _CategoryTile extends StatelessWidget {
             child: Icon(
               icon,
               size: 24,
-              color: const Color(0xFF6B7280), // gray-500
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           SizedBox(height: AppSpacing.sm),
@@ -364,7 +364,7 @@ class _CategoryTile extends StatelessWidget {
             category.nameAr,
             style: context.textTheme.bodySmall?.copyWith(
               fontSize: 10,
-              color: const Color(0xFF374151), // gray-700
+              color: context.colorScheme.onSurface,
             ),
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -406,7 +406,7 @@ class _NearbySection extends ConsumerWidget {
                   Text(
                     context.l10n.nearYou,
                     style: context.textTheme.titleMedium?.copyWith(
-                      color: const Color(0xFF111827), // gray-900
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -475,7 +475,7 @@ class _NearbyCard extends ConsumerWidget {
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: const Color(0xFFF3F4F6)), // gray-100
+          border: Border.all(color: context.colorScheme.outlineVariant), // gray-100
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.04),
@@ -521,7 +521,7 @@ class _NearbyCard extends ConsumerWidget {
                                   style:
                                       context.textTheme.titleSmall?.copyWith(
                                     fontSize: 14,
-                                    color: const Color(0xFF111827),
+                                    color: context.colorScheme.onSurface,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -574,7 +574,7 @@ class _NearbyCard extends ConsumerWidget {
                               page.category!,
                               style: context.textTheme.bodySmall?.copyWith(
                                 fontSize: 12,
-                                color: const Color(0xFF6B7280), // gray-500
+                                color: context.colorScheme.onSurfaceVariant,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -584,7 +584,7 @@ class _NearbyCard extends ConsumerWidget {
                             ' · ',
                             style: context.textTheme.bodySmall?.copyWith(
                               fontSize: 12,
-                              color: const Color(0xFF6B7280),
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -594,7 +594,7 @@ class _NearbyCard extends ConsumerWidget {
                           ),
                           style: context.textTheme.bodySmall?.copyWith(
                             fontSize: 12,
-                            color: const Color(0xFF6B7280),
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -610,7 +610,7 @@ class _NearbyCard extends ConsumerWidget {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF9FAFB), // gray-50
+                              color: context.colorScheme.surfaceContainerLowest,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
@@ -628,7 +628,7 @@ class _NearbyCard extends ConsumerWidget {
                                   ),
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: const Color(0xFF4B5563), // gray-600
+                                    color: context.colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                               ],
@@ -643,7 +643,7 @@ class _NearbyCard extends ConsumerWidget {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF3F4F6), // gray-100
+                              color: context.colorScheme.outlineVariant,
                               borderRadius: AppRadius.pill,
                             ),
                             child: Row(
@@ -652,14 +652,14 @@ class _NearbyCard extends ConsumerWidget {
                                 Icon(
                                   Icons.visibility_outlined,
                                   size: 9,
-                                  color: const Color(0xFF6B7280),
+                                  color: context.colorScheme.onSurfaceVariant,
                                 ),
                                 SizedBox(width: 2),
                                 Text(
                                   'تصفح فقط',
                                   style: TextStyle(
                                     fontSize: 9,
-                                    color: const Color(0xFF6B7280),
+                                    color: context.colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                               ],
@@ -705,7 +705,7 @@ class _TrendingPagesSection extends ConsumerWidget {
               Text(
                 context.l10n.trendingPages,
                 style: context.textTheme.titleMedium?.copyWith(
-                  color: const Color(0xFF111827),
+                  color: context.colorScheme.onSurface,
                 ),
               ),
             ],
@@ -763,7 +763,7 @@ class _TrendingOverlayCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppRadius.lg),
-            border: Border.all(color: const Color(0xFFF3F4F6)),
+            border: Border.all(color: context.colorScheme.outlineVariant),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.04),

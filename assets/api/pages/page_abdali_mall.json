@@ -1,0 +1,231 @@
+{
+  "success": true,
+  "data": {
+    "id": "abdali-mall",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "مراكز تجارية",
+    "explore_category": "cat_malls",
+    "name": "العبدلي مول",
+    "name_en": "Abdali Mall",
+    "slug": "abdali-mall",
+    "handle": "abdali-mall",
+    "store_type": "physical",
+    "archetype": "directory",
+    "description": "العبدلي مول — وجهة تسوق عصرية في قلب بوليفارد العبدلي. ٣ طوابق تضم أشهر الماركات العالمية، مطاعم متنوعة، ومرافق ترفيهية.",
+    "avatar_url": "https://picsum.photos/seed/abdali-mall-avatar/200",
+    "cover_url": "https://picsum.photos/seed/abdali-mall-cover/800/400",
+    "phone": "+962 6 590 1111",
+    "location": {
+      "lat": 31.959,
+      "lng": 35.894,
+      "label": "العبدلي — البوليفارد",
+      "area": "العبدلي",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ١٠:٠٠ ص — ١٠:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 3100,
+    "views_count": 52000,
+    "posts_count": 0,
+    "is_following": false,
+    "trust_score": 92,
+    "trust_metrics": [
+      {"label": "عدد المحلات", "value": "١٢", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "٤", "icon": "verified"},
+      {"label": "الطوابق", "value": "٣", "icon": "layers"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "claim_status": "unclaimed",
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "blocked_dates": [],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف — ٨٠٠ موقف"},
+      {"icon": "wifi", "label": "واي فاي مجاني"},
+      {"icon": "elevator", "label": "مصاعد"},
+      {"icon": "mosque", "label": "مصلى"},
+      {"icon": "atm", "label": "صراف آلي"},
+      {"icon": "child_care", "label": "منطقة أطفال"}
+    ],
+    "parking_info": "مواقف تحت الأرض — ٨٠٠ موقف",
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات وبنوك", "tenant_count": 4},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء", "tenant_count": 4},
+      {"id": "f2", "name": "الطابق ٢", "label": "طعام وترفيه", "tenant_count": 4}
+    ],
+    "directory_stats": {
+      "total_tenants": 12,
+      "on_honak": 4,
+      "open_now": 11,
+      "floors": 3
+    },
+    "featured_tenant_ids": ["ab-1", "ab-2", "ab-12"],
+    "mall_announcements": [
+      {
+        "id": "ann_ab1",
+        "type": "promotion",
+        "title": "تخفيضات نهاية الشتاء",
+        "body": "خصومات تصل إلى ٥٠٪ في محلات الأزياء بالطابق الأول",
+        "badge": "حتى نهاية فبراير",
+        "valid_until": "2026-02-28"
+      },
+      {
+        "id": "ann_ab2",
+        "type": "event",
+        "title": "عرض كيدزانيا الخاص",
+        "body": "تذكرتين بسعر تذكرة واحدة كل يوم أحد خلال فبراير",
+        "badge": "كل أحد",
+        "valid_until": "2026-02-28"
+      },
+      {
+        "id": "ann_ab3",
+        "type": "info",
+        "title": "ساعات رمضان",
+        "body": "خلال شهر رمضان: ١٠:٠٠ ص — ١٢:٠٠ ص. المطاعم تفتح بعد الإفطار.",
+        "badge": "رمضان",
+        "valid_until": "2026-04-01"
+      }
+    ],
+    "tenants": [
+      {
+        "id": "ab-1",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100"
+      },
+      {
+        "id": "ab-2",
+        "name": "زارا",
+        "name_en": "Zara",
+        "category": "أزياء",
+        "floor_id": "ground",
+        "unit": "G-10",
+        "is_open": true,
+        "page_id": "zara-jo",
+        "logo_url": "https://picsum.photos/seed/zarajo/100"
+      },
+      {
+        "id": "ab-3",
+        "name": "H&M",
+        "name_en": "H&M",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/hmjo/100"
+      },
+      {
+        "id": "ab-4",
+        "name": "Massimo Dutti",
+        "name_en": "Massimo Dutti",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-12",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/massimodutti/100"
+      },
+      {
+        "id": "ab-5",
+        "name": "Bershka",
+        "name_en": "Bershka",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-18",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/bershka/100"
+      },
+      {
+        "id": "ab-6",
+        "name": "LC Waikiki",
+        "name_en": "LC Waikiki",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-22",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/lcwaikiki/100"
+      },
+      {
+        "id": "ab-7",
+        "name": "ستاربكس",
+        "name_en": "Starbucks",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/starbucks/100"
+      },
+      {
+        "id": "ab-8",
+        "name": "ماكدونالدز",
+        "name_en": "McDonald's",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/mcdonalds/100"
+      },
+      {
+        "id": "ab-9",
+        "name": "سينابون",
+        "name_en": "Cinnabon",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-08",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/cinnabon/100"
+      },
+      {
+        "id": "ab-10",
+        "name": "سينما برايم",
+        "name_en": "Cinema Prime",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-15",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/cinemaprime/100"
+      },
+      {
+        "id": "ab-11",
+        "name": "كيدزانيا",
+        "name_en": "KidZania",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-20",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/kidzania/100"
+      },
+      {
+        "id": "ab-12",
+        "name": "STC",
+        "name_en": "STC",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-15",
+        "is_open": true,
+        "page_id": "stc-jo",
+        "logo_url": "https://picsum.photos/seed/stcjo/100"
+      }
+    ]
+  }
+}

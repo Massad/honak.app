@@ -139,7 +139,7 @@ class PromotedCardBody extends StatelessWidget {
                         context.l10n.visitPage,
                         style: context.textTheme.bodySmall?.copyWith(
                           fontSize: 10,
-                          color: const Color(0xFF374151),
+                          color: context.colorScheme.onSurface,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

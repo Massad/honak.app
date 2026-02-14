@@ -43,8 +43,8 @@ class VenueTenantCard extends StatelessWidget {
             AppSpacing.sm,
           ),
           decoration: BoxDecoration(
-            color: const Color(0xFFEFF6FF), // blue-50
-            border: Border.all(color: const Color(0xFFBFDBFE)), // blue-100
+            color: context.colorScheme.primary.withValues(alpha: 0.08),
+            border: Border.all(color: context.colorScheme.primary.withValues(alpha: 0.2)),
             borderRadius: BorderRadius.circular(AppRadius.lg),
           ),
           child: Row(

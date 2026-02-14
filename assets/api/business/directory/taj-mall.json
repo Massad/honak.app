@@ -1,0 +1,159 @@
+{
+  "success": true,
+  "data": {
+    "tenants": [
+      {
+        "id": "t-arab-bank",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-02",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100",
+        "linked_at": "2025-04-10T10:00:00Z",
+        "tags": ["بنك", "صراف"]
+      },
+      {
+        "id": "t-virgin",
+        "name": "فيرجن ميغاستور",
+        "name_en": "Virgin Megastore",
+        "category": "إلكترونيات",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/virginmegastore/100",
+        "tags": ["إلكترونيات", "موسيقى"]
+      },
+      {
+        "id": "t-istore",
+        "name": "آي ستور",
+        "name_en": "iStore",
+        "category": "إلكترونيات",
+        "floor_id": "f2",
+        "unit": "F2-10",
+        "is_open": true,
+        "invited_at": "2026-02-01T10:00:00Z",
+        "logo_url": "https://picsum.photos/seed/istore/100",
+        "tags": ["إلكترونيات", "آبل"]
+      },
+      {
+        "id": "t-pullbear",
+        "name": "بول آند بير",
+        "name_en": "Pull & Bear",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/pullbear/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-splash",
+        "name": "سبلاش",
+        "name_en": "Splash",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-12",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/splash/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-marks",
+        "name": "ماركس آند سبنسر",
+        "name_en": "Marks & Spencer",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-20",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/marksspencer/100",
+        "tags": ["أزياء", "ماركات"]
+      },
+      {
+        "id": "t-carrefour",
+        "name": "كارفور",
+        "name_en": "Carrefour",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-10",
+        "is_open": true,
+        "invited_at": "2026-01-15T10:00:00Z",
+        "logo_url": "https://picsum.photos/seed/carrefour/100",
+        "tags": ["سوبرماركت"]
+      },
+      {
+        "id": "t-burgerking",
+        "name": "برغر كينغ",
+        "name_en": "Burger King",
+        "category": "طعام",
+        "floor_id": "f3",
+        "unit": "F3-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/burgerking/100",
+        "tags": ["وجبات سريعة"]
+      },
+      {
+        "id": "t-shawarmer",
+        "name": "شاورمر",
+        "name_en": "Shawarmer",
+        "category": "طعام",
+        "floor_id": "f3",
+        "unit": "F3-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/shawarmer/100",
+        "tags": ["شاورما"]
+      },
+      {
+        "id": "t-costa",
+        "name": "كوستا كوفي",
+        "name_en": "Costa Coffee",
+        "category": "طعام",
+        "floor_id": "f3",
+        "unit": "F3-10",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/costacoffee/100",
+        "tags": ["قهوة"]
+      },
+      {
+        "id": "t-funcity",
+        "name": "فن سيتي",
+        "name_en": "Fun City",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-20",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/funcity/100",
+        "tags": ["ألعاب", "أطفال"]
+      },
+      {
+        "id": "t-mumuso",
+        "name": "موموسو",
+        "name_en": "Mumuso",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-25",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/mumuso/100",
+        "tags": ["إكسسوارات"]
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات", "tenant_count": 3},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء", "tenant_count": 4},
+      {"id": "f2", "name": "الطابق ٢", "label": "إلكترونيات وترفيه", "tenant_count": 3},
+      {"id": "f3", "name": "الطابق ٣", "label": "طعام", "tenant_count": 3}
+    ],
+    "categories": ["خدمات", "أزياء", "إلكترونيات", "طعام", "ترفيه"],
+    "amenities": ["مواقف مجانية", "واي فاي", "مصاعد", "مصلى", "صراف آلي"],
+    "featured_tenant_ids": ["t-virgin", "t-marks", "t-funcity"],
+    "stats": {
+      "total": 12,
+      "claimed": 1,
+      "invited": 2,
+      "unclaimed": 9,
+      "new_this_week": 0
+    }
+  }
+}

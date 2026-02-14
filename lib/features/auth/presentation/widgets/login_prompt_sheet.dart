@@ -181,7 +181,7 @@ class _LoginPromptContent extends StatelessWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: const Color(0xFFE5E7EB),
+              color: context.colorScheme.outlineVariant,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -293,9 +293,9 @@ class _LoginPromptContent extends StatelessWidget {
         // Footer text
         Text(
           'رقم هاتف أردني فقط · بدون بيانات شخصية · ثواني',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 10,
-            color: Color(0xFF9CA3AF),
+            color: context.colorScheme.onSurfaceVariant,
           ),
           textAlign: TextAlign.center,
         ),
@@ -319,7 +319,7 @@ class _BenefitCard extends StatelessWidget {
         vertical: 10,
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFFF9FAFB),
+        color: context.colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(AppRadius.md),
       ),
       child: Row(
@@ -330,7 +330,7 @@ class _BenefitCard extends StatelessWidget {
             child: Text(
               text,
               style: context.textTheme.bodySmall?.copyWith(
-                color: const Color(0xFF4B5563),
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ),

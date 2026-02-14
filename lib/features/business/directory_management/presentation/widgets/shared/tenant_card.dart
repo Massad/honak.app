@@ -25,66 +25,55 @@ class TenantCard extends StatelessWidget {
     final hasPage = tenant.pageId != null;
     final isClosed = !tenant.isOpen || tenant.temporarilyClosed;
 
-    return Opacity(
-      opacity: hasPage ? 1.0 : 0.6,
-      child: InkWell(
-        onTap: hasPage ? onTap : null,
-        borderRadius: AppRadius.card,
-        child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(
-            vertical: compact ? AppSpacing.sm : AppSpacing.md,
-            horizontal: AppSpacing.lg,
-          ),
-          child: Row(
-            children: [
-              // Logo
-              _TenantLogo(
-                logoUrl: tenant.logoUrl,
-                size: compact ? 36.0 : 44.0,
-              ),
-              const SizedBox(width: AppSpacing.md),
-
-              // Info
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      tenant.name,
-                      style: context.textTheme.titleSmall,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+    return InkWell(
+      onTap: hasPage ? onTap : null,
+      borderRadius: AppRadius.card,
+      child: Padding(
+        padding: EdgeInsetsDirectional.symmetric(
+          vertical: compact ? AppSpacing.sm : AppSpacing.md,
+          horizontal: AppSpacing.lg,
+        ),
+        child: Row(
+          children: [
+            _TenantLogo(
+              logoUrl: tenant.logoUrl,
+              size: compact ? 36.0 : 44.0,
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    tenant.name,
+                    style: context.textTheme.titleSmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: AppSpacing.xxs),
+                  Text(
+                    '${tenant.unit} · ${tenant.category}',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
-                    SizedBox(height: AppSpacing.xxs),
-                    Text(
-                      '${tenant.unit} · ${tenant.category}',
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
-
-              const SizedBox(width: AppSpacing.sm),
-
-              // Status badge
-              _StatusBadge(isClosed: isClosed),
-
-              // Chevron if navigable
-              if (hasPage) ...[
-                const SizedBox(width: AppSpacing.xs),
-                Icon(
-                  Icons.chevron_right,
-                  size: 20,
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
-              ],
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            _StatusBadge(isClosed: isClosed),
+            if (hasPage) ...[
+              const SizedBox(width: AppSpacing.xs),
+              Icon(
+                Icons.chevron_right,
+                size: 20,
+                color: context.colorScheme.onSurfaceVariant,
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );

@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant_status.dart';
 
-/// Business-facing tenant card with status-aware display and action menu.
+/// Business-facing tenant card with status-aware display and inline actions.
 ///
+/// Matches Figma: avatar, name+subtitle, status line, two action buttons.
 /// Four states:
-/// 1. **Claimed** (green): linked with page, actions: View Page, Edit, Unlink
+/// 1. **Claimed** (green): "عرض الصفحة" + "تعديل"
 /// 2. **New** (<7 days, blue): same as claimed + "جديد" badge
-/// 3. **Invited** (orange): pending invite, actions: Resend, Edit, Cancel
-/// 4. **Unclaimed** (gray): no link, actions: Send Invite, Edit, Delete
+/// 3. **Invited** (orange): "إعادة الدعوة" + "تعديل"
+/// 4. **Unclaimed** (gray): "إرسال دعوة" + "تعديل"
 class TenantManageCard extends StatelessWidget {
   final Tenant tenant;
   final VoidCallback? onTap;
   final VoidCallback? onMenuAction;
+  final VoidCallback? onViewPage;
+  final VoidCallback? onEdit;
+  final VoidCallback? onInvite;
 
   const TenantManageCard({
     super.key,
     required this.tenant,
     this.onTap,
     this.onMenuAction,
+    this.onViewPage,
+    this.onEdit,
+    this.onInvite,
   });
 
   @override
@@ -34,69 +42,203 @@ class TenantManageCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsetsDirectional.all(AppSpacing.md),
         decoration: BoxDecoration(
+          color: context.colorScheme.surface,
           border: Border.all(color: context.colorScheme.outlineVariant),
           borderRadius: AppRadius.card,
         ),
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // Status dot
-            Container(
-              width: 10,
-              height: 10,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: status.color,
-              ),
-            ),
-            SizedBox(width: AppSpacing.md),
+            // Top row: menu + info + avatar
+            Row(
+              children: [
+                // Unlink/link indicator icon
+                Icon(
+                  status == TenantStatus.claimed ||
+                          status == TenantStatus.newTenant
+                      ? Icons.link
+                      : status == TenantStatus.invited
+                          ? Icons.schedule_send
+                          : Icons.link_off,
+                  size: 16,
+                  color: status.color.withValues(alpha: 0.6),
+                ),
+                const SizedBox(width: AppSpacing.sm),
 
-            // Logo
-            _TenantLogo(logoUrl: tenant.logoUrl),
-            const SizedBox(width: AppSpacing.md),
-
-            // Info
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
+                // Info column
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Flexible(
-                        child: Text(
-                          tenant.name,
-                          style: context.textTheme.titleSmall,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      // Name + badge
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              tenant.name,
+                              style: context.textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if (status == TenantStatus.newTenant ||
+                              status == TenantStatus.invited) ...[
+                            const SizedBox(width: AppSpacing.xs),
+                            _Badge(status: status),
+                          ],
+                        ],
                       ),
-                      if (status == TenantStatus.newTenant ||
-                          status == TenantStatus.invited) ...[
-                        const SizedBox(width: AppSpacing.xs),
-                        _Badge(status: status),
-                      ],
+                      const SizedBox(height: 2),
+
+                      // Category · unit · floor
+                      Text(
+                        '${tenant.category} · ${tenant.unit}',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          color: context.colorScheme.onSurfaceVariant,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 2),
+
+                      // Status line with dot
+                      Row(
+                        children: [
+                          Container(
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: status.color,
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.xs),
+                          _StatusSubtitle(tenant: tenant, status: status),
+                        ],
+                      ),
                     ],
                   ),
-                  SizedBox(height: AppSpacing.xxs),
-                  Text(
-                    '${tenant.unit} · ${tenant.category}',
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: AppSpacing.xxs),
-                  _StatusSubtitle(tenant: tenant, status: status),
-                ],
-              ),
+                ),
+
+                const SizedBox(width: AppSpacing.sm),
+
+                // Avatar
+                _TenantLogo(logoUrl: tenant.logoUrl),
+              ],
             ),
 
-            // Menu button
-            IconButton(
-              icon: const Icon(Icons.more_vert, size: 20),
-              onPressed: onMenuAction,
-              visualDensity: VisualDensity.compact,
+            const SizedBox(height: AppSpacing.sm),
+
+            // Action buttons row
+            Row(
+              textDirection: TextDirection.ltr,
+              children: [
+                // Menu icon (far left in LTR = far right in RTL)
+                SizedBox(
+                  width: 32,
+                  height: 32,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.more_horiz,
+                      size: 18,
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
+                    onPressed: onMenuAction,
+                    padding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                  ),
+                ),
+                const Spacer(),
+
+                // Edit button
+                _ActionButton(
+                  icon: Icons.edit_outlined,
+                  label: 'تعديل',
+                  onTap: onEdit,
+                ),
+                const SizedBox(width: AppSpacing.sm),
+
+                // Primary action (View Page / Invite)
+                if (status == TenantStatus.claimed ||
+                    status == TenantStatus.newTenant)
+                  _ActionButton(
+                    icon: Icons.open_in_new,
+                    label: 'عرض الصفحة',
+                    onTap: onViewPage,
+                    isPrimary: true,
+                  )
+                else if (status == TenantStatus.invited)
+                  _ActionButton(
+                    icon: Icons.send,
+                    label: 'إعادة الدعوة',
+                    onTap: onInvite,
+                    isPrimary: true,
+                  )
+                else
+                  _ActionButton(
+                    icon: Icons.mail_outline,
+                    label: 'إرسال دعوة',
+                    onTap: onInvite,
+                    isPrimary: true,
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback? onTap;
+  final bool isPrimary;
+
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    this.onTap,
+    this.isPrimary = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isPrimary ? AppColors.primary : context.colorScheme.onSurface;
+    final bgColor = isPrimary
+        ? AppColors.primary.withValues(alpha: 0.08)
+        : context.colorScheme.surfaceContainerHighest;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: AppSpacing.sm,
+          vertical: AppSpacing.xs,
+        ),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: AppRadius.cardInner,
+          border: isPrimary
+              ? Border.all(color: AppColors.primary.withValues(alpha: 0.2))
+              : null,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 14, color: color),
+            const SizedBox(width: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: color,
+              ),
             ),
           ],
         ),
@@ -113,8 +255,8 @@ class _TenantLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
-      height: 40,
+      width: 48,
+      height: 48,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: context.colorScheme.surfaceContainerHighest,
@@ -126,13 +268,13 @@ class _TenantLogo extends StatelessWidget {
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Icon(
                 Icons.storefront,
-                size: 20,
+                size: 22,
                 color: context.colorScheme.onSurfaceVariant,
               ),
             )
           : Icon(
               Icons.storefront,
-              size: 20,
+              size: 22,
               color: context.colorScheme.onSurfaceVariant,
             ),
     );
@@ -149,7 +291,7 @@ class _Badge extends StatelessWidget {
     return Container(
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: AppSpacing.xs,
-        vertical: AppSpacing.xxs,
+        vertical: 1,
       ),
       decoration: BoxDecoration(
         color: status.color.withValues(alpha: 0.15),
@@ -160,6 +302,7 @@ class _Badge extends StatelessWidget {
         style: context.textTheme.labelSmall?.copyWith(
           color: status.color,
           fontWeight: FontWeight.w600,
+          fontSize: 10,
         ),
       ),
     );
@@ -175,7 +318,8 @@ class _StatusSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = context.textTheme.labelSmall?.copyWith(
-      color: context.colorScheme.onSurfaceVariant,
+      color: status.color,
+      fontWeight: FontWeight.w500,
     );
 
     return switch (status) {

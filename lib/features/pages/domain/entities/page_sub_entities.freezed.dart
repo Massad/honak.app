@@ -611,6 +611,16 @@ mixin _$Branch {
   String? get city => throw _privateConstructorUsedError;
   String? get neighborhood => throw _privateConstructorUsedError;
   List<String> get coverage => throw _privateConstructorUsedError;
+  double? get lat => throw _privateConstructorUsedError;
+  double? get lng => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_id')
+  String? get venueId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_name')
+  String? get venueName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_floor')
+  String? get venueFloor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'venue_unit')
+  String? get venueUnit => throw _privateConstructorUsedError;
 
   /// Serializes this Branch to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -635,6 +645,12 @@ abstract class $BranchCopyWith<$Res> {
     String? city,
     String? neighborhood,
     List<String> coverage,
+    double? lat,
+    double? lng,
+    @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
+    @JsonKey(name: 'venue_floor') String? venueFloor,
+    @JsonKey(name: 'venue_unit') String? venueUnit,
   });
 }
 
@@ -661,6 +677,12 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
     Object? city = freezed,
     Object? neighborhood = freezed,
     Object? coverage = null,
+    Object? lat = freezed,
+    Object? lng = freezed,
+    Object? venueId = freezed,
+    Object? venueName = freezed,
+    Object? venueFloor = freezed,
+    Object? venueUnit = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -696,6 +718,30 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
                 ? _value.coverage
                 : coverage // ignore: cast_nullable_to_non_nullable
                       as List<String>,
+            lat: freezed == lat
+                ? _value.lat
+                : lat // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            lng: freezed == lng
+                ? _value.lng
+                : lng // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            venueId: freezed == venueId
+                ? _value.venueId
+                : venueId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            venueName: freezed == venueName
+                ? _value.venueName
+                : venueName // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            venueFloor: freezed == venueFloor
+                ? _value.venueFloor
+                : venueFloor // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            venueUnit: freezed == venueUnit
+                ? _value.venueUnit
+                : venueUnit // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -719,6 +765,12 @@ abstract class _$$BranchImplCopyWith<$Res> implements $BranchCopyWith<$Res> {
     String? city,
     String? neighborhood,
     List<String> coverage,
+    double? lat,
+    double? lng,
+    @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
+    @JsonKey(name: 'venue_floor') String? venueFloor,
+    @JsonKey(name: 'venue_unit') String? venueUnit,
   });
 }
 
@@ -744,6 +796,12 @@ class __$$BranchImplCopyWithImpl<$Res>
     Object? city = freezed,
     Object? neighborhood = freezed,
     Object? coverage = null,
+    Object? lat = freezed,
+    Object? lng = freezed,
+    Object? venueId = freezed,
+    Object? venueName = freezed,
+    Object? venueFloor = freezed,
+    Object? venueUnit = freezed,
   }) {
     return _then(
       _$BranchImpl(
@@ -779,6 +837,30 @@ class __$$BranchImplCopyWithImpl<$Res>
             ? _value._coverage
             : coverage // ignore: cast_nullable_to_non_nullable
                   as List<String>,
+        lat: freezed == lat
+            ? _value.lat
+            : lat // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        lng: freezed == lng
+            ? _value.lng
+            : lng // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        venueId: freezed == venueId
+            ? _value.venueId
+            : venueId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        venueName: freezed == venueName
+            ? _value.venueName
+            : venueName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        venueFloor: freezed == venueFloor
+            ? _value.venueFloor
+            : venueFloor // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        venueUnit: freezed == venueUnit
+            ? _value.venueUnit
+            : venueUnit // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -796,6 +878,12 @@ class _$BranchImpl implements _Branch {
     this.city,
     this.neighborhood,
     final List<String> coverage = const [],
+    this.lat,
+    this.lng,
+    @JsonKey(name: 'venue_id') this.venueId,
+    @JsonKey(name: 'venue_name') this.venueName,
+    @JsonKey(name: 'venue_floor') this.venueFloor,
+    @JsonKey(name: 'venue_unit') this.venueUnit,
   }) : _coverage = coverage;
 
   factory _$BranchImpl.fromJson(Map<String, dynamic> json) =>
@@ -825,8 +913,25 @@ class _$BranchImpl implements _Branch {
   }
 
   @override
+  final double? lat;
+  @override
+  final double? lng;
+  @override
+  @JsonKey(name: 'venue_id')
+  final String? venueId;
+  @override
+  @JsonKey(name: 'venue_name')
+  final String? venueName;
+  @override
+  @JsonKey(name: 'venue_floor')
+  final String? venueFloor;
+  @override
+  @JsonKey(name: 'venue_unit')
+  final String? venueUnit;
+
+  @override
   String toString() {
-    return 'Branch(id: $id, name: $name, address: $address, phone: $phone, hours: $hours, city: $city, neighborhood: $neighborhood, coverage: $coverage)';
+    return 'Branch(id: $id, name: $name, address: $address, phone: $phone, hours: $hours, city: $city, neighborhood: $neighborhood, coverage: $coverage, lat: $lat, lng: $lng, venueId: $venueId, venueName: $venueName, venueFloor: $venueFloor, venueUnit: $venueUnit)';
   }
 
   @override
@@ -842,7 +947,16 @@ class _$BranchImpl implements _Branch {
             (identical(other.city, city) || other.city == city) &&
             (identical(other.neighborhood, neighborhood) ||
                 other.neighborhood == neighborhood) &&
-            const DeepCollectionEquality().equals(other._coverage, _coverage));
+            const DeepCollectionEquality().equals(other._coverage, _coverage) &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.lng, lng) || other.lng == lng) &&
+            (identical(other.venueId, venueId) || other.venueId == venueId) &&
+            (identical(other.venueName, venueName) ||
+                other.venueName == venueName) &&
+            (identical(other.venueFloor, venueFloor) ||
+                other.venueFloor == venueFloor) &&
+            (identical(other.venueUnit, venueUnit) ||
+                other.venueUnit == venueUnit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -857,6 +971,12 @@ class _$BranchImpl implements _Branch {
     city,
     neighborhood,
     const DeepCollectionEquality().hash(_coverage),
+    lat,
+    lng,
+    venueId,
+    venueName,
+    venueFloor,
+    venueUnit,
   );
 
   /// Create a copy of Branch
@@ -883,6 +1003,12 @@ abstract class _Branch implements Branch {
     final String? city,
     final String? neighborhood,
     final List<String> coverage,
+    final double? lat,
+    final double? lng,
+    @JsonKey(name: 'venue_id') final String? venueId,
+    @JsonKey(name: 'venue_name') final String? venueName,
+    @JsonKey(name: 'venue_floor') final String? venueFloor,
+    @JsonKey(name: 'venue_unit') final String? venueUnit,
   }) = _$BranchImpl;
 
   factory _Branch.fromJson(Map<String, dynamic> json) = _$BranchImpl.fromJson;
@@ -903,6 +1029,22 @@ abstract class _Branch implements Branch {
   String? get neighborhood;
   @override
   List<String> get coverage;
+  @override
+  double? get lat;
+  @override
+  double? get lng;
+  @override
+  @JsonKey(name: 'venue_id')
+  String? get venueId;
+  @override
+  @JsonKey(name: 'venue_name')
+  String? get venueName;
+  @override
+  @JsonKey(name: 'venue_floor')
+  String? get venueFloor;
+  @override
+  @JsonKey(name: 'venue_unit')
+  String? get venueUnit;
 
   /// Create a copy of Branch
   /// with the given fields replaced by the non-null parameter values.

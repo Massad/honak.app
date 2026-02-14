@@ -1,0 +1,119 @@
+{
+  "success": true,
+  "data": {
+    "id": "hayat-gym",
+    "owner_id": "usr_004",
+    "business_type_id": "gym",
+    "business_type_name": "نادي رياضي",
+    "category_name": "رياضة ولياقة",
+    "explore_category": "cat_fitness",
+    "name": "نادي الحياة",
+    "name_en": "Hayat Gym",
+    "slug": "hayat-gym",
+    "handle": "hayat-gym",
+    "store_type": "physical",
+    "archetype": "service_booking",
+    "description": "نادي رياضي متكامل في City Mall — أجهزة حديثة، حصص جماعية، تدريب شخصي. اشتراكات شهرية وسنوية.",
+    "avatar_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80",
+    "phone": "+96265927777",
+    "location": {
+      "lat": 31.957,
+      "lng": 35.882,
+      "label": "City Mall، الطابق ٣، F3-05",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "06:00", "close": "23:00"},
+      "monday": {"enabled": true, "open": "06:00", "close": "23:00"},
+      "tuesday": {"enabled": true, "open": "06:00", "close": "23:00"},
+      "wednesday": {"enabled": true, "open": "06:00", "close": "23:00"},
+      "thursday": {"enabled": true, "open": "06:00", "close": "23:00"},
+      "friday": {"enabled": true, "open": "08:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "06:00", "close": "23:00"}
+    },
+    "operating_hours": "السبت — الخميس: ٦:٠٠ ص — ١١:٠٠ م\nالجمعة: ٨:٠٠ ص — ١٠:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 680,
+    "items_count": 0,
+    "posts_count": 15,
+    "is_following": false,
+    "trust_score": 72,
+    "trust_metrics": [
+      {"label": "المشتركون النشطون", "value": "١٢٠", "icon": "people"},
+      {"label": "التقييم", "value": "٤.٦", "icon": "star"},
+      {"label": "سنوات الخبرة", "value": "٣", "icon": "calendar"}
+    ],
+    "member_since": "2023",
+    "delivery_available": false,
+    "pickup_available": false,
+    "payment_methods": ["نقداً", "فيزا / ماستركارد", "CliQ"],
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1690000000,
+    "team_members_count": 4,
+    "engagement_level": "full",
+    "data_synced": true,
+    "venue_id": "city-mall",
+    "venue_unit": "F3-05",
+    "stories": [
+      {"id": "s_gym1", "image_url": "https://picsum.photos/seed/hayatgym1/400/700", "duration": 5, "created_at": 1707800000}
+    ],
+    "blocked_dates": [],
+    "branches": [
+      {
+        "id": "main",
+        "name": "نادي الحياة — City Mall",
+        "city": "عمّان",
+        "city_id": "amman",
+        "neighborhood_id": "abdoun",
+        "address": "City Mall، الطابق ٣، F3-05",
+        "lat": 31.9570,
+        "lng": 35.8820
+      }
+    ],
+    "packages": [
+      {
+        "id": "pkg_gym1",
+        "name": "اشتراك شهري",
+        "description": "دخول غير محدود للنادي لمدة شهر",
+        "price_cents": 4000,
+        "credits": 0,
+        "credit_label": null,
+        "validity_months": 1,
+        "icon": "fitness",
+        "compare_single_price": 500,
+        "active": true,
+        "model": "date_only"
+      },
+      {
+        "id": "pkg_gym2",
+        "name": "اشتراك ٣ أشهر",
+        "description": "دخول غير محدود + حصة تدريب شخصي مجانية شهرياً",
+        "price_cents": 10000,
+        "credits": 0,
+        "credit_label": null,
+        "validity_months": 3,
+        "icon": "fitness",
+        "compare_single_price": 4000,
+        "active": true,
+        "model": "date_only"
+      },
+      {
+        "id": "pkg_gym3",
+        "name": "اشتراك سنوي",
+        "description": "أفضل سعر — دخول كامل + ٢ حصة PT شهرياً",
+        "price_cents": 30000,
+        "credits": 0,
+        "credit_label": null,
+        "validity_months": 12,
+        "icon": "fitness",
+        "compare_single_price": 4000,
+        "active": true,
+        "model": "date_only"
+      }
+    ]
+  }
+}

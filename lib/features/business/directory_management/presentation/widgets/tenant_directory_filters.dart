@@ -88,15 +88,32 @@ class TenantDirectoryFilters extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.md),
 
-        // Search bar
+        // Search bar + filter icon
         Padding(
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AppSpacing.lg,
           ),
-          child: TextField(
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  borderRadius: AppRadius.button,
+                ),
+                child: Icon(
+                  Icons.tune,
+                  size: 20,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: TextField(
             onChanged: onSearchChanged,
             decoration: InputDecoration(
-              hintText: 'ابحث بالاسم أو الوحدة أو التصنيف...',
+              hintText: 'ابحث عن متجر أو رقم وحدة...',
               hintStyle: TextStyle(
                 fontSize: 13,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -139,6 +156,9 @@ class TenantDirectoryFilters extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+              ),
+            ],
           ),
         ),
       ],

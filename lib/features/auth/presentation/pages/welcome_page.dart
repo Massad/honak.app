@@ -166,16 +166,16 @@ class WelcomePage extends ConsumerWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.language,
                           size: 16,
-                          color: Color(0xFF9CA3AF),
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           'English',
                           style: context.textTheme.bodySmall?.copyWith(
-                            color: const Color(0xFF9CA3AF),
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -224,14 +224,14 @@ class WelcomePage extends ConsumerWidget {
                               text: 'هناك',
                               style: context.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF111827),
+                                color: context.colorScheme.onSurface,
                               ),
                             ),
                             TextSpan(
                               text: '.app',
                               style: context.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.normal,
-                                color: const Color(0xFF9CA3AF),
+                                color: context.colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ],
@@ -242,7 +242,7 @@ class WelcomePage extends ConsumerWidget {
                       Text(
                         'تطبيق واحد لكل شي محلي في الأردن',
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: const Color(0xFF6B7280),
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -262,7 +262,7 @@ class WelcomePage extends ConsumerWidget {
                         Text(
                           'اختر حساب تجريبي للدخول',
                           style: context.textTheme.labelSmall?.copyWith(
-                            color: const Color(0xFF9CA3AF),
+                            color: context.colorScheme.onSurfaceVariant,
                             fontSize: 10,
                           ),
                           textAlign: TextAlign.center,
@@ -338,7 +338,7 @@ class _GuestBrowseButton extends StatelessWidget {
       onTap: onTap,
       child: CustomPaint(
         painter: _DashedBorderPainter(
-          color: const Color(0xFFE5E7EB),
+          color: context.colorScheme.outlineVariant,
           strokeWidth: 2,
           radius: AppRadius.md,
         ),
@@ -348,16 +348,16 @@ class _GuestBrowseButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.visibility_outlined,
                 size: 16,
-                color: Color(0xFF6B7280),
+                color: context.colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 'تصفح كزائر بدون حساب',
                 style: context.textTheme.titleSmall?.copyWith(
-                  color: const Color(0xFF6B7280),
+                  color: context.colorScheme.onSurfaceVariant,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -457,7 +457,7 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
-          border: Border.all(color: const Color(0xFFF3F4F6)),
+          border: Border.all(color: context.colorScheme.surfaceContainerLow),
           borderRadius: BorderRadius.circular(AppRadius.md),
           boxShadow: const [
             BoxShadow(
@@ -514,15 +514,15 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
                         account.name,
                         style: context.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF111827),
+                          color: context.colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Text(
                         account.nameEn,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
-                          color: Color(0xFF9CA3AF),
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                       const Spacer(),
@@ -550,41 +550,41 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
                   // Personal account + page count
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.person_outline,
                         size: 9,
-                        color: Color(0xFF9CA3AF),
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: AppSpacing.xs),
-                      const Text(
+                      Text(
                         'حساب شخصي',
                         style: TextStyle(
                           fontSize: 10,
-                          color: Color(0xFF6B7280),
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                       if (names.isNotEmpty) ...[
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 6),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Text(
                             '|',
                             style: TextStyle(
                               fontSize: 10,
-                              color: Color(0xFFD1D5DB),
+                              color: context.colorScheme.outline,
                             ),
                           ),
                         ),
-                        const Icon(
+                        Icon(
                           Icons.storefront,
                           size: 9,
-                          color: Color(0xFF9CA3AF),
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           'صاحب ${names.length} صفحات',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
-                            color: Color(0xFF6B7280),
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -608,15 +608,15 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF3F4F6),
+                                color: context.colorScheme.surfaceContainerLow,
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.xs),
                               ),
                               child: Text(
                                 '+$remaining أخرى',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 10,
-                                  color: Color(0xFF9CA3AF),
+                                  color: context.colorScheme.onSurfaceVariant,
                                 ),
                               ),
                             ),

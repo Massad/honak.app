@@ -1,0 +1,208 @@
+{
+  "success": true,
+  "data": {
+    "id": "galleria-mall",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "مراكز تجارية",
+    "explore_category": "cat_malls",
+    "name": "غاليريا مول",
+    "name_en": "Galleria Mall",
+    "slug": "galleria-mall",
+    "handle": "galleria-mall",
+    "store_type": "physical",
+    "archetype": "directory",
+    "description": "غاليريا مول — مجمع تجاري عائلي في خلدا على شارع وصفي التل. ٣ طوابق تضم صيدلية، سوبرماركت، محلات أزياء، وساحة طعام.",
+    "avatar_url": "https://picsum.photos/seed/galleria-mall-avatar/200",
+    "cover_url": "https://picsum.photos/seed/galleria-mall-cover/800/400",
+    "phone": "+962 6 533 5555",
+    "location": {
+      "lat": 31.968,
+      "lng": 35.851,
+      "label": "خلدا — شارع وصفي التل",
+      "area": "خلدا",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "22:00"}
+    },
+    "operating_hours": "السبت — الخميس: ٩:٠٠ ص — ١٠:٠٠ م\nالجمعة: ١٠:٠٠ ص — ١٠:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 1200,
+    "views_count": 18000,
+    "posts_count": 0,
+    "is_following": false,
+    "trust_score": 78,
+    "trust_metrics": [
+      {"label": "عدد المحلات", "value": "١٠", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "١", "icon": "verified"},
+      {"label": "الطوابق", "value": "٣", "icon": "layers"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "claim_status": "unclaimed",
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "blocked_dates": [],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف — ٣٠٠ موقف"},
+      {"icon": "wifi", "label": "واي فاي مجاني"},
+      {"icon": "elevator", "label": "مصعد"},
+      {"icon": "mosque", "label": "مصلى"},
+      {"icon": "atm", "label": "صراف آلي"}
+    ],
+    "parking_info": "مواقف أمامية وتحت الأرض — ٣٠٠ موقف",
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات وبقالة", "tenant_count": 3},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء ومستلزمات", "tenant_count": 4},
+      {"id": "f2", "name": "الطابق ٢", "label": "طعام", "tenant_count": 3}
+    ],
+    "directory_stats": {
+      "total_tenants": 10,
+      "on_honak": 1,
+      "open_now": 9,
+      "floors": 3
+    },
+    "featured_tenant_ids": ["gl-1", "gl-4", "gl-8"],
+    "mall_announcements": [
+      {
+        "id": "ann_gl1",
+        "type": "promotion",
+        "title": "عروض سوبرماركت سمارت",
+        "body": "خصومات أسبوعية على المواد الغذائية والمنظفات",
+        "badge": "عرض أسبوعي",
+        "valid_until": "2026-03-31"
+      },
+      {
+        "id": "ann_gl2",
+        "type": "info",
+        "title": "افتتاح محل جديد",
+        "body": "قريباً — افتتاح محل إكسسوارات جديد في الطابق الأول",
+        "badge": "قريباً",
+        "valid_until": "2026-03-15"
+      },
+      {
+        "id": "ann_gl3",
+        "type": "info",
+        "title": "ساعات رمضان",
+        "body": "خلال شهر رمضان: ١٠:٠٠ ص — ١١:٠٠ م.",
+        "badge": "رمضان",
+        "valid_until": "2026-04-01"
+      }
+    ],
+    "tenants": [
+      {
+        "id": "gl-1",
+        "name": "صيدلية الشفاء",
+        "name_en": "Al-Shifa Pharmacy",
+        "category": "صحة",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/alshifapharmacy/100"
+      },
+      {
+        "id": "gl-2",
+        "name": "سوبرماركت سمارت",
+        "name_en": "Smart Supermarket",
+        "category": "بقالة",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/smartsuper/100"
+      },
+      {
+        "id": "gl-3",
+        "name": "أورانج",
+        "name_en": "Orange",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-08",
+        "is_open": true,
+        "page_id": "orange-jo",
+        "logo_url": "https://picsum.photos/seed/orangejo/100"
+      },
+      {
+        "id": "gl-4",
+        "name": "محل ليان للأزياء",
+        "name_en": "Layan Fashion",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/layanfashion/100"
+      },
+      {
+        "id": "gl-5",
+        "name": "أحذية ستيب",
+        "name_en": "Step Shoes",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/stepshoes/100"
+      },
+      {
+        "id": "gl-6",
+        "name": "نظارات الرؤية",
+        "name_en": "Vision Optics",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-10",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/visionoptics/100"
+      },
+      {
+        "id": "gl-7",
+        "name": "مستلزمات البيت",
+        "name_en": "Home Essentials",
+        "category": "مستلزمات",
+        "floor_id": "f1",
+        "unit": "F1-15",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/homeessentials/100"
+      },
+      {
+        "id": "gl-8",
+        "name": "مطعم الديوان",
+        "name_en": "Al-Diwan Restaurant",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/aldiwanrest/100"
+      },
+      {
+        "id": "gl-9",
+        "name": "كرك وزعتر",
+        "name_en": "Karak & Zaatar",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/karakzaatar/100"
+      },
+      {
+        "id": "gl-10",
+        "name": "عصير تايم",
+        "name_en": "Juice Time",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-08",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/juicetime/100"
+      }
+    ]
+  }
+}

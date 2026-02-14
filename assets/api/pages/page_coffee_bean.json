@@ -1,0 +1,61 @@
+{
+  "success": true,
+  "data": {
+    "id": "coffee-bean",
+    "business_type_id": "cafe",
+    "business_type_name": "مقهى",
+    "category_name": "مقاهي",
+    "explore_category": "cat_food",
+    "name": "كوفي بين",
+    "name_en": "Coffee Bean",
+    "slug": "coffee-bean",
+    "handle": "coffee-bean",
+    "store_type": "physical",
+    "archetype": "menu_order",
+    "description": "كوفي بين — قهوة مختصة وحلويات طازجة. إسبريسو، لاتيه، كولد برو، وأصناف موسمية. أجواء مريحة للعمل والقراءة.",
+    "avatar_url": "https://picsum.photos/seed/coffeebean/200",
+    "cover_url": "https://picsum.photos/seed/coffeebean-cover/800/400",
+    "phone": "+96265922215",
+    "location": {
+      "lat": 31.957,
+      "lng": 35.882,
+      "label": "City Mall — الطابق ١، F1-15",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "venue_id": "city-mall",
+    "venue_floor": "الطابق ١",
+    "venue_unit": "F1-15",
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "monday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "tuesday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "wednesday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "thursday": {"enabled": true, "open": "07:00", "close": "23:00"},
+      "friday": {"enabled": true, "open": "08:00", "close": "23:00"},
+      "saturday": {"enabled": true, "open": "07:00", "close": "23:00"}
+    },
+    "operating_hours": "يومياً: ٧:٠٠ ص – ١١:٠٠ م",
+    "items_label_ar": "القائمة",
+    "items_label_en": "Menu",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 4800,
+    "items_count": 32,
+    "posts_count": 40,
+    "is_following": false,
+    "trust_score": 87,
+    "trust_metrics": [
+      {"label": "الأكثر طلباً", "value": "لاتيه بالكراميل", "icon": "local_cafe"},
+      {"label": "وقت التحضير", "value": "٥ دقائق", "icon": "schedule"},
+      {"label": "فروع", "value": "٣ فروع", "icon": "store"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat"],
+    "created_at": 1706000000,
+    "engagement_level": "full",
+    "data_synced": true,
+    "stories": []
+  }
+}

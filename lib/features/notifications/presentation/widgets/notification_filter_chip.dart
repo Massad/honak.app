@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -25,7 +26,7 @@ class NotificationFilterChip extends StatelessWidget {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : const Color(0xFFF1F3F5),
+          color: isActive ? AppColors.primary : context.colorScheme.surfaceContainerLow,
           borderRadius: AppRadius.pill,
         ),
         child: Text(
@@ -33,7 +34,7 @@ class NotificationFilterChip extends StatelessWidget {
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: isActive ? Colors.white : const Color(0xFF6B7280),
+            color: isActive ? Colors.white : context.colorScheme.onSurfaceVariant,
           ),
         ),
       ),

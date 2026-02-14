@@ -1,0 +1,83 @@
+{
+  "success": true,
+  "data": {
+    "id": "tech-planet",
+    "owner_id": "usr_004",
+    "business_type_id": "electronics_store",
+    "business_type_name": "إلكترونيات",
+    "category_name": "تسوق",
+    "explore_category": "cat_retail",
+    "name": "تيك بلانت",
+    "name_en": "Tech Planet",
+    "slug": "tech-planet",
+    "handle": "tech-planet",
+    "store_type": "physical",
+    "archetype": "catalog_order",
+    "description": "أحدث الأجهزة الإلكترونية — هواتف، لابتوبات، سماعات، ساعات ذكية، وإكسسوارات. وكيل معتمد لـ Samsung و Apple.",
+    "avatar_url": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=200&q=80",
+    "cover_url": "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=800&q=80",
+    "phone": "+96265928888",
+    "location": {
+      "lat": 31.957,
+      "lng": 35.882,
+      "label": "City Mall، الأرضي، G-18",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ١٠:٠٠ ص — ١٠:٠٠ م",
+    "items_label_ar": "المنتجات",
+    "items_label_en": "Products",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 520,
+    "items_count": 45,
+    "posts_count": 22,
+    "is_following": false,
+    "trust_score": 78,
+    "trust_metrics": [
+      {"label": "منتجات", "value": "٤٥", "icon": "inventory"},
+      {"label": "التقييم", "value": "٤.٧", "icon": "star"},
+      {"label": "سنوات", "value": "٢", "icon": "calendar"}
+    ],
+    "member_since": "2024",
+    "delivery_available": false,
+    "pickup_available": true,
+    "payment_methods": ["نقداً", "فيزا / ماستركارد", "CliQ", "تقسيط"],
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1695000000,
+    "team_members_count": 3,
+    "engagement_level": "full",
+    "data_synced": true,
+    "venue_id": "city-mall",
+    "venue_unit": "G-18",
+    "stories": [],
+    "blocked_dates": [],
+    "branches": [
+      {
+        "id": "main",
+        "name": "تيك بلانت — City Mall",
+        "city": "عمّان",
+        "city_id": "amman",
+        "neighborhood_id": "abdoun",
+        "address": "City Mall، الأرضي، G-18",
+        "lat": 31.9570,
+        "lng": 35.8820
+      }
+    ],
+    "gallery_images": [
+      "https://images.unsplash.com/photo-1491933382434-500287f9b54b?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
+    ]
+  }
+}

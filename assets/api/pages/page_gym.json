@@ -67,7 +67,9 @@
         "city": "عمّان",
         "city_id": "amman",
         "neighborhood_id": "abdoun",
-        "address": "عبدون، شارع الأمير هاشم"
+        "address": "عبدون، شارع الأمير هاشم",
+        "lat": 31.9560,
+        "lng": 35.8780
       }
     ],
     "packages": [

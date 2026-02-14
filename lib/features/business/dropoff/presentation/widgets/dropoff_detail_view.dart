@@ -551,9 +551,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
               const Spacer(),
               Text(
                 '${total.toFormattedArabic()} د.أ',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF111827),
+                  color: context.colorScheme.onSurface,
                 ),
               ),
             ],
@@ -587,9 +587,9 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                           children: [
                             Text(
                               item.name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
-                                color: Color(0xFF111827),
+                                color: context.colorScheme.onSurface,
                               ),
                             ),
                             const SizedBox(width: 4),

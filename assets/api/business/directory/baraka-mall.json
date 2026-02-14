@@ -1,0 +1,109 @@
+{
+  "success": true,
+  "data": {
+    "tenants": [
+      {
+        "id": "t-supermarket",
+        "name": "سوبرماركت البركة",
+        "name_en": "Baraka Supermarket",
+        "category": "محلات",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/baraka-supermarket/100",
+        "tags": ["سوبرماركت"]
+      },
+      {
+        "id": "t-pharmacy",
+        "name": "صيدلية البركة",
+        "name_en": "Baraka Pharmacy",
+        "category": "محلات",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/baraka-pharmacy/100",
+        "tags": ["صيدلية"]
+      },
+      {
+        "id": "t-phones",
+        "name": "محل هواتف",
+        "name_en": "Phone Shop",
+        "category": "محلات",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/phoneshop/100",
+        "tags": ["هواتف"]
+      },
+      {
+        "id": "t-sharq",
+        "name": "أزياء الشرق",
+        "name_en": "Sharq Fashion",
+        "category": "محلات",
+        "floor_id": "ground",
+        "unit": "G-07",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/sharqfashion/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-deira",
+        "name": "مطعم الديرة",
+        "name_en": "Al Deira Restaurant",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/aldeira/100",
+        "tags": ["مطعم"]
+      },
+      {
+        "id": "t-coffeeland",
+        "name": "كوفي لاند",
+        "name_en": "Coffee Land",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-03",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/coffeeland/100",
+        "tags": ["قهوة"]
+      },
+      {
+        "id": "t-rana",
+        "name": "صالون رنا",
+        "name_en": "Rana Salon",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/ranasalon/100",
+        "tags": ["صالون", "تجميل"]
+      },
+      {
+        "id": "t-travel",
+        "name": "مكتب سفريات",
+        "name_en": "Travel Office",
+        "category": "خدمات",
+        "floor_id": "f1",
+        "unit": "F1-07",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/traveloffice/100",
+        "tags": ["سفر", "سياحة"]
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "محلات", "tenant_count": 4},
+      {"id": "f1", "name": "الطابق ١", "label": "خدمات", "tenant_count": 4}
+    ],
+    "categories": ["محلات", "خدمات"],
+    "amenities": ["مواقف مجانية", "مصاعد", "مصلى"],
+    "featured_tenant_ids": ["t-supermarket", "t-deira"],
+    "stats": {
+      "total": 8,
+      "claimed": 0,
+      "invited": 0,
+      "unclaimed": 8,
+      "new_this_week": 0
+    }
+  }
+}

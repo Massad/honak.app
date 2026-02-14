@@ -112,14 +112,14 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF9FAFB),
+                      color: context.colorScheme.surfaceContainerLowest,
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
-                    child: const Icon(
+                    child: Icon(
                       Icons.arrow_back,
                       size: 20,
-                      color: Color(0xFF111827),
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -142,7 +142,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                       'أدخل رقم هاتفك',
                       style: context.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFF111827),
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -150,7 +150,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                     Text(
                       'سنرسل لك رمز تحقق للتأكد من رقمك',
                       style: context.textTheme.titleSmall?.copyWith(
-                        color: const Color(0xFF6B7280),
+                        color: context.colorScheme.onSurfaceVariant,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -168,7 +168,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                               horizontal: AppSpacing.lg,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF9FAFB),
+                              color: context.colorScheme.surfaceContainerLowest,
                               borderRadius:
                                   BorderRadius.circular(AppRadius.md),
                               border: Border.all(
@@ -188,7 +188,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                                   style:
                                       context.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
-                                    color: const Color(0xFF374151),
+                                    color: context.colorScheme.onSurface,
                                   ),
                                 ),
                               ],
@@ -202,7 +202,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                               decoration: BoxDecoration(
                                 color: _focusNode.hasFocus
                                     ? AppColors.white
-                                    : const Color(0xFFF9FAFB),
+                                    : context.colorScheme.surfaceContainerLowest,
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.md),
                                 border: Border.all(
@@ -229,7 +229,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                                   hintText: '79 000 0000',
                                   hintStyle:
                                       context.textTheme.bodyLarge?.copyWith(
-                                    color: const Color(0xFF9CA3AF),
+                                    color: context.colorScheme.onSurfaceVariant,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                   ),
@@ -304,7 +304,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                       child: Text(
                         'للتجربة: استخدم أحد الأرقام في صفحة الدخول',
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: const Color(0xFF9CA3AF),
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                         textAlign: TextAlign.center,
                       ),

@@ -7,21 +7,25 @@ import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 /// Card displaying a single tenant in the directory listing.
+///
+/// Claimed tenants (with [Item.pageId]) show a chevron and navigate to their
+/// page on tap. Unclaimed tenants still appear at full opacity but without
+/// a chevron and are not tappable.
 class DirectoryTenantCard extends StatelessWidget {
   final Item item;
 
   const DirectoryTenantCard({super.key, required this.item});
+
+  bool get _isClaimed => item.pageId != null;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () => context.push(
-          item.pageId != null
-              ? Routes.pagePath(item.pageId!)
-              : Routes.productPath(item.id),
-        ),
+        onTap: _isClaimed
+            ? () => context.push(Routes.pagePath(item.pageId!))
+            : null,
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Row(
@@ -32,8 +36,7 @@ class DirectoryTenantCard extends StatelessWidget {
                   width: 56,
                   height: 56,
                   child: AppImage(
-                    url:
-                        item.images.isNotEmpty ? item.images.first : null,
+                    url: item.images.isNotEmpty ? item.images.first : null,
                     fit: BoxFit.cover,
                     placeholderIcon: Icons.storefront,
                   ),
@@ -61,7 +64,8 @@ class DirectoryTenantCard extends StatelessWidget {
                               vertical: AppSpacing.xxs,
                             ),
                             decoration: BoxDecoration(
-                              color: context.colorScheme.surfaceContainerHighest,
+                              color:
+                                  context.colorScheme.surfaceContainerHighest,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Row(
@@ -70,14 +74,14 @@ class DirectoryTenantCard extends StatelessWidget {
                                 Icon(
                                   Icons.layers_outlined,
                                   size: 12,
-                                  color: context
-                                      .colorScheme.onSurfaceVariant,
+                                  color:
+                                      context.colorScheme.onSurfaceVariant,
                                 ),
                                 const SizedBox(width: AppSpacing.xxs),
                                 Text(
                                   item.categoryName!,
-                                  style:
-                                      context.textTheme.labelSmall?.copyWith(
+                                  style: context.textTheme.labelSmall
+                                      ?.copyWith(
                                     color: context
                                         .colorScheme.onSurfaceVariant,
                                   ),
@@ -120,10 +124,11 @@ class DirectoryTenantCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(
-                Icons.chevron_left,
-                color: context.colorScheme.onSurfaceVariant,
-              ),
+              if (_isClaimed)
+                Icon(
+                  Icons.chevron_left,
+                  color: context.colorScheme.onSurfaceVariant,
+                ),
             ],
           ),
         ),

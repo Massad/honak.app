@@ -178,14 +178,14 @@
           "icon": "👰"
         },
         {
+          "id": "clothes_store",
+          "name": "متجر أزياء",
+          "icon": "👗"
+        },
+        {
           "id": "online_store",
           "name": "متجر أونلاين",
           "icon": "🛒"
-        },
-        {
-          "id": "clothes_store",
-          "name": "متجر ملابس",
-          "icon": "👗"
         },
         {
           "id": "bookstore",
@@ -294,6 +294,11 @@
       "sort_order": 11,
       "types": [
         {
+          "id": "cinema",
+          "name": "سينما",
+          "icon": ""
+        },
+        {
           "id": "event_venue",
           "name": "قاعة مناسبات",
           "icon": "🏛️"
@@ -344,6 +349,16 @@
           "id": "shoe_repair",
           "name": "إسكافي",
           "icon": "👞"
+        },
+        {
+          "id": "telecom",
+          "name": "اتصالات",
+          "icon": ""
+        },
+        {
+          "id": "bank",
+          "name": "بنك",
+          "icon": ""
         },
         {
           "id": "tailor",

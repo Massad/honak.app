@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
 import 'package:honak/features/business/dropoff/domain/entities/ticket_activity.dart';
@@ -26,7 +27,7 @@ Color activityActionColor(TicketActivityAction action) => switch (action) {
       TicketActivityAction.infoRequested => const Color(0xFFFF9800),
       TicketActivityAction.infoReceived => const Color(0xFF43A047),
       TicketActivityAction.paymentMarked => const Color(0xFF43A047),
-      TicketActivityAction.noteAdded => const Color(0xFF6B7280),
+      TicketActivityAction.noteAdded => AppColors.textSecondary,
       TicketActivityAction.itemModified => const Color(0xFFFF9800),
     };
 

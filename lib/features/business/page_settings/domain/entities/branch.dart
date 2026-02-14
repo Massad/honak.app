@@ -17,6 +17,11 @@ class Branch with _$Branch {
     double? longitude,
     @JsonKey(name: 'is_main') @Default(false) bool isMain,
     @Default(true) bool active,
+    @JsonKey(name: 'location_type') @Default('standalone') String locationType,
+    @JsonKey(name: 'venue_id') String? venueId,
+    @JsonKey(name: 'venue_name') String? venueName,
+    @JsonKey(name: 'venue_floor') String? venueFloor,
+    @JsonKey(name: 'venue_unit') String? venueUnit,
   }) = _Branch;
 
   factory Branch.fromJson(Map<String, dynamic> json) =>

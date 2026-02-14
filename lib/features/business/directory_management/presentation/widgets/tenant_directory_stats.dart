@@ -5,8 +5,9 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/directory_manage_stats.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant_status.dart';
 
-/// Stats grid — 5 cards in a 2-row grid layout.
+/// Stats row — 5 compact cards in a single horizontal row.
 ///
+/// Matches Figma: جديد | غير مربوط | مدعو | مربوط | إجمالي
 /// Tapping a stat card filters the tenant list by that status.
 class TenantDirectoryStats extends StatelessWidget {
   final DirectoryManageStats stats;
@@ -24,39 +25,39 @@ class TenantDirectoryStats extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       _StatItem(
-        label: 'الكل',
-        count: stats.total,
-        color: context.colorScheme.onSurface,
-        bgColor: context.colorScheme.surfaceContainerHighest,
-        filterKey: null,
-      ),
-      _StatItem(
-        label: TenantStatus.claimed.label,
-        count: stats.claimed,
-        color: TenantStatus.claimed.color,
-        bgColor: TenantStatus.claimed.color.withValues(alpha: 0.1),
-        filterKey: 'claimed',
-      ),
-      _StatItem(
         label: TenantStatus.newTenant.label,
         count: stats.newThisWeek,
         color: TenantStatus.newTenant.color,
-        bgColor: TenantStatus.newTenant.color.withValues(alpha: 0.1),
+        bgColor: TenantStatus.newTenant.color.withValues(alpha: 0.08),
         filterKey: 'new',
-      ),
-      _StatItem(
-        label: TenantStatus.invited.label,
-        count: stats.invited,
-        color: TenantStatus.invited.color,
-        bgColor: TenantStatus.invited.color.withValues(alpha: 0.1),
-        filterKey: 'invited',
       ),
       _StatItem(
         label: TenantStatus.unclaimed.label,
         count: stats.unclaimed,
         color: TenantStatus.unclaimed.color,
-        bgColor: TenantStatus.unclaimed.color.withValues(alpha: 0.1),
+        bgColor: TenantStatus.unclaimed.color.withValues(alpha: 0.08),
         filterKey: 'unclaimed',
+      ),
+      _StatItem(
+        label: TenantStatus.invited.label,
+        count: stats.invited,
+        color: TenantStatus.invited.color,
+        bgColor: TenantStatus.invited.color.withValues(alpha: 0.08),
+        filterKey: 'invited',
+      ),
+      _StatItem(
+        label: TenantStatus.claimed.label,
+        count: stats.claimed,
+        color: TenantStatus.claimed.color,
+        bgColor: TenantStatus.claimed.color.withValues(alpha: 0.08),
+        filterKey: 'claimed',
+      ),
+      _StatItem(
+        label: 'إجمالي',
+        count: stats.total,
+        color: context.colorScheme.onSurface,
+        bgColor: context.colorScheme.surfaceContainerHighest,
+        filterKey: null,
       ),
     ];
 
@@ -64,29 +65,12 @@ class TenantDirectoryStats extends StatelessWidget {
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: AppSpacing.lg,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
         children: [
-          // Row 1: 3 cards
-          Row(
-            children: [
-              for (int i = 0; i < 3; i++) ...[
-                if (i > 0) const SizedBox(width: AppSpacing.sm),
-                Expanded(child: _buildCard(context, items[i])),
-              ],
-            ],
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          // Row 2: 2 cards
-          Row(
-            children: [
-              Expanded(child: _buildCard(context, items[3])),
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(child: _buildCard(context, items[4])),
-              const SizedBox(width: AppSpacing.sm),
-              const Expanded(child: SizedBox.shrink()),
-            ],
-          ),
+          for (int i = 0; i < items.length; i++) ...[
+            if (i > 0) const SizedBox(width: AppSpacing.xs),
+            Expanded(child: _buildCard(context, items[i])),
+          ],
         ],
       ),
     );
@@ -102,7 +86,7 @@ class TenantDirectoryStats extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
+          horizontal: AppSpacing.xs,
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
@@ -113,7 +97,6 @@ class TenantDirectoryStats extends StatelessWidget {
               : Border.all(color: Colors.transparent),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
@@ -123,12 +106,16 @@ class TenantDirectoryStats extends StatelessWidget {
                 color: item.color,
               ),
             ),
-            const SizedBox(height: AppSpacing.xxs),
+            const SizedBox(height: 2),
             Text(
               item.label,
               style: context.textTheme.labelSmall?.copyWith(
                 color: item.color.withValues(alpha: 0.8),
+                fontSize: 10,
               ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

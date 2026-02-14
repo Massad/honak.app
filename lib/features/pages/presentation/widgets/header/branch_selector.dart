@@ -83,7 +83,11 @@ class BranchSelector extends StatelessWidget {
     );
   }
 
-  void _showBranchPicker(BuildContext context) {
+  void _showBranchPicker(BuildContext context) => showPicker(context);
+
+  /// Opens the branch picker bottom sheet. Can be called externally by
+  /// [NearestBranchCard] to reuse the same picker UI.
+  void showPicker(BuildContext context) {
     showAppSheet<void>(
       context,
       builder: (_) => _BranchPickerSheet(
@@ -111,11 +115,15 @@ class _BranchPickerSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // Header
-        Padding(
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.75,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Header
+          Padding(
             padding: EdgeInsets.all(AppSpacing.lg),
             child: Row(
               children: [
@@ -136,124 +144,130 @@ class _BranchPickerSheet extends StatelessWidget {
             ),
           ),
 
-          // Branch list
-          ...List.generate(branches.length, (index) {
-            final branch = branches[index];
-            final isSelected = index == selectedIndex;
+          // Scrollable branch list
+          Flexible(
+            child: ListView.builder(
+              shrinkWrap: true,
+              padding: EdgeInsetsDirectional.only(bottom: AppSpacing.lg),
+              itemCount: branches.length,
+              itemBuilder: (context, index) {
+                final branch = branches[index];
+                final isSelected = index == selectedIndex;
 
-            return Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg,
-                vertical: AppSpacing.xs,
-              ),
-              child: Material(
-                color: isSelected
-                    ? context.colorScheme.primary.withValues(alpha: 0.06)
-                    : context.colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () => onBranchChanged(index),
-                  child: Container(
-                    padding: EdgeInsets.all(AppSpacing.lg),
-                    decoration: BoxDecoration(
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSpacing.lg,
+                    vertical: AppSpacing.xs,
+                  ),
+                  child: Material(
+                    color: isSelected
+                        ? context.colorScheme.primary.withValues(alpha: 0.06)
+                        : context.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(12),
+                    child: InkWell(
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isSelected
-                            ? context.colorScheme.primary
-                            : context.colorScheme.outlineVariant,
-                        width: isSelected ? 2 : 1,
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                branch.name,
-                                style:
-                                    context.textTheme.titleSmall?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              if (branch.address != null &&
-                                  branch.address!.isNotEmpty) ...[
-                                SizedBox(height: AppSpacing.xxs),
-                                Text(
-                                  branch.address!,
-                                  style: context.textTheme.bodySmall
-                                      ?.copyWith(
-                                    color: context
-                                        .colorScheme.onSurfaceVariant,
-                                  ),
-                                ),
-                              ],
-                              if (branch.hours != null &&
-                                  branch.hours!.isNotEmpty) ...[
-                                SizedBox(height: AppSpacing.xxs),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.access_time_outlined,
-                                      size: 12,
-                                      color: context
-                                          .colorScheme.onSurfaceVariant,
-                                    ),
-                                    SizedBox(width: AppSpacing.xxs),
-                                    Text(
-                                      branch.hours!,
-                                      style: context.textTheme.labelSmall
-                                          ?.copyWith(
-                                        color: context
-                                            .colorScheme.onSurfaceVariant,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                              if (branch.phone != null &&
-                                  branch.phone!.isNotEmpty) ...[
-                                SizedBox(height: AppSpacing.xxs),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.phone_outlined,
-                                      size: 12,
-                                      color: context
-                                          .colorScheme.onSurfaceVariant,
-                                    ),
-                                    SizedBox(width: AppSpacing.xxs),
-                                    Text(
-                                      branch.phone!,
-                                      style: context.textTheme.labelSmall
-                                          ?.copyWith(
-                                        color: context
-                                            .colorScheme.onSurfaceVariant,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ],
+                      onTap: () => onBranchChanged(index),
+                      child: Container(
+                        padding: EdgeInsets.all(AppSpacing.lg),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: isSelected
+                                ? context.colorScheme.primary
+                                : context.colorScheme.outlineVariant,
+                            width: isSelected ? 2 : 1,
                           ),
                         ),
-                        if (isSelected)
-                          Icon(
-                            Icons.check_circle,
-                            color: context.colorScheme.primary,
-                          ),
-                      ],
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    branch.name,
+                                    style:
+                                        context.textTheme.titleSmall?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  if (branch.address != null &&
+                                      branch.address!.isNotEmpty) ...[
+                                    SizedBox(height: AppSpacing.xxs),
+                                    Text(
+                                      branch.address!,
+                                      style: context.textTheme.bodySmall
+                                          ?.copyWith(
+                                        color: context
+                                            .colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                  ],
+                                  if (branch.hours != null &&
+                                      branch.hours!.isNotEmpty) ...[
+                                    SizedBox(height: AppSpacing.xxs),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.access_time_outlined,
+                                          size: 12,
+                                          color: context
+                                              .colorScheme.onSurfaceVariant,
+                                        ),
+                                        SizedBox(width: AppSpacing.xxs),
+                                        Text(
+                                          branch.hours!,
+                                          style: context.textTheme.labelSmall
+                                              ?.copyWith(
+                                            color: context
+                                                .colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                  if (branch.phone != null &&
+                                      branch.phone!.isNotEmpty) ...[
+                                    SizedBox(height: AppSpacing.xxs),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.phone_outlined,
+                                          size: 12,
+                                          color: context
+                                              .colorScheme.onSurfaceVariant,
+                                        ),
+                                        SizedBox(width: AppSpacing.xxs),
+                                        Text(
+                                          branch.phone!,
+                                          style: context.textTheme.labelSmall
+                                              ?.copyWith(
+                                            color: context
+                                                .colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                            if (isSelected)
+                              Icon(
+                                Icons.check_circle,
+                                color: context.colorScheme.primary,
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          }),
-
-        SizedBox(height: AppSpacing.lg),
-      ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -83,12 +83,8 @@ class _FeaturedTenantCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: item != null
-          ? () => context.push(
-                item!.pageId != null
-                    ? Routes.pagePath(item!.pageId!)
-                    : Routes.productPath(item!.id),
-              )
+      onTap: item?.pageId != null
+          ? () => context.push(Routes.pagePath(item!.pageId!))
           : null,
       child: Column(
         mainAxisSize: MainAxisSize.min,

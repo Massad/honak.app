@@ -17,9 +17,11 @@ class InfoTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Padding(
       padding: AppSpacing.paddingAll(AppSpacing.lg),
-      children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
         // Service availability
         _ServiceAvailabilityRow(page: page),
 
@@ -50,6 +52,7 @@ class InfoTab extends StatelessWidget {
             location: page.location,
             branches: page.branches,
             address: page.address,
+            pageName: page.name,
           ),
         ],
 
@@ -89,7 +92,8 @@ class InfoTab extends StatelessWidget {
           followersCount: page.followersCount,
           memberSince: page.memberSince,
         ),
-      ],
+        ],
+      ),
     );
   }
 }

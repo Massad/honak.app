@@ -1,0 +1,187 @@
+{
+  "success": true,
+  "data": {
+    "id": "ayla-oasis",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "مراكز تجارية",
+    "explore_category": "cat_malls",
+    "name": "واحة أيلة",
+    "name_en": "Ayla Oasis",
+    "slug": "ayla-oasis",
+    "handle": "ayla-oasis",
+    "store_type": "physical",
+    "archetype": "directory",
+    "description": "واحة أيلة — وجهة تسوق وترفيه فريدة في منتجع أيلة بالعقبة. طابقان يضمان محلات هدايا، مطاعم مطلة على البحر، ومتاجر منتجعات.",
+    "avatar_url": "https://picsum.photos/seed/ayla-oasis-avatar/200",
+    "cover_url": "https://picsum.photos/seed/ayla-oasis-cover/800/400",
+    "phone": "+962 3 203 7777",
+    "location": {
+      "lat": 29.527,
+      "lng": 35.008,
+      "label": "العقبة — أيلة",
+      "area": "أيلة",
+      "city": "العقبة"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "23:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "23:00"}
+    },
+    "operating_hours": "يومياً: ١٠:٠٠ ص — ١١:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 480,
+    "views_count": 7200,
+    "posts_count": 0,
+    "is_following": false,
+    "trust_score": 72,
+    "trust_metrics": [
+      {"label": "عدد المحلات", "value": "٨", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "٠", "icon": "verified"},
+      {"label": "الطوابق", "value": "٢", "icon": "layers"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "claim_status": "unclaimed",
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "blocked_dates": [],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف — ٢٠٠ موقف"},
+      {"icon": "wifi", "label": "واي فاي مجاني"},
+      {"icon": "elevator", "label": "مصعد"},
+      {"icon": "mosque", "label": "مصلى"},
+      {"icon": "atm", "label": "صراف آلي"}
+    ],
+    "parking_info": "مواقف مجانية — ٢٠٠ موقف",
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "محلات ومطاعم", "tenant_count": 5},
+      {"id": "f1", "name": "الطابق ١", "label": "هدايا وتسوق", "tenant_count": 3}
+    ],
+    "directory_stats": {
+      "total_tenants": 8,
+      "on_honak": 0,
+      "open_now": 6,
+      "floors": 2
+    },
+    "featured_tenant_ids": ["ay-1", "ay-4", "ay-6"],
+    "mall_announcements": [
+      {
+        "id": "ann_ay1",
+        "type": "event",
+        "title": "أمسية موسيقية",
+        "body": "كل يوم خميس — أمسية موسيقية حية في ساحة الواحة",
+        "badge": "كل خميس",
+        "valid_until": "2026-03-31"
+      },
+      {
+        "id": "ann_ay2",
+        "type": "promotion",
+        "title": "عروض الصيف المبكر",
+        "body": "خصومات على مستلزمات البحر والسباحة في جميع المحلات",
+        "badge": "عرض موسمي",
+        "valid_until": "2026-04-30"
+      },
+      {
+        "id": "ann_ay3",
+        "type": "info",
+        "title": "ساعات رمضان",
+        "body": "خلال شهر رمضان: ١٠:٠٠ ص — ١٢:٠٠ ص. المطاعم تفتح بعد الإفطار.",
+        "badge": "رمضان",
+        "valid_until": "2026-04-01"
+      }
+    ],
+    "tenants": [
+      {
+        "id": "ay-1",
+        "name": "مطعم البحر",
+        "name_en": "Al-Bahr Restaurant",
+        "category": "طعام",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/albahrrest/100"
+      },
+      {
+        "id": "ay-2",
+        "name": "كافيه الشاطئ",
+        "name_en": "Beach Cafe",
+        "category": "طعام",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/beachcafe/100"
+      },
+      {
+        "id": "ay-3",
+        "name": "آيس كريم سكوب",
+        "name_en": "Scoop Ice Cream",
+        "category": "طعام",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/scoopicecream/100"
+      },
+      {
+        "id": "ay-4",
+        "name": "متجر الغوص",
+        "name_en": "Dive Shop",
+        "category": "رياضة",
+        "floor_id": "ground",
+        "unit": "G-07",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/diveshop/100"
+      },
+      {
+        "id": "ay-5",
+        "name": "صيدلية المنتجع",
+        "name_en": "Resort Pharmacy",
+        "category": "صحة",
+        "floor_id": "ground",
+        "unit": "G-09",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/resortpharmacy/100"
+      },
+      {
+        "id": "ay-6",
+        "name": "هدايا أيلة",
+        "name_en": "Ayla Souvenirs",
+        "category": "هدايا",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/aylasouvenirs/100"
+      },
+      {
+        "id": "ay-7",
+        "name": "أزياء البحر",
+        "name_en": "Sea Fashion",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/seafashion/100"
+      },
+      {
+        "id": "ay-8",
+        "name": "سبا أيلة",
+        "name_en": "Ayla Spa",
+        "category": "تجميل",
+        "floor_id": "f1",
+        "unit": "F1-08",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/aylaspa/100"
+      }
+    ]
+  }
+}

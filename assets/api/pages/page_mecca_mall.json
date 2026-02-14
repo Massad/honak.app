@@ -1,0 +1,230 @@
+{
+  "success": true,
+  "data": {
+    "id": "mecca-mall",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "مراكز تجارية",
+    "explore_category": "cat_malls",
+    "name": "مكة مول",
+    "name_en": "Mecca Mall",
+    "slug": "mecca-mall",
+    "handle": "mecca-mall",
+    "store_type": "physical",
+    "archetype": "directory",
+    "description": "مكة مول — من أكبر المجمعات التجارية في عمّان على شارع مكة المكرمة. ٣ طوابق تضم بنوك، اتصالات، أزياء عالمية، وساحة طعام.",
+    "avatar_url": "https://picsum.photos/seed/mecca-mall-avatar/200",
+    "cover_url": "https://picsum.photos/seed/mecca-mall-cover/800/400",
+    "phone": "+962 6 552 4444",
+    "location": {
+      "lat": 31.975,
+      "lng": 35.861,
+      "label": "شارع مكة المكرمة",
+      "area": "شارع مكة",
+      "city": "عمّان"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ١٠:٠٠ ص — ١٠:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 4200,
+    "views_count": 68000,
+    "posts_count": 0,
+    "is_following": false,
+    "trust_score": 93,
+    "trust_metrics": [
+      {"label": "عدد المحلات", "value": "١٢", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "٢", "icon": "verified"},
+      {"label": "الطوابق", "value": "٣", "icon": "layers"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "claim_status": "unclaimed",
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "blocked_dates": [],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف — ١,٥٠٠ موقف"},
+      {"icon": "wifi", "label": "واي فاي مجاني"},
+      {"icon": "elevator", "label": "مصاعد"},
+      {"icon": "mosque", "label": "مصلى"},
+      {"icon": "atm", "label": "صراف آلي"},
+      {"icon": "child_care", "label": "منطقة أطفال"}
+    ],
+    "parking_info": "مواقف مجانية — ١,٥٠٠ موقف",
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات وبنوك", "tenant_count": 3},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء", "tenant_count": 5},
+      {"id": "f2", "name": "الطابق ٢", "label": "طعام", "tenant_count": 4}
+    ],
+    "directory_stats": {
+      "total_tenants": 12,
+      "on_honak": 2,
+      "open_now": 10,
+      "floors": 3
+    },
+    "featured_tenant_ids": ["mc-1", "mc-4", "mc-8"],
+    "mall_announcements": [
+      {
+        "id": "ann_mc1",
+        "type": "promotion",
+        "title": "عروض الأزياء الشتوية",
+        "body": "تخفيضات تصل إلى ٦٠٪ في DeFacto و Koton و LC Waikiki",
+        "badge": "تصفية شتوية",
+        "valid_until": "2026-02-28"
+      },
+      {
+        "id": "ann_mc2",
+        "type": "event",
+        "title": "يوم سبحة في سباركيز",
+        "body": "دخول مجاني للأطفال تحت ٥ سنوات كل يوم ثلاثاء",
+        "badge": "كل ثلاثاء",
+        "valid_until": "2026-03-31"
+      },
+      {
+        "id": "ann_mc3",
+        "type": "info",
+        "title": "ساعات رمضان",
+        "body": "خلال شهر رمضان: ١٠:٠٠ ص — ١٢:٠٠ ص. ساحة الطعام تفتح بعد الإفطار.",
+        "badge": "رمضان",
+        "valid_until": "2026-04-01"
+      }
+    ],
+    "tenants": [
+      {
+        "id": "mc-1",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-08",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100"
+      },
+      {
+        "id": "mc-2",
+        "name": "بنك الإسكان",
+        "name_en": "Housing Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-12",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/housingbank/100"
+      },
+      {
+        "id": "mc-3",
+        "name": "زين",
+        "name_en": "Zain",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-15",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/zainjo/100"
+      },
+      {
+        "id": "mc-4",
+        "name": "DeFacto",
+        "name_en": "DeFacto",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/defacto/100"
+      },
+      {
+        "id": "mc-5",
+        "name": "كوتون",
+        "name_en": "Koton",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-08",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/koton/100"
+      },
+      {
+        "id": "mc-6",
+        "name": "LC Waikiki",
+        "name_en": "LC Waikiki",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-15",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/lcwaikiki/100"
+      },
+      {
+        "id": "mc-7",
+        "name": "أديداس",
+        "name_en": "Adidas",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-20",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/adidas/100"
+      },
+      {
+        "id": "mc-8",
+        "name": "سيفورا",
+        "name_en": "Sephora",
+        "category": "تجميل",
+        "floor_id": "f1",
+        "unit": "F1-25",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/sephora/100"
+      },
+      {
+        "id": "mc-9",
+        "name": "بيتزا هت",
+        "name_en": "Pizza Hut",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/pizzahut/100"
+      },
+      {
+        "id": "mc-10",
+        "name": "شيلي هاوس",
+        "name_en": "Chili House",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/chilihouse/100"
+      },
+      {
+        "id": "mc-11",
+        "name": "دانكن",
+        "name_en": "Dunkin'",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-10",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/dunkin/100"
+      },
+      {
+        "id": "mc-12",
+        "name": "ملاهي سباركيز",
+        "name_en": "Sparky's",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-18",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/sparkys/100"
+      }
+    ]
+  }
+}

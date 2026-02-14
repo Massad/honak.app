@@ -156,12 +156,17 @@ List<({String id, String label})> getPageTabs(
   };
 
   if (isUnclaimed) {
+    // Directory pages keep their directory tab even when unclaimed —
+    // the tenant list is useful even without a manager.
+    if (archetype == Archetype.directory) {
+      return allTabs.where((t) => t.id != 'activity').toList();
+    }
     return allTabs.where((t) => t.id == 'main' || t.id == 'info').toList();
   }
   return allTabs;
 }
 
-class _PageDetailContent extends StatelessWidget {
+class _PageDetailContent extends StatefulWidget {
   final PageDetail page;
   final Archetype archetype;
   final List<({String id, String label})> tabs;
@@ -183,13 +188,44 @@ class _PageDetailContent extends StatelessWidget {
   });
 
   @override
+  State<_PageDetailContent> createState() => _PageDetailContentState();
+}
+
+class _PageDetailContentState extends State<_PageDetailContent> {
+  @override
+  void initState() {
+    super.initState();
+    widget.tabController.addListener(_onTabChanged);
+  }
+
+  @override
+  void didUpdateWidget(covariant _PageDetailContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.tabController != widget.tabController) {
+      oldWidget.tabController.removeListener(_onTabChanged);
+      widget.tabController.addListener(_onTabChanged);
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.tabController.removeListener(_onTabChanged);
+    super.dispose();
+  }
+
+  void _onTabChanged() {
+    if (mounted) setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final hasMultipleBranches = page.branches.length >= 2;
+    final page = widget.page;
+    final archetype = widget.archetype;
+    final showNearestBranch = page.branches.length >= 2;
     final hasCoverage = page.coverageZones.isNotEmpty ||
         page.coverageZonesStructured.isNotEmpty;
-    final hasMiddleElements = hasMultipleBranches || hasCoverage;
+    final hasMiddleElements = showNearestBranch || hasCoverage;
 
-    // Flatten coverage areas for banner
     final coverageAreas = hasCoverage
         ? [
             ...page.coverageZones,
@@ -198,8 +234,10 @@ class _PageDetailContent extends StatelessWidget {
           ]
         : <String>[];
 
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+    final activeTabId = widget.tabs[widget.tabController.index].id;
+
+    return CustomScrollView(
+      slivers: [
         // 1. Cover image
         SliverToBoxAdapter(
           child: PageCover(
@@ -209,31 +247,32 @@ class _PageDetailContent extends StatelessWidget {
           ),
         ),
 
-        // 2. Branch selector (only if 2+ branches) — between cover and white section
-        if (hasMultipleBranches)
+        // 2. Nearest branch card (all archetypes with 2+ branches)
+        if (showNearestBranch)
           SliverToBoxAdapter(
-            child: BranchSelector(
+            child: NearestBranchCard(
               branches: page.branches,
-              selectedIndex: selectedBranchIndex,
-              onBranchChanged: onBranchChanged,
+              archetype: archetype,
+              selectedBranchIndex: widget.selectedBranchIndex,
+              onBranchChanged: widget.onBranchChanged,
+              pageName: page.name,
             ),
           ),
 
-        // 2b. Coverage banner — between branch selector and white section
+        // 2b. Coverage banner
         if (hasCoverage)
           SliverToBoxAdapter(
             child: CoverageBanner(coverageAreas: coverageAreas),
           ),
 
-        // 3. White info section (avatar + name + badges + description +
-        //    location + hours + trust metrics + status banner + action bar)
+        // 3. White info section
         SliverToBoxAdapter(
           child: PageInfoCard(
             page: page,
             archetype: archetype,
             hasMiddleElements: hasMiddleElements,
-            isFollowing: isFollowing,
-            onFollowChanged: onFollowChanged,
+            isFollowing: widget.isFollowing,
+            onFollowChanged: widget.onFollowChanged,
             onSearchType: (type) {
               final catSlug = page.exploreCategory ?? page.categoryId;
               if (catSlug != null) {
@@ -269,29 +308,29 @@ class _PageDetailContent extends StatelessWidget {
         SliverPersistentHeader(
           pinned: true,
           delegate: PageTabBarDelegate(
-            tabController: tabController,
-            tabs: tabs.map((t) => Tab(text: t.label)).toList(),
+            tabController: widget.tabController,
+            tabs: widget.tabs.map((t) => Tab(text: t.label)).toList(),
           ),
         ),
+
+        // 5. Active tab content — inline for short tabs, fill for scrollable tabs
+        ..._buildActiveTabSlivers(context, activeTabId),
       ],
-      body: TabBarView(
-        controller: tabController,
-        children: tabs
-            .map((t) => Builder(
-                  builder: (context) =>
-                      _buildTabContent(context, t.id, page, archetype),
-                ))
-            .toList(),
-      ),
     );
   }
 
-  void _openClaimFlow(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => ClaimRequestPage(page: page),
-      ),
-    );
+  /// Short-content tabs (info) render inline via SliverToBoxAdapter —
+  /// content ends where it naturally ends, no blank space.
+  /// Scrollable tabs fill the remaining viewport with internal scroll.
+  List<Widget> _buildActiveTabSlivers(BuildContext context, String tabId) {
+    final content =
+        _buildTabContent(context, tabId, widget.page, widget.archetype);
+
+    if (tabId == 'info') {
+      return [SliverToBoxAdapter(child: content)];
+    }
+
+    return [SliverFillRemaining(hasScrollBody: true, child: content)];
   }
 
   Widget _buildTabContent(
@@ -314,10 +353,17 @@ class _PageDetailContent extends StatelessWidget {
     };
   }
 
+  void _openClaimFlow(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => ClaimRequestPage(page: widget.page),
+      ),
+    );
+  }
+
   Widget _buildMainSection(
       BuildContext context, PageDetail page, Archetype archetype) {
-    // Unclaimed pages show the auto-registered banner instead of content
-    if (page.claimStatus == 'unclaimed') {
+    if (page.claimStatus == 'unclaimed' && archetype != Archetype.directory) {
       return SectionEmptyState(
         page: page,
         archetype: archetype,

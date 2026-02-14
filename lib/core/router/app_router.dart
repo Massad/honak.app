@@ -509,7 +509,7 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primary = context.colorScheme.primary;
-    const grey = Color(0xFF9CA3AF);
+    final grey = context.colorScheme.onSurfaceVariant;
 
     return GestureDetector(
       onTap: onTap,
@@ -608,7 +608,7 @@ class _CenterTab extends StatelessWidget {
                       isActive ? FontWeight.w600 : FontWeight.normal,
                   color: isActive
                       ? context.colorScheme.primary
-                      : const Color(0xFF9CA3AF),
+                      : context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ),

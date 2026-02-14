@@ -250,6 +250,20 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
           children: [
             const SizedBox(height: AppSpacing.md),
 
+            // Section header
+            Padding(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.lg,
+              ),
+              child: Text(
+                'إدارة الدليل',
+                style: context.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+
             // Config chips bar
             TenantDirectoryConfigChips(
               floorCount: data.floors.length,
@@ -300,6 +314,43 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
               ),
             const SizedBox(height: AppSpacing.md),
 
+            // Tenant list header
+            Padding(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.lg,
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    '${filtered.length} وحدة',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: _openAddTenant,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.add, size: 16, color: AppColors.primary),
+                        const SizedBox(width: 2),
+                        Text(
+                          'إضافة وحدة',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+
             // Tenant list
             if (filtered.isEmpty)
               _EmptyState(
@@ -324,56 +375,17 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
                     tenant: tenant,
                     onTap: () => _openEditTenant(tenant),
                     onMenuAction: () => _showTenantMenu(tenant),
+                    onViewPage: tenant.pageId != null
+                        ? () => _showToast('عرض صفحة ${tenant.name}')
+                        : null,
+                    onEdit: () => _openEditTenant(tenant),
+                    onInvite: () => _showInviteSheet(tenant),
                   ),
                 ),
               ),
 
-            const SizedBox(height: 80),
+            const SizedBox(height: AppSpacing.lg),
           ],
-        ),
-
-        // FAB
-        Positioned(
-          bottom: AppSpacing.lg,
-          left: AppSpacing.lg,
-          right: AppSpacing.lg,
-          child: Center(
-            child: GestureDetector(
-              onTap: _openAddTenant,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xl,
-                  vertical: AppSpacing.md,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.3),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.add, size: 18, color: Colors.white),
-                    SizedBox(width: AppSpacing.xs),
-                    Text(
-                      'إضافة مستأجر',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.surface,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
         ),
       ],
     );

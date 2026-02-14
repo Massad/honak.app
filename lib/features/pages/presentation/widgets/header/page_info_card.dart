@@ -10,9 +10,7 @@ import 'package:honak/features/pages/presentation/widgets/header/location_hours_
 import 'package:honak/features/pages/presentation/widgets/header/page_avatar.dart';
 import 'package:honak/features/pages/presentation/widgets/header/status_banner.dart';
 import 'package:honak/features/pages/presentation/widgets/header/trust_metrics_row.dart';
-import 'package:honak/features/pages/presentation/widgets/header/venue_tenant_card.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/follow_button.dart';
-import 'package:honak/shared/widgets/data_sync_badge.dart';
 
 /// Full-width white section containing avatar, name, badges, description,
 /// location, hours, trust metrics, status banner, and action bar.
@@ -141,9 +139,6 @@ class PageInfoCard extends StatelessWidget {
             ],
           ),
 
-          // Data sync badge — shown when data may be stale
-          DataSyncBadge(show: !page.dataSynced),
-
           // Description — hidden for 'visibility' engagement level
           if (page.engagementLevel != 'visibility' &&
               page.description != null &&
@@ -180,15 +175,6 @@ class PageInfoCard extends StatelessWidget {
             relocated: page.relocated,
             permanentlyClosed: page.permanentlyClosed,
           ),
-
-          // Venue tenant card — when page is inside a venue (mall, building)
-          if (page.venueId != null)
-            VenueTenantCard(
-              venueId: page.venueId!,
-              venueName: page.venueName,
-              venueFloor: page.venueFloor,
-              venueUnit: page.venueUnit,
-            ),
 
           // Action bar (inside white section)
           SizedBox(height: AppSpacing.sm),

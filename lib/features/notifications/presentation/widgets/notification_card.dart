@@ -33,7 +33,7 @@ class NotificationCard extends StatelessWidget {
           color: isRead ? cs.surface : unreadBg,
           borderRadius: AppRadius.cardInner,
           border: Border.all(
-            color: isRead ? const Color(0xFFE5E7EB) : unreadBorder,
+            color: isRead ? cs.outlineVariant : unreadBorder,
           ),
         ),
         child: Row(

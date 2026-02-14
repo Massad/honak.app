@@ -77,7 +77,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                       'ما اسمك؟',
                       style: context.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFF111827),
+                        color: context.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -85,7 +85,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                     Text(
                       'هكذا ستظهر للأعمال التجارية عند التواصل معهم',
                       style: context.textTheme.titleSmall?.copyWith(
-                        color: const Color(0xFF6B7280),
+                        color: context.colorScheme.onSurfaceVariant,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -97,7 +97,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                       decoration: BoxDecoration(
                         color: _focusNode.hasFocus
                             ? AppColors.white
-                            : const Color(0xFFF9FAFB),
+                            : context.colorScheme.surfaceContainerLowest,
                         borderRadius: BorderRadius.circular(AppRadius.md),
                         border: Border.all(
                           color: _focusNode.hasFocus
@@ -118,7 +118,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                         decoration: InputDecoration(
                           hintText: 'اسمك',
                           hintStyle: context.textTheme.bodyLarge?.copyWith(
-                            color: const Color(0xFF9CA3AF),
+                            color: context.colorScheme.onSurfaceVariant,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),

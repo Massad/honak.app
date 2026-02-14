@@ -1,0 +1,185 @@
+{
+  "success": true,
+  "data": {
+    "id": "baraka-mall",
+    "business_type_id": "directory",
+    "business_type_name": "دليل مجمع",
+    "category_name": "مراكز تجارية",
+    "explore_category": "cat_malls",
+    "name": "بركة مول",
+    "name_en": "Baraka Mall",
+    "slug": "baraka-mall",
+    "handle": "baraka-mall",
+    "store_type": "physical",
+    "archetype": "directory",
+    "description": "بركة مول — مجمع تجاري في قلب الزرقاء على شارع الملك عبدالله. طابقان يضمان محلات متنوعة ومطاعم.",
+    "avatar_url": "https://picsum.photos/seed/baraka-mall-avatar/200",
+    "cover_url": "https://picsum.photos/seed/baraka-mall-cover/800/400",
+    "phone": "+962 5 390 6666",
+    "location": {
+      "lat": 32.056,
+      "lng": 36.094,
+      "label": "الزرقاء — شارع الملك عبدالله",
+      "area": "الزرقاء",
+      "city": "الزرقاء"
+    },
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "monday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "tuesday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "wednesday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "thursday": {"enabled": true, "open": "09:00", "close": "21:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "21:00"},
+      "saturday": {"enabled": true, "open": "09:00", "close": "21:00"}
+    },
+    "operating_hours": "السبت — الخميس: ٩:٠٠ ص — ٩:٠٠ م\nالجمعة: ١٠:٠٠ ص — ٩:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 650,
+    "views_count": 9500,
+    "posts_count": 0,
+    "is_following": false,
+    "trust_score": 70,
+    "trust_metrics": [
+      {"label": "عدد المحلات", "value": "٨", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "٠", "icon": "verified"},
+      {"label": "الطوابق", "value": "٢", "icon": "layers"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "claim_status": "unclaimed",
+    "engagement_level": "full",
+    "data_synced": false,
+    "stories": [],
+    "blocked_dates": [],
+    "amenities": [
+      {"icon": "local_parking", "label": "مواقف — ١٥٠ موقف"},
+      {"icon": "elevator", "label": "مصعد"},
+      {"icon": "mosque", "label": "مصلى قريب"},
+      {"icon": "atm", "label": "صراف آلي"}
+    ],
+    "parking_info": "مواقف أمامية — ١٥٠ موقف",
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات ومحلات", "tenant_count": 5},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء وطعام", "tenant_count": 3}
+    ],
+    "directory_stats": {
+      "total_tenants": 8,
+      "on_honak": 0,
+      "open_now": 7,
+      "floors": 2
+    },
+    "featured_tenant_ids": ["bk-1", "bk-3", "bk-6"],
+    "mall_announcements": [
+      {
+        "id": "ann_bk1",
+        "type": "promotion",
+        "title": "عروض افتتاحية",
+        "body": "خصومات ترحيبية في جميع المحلات بمناسبة انضمامنا لهونك",
+        "badge": "جديد",
+        "valid_until": "2026-03-15"
+      },
+      {
+        "id": "ann_bk2",
+        "type": "info",
+        "title": "مواقف إضافية",
+        "body": "تم توسيع المواقف الخلفية — ٥٠ موقف إضافي متاح الآن",
+        "badge": "تحديث",
+        "valid_until": "2026-06-01"
+      },
+      {
+        "id": "ann_bk3",
+        "type": "info",
+        "title": "ساعات رمضان",
+        "body": "خلال شهر رمضان: ١٠:٠٠ ص — ١١:٠٠ م.",
+        "badge": "رمضان",
+        "valid_until": "2026-04-01"
+      }
+    ],
+    "tenants": [
+      {
+        "id": "bk-1",
+        "name": "صيدلية النور",
+        "name_en": "Al-Nour Pharmacy",
+        "category": "صحة",
+        "floor_id": "ground",
+        "unit": "G-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/alnourpharmacy/100"
+      },
+      {
+        "id": "bk-2",
+        "name": "ميني ماركت الأمانة",
+        "name_en": "Amana Mini Market",
+        "category": "بقالة",
+        "floor_id": "ground",
+        "unit": "G-03",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/amanaminimarket/100"
+      },
+      {
+        "id": "bk-3",
+        "name": "موبايل شوب",
+        "name_en": "Mobile Shop",
+        "category": "إلكترونيات",
+        "floor_id": "ground",
+        "unit": "G-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/mobileshop/100"
+      },
+      {
+        "id": "bk-4",
+        "name": "مكتبة القلم",
+        "name_en": "Al-Qalam Bookstore",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-07",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/alqalambookstore/100"
+      },
+      {
+        "id": "bk-5",
+        "name": "حلاقة الأمير",
+        "name_en": "Al-Ameer Barber",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-09",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/alameerbarber/100"
+      },
+      {
+        "id": "bk-6",
+        "name": "أزياء الوردة",
+        "name_en": "Al-Warda Fashion",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/alwardafashion/100"
+      },
+      {
+        "id": "bk-7",
+        "name": "شاورما أبو حسين",
+        "name_en": "Abu Hussein Shawarma",
+        "category": "طعام",
+        "floor_id": "f1",
+        "unit": "F1-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/abuhusseinshawarma/100"
+      },
+      {
+        "id": "bk-8",
+        "name": "كوفي بريك",
+        "name_en": "Coffee Break",
+        "category": "طعام",
+        "floor_id": "f1",
+        "unit": "F1-08",
+        "is_open": false,
+        "temporarily_closed": true,
+        "logo_url": "https://picsum.photos/seed/coffeebreak/100"
+      }
+    ]
+  }
+}

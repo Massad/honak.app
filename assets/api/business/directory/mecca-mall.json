@@ -1,0 +1,156 @@
+{
+  "success": true,
+  "data": {
+    "tenants": [
+      {
+        "id": "t-arab-bank",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-08",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100",
+        "linked_at": "2025-03-20T10:00:00Z",
+        "tags": ["بنك", "صراف"]
+      },
+      {
+        "id": "t-housing-bank",
+        "name": "بنك الإسكان",
+        "name_en": "Housing Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-12",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/housingbank/100",
+        "tags": ["بنك"]
+      },
+      {
+        "id": "t-zain",
+        "name": "زين",
+        "name_en": "Zain",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-15",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/zainjo/100",
+        "tags": ["اتصالات"]
+      },
+      {
+        "id": "t-defacto",
+        "name": "ديفاكتو",
+        "name_en": "DeFacto",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/defacto/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-koton",
+        "name": "كوتون",
+        "name_en": "Koton",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-08",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/koton/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-lcw",
+        "name": "LC Waikiki",
+        "name_en": "LC Waikiki",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-15",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/lcwaikiki/100",
+        "tags": ["أزياء"]
+      },
+      {
+        "id": "t-adidas",
+        "name": "أديداس",
+        "name_en": "Adidas",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-20",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/adidas/100",
+        "tags": ["رياضة", "أحذية"]
+      },
+      {
+        "id": "t-sephora",
+        "name": "سيفورا",
+        "name_en": "Sephora",
+        "category": "أزياء",
+        "floor_id": "f1",
+        "unit": "F1-25",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/sephora/100",
+        "tags": ["مكياج", "عطور"]
+      },
+      {
+        "id": "t-pizzahut",
+        "name": "بيتزا هت",
+        "name_en": "Pizza Hut",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-01",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/pizzahut/100",
+        "tags": ["بيتزا"]
+      },
+      {
+        "id": "t-chilihouse",
+        "name": "تشيلي هاوس",
+        "name_en": "Chili House",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-05",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/chilihouse/100",
+        "tags": ["مطعم"]
+      },
+      {
+        "id": "t-dunkin",
+        "name": "دانكن",
+        "name_en": "Dunkin'",
+        "category": "طعام",
+        "floor_id": "f2",
+        "unit": "F2-10",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/dunkin/100",
+        "tags": ["قهوة", "دونات"]
+      },
+      {
+        "id": "t-sparky",
+        "name": "ملاهي سباركيز",
+        "name_en": "Sparky's",
+        "category": "ترفيه",
+        "floor_id": "f2",
+        "unit": "F2-18",
+        "is_open": true,
+        "logo_url": "https://picsum.photos/seed/sparkys/100",
+        "tags": ["ألعاب", "أطفال"]
+      }
+    ],
+    "floors": [
+      {"id": "ground", "name": "الأرضي", "label": "خدمات وبنوك", "tenant_count": 3},
+      {"id": "f1", "name": "الطابق ١", "label": "أزياء", "tenant_count": 5},
+      {"id": "f2", "name": "الطابق ٢", "label": "طعام وترفيه", "tenant_count": 4}
+    ],
+    "categories": ["خدمات", "أزياء", "طعام", "ترفيه"],
+    "amenities": ["مواقف مجانية", "واي فاي", "مصاعد", "مصلى", "صراف آلي", "منطقة أطفال"],
+    "featured_tenant_ids": ["t-sephora", "t-adidas", "t-sparky"],
+    "stats": {
+      "total": 12,
+      "claimed": 1,
+      "invited": 0,
+      "unclaimed": 11,
+      "new_this_week": 1
+    }
+  }
+}

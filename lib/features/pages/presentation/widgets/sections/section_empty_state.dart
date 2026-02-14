@@ -119,20 +119,20 @@ class _UnclaimedState extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'صفحة مُسجّلة تلقائياً',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF111827), // gray-900
+                              color: context.colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'تم إنشاء هذه الصفحة من بيانات عامة لتسهيل العثور على ${page.name}.\n$contentNoun غير متاحة حالياً.',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF6B7280), // gray-500
+                              color: context.colorScheme.onSurfaceVariant,
                               height: 1.6,
                             ),
                           ),
@@ -223,26 +223,26 @@ class _UnclaimedState extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFF9FAFB), // gray-50
+              color: context.colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: const Color(0xFFF3F4F6), // gray-100
+                color: context.colorScheme.outlineVariant,
               ),
             ),
-            child: const Row(
+            child: Row(
               children: [
                 Icon(
                   Icons.notifications_outlined,
                   size: 14,
-                  color: Color(0xFF9CA3AF), // gray-400
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     'تابع هذه الصفحة — سنُعلمك عند تفعيلها من صاحب النشاط',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Color(0xFF6B7280), // gray-500
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),

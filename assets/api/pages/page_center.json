@@ -2,7 +2,6 @@
   "success": true,
   "data": {
     "id": "shmeisani-center",
-    "owner_id": "usr_003",
     "business_type_id": "directory",
     "business_type_name": "دليل مجمع",
     "category_name": "مراكز تجارية",
@@ -39,19 +38,20 @@
     "page_status": "active",
     "followers_count": 450,
     "views_count": 8200,
-    "posts_count": 12,
+    "posts_count": 0,
     "is_following": false,
     "trust_score": 80,
     "trust_metrics": [
-      {"label": "عدد المحلات", "value": "١٠", "icon": "storefront"},
-      {"label": "محلات مسجلة", "value": "١٠", "icon": "verified"},
+      {"label": "عدد المحلات", "value": "١١", "icon": "storefront"},
+      {"label": "محلات مسجلة", "value": "١١", "icon": "verified"},
       {"label": "الطوابق", "value": "٢", "icon": "layers"}
     ],
     "member_since": "2025",
     "contact_methods": ["chat", "phone"],
     "created_at": 1709000000,
+    "claim_status": "unclaimed",
     "engagement_level": "full",
-    "data_synced": true,
+    "data_synced": false,
     "stories": [],
     "blocked_dates": [],
     "amenities": [
@@ -61,13 +61,14 @@
     ],
     "parking_info": "مواقف أمامية — ٦٠ موقف",
     "floors": [
-      {"id": "ground", "name": "الأرضي", "label": "مطاعم وخدمات", "tenant_count": 5},
+      {"id": "ground", "name": "الأرضي", "label": "مطاعم وخدمات", "tenant_count": 6},
       {"id": "f1", "name": "الطابق ١", "label": "عيادات ومكاتب", "tenant_count": 5}
     ],
     "directory_stats": {
-      "total_tenants": 10,
-      "claimed_tenants": 10,
-      "unclaimed_tenants": 0,
+      "total_tenants": 11,
+      "claimed_tenants": 2,
+      "unclaimed_tenants": 7,
+      "invited_tenants": 2,
       "floors": 2
     },
     "featured_tenant_ids": ["sc-1", "sc-4", "sc-6"],
@@ -90,7 +91,6 @@
         "floor_id": "ground",
         "unit": "G-01",
         "is_open": true,
-        "page_id": "sham-shawarma",
         "logo_url": "https://picsum.photos/seed/shamshawarma/100"
       },
       {
@@ -101,7 +101,6 @@
         "floor_id": "ground",
         "unit": "G-02",
         "is_open": true,
-        "page_id": "habibah-knafeh",
         "logo_url": "https://picsum.photos/seed/habibahknafeh/100"
       },
       {
@@ -112,7 +111,6 @@
         "floor_id": "ground",
         "unit": "G-03",
         "is_open": true,
-        "page_id": "hayat-pharmacy",
         "logo_url": "https://picsum.photos/seed/hayatpharmacy/100"
       },
       {
@@ -123,7 +121,6 @@
         "floor_id": "ground",
         "unit": "G-04",
         "is_open": true,
-        "page_id": "fresh-supermarket",
         "logo_url": "https://picsum.photos/seed/freshsuper/100"
       },
       {
@@ -134,8 +131,18 @@
         "floor_id": "ground",
         "unit": "G-05",
         "is_open": true,
-        "page_id": "alamal-bookstore",
         "logo_url": "https://picsum.photos/seed/alamalbookstore/100"
+      },
+      {
+        "id": "sc-11",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-06",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100"
       },
       {
         "id": "sc-6",
@@ -156,7 +163,6 @@
         "floor_id": "f1",
         "unit": "106",
         "is_open": true,
-        "page_id": "smile-dental",
         "logo_url": "https://picsum.photos/seed/smiledental/100"
       },
       {
@@ -167,7 +173,6 @@
         "floor_id": "f1",
         "unit": "107",
         "is_open": true,
-        "page_id": "alhaq-law",
         "logo_url": "https://picsum.photos/seed/alhaqlaw/100"
       },
       {
@@ -178,7 +183,6 @@
         "floor_id": "f1",
         "unit": "108",
         "is_open": true,
-        "page_id": "shmeisani-lab",
         "logo_url": "https://picsum.photos/seed/shmeisanilab/100"
       },
       {
@@ -189,7 +193,6 @@
         "floor_id": "f1",
         "unit": "110",
         "is_open": true,
-        "page_id": "layla-salon",
         "logo_url": "https://picsum.photos/seed/laylasalon/100"
       }
     ]

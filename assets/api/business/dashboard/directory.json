@@ -2,39 +2,41 @@
   "success": true,
   "data": {
     "stats": {
-      "page_views": 1250,
-      "new_followers": 85,
-      "claimed_tenants": 18,
-      "total_tenants": 25,
-      "new_this_week": 2
+      "page_views": {"value": 1250, "change": 12},
+      "new_followers": {"value": 85, "change": 8},
+      "claimed_tenants": {"claimed": 18, "total": 25},
+      "new_this_week": {"value": 2}
     },
     "recently_linked": [
       {
         "id": "t-samsung",
         "name": "Samsung Jordan",
+        "floor": "الأرضي",
         "unit": "G-18",
         "category": "إلكترونيات",
-        "time": "منذ 3 أيام",
+        "linked_at": 1707700000,
         "page_id": "samsung-jo",
         "logo_url": "https://picsum.photos/seed/samsungjo/80/80",
         "status": "unreviewed"
       },
       {
-        "id": "t-25",
+        "id": "t-nour",
         "name": "نور فاشن",
+        "floor": "الطابق ٢",
         "unit": "F2-40",
         "category": "أزياء",
-        "time": "منذ 5 أيام",
+        "linked_at": 1707500000,
         "page_id": "nour-fashion",
         "logo_url": "https://picsum.photos/seed/nourfashion/80/80",
         "status": "unreviewed"
       },
       {
-        "id": "t-24",
+        "id": "t-hara",
         "name": "قهوة الحارة",
+        "floor": "الطابق ١",
         "unit": "F1-22",
         "category": "طعام",
-        "time": "منذ أسبوع",
+        "linked_at": 1707000000,
         "page_id": "hara-coffee",
         "logo_url": "https://picsum.photos/seed/haracoffee/80/80",
         "status": "reviewed"

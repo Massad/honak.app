@@ -88,13 +88,13 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
           ),
           child: Row(
             children: [
-              const Expanded(
-                child: const Text(
+              Expanded(
+                child: Text(
                   'طلب سريع',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF111827),
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
               ),

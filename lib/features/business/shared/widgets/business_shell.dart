@@ -65,7 +65,7 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
       appBar: const BusinessAppBar(),
       body: IndexedStack(
         index: _currentIndex,

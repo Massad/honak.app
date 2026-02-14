@@ -2,6 +2,48 @@
   "success": true,
   "data": [
     {
+      "id": "burger-joint",
+      "name": "برغر جوينت",
+      "slug": "burger-joint",
+      "avatar_url": "https://picsum.photos/seed/burgerjoint/200",
+      "cover_url": "https://picsum.photos/seed/burgerjoint-cover/800/400",
+      "business_type_name": "مطعم",
+      "business_type_id": "restaurant",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 6200,
+      "trust_metrics": [
+        {
+          "label": "الأكثر طلباً",
+          "value": "كلاسيك برغر",
+          "icon": "restaurant"
+        },
+        {
+          "label": "وقت التحضير",
+          "value": "١٥ دقيقة",
+          "icon": "schedule"
+        },
+        {
+          "label": "توصيل",
+          "value": "متاح",
+          "icon": "delivery_dining"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
       "id": "beit-sitti",
       "name": "بيت ستي",
       "slug": "beit-sitti",
@@ -221,6 +263,48 @@
       },
       "distance": null,
       "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "coffee-bean",
+      "name": "كوفي بين",
+      "slug": "coffee-bean",
+      "avatar_url": "https://picsum.photos/seed/coffeebean/200",
+      "cover_url": "https://picsum.photos/seed/coffeebean-cover/800/400",
+      "business_type_name": "مقهى",
+      "business_type_id": "cafe",
+      "explore_category": "cat_food",
+      "archetype": "menu_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 4800,
+      "trust_metrics": [
+        {
+          "label": "الأكثر طلباً",
+          "value": "لاتيه بالكراميل",
+          "icon": "local_cafe"
+        },
+        {
+          "label": "وقت التحضير",
+          "value": "٥ دقائق",
+          "icon": "schedule"
+        },
+        {
+          "label": "فروع",
+          "value": "٣ فروع",
+          "icon": "store"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
       "monthly_metric": null,
       "sub_category": null
     },
@@ -738,6 +822,48 @@
       "claim_status": "unclaimed"
     },
     {
+      "id": "hayat-gym",
+      "name": "نادي الحياة",
+      "slug": "hayat-gym",
+      "avatar_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "نادي رياضي",
+      "business_type_id": "gym",
+      "explore_category": "cat_fitness",
+      "archetype": "service_booking",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 680,
+      "trust_metrics": [
+        {
+          "label": "المشتركون النشطون",
+          "value": "١٢٠",
+          "icon": "people"
+        },
+        {
+          "label": "التقييم",
+          "value": "٤.٦",
+          "icon": "star"
+        },
+        {
+          "label": "سنوات الخبرة",
+          "value": "٣",
+          "icon": "calendar"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
       "id": "power-fitness",
       "name": "نادي القوة للياقة",
       "slug": "power-fitness",
@@ -807,6 +933,178 @@
       "sub_category": null
     },
     {
+      "id": "abdali-mall",
+      "name": "العبدلي مول",
+      "slug": "abdali-mall",
+      "avatar_url": "https://picsum.photos/seed/abdali-mall-avatar/200",
+      "cover_url": "https://picsum.photos/seed/abdali-mall-cover/800/400",
+      "business_type_name": "دليل مجمع",
+      "business_type_id": "directory",
+      "explore_category": "cat_malls",
+      "archetype": "directory",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 3100,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "١٢",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "٤",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٣",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "العبدلي",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "baraka-mall",
+      "name": "بركة مول",
+      "slug": "baraka-mall",
+      "avatar_url": "https://picsum.photos/seed/baraka-mall-avatar/200",
+      "cover_url": "https://picsum.photos/seed/baraka-mall-cover/800/400",
+      "business_type_name": "دليل مجمع",
+      "business_type_id": "directory",
+      "explore_category": "cat_malls",
+      "archetype": "directory",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 650,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "٨",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "٠",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٢",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "الزرقاء",
+        "city": "الزرقاء"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "taj-mall",
+      "name": "تاج مول",
+      "slug": "taj-mall",
+      "avatar_url": "https://picsum.photos/seed/taj-mall-avatar/200",
+      "cover_url": "https://picsum.photos/seed/taj-mall-cover/800/400",
+      "business_type_name": "دليل مجمع",
+      "business_type_id": "directory",
+      "explore_category": "cat_malls",
+      "archetype": "directory",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 2800,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "١٢",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "٢",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٤",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "عبدون الجنوبي",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "galleria-mall",
+      "name": "غاليريا مول",
+      "slug": "galleria-mall",
+      "avatar_url": "https://picsum.photos/seed/galleria-mall-avatar/200",
+      "cover_url": "https://picsum.photos/seed/galleria-mall-cover/800/400",
+      "business_type_name": "دليل مجمع",
+      "business_type_id": "directory",
+      "explore_category": "cat_malls",
+      "archetype": "directory",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 1200,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "١٠",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "١",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٣",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "خلدا",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
       "id": "shmeisani-center",
       "name": "مجمع الشميساني",
       "slug": "shmeisani-center",
@@ -825,12 +1123,12 @@
       "trust_metrics": [
         {
           "label": "عدد المحلات",
-          "value": "١٠",
+          "value": "١١",
           "icon": "storefront"
         },
         {
           "label": "محلات مسجلة",
-          "value": "١٠",
+          "value": "١١",
           "icon": "verified"
         },
         {
@@ -846,7 +1144,94 @@
       "distance": null,
       "has_active_stories": false,
       "monthly_metric": null,
-      "sub_category": null
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "mecca-mall",
+      "name": "مكة مول",
+      "slug": "mecca-mall",
+      "avatar_url": "https://picsum.photos/seed/mecca-mall-avatar/200",
+      "cover_url": "https://picsum.photos/seed/mecca-mall-cover/800/400",
+      "business_type_name": "دليل مجمع",
+      "business_type_id": "directory",
+      "explore_category": "cat_malls",
+      "archetype": "directory",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 4200,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "١٢",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "٢",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٣",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "شارع مكة",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
+    },
+    {
+      "id": "ayla-oasis",
+      "name": "واحة أيلة",
+      "slug": "ayla-oasis",
+      "avatar_url": "https://picsum.photos/seed/ayla-oasis-avatar/200",
+      "cover_url": "https://picsum.photos/seed/ayla-oasis-cover/800/400",
+      "business_type_name": "دليل مجمع",
+      "business_type_id": "directory",
+      "explore_category": "cat_malls",
+      "archetype": "directory",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 480,
+      "trust_metrics": [
+        {
+          "label": "عدد المحلات",
+          "value": "٨",
+          "icon": "storefront"
+        },
+        {
+          "label": "محلات مسجلة",
+          "value": "٠",
+          "icon": "verified"
+        },
+        {
+          "label": "الطوابق",
+          "value": "٢",
+          "icon": "layers"
+        }
+      ],
+      "location": {
+        "area": "أيلة",
+        "city": "العقبة"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null,
+      "claim_status": "unclaimed"
     },
     {
       "id": "tiny-tots",
@@ -874,6 +1259,48 @@
       "monthly_metric": null,
       "sub_category": null,
       "claim_status": "unclaimed"
+    },
+    {
+      "id": "tech-planet",
+      "name": "تيك بلانت",
+      "slug": "tech-planet",
+      "avatar_url": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "إلكترونيات",
+      "business_type_id": "electronics_store",
+      "explore_category": "cat_retail",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 520,
+      "trust_metrics": [
+        {
+          "label": "منتجات",
+          "value": "٤٥",
+          "icon": "inventory"
+        },
+        {
+          "label": "التقييم",
+          "value": "٤.٧",
+          "icon": "star"
+        },
+        {
+          "label": "سنوات",
+          "value": "٢",
+          "icon": "calendar"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null
     },
     {
       "id": "gadget-zone",
@@ -938,6 +1365,48 @@
       "location": {
         "area": "أونلاين",
         "city": "الأردن"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
+      "id": "zara-jo",
+      "name": "زارا",
+      "slug": "zara-jo",
+      "avatar_url": "https://picsum.photos/seed/zarajo/200",
+      "cover_url": "https://picsum.photos/seed/zarajo-cover/800/400",
+      "business_type_name": "متجر أزياء",
+      "business_type_id": "clothes_store",
+      "explore_category": "cat_retail",
+      "archetype": "catalog_order",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 12000,
+      "trust_metrics": [
+        {
+          "label": "فروع في الأردن",
+          "value": "٥",
+          "icon": "store"
+        },
+        {
+          "label": "تشكيلة جديدة",
+          "value": "كل أسبوعين",
+          "icon": "auto_awesome"
+        },
+        {
+          "label": "استبدال",
+          "value": "٣٠ يوم",
+          "icon": "swap_horiz"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
       },
       "distance": null,
       "has_active_stories": true,
@@ -1585,6 +2054,48 @@
       "sub_category": null
     },
     {
+      "id": "cinema-city",
+      "name": "سينما سيتي",
+      "slug": "cinema-city",
+      "avatar_url": "https://picsum.photos/seed/cinemacity/200",
+      "cover_url": "https://picsum.photos/seed/cinemacity-cover/800/400",
+      "business_type_name": "سينما",
+      "business_type_id": "cinema",
+      "explore_category": "cat_entertainment",
+      "archetype": "reservation",
+      "engagement_level": "full",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 15200,
+      "trust_metrics": [
+        {
+          "label": "صالات عرض",
+          "value": "٨",
+          "icon": "theaters"
+        },
+        {
+          "label": "تقنية",
+          "value": "IMAX + Dolby",
+          "icon": "surround_sound"
+        },
+        {
+          "label": "حجز مسبق",
+          "value": "متاح",
+          "icon": "event_seat"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
       "id": "sara-photography",
       "name": "تصوير سارة",
       "slug": "sara-photography",
@@ -1762,6 +2273,48 @@
       "claim_status": "unclaimed"
     },
     {
+      "id": "stc-jo",
+      "name": "STC",
+      "slug": "stc-jo",
+      "avatar_url": "https://picsum.photos/seed/stcjo/200",
+      "cover_url": "https://picsum.photos/seed/stcjo-cover/800/400",
+      "business_type_name": "اتصالات",
+      "business_type_id": "telecom",
+      "explore_category": "cat_services",
+      "archetype": "follow_only",
+      "engagement_level": "visibility",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 22000,
+      "trust_metrics": [
+        {
+          "label": "فروع",
+          "value": "٤٥+",
+          "icon": "store"
+        },
+        {
+          "label": "تغطية",
+          "value": "٥G",
+          "icon": "signal_cellular_alt"
+        },
+        {
+          "label": "خدمة عملاء",
+          "value": "١٠١",
+          "icon": "support_agent"
+        }
+      ],
+      "location": {
+        "area": "عبدون",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": false,
+      "monthly_metric": null,
+      "sub_category": null
+    },
+    {
       "id": "alaseel-shoe-repair",
       "name": "إسكافي الأصيل",
       "slug": "alaseel-shoe-repair",
@@ -1803,6 +2356,48 @@
       "monthly_metric": null,
       "sub_category": null,
       "claim_status": "claimed"
+    },
+    {
+      "id": "arab-bank",
+      "name": "البنك العربي",
+      "slug": "arab-bank",
+      "avatar_url": "https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=200&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+      "business_type_name": "بنك",
+      "business_type_id": "bank",
+      "explore_category": "cat_services",
+      "archetype": "follow_only",
+      "engagement_level": "visibility",
+      "is_open": true,
+      "store_type": "physical",
+      "is_verified": true,
+      "is_following": false,
+      "followers_count": 45000,
+      "trust_metrics": [
+        {
+          "label": "فروع في الأردن",
+          "value": "٧٨",
+          "icon": "location_on"
+        },
+        {
+          "label": "صراف آلي",
+          "value": "١٥٠+",
+          "icon": "atm"
+        },
+        {
+          "label": "تأسس",
+          "value": "١٩٣٠",
+          "icon": "history"
+        }
+      ],
+      "location": {
+        "area": "الشميساني",
+        "city": "عمّان"
+      },
+      "distance": null,
+      "has_active_stories": true,
+      "monthly_metric": null,
+      "sub_category": null
     },
     {
       "id": "alnajjar-tailor",

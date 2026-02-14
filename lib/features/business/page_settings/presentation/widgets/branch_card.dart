@@ -6,6 +6,9 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/branch.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/branch_provider.dart';
+import 'package:honak/features/business/page_settings/presentation/providers/venue_search_provider.dart';
+import 'package:honak/features/explore/domain/entities/page_summary.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 class BranchCard extends ConsumerStatefulWidget {
   final Branch branch;
@@ -28,8 +31,13 @@ class _BranchCardState extends ConsumerState<BranchCard> {
   late TextEditingController _nameController;
   late TextEditingController _addressController;
   late TextEditingController _phoneController;
+  late TextEditingController _floorController;
+  late TextEditingController _unitController;
   String? _selectedCity;
   String? _selectedNeighborhood;
+  late String _locationType;
+  String? _selectedVenueId;
+  String? _selectedVenueName;
 
   @override
   void initState() {
@@ -40,8 +48,15 @@ class _BranchCardState extends ConsumerState<BranchCard> {
         TextEditingController(text: widget.branch.address ?? '');
     _phoneController =
         TextEditingController(text: widget.branch.phone ?? '');
+    _floorController =
+        TextEditingController(text: widget.branch.venueFloor ?? '');
+    _unitController =
+        TextEditingController(text: widget.branch.venueUnit ?? '');
     _selectedCity = widget.branch.city;
     _selectedNeighborhood = widget.branch.neighborhood;
+    _locationType = widget.branch.locationType;
+    _selectedVenueId = widget.branch.venueId;
+    _selectedVenueName = widget.branch.venueName;
   }
 
   @override
@@ -49,6 +64,8 @@ class _BranchCardState extends ConsumerState<BranchCard> {
     _nameController.dispose();
     _addressController.dispose();
     _phoneController.dispose();
+    _floorController.dispose();
+    _unitController.dispose();
     super.dispose();
   }
 
@@ -66,6 +83,9 @@ class _BranchCardState extends ConsumerState<BranchCard> {
   }
 
   void _saveChanges() {
+    final isInVenue = _locationType == 'in_venue';
+    final floor = _floorController.text.trim();
+    final unit = _unitController.text.trim();
     final updated = widget.branch.copyWith(
       name: _nameController.text.trim(),
       address: _addressController.text.trim().isNotEmpty
@@ -76,6 +96,11 @@ class _BranchCardState extends ConsumerState<BranchCard> {
           : null,
       city: _selectedCity,
       neighborhood: _selectedNeighborhood,
+      locationType: _locationType,
+      venueId: isInVenue ? _selectedVenueId : null,
+      venueName: isInVenue ? _selectedVenueName : null,
+      venueFloor: isInVenue && floor.isNotEmpty ? floor : null,
+      venueUnit: isInVenue && unit.isNotEmpty ? unit : null,
     );
     ref.read(branchProvider.notifier).updateBranch(updated);
   }
@@ -239,6 +264,10 @@ class _BranchCardState extends ConsumerState<BranchCard> {
                     label: 'العنوان التفصيلي',
                     onChanged: (_) => _saveChanges(),
                   ),
+                  const SizedBox(height: AppSpacing.md),
+
+                  // Location type toggle
+                  _buildLocationTypeSection(),
                   const SizedBox(height: AppSpacing.sm),
 
                   // Phone (LTR)
@@ -311,6 +340,147 @@ class _BranchCardState extends ConsumerState<BranchCard> {
             ),
           ],
         ],
+      ),
+    );
+  }
+
+  Widget _buildLocationTypeSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        // Label
+        Text(
+          // "نوع الموقع"
+          '\u0646\u0648\u0639 \u0627\u0644\u0645\u0648\u0642\u0639',
+          style: TextStyle(
+            fontSize: 11,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        // Toggle row
+        Row(
+          children: [
+            Expanded(
+              child: _StatusToggle(
+                // "داخل مجمع"
+                label: '\u062f\u0627\u062e\u0644 \u0645\u062c\u0645\u0639',
+                isSelected: _locationType == 'in_venue',
+                color: Theme.of(context).colorScheme.primary,
+                onTap: () {
+                  setState(() => _locationType = 'in_venue');
+                  _saveChanges();
+                },
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: _StatusToggle(
+                // "موقع مستقل"
+                label: '\u0645\u0648\u0642\u0639 \u0645\u0633\u062a\u0642\u0644',
+                isSelected: _locationType == 'standalone',
+                color: Theme.of(context).colorScheme.primary,
+                onTap: () {
+                  setState(() {
+                    _locationType = 'standalone';
+                    _selectedVenueId = null;
+                    _selectedVenueName = null;
+                    _floorController.clear();
+                    _unitController.clear();
+                  });
+                  _saveChanges();
+                },
+              ),
+            ),
+          ],
+        ),
+        // Venue fields — shown when "داخل مجمع" is selected
+        if (_locationType == 'in_venue') ...[
+          const SizedBox(height: AppSpacing.sm),
+          // Venue selector
+          GestureDetector(
+            onTap: () => _showVenueSearchSheet(),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 18,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                  const Spacer(),
+                  Text(
+                    _selectedVenueName ??
+                        // "اختر المجمع"
+                        '\u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u062c\u0645\u0639',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: _selectedVenueName != null
+                          ? Theme.of(context).colorScheme.onSurface
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.xs),
+                  Icon(
+                    Icons.apartment_outlined,
+                    size: 18,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Floor + Unit in a row
+          Row(
+            children: [
+              Expanded(
+                child: _buildField(
+                  controller: _unitController,
+                  // "رقم الوحدة"
+                  label: '\u0631\u0642\u0645 \u0627\u0644\u0648\u062d\u062f\u0629',
+                  onChanged: (_) => _saveChanges(),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: _buildField(
+                  controller: _floorController,
+                  // "الطابق"
+                  label: '\u0627\u0644\u0637\u0627\u0628\u0642',
+                  onChanged: (_) => _saveChanges(),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ],
+    );
+  }
+
+  void _showVenueSearchSheet() {
+    showAppSheet(
+      context,
+      builder: (ctx) => _VenueSearchSheet(
+        onSelect: (id, name) {
+          setState(() {
+            _selectedVenueId = id;
+            _selectedVenueName = name;
+          });
+          _saveChanges();
+        },
       ),
     );
   }
@@ -457,6 +627,179 @@ class _StatusToggle extends StatelessWidget {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Bottom sheet for searching and selecting a venue (directory page).
+class _VenueSearchSheet extends ConsumerStatefulWidget {
+  final void Function(String id, String name) onSelect;
+
+  const _VenueSearchSheet({required this.onSelect});
+
+  @override
+  ConsumerState<_VenueSearchSheet> createState() => _VenueSearchSheetState();
+}
+
+class _VenueSearchSheetState extends ConsumerState<_VenueSearchSheet> {
+  String _query = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final venuesAsync = ref.watch(venueListProvider);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AppSheetHeader(
+          // "اختر المجمع"
+          title: '\u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u062c\u0645\u0639',
+          onClose: () => Navigator.pop(context),
+        ),
+        // Search field
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          child: TextField(
+            textAlign: TextAlign.end,
+            onChanged: (val) => setState(() => _query = val),
+            decoration: InputDecoration(
+              isDense: true,
+              // "بحث..."
+              hintText: '\u0628\u062d\u062b...',
+              hintStyle: TextStyle(
+                fontSize: 13,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+              prefixIcon: Icon(Icons.search, size: 20),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        // Venue list
+        venuesAsync.when(
+          loading: () => Padding(
+            padding: const EdgeInsets.all(AppSpacing.xl),
+            child: Center(child: CircularProgressIndicator()),
+          ),
+          error: (e, _) => Padding(
+            padding: const EdgeInsets.all(AppSpacing.xl),
+            child: Text('$e'),
+          ),
+          data: (venues) {
+            final filtered = _query.isEmpty
+                ? venues
+                : venues.where((v) => v.name.contains(_query)).toList();
+            if (filtered.isEmpty) {
+              return Padding(
+                padding: const EdgeInsets.all(AppSpacing.xl),
+                child: Text(
+                  // "لا توجد نتائج"
+                  '\u0644\u0627 \u062a\u0648\u062c\u062f \u0646\u062a\u0627\u0626\u062c',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              );
+            }
+            return ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 300),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: filtered.length,
+                itemBuilder: (ctx, i) {
+                  final venue = filtered[i];
+                  return _VenueListTile(
+                    venue: venue,
+                    onTap: () {
+                      Navigator.pop(context);
+                      widget.onSelect(venue.slug, venue.name);
+                    },
+                  );
+                },
+              ),
+            );
+          },
+        ),
+        SizedBox(height: AppSpacing.md),
+      ],
+    );
+  }
+}
+
+class _VenueListTile extends StatelessWidget {
+  final PageSummary venue;
+  final VoidCallback onTap;
+
+  const _VenueListTile({required this.venue, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final location = venue.location;
+    final area = location?.area ?? location?.city;
+
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(
+          AppSpacing.lg,
+          AppSpacing.sm,
+          AppSpacing.lg,
+          AppSpacing.sm,
+        ),
+        child: Row(
+          children: [
+            // Avatar
+            CircleAvatar(
+              radius: 18,
+              backgroundImage: venue.avatarUrl != null
+                  ? NetworkImage(venue.avatarUrl!)
+                  : null,
+              child: venue.avatarUrl == null
+                  ? Icon(Icons.apartment, size: 18)
+                  : null,
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            // Name + area
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    venue.name,
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  if (area != null)
+                    Text(
+                      area,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

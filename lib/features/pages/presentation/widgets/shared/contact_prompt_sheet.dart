@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// "Mention us" nudge shown when customers tap Call/WhatsApp on unclaimed pages.
@@ -45,7 +46,7 @@ class ContactPromptSheet extends StatelessWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: const Color(0xFFE5E7EB), // gray-200
+              color: context.colorScheme.outlineVariant,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -87,9 +88,9 @@ class ContactPromptSheet extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text.rich(
                       TextSpan(
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF111827), // gray-900
+                          color: context.colorScheme.onSurface,
                           height: 1.6,
                         ),
                         children: [
@@ -114,11 +115,11 @@ class ContactPromptSheet extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    const Text(
+                    Text(
                       'هيك بنساعدهم يفعّلوا صفحتهم ويوصلوا لزبائن أكثر',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Color(0xFF9CA3AF), // gray-400
+                        color: context.colorScheme.onSurfaceVariant,
                         height: 1.5,
                       ),
                     ),

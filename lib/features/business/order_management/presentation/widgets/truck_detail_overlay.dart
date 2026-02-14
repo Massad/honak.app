@@ -393,7 +393,7 @@ class _TabChip extends StatelessWidget {
           vertical: AppSpacing.xs + 2,
         ),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : const Color(0xFFF1F3F5),
+          color: isActive ? AppColors.primary : context.colorScheme.surfaceContainerLow,
           borderRadius: AppRadius.pill,
         ),
         child: Text(
@@ -476,7 +476,7 @@ class _OverviewTab extends ConsumerWidget {
                 child: LinearProgressIndicator(
                   value: progress,
                   minHeight: 8,
-                  backgroundColor: const Color(0xFFF1F3F5),
+                  backgroundColor: context.colorScheme.surfaceContainerLow,
                   valueColor: AlwaysStoppedAnimation(truckColor),
                 ),
               ),
@@ -579,7 +579,7 @@ class _OverviewTab extends ConsumerWidget {
                         ? truck.today.currentFull / truck.capacityFull
                         : 0,
                     minHeight: 6,
-                    backgroundColor: const Color(0xFFF1F3F5),
+                    backgroundColor: context.colorScheme.surfaceContainerLow,
                     valueColor: AlwaysStoppedAnimation(_inventoryColor(truck)),
                   ),
                 ),
@@ -724,7 +724,7 @@ class _OverviewTab extends ConsumerWidget {
                         vertical: AppSpacing.sm,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF9FAFB),
+                        color: context.colorScheme.surfaceContainerLowest,
                         borderRadius: BorderRadius.circular(AppRadius.sm),
                       ),
                       child: Row(
@@ -822,7 +822,7 @@ class _OverviewTab extends ConsumerWidget {
                     ),
                     decoration: BoxDecoration(
                       color:
-                          isActive ? AppColors.primary : const Color(0xFFF1F3F5),
+                          isActive ? AppColors.primary : context.colorScheme.surfaceContainerLow,
                       borderRadius: AppRadius.pill,
                     ),
                     child: Text(
@@ -868,7 +868,7 @@ class _OverviewTab extends ConsumerWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF9FAFB),
+                        color: context.colorScheme.surfaceContainerLowest,
                         borderRadius: BorderRadius.circular(AppRadius.sm),
                       ),
                       child: Column(
@@ -897,7 +897,7 @@ class _OverviewTab extends ConsumerWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF9FAFB),
+                        color: context.colorScheme.surfaceContainerLowest,
                         borderRadius: BorderRadius.circular(AppRadius.sm),
                       ),
                       child: Column(
@@ -962,14 +962,14 @@ class _ActivityTab extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
-        const Align(
+        Align(
           alignment: AlignmentDirectional.centerEnd,
-          child: const Text(
+          child: Text(
             'نشاط اليوم',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
-              color: Color(0xFF111827),
+              color: context.colorScheme.onSurface,
             ),
           ),
         ),
@@ -1346,7 +1346,7 @@ class _Card extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: const Color(0xFFF1F3F5)),
+        border: Border.all(color: context.colorScheme.surfaceContainerLow),
         boxShadow: AppShadows.sm,
       ),
       child: child,
@@ -1402,7 +1402,7 @@ class _BadgeChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: const Color(0xFFF9FAFB),
+        color: context.colorScheme.surfaceContainerLowest,
         borderRadius: AppRadius.pill,
       ),
       child: Row(

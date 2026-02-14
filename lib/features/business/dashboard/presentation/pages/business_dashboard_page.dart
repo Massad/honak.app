@@ -86,10 +86,10 @@ class BusinessDashboardPage extends ConsumerWidget {
 // ═══════════════════════════════════════════════════════════════
 
 const _statStyles = [
-  (bg: Color(0xFFFFF8E1), fg: Color(0xFFFF9800), icon: Icons.calendar_today),
-  (bg: Color(0xFFE3F2FD), fg: Color(0xFF1A73E8), icon: Icons.people_alt),
-  (bg: Color(0xFFE8F5E9), fg: Color(0xFF43A047), icon: Icons.visibility),
-  (bg: Color(0xFFF3E5F5), fg: Color(0xFF9C27B0), icon: Icons.trending_up),
+  (fg: Color(0xFFFF9800), icon: Icons.calendar_today),
+  (fg: Color(0xFF1A73E8), icon: Icons.people_alt),
+  (fg: Color(0xFF43A047), icon: Icons.visibility),
+  (fg: Color(0xFF9C27B0), icon: Icons.trending_up),
 ];
 
 class _StatsRow extends StatelessWidget {
@@ -135,7 +135,7 @@ class _StatsRow extends StatelessWidget {
                 horizontal: AppSpacing.sm,
               ),
               decoration: BoxDecoration(
-                color: style.bg,
+                color: style.fg.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Column(

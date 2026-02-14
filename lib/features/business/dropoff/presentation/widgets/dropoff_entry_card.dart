@@ -406,9 +406,9 @@ class DropoffEntryCard extends StatelessWidget {
               children: [
                 Text(
                   ticket.customerName,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF111827),
+                    color: context.colorScheme.onSurface,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),

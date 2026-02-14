@@ -61,6 +61,12 @@ _$BranchImpl _$$BranchImplFromJson(Map<String, dynamic> json) => _$BranchImpl(
   coverage:
       (json['coverage'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const [],
+  lat: (json['lat'] as num?)?.toDouble(),
+  lng: (json['lng'] as num?)?.toDouble(),
+  venueId: json['venue_id'] as String?,
+  venueName: json['venue_name'] as String?,
+  venueFloor: json['venue_floor'] as String?,
+  venueUnit: json['venue_unit'] as String?,
 );
 
 Map<String, dynamic> _$$BranchImplToJson(_$BranchImpl instance) =>
@@ -73,6 +79,12 @@ Map<String, dynamic> _$$BranchImplToJson(_$BranchImpl instance) =>
       'city': instance.city,
       'neighborhood': instance.neighborhood,
       'coverage': instance.coverage,
+      'lat': instance.lat,
+      'lng': instance.lng,
+      'venue_id': instance.venueId,
+      'venue_name': instance.venueName,
+      'venue_floor': instance.venueFloor,
+      'venue_unit': instance.venueUnit,
     };
 
 _$CoverageZoneImpl _$$CoverageZoneImplFromJson(Map<String, dynamic> json) =>

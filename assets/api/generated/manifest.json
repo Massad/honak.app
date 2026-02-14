@@ -1,6 +1,11 @@
 {
-  "_generated": "2026-02-13T23:28:50.351575Z",
+  "_generated": "2026-02-14T03:06:42.430027Z",
   "pages": {
+    "abdali-mall": {
+      "fixture": "pages/page_abdali_mall",
+      "business_type_id": "directory",
+      "archetype": "directory"
+    },
     "abu-ahmad-water": {
       "fixture": "pages/page_water",
       "business_type_id": "water_delivery",
@@ -56,10 +61,25 @@
       "business_type_id": "municipality",
       "archetype": "follow_only"
     },
+    "arab-bank": {
+      "fixture": "pages/page_arab_bank",
+      "business_type_id": "bank",
+      "archetype": "follow_only"
+    },
     "atr-oud": {
       "fixture": "pages/page_perfume",
       "business_type_id": "perfume_shop",
       "archetype": "catalog_order"
+    },
+    "ayla-oasis": {
+      "fixture": "pages/page_ayla_oasis",
+      "business_type_id": "directory",
+      "archetype": "directory"
+    },
+    "baraka-mall": {
+      "fixture": "pages/page_baraka_mall",
+      "business_type_id": "directory",
+      "archetype": "directory"
     },
     "barber-fadi": {
       "fixture": "pages/page_barber",
@@ -71,6 +91,16 @@
       "business_type_id": "restaurant",
       "archetype": "menu_order"
     },
+    "burger-joint": {
+      "fixture": "pages/page_burger_joint",
+      "business_type_id": "restaurant",
+      "archetype": "menu_order"
+    },
+    "cinema-city": {
+      "fixture": "pages/page_cinema_city",
+      "business_type_id": "cinema",
+      "archetype": "reservation"
+    },
     "city-mall": {
       "fixture": "pages/page_directory",
       "business_type_id": "directory",
@@ -80,6 +110,11 @@
       "fixture": "pages/page_laundry",
       "business_type_id": "laundry",
       "archetype": "service_booking"
+    },
+    "coffee-bean": {
+      "fixture": "pages/page_coffee_bean",
+      "business_type_id": "cafe",
+      "archetype": "menu_order"
     },
     "cool-ac": {
       "fixture": "pages/page_ac_repair",
@@ -121,6 +156,11 @@
       "business_type_id": "electronics_store",
       "archetype": "catalog_order"
     },
+    "galleria-mall": {
+      "fixture": "pages/page_galleria_mall",
+      "business_type_id": "directory",
+      "archetype": "directory"
+    },
     "glamour-cosmetics": {
       "fixture": "pages/page_cosmetics",
       "business_type_id": "cosmetics_store",
@@ -141,6 +181,11 @@
       "business_type_id": "cafe",
       "archetype": "menu_order"
     },
+    "hayat-gym": {
+      "fixture": "pages/page_gym_hayat",
+      "business_type_id": "gym",
+      "archetype": "service_booking"
+    },
     "hayat-pharmacy": {
       "fixture": "pages/page_pharmacy",
       "business_type_id": "pharmacy",
@@ -160,6 +205,11 @@
       "fixture": "pages/page_bookstore",
       "business_type_id": "bookstore",
       "archetype": "catalog_order"
+    },
+    "mecca-mall": {
+      "fixture": "pages/page_mecca_mall",
+      "business_type_id": "directory",
+      "archetype": "directory"
     },
     "mini-market-ahmad": {
       "fixture": "pages/page_mini_market",
@@ -251,10 +301,25 @@
       "business_type_id": "car_wash",
       "archetype": "service_booking"
     },
+    "stc-jo": {
+      "fixture": "pages/page_stc",
+      "business_type_id": "telecom",
+      "archetype": "follow_only"
+    },
+    "taj-mall": {
+      "fixture": "pages/page_taj_mall",
+      "business_type_id": "directory",
+      "archetype": "directory"
+    },
     "tazej-juice": {
       "fixture": "pages/page_juice_bar",
       "business_type_id": "juice_bar",
       "archetype": "menu_order"
+    },
+    "tech-planet": {
+      "fixture": "pages/page_tech_planet",
+      "business_type_id": "electronics_store",
+      "archetype": "catalog_order"
     },
     "tiny-tots": {
       "fixture": "pages/page_kids_store",
@@ -280,6 +345,11 @@
       "fixture": "pages/page_camping",
       "business_type_id": "camping",
       "archetype": "reservation"
+    },
+    "zara-jo": {
+      "fixture": "pages/page_zara",
+      "business_type_id": "clothes_store",
+      "archetype": "catalog_order"
     }
   }
 }

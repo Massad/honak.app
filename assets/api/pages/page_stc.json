@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "data": {
+    "id": "stc-jo",
+    "business_type_id": "telecom",
+    "business_type_name": "اتصالات",
+    "category_name": "اتصالات",
+    "explore_category": "cat_services",
+    "name": "STC",
+    "name_en": "STC",
+    "slug": "stc-jo",
+    "handle": "stc-jo",
+    "store_type": "physical",
+    "archetype": "follow_only",
+    "description": "STC — فرع City Mall. باقات إنترنت، خطوط جديدة، أجهزة، شحن فوري، وخدمة عملاء مباشرة.",
+    "avatar_url": "https://picsum.photos/seed/stcjo/200",
+    "cover_url": "https://picsum.photos/seed/stcjo-cover/800/400",
+    "phone": "+962799000000",
+    "location": {
+      "lat": 31.957,
+      "lng": 35.882,
+      "label": "City Mall — الأرضي، G-12",
+      "area": "عبدون",
+      "city": "عمّان"
+    },
+    "venue_id": "city-mall",
+    "venue_floor": "الأرضي",
+    "venue_unit": "G-12",
+    "weekly_schedule": {
+      "sunday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "monday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "tuesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "wednesday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "thursday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "friday": {"enabled": true, "open": "10:00", "close": "22:00"},
+      "saturday": {"enabled": true, "open": "10:00", "close": "22:00"}
+    },
+    "operating_hours": "يومياً: ١٠:٠٠ ص – ١٠:٠٠ م",
+    "is_verified": true,
+    "is_open": true,
+    "page_status": "active",
+    "followers_count": 22000,
+    "posts_count": 30,
+    "is_following": false,
+    "trust_score": 90,
+    "trust_metrics": [
+      {"label": "فروع", "value": "٤٥+", "icon": "store"},
+      {"label": "تغطية", "value": "٥G", "icon": "signal_cellular_alt"},
+      {"label": "خدمة عملاء", "value": "١٠١", "icon": "support_agent"}
+    ],
+    "member_since": "2025",
+    "contact_methods": ["chat", "phone"],
+    "created_at": 1704000000,
+    "engagement_level": "visibility",
+    "data_synced": true,
+    "stories": []
+  }
+}

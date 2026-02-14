@@ -10,9 +10,7 @@
         "floor_id": "ground",
         "unit": "G-01",
         "is_open": true,
-        "page_id": "sham-shawarma",
         "logo_url": "https://picsum.photos/seed/shamshawarma/100",
-        "linked_at": "2025-10-01T10:00:00Z",
         "tags": ["شاورما", "مطعم"]
       },
       {
@@ -23,10 +21,8 @@
         "floor_id": "ground",
         "unit": "G-02",
         "is_open": true,
-        "page_id": "habibah-knafeh",
         "logo_url": "https://picsum.photos/seed/habibahknafeh/100",
-        "linked_at": "2025-10-05T10:00:00Z",
-        "tags": ["حلويات"]
+        "tags": ["حلويات", "كنافة"]
       },
       {
         "id": "sc-3",
@@ -36,9 +32,7 @@
         "floor_id": "ground",
         "unit": "G-03",
         "is_open": true,
-        "page_id": "hayat-pharmacy",
         "logo_url": "https://picsum.photos/seed/hayatpharmacy/100",
-        "linked_at": "2025-10-10T10:00:00Z",
         "tags": ["صيدلية"]
       },
       {
@@ -49,9 +43,7 @@
         "floor_id": "ground",
         "unit": "G-04",
         "is_open": true,
-        "page_id": "fresh-supermarket",
         "logo_url": "https://picsum.photos/seed/freshsuper/100",
-        "linked_at": "2025-11-01T10:00:00Z",
         "tags": ["بقالة", "سوبرماركت"]
       },
       {
@@ -62,10 +54,21 @@
         "floor_id": "ground",
         "unit": "G-05",
         "is_open": true,
-        "page_id": "alamal-bookstore",
         "logo_url": "https://picsum.photos/seed/alamalbookstore/100",
-        "linked_at": "2025-11-15T10:00:00Z",
-        "tags": ["مكتبة"]
+        "tags": ["قرطاسية", "كتب"]
+      },
+      {
+        "id": "sc-11",
+        "name": "البنك العربي",
+        "name_en": "Arab Bank",
+        "category": "خدمات",
+        "floor_id": "ground",
+        "unit": "G-06",
+        "is_open": true,
+        "page_id": "arab-bank",
+        "logo_url": "https://picsum.photos/seed/arabbank/100",
+        "linked_at": "2025-08-01T10:00:00Z",
+        "tags": ["بنك", "صراف"]
       },
       {
         "id": "sc-6",
@@ -77,8 +80,8 @@
         "is_open": true,
         "page_id": "dr-khaled-clinic",
         "logo_url": "https://images.unsplash.com/photo-1748200100041-3d815ae01dd1?auto=format&fit=crop&w=100&q=80",
-        "linked_at": "2025-10-01T10:00:00Z",
-        "tags": ["طب", "عيادة"]
+        "linked_at": "2025-06-01T10:00:00Z",
+        "tags": ["عيادة", "طبيب"]
       },
       {
         "id": "sc-7",
@@ -88,8 +91,8 @@
         "floor_id": "f1",
         "unit": "106",
         "is_open": true,
-        "invited_at": "2026-02-01T10:00:00Z",
         "logo_url": "https://picsum.photos/seed/smiledental/100",
+        "invited_at": "2026-02-01T10:00:00Z",
         "tags": ["أسنان"]
       },
       {
@@ -100,9 +103,8 @@
         "floor_id": "f1",
         "unit": "107",
         "is_open": true,
-        "page_id": "alhaq-law",
         "logo_url": "https://picsum.photos/seed/alhaqlaw/100",
-        "linked_at": "2025-12-01T10:00:00Z",
+        "invited_at": "2026-02-05T10:00:00Z",
         "tags": ["محاماة"]
       },
       {
@@ -114,7 +116,7 @@
         "unit": "108",
         "is_open": true,
         "logo_url": "https://picsum.photos/seed/shmeisanilab/100",
-        "tags": ["مختبر"]
+        "tags": ["مختبر", "تحاليل"]
       },
       {
         "id": "sc-10",
@@ -124,24 +126,22 @@
         "floor_id": "f1",
         "unit": "110",
         "is_open": true,
-        "page_id": "layla-salon",
         "logo_url": "https://picsum.photos/seed/laylasalon/100",
-        "linked_at": "2025-12-15T10:00:00Z",
-        "tags": ["صالون", "تجميل"]
+        "tags": ["تجميل", "صالون"]
       }
     ],
     "floors": [
-      {"id": "ground", "name": "الأرضي", "label": "مطاعم وخدمات", "tenant_count": 5},
+      {"id": "ground", "name": "الأرضي", "label": "مطاعم وخدمات", "tenant_count": 6},
       {"id": "f1", "name": "الطابق ١", "label": "عيادات ومكاتب", "tenant_count": 5}
     ],
     "categories": ["طعام", "صحة", "خدمات", "بقالة", "تجميل"],
     "amenities": ["مواقف", "مصعد", "مصلى قريب"],
-    "featured_tenant_ids": ["sc-1", "sc-4", "sc-6"],
+    "featured_tenant_ids": ["sc-6", "sc-1", "sc-4"],
     "stats": {
-      "total": 10,
-      "claimed": 8,
-      "invited": 1,
-      "unclaimed": 1,
+      "total": 11,
+      "claimed": 2,
+      "invited": 2,
+      "unclaimed": 7,
       "new_this_week": 0
     }
   }

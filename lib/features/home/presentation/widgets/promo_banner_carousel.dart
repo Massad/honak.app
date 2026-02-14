@@ -109,7 +109,7 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
                 decoration: BoxDecoration(
                   color: isActive
                       ? context.colorScheme.primary
-                      : const Color(0xFFD1D5DB),
+                      : context.colorScheme.outline,
                   borderRadius: BorderRadius.circular(3),
                 ),
               );
