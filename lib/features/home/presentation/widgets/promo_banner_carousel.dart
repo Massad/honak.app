@@ -38,8 +38,8 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
     _PromoBanner(
       gradientStart: Color(0xFFFF9800),
       gradientEnd: Color(0xFFFFB74D),
-      titleAr: 'وفّر مع هناك',
-      titleEn: 'Save with Honak',
+      titleAr: 'وفّر مع هناك.app',
+      titleEn: 'Save with honak.app',
       subtitleAr: 'خصومات حصرية على أول طلب',
       subtitleEn: 'Exclusive discounts on first order',
       imageAsset: 'assets/images/promo_save.png',
@@ -169,7 +169,7 @@ class _BannerCard extends StatelessWidget {
                       ),
                       SizedBox(width: AppSpacing.xs),
                       Text(
-                        isRtl ? 'هناك' : 'Honak',
+                        isRtl ? 'هناك.app' : 'honak.app',
                         style: TextStyle(
                           fontSize: 10,
                           color: Colors.white.withValues(alpha: 0.8),

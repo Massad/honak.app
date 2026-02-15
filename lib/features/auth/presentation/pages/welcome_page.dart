@@ -12,6 +12,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/api/mock_api_client.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class _DemoAccount {
   final String phone;
@@ -191,29 +192,11 @@ class WelcomePage extends ConsumerWidget {
                   ),
                   child: Column(
                     children: [
-                      // Logo box
-                      Container(
+                      // Logo
+                      SvgPicture.asset(
+                        'assets/icons/app_icon.svg',
                         width: 64,
                         height: 64,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(AppRadius.lg),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.primary.withValues(alpha: 0.3),
-                              blurRadius: 24,
-                              offset: const Offset(0, 8),
-                            ),
-                          ],
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'H',
-                          style: context.textTheme.headlineSmall?.copyWith(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                       ),
                       const SizedBox(height: AppSpacing.md),
                       // App name with .app suffix

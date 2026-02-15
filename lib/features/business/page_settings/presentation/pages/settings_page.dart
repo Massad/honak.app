@@ -6,7 +6,6 @@ import 'package:honak/config/business_type_config.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
-import 'package:honak/features/business/page_settings/presentation/widgets/account_tab.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/availability_manager.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/branch_manager.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/cancellation_policy.dart';
@@ -33,7 +32,6 @@ import 'package:honak/features/business/page_settings/presentation/widgets/reloc
 import 'package:honak/features/business/page_settings/presentation/widgets/team_management.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/tenant_manager.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/venue_settings.dart';
-import 'package:honak/features/business/page_settings/presentation/widgets/villa_settings.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 
 enum _SubScreen {
@@ -54,7 +52,6 @@ enum _SubScreen {
   intakeQuestions,
   quoteFormQuestions,
   packages,
-  villaSettings,
   venueSettings,
   tenantDirectory,
   alerts,
@@ -73,22 +70,8 @@ class BusinessSettingsPage extends ConsumerStatefulWidget {
 }
 
 class _BusinessSettingsPageState
-    extends ConsumerState<BusinessSettingsPage>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+    extends ConsumerState<BusinessSettingsPage> {
   _SubScreen _activeSubScreen = _SubScreen.main;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
 
   void _openSubScreen(_SubScreen screen) {
     setState(() => _activeSubScreen = screen);
@@ -110,42 +93,11 @@ class _BusinessSettingsPageState
       return _buildSubScreen(archetype, config: config);
     }
 
-    return Column(
-      children: [
-        // Tab bar
-        Container(
-          color: Theme.of(context).colorScheme.surface,
-          child: TabBar(
-            controller: _tabController,
-            labelColor: AppColors.primary,
-            unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
-            indicatorColor: AppColors.primary,
-            labelStyle: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-            ),
-            unselectedLabelStyle: const TextStyle(fontSize: 13),
-            tabs: const [
-              Tab(text: 'صفحتي'),
-              Tab(text: 'حسابي'),
-            ],
-          ),
-        ),
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              _MyPageTab(
-                bizContext: bizContext,
-                config: config,
-                archetype: archetype,
-                onOpenSubScreen: _openSubScreen,
-              ),
-              const AccountTab(),
-            ],
-          ),
-        ),
-      ],
+    return _MyPageTab(
+      bizContext: bizContext,
+      config: config,
+      archetype: archetype,
+      onOpenSubScreen: _openSubScreen,
     );
   }
 
@@ -193,8 +145,6 @@ class _BusinessSettingsPageState
         ),
       _SubScreen.packages =>
         PackagesManager(onClose: _closeSubScreen),
-      _SubScreen.villaSettings =>
-        VillaSettings(onClose: _closeSubScreen),
       _SubScreen.venueSettings =>
         VenueSettings(onClose: _closeSubScreen),
       _SubScreen.tenantDirectory =>
@@ -264,8 +214,6 @@ class _MyPageTab extends StatelessWidget {
             'recurring_orders',
           ].contains(f)) ??
       false;
-  bool get _showVillaSettings =>
-      config?.id == 'villa_rental' || config?.id == 'farm_rental';
   bool get _showVenueSettings => config?.id == 'event_venue';
   bool get _showTenantDirectory => archetype == Archetype.directory;
   bool get _showAlerts => archetype == Archetype.followOnly;
@@ -442,16 +390,6 @@ class _MyPageTab extends StatelessWidget {
                     desc: 'أسئلة لفهم احتياج العميل',
                     onTap: () =>
                         onOpenSubScreen(_SubScreen.quoteFormQuestions),
-                  ),
-                ],
-                if (_showVillaSettings) ...[
-                  const SizedBox(height: 6),
-                  SettingsItem(
-                    icon: Icons.villa_outlined,
-                    label: 'إعدادات المكان',
-                    desc: 'المرافق وقواعد الإقامة والمعرض',
-                    onTap: () =>
-                        onOpenSubScreen(_SubScreen.villaSettings),
                   ),
                 ],
                 if (_showVenueSettings) ...[

@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_wedding",
+      "name": "أعراس",
+      "item_count": 1,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_portrait",
+      "name": "بورتريه",
+      "item_count": 2,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_events",
+      "name": "مناسبات",
+      "item_count": 1,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_products",
+      "name": "تصوير منتجات",
+      "item_count": 1,
+      "sort_order": 4
+    }
+  ],
+  "meta": {
+    "total": 4
+  }
+}

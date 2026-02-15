@@ -9,7 +9,10 @@
     },
     "today_revenue": {
       "total": 33000,
+      "yesterday": 27500,
       "completed_count": 18,
+      "orders_count": 18,
+      "payment_breakdown": {"cash": 19800, "cliq": 9900, "bank": 3300},
       "items": [
         {"service": "اسطوانة غاز كبيرة × 4", "amount": 12000, "time": "07:00"},
         {"service": "اسطوانة غاز كبيرة × 3", "amount": 9000, "time": "08:30"},
@@ -41,6 +44,11 @@
         {"area": "ماركا الجنوبية", "customer": "كافتيريا الأصدقاء", "qty": 2, "schedule": "كل أسبوع"}
       ]
     },
+    "customer_insights": [
+      {"type": "warning", "customer": "مطعم الريان", "message": "لم يطلبوا منذ أسبوعين — كانوا يطلبون كل 3 أيام"},
+      {"type": "info", "customer": "فرن السنابل", "message": "زادوا طلبهم من 2 إلى 4 اسطوانات أسبوعياً"},
+      {"type": "positive", "customer": "بقالة أبو عادل", "message": "عميل منتظم — 48 طلب خلال السنة"}
+    ],
     "pending_requests": [
       {"id": "req_601", "customer": "أبو وليد", "service": "2 اسطوانة كبيرة — الهاشمي", "date": "2026-02-12", "time": "14:30"},
       {"id": "req_602", "customer": "سوبرماركت النجمة", "service": "4 اسطوانة كبيرة — ماركا", "date": "2026-02-12", "time": "15:00"}

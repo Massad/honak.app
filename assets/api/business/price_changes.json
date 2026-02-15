@@ -146,5 +146,23 @@
   "dr-khaled-clinic": {
     "active": null,
     "history": []
+  },
+  "villa-dead-sea": {
+    "active": {
+      "id": "pc_villa_01",
+      "direction": "increase",
+      "method": "percentage",
+      "value": 15,
+      "scope": "all",
+      "category_names": [],
+      "item_ids": [],
+      "starts_at": "2026-01-15T00:00:00",
+      "ends_at": "2026-03-31T00:00:00",
+      "reason": "موسم الذروة",
+      "is_public": true,
+      "status": "active",
+      "affected_count": 1
+    },
+    "history": []
   }
 }

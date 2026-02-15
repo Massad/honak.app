@@ -1,0 +1,62 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_mak_arabic",
+      "name": "روايات عربية",
+      "item_count": 1,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_mak_translated",
+      "name": "روايات مترجمة",
+      "item_count": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_mak_english",
+      "name": "كتب إنجليزية",
+      "item_count": 1,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_mak_stationery",
+      "name": "قرطاسية",
+      "item_count": 2,
+      "sort_order": 4
+    },
+    {
+      "id": "cat_mak_art",
+      "name": "أدوات رسم",
+      "item_count": 1,
+      "sort_order": 5
+    },
+    {
+      "id": "cat_mak_kids",
+      "name": "أطفال",
+      "item_count": 1,
+      "sort_order": 6
+    },
+    {
+      "id": "cat_mak_reference",
+      "name": "مراجع",
+      "item_count": 1,
+      "sort_order": 7
+    },
+    {
+      "id": "cat_mak_games",
+      "name": "ألعاب تعليمية",
+      "item_count": 1,
+      "sort_order": 8
+    },
+    {
+      "id": "cat_mak_bags",
+      "name": "حقائب",
+      "item_count": 1,
+      "sort_order": 9
+    }
+  ],
+  "meta": {
+    "total": 9
+  }
+}

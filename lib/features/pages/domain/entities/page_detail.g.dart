@@ -140,6 +140,11 @@ _$PageDetailImpl _$$PageDetailImplFromJson(
   pricing: json['pricing'] == null
       ? null
       : VillaPricing.fromJson(json['pricing'] as Map<String, dynamic>),
+  seasonalPricing: json['seasonal_pricing'] == null
+      ? null
+      : SeasonalPricing.fromJson(
+          json['seasonal_pricing'] as Map<String, dynamic>,
+        ),
   houseRules:
       (json['house_rules'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -290,6 +295,7 @@ Map<String, dynamic> _$$PageDetailImplToJson(_$PageDetailImpl instance) =>
       'gallery_images': instance.galleryImages,
       'amenities': instance.amenities,
       'pricing': instance.pricing,
+      'seasonal_pricing': instance.seasonalPricing,
       'house_rules': instance.houseRules,
       'check_in': instance.checkIn,
       'check_out': instance.checkOut,

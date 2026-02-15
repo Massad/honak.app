@@ -89,6 +89,105 @@
       "weekday_cents": 15000,
       "weekend_cents": 20000
     },
+    "seasonal_pricing": {
+      "seasons": [
+        {
+          "id": "summer",
+          "name": "موسم الصيف",
+          "icon": "wb_sunny",
+          "start_month": 6,
+          "start_day": 1,
+          "end_month": 9,
+          "end_day": 15,
+          "weekday_cents": 25000,
+          "weekend_cents": 35000,
+          "active": true,
+          "color": "#F59E0B"
+        },
+        {
+          "id": "winter",
+          "name": "موسم الشتاء",
+          "icon": "ac_unit",
+          "start_month": 12,
+          "start_day": 1,
+          "end_month": 2,
+          "end_day": 28,
+          "weekday_cents": 12000,
+          "weekend_cents": 18000,
+          "active": true,
+          "color": "#3B82F6"
+        },
+        {
+          "id": "spring",
+          "name": "موسم الربيع",
+          "icon": "local_florist",
+          "start_month": 3,
+          "start_day": 1,
+          "end_month": 5,
+          "end_day": 31,
+          "weekday_cents": 15000,
+          "weekend_cents": 22000,
+          "active": true,
+          "color": "#10B981"
+        },
+        {
+          "id": "autumn",
+          "name": "الخريف",
+          "icon": "park",
+          "start_month": 9,
+          "start_day": 16,
+          "end_month": 11,
+          "end_day": 30,
+          "weekday_cents": 13000,
+          "weekend_cents": 19000,
+          "active": false,
+          "color": "#D97706"
+        }
+      ],
+      "holidays": [
+        {
+          "id": "eid_fitr",
+          "name": "عيد الفطر",
+          "start_date": "03-30",
+          "end_date": "04-02",
+          "surcharge_percent": 25,
+          "active": true
+        },
+        {
+          "id": "independence",
+          "name": "عيد الاستقلال",
+          "start_date": "05-25",
+          "end_date": "05-25",
+          "surcharge_percent": 15,
+          "active": true
+        }
+      ],
+      "early_bird": {
+        "days_ahead": 14,
+        "discount_percent": 10,
+        "active": false
+      },
+      "last_minute": {
+        "hours_before_checkin": 48,
+        "days_ahead": 2,
+        "discount_percent": 20,
+        "active": false,
+        "label": "عرض اللحظة الأخيرة"
+      }
+    },
+    "active_price_change": {
+      "id": "pc_villa_01",
+      "direction": "increase",
+      "method": "percentage",
+      "value": 15,
+      "scope": "all",
+      "starts_at": "2026-01-15T00:00:00",
+      "ends_at": "2026-03-31T00:00:00",
+      "reason": "موسم الذروة",
+      "is_public": true,
+      "status": "active",
+      "affected_count": 1
+    },
     "booking_questions": ["ما تاريخ الوصول والمغادرة؟", "كم عدد الأشخاص؟", "هل تحتاج شواء/حفلة؟", "أي طلبات خاصة؟"],
     "safety_disclaimers": ["مسبح بدون إشراف — يُرجى مراقبة الأطفال", "الحيوانات الأليفة غير مسموحة", "التدخين في الأماكن المخصصة فقط", "الأثاث ثابت — يُرجى عدم نقله", "أي أضرار تُخصم من التأمين"],
     "deposit_config": {"percentage": 50, "min_amount": 7500},

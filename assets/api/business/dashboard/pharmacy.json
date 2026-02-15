@@ -9,7 +9,10 @@
     },
     "today_revenue": {
       "total": 8500,
+      "yesterday": 7200,
       "completed_count": 15,
+      "orders_count": 15,
+      "payment_breakdown": {"cash": 5100, "cliq": 2600, "bank": 800},
       "items": [
         {"service": "فيتامين D3 × 5", "amount": 2750, "time": "09:00"},
         {"service": "كريم سيرافي × 2", "amount": 2800, "time": "10:30"},
@@ -31,6 +34,11 @@
       {"name": "حفاضات بامبرز", "count": 48, "trend": "same"},
       {"name": "كريم سيرافي", "count": 38, "trend": "up"},
       {"name": "فيتامين C 1000mg", "count": 35, "trend": "same"}
+    ],
+    "low_stock": [
+      {"name": "بانادول إكسترا", "remaining": 4, "threshold": 20},
+      {"name": "فيتامين D3 5000", "remaining": 8, "threshold": 25},
+      {"name": "كريم واقي شمس بيوديرما", "remaining": 3, "threshold": 15}
     ],
     "pending_requests": [
       {"id": "req_ph01", "customer": "عيادة د. سمير", "service": "طلب جملة — مكملات غذائية", "date": "2026-02-14", "time": "10:00"},

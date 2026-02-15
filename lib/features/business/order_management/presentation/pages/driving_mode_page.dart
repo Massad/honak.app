@@ -39,6 +39,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
   late int _reloads;
   late String _startedAt;
   int? _previewPos;
+  QueueItem? _editingItem;
   final _scrollController = ScrollController();
 
   @override
@@ -283,6 +284,81 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
     _showToast('تم إلغاء التوجه \u2014 اختر التالي');
   }
 
+  /// Undo a delivery — revert to pending, restore inventory.
+  void _handleUndoDelivery(int position) {
+    final item = _queue.cast<QueueItem?>().firstWhere(
+      (q) => q!.position == position && q.status == QueueItemStatus.delivered,
+      orElse: () => null,
+    );
+    if (item == null) return;
+    final oldFull = item.fullDelivered ?? 0;
+    final oldEmpty = item.emptiesCollected ?? 0;
+    setState(() {
+      _queue = _queue.map((q) {
+        if (q.position == position) {
+          return q.copyWith(
+            status: QueueItemStatus.pending,
+            deliveredAt: null,
+            fullDelivered: null,
+            emptiesCollected: null,
+            actualPayment: null,
+            deliveryNote: null,
+          );
+        }
+        return q;
+      }).toList();
+      _full = _full + oldFull;
+      _empty = (_empty - oldEmpty).clamp(0, 9999);
+    });
+    _showToast('تم التراجع عن تسليم ${item.customerName}');
+  }
+
+  /// Open edit sheet for a delivered item.
+  void _handleOpenEdit(int position) {
+    final item = _queue.cast<QueueItem?>().firstWhere(
+      (q) => q!.position == position && q.status == QueueItemStatus.delivered,
+      orElse: () => null,
+    );
+    if (item == null) return;
+    setState(() => _editingItem = item);
+  }
+
+  /// Save edited delivery — apply inventory delta.
+  void _handleSaveEdit(
+    int position,
+    int newFullDel,
+    int newEmptyCol,
+    PaymentType newPayment,
+    String newNote,
+  ) {
+    final item = _queue.cast<QueueItem?>().firstWhere(
+      (q) => q!.position == position,
+      orElse: () => null,
+    );
+    if (item == null) return;
+    final oldFull = item.fullDelivered ?? 0;
+    final oldEmpty = item.emptiesCollected ?? 0;
+    final fullDelta = oldFull - newFullDel; // positive = returned to truck
+    final emptyDelta = oldEmpty - newEmptyCol;
+    setState(() {
+      _queue = _queue.map((q) {
+        if (q.position == position) {
+          return q.copyWith(
+            fullDelivered: newFullDel,
+            emptiesCollected: newEmptyCol,
+            actualPayment: newPayment,
+            deliveryNote: newNote.isEmpty ? null : newNote,
+          );
+        }
+        return q;
+      }).toList();
+      _full = (_full + fullDelta).clamp(0, 9999);
+      _empty = (_empty - emptyDelta).clamp(0, 9999);
+      _editingItem = null;
+    });
+    _showToast('تم تعديل تسليم ${item.customerName}');
+  }
+
   void _showSheet(Widget Function(BuildContext) builder) {
     showAppSheet(
       context,
@@ -300,25 +376,57 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            _buildHeader(),
-            Expanded(
-              child: ListView(
-                controller: _scrollController,
-                padding: const EdgeInsets.only(bottom: 100),
-                children: [
-                  _buildInventoryBar(),
-                  if (current != null)
-                    _buildCurrentCard(current)
-                  else if (pending.isEmpty)
-                    _buildRouteComplete(),
-                  if (pending.isNotEmpty) _buildQueueSection(pending, current),
-                  if (delivered.isNotEmpty) DeliveredCollapse(items: delivered),
-                ],
-              ),
+            Column(
+              children: [
+                _buildHeader(),
+                Expanded(
+                  child: ListView(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.only(bottom: 100),
+                    children: [
+                      _buildInventoryBar(),
+                      if (current != null)
+                        _buildCurrentCard(current)
+                      else if (pending.isEmpty)
+                        _buildRouteComplete(),
+                      if (pending.isNotEmpty) _buildQueueSection(pending, current),
+                      if (delivered.isNotEmpty)
+                        DeliveredCollapse(
+                          items: delivered,
+                          onUndo: _handleUndoDelivery,
+                          onEdit: _handleOpenEdit,
+                        ),
+                    ],
+                  ),
+                ),
+                _buildBottomBar(),
+              ],
             ),
-            _buildBottomBar(),
+            // Edit delivery sheet overlay
+            if (_editingItem != null)
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () => setState(() => _editingItem = null),
+                  child: Container(
+                    color: Colors.black.withAlpha(80),
+                    alignment: Alignment.bottomCenter,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Material(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(AppRadius.lg),
+                        ),
+                        child: EditDeliverySheet(
+                          item: _editingItem!,
+                          onSave: _handleSaveEdit,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

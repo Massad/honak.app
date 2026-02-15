@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
+import 'package:honak/features/business/shared/entities/status_config.dart';
 
 /// Centralized visual configuration for each [DropoffStatus].
 ///
-/// Provides consistent colors, icons, and labels across all dropoff widgets
-/// (entry card, board, detail view, status picker, customer view).
-class DropoffStatusConfig {
+/// Extends shared [StatusConfig] so it can be used with
+/// [GenericStatusPickerSheet] and other shared widgets.
+class DropoffStatusConfig extends StatusConfig {
   const DropoffStatusConfig._({
-    required this.color,
-    required this.bgColor,
-    required this.borderColor,
-    required this.icon,
-    required this.label,
+    required super.color,
+    required super.bgColor,
+    required super.borderColor,
+    required super.icon,
+    required super.label,
   });
-
-  final Color color;
-  final Color bgColor;
-  final Color borderColor;
-  final IconData icon;
-  final String label;
 
   /// Status config map keyed by [DropoffStatus].
   static const Map<DropoffStatus, DropoffStatusConfig> _configs = {

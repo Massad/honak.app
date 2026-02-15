@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_watch_battery",
+      "name": "بطارية",
+      "item_count": 2,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_watch_crystal",
+      "name": "زجاج",
+      "item_count": 3,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_watch_band",
+      "name": "سوار",
+      "item_count": 3,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_watch_movement",
+      "name": "حركة",
+      "item_count": 3,
+      "sort_order": 4
+    },
+    {
+      "id": "cat_watch_seal",
+      "name": "عزل",
+      "item_count": 1,
+      "sort_order": 5
+    },
+    {
+      "id": "cat_watch_clean",
+      "name": "تنظيف",
+      "item_count": 1,
+      "sort_order": 6
+    },
+    {
+      "id": "cat_watch_full",
+      "name": "صيانة شاملة",
+      "item_count": 1,
+      "sort_order": 7
+    }
+  ],
+  "meta": {
+    "total": 7
+  }
+}

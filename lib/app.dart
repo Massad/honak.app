@@ -18,7 +18,7 @@ class HonakApp extends ConsumerWidget {
         ref.watch(themeModeProvider).valueOrNull ?? ThemeMode.system;
 
     return MaterialApp.router(
-      title: 'حنك',
+      title: 'هناك.app',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),

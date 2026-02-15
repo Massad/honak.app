@@ -2,10 +2,9 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 4,
-      "new_followers": 2,
-      "page_views": 22,
-      "today_revenue": 3700
+      "received": 1,
+      "processing": 1,
+      "ready": 1
     },
     "today_summary": {
       "completed": 1,
@@ -24,7 +23,10 @@
     },
     "today_revenue": {
       "total": 3700,
+      "yesterday": 3100,
       "completed_count": 2,
+      "orders_count": 2,
+      "payment_breakdown": {"cash": 2200, "cliq": 1100, "bank": 400},
       "items": [
         { "service": "تبديل سحّاب بوت", "amount": 600, "time": "11:00" },
         { "service": "خياطة وإصلاح × 2", "amount": 600, "time": "17:00" }

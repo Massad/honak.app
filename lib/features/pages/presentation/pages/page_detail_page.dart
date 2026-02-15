@@ -193,31 +193,6 @@ class _PageDetailContent extends StatefulWidget {
 
 class _PageDetailContentState extends State<_PageDetailContent> {
   @override
-  void initState() {
-    super.initState();
-    widget.tabController.addListener(_onTabChanged);
-  }
-
-  @override
-  void didUpdateWidget(covariant _PageDetailContent oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.tabController != widget.tabController) {
-      oldWidget.tabController.removeListener(_onTabChanged);
-      widget.tabController.addListener(_onTabChanged);
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.tabController.removeListener(_onTabChanged);
-    super.dispose();
-  }
-
-  void _onTabChanged() {
-    if (mounted) setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) {
     final page = widget.page;
     final archetype = widget.archetype;
@@ -234,10 +209,9 @@ class _PageDetailContentState extends State<_PageDetailContent> {
           ]
         : <String>[];
 
-    final activeTabId = widget.tabs[widget.tabController.index].id;
 
-    return CustomScrollView(
-      slivers: [
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
         // 1. Cover image
         SliverToBoxAdapter(
           child: PageCover(
@@ -312,25 +286,15 @@ class _PageDetailContentState extends State<_PageDetailContent> {
             tabs: widget.tabs.map((t) => Tab(text: t.label)).toList(),
           ),
         ),
-
-        // 5. Active tab content — inline for short tabs, fill for scrollable tabs
-        ..._buildActiveTabSlivers(context, activeTabId),
       ],
+      // 5. Tab body — each tab gets its own scroll context
+      body: TabBarView(
+        controller: widget.tabController,
+        children: widget.tabs.map((tab) {
+          return _buildTabContent(context, tab.id, page, archetype);
+        }).toList(),
+      ),
     );
-  }
-
-  /// Short-content tabs (info) render inline via SliverToBoxAdapter —
-  /// content ends where it naturally ends, no blank space.
-  /// Scrollable tabs fill the remaining viewport with internal scroll.
-  List<Widget> _buildActiveTabSlivers(BuildContext context, String tabId) {
-    final content =
-        _buildTabContent(context, tabId, widget.page, widget.archetype);
-
-    if (tabId == 'info') {
-      return [SliverToBoxAdapter(child: content)];
-    }
-
-    return [SliverFillRemaining(hasScrollBody: true, child: content)];
   }
 
   Widget _buildTabContent(
@@ -347,7 +311,7 @@ class _PageDetailContentState extends State<_PageDetailContent> {
           archetype: archetype,
           pinnedPosts: page.pinnedPosts,
         ),
-      'info' => InfoTab(page: page),
+      'info' => SingleChildScrollView(child: InfoTab(page: page)),
       'directory' => DirectoryTab(pageId: page.id, page: page),
       _ => const SizedBox.shrink(),
     };
@@ -364,10 +328,12 @@ class _PageDetailContentState extends State<_PageDetailContent> {
   Widget _buildMainSection(
       BuildContext context, PageDetail page, Archetype archetype) {
     if (page.claimStatus == 'unclaimed' && archetype != Archetype.directory) {
-      return SectionEmptyState(
-        page: page,
-        archetype: archetype,
-        onClaimPage: () => _openClaimFlow(context),
+      return SingleChildScrollView(
+        child: SectionEmptyState(
+          page: page,
+          archetype: archetype,
+          onClaimPage: () => _openClaimFlow(context),
+        ),
       );
     }
 

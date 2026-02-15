@@ -552,7 +552,7 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
-                              'أسمح لفريق هناك بقراءة المحادثة',
+                              'أسمح لفريق هناك.app بقراءة المحادثة',
                               style: context.textTheme.bodySmall?.copyWith(
                                 color: _allowRead
                                     ? context.colorScheme.onSurface

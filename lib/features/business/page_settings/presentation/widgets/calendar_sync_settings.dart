@@ -301,7 +301,7 @@ class _CalendarSyncSettingsState extends State<CalendarSyncSettings> {
         children: [
           Expanded(
             child: Text(
-              'المزامنة باتجاه واحد: الحجوزات من هنك تُضاف تلقائياً لتقويمك. التعديلات على التقويم لا تؤثر على الحجوزات.',
+              'المزامنة باتجاه واحد: الحجوزات من هناك.app تُضاف تلقائياً لتقويمك. التعديلات على التقويم لا تؤثر على الحجوزات.',
               style: TextStyle(fontSize: 11, color: Colors.blue.shade700),
               textAlign: TextAlign.right,
             ),

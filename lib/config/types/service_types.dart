@@ -612,20 +612,18 @@ final laundry = createType(
   features: ['service_duration'],
   trackingMode: 'dropoff',
   requestLabelAr: 'طلب غسيل',
-  customerCtaAr: 'تتبع ملابسك',
-  customerCtaDescAr: 'سلّم ملابسك وتابع حالتها خطوة بخطوة',
+  customerCtaAr: 'تتبع قطعك',
+  customerCtaDescAr: 'سلّم قطعك في المحل وتابع حالتها مباشرة من هنا',
   perEmployeeAvailability: false,
   dateSelection: DateSelection.none,
   dashboard: DashboardConfig(
     statsLabels: [
       DashboardStatLabel(
-          key: 'received', label: 'مستلمة', icon: 'inbox'),
+          key: 'received', label: 'استلام', icon: 'inbox'),
       DashboardStatLabel(
           key: 'processing', label: 'قيد المعالجة', icon: 'loader'),
       DashboardStatLabel(
-          key: 'ready', label: 'جاهزة', icon: 'check-circle'),
-      DashboardStatLabel(
-          key: 'revenue_today', label: 'إيراد اليوم', icon: 'trending-up'),
+          key: 'ready', label: 'جاهز للاستلام', icon: 'check-circle'),
     ],
     sections: [
       Section.stats,
@@ -635,7 +633,7 @@ final laundry = createType(
     ],
     quickActions: [
       DashboardAction(
-          id: 'new_ticket',
+          id: 'add_dropoff',
           labelAr: 'استلام جديد',
           icon: 'plus',
           color: 'bg-blue-50 text-[#1A73E8]'),
@@ -647,14 +645,18 @@ final laundry = createType(
     ],
   ),
   orderLabels: const OrderLabels(
-    incoming: 'تذاكر مستلمة',
+    incoming: 'تم الاستلام',
     accepted: 'قيد المعالجة',
-    completed: 'تم التسليم',
+    completed: 'جاهز للاستلام',
     itemUnit: 'قطعة',
   ),
   suggestedRoles: const [
     SuggestedRole(
       labelAr: 'عامل غسيل',
+      defaultPermissions: ['manage_orders'],
+    ),
+    SuggestedRole(
+      labelAr: 'عامل كي',
       defaultPermissions: ['manage_orders'],
     ),
     SuggestedRole(
@@ -979,19 +981,17 @@ final mobileRepair = createType(
   trackingMode: 'dropoff',
   requestLabelAr: 'طلب تصليح',
   customerCtaAr: 'تتبع جهازك',
-  customerCtaDescAr: 'سلّم جهازك وتابع حالة التصليح خطوة بخطوة',
+  customerCtaDescAr: 'سلّم جهازك وتابع حالة التصليح مباشرة',
   perEmployeeAvailability: false,
   dateSelection: DateSelection.none,
   dashboard: DashboardConfig(
     statsLabels: [
       DashboardStatLabel(
-          key: 'received', label: 'مستلمة', icon: 'inbox'),
+          key: 'received', label: 'استلام', icon: 'inbox'),
       DashboardStatLabel(
           key: 'processing', label: 'قيد التصليح', icon: 'loader'),
       DashboardStatLabel(
-          key: 'ready', label: 'جاهزة', icon: 'check-circle'),
-      DashboardStatLabel(
-          key: 'revenue_today', label: 'إيراد اليوم', icon: 'trending-up'),
+          key: 'ready', label: 'جاهز للاستلام', icon: 'check-circle'),
     ],
     sections: [
       Section.stats,
@@ -1001,7 +1001,7 @@ final mobileRepair = createType(
     ],
     quickActions: [
       DashboardAction(
-          id: 'new_ticket',
+          id: 'add_dropoff',
           labelAr: 'استلام جديد',
           icon: 'plus',
           color: 'bg-blue-50 text-[#1A73E8]'),
@@ -1013,9 +1013,9 @@ final mobileRepair = createType(
     ],
   ),
   orderLabels: const OrderLabels(
-    incoming: 'أجهزة مستلمة',
+    incoming: 'تم الاستلام',
     accepted: 'قيد التصليح',
-    completed: 'تم التسليم',
+    completed: 'جاهز للاستلام',
     itemUnit: 'جهاز',
   ),
   suggestedRoles: const [
@@ -1026,6 +1026,15 @@ final mobileRepair = createType(
     SuggestedRole(
       labelAr: 'موظف استقبال',
       defaultPermissions: ['manage_orders', 'respond_chat'],
+    ),
+    SuggestedRole(
+      labelAr: 'مدير',
+      defaultPermissions: [
+        'manage_orders',
+        'manage_catalog',
+        'respond_chat',
+        'view_insights',
+      ],
     ),
   ],
   itemManagement: const ItemManagementConfig(
@@ -1043,7 +1052,7 @@ final mobileRepair = createType(
         labelAr: 'المدة التقديرية',
         type: ItemPropertyType.text,
         required: false,
-        placeholderAr: '١ ساعة',
+        placeholderAr: '٢ ساعة',
       ),
     ],
     quantityMode: QuantityMode.none,
@@ -1057,27 +1066,25 @@ final tailor = createType(
   id: 'tailor',
   nameAr: 'خياط',
   nameEn: 'Tailor',
-  categoryAr: 'أزياء وملابس',
+  categoryAr: 'ملابس وأزياء',
   categoryEn: 'Tailor',
   archetype: Archetype.serviceBooking,
-  icon: '🪡',
+  icon: '✂️',
   features: ['service_duration'],
   trackingMode: 'dropoff',
-  requestLabelAr: 'طلب خياطة',
-  customerCtaAr: 'تتبع قطعتك',
-  customerCtaDescAr: 'سلّم القطعة وتابع حالتها خطوة بخطوة',
+  requestLabelAr: 'طلب تعديل / تفصيل',
+  customerCtaAr: 'تتبع قطعك',
+  customerCtaDescAr: 'سلّم ملابسك وتابع حالة التعديل من هنا',
   perEmployeeAvailability: false,
   dateSelection: DateSelection.none,
   dashboard: DashboardConfig(
     statsLabels: [
       DashboardStatLabel(
-          key: 'received', label: 'مستلمة', icon: 'inbox'),
+          key: 'received', label: 'استلام', icon: 'inbox'),
       DashboardStatLabel(
-          key: 'processing', label: 'قيد الخياطة', icon: 'loader'),
+          key: 'processing', label: 'قيد التعديل', icon: 'loader'),
       DashboardStatLabel(
-          key: 'ready', label: 'جاهزة', icon: 'check-circle'),
-      DashboardStatLabel(
-          key: 'revenue_today', label: 'إيراد اليوم', icon: 'trending-up'),
+          key: 'ready', label: 'جاهز للاستلام', icon: 'check-circle'),
     ],
     sections: [
       Section.stats,
@@ -1087,7 +1094,7 @@ final tailor = createType(
     ],
     quickActions: [
       DashboardAction(
-          id: 'new_ticket',
+          id: 'add_dropoff',
           labelAr: 'استلام جديد',
           icon: 'plus',
           color: 'bg-blue-50 text-[#1A73E8]'),
@@ -1099,14 +1106,18 @@ final tailor = createType(
     ],
   ),
   orderLabels: const OrderLabels(
-    incoming: 'قطع مستلمة',
-    accepted: 'قيد الخياطة',
-    completed: 'تم التسليم',
+    incoming: 'تم الاستلام',
+    accepted: 'قيد التعديل',
+    completed: 'جاهز للاستلام',
     itemUnit: 'قطعة',
   ),
   suggestedRoles: const [
     SuggestedRole(
       labelAr: 'خياط',
+      defaultPermissions: ['manage_orders'],
+    ),
+    SuggestedRole(
+      labelAr: 'مساعد خياط',
       defaultPermissions: ['manage_orders'],
     ),
     SuggestedRole(
@@ -1123,6 +1134,27 @@ final tailor = createType(
       ],
     ),
   ],
+  itemManagement: const ItemManagementConfig(
+    sourceField: 'services',
+    itemLabelAr: 'خدمة',
+    itemsLabelAr: 'الخدمات',
+    addLabelAr: 'إضافة خدمة',
+    hasImage: false,
+    hasCategory: true,
+    hasDescription: false,
+    hasPrice: true,
+    properties: [
+      ItemPropertyConfig(
+        id: 'duration',
+        labelAr: 'المدة التقديرية',
+        type: ItemPropertyType.text,
+        required: false,
+        placeholderAr: '٣ أيام',
+      ),
+    ],
+    quantityMode: QuantityMode.open,
+    canDiscount: false,
+  ),
 );
 
 // ─── Shoe Repair ────────────────────────────────────────────
@@ -1131,27 +1163,25 @@ final shoeRepair = createType(
   id: 'shoe_repair',
   nameAr: 'إسكافي',
   nameEn: 'Shoe Repair',
-  categoryAr: 'أزياء وملابس',
+  categoryAr: 'خدمات',
   categoryEn: 'Shoe Repair',
   archetype: Archetype.serviceBooking,
   icon: '👞',
   features: ['service_duration'],
   trackingMode: 'dropoff',
-  requestLabelAr: 'طلب إصلاح',
-  customerCtaAr: 'تتبع حذائك',
-  customerCtaDescAr: 'سلّم الحذاء وتابع حالة الإصلاح خطوة بخطوة',
+  requestLabelAr: 'طلب تصليح',
+  customerCtaAr: 'تتبع طلبك',
+  customerCtaDescAr: 'سلّم حذاءك وتابع حالة التصليح من هنا',
   perEmployeeAvailability: false,
   dateSelection: DateSelection.none,
   dashboard: DashboardConfig(
     statsLabels: [
       DashboardStatLabel(
-          key: 'received', label: 'مستلمة', icon: 'inbox'),
+          key: 'received', label: 'استلام', icon: 'inbox'),
       DashboardStatLabel(
-          key: 'processing', label: 'قيد الإصلاح', icon: 'loader'),
+          key: 'processing', label: 'قيد التصليح', icon: 'loader'),
       DashboardStatLabel(
-          key: 'ready', label: 'جاهزة', icon: 'check-circle'),
-      DashboardStatLabel(
-          key: 'revenue_today', label: 'إيراد اليوم', icon: 'trending-up'),
+          key: 'ready', label: 'جاهز للاستلام', icon: 'check-circle'),
     ],
     sections: [
       Section.stats,
@@ -1161,7 +1191,7 @@ final shoeRepair = createType(
     ],
     quickActions: [
       DashboardAction(
-          id: 'new_ticket',
+          id: 'add_dropoff',
           labelAr: 'استلام جديد',
           icon: 'plus',
           color: 'bg-blue-50 text-[#1A73E8]'),
@@ -1173,10 +1203,10 @@ final shoeRepair = createType(
     ],
   ),
   orderLabels: const OrderLabels(
-    incoming: 'أحذية مستلمة',
-    accepted: 'قيد الإصلاح',
-    completed: 'تم التسليم',
-    itemUnit: 'حذاء',
+    incoming: 'تم الاستلام',
+    accepted: 'قيد التصليح',
+    completed: 'جاهز للاستلام',
+    itemUnit: 'قطعة',
   ),
   suggestedRoles: const [
     SuggestedRole(
@@ -1193,6 +1223,27 @@ final shoeRepair = createType(
       ],
     ),
   ],
+  itemManagement: const ItemManagementConfig(
+    sourceField: 'services',
+    itemLabelAr: 'خدمة',
+    itemsLabelAr: 'الخدمات',
+    addLabelAr: 'إضافة خدمة',
+    hasImage: false,
+    hasCategory: true,
+    hasDescription: false,
+    hasPrice: true,
+    properties: [
+      ItemPropertyConfig(
+        id: 'duration',
+        labelAr: 'المدة التقديرية',
+        type: ItemPropertyType.text,
+        required: false,
+        placeholderAr: '٢ يوم',
+      ),
+    ],
+    quantityMode: QuantityMode.open,
+    canDiscount: false,
+  ),
 );
 
 // ─── Watch Repair ───────────────────────────────────────────
@@ -1201,7 +1252,7 @@ final watchRepair = createType(
   id: 'watch_repair',
   nameAr: 'تصليح ساعات',
   nameEn: 'Watch Repair',
-  categoryAr: 'إلكترونيات وتقنية',
+  categoryAr: 'خدمات',
   categoryEn: 'Watch Repair',
   archetype: Archetype.serviceBooking,
   icon: '⌚',
@@ -1209,19 +1260,17 @@ final watchRepair = createType(
   trackingMode: 'dropoff',
   requestLabelAr: 'طلب تصليح ساعة',
   customerCtaAr: 'تتبع ساعتك',
-  customerCtaDescAr: 'سلّم الساعة وتابع حالة التصليح خطوة بخطوة',
+  customerCtaDescAr: 'سلّم ساعتك وتابع حالة التصليح من هنا',
   perEmployeeAvailability: false,
   dateSelection: DateSelection.none,
   dashboard: DashboardConfig(
     statsLabels: [
       DashboardStatLabel(
-          key: 'received', label: 'مستلمة', icon: 'inbox'),
+          key: 'received', label: 'استلام', icon: 'inbox'),
       DashboardStatLabel(
           key: 'processing', label: 'قيد التصليح', icon: 'loader'),
       DashboardStatLabel(
-          key: 'ready', label: 'جاهزة', icon: 'check-circle'),
-      DashboardStatLabel(
-          key: 'revenue_today', label: 'إيراد اليوم', icon: 'trending-up'),
+          key: 'ready', label: 'جاهز للاستلام', icon: 'check-circle'),
     ],
     sections: [
       Section.stats,
@@ -1231,7 +1280,7 @@ final watchRepair = createType(
     ],
     quickActions: [
       DashboardAction(
-          id: 'new_ticket',
+          id: 'add_dropoff',
           labelAr: 'استلام جديد',
           icon: 'plus',
           color: 'bg-blue-50 text-[#1A73E8]'),
@@ -1243,15 +1292,23 @@ final watchRepair = createType(
     ],
   ),
   orderLabels: const OrderLabels(
-    incoming: 'ساعات مستلمة',
+    incoming: 'تم الاستلام',
     accepted: 'قيد التصليح',
-    completed: 'تم التسليم',
+    completed: 'جاهز للاستلام',
     itemUnit: 'ساعة',
   ),
   suggestedRoles: const [
     SuggestedRole(
       labelAr: 'ساعاتي',
       defaultPermissions: ['manage_orders'],
+    ),
+    SuggestedRole(
+      labelAr: 'فني ساعات',
+      defaultPermissions: ['manage_orders'],
+    ),
+    SuggestedRole(
+      labelAr: 'موظف استقبال',
+      defaultPermissions: ['manage_orders', 'respond_chat'],
     ),
     SuggestedRole(
       labelAr: 'مدير',
@@ -1263,6 +1320,27 @@ final watchRepair = createType(
       ],
     ),
   ],
+  itemManagement: const ItemManagementConfig(
+    sourceField: 'services',
+    itemLabelAr: 'خدمة',
+    itemsLabelAr: 'الخدمات',
+    addLabelAr: 'إضافة خدمة',
+    hasImage: false,
+    hasCategory: true,
+    hasDescription: true,
+    hasPrice: true,
+    properties: [
+      ItemPropertyConfig(
+        id: 'duration',
+        labelAr: 'المدة التقديرية',
+        type: ItemPropertyType.text,
+        required: false,
+        placeholderAr: '٣ أيام',
+      ),
+    ],
+    quantityMode: QuantityMode.none,
+    canDiscount: false,
+  ),
 );
 
 // ─── Tutor ───────────────────────────────────────────────────

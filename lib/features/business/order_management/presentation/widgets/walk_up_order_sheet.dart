@@ -33,7 +33,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
   final _noteController = TextEditingController();
 
   static const _sourceOptions = [
-    (id: OrderSource.walkUp, label: 'زبون مباشر', icon: Icons.person),
+    (id: OrderSource.walkUp, label: 'عشوائي', icon: Icons.shuffle),
     (id: OrderSource.phoneCall, label: 'اتصال', icon: Icons.phone),
     (id: OrderSource.whatsapp, label: 'واتساب', icon: Icons.chat),
   ];
@@ -52,7 +52,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
       status: status,
       customerName:
           _nameController.text.trim().isEmpty
-              ? 'زبون جديد'
+              ? 'زبون عابر'
               : _nameController.text.trim(),
       customerPhone: _phoneController.text.trim(),
       address: 'نقطة GPS',
@@ -182,6 +182,48 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                       }).toList(),
                     ),
                     const SizedBox(height: AppSpacing.lg),
+                    // Customer section with "اختياري" badge
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person_outline,
+                              size: 13,
+                              color: context.colorScheme.onSurfaceVariant,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              'من؟',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: context.colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.surfaceContainerHighest,
+                            borderRadius: AppRadius.pill,
+                          ),
+                          child: Text(
+                            'اختياري',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: context.colorScheme.onSurfaceVariant
+                                  .withAlpha(130),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
                     // Customer name
                     TextField(
                       controller: _nameController,

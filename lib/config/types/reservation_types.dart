@@ -193,6 +193,7 @@ final eventVenue = createType(
     hasCategory: false,
     hasDescription: true,
     hasPrice: true,
+    priceLabelAr: 'السعر (من)',
     properties: [
       ItemPropertyConfig(
         id: 'capacity',
@@ -208,6 +209,7 @@ final eventVenue = createType(
   manageTabs: const [
     ManageTab(id: 'items', labelAr: 'المساحات'),
     ManageTab(id: 'packages', labelAr: 'الباقات'),
+    ManageTab(id: 'seasonal_pricing', labelAr: 'التسعير الموسمي'),
   ],
   hasCustomersTab: true,
 );
@@ -434,6 +436,7 @@ final villaRental = createType(
     hasCategory: false,
     hasDescription: true,
     hasPrice: true,
+    priceLabelAr: 'السعر (من)',
     properties: [
       ItemPropertyConfig(
         id: 'capacity',

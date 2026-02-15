@@ -9,7 +9,10 @@
     },
     "today_revenue": {
       "total": 8900,
+      "yesterday": 7600,
       "completed_count": 5,
+      "orders_count": 5,
+      "payment_breakdown": {"cash": 5300, "cliq": 2700, "bank": 900},
       "items": [
         {"service": "رواية — في ممر الفئران", "amount": 1200, "time": "10:00"},
         {"service": "كتب أطفال × 3", "amount": 2700, "time": "11:00"},

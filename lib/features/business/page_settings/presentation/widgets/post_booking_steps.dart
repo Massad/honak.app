@@ -72,7 +72,7 @@ class PostBookingSteps extends ConsumerWidget {
 class _AddStepButton extends ConsumerWidget {
   final int stepsCount;
 
-  const _AddStepButton({super.key, required this.stepsCount});
+  const _AddStepButton({required this.stepsCount});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -132,7 +132,7 @@ class _AddStepButton extends ConsumerWidget {
 }
 
 class _TemplatesButton extends ConsumerWidget {
-  const _TemplatesButton({super.key});
+  const _TemplatesButton();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

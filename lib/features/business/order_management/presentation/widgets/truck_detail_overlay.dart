@@ -93,12 +93,15 @@ class _TruckDetailSheet extends ConsumerStatefulWidget {
 
 class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
   int _tabIndex = 0;
+  ({String by, String at})? _offDayOverride;
 
   bool get _isOffToday {
     final now = DateTime.now();
     final dayName = _allDays[now.weekday % 7];
     return !widget.truck.deliveryDays.contains(dayName);
   }
+
+  bool get _effectivelyOff => _isOffToday && _offDayOverride == null;
 
   String? get _nextDeliveryDay {
     final now = DateTime.now();
@@ -116,7 +119,7 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
   Widget build(BuildContext context) {
     final truck = widget.truck;
     final truckColor = _parseColor(truck.color);
-    final status = _isOffToday
+    final status = _effectivelyOff
         ? ('عطلة اليوم', const Color(0xFF9E9E9E))
         : (_statusMap[truck.today.status] ?? ('غير معروف', Theme.of(context).colorScheme.onSurfaceVariant));
     final (statusLabel, statusColor) = status;
@@ -147,12 +150,13 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
                   truck: truck,
                   pageSlug: widget.pageSlug,
                   truckColor: truckColor,
-                  isOffToday: _isOffToday,
+                  isOffToday: _effectivelyOff,
                   nextDeliveryDay: _nextDeliveryDay,
                 )
               : _ActivityTab(
                   truck: truck,
                   pageSlug: widget.pageSlug,
+                  offDayOverride: _offDayOverride,
                 ),
         ),
 
@@ -263,50 +267,104 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
     );
   }
 
+  void _navigateToDrivingMode(Truck truck) {
+    final routeData = ref.read(
+      truckRouteQueueProvider((
+        pageSlug: widget.pageSlug,
+        truckId: truck.id,
+      )),
+    );
+    final bizContext = ref.read(businessContextProvider);
+    final queue = routeData?.queue ?? [];
+    Navigator.of(context).pop(); // close overlay
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => DrivingModePage(
+          truck: truck,
+          initialQueue: queue,
+          pageName: bizContext?.page.name ?? '',
+          productName: bizContext?.config?.orderLabels.itemUnit ?? 'وحدة',
+        ),
+      ),
+    );
+  }
+
   Widget _buildBottomAction(Truck truck) {
-    if (_isOffToday) {
+    // Effectively off: show amber banner + orange override button
+    if (_effectivelyOff) {
       return Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
           border: Border(top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
         ),
-        child: Container(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFFF8E1),
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'الشاحنة في عطلة اليوم',
-                      style: TextStyle(fontSize: 12, color: context.colorScheme.onSurface),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Off-day info banner
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF8E1),
+                borderRadius: BorderRadius.circular(AppRadius.md),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'الشاحنة في عطلة اليوم',
+                          style: TextStyle(fontSize: 12, color: context.colorScheme.onSurface),
+                        ),
+                        Text(
+                          _nextDeliveryDay != null
+                              ? 'الطلبات ستنتقل لـ $_nextDeliveryDay'
+                              : 'لا توجد أيام توصيل محددة',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: context.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      _nextDeliveryDay != null
-                          ? 'الطلبات ستنتقل لـ $_nextDeliveryDay'
-                          : 'لا توجد أيام توصيل محددة',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  const Icon(Icons.calendar_today, color: AppColors.warning, size: 20),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            // Override button — orange #FF9800
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: FilledButton.icon(
+                onPressed: () {
+                  setState(() {
+                    _offDayOverride = (
+                      by: 'مستخدم النظام',
+                      at: DateTime.now().toIso8601String(),
+                    );
+                  });
+                },
+                icon: const Icon(Icons.local_shipping, size: 16),
+                label: const Text('بدء المسار رغم العطلة'),
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFFFF9800),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.md),
+                  ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.md),
-              const Icon(Icons.calendar_today, color: AppColors.warning, size: 20),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     }
 
+    // Normal route action (may include override reminder if overriding)
     final status = truck.today.status;
     final String label;
     final Color bgColor;
@@ -329,40 +387,55 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
         color: context.colorScheme.surface,
         border: Border(top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
       ),
-      child: SizedBox(
-        width: double.infinity,
-        height: 48,
-        child: FilledButton.icon(
-          onPressed: () {
-            final routeData = ref.read(
-              truckRouteQueueProvider((
-                pageSlug: widget.pageSlug,
-                truckId: truck.id,
-              )),
-            );
-            final bizContext = ref.read(businessContextProvider);
-            final queue = routeData?.queue ?? [];
-            Navigator.of(context).pop(); // close overlay
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => DrivingModePage(
-                  truck: truck,
-                  initialQueue: queue,
-                  pageName: bizContext?.page.name ?? '',
-                  productName: bizContext?.config?.orderLabels.itemUnit ?? 'وحدة',
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Override reminder — exceptional operation on off day
+          if (_isOffToday && _offDayOverride != null) ...[
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF8E1),
+                borderRadius: BorderRadius.circular(AppRadius.sm),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'تشغيل استثنائي — هذا يوم عطلة للشاحنة',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.amber.shade800,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Icon(Icons.warning_amber_rounded,
+                      size: 12, color: const Color(0xFFFF9800)),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+          ],
+          SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: FilledButton.icon(
+              onPressed: () => _navigateToDrivingMode(truck),
+              icon: const Icon(Icons.location_on, size: 16),
+              label: Text(label),
+              style: FilledButton.styleFrom(
+                backgroundColor: bgColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.md),
                 ),
               ),
-            );
-          },
-          icon: const Icon(Icons.location_on, size: 16),
-          label: Text(label),
-          style: FilledButton.styleFrom(
-            backgroundColor: bgColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppRadius.md),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -946,10 +1019,12 @@ class _ActivityTab extends ConsumerWidget {
   const _ActivityTab({
     required this.truck,
     required this.pageSlug,
+    this.offDayOverride,
   });
 
   final Truck truck;
   final String pageSlug;
+  final ({String by, String at})? offDayOverride;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -957,7 +1032,7 @@ class _ActivityTab extends ConsumerWidget {
       truckRouteQueueProvider((pageSlug: pageSlug, truckId: truck.id)),
     );
     final queue = routeData?.queue ?? [];
-    final activityLog = _buildActivityLog(queue, truck);
+    final activityLog = _buildActivityLog(queue, truck, offDayOverride);
 
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -1451,8 +1526,23 @@ class _ActivityEntry {
   final String? rescheduled;
 }
 
-List<_ActivityEntry> _buildActivityLog(List<QueueItem> queue, Truck truck) {
+List<_ActivityEntry> _buildActivityLog(
+  List<QueueItem> queue,
+  Truck truck, [
+  ({String by, String at})? offDayOverride,
+]) {
   final entries = <_ActivityEntry>[];
+
+  // Off-day override — logged before route_start since it happens first
+  if (offDayOverride != null) {
+    entries.add(_ActivityEntry(
+      label: 'تشغيل استثنائي في يوم العطلة',
+      detail: 'تم التفعيل بواسطة ${offDayOverride.by}',
+      icon: Icons.warning_amber_rounded,
+      color: const Color(0xFFFF9800),
+      time: offDayOverride.at,
+    ));
+  }
 
   // Route start
   if (truck.today.startedAt != null) {
@@ -1547,9 +1637,8 @@ IconData _sourceIcon(OrderSource source) {
   return switch (source) {
     OrderSource.recurringAuto => Icons.refresh,
     OrderSource.appOrder => Icons.smartphone,
-    OrderSource.walkUp => Icons.add,
+    OrderSource.walkUp => Icons.shuffle,
     OrderSource.phoneCall => Icons.phone,
-    OrderSource.balcony => Icons.home,
     OrderSource.whatsapp => Icons.chat,
     OrderSource.adHoc => Icons.add,
   };

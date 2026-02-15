@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_accessories",
+      "name": "إكسسوارات",
+      "item_count": 2,
+      "sort_order": 1
+    }
+  ],
+  "meta": {
+    "total": 1
+  }
+}

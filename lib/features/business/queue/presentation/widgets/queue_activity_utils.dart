@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_source.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
+import 'package:honak/features/business/shared/entities/activity_action_config.dart';
 
 // ═══════════════════════════════════════════════════════════════
 // Queue Activity Log Utilities
@@ -60,29 +61,49 @@ class QueueActivityEntry {
   final String? method;
 }
 
+/// Visual config for each [QueueActivityAction].
+const Map<QueueActivityAction, ActivityActionConfig> queueActionConfigs = {
+  QueueActivityAction.entryCreated: ActivityActionConfig(
+    icon: Icons.inbox_rounded,
+    color: Color(0xFF1A73E8),
+  ),
+  QueueActivityAction.statusChanged: ActivityActionConfig(
+    icon: Icons.play_arrow_rounded,
+    color: Color(0xFF1A73E8),
+  ),
+  QueueActivityAction.photoBefore: ActivityActionConfig(
+    icon: Icons.camera_alt_outlined,
+    color: Color(0xFF1A73E8),
+  ),
+  QueueActivityAction.photoAfter: ActivityActionConfig(
+    icon: Icons.image_rounded,
+    color: Color(0xFF43A047),
+  ),
+  QueueActivityAction.noShow: ActivityActionConfig(
+    icon: Icons.block_rounded,
+    color: Color(0xFFE53935),
+  ),
+  QueueActivityAction.paymentMarked: ActivityActionConfig(
+    icon: Icons.credit_card_rounded,
+    color: Color(0xFF43A047),
+  ),
+  QueueActivityAction.noteAdded: ActivityActionConfig(
+    icon: Icons.sticky_note_2_outlined,
+    color: AppColors.textSecondary,
+  ),
+  QueueActivityAction.onTheWay: ActivityActionConfig(
+    icon: Icons.navigation_rounded,
+    color: Color(0xFF43A047),
+  ),
+};
+
 /// Maps a [QueueActivityAction] to a Material icon.
-IconData activityActionIcon(QueueActivityAction action) => switch (action) {
-      QueueActivityAction.entryCreated => Icons.inbox_rounded,
-      QueueActivityAction.statusChanged => Icons.play_arrow_rounded,
-      QueueActivityAction.photoBefore => Icons.camera_alt_outlined,
-      QueueActivityAction.photoAfter => Icons.image_rounded,
-      QueueActivityAction.noShow => Icons.block_rounded,
-      QueueActivityAction.paymentMarked => Icons.credit_card_rounded,
-      QueueActivityAction.noteAdded => Icons.sticky_note_2_outlined,
-      QueueActivityAction.onTheWay => Icons.navigation_rounded,
-    };
+IconData activityActionIcon(QueueActivityAction action) =>
+    queueActionConfigs[action]!.icon;
 
 /// Maps a [QueueActivityAction] to a semantic color.
-Color activityActionColor(QueueActivityAction action) => switch (action) {
-      QueueActivityAction.entryCreated => const Color(0xFF1A73E8),
-      QueueActivityAction.statusChanged => const Color(0xFF1A73E8),
-      QueueActivityAction.photoBefore => const Color(0xFF1A73E8),
-      QueueActivityAction.photoAfter => const Color(0xFF43A047),
-      QueueActivityAction.noShow => const Color(0xFFE53935),
-      QueueActivityAction.paymentMarked => const Color(0xFF43A047),
-      QueueActivityAction.noteAdded => AppColors.textSecondary,
-      QueueActivityAction.onTheWay => const Color(0xFF43A047),
-    };
+Color activityActionColor(QueueActivityAction action) =>
+    queueActionConfigs[action]!.color;
 
 /// Mock staff names with roles for realistic activity log entries.
 const _staffPool = [

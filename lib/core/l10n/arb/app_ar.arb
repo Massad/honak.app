@@ -1,6 +1,6 @@
 {
   "@@locale": "ar",
-  "appName": "حنك",
+  "appName": "هناك.app",
 
   "ok": "حسناً",
   "cancel": "إلغاء",
@@ -297,7 +297,7 @@
   "statusAnnouncement": "إعلان",
   "specialOffer": "عرض خاص",
 
-  "guestWelcomeTitle": "مرحباً بك في هناك",
+  "guestWelcomeTitle": "مرحباً بك في هناك.app",
   "guestWelcomeSubtitle": "اكتشف أعمال ومتاجر محلية حولك — تصفح، تابع، واطلب",
   "guestExploreNearby": "استكشف القريب منك",
   "guestCreateAccount": "أنشئ حسابك",
@@ -608,6 +608,81 @@
   "@savingsPercent": {
     "placeholders": {
       "percent": {"type": "int"}
+    }
+  },
+
+  "seasonalPricing": "التسعير الموسمي",
+  "currentSeason": "الموسم الحالي",
+  "seasonSummer": "موسم الصيف",
+  "seasonWinter": "موسم الشتاء",
+  "seasonSpring": "موسم الربيع",
+  "seasonAutumn": "الخريف",
+  "weekdayPrice": "أيام الأسبوع",
+  "weekendPrice": "نهاية الأسبوع",
+  "perNight": "/ ليلة",
+  "holidaySurcharge": "رسوم العطلات",
+  "holidaySurchargeNotice": "رسوم إضافية {percent}٪ — {name}",
+  "@holidaySurchargeNotice": {
+    "placeholders": {
+      "percent": {"type": "int"},
+      "name": {"type": "String"}
+    }
+  },
+  "earlyBirdDiscount": "خصم حجز مبكر",
+  "earlyBirdNotice": "احجز قبل {days} يوم ووفّر {percent}٪",
+  "@earlyBirdNotice": {
+    "placeholders": {
+      "days": {"type": "int"},
+      "percent": {"type": "int"}
+    }
+  },
+  "lastMinuteDeal": "عرض اللحظة الأخيرة",
+  "lastMinuteDiscount": "خصم {percent}٪",
+  "@lastMinuteDiscount": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "seasonTimeline": "مواسم السنة",
+  "bookNow": "طلب حجز",
+  "bookNowWithPrice": "طلب حجز — من {price}/ليلة",
+  "@bookNowWithPrice": {
+    "placeholders": {
+      "price": {"type": "String"}
+    }
+  },
+  "urgentBooking": "احجز الآن!",
+  "seasonsList": "المواسم",
+  "holidaysList": "العطل الرسمية",
+  "seasonActive": "فعّال",
+  "seasonInactive": "غير فعّال",
+  "daysAhead": "{days} يوم مسبقاً",
+  "@daysAhead": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "discountPercent": "خصم {percent}٪",
+  "@discountPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "surchargePercent": "زيادة {percent}٪",
+  "@surchargePercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+
+  "reorderSectionTitle": "اطلب مرة أخرى",
+  "reorderButton": "إعادة الطلب",
+  "today": "اليوم",
+  "yesterday": "أمس",
+  "daysAgo": "قبل {days} يوم",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {"type": "int"}
     }
   }
 }

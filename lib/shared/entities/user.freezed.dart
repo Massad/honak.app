@@ -24,6 +24,8 @@ mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name_en')
+  String? get nameEn => throw _privateConstructorUsedError;
   @JsonKey(name: 'avatar_url')
   String? get avatarUrl => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
@@ -52,6 +54,7 @@ abstract class $UserCopyWith<$Res> {
     String id,
     String phone,
     String name,
+    @JsonKey(name: 'name_en') String? nameEn,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
     String? bio,
     @JsonKey(name: 'created_at') int? createdAt,
@@ -79,6 +82,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = null,
     Object? phone = null,
     Object? name = null,
+    Object? nameEn = freezed,
     Object? avatarUrl = freezed,
     Object? bio = freezed,
     Object? createdAt = freezed,
@@ -100,6 +104,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
                 ? _value.name
                 : name // ignore: cast_nullable_to_non_nullable
                       as String,
+            nameEn: freezed == nameEn
+                ? _value.nameEn
+                : nameEn // ignore: cast_nullable_to_non_nullable
+                      as String?,
             avatarUrl: freezed == avatarUrl
                 ? _value.avatarUrl
                 : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -142,6 +150,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
     String id,
     String phone,
     String name,
+    @JsonKey(name: 'name_en') String? nameEn,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
     String? bio,
     @JsonKey(name: 'created_at') int? createdAt,
@@ -166,6 +175,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? id = null,
     Object? phone = null,
     Object? name = null,
+    Object? nameEn = freezed,
     Object? avatarUrl = freezed,
     Object? bio = freezed,
     Object? createdAt = freezed,
@@ -187,6 +197,10 @@ class __$$UserImplCopyWithImpl<$Res>
             ? _value.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        nameEn: freezed == nameEn
+            ? _value.nameEn
+            : nameEn // ignore: cast_nullable_to_non_nullable
+                  as String?,
         avatarUrl: freezed == avatarUrl
             ? _value.avatarUrl
             : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -223,6 +237,7 @@ class _$UserImpl implements _User {
     required this.id,
     required this.phone,
     required this.name,
+    @JsonKey(name: 'name_en') this.nameEn,
     @JsonKey(name: 'avatar_url') this.avatarUrl,
     this.bio,
     @JsonKey(name: 'created_at') this.createdAt,
@@ -240,6 +255,9 @@ class _$UserImpl implements _User {
   final String phone;
   @override
   final String name;
+  @override
+  @JsonKey(name: 'name_en')
+  final String? nameEn;
   @override
   @JsonKey(name: 'avatar_url')
   final String? avatarUrl;
@@ -265,7 +283,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, phone: $phone, name: $name, avatarUrl: $avatarUrl, bio: $bio, createdAt: $createdAt, status: $status, needsProfileSetup: $needsProfileSetup, pages: $pages)';
+    return 'User(id: $id, phone: $phone, name: $name, nameEn: $nameEn, avatarUrl: $avatarUrl, bio: $bio, createdAt: $createdAt, status: $status, needsProfileSetup: $needsProfileSetup, pages: $pages)';
   }
 
   @override
@@ -276,6 +294,7 @@ class _$UserImpl implements _User {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.nameEn, nameEn) || other.nameEn == nameEn) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
             (identical(other.bio, bio) || other.bio == bio) &&
@@ -294,6 +313,7 @@ class _$UserImpl implements _User {
     id,
     phone,
     name,
+    nameEn,
     avatarUrl,
     bio,
     createdAt,
@@ -321,6 +341,7 @@ abstract class _User implements User {
     required final String id,
     required final String phone,
     required final String name,
+    @JsonKey(name: 'name_en') final String? nameEn,
     @JsonKey(name: 'avatar_url') final String? avatarUrl,
     final String? bio,
     @JsonKey(name: 'created_at') final int? createdAt,
@@ -337,6 +358,9 @@ abstract class _User implements User {
   String get phone;
   @override
   String get name;
+  @override
+  @JsonKey(name: 'name_en')
+  String? get nameEn;
   @override
   @JsonKey(name: 'avatar_url')
   String? get avatarUrl;

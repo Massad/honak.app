@@ -120,6 +120,7 @@ class MockApiClient implements ApiClient {
       'dashboard' => ['business/dashboard/$bizType'],
       'packages' => ['subscriptions/packages_$pageId'],
       'queue' || 'dropoff' => ['business/$bizType'],
+      'requests' => ['business/requests/$bizType'],
       _ => <String>[],
     };
 
@@ -142,6 +143,7 @@ class MockApiClient implements ApiClient {
       'packages' => 'subscriptions/packages_abu-ahmad-water',
       'queue' => 'business/car_wash',
       'dropoff' => 'business/laundry',
+      'requests' => 'business/requests_pending',
       _ => 'pages/page_restaurant',
     };
     _subFixtureCache[cacheKey] = fallback;
@@ -694,6 +696,34 @@ class MockApiClient implements ApiClient {
           {'success': true, 'data': {'tenants': [], 'floors': []}},
           fromJson,
         );
+      }
+    }
+
+    // Business requests — per-type fixtures keyed by page_id
+    final bizReqMatch =
+        RegExp(r'^/v1/biz/requests(?:/([a-z_]+))?$').firstMatch(path);
+    if (bizReqMatch != null) {
+      final status = bizReqMatch.group(1); // pending, accepted, etc.
+      final pageId = queryParams?['page_id'] as String?;
+      if (pageId != null) {
+        try {
+          final fixture =
+              await _resolvePageSubFixture(pageId, 'requests');
+          final rawData =
+              await _loadFixture(fixture) as Map<String, dynamic>;
+          // Per-type fixtures have {pending:[], accepted:[], ...}
+          if (rawData.containsKey('pending')) {
+            final bucket = status ?? 'pending';
+            final items = rawData[bucket] as List<dynamic>? ?? [];
+            return _buildResponse<T>(
+              {'success': true, 'data': items, 'meta': {'total': items.length, 'has_more': false}},
+              fromJson,
+              queryParams: queryParams,
+            );
+          }
+        } catch (_) {
+          // Fallback to static fixtures below
+        }
       }
     }
 

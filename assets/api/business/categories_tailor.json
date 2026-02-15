@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_tailor_alter",
+      "name": "تعديلات",
+      "item_count": 5,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_tailor_repair",
+      "name": "إصلاحات",
+      "item_count": 4,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_tailor_custom",
+      "name": "تفصيل",
+      "item_count": 4,
+      "sort_order": 3
+    }
+  ],
+  "meta": {
+    "total": 3
+  }
+}

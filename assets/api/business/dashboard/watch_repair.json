@@ -2,10 +2,9 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 5,
-      "new_followers": 1,
-      "page_views": 15,
-      "today_revenue": 7900
+      "received": 1,
+      "processing": 2,
+      "ready": 1
     },
     "today_summary": {
       "completed": 1,
@@ -24,7 +23,10 @@
     },
     "today_revenue": {
       "total": 7900,
+      "yesterday": 6500,
       "completed_count": 2,
+      "orders_count": 2,
+      "payment_breakdown": {"cash": 4700, "cliq": 2400, "bank": 800},
       "items": [
         { "service": "تبديل زجاج + تنظيف — Tissot", "amount": 1500, "time": "10:00" },
         { "service": "تبديل سوار + بطارية — Casio", "amount": 800, "time": "15:00" }

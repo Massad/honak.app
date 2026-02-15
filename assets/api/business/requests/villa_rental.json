@@ -1,0 +1,118 @@
+{
+  "pending": [
+    {
+      "id": "req_vr_001",
+      "customer": {
+        "id": "usr_030",
+        "name": "سمير ب.",
+        "avatar_url": "https://picsum.photos/seed/samir/50/50",
+        "phone": "0791000030"
+      },
+      "status": "pending",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 45000,
+      "note": null,
+      "created_at": 1739519400,
+      "date_range": "الخميس–السبت (٢٠–٢٢ فبراير)",
+      "guest_count": 10,
+      "service_location": "فيلا البحر الميت — سويمة"
+    },
+    {
+      "id": "req_vr_002",
+      "customer": {
+        "id": "usr_031",
+        "name": "ليلى ت.",
+        "avatar_url": "https://picsum.photos/seed/layla2/50/50",
+        "phone": "0791000031"
+      },
+      "status": "pending",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 20000,
+      "note": "عائلة مع أطفال صغار",
+      "created_at": 1739508600,
+      "date_range": "الجمعة ٢١ فبراير",
+      "guest_count": 6,
+      "service_location": "فيلا البحر الميت — سويمة"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "req_vr_003",
+      "customer": {
+        "id": "usr_032",
+        "name": "أحمد ر.",
+        "avatar_url": "https://picsum.photos/seed/ahmad2/50/50",
+        "phone": "0791000032"
+      },
+      "status": "accepted",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 40000,
+      "note": null,
+      "created_at": 1739174400,
+      "date_range": "الخميس–السبت (٢٧ فبراير–١ مارس)",
+      "guest_count": 8,
+      "service_location": "فيلا البحر الميت — سويمة"
+    }
+  ],
+  "in_progress": [
+    {
+      "id": "req_vr_004",
+      "customer": {
+        "id": "usr_033",
+        "name": "عمر ش.",
+        "avatar_url": "https://picsum.photos/seed/omar4/50/50",
+        "phone": "0791000033"
+      },
+      "status": "in_progress",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 35000,
+      "note": null,
+      "created_at": 1739347200,
+      "date_range": "الخميس–السبت (١٣–١٥ فبراير)",
+      "guest_count": 12,
+      "service_location": "فيلا البحر الميت — سويمة"
+    }
+  ],
+  "completed": [
+    {
+      "id": "req_vr_005",
+      "customer": {
+        "id": "usr_034",
+        "name": "منى ع.",
+        "avatar_url": "https://picsum.photos/seed/muna/50/50",
+        "phone": "0791000034"
+      },
+      "status": "completed",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 35000,
+      "note": null,
+      "created_at": 1738742400,
+      "date_range": "٥–٧ فبراير",
+      "guest_count": 6,
+      "service_location": "فيلا البحر الميت — سويمة"
+    },
+    {
+      "id": "req_vr_006",
+      "customer": {
+        "id": "usr_035",
+        "name": "سارة ف.",
+        "avatar_url": "https://picsum.photos/seed/sara3/50/50",
+        "phone": "0791000035"
+      },
+      "status": "completed",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 60000,
+      "note": "مناسبة عيد ميلاد",
+      "created_at": 1738396800,
+      "date_range": "١–٣ فبراير",
+      "guest_count": 15,
+      "service_location": "فيلا البحر الميت — سويمة"
+    }
+  ]
+}

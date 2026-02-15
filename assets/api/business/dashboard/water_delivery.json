@@ -9,7 +9,10 @@
     },
     "today_revenue": {
       "total": 17000,
+      "yesterday": 14500,
       "completed_count": 28,
+      "orders_count": 28,
+      "payment_breakdown": {"cash": 11500, "cliq": 3800, "bank": 1700},
       "items": [
         {"service": "عبوة 18.9 لتر × 5", "amount": 5000, "time": "07:30"},
         {"service": "عبوة 18.9 لتر × 3", "amount": 3000, "time": "08:00"},

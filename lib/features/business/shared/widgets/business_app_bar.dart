@@ -24,42 +24,58 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
-      // "← عميل" back button
+      // "← عميل" chip button
       leading: Padding(
-        padding: const EdgeInsetsDirectional.only(start: AppSpacing.xs),
+        padding: const EdgeInsetsDirectional.only(start: AppSpacing.sm),
         child: Center(
-          child: GestureDetector(
-            onTap: () {
-              ref.read(appModeProvider.notifier).switchToCustomerMode();
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.sm,
-                vertical: AppSpacing.xs,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.arrow_forward,
-                    size: 16,
-                    color: AppColors.primary,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {
+                ref.read(appModeProvider.notifier).switchToCustomerMode();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.3),
                   ),
-                  const SizedBox(width: 4),
-                  Text(
-                    'عميل',
-                    style: context.textTheme.bodySmall?.copyWith(
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.arrow_forward,
+                      size: 14,
                       color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 4),
+                    Icon(
+                      Icons.shopping_bag_outlined,
+                      size: 14,
+                      color: AppColors.primary,
+                    ),
+                    const SizedBox(width: 2),
+                    Text(
+                      'عميل',
+                      style: context.textTheme.labelSmall?.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
-      leadingWidth: 90,
+      leadingWidth: 120,
       // Page name + avatar
       title: page != null
           ? GestureDetector(
@@ -134,13 +150,23 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
             )
           : null,
       centerTitle: false,
-      // Notifications
+      // Notifications with badge
       actions: [
-        IconButton(
-          onPressed: () => context.showSnackBar('قريباً: الإشعارات'),
-          icon: Icon(
-            Icons.notifications_outlined,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
+        Padding(
+          padding: const EdgeInsetsDirectional.only(end: AppSpacing.xs),
+          child: IconButton(
+            onPressed: () => context.showSnackBar('قريباً: الإشعارات'),
+            icon: Badge(
+              label: const Text(
+                '5',
+                style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+              ),
+              backgroundColor: AppColors.error,
+              child: Icon(
+                Icons.notifications_outlined,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
           ),
         ),
       ],

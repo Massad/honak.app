@@ -14,6 +14,7 @@ import 'package:honak/features/business/catalog_management/presentation/widgets/
 import 'package:honak/features/business/catalog_management/presentation/widgets/load_more_button.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/mass_action_bar.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/package_manager_section.dart';
+import 'package:honak/features/business/catalog_management/presentation/widgets/truck_manager_section.dart';
 import 'package:honak/features/business/shared/widgets/item_card.dart';
 import 'package:honak/shared/widgets/catalog_search_bar.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/item_list_skeleton.dart';
@@ -25,6 +26,7 @@ import 'package:honak/features/business/catalog_management/presentation/widgets/
 import 'package:honak/features/business/catalog_management/presentation/widgets/price_change/price_change_history.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/price_change/wizard_page.dart'
     as pc_wizard;
+import 'package:honak/features/business/catalog_management/presentation/widgets/stock_manager_sheet.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/team_assign_sheet.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/team_provider.dart';
 import 'package:honak/shared/extensions/sort_extensions.dart';
@@ -609,8 +611,11 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
     final pageId = bizContext.page.id;
     final config = bizContext.config;
     final itemConfig = config?.itemManagement;
+    final int clampedTab = _activeTab.clamp(0, max(manageTabs.length - 1, 0));
+    final activeTabId =
+        manageTabs.isNotEmpty ? manageTabs[clampedTab].id : 'items';
     final label = manageTabs.isNotEmpty
-        ? manageTabs[_activeTab.clamp(0, manageTabs.length - 1)].labelAr
+        ? manageTabs[clampedTab].labelAr
         : bizContext.manageTabLabel;
 
     final itemsAsync = ref.watch(bizItemsProvider(pageId));
@@ -641,159 +646,166 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                     _openPriceHistory(active, history),
               ),
 
-            // Items content
-            ...itemsAsync.when(
-              loading: () => [const ItemListSkeleton()],
-              error: (err, _) => [
-                _ErrorState(
-                  message: 'خطأ في تحميل $label',
-                  onRetry: () => ref.invalidate(bizItemsProvider(pageId)),
-                ),
-              ],
-              data: (items) {
-                final categories = categoriesAsync.valueOrNull ?? [];
-                final filtered = _applyFilters(items);
-                final addLabel = itemConfig?.addLabelAr ?? 'إضافة $label';
-                final itemsLabel = itemConfig?.itemsLabelAr ?? label;
-                final itemLabel = itemConfig?.itemLabelAr ?? label;
-
-                // Reorder mode
-                if (_mode == _ManageMode.reorder) {
-                  return _buildReorderItems(itemConfig);
-                }
-
-                final visible =
-                    filtered.sublist(0, min(_visibleCount, filtered.length));
-                final remaining = filtered.length - visible.length;
-
-                return [
-                  // Section header
-                  _SectionHeader(
-                    label: itemsLabel,
-                    count: items.length,
-                    addLabel: addLabel,
-                    onAdd: () =>
-                        _openItemWizard(itemConfig, pageId, categories),
-                    hideAdd: _mode == _ManageMode.select,
+            // Tab content — items, packages, or trucks based on active tab
+            if (activeTabId == 'packages')
+              const PackageManagerSection()
+            else if (activeTabId == 'trucks')
+              const TruckManagerSection()
+            else
+              ...itemsAsync.when(
+                loading: () => [const ItemListSkeleton()],
+                error: (err, _) => [
+                  _ErrorState(
+                    message: 'خطأ في تحميل $label',
+                    onRetry: () => ref.invalidate(bizItemsProvider(pageId)),
                   ),
+                ],
+                data: (items) {
+                  final categories = categoriesAsync.valueOrNull ?? [];
+                  final filtered = _applyFilters(items);
+                  final addLabel = itemConfig?.addLabelAr ?? 'إضافة $label';
+                  final itemsLabel = itemConfig?.itemsLabelAr ?? label;
+                  final itemLabel = itemConfig?.itemLabelAr ?? label;
 
-                  // Toolbar
-                  if (items.isNotEmpty)
-                    _Toolbar(
-                      mode: _mode,
-                      selectedCount: _selected.length,
-                      totalCount: items.length,
-                      categoryCount: categories.length,
-                      onReorder: () => _enterReorderMode(items),
-                      onSelect: _enterSelectMode,
-                      onExitReorder: _exitReorderMode,
-                      onToggleAll: () => _toggleAll(items),
-                      allSelected: _selected.length == items.length,
-                      onExitSelect: _exitSelectMode,
-                      onManageCategories: () => openCategoryManager(
-                        context,
-                        categories: categories,
-                        itemLabelAr: itemConfig?.itemLabelAr ?? 'عنصر',
-                        onChanged: (_) {},
-                      ),
-                    ),
+                  // Reorder mode
+                  if (_mode == _ManageMode.reorder) {
+                    return _buildReorderItems(itemConfig);
+                  }
 
-                  // Search + filter button
-                  if (items.isNotEmpty && _mode != _ManageMode.select)
-                    CatalogSearchBar(
-                      query: _searchQuery,
-                      onChanged: (q) => setState(() {
-                        _searchQuery = q;
-                        _resetPagination();
-                      }),
-                      hintText: 'بحث في $itemsLabel...',
-                      onFilterTap: () => showFilterSheet(
-                        context,
-                        categories: categories,
-                        activeCategoryId: _filterCategoryId,
-                        activeStatus: _filterStatus,
-                        totalCount: items.length,
-                        filteredCount: filtered.length,
-                        itemLabelAr: itemLabel,
-                        itemsLabelAr: itemsLabel,
-                        onApply: (catId, status) {
-                          setState(() {
-                            _filterCategoryId = catId;
-                            _filterStatus = status;
-                            _resetPagination();
-                          });
-                        },
-                      ),
-                      activeFilterCount: _activeFilterCount,
-                    ),
+                  final visible =
+                      filtered.sublist(0, min(_visibleCount, filtered.length));
+                  final remaining = filtered.length - visible.length;
 
-                  // Active filter tags
-                  if (_isFiltering && _activeFilterCount > 0)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                      child: ActiveFilterStrip(
-                        filters: _buildActiveFilters(categories),
-                        onRemove: _removeFilter,
-                        onClearAll:
-                            _activeFilterCount > 1 ? _clearAllFilters : null,
-                      ),
-                    ),
-
-                  // Result count
-                  if (_isFiltering)
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                        AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
-                      child: Text(
-                        filtered.length == items.length
-                            ? '${items.length} $itemLabel'
-                            : '${filtered.length} من ${items.length} $itemLabel',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-
-                  // Items list
-                  if (items.isEmpty)
-                    _EmptyItemState(
+                  return [
+                    // Section header
+                    _SectionHeader(
                       label: itemsLabel,
+                      count: items.length,
                       addLabel: addLabel,
                       onAdd: () =>
                           _openItemWizard(itemConfig, pageId, categories),
-                    )
-                  else if (filtered.isEmpty)
-                    _FilteredEmptyState(
-                      query: _searchQuery,
-                      onClear: _clearAllFilters,
-                    )
-                  else ...[
-                    ..._buildItems(
-                      visible: visible,
-                      allFiltered: filtered,
-                      categories: categories,
-                      config: itemConfig,
-                      pageId: pageId,
-                      grouped: (config?.itemManagement?.hasCategory ?? false) &&
-                          categories.isNotEmpty,
+                      hideAdd: _mode == _ManageMode.select,
                     ),
-                    // Load more
-                    if (remaining > 0)
-                      LoadMoreButton(
-                        remaining: remaining,
-                        pageSize: _pageSize,
-                        onLoadMore: _loadMore,
+
+                    // Toolbar
+                    if (items.isNotEmpty)
+                      _Toolbar(
+                        mode: _mode,
+                        selectedCount: _selected.length,
+                        totalCount: items.length,
+                        categoryCount: categories.length,
+                        hasStock: items.any((i) => i.stock != null),
+                        onReorder: () => _enterReorderMode(items),
+                        onSelect: _enterSelectMode,
+                        onStockManager: () => showStockManagerSheet(
+                          context,
+                          pageId: pageId,
+                        ),
+                        onExitReorder: _exitReorderMode,
+                        onToggleAll: () => _toggleAll(items),
+                        allSelected: _selected.length == items.length,
+                        onExitSelect: _exitSelectMode,
+                        onManageCategories: () => openCategoryManager(
+                          context,
+                          categories: categories,
+                          itemLabelAr: itemConfig?.itemLabelAr ?? 'عنصر',
+                          onChanged: (_) {},
+                        ),
                       ),
-                  ],
 
-                  // Packages & subscriptions section
-                  const PackageManagerSection(),
+                    // Search + filter button
+                    if (items.isNotEmpty && _mode != _ManageMode.select)
+                      CatalogSearchBar(
+                        query: _searchQuery,
+                        onChanged: (q) => setState(() {
+                          _searchQuery = q;
+                          _resetPagination();
+                        }),
+                        hintText: 'بحث في $itemsLabel...',
+                        onFilterTap: () => showFilterSheet(
+                          context,
+                          categories: categories,
+                          activeCategoryId: _filterCategoryId,
+                          activeStatus: _filterStatus,
+                          totalCount: items.length,
+                          filteredCount: filtered.length,
+                          itemLabelAr: itemLabel,
+                          itemsLabelAr: itemsLabel,
+                          onApply: (catId, status) {
+                            setState(() {
+                              _filterCategoryId = catId;
+                              _filterStatus = status;
+                              _resetPagination();
+                            });
+                          },
+                        ),
+                        activeFilterCount: _activeFilterCount,
+                      ),
 
-                  const SizedBox(height: 80),
-                ];
-              },
-            ),
+                    // Active filter tags
+                    if (_isFiltering && _activeFilterCount > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                        child: ActiveFilterStrip(
+                          filters: _buildActiveFilters(categories),
+                          onRemove: _removeFilter,
+                          onClearAll:
+                              _activeFilterCount > 1 ? _clearAllFilters : null,
+                        ),
+                      ),
+
+                    // Result count
+                    if (_isFiltering)
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                          AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
+                        child: Text(
+                          filtered.length == items.length
+                              ? '${items.length} $itemLabel'
+                              : '${filtered.length} من ${items.length} $itemLabel',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
+
+                    // Items list
+                    if (items.isEmpty)
+                      _EmptyItemState(
+                        label: itemsLabel,
+                        addLabel: addLabel,
+                        onAdd: () =>
+                            _openItemWizard(itemConfig, pageId, categories),
+                      )
+                    else if (filtered.isEmpty)
+                      _FilteredEmptyState(
+                        query: _searchQuery,
+                        onClear: _clearAllFilters,
+                      )
+                    else ...[
+                      ..._buildItems(
+                        visible: visible,
+                        allFiltered: filtered,
+                        categories: categories,
+                        config: itemConfig,
+                        pageId: pageId,
+                        grouped: (config?.itemManagement?.hasCategory ?? false) &&
+                            categories.isNotEmpty,
+                      ),
+                      // Load more
+                      if (remaining > 0)
+                        LoadMoreButton(
+                          remaining: remaining,
+                          pageSize: _pageSize,
+                          onLoadMore: _loadMore,
+                        ),
+                    ],
+
+                    const SizedBox(height: 80),
+                  ];
+                },
+              ),
           ],
         ),
 
@@ -1055,8 +1067,10 @@ class _Toolbar extends StatelessWidget {
   final int selectedCount;
   final int totalCount;
   final int categoryCount;
+  final bool hasStock;
   final VoidCallback onReorder;
   final VoidCallback onSelect;
+  final VoidCallback? onStockManager;
   final VoidCallback onExitReorder;
   final VoidCallback onToggleAll;
   final bool allSelected;
@@ -1068,8 +1082,10 @@ class _Toolbar extends StatelessWidget {
     required this.selectedCount,
     required this.totalCount,
     required this.categoryCount,
+    this.hasStock = false,
     required this.onReorder,
     required this.onSelect,
+    this.onStockManager,
     required this.onExitReorder,
     required this.onToggleAll,
     required this.allSelected,
@@ -1105,6 +1121,14 @@ class _Toolbar extends StatelessWidget {
           icon: Icons.check_box_outline_blank,
           onTap: onSelect,
         ),
+        if (hasStock && onStockManager != null) ...[
+          const SizedBox(width: 6),
+          _ToolbarChip(
+            label: 'مخزون',
+            icon: Icons.inventory_2_outlined,
+            onTap: onStockManager!,
+          ),
+        ],
         const Spacer(),
         if (categoryCount > 0)
           GestureDetector(

@@ -396,7 +396,7 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
           const SizedBox(height: AppSpacing.md),
           _InfoStep(
             number: '1',
-            text: 'أضف أو عدّل منتجاتك في هنك',
+            text: 'أضف أو عدّل منتجاتك في هناك.app',
           ),
           const SizedBox(height: AppSpacing.sm),
           _InfoStep(
@@ -410,7 +410,7 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
-            'المزامنة باتجاه واحد: من هنك → المنصة الخارجية.',
+            'المزامنة باتجاه واحد: من هناك.app → المنصة الخارجية.',
             style: TextStyle(
               fontSize: 11,
               color: Colors.blue.shade600,

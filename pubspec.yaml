@@ -37,6 +37,9 @@ dependencies:
   flutter_svg: ^2.0.16
   shimmer: ^3.0.0
 
+  # Charts
+  fl_chart: ^0.69.2
+
   # Sharing
   share_plus: ^10.1.4
 
@@ -57,12 +60,21 @@ dev_dependencies:
   riverpod_generator: ^2.6.3
   flutter_lints: ^5.0.0
   mocktail: ^1.0.4
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon_1024.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
   generate: true
 
   assets:
+    - assets/icons/
     - lib/fixtures/
     - assets/api/auth/
     - assets/api/users/
@@ -79,6 +91,8 @@ flutter:
     - assets/api/business/
     - assets/api/business/dashboard/
     - assets/api/business/directory/
+    - assets/api/business/orders/
+    - assets/api/business/requests/
     - assets/api/requests/
     - assets/api/settings/
     - assets/api/wizard/

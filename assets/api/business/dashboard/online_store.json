@@ -4,12 +4,14 @@
     "stats": {
       "requests_today": 8,
       "new_followers": 15,
-      "page_views": 312,
-      "today_revenue": 22400
+      "page_views": 312
     },
     "today_revenue": {
       "total": 22400,
+      "yesterday": 18500,
       "completed_count": 6,
+      "orders_count": 6,
+      "payment_breakdown": {"cash": 13400, "cliq": 6700, "bank": 2300},
       "items": [
         {"service": "سماعات بلوتوث", "amount": 4500, "time": "09:00"},
         {"service": "حافظة هاتف × 3", "amount": 3600, "time": "10:30"},

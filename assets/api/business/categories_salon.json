@@ -1,9 +1,32 @@
 {
   "success": true,
   "data": [
-    {"id": "cat_s01", "name": "قص وتصفيف", "name_en": "Cut & Styling", "item_count": 8, "sort_order": 0},
-    {"id": "cat_s02", "name": "ألوان وصبغات", "name_en": "Colors & Dyes", "item_count": 8, "sort_order": 1},
-    {"id": "cat_s03", "name": "عناية وعلاج", "name_en": "Care & Treatment", "item_count": 8, "sort_order": 2},
-    {"id": "cat_s04", "name": "أظافر", "name_en": "Nails", "item_count": 8, "sort_order": 3}
-  ]
+    {
+      "id": "cat_s01",
+      "name": "قص وتصفيف",
+      "item_count": 8,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_s02",
+      "name": "ألوان وصبغات",
+      "item_count": 8,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_s03",
+      "name": "عناية وعلاج",
+      "item_count": 8,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_s04",
+      "name": "أظافر",
+      "item_count": 8,
+      "sort_order": 4
+    }
+  ],
+  "meta": {
+    "total": 4
+  }
 }

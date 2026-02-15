@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_supplements",
+      "name": "مكملات غذائية",
+      "item_count": 6,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_skincare",
+      "name": "عناية بالبشرة",
+      "item_count": 4,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_devices",
+      "name": "أجهزة طبية",
+      "item_count": 3,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_baby",
+      "name": "عناية بالأطفال",
+      "item_count": 2,
+      "sort_order": 4
+    }
+  ],
+  "meta": {
+    "total": 4
+  }
+}

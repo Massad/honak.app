@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'Honak';
+  String get appName => 'honak.app';
 
   @override
   String get ok => 'OK';
@@ -645,7 +645,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get specialOffer => 'Special Offer';
 
   @override
-  String get guestWelcomeTitle => 'Welcome to Honak';
+  String get guestWelcomeTitle => 'Welcome to honak.app';
 
   @override
   String get guestWelcomeSubtitle =>
@@ -1294,5 +1294,114 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String savingsPercent(int percent) {
     return 'Save $percent%';
+  }
+
+  @override
+  String get seasonalPricing => 'التسعير الموسمي';
+
+  @override
+  String get currentSeason => 'الموسم الحالي';
+
+  @override
+  String get seasonSummer => 'موسم الصيف';
+
+  @override
+  String get seasonWinter => 'موسم الشتاء';
+
+  @override
+  String get seasonSpring => 'موسم الربيع';
+
+  @override
+  String get seasonAutumn => 'الخريف';
+
+  @override
+  String get weekdayPrice => 'أيام الأسبوع';
+
+  @override
+  String get weekendPrice => 'نهاية الأسبوع';
+
+  @override
+  String get perNight => '/ ليلة';
+
+  @override
+  String get holidaySurcharge => 'رسوم العطلات';
+
+  @override
+  String holidaySurchargeNotice(int percent, String name) {
+    return 'رسوم إضافية $percent٪ — $name';
+  }
+
+  @override
+  String get earlyBirdDiscount => 'خصم حجز مبكر';
+
+  @override
+  String earlyBirdNotice(int days, int percent) {
+    return 'احجز قبل $days يوم ووفّر $percent٪';
+  }
+
+  @override
+  String get lastMinuteDeal => 'عرض اللحظة الأخيرة';
+
+  @override
+  String lastMinuteDiscount(int percent) {
+    return 'خصم $percent٪';
+  }
+
+  @override
+  String get seasonTimeline => 'مواسم السنة';
+
+  @override
+  String get bookNow => 'طلب حجز';
+
+  @override
+  String bookNowWithPrice(String price) {
+    return 'طلب حجز — من $price/ليلة';
+  }
+
+  @override
+  String get urgentBooking => 'احجز الآن!';
+
+  @override
+  String get seasonsList => 'المواسم';
+
+  @override
+  String get holidaysList => 'العطل الرسمية';
+
+  @override
+  String get seasonActive => 'فعّال';
+
+  @override
+  String get seasonInactive => 'غير فعّال';
+
+  @override
+  String daysAhead(int days) {
+    return '$days يوم مسبقاً';
+  }
+
+  @override
+  String discountPercent(int percent) {
+    return 'خصم $percent٪';
+  }
+
+  @override
+  String surchargePercent(int percent) {
+    return 'زيادة $percent٪';
+  }
+
+  @override
+  String get reorderSectionTitle => 'اطلب مرة أخرى';
+
+  @override
+  String get reorderButton => 'إعادة الطلب';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get yesterday => 'أمس';
+
+  @override
+  String daysAgo(int days) {
+    return 'قبل $days يوم';
   }
 }

@@ -1,6 +1,6 @@
 abstract final class AppConstants {
-  static const String appName = 'Honak';
-  static const String appNameAr = '\u0647\u0646\u0627\u0643';
+  static const String appName = 'honak.app';
+  static const String appNameAr = '\u0647\u0646\u0627\u0643.app';
   static const String appDomain = 'honak.app';
 
   static const int defaultPageSize = 20;

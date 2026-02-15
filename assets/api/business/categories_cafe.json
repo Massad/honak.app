@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_caf01",
+      "name": "المشروبات الساخنة",
+      "item_count": 2,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_caf02",
+      "name": "الحلويات",
+      "item_count": 1,
+      "sort_order": 2
+    }
+  ],
+  "meta": {
+    "total": 2
+  }
+}

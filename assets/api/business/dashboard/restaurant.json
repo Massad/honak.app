@@ -9,7 +9,10 @@
     },
     "today_revenue": {
       "total": 34500,
+      "yesterday": 28750,
       "completed_count": 18,
+      "orders_count": 18,
+      "payment_breakdown": {"cash": 20700, "cliq": 10350, "bank": 3450},
       "items": [
         {"service": "مسخن", "amount": 4500, "time": "12:15"},
         {"service": "منسف", "amount": 8000, "time": "12:30"},

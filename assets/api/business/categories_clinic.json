@@ -1,7 +1,20 @@
 {
   "success": true,
   "data": [
-    {"id": "cat_general", "name": "طب عام", "item_count": 5, "sort_order": 0},
-    {"id": "cat_dental", "name": "أسنان", "item_count": 6, "sort_order": 1}
-  ]
+    {
+      "id": "cat_general",
+      "name": "طب عام",
+      "item_count": 5,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_dental",
+      "name": "أسنان",
+      "item_count": 6,
+      "sort_order": 2
+    }
+  ],
+  "meta": {
+    "total": 2
+  }
 }

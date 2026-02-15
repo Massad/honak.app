@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In ar, this message translates to:
-  /// **'حنك'**
+  /// **'هناك.app'**
   String get appName;
 
   /// No description provided for @ok.
@@ -1301,7 +1301,7 @@ abstract class AppLocalizations {
   /// No description provided for @guestWelcomeTitle.
   ///
   /// In ar, this message translates to:
-  /// **'مرحباً بك في هناك'**
+  /// **'مرحباً بك في هناك.app'**
   String get guestWelcomeTitle;
 
   /// No description provided for @guestWelcomeSubtitle.
@@ -2503,6 +2503,192 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'وفّر {percent}٪'**
   String savingsPercent(int percent);
+
+  /// No description provided for @seasonalPricing.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسعير الموسمي'**
+  String get seasonalPricing;
+
+  /// No description provided for @currentSeason.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموسم الحالي'**
+  String get currentSeason;
+
+  /// No description provided for @seasonSummer.
+  ///
+  /// In ar, this message translates to:
+  /// **'موسم الصيف'**
+  String get seasonSummer;
+
+  /// No description provided for @seasonWinter.
+  ///
+  /// In ar, this message translates to:
+  /// **'موسم الشتاء'**
+  String get seasonWinter;
+
+  /// No description provided for @seasonSpring.
+  ///
+  /// In ar, this message translates to:
+  /// **'موسم الربيع'**
+  String get seasonSpring;
+
+  /// No description provided for @seasonAutumn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخريف'**
+  String get seasonAutumn;
+
+  /// No description provided for @weekdayPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام الأسبوع'**
+  String get weekdayPrice;
+
+  /// No description provided for @weekendPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'نهاية الأسبوع'**
+  String get weekendPrice;
+
+  /// No description provided for @perNight.
+  ///
+  /// In ar, this message translates to:
+  /// **'/ ليلة'**
+  String get perNight;
+
+  /// No description provided for @holidaySurcharge.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسوم العطلات'**
+  String get holidaySurcharge;
+
+  /// No description provided for @holidaySurchargeNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسوم إضافية {percent}٪ — {name}'**
+  String holidaySurchargeNotice(int percent, String name);
+
+  /// No description provided for @earlyBirdDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم حجز مبكر'**
+  String get earlyBirdDiscount;
+
+  /// No description provided for @earlyBirdNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'احجز قبل {days} يوم ووفّر {percent}٪'**
+  String earlyBirdNotice(int days, int percent);
+
+  /// No description provided for @lastMinuteDeal.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض اللحظة الأخيرة'**
+  String get lastMinuteDeal;
+
+  /// No description provided for @lastMinuteDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم {percent}٪'**
+  String lastMinuteDiscount(int percent);
+
+  /// No description provided for @seasonTimeline.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواسم السنة'**
+  String get seasonTimeline;
+
+  /// No description provided for @bookNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب حجز'**
+  String get bookNow;
+
+  /// No description provided for @bookNowWithPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب حجز — من {price}/ليلة'**
+  String bookNowWithPrice(String price);
+
+  /// No description provided for @urgentBooking.
+  ///
+  /// In ar, this message translates to:
+  /// **'احجز الآن!'**
+  String get urgentBooking;
+
+  /// No description provided for @seasonsList.
+  ///
+  /// In ar, this message translates to:
+  /// **'المواسم'**
+  String get seasonsList;
+
+  /// No description provided for @holidaysList.
+  ///
+  /// In ar, this message translates to:
+  /// **'العطل الرسمية'**
+  String get holidaysList;
+
+  /// No description provided for @seasonActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّال'**
+  String get seasonActive;
+
+  /// No description provided for @seasonInactive.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير فعّال'**
+  String get seasonInactive;
+
+  /// No description provided for @daysAhead.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days} يوم مسبقاً'**
+  String daysAhead(int days);
+
+  /// No description provided for @discountPercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم {percent}٪'**
+  String discountPercent(int percent);
+
+  /// No description provided for @surchargePercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'زيادة {percent}٪'**
+  String surchargePercent(int percent);
+
+  /// No description provided for @reorderSectionTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اطلب مرة أخرى'**
+  String get reorderSectionTitle;
+
+  /// No description provided for @reorderButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة الطلب'**
+  String get reorderButton;
+
+  /// No description provided for @today.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get today;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get yesterday;
+
+  /// No description provided for @daysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل {days} يوم'**
+  String daysAgo(int days);
 }
 
 class _AppLocalizationsDelegate

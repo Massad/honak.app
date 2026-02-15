@@ -7,6 +7,7 @@ import 'package:honak/features/business/dashboard/presentation/pages/business_da
 import 'package:honak/features/business/dashboard/presentation/widgets/content_tab.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/features/business/catalog_management/presentation/pages/manage_page.dart';
+import 'package:honak/features/business/catalog_management/presentation/pages/villa_manage_page.dart';
 import 'package:honak/features/business/directory_management/presentation/pages/directory_manage_page.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 
@@ -155,7 +156,9 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
   Widget _buildTabContent(String tabId) {
     return switch (tabId) {
       'dashboard' => const BusinessDashboardPage(),
-      'manage' => const BusinessManagePage(),
+      'manage' => _isVillaType(ref)
+          ? const VillaManagePage()
+          : const BusinessManagePage(),
       'directory_manage' => const DirectoryManagePage(),
       'content' => const ContentTab(),
       'customers' => EmptyState(
@@ -165,6 +168,11 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
         ),
       _ => const SizedBox.shrink(),
     };
+  }
+
+  bool _isVillaType(WidgetRef ref) {
+    final typeId = ref.read(businessContextProvider)?.config?.id;
+    return typeId == 'villa_rental' || typeId == 'farm_rental';
   }
 }
 

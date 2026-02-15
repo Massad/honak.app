@@ -1,0 +1,63 @@
+{
+  "pending": [
+    {
+      "id": "req_ev_001",
+      "customer": {
+        "id": "usr_070",
+        "name": "رائد م.",
+        "avatar_url": "https://picsum.photos/seed/raed/50/50",
+        "phone": "0791000070"
+      },
+      "status": "pending",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 150000,
+      "note": "حفل زفاف — ٢٠٠ شخص",
+      "created_at": 1739523600,
+      "date_range": "السبت ٢٢ فبراير",
+      "guest_count": 200,
+      "service_location": "قاعة الأفراح — عمّان"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "req_ev_002",
+      "customer": {
+        "id": "usr_071",
+        "name": "هالة ص.",
+        "avatar_url": "https://picsum.photos/seed/hala/50/50",
+        "phone": "0791000071"
+      },
+      "status": "accepted",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 80000,
+      "note": "حفل تخرج — قاعة صغيرة",
+      "created_at": 1739437200,
+      "date_range": "الخميس ٢٧ فبراير",
+      "guest_count": 80,
+      "service_location": "قاعة الأفراح — عمّان"
+    }
+  ],
+  "in_progress": [],
+  "completed": [
+    {
+      "id": "req_ev_003",
+      "customer": {
+        "id": "usr_072",
+        "name": "فادي ك.",
+        "avatar_url": "https://picsum.photos/seed/fadi/50/50",
+        "phone": "0791000072"
+      },
+      "status": "completed",
+      "type": "reservation",
+      "items_count": 0,
+      "total_cents": 120000,
+      "note": "مؤتمر شركة",
+      "created_at": 1739264400,
+      "date_range": "٨–٩ فبراير",
+      "guest_count": 150,
+      "service_location": "قاعة الأفراح — عمّان"
+    }
+  ]
+}

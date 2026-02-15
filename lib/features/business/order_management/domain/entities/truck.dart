@@ -33,7 +33,6 @@ enum OrderSource {
   walkUp,
   @JsonValue('phone_call')
   phoneCall,
-  balcony,
   whatsapp,
   @JsonValue('ad_hoc')
   adHoc,
@@ -376,9 +375,8 @@ const truckColors = [
 const sourceLabels = {
   OrderSource.recurringAuto: 'تلقائي',
   OrderSource.appOrder: 'طلب تطبيق',
-  OrderSource.walkUp: 'طلب شارع',
+  OrderSource.walkUp: 'عشوائي',
   OrderSource.phoneCall: 'اتصال',
-  OrderSource.balcony: 'بلكونة',
   OrderSource.whatsapp: 'واتساب',
   OrderSource.adHoc: 'يدوي',
 };

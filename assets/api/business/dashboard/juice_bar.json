@@ -5,17 +5,20 @@
       "requests_today": 35,
       "new_followers": 4,
       "page_views": 180,
-      "today_revenue": 6800
+      "today_revenue": 7500
     },
     "today_revenue": {
-      "total": 6800,
+      "total": 7500,
+      "yesterday": 6200,
       "completed_count": 30,
+      "orders_count": 30,
+      "payment_breakdown": {"cash": 4500, "cliq": 2200, "bank": 800},
       "items": [
-        {"service": "عصير برتقال × 15", "amount": 1500, "time": "08:30"},
-        {"service": "كوكتيل أفوكادو × 8", "amount": 1200, "time": "09:00"},
-        {"service": "ميلك شيك لوتس × 6", "amount": 1500, "time": "10:00"},
-        {"service": "سموذي منجا × 10", "amount": 2000, "time": "11:00"},
-        {"service": "عصير ليمون بالنعنع × 8", "amount": 600, "time": "12:00"}
+        {"service": "عصير برتقال × 3", "amount": 450, "time": "08:30"},
+        {"service": "كوكتيل أفوكادو × 2", "amount": 600, "time": "09:15"},
+        {"service": "ميلك شيك لوتس × 2", "amount": 500, "time": "10:00"},
+        {"service": "سموذي منجا × 4", "amount": 1000, "time": "11:00"},
+        {"service": "عصير ليمون بالنعنع × 3", "amount": 450, "time": "12:00"}
       ]
     },
     "active_queue": [

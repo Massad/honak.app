@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_wash",
+      "name": "غسيل",
+      "item_count": 2,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_detail",
+      "name": "تفصيلي",
+      "item_count": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_engine",
+      "name": "محرك",
+      "item_count": 1,
+      "sort_order": 3
+    }
+  ],
+  "meta": {
+    "total": 3
+  }
+}

@@ -7,60 +7,97 @@ import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 /// Profile card showing user avatar, name, and phone.
+/// Tapping navigates to customer mode for editing.
 class AccountProfileCard extends StatelessWidget {
   final User user;
+  final VoidCallback? onTap;
 
-  const AccountProfileCard({super.key, required this.user});
+  const AccountProfileCard({super.key, required this.user, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+    return Material(
+      color: Theme.of(context).colorScheme.surface,
+      borderRadius: BorderRadius.circular(14),
+      child: InkWell(
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 6,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.chevron_left,
-            size: 16,
-            color: Theme.of(context).colorScheme.outline,
-          ),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                user.name,
-                style: context.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.03),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
               ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.chevron_left,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                  const Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        user.name,
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      if (user.nameEn != null && user.nameEn!.isNotEmpty)
+                        Text(
+                          user.nameEn!,
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppColors.textHint,
+                          ),
+                        ),
+                      Text(
+                        user.phone,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primary.withValues(alpha: 0.1),
+                    ),
+                    child: AppImage.avatar(
+                      url: user.avatarUrl,
+                      name: user.name,
+                      radius: 22,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.sm),
               Text(
-                user.phone,
+                'لتعديل بياناتك الشخصية، انتقل إلى وضع العميل ← حسابي',
                 style: TextStyle(
-                  fontSize: 11,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  fontSize: 10,
+                  color: AppColors.textHint,
                 ),
               ),
             ],
           ),
-          const SizedBox(width: AppSpacing.md),
-          AppImage.avatar(
-            url: user.avatarUrl,
-            name: user.name,
-            radius: 22,
-          ),
-        ],
+        ),
       ),
     );
   }

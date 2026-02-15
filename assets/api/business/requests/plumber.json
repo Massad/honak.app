@@ -1,0 +1,112 @@
+{
+  "pending": [
+    {
+      "id": "req_pl_001",
+      "customer": {
+        "id": "usr_050",
+        "name": "رنا ب.",
+        "avatar_url": "https://picsum.photos/seed/rana/50/50",
+        "phone": "0791000050"
+      },
+      "status": "pending",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": null,
+      "description": "تسرب مياه من السيفون تحت المغسلة في الحمام الرئيسي. المياه تتسرب بشكل مستمر.",
+      "note": "تسرب مياه — حمام رئيسي",
+      "created_at": 1739523600,
+      "service_location": "تلاع العلي، عمّان"
+    },
+    {
+      "id": "req_pl_002",
+      "customer": {
+        "id": "usr_051",
+        "name": "خالد ن.",
+        "avatar_url": "https://picsum.photos/seed/khaled2/50/50",
+        "phone": "0791000051"
+      },
+      "status": "pending",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": null,
+      "description": "أريد تركيب سخان مياه كهربائي ٥٠ لتر. السخان موجود عندي، أحتاج تركيب فقط مع التوصيلات.",
+      "note": "تركيب سخان مياه جديد",
+      "created_at": 1739520900,
+      "service_location": "الصويفية، عمّان"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "req_pl_003",
+      "customer": {
+        "id": "usr_052",
+        "name": "عمر ح.",
+        "avatar_url": "https://picsum.photos/seed/omar3/50/50",
+        "phone": "0791000052"
+      },
+      "status": "accepted",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": 8000,
+      "description": "تسرب مياه من أنبوب الماء البارد تحت المجلى",
+      "note": null,
+      "created_at": 1739437200,
+      "service_location": "خلدا، عمّان"
+    }
+  ],
+  "in_progress": [
+    {
+      "id": "req_pl_004",
+      "customer": {
+        "id": "usr_053",
+        "name": "هند ك.",
+        "avatar_url": "https://picsum.photos/seed/hind/50/50",
+        "phone": "0791000053"
+      },
+      "status": "in_progress",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": 4500,
+      "description": "تركيب خلاط مطبخ جديد",
+      "note": null,
+      "created_at": 1739350800,
+      "service_location": "دابوق، عمّان"
+    }
+  ],
+  "completed": [
+    {
+      "id": "req_pl_005",
+      "customer": {
+        "id": "usr_054",
+        "name": "ريم ب.",
+        "avatar_url": "https://picsum.photos/seed/reem/50/50",
+        "phone": "0791000054"
+      },
+      "status": "completed",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": 12000,
+      "description": "تركيب سخان مياه جديد مع كامل التوصيلات",
+      "note": null,
+      "created_at": 1739264400,
+      "service_location": "الرابية، عمّان"
+    },
+    {
+      "id": "req_pl_006",
+      "customer": {
+        "id": "usr_055",
+        "name": "سمر ف.",
+        "avatar_url": "https://picsum.photos/seed/samar/50/50",
+        "phone": "0791000055"
+      },
+      "status": "completed",
+      "type": "quote",
+      "items_count": 0,
+      "total_cents": 3500,
+      "description": "صيانة مجلى",
+      "note": null,
+      "created_at": 1739178000,
+      "service_location": "الجبيهة، عمّان"
+    }
+  ]
+}

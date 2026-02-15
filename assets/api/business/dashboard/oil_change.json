@@ -2,10 +2,9 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 8,
-      "new_followers": 4,
-      "page_views": 55,
-      "today_revenue": 18000
+      "queue_size": 4,
+      "completed_today": 4,
+      "revenue_today": 18000
     },
     "today_summary": {
       "completed": 4,
@@ -24,7 +23,10 @@
     },
     "today_revenue": {
       "total": 18000,
+      "yesterday": 15200,
       "completed_count": 4,
+      "orders_count": 4,
+      "payment_breakdown": {"cash": 10800, "cliq": 5400, "bank": 1800},
       "items": [
         { "service": "زيت عادي", "amount": 1500, "time": "07:55" },
         { "service": "زيت تخليقي", "amount": 2500, "time": "07:35" },

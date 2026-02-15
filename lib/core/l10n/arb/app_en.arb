@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appName": "Honak",
+  "appName": "honak.app",
 
   "ok": "OK",
   "cancel": "Cancel",
@@ -297,7 +297,7 @@
   "statusAnnouncement": "Announcement",
   "specialOffer": "Special Offer",
 
-  "guestWelcomeTitle": "Welcome to Honak",
+  "guestWelcomeTitle": "Welcome to honak.app",
   "guestWelcomeSubtitle": "Discover local businesses around you — browse, follow, and order",
   "guestExploreNearby": "Explore nearby",
   "guestCreateAccount": "Create account",

@@ -1,0 +1,48 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 12,
+      "new_followers": 3,
+      "page_views": 45,
+      "today_revenue": 8500
+    },
+    "today_revenue": {
+      "total": 8500,
+      "yesterday": 7200,
+      "completed_count": 8,
+      "orders_count": 8,
+      "payment_breakdown": {"cash": 5100, "cliq": 2500, "bank": 900},
+      "items": [
+        {"service": "اشتراك شهري", "amount": 4000, "time": "08:00"},
+        {"service": "حصة مدرب خاص", "amount": 2000, "time": "09:30"},
+        {"service": "يوم واحد", "amount": 700, "time": "10:00"},
+        {"service": "اشتراك شهري", "amount": 3500, "time": "11:00"}
+      ]
+    },
+    "next_appointment": {
+      "customer_name": "أحمد سمير",
+      "service": "حصة مدرب خاص",
+      "time": "14:00",
+      "provider": "كابتن ياسر"
+    },
+    "today_schedule": [
+      {"time": "08:00", "customer": "محمد خالد", "service": "اشتراك شهري — تجديد", "status": "completed"},
+      {"time": "09:00", "customer": "سارة يوسف", "service": "حصة مدرب خاص", "status": "completed"},
+      {"time": "09:30", "customer": "عمر حسن", "service": "حصة مدرب خاص", "status": "completed"},
+      {"time": "10:00", "customer": "ليلى فراس", "service": "يوم واحد", "status": "completed"},
+      {"time": "10:30", "customer": "رامي صالح", "service": "اشتراك شهري", "status": "completed"},
+      {"time": "11:00", "customer": "دانا أحمد", "service": "اشتراك شهري", "status": "completed"},
+      {"time": "12:00", "customer": "طارق محمود", "service": "حصة كروس فت", "status": "completed"},
+      {"time": "13:00", "customer": "نور عادل", "service": "اشتراك 3 شهور", "status": "completed"},
+      {"time": "14:00", "customer": "أحمد سمير", "service": "حصة مدرب خاص", "status": "upcoming"},
+      {"time": "15:00", "customer": "خالد ناصر", "service": "اشتراك شهري — جديد", "status": "upcoming"},
+      {"time": "16:00", "customer": "هند سامي", "service": "حصة يوغا", "status": "upcoming"},
+      {"time": "17:00", "customer": "سعد منير", "service": "حصة مدرب خاص", "status": "upcoming"}
+    ],
+    "pending_requests": [
+      {"id": "req_g01", "customer": "فراس عماد", "service": "اشتراك شهري + مدرب خاص", "date": "2026-02-15", "time": "09:00"},
+      {"id": "req_g02", "customer": "ريم حسام", "service": "اشتراك 3 شهور", "date": "2026-02-15", "time": "10:00"}
+    ]
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "pending": [
+    {
+      "id": "VS-1001",
+      "customer": "سمير ب.",
+      "avatar": "https://picsum.photos/seed/samir/50/50",
+      "type": "reservation",
+      "summary": "حجز الفيلا — عطلة نهاية الأسبوع",
+      "total": "٤٥٠ د.أ",
+      "time": "منذ ٢ ساعة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ٨:٣٠ ص",
+      "urgent": false,
+      "space_name": "الفيلا كاملة",
+      "dates": "الخميس–السبت (٢٠–٢٢ فبراير)",
+      "nights": 2,
+      "guests": "١٠ أشخاص",
+      "check_in": "٣:٠٠ م",
+      "check_out": "١٢:٠٠ ظ",
+      "branch_name": "فيلا البحر الميت — سويمة"
+    },
+    {
+      "id": "VS-1002",
+      "customer": "ليلى ت.",
+      "avatar": "https://picsum.photos/seed/layla2/50/50",
+      "type": "reservation",
+      "summary": "حجز ليلة واحدة — عائلي",
+      "total": "٢٠٠ د.أ",
+      "time": "منذ ٥ ساعات",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ٥:٣٠ ص",
+      "urgent": false,
+      "space_name": "الفيلا كاملة",
+      "dates": "الجمعة ٢١ فبراير",
+      "nights": 1,
+      "guests": "٦ أشخاص",
+      "check_in": "٣:٠٠ م",
+      "check_out": "١٢:٠٠ ظ",
+      "branch_name": "فيلا البحر الميت — سويمة",
+      "notes": "عائلة مع أطفال صغار"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "VS-999",
+      "customer": "أحمد ر.",
+      "avatar": "https://picsum.photos/seed/ahmad2/50/50",
+      "type": "reservation",
+      "summary": "حجز مؤكد — نهاية الأسبوع",
+      "total": "٤٠٠ د.أ",
+      "time": "منذ ٤ أيام",
+      "created_at": "١٠ فبراير ٢٠٢٦ · ٦:٠٠ ص",
+      "status": "accepted",
+      "space_name": "الفيلا كاملة",
+      "dates": "الخميس–السبت (٢٧ فبراير–١ مارس)",
+      "nights": 2,
+      "guests": "٨ أشخاص",
+      "check_in": "٣:٠٠ م",
+      "check_out": "١٢:٠٠ ظ",
+      "branch_name": "فيلا البحر الميت — سويمة",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الحجز", "time": "٦:٠٠ ص", "done": true },
+        { "status": "accepted", "label": "تم تأكيد الحجز", "time": "٦:٣٠ ص", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "in_progress": [
+    {
+      "id": "VS-997",
+      "customer": "عمر ش.",
+      "avatar": "https://picsum.photos/seed/omar4/50/50",
+      "type": "reservation",
+      "summary": "حجز نشط — ضيف في الفيلا",
+      "total": "٣٥٠ د.أ",
+      "time": "اليوم",
+      "created_at": "١٢ فبراير ٢٠٢٦ · ١٠:٠٠ ص",
+      "status": "in_progress",
+      "space_name": "الفيلا كاملة",
+      "dates": "الخميس–السبت (١٣–١٥ فبراير)",
+      "nights": 2,
+      "guests": "١٢ شخص",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الحجز", "time": "١٠:٠٠ ص", "done": true },
+        { "status": "accepted", "label": "تم التأكيد", "time": "١٠:٣٠ ص", "done": true },
+        { "status": "in_progress", "label": "الضيف وصل", "time": "٣:٠٠ م", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "id": "VS-995",
+      "customer": "منى ع.",
+      "avatar": "https://picsum.photos/seed/muna/50/50",
+      "type": "reservation",
+      "summary": "حجز مكتمل — عائلي",
+      "total": "٣٥٠ د.أ",
+      "time": "الأسبوع الماضي",
+      "created_at": "٥ فبراير ٢٠٢٦ · ٤:٠٠ م",
+      "status": "completed",
+      "space_name": "الفيلا كاملة",
+      "nights": 2,
+      "guests": "٦ أشخاص",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الحجز", "time": "٤:٠٠ م", "done": true },
+        { "status": "accepted", "label": "تم التأكيد", "time": "٤:١٥ م", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "٧ فبراير ٢٠٢٦ · ١٢:٠٠ ظ", "done": true }
+      ]
+    },
+    {
+      "id": "VS-992",
+      "customer": "سارة ف.",
+      "avatar": "https://picsum.photos/seed/sara3/50/50",
+      "type": "reservation",
+      "summary": "حجز مكتمل — مناسبة",
+      "total": "٦٠٠ د.أ",
+      "time": "منذ أسبوعين",
+      "created_at": "١ فبراير ٢٠٢٦ · ٩:٠٠ ص",
+      "status": "completed",
+      "space_name": "الفيلا كاملة",
+      "nights": 3,
+      "guests": "١٥ شخص",
+      "notes": "مناسبة عيد ميلاد",
+      "timeline": [
+        { "status": "pending", "label": "تم الاستلام", "time": "٩:٠٠ ص", "done": true },
+        { "status": "accepted", "label": "تم التأكيد", "time": "٩:٣٠ ص", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "٣ فبراير", "done": true }
+      ]
+    }
+  ]
+}

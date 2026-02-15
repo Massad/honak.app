@@ -1,0 +1,109 @@
+{
+  "pending": [
+    {
+      "id": "req_sl_001",
+      "customer": {
+        "id": "usr_040",
+        "name": "دينا خ.",
+        "avatar_url": "https://picsum.photos/seed/dina/50/50",
+        "phone": "0791000040"
+      },
+      "status": "pending",
+      "type": "booking",
+      "items_count": 1,
+      "total_cents": 2500,
+      "note": null,
+      "created_at": 1739522200,
+      "preferred_date": "غداً",
+      "time_slot": "٢:٠٠ م"
+    },
+    {
+      "id": "req_sl_002",
+      "customer": {
+        "id": "usr_041",
+        "name": "منال ع.",
+        "avatar_url": "https://picsum.photos/seed/manal/50/50",
+        "phone": "0791000041"
+      },
+      "status": "pending",
+      "type": "booking",
+      "items_count": 1,
+      "total_cents": 4000,
+      "note": null,
+      "created_at": 1739520000,
+      "preferred_date": "السبت",
+      "time_slot": "٤:٠٠ م"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "req_sl_003",
+      "customer": {
+        "id": "usr_042",
+        "name": "سارة أ.",
+        "avatar_url": "https://picsum.photos/seed/sara2/50/50",
+        "phone": "0791000042"
+      },
+      "status": "accepted",
+      "type": "booking",
+      "items_count": 1,
+      "total_cents": 3500,
+      "note": null,
+      "created_at": 1739437200,
+      "preferred_date": "غداً",
+      "time_slot": "١٠:٠٠ ص"
+    },
+    {
+      "id": "req_sl_004",
+      "customer": {
+        "id": "usr_043",
+        "name": "لانا م.",
+        "avatar_url": "https://picsum.photos/seed/lana/50/50",
+        "phone": "0791000043"
+      },
+      "status": "accepted",
+      "type": "booking",
+      "items_count": 1,
+      "total_cents": 6000,
+      "note": null,
+      "created_at": 1739433600,
+      "preferred_date": "بعد غد",
+      "time_slot": "١١:٠٠ ص"
+    }
+  ],
+  "in_progress": [],
+  "completed": [
+    {
+      "id": "req_sl_005",
+      "customer": {
+        "id": "usr_044",
+        "name": "هدى م.",
+        "avatar_url": "https://picsum.photos/seed/huda/50/50",
+        "phone": "0791000044"
+      },
+      "status": "completed",
+      "type": "booking",
+      "items_count": 1,
+      "total_cents": 1500,
+      "note": null,
+      "created_at": 1739430000,
+      "preferred_date": "أمس",
+      "time_slot": "١١:٠٠ ص"
+    },
+    {
+      "id": "req_sl_006",
+      "customer": {
+        "id": "usr_045",
+        "name": "ريم ك.",
+        "avatar_url": "https://picsum.photos/seed/reem2/50/50",
+        "phone": "0791000045"
+      },
+      "status": "completed",
+      "type": "booking",
+      "items_count": 1,
+      "total_cents": 3000,
+      "note": null,
+      "created_at": 1739260800
+    }
+  ]
+}

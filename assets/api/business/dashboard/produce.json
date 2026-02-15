@@ -2,7 +2,7 @@
   "success": true,
   "data": {
     "stats": {"requests_today": 25, "new_followers": 1, "page_views": 30, "today_revenue": 3200},
-    "today_revenue": {"total": 3200, "completed_count": 20, "items": [
+    "today_revenue": {"total": 3200, "yesterday": 2700, "completed_count": 20, "orders_count": 20, "payment_breakdown": {"cash": 1900, "cliq": 1000, "bank": 300}, "items": [
       {"service": "خضار متنوعة × 8", "amount": 800, "time": "06:30"},
       {"service": "فواكه × 5", "amount": 1000, "time": "08:00"},
       {"service": "أعشاب طازجة × 12", "amount": 400, "time": "09:30"},
@@ -13,6 +13,10 @@
       {"name": "خيار", "count": 55, "trend": "same"},
       {"name": "فراولة", "count": 30, "trend": "up"},
       {"name": "برتقال", "count": 28, "trend": "down"}
+    ],
+    "low_stock": [
+      {"name": "فراولة", "remaining": 3, "threshold": 10},
+      {"name": "موز", "remaining": 5, "threshold": 15}
     ],
     "pending_requests": [
       {"id": "req_pd01", "customer": "أم سمير", "service": "خضار يومية — خلدا", "date": "2026-02-13", "time": "15:00"}

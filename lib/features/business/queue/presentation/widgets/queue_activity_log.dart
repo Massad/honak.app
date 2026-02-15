@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_activity_utils.dart';
+import 'package:honak/features/business/shared/entities/activity_action_config.dart';
 import 'package:honak/features/business/shared/widgets/activity_log.dart';
 
 // ═══════════════════════════════════════════════════════════════
@@ -9,14 +10,13 @@ import 'package:honak/features/business/shared/widgets/activity_log.dart';
 // ═══════════════════════════════════════════════════════════════
 
 /// Converts a domain-specific [QueueActivityEntry] to the shared
-/// [ActivityLogEntry] UI model.
+/// [ActivityLogEntry] UI model using the shared helper.
 ActivityLogEntry toQueueActivityLogEntry(QueueActivityEntry e) {
-  return ActivityLogEntry(
+  return buildActivityLogEntry(
     id: e.id,
     timestamp: e.timestamp,
     label: e.action.labelAr,
-    icon: activityActionIcon(e.action),
-    color: activityActionColor(e.action),
+    config: queueActionConfigs[e.action]!,
     actorName: e.actorName,
     actorRole: e.actorRole,
     from: e.from,

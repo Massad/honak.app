@@ -83,7 +83,7 @@ final _triggerConfigs = <LoginPromptTrigger, _TriggerConfig>{
   ),
   LoginPromptTrigger.general: _TriggerConfig(
     icon: Icons.person_add,
-    title: 'انضم لهناك',
+    title: 'انضم لهناك.app',
     desc: 'أنشئ حسابك للاستفادة من كل الميزات',
     color: Color(0xFF1A73E8),
     benefits: [

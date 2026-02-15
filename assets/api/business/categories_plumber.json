@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_inspection",
+      "name": "كشف وفحص",
+      "item_count": 1,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_repair",
+      "name": "صيانة وإصلاح",
+      "item_count": 1,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_install",
+      "name": "تركيبات",
+      "item_count": 1,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_reno",
+      "name": "أعمال كبيرة",
+      "item_count": 1,
+      "sort_order": 4
+    },
+    {
+      "id": "cat_emergency",
+      "name": "طوارئ",
+      "item_count": 1,
+      "sort_order": 5
+    }
+  ],
+  "meta": {
+    "total": 5
+  }
+}

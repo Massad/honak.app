@@ -9,6 +9,7 @@ import 'package:honak/features/business/queue/domain/entities/queue_source.dart'
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_activity_log.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_activity_utils.dart';
+import 'package:honak/features/business/queue/presentation/widgets/queue_status_config.dart';
 import 'package:honak/shared/entities/money.dart';
 
 // ═══════════════════════════════════════════════════════════════
@@ -219,7 +220,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
       QueueStatus.completed,
     ];
     final currentIdx = statusFlow.indexOf(entry.status);
-    final statusConf = _StatusConfig.of(entry.status);
+    final statusConf = QueueStatusConfig.of(entry.status);
 
     return _SectionCard(
       child: Column(
@@ -1065,7 +1066,7 @@ class _ProgressCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final conf = _StatusConfig.of(status);
+    final conf = QueueStatusConfig.of(status);
 
     final Color bgColor;
     final Color borderColor;
@@ -1273,67 +1274,3 @@ class _AdvanceButton extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════
-// Status Config
-// ═══════════════════════════════════════════════════════════════
-
-class _StatusConfig {
-  final String label;
-  final Color color;
-  final Color bgColor;
-  final Color borderColor;
-  final IconData icon;
-
-  const _StatusConfig({
-    required this.label,
-    required this.color,
-    required this.bgColor,
-    required this.borderColor,
-    required this.icon,
-  });
-
-  static _StatusConfig of(QueueStatus status) => switch (status) {
-        QueueStatus.waiting => const _StatusConfig(
-            label: 'في الانتظار',
-            color: Color(0xFFFF9800),
-            bgColor: Color(0xFFFFF8E1),
-            borderColor: Color(0xFFFF9800),
-            icon: Icons.access_time_rounded,
-          ),
-        QueueStatus.onTheWay => const _StatusConfig(
-            label: 'في الطريق',
-            color: Color(0xFF43A047),
-            bgColor: Color(0xFFF0FDF4),
-            borderColor: Color(0xFF43A047),
-            icon: Icons.navigation_rounded,
-          ),
-        QueueStatus.inProgress => const _StatusConfig(
-            label: 'قيد الخدمة',
-            color: Color(0xFF1A73E8),
-            bgColor: Color(0xFFEFF6FF),
-            borderColor: Color(0xFF1A73E8),
-            icon: Icons.play_arrow_rounded,
-          ),
-        QueueStatus.ready => const _StatusConfig(
-            label: 'جاهز للاستلام',
-            color: Color(0xFF43A047),
-            bgColor: Color(0xFFF0FDF4),
-            borderColor: Color(0xFF43A047),
-            icon: Icons.check_circle_rounded,
-          ),
-        QueueStatus.completed => const _StatusConfig(
-            label: 'مكتمل',
-            color: Color(0xFF6B7280),
-            bgColor: Color(0xFFF9FAFB),
-            borderColor: Color(0xFF6B7280),
-            icon: Icons.local_shipping_rounded,
-          ),
-        QueueStatus.noShow => const _StatusConfig(
-            label: 'لم يحضر',
-            color: Color(0xFFE53935),
-            bgColor: Color(0xFFFEF2F2),
-            borderColor: Color(0xFFE53935),
-            icon: Icons.block_rounded,
-          ),
-      };
-}

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
+import 'package:honak/features/pages/domain/entities/seasonal_pricing.dart';
 import 'package:honak/features/pages/domain/entities/trust_metric.dart';
 import 'package:honak/shared/entities/location.dart';
 
@@ -110,6 +111,7 @@ class PageDetail with _$PageDetail {
     @JsonKey(name: 'gallery_images') @Default([]) List<String> galleryImages,
     @Default([]) List<Amenity> amenities,
     VillaPricing? pricing,
+    @JsonKey(name: 'seasonal_pricing') SeasonalPricing? seasonalPricing,
     @JsonKey(name: 'house_rules') @Default([]) List<String> houseRules,
     @JsonKey(name: 'check_in') String? checkIn,
     @JsonKey(name: 'check_out') String? checkOut,

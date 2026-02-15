@@ -224,6 +224,8 @@ class MTab {
   static const pastWork = ManageTab(id: 'past_work', labelAr: 'أعمالنا');
   static const packages = ManageTab(id: 'packages', labelAr: 'الباقات');
   static const priceRange = ManageTab(id: 'price_range', labelAr: 'الأسعار');
+  static const seasonalPricing = ManageTab(id: 'seasonal_pricing', labelAr: 'التسعير الموسمي');
+  static const trucks = ManageTab(id: 'trucks', labelAr: 'الشاحنات');
 }
 
 // ═══════════════════════════════════════════════════════════════

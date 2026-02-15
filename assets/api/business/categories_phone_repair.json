@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_phone_screen",
+      "name": "شاشة",
+      "item_count": 3,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_phone_power",
+      "name": "طاقة وشحن",
+      "item_count": 2,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_phone_parts",
+      "name": "قطع داخلية",
+      "item_count": 4,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_phone_software",
+      "name": "برمجيات",
+      "item_count": 3,
+      "sort_order": 4
+    }
+  ],
+  "meta": {
+    "total": 4
+  }
+}

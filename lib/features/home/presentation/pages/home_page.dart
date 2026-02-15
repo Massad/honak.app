@@ -11,6 +11,7 @@ import 'package:honak/features/home/presentation/widgets/nearby_pages_card.dart'
 import 'package:honak/features/home/presentation/widgets/post_card.dart';
 import 'package:honak/features/home/presentation/widgets/promo_banner_carousel.dart';
 import 'package:honak/features/home/presentation/widgets/quick_categories.dart';
+import 'package:honak/features/home/presentation/widgets/reorder_section.dart';
 import 'package:honak/features/home/presentation/widgets/stories_bar.dart';
 import 'package:honak/features/stories/presentation/providers/stories_provider.dart'
     show storyContentProvider;
@@ -20,6 +21,7 @@ import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -35,12 +37,11 @@ class HomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          context.l10n.appName,
-          style: context.textTheme.titleLarge?.copyWith(
-            color: context.colorScheme.primary,
-            fontWeight: FontWeight.bold,
-          ),
+        title: SvgPicture.asset(
+          Theme.of(context).brightness == Brightness.dark
+              ? 'assets/icons/icon_dark.svg'
+              : 'assets/icons/icon_light.svg',
+          height: 28,
         ),
         actions: [
           Stack(
@@ -76,6 +77,7 @@ class HomePage extends ConsumerWidget {
           ref.invalidate(suggestedPagesProvider);
           ref.invalidate(nearbyPagesProvider);
           ref.invalidate(feedItemsProvider);
+          ref.invalidate(reorderableRequestsProvider);
         },
         child: feedAsync.when(
           loading: () => const _FeedSkeleton(),
@@ -134,6 +136,17 @@ class HomePage extends ConsumerWidget {
                     child: Column(
                       children: [
                         const GuestWelcomeBanner(),
+                        SizedBox(height: AppSpacing.md),
+                      ],
+                    ),
+                  ),
+
+                // 2b. Reorder section (authenticated users only)
+                if (!isGuest)
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        const ReorderSection(),
                         SizedBox(height: AppSpacing.md),
                       ],
                     ),

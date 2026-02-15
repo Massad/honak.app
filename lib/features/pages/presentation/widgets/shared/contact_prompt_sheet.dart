@@ -104,7 +104,7 @@ class ContactPromptSheet extends StatelessWidget {
                           ),
                           const TextSpan(text: '، قلّهم إنك لقيتهم على '),
                           const TextSpan(
-                            text: 'هناك',
+                            text: 'هناك.app',
                             style: TextStyle(
                               color: Color(0xFF1A73E8),
                               fontWeight: FontWeight.w600,

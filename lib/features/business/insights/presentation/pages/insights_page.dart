@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/config/archetype.dart';
-import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dashboard/presentation/providers/dashboard_provider.dart';
+import 'package:honak/features/business/insights/domain/entities/insight_entities.dart';
+import 'package:honak/features/business/insights/domain/insight_chart_config.dart';
+import 'package:honak/features/business/insights/presentation/providers/insights_provider.dart';
+import 'package:honak/features/business/insights/presentation/widgets/booking_calendar.dart';
 import 'package:honak/features/business/insights/presentation/widgets/directory_dashboard_section.dart';
 import 'package:honak/features/business/insights/presentation/widgets/directory_insights_cards.dart';
+import 'package:honak/features/business/insights/presentation/widgets/distribution_chart.dart';
+import 'package:honak/features/business/insights/presentation/widgets/insight_section_block.dart';
+import 'package:honak/features/business/insights/presentation/widgets/modifier_analytics.dart';
+import 'package:honak/features/business/insights/presentation/widgets/ranked_list.dart';
+import 'package:honak/features/business/insights/presentation/widgets/revenue_chart.dart';
+import 'package:honak/features/business/insights/presentation/widgets/smart_tips_section.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
-
-// Placeholder insights/analytics page for business mode.
-// Will be replaced with real analytics when backend is ready.
+import 'package:shimmer/shimmer.dart';
 
 class BusinessInsightsPage extends ConsumerWidget {
   const BusinessInsightsPage({super.key});
@@ -19,14 +25,299 @@ class BusinessInsightsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bizContext = ref.watch(businessContextProvider);
 
-    // Directory archetype gets specialized insights
+    // Directory archetype keeps existing specialized insights
     if (bizContext != null && bizContext.archetype == Archetype.directory) {
       return _DirectoryInsightsContent(pageId: bizContext.page.id);
     }
 
-    return _DefaultInsightsContent();
+    // All other archetypes get the full insights screen
+    if (bizContext == null) return const SizedBox.shrink();
+
+    return _FullInsightsScreen(
+      pageId: bizContext.page.id,
+      archetypeKey: bizContext.archetype.key,
+      typeNameAr: bizContext.config?.nameAr ?? '',
+    );
   }
 }
+
+// ═══════════════════════════════════════════════════════════════
+// Full Insights Screen (replaces placeholder for non-directory)
+// ═══════════════════════════════════════════════════════════════
+
+class _FullInsightsScreen extends ConsumerWidget {
+  final String pageId;
+  final String archetypeKey;
+  final String typeNameAr;
+
+  const _FullInsightsScreen({
+    required this.pageId,
+    required this.archetypeKey,
+    required this.typeNameAr,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final period = ref.watch(insightsPeriodProvider);
+    final insightsAsync = ref.watch(insightsDataProvider(pageId));
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F5F5),
+      body: Column(
+        children: [
+          // Sticky header
+          _StickyHeader(
+            typeNameAr: typeNameAr,
+            period: period,
+            onPeriodChanged: (p) =>
+                ref.read(insightsPeriodProvider.notifier).state = p,
+          ),
+          // Content
+          Expanded(
+            child: insightsAsync.when(
+              loading: () => const _InsightsSkeleton(),
+              error: (_, __) => const Center(
+                child: Text('حدث خطأ في تحميل الإحصائيات'),
+              ),
+              data: (data) => _InsightsContent(
+                data: data,
+                archetypeKey: archetypeKey,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Sticky Header
+// ═══════════════════════════════════════════════════════════════
+
+class _StickyHeader extends StatelessWidget {
+  final String typeNameAr;
+  final InsightPeriod period;
+  final ValueChanged<InsightPeriod> onPeriodChanged;
+
+  const _StickyHeader({
+    required this.typeNameAr,
+    required this.period,
+    required this.onPeriodChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top + 8,
+        left: 16,
+        right: 16,
+        bottom: 12,
+      ),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(bottom: BorderSide(color: Color(0xFFF3F4F6))),
+      ),
+      child: Column(
+        children: [
+          // Title row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'الإحصائيات',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF111827),
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.bar_chart_rounded, size: 16, color: Color(0xFF1A73E8)),
+                  const SizedBox(width: 6),
+                  Text(
+                    typeNameAr,
+                    style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // Period tabs
+          Row(
+            children: InsightPeriod.values.map((p) {
+              final isSelected = p == period;
+              return Padding(
+                padding: const EdgeInsetsDirectional.only(end: 8),
+                child: GestureDetector(
+                  onTap: () => onPeriodChanged(p),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? const Color(0xFF1A73E8)
+                          : const Color(0xFFF3F4F6),
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Text(
+                      p.labelAr,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isSelected ? Colors.white : const Color(0xFF6B7280),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Insights Content — renders all sections based on data + archetype
+// ═══════════════════════════════════════════════════════════════
+
+class _InsightsContent extends StatelessWidget {
+  final InsightsData data;
+  final String archetypeKey;
+
+  const _InsightsContent({
+    required this.data,
+    required this.archetypeKey,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final visibility = getChartVisibility(archetypeKey);
+
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      children: [
+        // 1. First KPI section (overview — always first)
+        if (data.kpiSections.isNotEmpty)
+          InsightSectionBlock(section: data.kpiSections.first),
+
+        // 2. Revenue chart (conditional)
+        if (visibility.showRevenueChart && data.revenueChart != null) ...[
+          const SizedBox(height: 20),
+          RevenueChart(data: data.revenueChart!),
+        ],
+
+        // 3. Ranked list (conditional)
+        if (visibility.showRankedList && data.topItems != null) ...[
+          const SizedBox(height: 20),
+          RankedList(data: data.topItems!),
+        ],
+
+        // 4. Remaining KPI sections (index 1+)
+        for (var i = 1; i < data.kpiSections.length; i++) ...[
+          const SizedBox(height: 20),
+          InsightSectionBlock(section: data.kpiSections[i]),
+        ],
+
+        // 5. Distribution chart (conditional)
+        if (visibility.showDistribution && data.distribution != null) ...[
+          const SizedBox(height: 20),
+          DistributionChart(data: data.distribution!),
+        ],
+
+        // 6. Smart tips
+        if (data.tips.isNotEmpty) ...[
+          const SizedBox(height: 20),
+          SmartTipsSection(tips: data.tips),
+        ],
+
+        // 7. Modifier Analytics (menu_order only)
+        if (archetypeKey == 'menu_order') ...[
+          const SizedBox(height: 20),
+          const ModifierAnalytics(),
+        ],
+
+        // 8. Booking Calendar (service_booking + reservation)
+        if (archetypeKey == 'service_booking' || archetypeKey == 'reservation') ...[
+          const SizedBox(height: 20),
+          const BookingCalendar(),
+        ],
+
+        // Bottom clearance for nav
+        const SizedBox(height: 100),
+      ],
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Skeleton loading
+// ═══════════════════════════════════════════════════════════════
+
+class _InsightsSkeleton extends StatelessWidget {
+  const _InsightsSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: const Color(0xFFE5E7EB),
+      highlightColor: const Color(0xFFF9FAFB),
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        children: [
+          // KPI grid skeleton (2x2)
+          _shimmerBox(height: 14, width: 80),
+          const SizedBox(height: 8),
+          Row(children: [
+            Expanded(child: _shimmerBox(height: 90)),
+            const SizedBox(width: 8),
+            Expanded(child: _shimmerBox(height: 90)),
+          ]),
+          const SizedBox(height: 8),
+          Row(children: [
+            Expanded(child: _shimmerBox(height: 90)),
+            const SizedBox(width: 8),
+            Expanded(child: _shimmerBox(height: 90)),
+          ]),
+          const SizedBox(height: 20),
+          // Chart skeleton
+          _shimmerBox(height: 260),
+          const SizedBox(height: 20),
+          // Ranked list skeleton
+          _shimmerBox(height: 200),
+          const SizedBox(height: 20),
+          // More KPI skeleton
+          _shimmerBox(height: 14, width: 100),
+          const SizedBox(height: 8),
+          Row(children: [
+            Expanded(child: _shimmerBox(height: 90)),
+            const SizedBox(width: 8),
+            Expanded(child: _shimmerBox(height: 90)),
+          ]),
+        ],
+      ),
+    );
+  }
+
+  Widget _shimmerBox({required double height, double? width}) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Directory Insights (preserved from original)
+// ═══════════════════════════════════════════════════════════════
 
 class _DirectoryInsightsContent extends ConsumerWidget {
   final String pageId;
@@ -39,7 +330,9 @@ class _DirectoryInsightsContent extends ConsumerWidget {
 
     return dashData.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => const _DefaultInsightsContent(),
+      error: (_, __) => const Center(
+        child: Text('حدث خطأ في تحميل البيانات'),
+      ),
       data: (data) {
         return ListView(
           padding: const EdgeInsets.all(AppSpacing.lg),
@@ -53,153 +346,6 @@ class _DirectoryInsightsContent extends ConsumerWidget {
           ],
         );
       },
-    );
-  }
-}
-
-class _DefaultInsightsContent extends StatelessWidget {
-  const _DefaultInsightsContent();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      children: [
-        const SizedBox(height: AppSpacing.xxl),
-        Center(
-          child: Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.08),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.bar_chart_rounded,
-              size: 36,
-              color: AppColors.primary.withValues(alpha: 0.4),
-            ),
-          ),
-        ),
-        const SizedBox(height: AppSpacing.lg),
-        Text(
-          'إحصائيات صفحتك',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w700,
-                color: context.colorScheme.onSurface,
-              ),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        Text(
-          'ستتوفر الإحصائيات والتحليلات قريباً',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-        ),
-        const SizedBox(height: AppSpacing.xxl),
-
-        // Preview cards to hint at upcoming features
-        _PreviewCard(
-          icon: Icons.visibility_outlined,
-          title: 'المشاهدات',
-          subtitle: 'عدد مرات مشاهدة صفحتك',
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        _PreviewCard(
-          icon: Icons.people_outline,
-          title: 'العملاء',
-          subtitle: 'عدد العملاء الذين تواصلوا معك',
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        _PreviewCard(
-          icon: Icons.trending_up,
-          title: 'الطلبات',
-          subtitle: 'إحصائيات الطلبات والحجوزات',
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        _PreviewCard(
-          icon: Icons.star_outline,
-          title: 'مؤشرات الثقة',
-          subtitle: 'سرعة الرد ونسبة الإنجاز',
-        ),
-      ],
-    );
-  }
-}
-
-class _PreviewCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-
-  const _PreviewCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: context.colorScheme.surfaceVariant,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(icon, size: 20, color: context.colorScheme.onSurfaceVariant),
-          ),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  subtitle,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: context.colorScheme.surfaceVariant,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              'قريباً',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

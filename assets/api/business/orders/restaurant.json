@@ -1,0 +1,144 @@
+{
+  "pending": [
+    {
+      "id": "BS-301",
+      "customer": "ليلى ح.",
+      "avatar": "https://picsum.photos/seed/layla/50/50",
+      "type": "order",
+      "summary": "منسف × ٣ + مقلوبة",
+      "total": "٤٢.٥٠ د.أ",
+      "time": "منذ ١٥ دقيقة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١:٠٠ م",
+      "urgent": false,
+      "items": [
+        { "name": "منسف أردني", "qty": 3, "price": "١٢.٠٠" },
+        { "name": "مقلوبة", "qty": 1, "price": "٦.٥٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "جبل عمّان",
+      "branch_name": "الفرع الرئيسي — جبل عمّان",
+      "notes": "بدون بصل"
+    },
+    {
+      "id": "BS-302",
+      "customer": "عمر ت.",
+      "avatar": "https://picsum.photos/seed/omar2/50/50",
+      "type": "order",
+      "summary": "فتوش + حمص + ٢ عصير",
+      "total": "١١.٠٠ د.أ",
+      "time": "منذ ٣٠ دقيقة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١٢:٤٥ م",
+      "urgent": false,
+      "items": [
+        { "name": "فتوش", "qty": 1, "price": "٢.٥٠" },
+        { "name": "حمص", "qty": 1, "price": "٢.٥٠" },
+        { "name": "عصير ليمون بنعنع", "qty": 2, "price": "٣.٠٠" }
+      ],
+      "delivery_method": "استلام من المحل",
+      "branch_name": "الفرع الرئيسي — جبل عمّان"
+    },
+    {
+      "id": "BS-303",
+      "customer": "نور ه.",
+      "avatar": "https://picsum.photos/seed/noor3/50/50",
+      "type": "order",
+      "summary": "شاورما × ٢ + بطاطا",
+      "total": "٩.٥٠ د.أ",
+      "time": "منذ ساعة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١٢:١٥ م",
+      "urgent": false,
+      "items": [
+        { "name": "شاورما دجاج", "qty": 2, "price": "٣.٥٠" },
+        { "name": "بطاطا مقلية", "qty": 1, "price": "٢.٥٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "الشميساني، عمّان"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "BS-298",
+      "customer": "سامي ر.",
+      "avatar": "https://picsum.photos/seed/sami/50/50",
+      "type": "order",
+      "summary": "منسف × ٢ + فتوش",
+      "total": "٢٦.٥٠ د.أ",
+      "time": "منذ ٤٥ دقيقة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١٢:٣٠ م",
+      "status": "accepted",
+      "items": [
+        { "name": "منسف أردني", "qty": 2, "price": "١٢.٠٠" },
+        { "name": "فتوش", "qty": 1, "price": "٢.٥٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "الويبدة، عمّان",
+      "notes": "بدون بصل",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "١٢:٣٠ م", "done": true },
+        { "status": "accepted", "label": "تم قبول الطلب", "time": "١٢:٣٥ م", "done": true },
+        { "status": "preparing", "label": "قيد التحضير", "time": "", "done": false },
+        { "status": "completed", "label": "تم التوصيل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "in_progress": [
+    {
+      "id": "BS-295",
+      "customer": "هدى ن.",
+      "avatar": "https://picsum.photos/seed/huda2/50/50",
+      "type": "order",
+      "summary": "وجبة عائلية كبيرة",
+      "total": "٣٥.٠٠ د.أ",
+      "time": "منذ ساعة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١٢:٠٠ م",
+      "status": "in_progress",
+      "items": [
+        { "name": "منسف أردني", "qty": 2, "price": "١٢.٠٠" },
+        { "name": "تبولة", "qty": 2, "price": "٢.٠٠" },
+        { "name": "عصير رمان", "qty": 3, "price": "٣.٠٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "أم أذينة، عمّان",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "١٢:٠٠ م", "done": true },
+        { "status": "accepted", "label": "تم القبول", "time": "١٢:٠٥ م", "done": true },
+        { "status": "in_progress", "label": "قيد التحضير", "time": "١٢:١٠ م", "done": true },
+        { "status": "completed", "label": "تم التوصيل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "id": "BS-290",
+      "customer": "نور أ.",
+      "avatar": "https://picsum.photos/seed/noor/50/50",
+      "type": "order",
+      "summary": "شاورما × ٤",
+      "total": "١٤.٠٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ٢:٠٠ م",
+      "status": "completed",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "٢:٠٠ م", "done": true },
+        { "status": "accepted", "label": "تم القبول", "time": "٢:٠٣ م", "done": true },
+        { "status": "preparing", "label": "قيد التحضير", "time": "٢:١٠ م", "done": true },
+        { "status": "completed", "label": "تم التسليم", "time": "٢:٤٥ م", "done": true }
+      ]
+    },
+    {
+      "id": "BS-288",
+      "customer": "طارق ع.",
+      "avatar": "https://picsum.photos/seed/tarek/50/50",
+      "type": "order",
+      "summary": "فتة حمص + كبسة",
+      "total": "١٨.٥٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ١١:٣٠ ص",
+      "status": "completed",
+      "timeline": [
+        { "status": "pending", "label": "تم الاستلام", "time": "١١:٣٠ ص", "done": true },
+        { "status": "completed", "label": "تم التسليم", "time": "١٢:٣٠ م", "done": true }
+      ]
+    }
+  ]
+}

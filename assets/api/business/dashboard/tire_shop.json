@@ -2,10 +2,9 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 6,
-      "new_followers": 2,
-      "page_views": 30,
-      "today_revenue": 4400
+      "queue_size": 3,
+      "completed_today": 3,
+      "revenue_today": 4400
     },
     "today_summary": {
       "completed": 3,
@@ -24,7 +23,10 @@
     },
     "today_revenue": {
       "total": 4400,
+      "yesterday": 3700,
       "completed_count": 3,
+      "orders_count": 3,
+      "payment_breakdown": {"cash": 2600, "cliq": 1400, "bank": 400},
       "items": [
         { "service": "تبديل إطار", "amount": 300, "time": "07:50" },
         { "service": "تعبئة نيتروجين", "amount": 400, "time": "08:00" },

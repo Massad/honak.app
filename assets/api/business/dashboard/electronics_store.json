@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "data": {
+    "stats": {
+      "requests_today": 8,
+      "new_followers": 5,
+      "page_views": 210,
+      "today_revenue": 27800
+    },
+    "today_revenue": {
+      "total": 27800,
+      "yesterday": 22500,
+      "completed_count": 6,
+      "orders_count": 6,
+      "payment_breakdown": {"cash": 8300, "cliq": 12500, "bank": 7000},
+      "items": [
+        {"service": "سامسونج جالكسي S24", "amount": 25000, "time": "10:00"},
+        {"service": "سماعات JBL × 2", "amount": 2000, "time": "11:30"},
+        {"service": "شاحن سريع × 3", "amount": 1500, "time": "12:00"},
+        {"service": "كفر جوال × 4", "amount": 1200, "time": "13:30"},
+        {"service": "باور بانك أنكر", "amount": 800, "time": "14:00"}
+      ]
+    },
+    "best_sellers": [
+      {"name": "كفر جوال سيليكون", "count": 45, "trend": "up"},
+      {"name": "شاحن سريع Type-C", "count": 38, "trend": "up"},
+      {"name": "سماعات بلوتوث JBL", "count": 22, "trend": "same"},
+      {"name": "باور بانك أنكر 10000", "count": 18, "trend": "up"}
+    ],
+    "low_stock": [
+      {"name": "شاحن سريع Type-C", "remaining": 5, "threshold": 15},
+      {"name": "سماعات بلوتوث JBL", "remaining": 3, "threshold": 10},
+      {"name": "واقي شاشة آيفون 15", "remaining": 4, "threshold": 20}
+    ],
+    "pending_requests": [
+      {"id": "req_es01", "customer": "محمد ناصر", "service": "سامسونج جالكسي S24 ألترا — استلام من المحل", "date": "2026-02-14", "time": "16:00"},
+      {"id": "req_es02", "customer": "شركة الأمل", "service": "5 لابتوب HP + 5 ماوس — طلب شركات", "date": "2026-02-15", "time": "10:00"}
+    ]
+  }
+}

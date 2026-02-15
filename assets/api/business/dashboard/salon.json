@@ -17,7 +17,10 @@
     },
     "today_revenue": {
       "total": 8500,
+      "yesterday": 7200,
       "completed_count": 4,
+      "orders_count": 4,
+      "payment_breakdown": {"cash": 5000, "cliq": 2500, "bank": 1000},
       "items": [
         {"service": "قص شعر", "amount": 1500, "time": "09:30"},
         {"service": "صبغة + سيشوار", "amount": 3500, "time": "10:00"},

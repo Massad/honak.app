@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_lamb",
+      "name": "خروف",
+      "item_count": 3,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_beef",
+      "name": "بقر",
+      "item_count": 2,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_prepared",
+      "name": "جاهز",
+      "item_count": 3,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_chicken",
+      "name": "دجاج",
+      "item_count": 3,
+      "sort_order": 4
+    },
+    {
+      "id": "cat_sides",
+      "name": "إضافات",
+      "item_count": 1,
+      "sort_order": 5
+    }
+  ],
+  "meta": {
+    "total": 5
+  }
+}

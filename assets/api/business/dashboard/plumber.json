@@ -7,6 +7,18 @@
       "page_views": 23,
       "today_revenue": 12000
     },
+    "today_revenue": {
+      "total": 12000,
+      "yesterday": 9800,
+      "completed_count": 3,
+      "orders_count": 3,
+      "payment_breakdown": {"cash": 7200, "cliq": 3600, "bank": 1200},
+      "items": [
+        {"service": "تسليك مجاري", "amount": 3500, "time": "08:00"},
+        {"service": "صيانة دورية — 3 حمامات", "amount": 5000, "time": "10:00"},
+        {"service": "تغيير خلاط مطبخ", "amount": 3500, "time": "13:00"}
+      ]
+    },
     "active_quotes": [
       {
         "id": "qt_1",

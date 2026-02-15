@@ -4,32 +4,55 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
 import 'package:honak/features/business/dropoff/domain/entities/ticket_activity.dart';
+import 'package:honak/features/business/shared/entities/activity_action_config.dart';
 
-/// Maps a [TicketActivityAction] to a Material icon (matches Figma).
-IconData activityActionIcon(TicketActivityAction action) => switch (action) {
-      TicketActivityAction.ticketCreated => Icons.inbox_rounded,
-      TicketActivityAction.statusChanged => Icons.autorenew_rounded,
-      TicketActivityAction.photoBefore => Icons.camera_alt_outlined,
-      TicketActivityAction.photoAfter => Icons.image_rounded,
-      TicketActivityAction.infoRequested => Icons.chat_bubble_outline_rounded,
-      TicketActivityAction.infoReceived => Icons.chat_rounded,
-      TicketActivityAction.paymentMarked => Icons.credit_card_rounded,
-      TicketActivityAction.noteAdded => Icons.sticky_note_2_outlined,
-      TicketActivityAction.itemModified => Icons.edit_outlined,
-    };
+/// Visual config for each [TicketActivityAction].
+const Map<TicketActivityAction, ActivityActionConfig> dropoffActionConfigs = {
+  TicketActivityAction.ticketCreated: ActivityActionConfig(
+    icon: Icons.inbox_rounded,
+    color: Color(0xFF1A73E8),
+  ),
+  TicketActivityAction.statusChanged: ActivityActionConfig(
+    icon: Icons.autorenew_rounded,
+    color: Color(0xFF1A73E8),
+  ),
+  TicketActivityAction.photoBefore: ActivityActionConfig(
+    icon: Icons.camera_alt_outlined,
+    color: Color(0xFF1A73E8),
+  ),
+  TicketActivityAction.photoAfter: ActivityActionConfig(
+    icon: Icons.image_rounded,
+    color: Color(0xFF43A047),
+  ),
+  TicketActivityAction.infoRequested: ActivityActionConfig(
+    icon: Icons.chat_bubble_outline_rounded,
+    color: Color(0xFFFF9800),
+  ),
+  TicketActivityAction.infoReceived: ActivityActionConfig(
+    icon: Icons.chat_rounded,
+    color: Color(0xFF43A047),
+  ),
+  TicketActivityAction.paymentMarked: ActivityActionConfig(
+    icon: Icons.credit_card_rounded,
+    color: Color(0xFF43A047),
+  ),
+  TicketActivityAction.noteAdded: ActivityActionConfig(
+    icon: Icons.sticky_note_2_outlined,
+    color: AppColors.textSecondary,
+  ),
+  TicketActivityAction.itemModified: ActivityActionConfig(
+    icon: Icons.edit_outlined,
+    color: Color(0xFFFF9800),
+  ),
+};
 
-/// Maps a [TicketActivityAction] to a semantic color (matches Figma).
-Color activityActionColor(TicketActivityAction action) => switch (action) {
-      TicketActivityAction.ticketCreated => const Color(0xFF1A73E8),
-      TicketActivityAction.statusChanged => const Color(0xFF1A73E8),
-      TicketActivityAction.photoBefore => const Color(0xFF1A73E8),
-      TicketActivityAction.photoAfter => const Color(0xFF43A047),
-      TicketActivityAction.infoRequested => const Color(0xFFFF9800),
-      TicketActivityAction.infoReceived => const Color(0xFF43A047),
-      TicketActivityAction.paymentMarked => const Color(0xFF43A047),
-      TicketActivityAction.noteAdded => AppColors.textSecondary,
-      TicketActivityAction.itemModified => const Color(0xFFFF9800),
-    };
+/// Maps a [TicketActivityAction] to a Material icon.
+IconData activityActionIcon(TicketActivityAction action) =>
+    dropoffActionConfigs[action]!.icon;
+
+/// Maps a [TicketActivityAction] to a semantic color.
+Color activityActionColor(TicketActivityAction action) =>
+    dropoffActionConfigs[action]!.color;
 
 /// Mock staff names with roles for realistic activity log entries.
 const _staffPool = [

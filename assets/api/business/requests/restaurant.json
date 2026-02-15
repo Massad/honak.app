@@ -1,0 +1,115 @@
+{
+  "pending": [
+    {
+      "id": "req_rs_001",
+      "customer": {
+        "id": "usr_060",
+        "name": "سامي م.",
+        "avatar_url": "https://picsum.photos/seed/sami/50/50",
+        "phone": "0791000060"
+      },
+      "status": "pending",
+      "type": "order",
+      "items_count": 3,
+      "total_cents": 1850,
+      "note": "بدون بصل من فضلكم",
+      "created_at": 1739523600,
+      "items": [
+        {"id": "item_r01", "name": "شاورما لحم", "quantity": 2, "price_cents": 350},
+        {"id": "item_r02", "name": "فلافل ساندويش", "quantity": 1, "price_cents": 150}
+      ]
+    },
+    {
+      "id": "req_rs_002",
+      "customer": {
+        "id": "usr_061",
+        "name": "نور ح.",
+        "avatar_url": "https://picsum.photos/seed/nour/50/50",
+        "phone": "0791000061"
+      },
+      "status": "pending",
+      "type": "order",
+      "items_count": 2,
+      "total_cents": 2400,
+      "note": "توصيل لعنوان الشركة",
+      "created_at": 1739522000,
+      "items": [
+        {"id": "item_r03", "name": "منسف كبير", "quantity": 1, "price_cents": 1800},
+        {"id": "item_r04", "name": "سلطة فتوش", "quantity": 1, "price_cents": 300}
+      ]
+    }
+  ],
+  "accepted": [
+    {
+      "id": "req_rs_003",
+      "customer": {
+        "id": "usr_062",
+        "name": "فراس ع.",
+        "avatar_url": "https://picsum.photos/seed/firas/50/50",
+        "phone": "0791000062"
+      },
+      "status": "accepted",
+      "type": "order",
+      "items_count": 4,
+      "total_cents": 3200,
+      "note": null,
+      "created_at": 1739437200,
+      "items": [
+        {"id": "item_r01", "name": "شاورما لحم", "quantity": 2, "price_cents": 350},
+        {"id": "item_r05", "name": "حمص", "quantity": 2, "price_cents": 200}
+      ]
+    }
+  ],
+  "in_progress": [
+    {
+      "id": "req_rs_004",
+      "customer": {
+        "id": "usr_063",
+        "name": "علي ر.",
+        "avatar_url": "https://picsum.photos/seed/ali2/50/50",
+        "phone": "0791000063"
+      },
+      "status": "in_progress",
+      "type": "order",
+      "items_count": 2,
+      "total_cents": 1500,
+      "note": null,
+      "created_at": 1739350800,
+      "items": [
+        {"id": "item_r06", "name": "مقلوبة", "quantity": 1, "price_cents": 1200}
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "id": "req_rs_005",
+      "customer": {
+        "id": "usr_064",
+        "name": "ياسمين ن.",
+        "avatar_url": "https://picsum.photos/seed/yasmin/50/50",
+        "phone": "0791000064"
+      },
+      "status": "completed",
+      "type": "order",
+      "items_count": 3,
+      "total_cents": 2800,
+      "note": null,
+      "created_at": 1739264400
+    },
+    {
+      "id": "req_rs_006",
+      "customer": {
+        "id": "usr_065",
+        "name": "عمار ب.",
+        "avatar_url": "https://picsum.photos/seed/ammar/50/50",
+        "phone": "0791000065"
+      },
+      "status": "completed",
+      "type": "order",
+      "items_count": 1,
+      "total_cents": 900,
+      "note": null,
+      "created_at": 1739178000
+    }
+  ]
+}

@@ -9,10 +9,14 @@
     },
     "today_revenue": {
       "total": 125000,
-      "completed_count": 2,
+      "yesterday": 105000,
+      "orders_count": 3,
+      "payment_breakdown": {"cash": 75000, "cliq": 37500, "bank": 12500},
       "items": [
-        {"service": "قاعة الملكية — حفل زفاف", "amount": 85000, "time": "الأمس"},
-        {"service": "قاعة الأميرة — عيد ميلاد", "amount": 40000, "time": "الأمس"}
+        {"service": "قاعة الملكية — حفل زفاف", "amount": 50000, "time": "الأمس"},
+        {"service": "قاعة الياسمين — مؤتمر", "amount": 30000, "time": "الأمس"},
+        {"service": "قاعة الأميرة — حفل تخرج", "amount": 20000, "time": "اليوم"},
+        {"service": "غرفة الاجتماعات — اجتماع شركة", "amount": 5000, "time": "اليوم"}
       ]
     },
     "occupancy": {
@@ -29,7 +33,8 @@
         "date_range": "14-15 شباط",
         "guests": 200,
         "space": "قاعة الملكية",
-        "total": 95000,
+        "event_type": "حفل زفاف",
+        "total": 50000,
         "is_soon": true
       },
       {
@@ -37,21 +42,32 @@
         "date_range": "16 شباط",
         "guests": 50,
         "space": "قاعة الياسمين",
-        "total": 25000,
+        "event_type": "مؤتمر",
+        "total": 30000,
         "is_soon": false
       },
       {
-        "customer": "عائلة خالد",
-        "date_range": "20-21 شباط",
-        "guests": 150,
+        "customer": "جامعة عمّان الأهلية",
+        "date_range": "18 شباط",
+        "guests": 120,
         "space": "قاعة الأميرة",
-        "total": 75000,
+        "event_type": "حفل تخرج",
+        "total": 20000,
+        "is_soon": false
+      },
+      {
+        "customer": "بنك الأردن",
+        "date_range": "20 شباط",
+        "guests": 25,
+        "space": "غرفة الاجتماعات",
+        "event_type": "اجتماع",
+        "total": 5000,
         "is_soon": false
       }
     ],
     "pending_requests": [
-      {"id": "req_1201", "customer": "أحمد سعيد", "service": "استفسار — قاعة الملكية — آذار", "date": "2026-02-12", "time": "14:00"},
-      {"id": "req_1202", "customer": "منى عمر", "service": "حجز — قاعة الياسمين — 28 شباط", "date": "2026-02-12", "time": "15:00"}
+      {"id": "req_1201", "customer": "أحمد سعيد", "service": "استفسار — قاعة الملكية — حفل زفاف — آذار", "date": "2026-02-12", "time": "14:00"},
+      {"id": "req_1202", "customer": "منى عمر", "service": "حجز — قاعة الياسمين — مؤتمر — 28 شباط", "date": "2026-02-12", "time": "15:00"}
     ]
   }
 }

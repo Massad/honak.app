@@ -1,0 +1,113 @@
+{
+  "pending": [
+    {
+      "id": "SR-1201",
+      "customer": "دينا خ.",
+      "avatar": "https://picsum.photos/seed/dina/50/50",
+      "type": "booking",
+      "summary": "قص شعر + صبغة",
+      "total": "٢٥.٠٠ د.أ",
+      "time": "منذ ٢٠ دقيقة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١٠:١٠ ص",
+      "urgent": false,
+      "service": "قص شعر + صبغة",
+      "preferred_date": "غداً",
+      "preferred_time": "٢:٠٠ م",
+      "preferred_team": "رانيا"
+    },
+    {
+      "id": "SR-1202",
+      "customer": "منال ع.",
+      "avatar": "https://picsum.photos/seed/manal/50/50",
+      "type": "booking",
+      "summary": "مكياج سهرة + تسريحة",
+      "total": "٤٠.٠٠ د.أ",
+      "time": "منذ ساعة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ٩:٣٠ ص",
+      "urgent": false,
+      "service": "مكياج سهرة + تسريحة",
+      "preferred_date": "السبت",
+      "preferred_time": "٤:٠٠ م",
+      "preferred_team": "ميساء"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "SR-1199",
+      "customer": "سارة أ.",
+      "avatar": "https://picsum.photos/seed/sara2/50/50",
+      "type": "booking",
+      "summary": "تسريحة + مكياج — غداً ١٠ ص",
+      "total": "٣٥.٠٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ٣:٠٠ م",
+      "status": "accepted",
+      "service": "تسريحة + مكياج",
+      "preferred_date": "غداً",
+      "preferred_time": "١٠:٠٠ ص",
+      "preferred_team": "ميساء",
+      "branch_name": "فرع عبدون",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الحجز", "time": "٣:٠٠ م", "done": true },
+        { "status": "accepted", "label": "تم تأكيد الموعد", "time": "٣:١٠ م", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "", "done": false }
+      ]
+    },
+    {
+      "id": "SR-1198",
+      "customer": "لانا م.",
+      "avatar": "https://picsum.photos/seed/lana/50/50",
+      "type": "booking",
+      "summary": "بروتين شعر — بعد غد",
+      "total": "٦٠.٠٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ١:٠٠ م",
+      "status": "accepted",
+      "service": "بروتين شعر",
+      "preferred_date": "بعد غد",
+      "preferred_time": "١١:٠٠ ص",
+      "preferred_team": "رانيا",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الحجز", "time": "١:٠٠ م", "done": true },
+        { "status": "accepted", "label": "تم التأكيد", "time": "١:٣٠ م", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "in_progress": [],
+  "completed": [
+    {
+      "id": "SR-1195",
+      "customer": "هدى م.",
+      "avatar": "https://picsum.photos/seed/huda/50/50",
+      "type": "booking",
+      "summary": "قص + تسريحة — مكتمل",
+      "total": "١٥.٠٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ١١:٠٠ ص",
+      "status": "completed",
+      "service": "قص + تسريحة",
+      "preferred_team": "رانيا",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الحجز", "time": "١١:٠٠ ص", "done": true },
+        { "status": "accepted", "label": "تم التأكيد", "time": "١١:٠٥ ص", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "١٢:٣٠ م", "done": true }
+      ]
+    },
+    {
+      "id": "SR-1193",
+      "customer": "ريم ك.",
+      "avatar": "https://picsum.photos/seed/reem2/50/50",
+      "type": "booking",
+      "summary": "صبغة + سشوار",
+      "total": "٣٠.٠٠ د.أ",
+      "time": "منذ يومين",
+      "created_at": "١١ فبراير ٢٠٢٦ · ٢:٠٠ م",
+      "status": "completed",
+      "timeline": [
+        { "status": "pending", "label": "تم الاستلام", "time": "٢:٠٠ م", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "٤:٠٠ م", "done": true }
+      ]
+    }
+  ]
+}

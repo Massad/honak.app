@@ -5,6 +5,12 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/features/account/presentation/pages/account_info_page.dart';
+import 'package:honak/features/account/presentation/pages/help_support_page.dart';
+import 'package:honak/features/account/presentation/pages/my_addresses_page.dart';
+import 'package:honak/features/account/presentation/pages/notification_prefs_page.dart';
+import 'package:honak/features/account/presentation/pages/privacy_security_page.dart';
+import 'package:honak/features/account/presentation/pages/saved_pages_page.dart';
 import 'package:honak/features/account/presentation/widgets/business_pages_section.dart';
 import 'package:honak/features/account/presentation/widgets/menu_item.dart';
 import 'package:honak/features/account/presentation/widgets/profile_header.dart';
@@ -50,31 +56,51 @@ class AccountPage extends ConsumerWidget {
                 AccountMenuItem(
                   icon: Icons.favorite_outline,
                   label: '\u0627\u0644\u0645\u062d\u0641\u0648\u0638\u0627\u062a',
-                  onTap: () => context.push(Routes.saved),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const SavedPagesPage(),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
                   icon: Icons.location_on_outlined,
                   label: '\u0639\u0646\u0627\u0648\u064a\u0646\u064a',
-                  onTap: () => context.showSnackBar('\u0642\u0631\u064a\u0628\u0627\u064b'),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const MyAddressesPage(),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
                   icon: Icons.person_outline,
                   label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u062d\u0633\u0627\u0628',
-                  onTap: () => context.showSnackBar('\u0642\u0631\u064a\u0628\u0627\u064b'),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const AccountInfoPage(),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
                   icon: Icons.notifications_outlined,
                   label: '\u0625\u0634\u0639\u0627\u0631\u0627\u062a\u064a',
-                  onTap: () => context.push(Routes.notifications),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const NotificationPrefsPage(),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
                   icon: Icons.shield_outlined,
                   label: '\u0627\u0644\u062e\u0635\u0648\u0635\u064a\u0629 \u0648\u0627\u0644\u0623\u0645\u0627\u0646',
-                  onTap: () => context.showSnackBar('\u0642\u0631\u064a\u0628\u0627\u064b'),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const PrivacySecurityPage(),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
@@ -87,7 +113,11 @@ class AccountPage extends ConsumerWidget {
                 AccountMenuItem(
                   icon: Icons.help_outline,
                   label: '\u0627\u0644\u0645\u0633\u0627\u0639\u062f\u0629 \u0648\u0627\u0644\u062f\u0639\u0645',
-                  onTap: () => context.showSnackBar('\u0642\u0631\u064a\u0628\u0627\u064b'),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const HelpSupportPage(),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 // Sign out

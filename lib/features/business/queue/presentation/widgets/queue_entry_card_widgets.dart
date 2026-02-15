@@ -181,7 +181,7 @@ class _StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final conf = _StatusConfig.of(status);
+    final conf = QueueStatusConfig.of(status);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -215,261 +215,35 @@ class _StatusBadge extends StatelessWidget {
   }
 }
 
-// ── Photo Toggle Button ──
-
-class _PhotoToggle extends StatelessWidget {
-  const _PhotoToggle({
-    required this.label,
-    required this.icon,
-    required this.active,
-  });
-
-  final String label;
-  final IconData icon;
-  final bool active;
-
-  static const _activeColor = Color(0xFF1A73E8);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: active ? const Color(0xFFEFF6FF) : Colors.transparent,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: active ? _activeColor : context.colorScheme.outlineVariant,
-          width: active ? 2 : 1,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon,
-              size: 12,
-              color: active ? _activeColor : context.colorScheme.onSurfaceVariant),
-          const SizedBox(width: 6),
-          Text(label,
-              style: context.textTheme.labelSmall?.copyWith(
-                  color: active ? _activeColor : context.colorScheme.onSurfaceVariant,
-                  fontSize: 11)),
-          if (active) ...[
-            const SizedBox(width: 4),
-            const Icon(Icons.check_circle, size: 10, color: _activeColor),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
 // ── Status Picker Bottom Sheet ──
 
-class _StatusPickerSheet extends StatelessWidget {
-  const _StatusPickerSheet({
-    required this.currentStatus,
-    required this.customerName,
-    required this.packageName,
-    required this.onSelect,
-  });
+/// Shows a queue status picker using the shared generic picker.
+Future<QueueStatus?> _showQueueStatusPicker(
+  BuildContext context, {
+  required QueueStatus currentStatus,
+  required String customerName,
+  required String packageName,
+}) {
+  final currentConfig = QueueStatusConfig.of(currentStatus);
+  final currentIdx = QueueStatusConfig.statusOrder.indexOf(currentStatus);
 
-  final QueueStatus currentStatus;
-  final String customerName;
-  final String packageName;
-  final ValueChanged<QueueStatus> onSelect;
-
-  @override
-  Widget build(BuildContext context) {
-    final currentConf = _StatusConfig.of(currentStatus);
-    final currentIdx = _statusOrder.indexOf(currentStatus);
-
-    final pickerStatuses = [
-      QueueStatus.waiting,
-      QueueStatus.inProgress,
-      QueueStatus.ready,
-      QueueStatus.completed,
-      QueueStatus.noShow,
-    ];
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag handle
-            Container(
-              margin: const EdgeInsets.only(top: 8, bottom: 4),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: context.colorScheme.outlineVariant,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-
-            // Header
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 12),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('تغيير حالة الطلب',
-                            style: context.textTheme.bodySmall?.copyWith(
-                                color: context.colorScheme.onSurface,
-                                fontSize: 14)),
-                        const SizedBox(height: 2),
-                        Text('$customerName — $packageName',
-                            style: context.textTheme.labelSmall?.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
-                                fontSize: 10)),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: context.colorScheme.surfaceContainerLow,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Icon(Icons.close,
-                          size: 16, color: context.colorScheme.onSurfaceVariant),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Divider(height: 1, color: context.colorScheme.surfaceContainerLow),
-
-            // Current status
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('الحالة الحالية',
-                      style: context.textTheme.labelSmall?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
-                  const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsetsDirectional.symmetric(
-                        horizontal: 12, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: currentConf.bgColor,
-                      borderRadius:
-                          BorderRadius.circular(AppRadius.md),
-                      border: Border.all(
-                          color: currentConf.borderColor, width: 2),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(currentConf.icon,
-                            size: 16, color: currentConf.color),
-                        const SizedBox(width: 8),
-                        Text(currentConf.label,
-                            style: context.textTheme.bodySmall
-                                ?.copyWith(color: currentConf.color)),
-                        const Spacer(),
-                        Text('الحالية',
-                            style: context.textTheme.labelSmall?.copyWith(
-                                color: context.colorScheme.outline,
-                                fontSize: 10)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Move to options
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('نقل إلى',
-                      style: context.textTheme.labelSmall?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
-                  const SizedBox(height: 8),
-                  ...pickerStatuses
-                      .where((s) => s != currentStatus)
-                      .map((s) {
-                    final conf = _StatusConfig.of(s);
-                    final targetIdx = _statusOrder.indexOf(s);
-                    final isBack = targetIdx < currentIdx;
-                    return Padding(
-                      padding:
-                          const EdgeInsetsDirectional.only(bottom: 6),
-                      child: GestureDetector(
-                        onTap: () => onSelect(s),
-                        child: Container(
-                          padding:
-                              const EdgeInsetsDirectional.symmetric(
-                                  horizontal: 12, vertical: 10),
-                          decoration: BoxDecoration(
-                            color: isBack
-                                ? const Color(0xFFFFF7ED)
-                                : Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.circular(
-                                AppRadius.md),
-                            border: Border.all(
-                              color: isBack
-                                  ? const Color(0xFFFED7AA)
-                                  : context.colorScheme.surfaceContainerLow,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(conf.icon,
-                                  size: 16, color: conf.color),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(conf.label,
-                                    style: context.textTheme.bodySmall
-                                        ?.copyWith(color: conf.color)),
-                              ),
-                              if (isBack)
-                                Container(
-                                  padding:
-                                      const EdgeInsetsDirectional
-                                          .symmetric(
-                                          horizontal: 6, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFFED7AA)
-                                        .withValues(alpha: 0.5),
-                                    borderRadius: AppRadius.pill,
-                                  ),
-                                  child: Text('تراجع',
-                                      style: context
-                                          .textTheme.labelSmall
-                                          ?.copyWith(
-                                              color: const Color(
-                                                  0xFFFF9800),
-                                              fontSize: 9)),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+  final options = QueueStatusConfig.pickerStatuses
+      .where((s) => s != currentStatus)
+      .map((s) {
+    final conf = QueueStatusConfig.of(s);
+    final targetIdx = QueueStatusConfig.statusOrder.indexOf(s);
+    return StatusOption<QueueStatus>(
+      status: s,
+      config: conf,
+      isBackward: targetIdx < currentIdx,
     );
-  }
+  }).toList();
+
+  return showGenericStatusPicker<QueueStatus>(
+    context,
+    title: 'تغيير حالة الطلب',
+    subtitle: '$customerName — $packageName',
+    currentConfig: currentConfig,
+    availableStatuses: options,
+  );
 }

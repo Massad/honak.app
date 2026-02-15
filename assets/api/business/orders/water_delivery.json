@@ -1,0 +1,131 @@
+{
+  "pending": [
+    {
+      "id": "AW-201",
+      "customer": "سارة م.",
+      "avatar": "https://picsum.photos/seed/sara/50/50",
+      "type": "order",
+      "summary": "٦ قوارير مياه ١٩ لتر",
+      "total": "٩.٠٠ د.أ",
+      "time": "منذ ١٠ دقائق",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١٠:٠٥ ص",
+      "urgent": true,
+      "items": [
+        { "name": "قارورة مياه ١٩ لتر", "qty": 6, "price": "١.٥٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "تلاع العلي، عمّان",
+      "branch_name": "المستودع الرئيسي — عبدون",
+      "paid_by_subscription": {
+        "package_name": "باقة 10 قوارير",
+        "credits_used": 6,
+        "remaining_after": 2
+      }
+    },
+    {
+      "id": "AW-202",
+      "customer": "محمد ع.",
+      "avatar": "https://picsum.photos/seed/moh/50/50",
+      "type": "order",
+      "summary": "٣ قوارير + برادة إيجار",
+      "total": "١٤.٥٠ د.أ",
+      "time": "منذ ٢٥ دقيقة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ٩:٥٠ ص",
+      "urgent": false,
+      "items": [
+        { "name": "قارورة مياه ١٩ لتر", "qty": 3, "price": "١.٥٠" },
+        { "name": "برادة مياه (إيجار)", "qty": 1, "price": "١٠.٠٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "الصويفية، عمّان",
+      "branch_name": "المستودع الرئيسي — عبدون"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "AW-198",
+      "customer": "فاطمة ق.",
+      "avatar": "https://picsum.photos/seed/fatima/50/50",
+      "type": "order",
+      "summary": "٤ قوارير مياه",
+      "total": "٦.٠٠ د.أ",
+      "time": "منذ ساعة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ٩:١٥ ص",
+      "status": "accepted",
+      "items": [
+        { "name": "قارورة مياه ١٩ لتر", "qty": 4, "price": "١.٥٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "عبدون، عمّان",
+      "branch_name": "المستودع الرئيسي — عبدون",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "٩:١٥ ص", "done": true },
+        { "status": "accepted", "label": "تم قبول الطلب", "time": "٩:٢٠ ص", "done": true },
+        { "status": "preparing", "label": "قيد التحضير", "time": "", "done": false },
+        { "status": "completed", "label": "تم التوصيل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "in_progress": [
+    {
+      "id": "AW-196",
+      "customer": "يوسف ع.",
+      "avatar": "https://picsum.photos/seed/yousef/50/50",
+      "type": "order",
+      "summary": "٢ موزع مياه",
+      "total": "٦.٠٠ د.أ",
+      "time": "منذ ساعتين",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ٨:١٠ ص",
+      "status": "in_progress",
+      "items": [
+        { "name": "موزع مياه 5 جالون", "qty": 2, "price": "٣.٠٠" }
+      ],
+      "delivery_method": "توصيل",
+      "delivery_address": "خلدا، عمّان",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "٨:١٠ ص", "done": true },
+        { "status": "accepted", "label": "تم قبول الطلب", "time": "٨:١٥ ص", "done": true },
+        { "status": "in_progress", "label": "قيد التوصيل", "time": "٨:٤٠ ص", "done": true },
+        { "status": "completed", "label": "تم التوصيل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "id": "AW-190",
+      "customer": "مريم س.",
+      "avatar": "https://picsum.photos/seed/mariam/50/50",
+      "type": "order",
+      "summary": "١٠ قوارير مياه",
+      "total": "١٥.٠٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ٢:٠٠ م",
+      "status": "completed",
+      "items": [
+        { "name": "قارورة مياه ١٩ لتر", "qty": 10, "price": "١.٥٠" }
+      ],
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "٢:٠٠ م", "done": true },
+        { "status": "accepted", "label": "تم القبول", "time": "٢:٠٥ م", "done": true },
+        { "status": "in_progress", "label": "قيد التوصيل", "time": "٢:٣٠ م", "done": true },
+        { "status": "completed", "label": "تم التوصيل", "time": "٣:١٥ م", "done": true }
+      ]
+    },
+    {
+      "id": "AW-188",
+      "customer": "أحمد ر.",
+      "avatar": "https://picsum.photos/seed/ahmad/50/50",
+      "type": "order",
+      "summary": "٢ قارورة + منظم غاز",
+      "total": "١٥.٠٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ١١:٠٠ ص",
+      "status": "completed",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "١١:٠٠ ص", "done": true },
+        { "status": "accepted", "label": "تم القبول", "time": "١١:١٠ ص", "done": true },
+        { "status": "completed", "label": "تم التسليم", "time": "١٢:٠٠ م", "done": true }
+      ]
+    }
+  ]
+}

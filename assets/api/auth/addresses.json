@@ -1,0 +1,41 @@
+[
+  {
+    "id": "addr_1",
+    "label": "البيت",
+    "label_icon": "home",
+    "area": "عبدون",
+    "city": "عمّان",
+    "street": "شارع الأميرة بسمة",
+    "building": "عمارة 14",
+    "floor": "3",
+    "apartment": "5",
+    "notes": "بجانب صيدلية الرازي",
+    "is_default": true
+  },
+  {
+    "id": "addr_2",
+    "label": "الشغل",
+    "label_icon": "briefcase",
+    "area": "الشميساني",
+    "city": "عمّان",
+    "street": "شارع عبدالحميد شرف",
+    "building": "برج الأردن",
+    "floor": "7",
+    "apartment": "",
+    "notes": "مكتب 702",
+    "is_default": false
+  },
+  {
+    "id": "addr_3",
+    "label": "بيت أهلي",
+    "label_icon": "users",
+    "area": "تلاع العلي",
+    "city": "عمّان",
+    "street": "شارع وصفي التل",
+    "building": "عمارة 22",
+    "floor": "1",
+    "apartment": "2",
+    "notes": "",
+    "is_default": false
+  }
+]

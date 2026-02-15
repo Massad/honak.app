@@ -26,6 +26,27 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
   late final TextEditingController _weekdayController;
   late final TextEditingController _weekendController;
 
+  // ── 1b. Seasonal Pricing ──────────────────────────────────
+  final List<_SeasonData> _seasons = [
+    _SeasonData('summer', 'موسم الصيف', 'wb_sunny', 6, 1, 9, 15, 25000, 35000, true, '#F59E0B'),
+    _SeasonData('winter', 'موسم الشتاء', 'ac_unit', 12, 1, 2, 28, 12000, 18000, true, '#3B82F6'),
+    _SeasonData('spring', 'موسم الربيع', 'local_florist', 3, 1, 5, 31, 15000, 22000, true, '#10B981'),
+    _SeasonData('autumn', 'الخريف', 'park', 9, 16, 11, 30, 13000, 19000, false, '#D97706'),
+  ];
+
+  final List<_HolidayData> _holidays = [
+    _HolidayData('eid_fitr', 'عيد الفطر', '03-30', '04-02', 25, true),
+    _HolidayData('independence', 'عيد الاستقلال', '05-25', '05-25', 15, true),
+  ];
+
+  bool _earlyBirdActive = false;
+  int _earlyBirdDays = 14;
+  int _earlyBirdPercent = 10;
+
+  bool _lastMinuteActive = false;
+  int _lastMinuteDays = 2;
+  int _lastMinutePercent = 20;
+
   // ── 2. Property Specs ──────────────────────────────────────
   int _maxGuests = 8;
   int _bedrooms = 3;
@@ -131,6 +152,19 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
               if (_expandedSection == 'pricing') ...[
                 const SizedBox(height: AppSpacing.xs),
                 _buildPricingContent(),
+              ],
+              const SizedBox(height: AppSpacing.md),
+
+              // 1b. Seasonal Pricing
+              _buildSectionToggle(
+                id: 'seasonal',
+                icon: Icons.date_range_outlined,
+                title: 'التسعير الموسمي',
+                count: _seasons.where((s) => s.active).length,
+              ),
+              if (_expandedSection == 'seasonal') ...[
+                const SizedBox(height: AppSpacing.xs),
+                _buildSeasonalPricingContent(),
               ],
               const SizedBox(height: AppSpacing.md),
 
@@ -1079,6 +1113,449 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
   }
 
   // ─────────────────────────────────────────────────────────────
+  // 1b. SEASONAL PRICING
+  // ─────────────────────────────────────────────────────────────
+  Widget _buildSeasonalPricingContent() {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // Seasons header
+          Text(
+            'المواسم',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: context.colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Season rule cards
+          for (int i = 0; i < _seasons.length; i++) ...[
+            _buildSeasonRuleCard(_seasons[i], i),
+            if (i < _seasons.length - 1) const SizedBox(height: AppSpacing.sm),
+          ],
+
+          const SizedBox(height: AppSpacing.lg),
+          // Holidays header
+          Text(
+            'العطل الرسمية',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: context.colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          for (int i = 0; i < _holidays.length; i++) ...[
+            _buildHolidayCard(_holidays[i], i),
+            if (i < _holidays.length - 1) const SizedBox(height: AppSpacing.sm),
+          ],
+
+          const SizedBox(height: AppSpacing.lg),
+          // Early bird toggle
+          _buildDiscountToggle(
+            icon: Icons.schedule,
+            iconColor: Colors.purple,
+            title: 'خصم حجز مبكر',
+            subtitle: '$_earlyBirdDays يوم مسبقاً — خصم $_earlyBirdPercent٪',
+            active: _earlyBirdActive,
+            onToggle: (v) => setState(() => _earlyBirdActive = v),
+          ),
+
+          const SizedBox(height: AppSpacing.sm),
+          if (_earlyBirdActive) ...[
+            _buildDiscountPickers(
+              daysValue: _earlyBirdDays,
+              daysOptions: const [7, 14, 21, 30],
+              percentValue: _earlyBirdPercent,
+              percentOptions: const [5, 10, 15, 20],
+              onDaysChanged: (v) => setState(() => _earlyBirdDays = v),
+              onPercentChanged: (v) => setState(() => _earlyBirdPercent = v),
+            ),
+            const SizedBox(height: AppSpacing.md),
+          ],
+
+          // Last-minute toggle
+          _buildDiscountToggle(
+            icon: Icons.local_fire_department,
+            iconColor: Colors.red,
+            title: 'عرض اللحظة الأخيرة',
+            subtitle: '$_lastMinuteDays يوم — خصم $_lastMinutePercent٪',
+            active: _lastMinuteActive,
+            onToggle: (v) => setState(() => _lastMinuteActive = v),
+          ),
+
+          if (_lastMinuteActive) ...[
+            const SizedBox(height: AppSpacing.sm),
+            _buildDiscountPickers(
+              daysValue: _lastMinuteDays,
+              daysOptions: const [1, 2, 3, 4],
+              percentValue: _lastMinutePercent,
+              percentOptions: const [5, 10, 15, 20],
+              onDaysChanged: (v) => setState(() => _lastMinuteDays = v),
+              onPercentChanged: (v) => setState(() => _lastMinutePercent = v),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSeasonRuleCard(_SeasonData season, int index) {
+    Color parseColor(String hex) {
+      try {
+        final clean = hex.replaceFirst('#', '');
+        return Color(int.parse('FF$clean', radix: 16));
+      } catch (_) {
+        return Colors.blue;
+      }
+    }
+
+    final color = parseColor(season.color);
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: season.active ? 0.06 : 0.02),
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        border: Border.all(
+          color: season.active
+              ? color.withValues(alpha: 0.2)
+              : Theme.of(context).colorScheme.outlineVariant,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // Header row with name + toggle
+          Row(
+            children: [
+              // Active toggle
+              SizedBox(
+                height: 24,
+                child: Switch(
+                  value: season.active,
+                  onChanged: (v) => setState(() => season.active = v),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+              ),
+              const Spacer(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    season.name,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: season.active ? color : Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  Text(
+                    '${season.startDay}/${season.startMonth} – ${season.endDay}/${season.endMonth}',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Container(
+                width: 8,
+                height: 24,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ],
+          ),
+          if (season.active) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildMiniPrice(
+                    'نهاية الأسبوع',
+                    Money(season.weekendCents).toJodString(),
+                    Colors.orange,
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: _buildMiniPrice(
+                    'أيام الأسبوع',
+                    Money(season.weekdayCents).toJodString(),
+                    color,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMiniPrice(String label, String price, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
+      ),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: TextStyle(fontSize: 9, color: color.withValues(alpha: 0.7)),
+          ),
+          Text(
+            '$price د.أ',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: color,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHolidayCard(_HolidayData holiday, int index) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: holiday.active
+            ? Colors.orange.withValues(alpha: 0.06)
+            : Theme.of(context).colorScheme.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        border: Border.all(
+          color: holiday.active
+              ? Colors.orange.withValues(alpha: 0.2)
+              : Theme.of(context).colorScheme.outlineVariant,
+        ),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            height: 24,
+            child: Switch(
+              value: holiday.active,
+              onChanged: (v) => setState(() => holiday.active = v),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              color: Colors.orange.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              '+${holiday.surchargePercent}٪',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Colors.orange.shade800,
+              ),
+            ),
+          ),
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                holiday.name,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: context.colorScheme.onSurface,
+                ),
+              ),
+              Text(
+                '${holiday.startDate} – ${holiday.endDate}',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Icon(Icons.celebration, size: 16, color: Colors.orange.shade600),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDiscountToggle({
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String subtitle,
+    required bool active,
+    required ValueChanged<bool> onToggle,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: active
+            ? iconColor.withValues(alpha: 0.05)
+            : Theme.of(context).colorScheme.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        border: Border.all(
+          color: active
+              ? iconColor.withValues(alpha: 0.2)
+              : Theme.of(context).colorScheme.outlineVariant,
+        ),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            height: 24,
+            child: Switch(
+              value: active,
+              onChanged: onToggle,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+          ),
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: context.colorScheme.onSurface,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Icon(icon, size: 16, color: iconColor),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDiscountPickers({
+    required int daysValue,
+    required List<int> daysOptions,
+    required int percentValue,
+    required List<int> percentOptions,
+    required ValueChanged<int> onDaysChanged,
+    required ValueChanged<int> onPercentChanged,
+  }) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: AppSpacing.lg),
+      child: Row(
+        children: [
+          // Percent picker
+          Expanded(
+            child: _buildChipPicker(
+              label: 'الخصم',
+              value: percentValue,
+              options: percentOptions,
+              format: (v) => '$v٪',
+              onChanged: onPercentChanged,
+            ),
+          ),
+          const SizedBox(width: AppSpacing.md),
+          // Days picker
+          Expanded(
+            child: _buildChipPicker(
+              label: 'الأيام',
+              value: daysValue,
+              options: daysOptions,
+              format: (v) => '$v',
+              onChanged: onDaysChanged,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildChipPicker({
+    required String label,
+    required int value,
+    required List<int> options,
+    required String Function(int) format,
+    required ValueChanged<int> onChanged,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        Wrap(
+          spacing: 4,
+          runSpacing: 4,
+          alignment: WrapAlignment.end,
+          children: options.map((opt) {
+            final selected = opt == value;
+            return GestureDetector(
+              onTap: () => onChanged(opt),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: selected
+                      ? AppColors.primary.withValues(alpha: 0.1)
+                      : Theme.of(context).colorScheme.surfaceContainerLowest,
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: selected
+                        ? AppColors.primary.withValues(alpha: 0.3)
+                        : Theme.of(context).colorScheme.outlineVariant,
+                  ),
+                ),
+                child: Text(
+                  format(opt),
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
+                    color: selected
+                        ? AppColors.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────
   // SHARED HELPERS
   // ─────────────────────────────────────────────────────────────
   Widget _buildEditButton({
@@ -1234,4 +1711,54 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
       ),
     );
   }
+}
+
+// ─────────────────────────────────────────────────────────────
+// Mutable data models for the editor (local state only)
+// ─────────────────────────────────────────────────────────────
+
+class _SeasonData {
+  final String id;
+  final String name;
+  final String icon;
+  final int startMonth;
+  final int startDay;
+  final int endMonth;
+  final int endDay;
+  final int weekdayCents;
+  final int weekendCents;
+  bool active;
+  final String color;
+
+  _SeasonData(
+    this.id,
+    this.name,
+    this.icon,
+    this.startMonth,
+    this.startDay,
+    this.endMonth,
+    this.endDay,
+    this.weekdayCents,
+    this.weekendCents,
+    this.active,
+    this.color,
+  );
+}
+
+class _HolidayData {
+  final String id;
+  final String name;
+  final String startDate;
+  final String endDate;
+  final int surchargePercent;
+  bool active;
+
+  _HolidayData(
+    this.id,
+    this.name,
+    this.startDate,
+    this.endDate,
+    this.surchargePercent,
+    this.active,
+  );
 }

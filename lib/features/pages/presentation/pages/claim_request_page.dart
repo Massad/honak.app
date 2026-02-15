@@ -392,7 +392,7 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                 Text(
                   isInPerson
                       ? 'سنتواصل معك لتأكيد موعد الزيارة.\nفريقنا سيساعدك بتفعيل الصفحة بالكامل.'
-                      : 'سيراجع فريق هناك طلبك خلال ٢٤ ساعة.\nسنتواصل معك عبر الرقم المسجل.',
+                      : 'سيراجع فريق هناك.app طلبك خلال ٢٤ ساعة.\nسنتواصل معك عبر الرقم المسجل.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -662,7 +662,7 @@ class _StepIntro extends StatelessWidget {
                       const SizedBox(height: 12),
                       _benefitRow(context, Icons.description_outlined, 'إضافة منتجاتك أو خدماتك أو قائمتك'),
                       const SizedBox(height: 12),
-                      _benefitRow(context, Icons.shield_outlined, 'تفعيل استقبال الطلبات عبر هناك'),
+                      _benefitRow(context, Icons.shield_outlined, 'تفعيل استقبال الطلبات عبر هناك.app'),
                       const SizedBox(height: 12),
                       _benefitRow(context, Icons.person_outline, 'إدارة فريق العمل والصلاحيات'),
                     ],

@@ -151,6 +151,7 @@ final photographer = createType(
     itemUnit: 'استفسار',
   ),
   showCoverageAreas: false,
+  coverageLabelAr: 'نطاق الخدمة',
   availablePermissions: [
     Perm.manageOrders,
     Perm.respondChat,

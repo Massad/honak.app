@@ -1,0 +1,88 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "biz_prt_01",
+      "name": "حفل زفاف عائلة الزعبي",
+      "name_en": "Al-Zoubi Wedding",
+      "description": "تغطية كاملة لحفل زفاف في فندق الشيراتون — تصوير فوتوغرافي وفيديو",
+      "images": [
+        "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=400&q=80"
+      ],
+      "category_id": "cat_wedding",
+      "category_name": "أعراس",
+      "status": "active",
+      "sort_order": 1,
+      "page_id": "sara-photography",
+      "option_groups": [],
+      "properties": {}
+    },
+    {
+      "id": "biz_prt_02",
+      "name": "جلسة بورتريه — رنا",
+      "name_en": "Portrait Session — Rana",
+      "description": "جلسة تصوير بورتريه احترافية في الاستوديو",
+      "images": [
+        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=400&q=80"
+      ],
+      "category_id": "cat_portrait",
+      "category_name": "بورتريه",
+      "status": "active",
+      "sort_order": 2,
+      "page_id": "sara-photography",
+      "option_groups": [],
+      "properties": {}
+    },
+    {
+      "id": "biz_prt_03",
+      "name": "حفل تخرج جامعة الأردنية",
+      "name_en": "UJ Graduation Ceremony",
+      "description": "تغطية حفل تخرج الفوج ٤٥ — كلية الهندسة",
+      "images": [
+        "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1627556704302-624286467c65?auto=format&fit=crop&w=400&q=80"
+      ],
+      "category_id": "cat_events",
+      "category_name": "مناسبات",
+      "status": "active",
+      "sort_order": 3,
+      "page_id": "sara-photography",
+      "option_groups": [],
+      "properties": {}
+    },
+    {
+      "id": "biz_prt_04",
+      "name": "تصوير منتجات — شركة الإبداع",
+      "name_en": "Product Photography — Ibdaa Co",
+      "description": "تصوير ٢٠ منتج لمتجر إلكتروني — خلفية بيضاء وتنسيق احترافي",
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80"
+      ],
+      "category_id": "cat_products",
+      "category_name": "تصوير منتجات",
+      "status": "active",
+      "sort_order": 4,
+      "page_id": "sara-photography",
+      "option_groups": [],
+      "properties": {}
+    },
+    {
+      "id": "biz_prt_05",
+      "name": "جلسة عائلية — حديقة الحسين",
+      "name_en": "Family Session — Hussein Park",
+      "description": "جلسة تصوير عائلية في الهواء الطلق",
+      "images": [
+        "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=400&q=80"
+      ],
+      "category_id": "cat_portrait",
+      "category_name": "بورتريه",
+      "status": "active",
+      "sort_order": 5,
+      "page_id": "sara-photography",
+      "option_groups": [],
+      "properties": {}
+    }
+  ],
+  "meta": {"total": 5, "has_more": false}
+}

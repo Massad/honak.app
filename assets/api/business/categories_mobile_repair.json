@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_mr_screen",
+      "name": "شاشة",
+      "item_count": 3,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_mr_power",
+      "name": "طاقة وشحن",
+      "item_count": 2,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_mr_parts",
+      "name": "قطع",
+      "item_count": 4,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_mr_repair",
+      "name": "إصلاح",
+      "item_count": 1,
+      "sort_order": 4
+    },
+    {
+      "id": "cat_mr_software",
+      "name": "برمجيات",
+      "item_count": 2,
+      "sort_order": 5
+    }
+  ],
+  "meta": {
+    "total": 5
+  }
+}

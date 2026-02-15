@@ -4,17 +4,20 @@
     "stats": {
       "requests_today": 5,
       "new_followers": 12,
-      "page_views": 234,
-      "today_revenue": 15600
+      "page_views": 234
     },
     "today_revenue": {
       "total": 15600,
-      "completed_count": 4,
+      "yesterday": 13200,
+      "completed_count": 5,
+      "orders_count": 5,
+      "payment_breakdown": {"cash": 9400, "cliq": 4700, "bank": 1500},
       "items": [
-        {"service": "فستان سهرة", "amount": 6500, "time": "11:00"},
-        {"service": "بلوزة + تنورة", "amount": 4200, "time": "12:30"},
+        {"service": "فستان سهرة", "amount": 5500, "time": "10:30"},
+        {"service": "بلوزة ساتان", "amount": 1800, "time": "11:30"},
+        {"service": "بنطلون جينز", "amount": 2500, "time": "12:30"},
         {"service": "جاكيت شتوي", "amount": 3500, "time": "13:15"},
-        {"service": "حقيبة يد", "amount": 1400, "time": "14:00"}
+        {"service": "تنورة ميدي", "amount": 2300, "time": "14:00"}
       ]
     },
     "low_stock": [

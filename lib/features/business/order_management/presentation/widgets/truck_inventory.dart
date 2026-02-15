@@ -283,7 +283,7 @@ class _CounterColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: Column(
         children: [
           // Label
@@ -301,7 +301,7 @@ class _CounterColumn extends StatelessWidget {
               Icon(icon, size: 11, color: iconColor),
             ],
           ),
-          const SizedBox(height: AppSpacing.sm),
+          const SizedBox(height: 6),
 
           // Buttons + count
           Row(
@@ -316,20 +316,20 @@ class _CounterColumn extends StatelessWidget {
                     : context.colorScheme.onSurfaceVariant,
                 onTap: onIncrement,
               ),
-              const SizedBox(width: AppSpacing.md),
+              const SizedBox(width: 8),
               SizedBox(
-                width: 48,
+                width: 40,
                 child: Text(
                   '$count',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 24,
                     fontWeight: FontWeight.w500,
                     color: countColor,
                   ),
                 ),
               ),
-              const SizedBox(width: AppSpacing.md),
+              const SizedBox(width: 8),
               // Decrement (visually left in RTL)
               _RoundButton(
                 icon: Icons.remove,
@@ -339,7 +339,7 @@ class _CounterColumn extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
 
           // Subtitle
           Text(
@@ -380,14 +380,14 @@ class _RoundButton extends StatelessWidget {
         opacity: onTap != null ? 1.0 : 0.3,
         duration: const Duration(milliseconds: 150),
         child: Container(
-          width: 44,
-          height: 44,
+          width: 36,
+          height: 36,
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
           ),
           alignment: Alignment.center,
-          child: Icon(icon, size: 16, color: foregroundColor),
+          child: Icon(icon, size: 14, color: foregroundColor),
         ),
       ),
     );

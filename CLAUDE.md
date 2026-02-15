@@ -160,6 +160,25 @@ Lint rule: `prefer_single_quotes: true`
 
 ~300 lines for widgets, ~500 for pages/providers. Split by area when approaching.
 
+## Adding a New Business Type
+
+Before adding a new business type, **read these docs first** (in order):
+
+1. `../docs/ARCHETYPES.md` — understand the 8 archetypes and pick the right one
+2. `../docs/BUSINESS_TAXONOMY.md` — see all ~160 types, categories, feature catalog
+3. `../docs/generated/BUSINESS_MAP.md` — see what each type currently has in the app
+4. `lib/config/types/` — existing type configs to use as reference
+
+Steps:
+1. **Register the type** in the appropriate `lib/config/types/{archetype}_types.dart` file using `createType()`
+2. **Create fixtures**: page JSON, items JSON, dashboard JSON (see "Adding a New Business Page" above)
+3. **Run generators**: `dart run tool/generate_fixtures.dart`
+4. **If custom features needed**: add widgets in `lib/features/business/` following existing patterns
+5. **Regenerate business map**: `dart run tool/generate_business_map.dart`
+
+If the type fits an existing archetype: ~4–5 files, zero new Dart widgets.
+If custom capabilities needed: ~5–15 additional files per capability.
+
 ## Visual Reference
 
 Figma prototype at `../app-figma/` — read React components there for layout/spacing/color reference, then build Flutter equivalents. Key paths:

@@ -197,7 +197,6 @@ const _$OrderSourceEnumMap = {
   OrderSource.appOrder: 'app_order',
   OrderSource.walkUp: 'walk_up',
   OrderSource.phoneCall: 'phone_call',
-  OrderSource.balcony: 'balcony',
   OrderSource.whatsapp: 'whatsapp',
   OrderSource.adHoc: 'ad_hoc',
 };

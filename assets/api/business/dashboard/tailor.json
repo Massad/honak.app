@@ -2,10 +2,9 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 4,
-      "new_followers": 1,
-      "page_views": 18,
-      "today_revenue": 7600
+      "received": 1,
+      "processing": 1,
+      "ready": 1
     },
     "today_summary": {
       "completed": 1,
@@ -24,7 +23,10 @@
     },
     "today_revenue": {
       "total": 7600,
+      "yesterday": 6400,
       "completed_count": 2,
+      "orders_count": 2,
+      "payment_breakdown": {"cash": 4600, "cliq": 2300, "bank": 700},
       "items": [
         { "service": "تفصيل عباية + تقصير بنطلون", "amount": 3300, "time": "10:00" },
         { "service": "تفصيل ثوب", "amount": 2500, "time": "09:00" }

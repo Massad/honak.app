@@ -23,7 +23,7 @@ class DirectoryStatsGrid extends StatelessWidget {
             child: _StatCard(
               icon: Icons.storefront,
               // "\u0639\u0644\u0649 \u0647\u0646\u0627\u0643" = على هناك
-              label: '\u0639\u0644\u0649 \u0647\u0646\u0627\u0643',
+              label: '\u0639\u0644\u0649 \u0647\u0646\u0627\u0643.app',
               value: '${stats.onHonak}/${stats.totalTenants}',
               color: Colors.blue,
             ),

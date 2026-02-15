@@ -7,6 +7,16 @@
       "page_views": 67,
       "today_revenue": 45000
     },
+    "today_revenue": {
+      "total": 45000,
+      "yesterday": 38000,
+      "completed_count": 1,
+      "orders_count": 1,
+      "payment_breakdown": {"cash": 27000, "cliq": 13500, "bank": 4500},
+      "items": [
+        {"service": "الفيلا الرئيسية — عائلة المصري", "amount": 45000, "time": "الأمس"}
+      ]
+    },
     "occupancy": {
       "percentage": 60,
       "period": "هذا الشهر",

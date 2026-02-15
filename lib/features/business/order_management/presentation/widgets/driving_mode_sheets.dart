@@ -50,19 +50,14 @@ class SourceBadge extends StatelessWidget {
         color: AppColors.primary,
       ),
       OrderSource.walkUp: (
-        label: 'طلب شارع',
-        icon: Icons.person,
+        label: 'عشوائي',
+        icon: Icons.shuffle,
         color: AppColors.success,
       ),
       OrderSource.phoneCall: (
         label: 'اتصال',
         icon: Icons.phone,
         color: AppColors.secondary,
-      ),
-      OrderSource.balcony: (
-        label: 'بلكونة',
-        icon: Icons.home_outlined,
-        color: Color(0xFF00897B),
       ),
       OrderSource.whatsapp: (
         label: 'واتساب',
@@ -109,12 +104,20 @@ class SourceBadge extends StatelessWidget {
 
 // ═══════════════════════════════════════════════════════════════
 // DeliveredCollapse — collapsed list of completed deliveries
+// Shows detailed cards with undo/edit within 30-min window.
 // ═══════════════════════════════════════════════════════════════
 
 class DeliveredCollapse extends StatefulWidget {
   final List<QueueItem> items;
+  final void Function(int position)? onUndo;
+  final void Function(int position)? onEdit;
 
-  const DeliveredCollapse({super.key, required this.items});
+  const DeliveredCollapse({
+    super.key,
+    required this.items,
+    this.onUndo,
+    this.onEdit,
+  });
 
   @override
   State<DeliveredCollapse> createState() => _DeliveredCollapseState();
@@ -156,52 +159,501 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
             ),
           ),
           if (_open)
-            Opacity(
-              opacity: 0.6,
-              child: Column(
-                children: widget.items.map((d) {
-                  final totalQty =
-                      d.items.fold<int>(0, (s, i) => s + i.qty);
-                  return Container(
-                    margin: const EdgeInsets.only(top: 4),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.md,
-                      vertical: AppSpacing.sm,
+            Column(
+              children: widget.items.map((d) {
+                final totalQty =
+                    d.fullDelivered ?? d.items.fold<int>(0, (s, i) => s + i.qty);
+
+                // 30-min edit window
+                final deliveredAt = d.deliveredAt != null
+                    ? DateTime.tryParse(d.deliveredAt!)
+                    : null;
+                final minutesAgo = deliveredAt != null
+                    ? DateTime.now().difference(deliveredAt).inMinutes
+                    : 999;
+                final canModify = minutesAgo <= 30;
+
+                // Time label
+                final timeLabel = deliveredAt != null
+                    ? '${deliveredAt.hour.toString().padLeft(2, '0')}:${deliveredAt.minute.toString().padLeft(2, '0')}'
+                    : '';
+
+                return Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.surface,
+                    borderRadius: AppRadius.card,
+                    border: Border.all(
+                      color: context.colorScheme.outlineVariant.withAlpha(100),
                     ),
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.surface,
-                      borderRadius: AppRadius.cardInner,
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.check,
-                          size: 12,
-                          color: AppColors.success,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Top row: check + name | qty + time
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.check,
+                                  size: 12,
+                                  color: AppColors.success,
+                                ),
+                                const SizedBox(width: 8),
+                                Flexible(
+                                  child: Text(
+                                    d.customerName,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: context.colorScheme.onSurface,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '$totalQty وحدة',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: context.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                              if (timeLabel.isNotEmpty) ...[
+                                const SizedBox(width: 8),
+                                Text(
+                                  timeLabel,
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    color: context.colorScheme.onSurfaceVariant
+                                        .withAlpha(130),
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      // Detail badges row: payment, empties, note
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            if (d.actualPayment != null)
+                              _deliveredBadge(
+                                paymentLabel(d.actualPayment!),
+                                context.colorScheme.onSurfaceVariant,
+                                context.colorScheme.surfaceContainerHighest,
+                              ),
+                            if (d.emptiesCollected != null &&
+                                d.emptiesCollected! > 0) ...[
+                              const SizedBox(width: 4),
+                              _deliveredBadge(
+                                '${d.emptiesCollected} فارغ',
+                                context.colorScheme.onSurfaceVariant,
+                                context.colorScheme.surfaceContainerHighest,
+                              ),
+                            ],
+                            if (d.deliveryNote != null &&
+                                d.deliveryNote!.isNotEmpty) ...[
+                              const SizedBox(width: 4),
+                              Flexible(
+                                child: _deliveredBadge(
+                                  d.deliveryNote!,
+                                  const Color(0xFFFF9800),
+                                  const Color(0xFFFFF8E1),
+                                  maxWidth: 120,
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
-                        const SizedBox(width: 8),
-                        Text(
-                          d.customerName,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: context.colorScheme.onSurfaceVariant,
-                            decoration: TextDecoration.lineThrough,
+                      ),
+
+                      // Undo / Edit actions — only for recent deliveries
+                      if (canModify &&
+                          (widget.onUndo != null || widget.onEdit != null))
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Container(
+                            padding: const EdgeInsets.only(top: 8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                top: BorderSide(
+                                  color: context.colorScheme.outlineVariant
+                                      .withAlpha(60),
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                if (widget.onEdit != null)
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () =>
+                                          widget.onEdit!(d.position),
+                                      child: Container(
+                                        height: 32,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.primary
+                                              .withAlpha(20),
+                                          borderRadius:
+                                              BorderRadius.circular(
+                                                  AppRadius.sm),
+                                        ),
+                                        child: const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.edit_outlined,
+                                                size: 10,
+                                                color: AppColors.primary),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              'تعديل البيانات',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                color: AppColors.primary,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                if (widget.onEdit != null &&
+                                    widget.onUndo != null)
+                                  const SizedBox(width: 8),
+                                if (widget.onUndo != null)
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () =>
+                                          widget.onUndo!(d.position),
+                                      child: Container(
+                                        height: 32,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.error
+                                              .withAlpha(20),
+                                          borderRadius:
+                                              BorderRadius.circular(
+                                                  AppRadius.sm),
+                                        ),
+                                        child: const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.undo,
+                                                size: 10,
+                                                color: AppColors.error),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              'تراجع',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                color: AppColors.error,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
-                        const Spacer(),
-                        Text(
-                          '$totalQty وحدة',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: context.colorScheme.onSurfaceVariant,
+
+                      // Expired notice
+                      if (!canModify)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Align(
+                            alignment: AlignmentDirectional.centerEnd,
+                            child: Text(
+                              'مضى أكثر من ٣٠ دقيقة — لا يمكن التعديل',
+                              style: TextStyle(
+                                fontSize: 8,
+                                color: context.colorScheme.onSurfaceVariant
+                                    .withAlpha(100),
+                              ),
+                            ),
                           ),
                         ),
-                      ],
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _deliveredBadge(
+    String text,
+    Color textColor,
+    Color bgColor, {
+    double? maxWidth,
+  }) {
+    return Container(
+      constraints:
+          maxWidth != null ? BoxConstraints(maxWidth: maxWidth) : null,
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: AppRadius.pill,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 8, color: textColor),
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EditDeliverySheet — modify a delivered item within 30-min window
+// ═══════════════════════════════════════════════════════════════
+
+class EditDeliverySheet extends StatefulWidget {
+  final QueueItem item;
+  final void Function(
+    int position,
+    int fullDelivered,
+    int emptiesCollected,
+    PaymentType actualPayment,
+    String note,
+  ) onSave;
+
+  const EditDeliverySheet({
+    super.key,
+    required this.item,
+    required this.onSave,
+  });
+
+  @override
+  State<EditDeliverySheet> createState() => _EditDeliverySheetState();
+}
+
+class _EditDeliverySheetState extends State<EditDeliverySheet> {
+  late int _fullDel;
+  late int _emptyCol;
+  late PaymentType _payment;
+  final _noteController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    final qty = widget.item.items.fold<int>(0, (s, i) => s + i.qty);
+    _fullDel = widget.item.fullDelivered ?? qty;
+    _emptyCol = widget.item.emptiesCollected ?? 0;
+    _payment = widget.item.actualPayment ?? widget.item.payment;
+    _noteController.text = widget.item.deliveryNote ?? '';
+  }
+
+  @override
+  void dispose() {
+    _noteController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.xl),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _SheetHeader(
+            title: 'تعديل بيانات التسليم',
+            subtitle: 'تعديل الكميات أو طريقة الدفع',
+            onClose: () => Navigator.pop(context),
+          ),
+          // Customer info
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: context.colorScheme.surfaceVariant,
+              borderRadius: AppRadius.cardInner,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.item.customerName,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  widget.item.address.split('\u060C').first,
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: context.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          // Warning banner
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF8E1),
+              border: Border.all(color: const Color(0xFFFFECB3)),
+              borderRadius: AppRadius.cardInner,
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.warning_amber,
+                  size: 14,
+                  color: Color(0xFFFF9800),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'التعديل سيُسجّل في سجل النشاط مع الوقت والقيم الأصلية',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.amber[800],
                     ),
-                  );
-                }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          // Counters row
+          Row(
+            children: [
+              Expanded(
+                child: _Counter(
+                  label: 'ممتلئ تم تسليمه',
+                  value: _fullDel,
+                  onChanged: (v) => setState(() => _fullDel = v),
+                  incrementColor: AppColors.primary,
+                ),
+              ),
+              Expanded(
+                child: _Counter(
+                  label: 'فوارغ تم جمعها',
+                  value: _emptyCol,
+                  onChanged: (v) => setState(() => _emptyCol = v),
+                  incrementColor: context.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          // Payment selector
+          Row(
+            children: _paymentOptions.map((opt) {
+              final active = _payment == opt.id;
+              return Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 8),
+                  child: GestureDetector(
+                    onTap: () => setState(() => _payment = opt.id),
+                    child: Container(
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: active
+                            ? AppColors.primary
+                            : context.colorScheme.surfaceVariant,
+                        borderRadius: AppRadius.cardInner,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            opt.icon,
+                            size: 13,
+                            color: active
+                                ? Colors.white
+                                : context.colorScheme.onSurfaceVariant,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            opt.label,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: active
+                                  ? Colors.white
+                                  : context.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          // Note
+          TextField(
+            controller: _noteController,
+            decoration: InputDecoration(
+              hintText: 'ملاحظة (اختياري)',
+              hintStyle: TextStyle(
+                fontSize: 14,
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+              filled: true,
+              fillColor: context.colorScheme.surfaceVariant,
+              border: OutlineInputBorder(
+                borderRadius: AppRadius.cardInner,
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.md,
               ),
             ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          // Save button
+          SizedBox(
+            height: 48,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                widget.onSave(
+                  widget.item.position,
+                  _fullDel,
+                  _emptyCol,
+                  _payment,
+                  _noteController.text,
+                );
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.check, size: 16),
+              label: const Text('حفظ التعديلات'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: AppRadius.cardInner,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -10,7 +10,6 @@ import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 
 import 'account_tab_cards.dart';
-import 'settings_item.dart';
 import 'settings_section.dart';
 
 export 'account_tab_cards.dart';
@@ -33,44 +32,13 @@ class AccountTab extends ConsumerWidget {
         if (user != null)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: AccountProfileCard(user: user),
+            child: AccountProfileCard(
+              user: user,
+              onTap: () {
+                ref.read(appModeProvider.notifier).switchToCustomerMode();
+              },
+            ),
           ),
-        const SizedBox(height: AppSpacing.lg),
-        // General settings
-        SettingsSection(
-          label: 'إعدادات عامة',
-          child: Column(
-            children: [
-              SettingsItem(
-                icon: Icons.notifications_outlined,
-                label: 'الإشعارات',
-                desc: 'إعدادات التنبيهات والإشعارات',
-                onTap: () => context.showSnackBar('قريباً: الإشعارات'),
-              ),
-              const SizedBox(height: 6),
-              SettingsItem(
-                icon: Icons.language_outlined,
-                label: 'اللغة',
-                desc: 'العربية',
-                onTap: () => context.showSnackBar('قريباً: اللغة'),
-              ),
-              const SizedBox(height: 6),
-              SettingsItem(
-                icon: Icons.help_outline,
-                label: 'المساعدة والدعم',
-                desc: 'الأسئلة الشائعة والتواصل معنا',
-                onTap: () => context.showSnackBar('قريباً: المساعدة'),
-              ),
-              const SizedBox(height: 6),
-              SettingsItem(
-                icon: Icons.description_outlined,
-                label: 'الشروط والأحكام',
-                desc: 'سياسة الخصوصية والاستخدام',
-                onTap: () => context.showSnackBar('قريباً: الشروط'),
-              ),
-            ],
-          ),
-        ),
         const SizedBox(height: AppSpacing.lg),
         // Business pages
         if (user != null && user.pages.isNotEmpty)
@@ -244,7 +212,7 @@ class AccountTab extends ConsumerWidget {
                 onPressed: () => Navigator.pop(ctx),
                 child: Text(
                   'إلغاء',
-                  style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  style: TextStyle(color: Theme.of(ctx).colorScheme.onSurfaceVariant),
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),

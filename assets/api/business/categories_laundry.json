@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_wash",
+      "name": "غسيل",
+      "item_count": 3,
+      "sort_order": 1
+    },
+    {
+      "id": "cat_iron",
+      "name": "كي",
+      "item_count": 2,
+      "sort_order": 2
+    },
+    {
+      "id": "cat_special",
+      "name": "خدمات خاصة",
+      "item_count": 3,
+      "sort_order": 3
+    },
+    {
+      "id": "cat_large",
+      "name": "قطع كبيرة",
+      "item_count": 2,
+      "sort_order": 4
+    }
+  ],
+  "meta": {
+    "total": 4
+  }
+}

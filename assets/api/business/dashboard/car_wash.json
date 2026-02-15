@@ -2,10 +2,9 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 8,
-      "new_followers": 5,
-      "page_views": 64,
-      "today_revenue": 4600
+      "queue_size": 4,
+      "completed_today": 3,
+      "revenue_today": 4600
     },
     "today_summary": {
       "completed": 3,
@@ -24,7 +23,10 @@
     },
     "today_revenue": {
       "total": 4600,
+      "yesterday": 3800,
       "completed_count": 3,
+      "orders_count": 3,
+      "payment_breakdown": {"cash": 2800, "cliq": 1400, "bank": 400},
       "items": [
         {"service": "غسيل خارجي", "amount": 300, "time": "07:55"},
         {"service": "غسيل داخلي وخارجي", "amount": 500, "time": "08:25"},

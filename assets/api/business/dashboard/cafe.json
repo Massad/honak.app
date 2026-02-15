@@ -5,16 +5,19 @@
       "requests_today": 15,
       "new_followers": 6,
       "page_views": 89,
-      "today_revenue": 12800
+      "today_revenue": 5400
     },
     "today_revenue": {
-      "total": 12800,
+      "total": 5400,
+      "yesterday": 4600,
       "completed_count": 12,
+      "orders_count": 12,
+      "payment_breakdown": {"cash": 3200, "cliq": 1600, "bank": 600},
       "items": [
-        {"service": "قهوة تركي × 3", "amount": 2250, "time": "08:30"},
-        {"service": "لاتيه + كرواسان", "amount": 3500, "time": "09:00"},
-        {"service": "شاي أخضر × 2", "amount": 1200, "time": "10:15"},
-        {"service": "كابتشينو + كيك", "amount": 3000, "time": "11:00"}
+        {"service": "قهوة عربية × 3", "amount": 450, "time": "08:30"},
+        {"service": "لاتيه + كرواسان", "amount": 450, "time": "09:00"},
+        {"service": "شاي أخضر × 2", "amount": 200, "time": "10:15"},
+        {"service": "كابتشينو + كيك", "amount": 550, "time": "11:00"}
       ]
     },
     "active_queue": [
@@ -27,6 +30,9 @@
       {"name": "كابتشينو", "count": 41, "trend": "up"},
       {"name": "V60", "count": 28, "trend": "up"},
       {"name": "شاي أخضر", "count": 23, "trend": "down"}
+    ],
+    "unavailable_items": [
+      "ماتشا لاتيه"
     ],
     "pending_requests": [
       {"id": "req_401", "customer": "ريم سعيد", "service": "حجز زاوية — 4 أشخاص", "date": "2026-02-12", "time": "16:00"}

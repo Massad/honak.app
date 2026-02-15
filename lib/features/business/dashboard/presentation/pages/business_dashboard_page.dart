@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:honak/config/archetype.dart';
 import 'package:honak/config/business_type_config.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dashboard/presentation/providers/dashboard_provider.dart';
 import 'package:honak/features/business/dashboard/presentation/widgets/dashboard_section_content.dart';
+import 'package:honak/features/business/dashboard/presentation/widgets/revenue_overview_card.dart';
+import 'package:honak/features/business/dashboard/presentation/widgets/setup_progress_card.dart';
+import 'package:honak/features/business/catalog_management/presentation/providers/stock_manager_provider.dart';
+import 'package:honak/features/business/catalog_management/presentation/widgets/stock_manager_sheet.dart';
 import 'package:honak/features/business/dashboard/presentation/widgets/sections/recurring_section.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 
@@ -19,21 +24,38 @@ class BusinessDashboardPage extends ConsumerWidget {
 
     final config = bizContext.config;
     final dashboard = config?.dashboard;
+    final archetype = bizContext.archetype;
     final dashData = ref.watch(dashboardStatsProvider(bizContext.page.id));
-    final statsMap =
-        dashData.valueOrNull?['stats'] as Map<String, dynamic>?;
+    final data = dashData.valueOrNull;
+    final statsMap = data?['stats'] as Map<String, dynamic>?;
+
+    // Revenue data for the overview card
+    final showRevenue = archetype != Archetype.directory &&
+        archetype != Archetype.followOnly;
+    final revenueData = showRevenue ? _parseRevenueData(data) : null;
 
     return ListView(
       padding: const EdgeInsets.only(bottom: AppSpacing.xxl),
       children: [
-        // Stats row
+        // 1. Setup checklist (hides when 100% complete)
+        SetupProgressCard(
+          archetype: archetype,
+          onAction: (stepId) =>
+              context.showSnackBar('قريباً: إعداد $stepId'),
+        ),
+
+        // 2. Revenue overview (not for directory/followOnly)
+        if (revenueData != null)
+          RevenueOverviewCard(data: revenueData),
+
+        // 3. Stats row
         if (dashboard != null && dashboard.statsLabels.isNotEmpty)
           _StatsRow(
             stats: dashboard.statsLabels,
             statsData: statsMap,
           ),
 
-        // Quick actions
+        // 4. Quick actions
         if (dashboard != null && dashboard.quickActions.isNotEmpty) ...[
           _SectionTitle(
             title: 'إجراءات سريعة',
@@ -43,7 +65,7 @@ class BusinessDashboardPage extends ConsumerWidget {
           _QuickActionsGrid(actions: dashboard.quickActions),
         ],
 
-        // Dashboard sections
+        // 5. Dashboard sections
         if (dashboard != null)
           ...dashboard.sections
               .where(
@@ -53,12 +75,19 @@ class BusinessDashboardPage extends ConsumerWidget {
               .map(
                 (section) => _SectionCard(
                   section: section,
-                  data: dashData.valueOrNull,
+                  data: data,
+                  onTap: section.type == DashboardSectionType.lowStock
+                      ? () => showStockManagerSheet(
+                            context,
+                            pageId: bizContext.page.id,
+                            initialFilter: StockFilterMode.low,
+                          )
+                      : null,
                 ),
               ),
 
-        // Recurring customers section
-        if (bizContext.archetype.supportsRequests)
+        // 6. Recurring customers section
+        if (archetype.supportsRequests)
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(
               AppSpacing.lg,
@@ -77,6 +106,41 @@ class BusinessDashboardPage extends ConsumerWidget {
             ),
           ),
       ],
+    );
+  }
+
+  /// Parse revenue data from dashboard fixture.
+  RevenueData? _parseRevenueData(Map<String, dynamic>? data) {
+    if (data == null) return null;
+    final rev = data['today_revenue'] as Map<String, dynamic>?;
+    if (rev == null) return null;
+
+    final amount = (rev['total'] ?? rev['amount'] ?? 0) as num;
+    final yesterday = (rev['yesterday'] ?? (amount * 0.8).round()) as num;
+    final orders = (rev['orders_count'] ?? rev['completed_count'] ?? 0) as num;
+
+    // Payment breakdown: from fixture or derived (60% cash, 30% cliq, 10% bank)
+    PaymentBreakdown? breakdown;
+    final pb = rev['payment_breakdown'] as Map<String, dynamic>?;
+    if (pb != null) {
+      breakdown = PaymentBreakdown(
+        cash: (pb['cash'] as num).toInt(),
+        cliq: (pb['cliq'] as num).toInt(),
+        bank: (pb['bank'] as num).toInt(),
+      );
+    } else if (amount > 0) {
+      breakdown = PaymentBreakdown(
+        cash: (amount * 0.6).round(),
+        cliq: (amount * 0.3).round(),
+        bank: (amount * 0.1).round(),
+      );
+    }
+
+    return RevenueData(
+      today: amount.toInt(),
+      yesterday: yesterday.toInt(),
+      ordersToday: orders.toInt(),
+      paymentBreakdown: breakdown,
     );
   }
 }
@@ -273,8 +337,9 @@ class _QuickActionCard extends StatelessWidget {
 class _SectionCard extends StatelessWidget {
   final DashboardSection section;
   final Map<String, dynamic>? data;
+  final VoidCallback? onTap;
 
-  const _SectionCard({required this.section, this.data});
+  const _SectionCard({required this.section, this.data, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -283,16 +348,19 @@ class _SectionCard extends StatelessWidget {
 
     // Sections with custom background render directly without white card
     if (customBg && hasData) {
-      return Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(
-          AppSpacing.lg,
-          AppSpacing.md,
-          AppSpacing.lg,
-          0,
-        ),
-        child: DashboardSectionContent(
-          type: section.type,
-          data: data!,
+      return GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(
+            AppSpacing.lg,
+            AppSpacing.md,
+            AppSpacing.lg,
+            0,
+          ),
+          child: DashboardSectionContent(
+            type: section.type,
+            data: data!,
+          ),
         ),
       );
     }

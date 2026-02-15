@@ -2,10 +2,9 @@
   "success": true,
   "data": {
     "stats": {
-      "requests_today": 6,
-      "new_followers": 3,
-      "page_views": 42,
-      "today_revenue": 7425
+      "received": 2,
+      "processing": 2,
+      "ready": 1
     },
     "today_summary": {
       "completed": 1,
@@ -24,7 +23,10 @@
     },
     "today_revenue": {
       "total": 7425,
+      "yesterday": 6200,
       "completed_count": 2,
+      "orders_count": 2,
+      "payment_breakdown": {"cash": 4500, "cliq": 2200, "bank": 725},
       "items": [
         { "service": "تنظيف بدلة كاملة + كي بالبخار", "amount": 800, "time": "10:00" },
         { "service": "غسيل عادي × 5 + كي عادي × 3", "amount": 525, "time": "16:30" }

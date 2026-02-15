@@ -7,6 +7,19 @@
       "page_views": 67,
       "today_revenue": 24000
     },
+    "today_revenue": {
+      "total": 24000,
+      "yesterday": 20500,
+      "completed_count": 8,
+      "orders_count": 8,
+      "payment_breakdown": {"cash": 14400, "cliq": 7200, "bank": 2400},
+      "items": [
+        {"service": "كشفية عامة × 5", "amount": 12500, "time": "09:00"},
+        {"service": "متابعة × 2", "amount": 3000, "time": "11:00"},
+        {"service": "فحص شامل × 1", "amount": 5000, "time": "10:30"},
+        {"service": "تحاليل × 1", "amount": 3500, "time": "12:00"}
+      ]
+    },
     "today_summary": {
       "completed": 8,
       "upcoming": 4,

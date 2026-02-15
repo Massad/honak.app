@@ -148,6 +148,8 @@ mixin _$PageDetail {
   List<String> get galleryImages => throw _privateConstructorUsedError;
   List<Amenity> get amenities => throw _privateConstructorUsedError;
   VillaPricing? get pricing => throw _privateConstructorUsedError;
+  @JsonKey(name: 'seasonal_pricing')
+  SeasonalPricing? get seasonalPricing => throw _privateConstructorUsedError;
   @JsonKey(name: 'house_rules')
   List<String> get houseRules => throw _privateConstructorUsedError;
   @JsonKey(name: 'check_in')
@@ -291,6 +293,7 @@ abstract class $PageDetailCopyWith<$Res> {
     @JsonKey(name: 'gallery_images') List<String> galleryImages,
     List<Amenity> amenities,
     VillaPricing? pricing,
+    @JsonKey(name: 'seasonal_pricing') SeasonalPricing? seasonalPricing,
     @JsonKey(name: 'house_rules') List<String> houseRules,
     @JsonKey(name: 'check_in') String? checkIn,
     @JsonKey(name: 'check_out') String? checkOut,
@@ -327,6 +330,7 @@ abstract class $PageDetailCopyWith<$Res> {
   $PageHoursCopyWith<$Res>? get hours;
   $PriceChangeCopyWith<$Res>? get activePriceChange;
   $VillaPricingCopyWith<$Res>? get pricing;
+  $SeasonalPricingCopyWith<$Res>? get seasonalPricing;
   $PriceRangeCopyWith<$Res>? get priceRange;
   $DirectoryStatsCopyWith<$Res>? get directoryStats;
 }
@@ -416,6 +420,7 @@ class _$PageDetailCopyWithImpl<$Res, $Val extends PageDetail>
     Object? galleryImages = null,
     Object? amenities = null,
     Object? pricing = freezed,
+    Object? seasonalPricing = freezed,
     Object? houseRules = null,
     Object? checkIn = freezed,
     Object? checkOut = freezed,
@@ -725,6 +730,10 @@ class _$PageDetailCopyWithImpl<$Res, $Val extends PageDetail>
                 ? _value.pricing
                 : pricing // ignore: cast_nullable_to_non_nullable
                       as VillaPricing?,
+            seasonalPricing: freezed == seasonalPricing
+                ? _value.seasonalPricing
+                : seasonalPricing // ignore: cast_nullable_to_non_nullable
+                      as SeasonalPricing?,
             houseRules: null == houseRules
                 ? _value.houseRules
                 : houseRules // ignore: cast_nullable_to_non_nullable
@@ -936,6 +945,20 @@ class _$PageDetailCopyWithImpl<$Res, $Val extends PageDetail>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
+  $SeasonalPricingCopyWith<$Res>? get seasonalPricing {
+    if (_value.seasonalPricing == null) {
+      return null;
+    }
+
+    return $SeasonalPricingCopyWith<$Res>(_value.seasonalPricing!, (value) {
+      return _then(_value.copyWith(seasonalPricing: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PageDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
   $PriceRangeCopyWith<$Res>? get priceRange {
     if (_value.priceRange == null) {
       return null;
@@ -1042,6 +1065,7 @@ abstract class _$$PageDetailImplCopyWith<$Res>
     @JsonKey(name: 'gallery_images') List<String> galleryImages,
     List<Amenity> amenities,
     VillaPricing? pricing,
+    @JsonKey(name: 'seasonal_pricing') SeasonalPricing? seasonalPricing,
     @JsonKey(name: 'house_rules') List<String> houseRules,
     @JsonKey(name: 'check_in') String? checkIn,
     @JsonKey(name: 'check_out') String? checkOut,
@@ -1085,6 +1109,8 @@ abstract class _$$PageDetailImplCopyWith<$Res>
   $PriceChangeCopyWith<$Res>? get activePriceChange;
   @override
   $VillaPricingCopyWith<$Res>? get pricing;
+  @override
+  $SeasonalPricingCopyWith<$Res>? get seasonalPricing;
   @override
   $PriceRangeCopyWith<$Res>? get priceRange;
   @override
@@ -1175,6 +1201,7 @@ class __$$PageDetailImplCopyWithImpl<$Res>
     Object? galleryImages = null,
     Object? amenities = null,
     Object? pricing = freezed,
+    Object? seasonalPricing = freezed,
     Object? houseRules = null,
     Object? checkIn = freezed,
     Object? checkOut = freezed,
@@ -1484,6 +1511,10 @@ class __$$PageDetailImplCopyWithImpl<$Res>
             ? _value.pricing
             : pricing // ignore: cast_nullable_to_non_nullable
                   as VillaPricing?,
+        seasonalPricing: freezed == seasonalPricing
+            ? _value.seasonalPricing
+            : seasonalPricing // ignore: cast_nullable_to_non_nullable
+                  as SeasonalPricing?,
         houseRules: null == houseRules
             ? _value._houseRules
             : houseRules // ignore: cast_nullable_to_non_nullable
@@ -1674,6 +1705,7 @@ class _$PageDetailImpl implements _PageDetail {
     final List<String> galleryImages = const [],
     final List<Amenity> amenities = const [],
     this.pricing,
+    @JsonKey(name: 'seasonal_pricing') this.seasonalPricing,
     @JsonKey(name: 'house_rules') final List<String> houseRules = const [],
     @JsonKey(name: 'check_in') this.checkIn,
     @JsonKey(name: 'check_out') this.checkOut,
@@ -2034,6 +2066,9 @@ class _$PageDetailImpl implements _PageDetail {
 
   @override
   final VillaPricing? pricing;
+  @override
+  @JsonKey(name: 'seasonal_pricing')
+  final SeasonalPricing? seasonalPricing;
   final List<String> _houseRules;
   @override
   @JsonKey(name: 'house_rules')
@@ -2206,7 +2241,7 @@ class _$PageDetailImpl implements _PageDetail {
 
   @override
   String toString() {
-    return 'PageDetail(id: $id, name: $name, nameEn: $nameEn, slug: $slug, handle: $handle, description: $description, descriptionEn: $descriptionEn, avatarUrl: $avatarUrl, coverUrl: $coverUrl, archetype: $archetype, businessTypeId: $businessTypeId, businessTypeName: $businessTypeName, categoryId: $categoryId, categoryName: $categoryName, exploreCategory: $exploreCategory, itemsLabelAr: $itemsLabelAr, itemsLabelEn: $itemsLabelEn, storeType: $storeType, engagementLevel: $engagementLevel, requiresApproval: $requiresApproval, trustScore: $trustScore, trustMetrics: $trustMetrics, responseTime: $responseTime, completionRate: $completionRate, totalOrders: $totalOrders, memberSince: $memberSince, isVerified: $isVerified, isOpen: $isOpen, pageStatus: $pageStatus, claimStatus: $claimStatus, temporarilyClosed: $temporarilyClosed, relocated: $relocated, permanentlyClosed: $permanentlyClosed, operatingHours: $operatingHours, workingHours: $workingHours, paymentMethods: $paymentMethods, cliqAlias: $cliqAlias, bankInfo: $bankInfo, coverageZones: $coverageZones, branches: $branches, coverageZonesStructured: $coverageZonesStructured, returnPolicy: $returnPolicy, cancellationPolicy: $cancellationPolicy, externalLinks: $externalLinks, deliveryAvailable: $deliveryAvailable, pickupAvailable: $pickupAvailable, bookingAvailable: $bookingAvailable, minimumOrderCents: $minimumOrderCents, deliveryFeeCents: $deliveryFeeCents, estimatedDeliveryMinutes: $estimatedDeliveryMinutes, followersCount: $followersCount, postsCount: $postsCount, itemsCount: $itemsCount, isFollowing: $isFollowing, teamMembersCount: $teamMembersCount, phone: $phone, whatsapp: $whatsapp, address: $address, location: $location, hours: $hours, catalogStrategy: $catalogStrategy, featuredItemsCount: $featuredItemsCount, contactMethods: $contactMethods, specials: $specials, modifiersNote: $modifiersNote, activePriceChange: $activePriceChange, packages: $packages, galleryImages: $galleryImages, amenities: $amenities, pricing: $pricing, houseRules: $houseRules, checkIn: $checkIn, checkOut: $checkOut, maxGuests: $maxGuests, bedrooms: $bedrooms, bathrooms: $bathrooms, servicesOffered: $servicesOffered, priceRange: $priceRange, serviceAreas: $serviceAreas, alerts: $alerts, aboutExtended: $aboutExtended, servicesLinks: $servicesLinks, pinnedPosts: $pinnedPosts, stories: $stories, weeklySchedule: $weeklySchedule, blockedDates: $blockedDates, dataSynced: $dataSynced, venueId: $venueId, venueName: $venueName, venueUnit: $venueUnit, venueFloor: $venueFloor, mallAnnouncements: $mallAnnouncements, featuredTenantIds: $featuredTenantIds, directoryStats: $directoryStats, parkingInfo: $parkingInfo, carryCategories: $carryCategories)';
+    return 'PageDetail(id: $id, name: $name, nameEn: $nameEn, slug: $slug, handle: $handle, description: $description, descriptionEn: $descriptionEn, avatarUrl: $avatarUrl, coverUrl: $coverUrl, archetype: $archetype, businessTypeId: $businessTypeId, businessTypeName: $businessTypeName, categoryId: $categoryId, categoryName: $categoryName, exploreCategory: $exploreCategory, itemsLabelAr: $itemsLabelAr, itemsLabelEn: $itemsLabelEn, storeType: $storeType, engagementLevel: $engagementLevel, requiresApproval: $requiresApproval, trustScore: $trustScore, trustMetrics: $trustMetrics, responseTime: $responseTime, completionRate: $completionRate, totalOrders: $totalOrders, memberSince: $memberSince, isVerified: $isVerified, isOpen: $isOpen, pageStatus: $pageStatus, claimStatus: $claimStatus, temporarilyClosed: $temporarilyClosed, relocated: $relocated, permanentlyClosed: $permanentlyClosed, operatingHours: $operatingHours, workingHours: $workingHours, paymentMethods: $paymentMethods, cliqAlias: $cliqAlias, bankInfo: $bankInfo, coverageZones: $coverageZones, branches: $branches, coverageZonesStructured: $coverageZonesStructured, returnPolicy: $returnPolicy, cancellationPolicy: $cancellationPolicy, externalLinks: $externalLinks, deliveryAvailable: $deliveryAvailable, pickupAvailable: $pickupAvailable, bookingAvailable: $bookingAvailable, minimumOrderCents: $minimumOrderCents, deliveryFeeCents: $deliveryFeeCents, estimatedDeliveryMinutes: $estimatedDeliveryMinutes, followersCount: $followersCount, postsCount: $postsCount, itemsCount: $itemsCount, isFollowing: $isFollowing, teamMembersCount: $teamMembersCount, phone: $phone, whatsapp: $whatsapp, address: $address, location: $location, hours: $hours, catalogStrategy: $catalogStrategy, featuredItemsCount: $featuredItemsCount, contactMethods: $contactMethods, specials: $specials, modifiersNote: $modifiersNote, activePriceChange: $activePriceChange, packages: $packages, galleryImages: $galleryImages, amenities: $amenities, pricing: $pricing, seasonalPricing: $seasonalPricing, houseRules: $houseRules, checkIn: $checkIn, checkOut: $checkOut, maxGuests: $maxGuests, bedrooms: $bedrooms, bathrooms: $bathrooms, servicesOffered: $servicesOffered, priceRange: $priceRange, serviceAreas: $serviceAreas, alerts: $alerts, aboutExtended: $aboutExtended, servicesLinks: $servicesLinks, pinnedPosts: $pinnedPosts, stories: $stories, weeklySchedule: $weeklySchedule, blockedDates: $blockedDates, dataSynced: $dataSynced, venueId: $venueId, venueName: $venueName, venueUnit: $venueUnit, venueFloor: $venueFloor, mallAnnouncements: $mallAnnouncements, featuredTenantIds: $featuredTenantIds, directoryStats: $directoryStats, parkingInfo: $parkingInfo, carryCategories: $carryCategories)';
   }
 
   @override
@@ -2361,6 +2396,8 @@ class _$PageDetailImpl implements _PageDetail {
               _amenities,
             ) &&
             (identical(other.pricing, pricing) || other.pricing == pricing) &&
+            (identical(other.seasonalPricing, seasonalPricing) ||
+                other.seasonalPricing == seasonalPricing) &&
             const DeepCollectionEquality().equals(
               other._houseRules,
               _houseRules,
@@ -2505,6 +2542,7 @@ class _$PageDetailImpl implements _PageDetail {
     const DeepCollectionEquality().hash(_galleryImages),
     const DeepCollectionEquality().hash(_amenities),
     pricing,
+    seasonalPricing,
     const DeepCollectionEquality().hash(_houseRules),
     checkIn,
     checkOut,
@@ -2622,6 +2660,7 @@ abstract class _PageDetail implements PageDetail {
     @JsonKey(name: 'gallery_images') final List<String> galleryImages,
     final List<Amenity> amenities,
     final VillaPricing? pricing,
+    @JsonKey(name: 'seasonal_pricing') final SeasonalPricing? seasonalPricing,
     @JsonKey(name: 'house_rules') final List<String> houseRules,
     @JsonKey(name: 'check_in') final String? checkIn,
     @JsonKey(name: 'check_out') final String? checkOut,
@@ -2850,6 +2889,9 @@ abstract class _PageDetail implements PageDetail {
   List<Amenity> get amenities;
   @override
   VillaPricing? get pricing;
+  @override
+  @JsonKey(name: 'seasonal_pricing')
+  SeasonalPricing? get seasonalPricing;
   @override
   @JsonKey(name: 'house_rules')
   List<String> get houseRules;

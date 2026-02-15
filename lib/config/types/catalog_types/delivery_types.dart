@@ -213,7 +213,8 @@ final waterDelivery = createType(
     quantityMode: QuantityMode.open,
     canDiscount: true,
   ),
-  manageTabs: [MTab.items, MTab.packages],
+  manageTabs: [MTab.items, MTab.packages, MTab.trucks],
+  coverageGranularity: CoverageGranularity.neighborhood,
 );
 
 // ─── Gas Delivery (full config — legacy) ───────────────────
@@ -410,4 +411,5 @@ final gasDelivery = createType(
     quantityMode: QuantityMode.open,
     canDiscount: true,
   ),
+  manageTabs: [MTab.items, MTab.trucks],
 );

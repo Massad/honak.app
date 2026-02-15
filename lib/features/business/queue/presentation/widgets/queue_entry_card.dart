@@ -9,84 +9,13 @@ import 'package:honak/features/business/queue/domain/entities/queue_source.dart'
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_activity_log.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_activity_utils.dart';
+import 'package:honak/features/business/queue/presentation/widgets/queue_status_config.dart';
+import 'package:honak/features/business/shared/widgets/generic_status_picker_sheet.dart';
+import 'package:honak/features/business/shared/widgets/photo_toggle_button.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 part 'queue_entry_card_widgets.dart';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// Status display config — colors, icons, labels for each queue status.
-// ═══════════════════════════════════════════════════════════════════════════
-
-class _StatusConfig {
-  const _StatusConfig({
-    required this.color,
-    required this.bgColor,
-    required this.borderColor,
-    required this.icon,
-    required this.label,
-  });
-
-  final Color color;
-  final Color bgColor;
-  final Color borderColor;
-  final IconData icon;
-  final String label;
-
-  static _StatusConfig of(QueueStatus status) => switch (status) {
-        QueueStatus.waiting => const _StatusConfig(
-            color: Color(0xFFFF9800),
-            bgColor: Color(0xFFFFF8E1),
-            borderColor: Color(0xFFFF9800),
-            icon: Icons.schedule_rounded,
-            label: 'في الانتظار',
-          ),
-        QueueStatus.onTheWay => const _StatusConfig(
-            color: Color(0xFF43A047),
-            bgColor: Color(0xFFF0FDF4),
-            borderColor: Color(0xFF43A047),
-            icon: Icons.navigation_rounded,
-            label: 'في الطريق',
-          ),
-        QueueStatus.inProgress => const _StatusConfig(
-            color: Color(0xFF1A73E8),
-            bgColor: Color(0xFFEFF6FF),
-            borderColor: Color(0xFF1A73E8),
-            icon: Icons.play_arrow_rounded,
-            label: 'قيد الخدمة',
-          ),
-        QueueStatus.ready => const _StatusConfig(
-            color: Color(0xFF43A047),
-            bgColor: Color(0xFFF0FDF4),
-            borderColor: Color(0xFF43A047),
-            icon: Icons.check_circle_outline_rounded,
-            label: 'جاهز للاستلام',
-          ),
-        QueueStatus.completed => const _StatusConfig(
-            color: Color(0xFF6B7280),
-            bgColor: Color(0xFFF9FAFB),
-            borderColor: Color(0xFF9CA3AF),
-            icon: Icons.local_shipping_rounded,
-            label: 'مكتمل',
-          ),
-        QueueStatus.noShow => const _StatusConfig(
-            color: Color(0xFFE53935),
-            bgColor: Color(0xFFFEF2F2),
-            borderColor: Color(0xFFE53935),
-            icon: Icons.block_rounded,
-            label: 'لم يحضر',
-          ),
-      };
-}
-
-const _statusOrder = [
-  QueueStatus.waiting,
-  QueueStatus.onTheWay,
-  QueueStatus.inProgress,
-  QueueStatus.ready,
-  QueueStatus.completed,
-  QueueStatus.noShow,
-];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // QueueEntryCard — matches Figma QueueEntryCard.tsx
@@ -531,18 +460,18 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
       child: Row(
         children: [
           Expanded(
-            child: _PhotoToggle(
+            child: PhotoToggleButton(
               label: 'صورة قبل',
               icon: Icons.camera_alt_outlined,
-              active: entry.photosBefore.isNotEmpty,
+              hasPhoto: entry.photosBefore.isNotEmpty,
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: _PhotoToggle(
+            child: PhotoToggleButton(
               label: 'صورة بعد',
               icon: Icons.image_outlined,
-              active: entry.photosAfter.isNotEmpty,
+              hasPhoto: entry.photosAfter.isNotEmpty,
             ),
           ),
         ],
@@ -790,20 +719,15 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
     return DateFormat.jm('ar').format(dt);
   }
 
-  void _showStatusPickerSheet(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => _StatusPickerSheet(
-        currentStatus: widget.entry.status,
-        customerName: widget.entry.customerName,
-        packageName: widget.entry.packageName,
-        onSelect: (status) {
-          Navigator.pop(context);
-          widget.onChangeStatus?.call(status);
-        },
-      ),
+  void _showStatusPickerSheet(BuildContext context) async {
+    final newStatus = await _showQueueStatusPicker(
+      context,
+      currentStatus: widget.entry.status,
+      customerName: widget.entry.customerName,
+      packageName: widget.entry.packageName,
     );
+    if (newStatus != null) {
+      widget.onChangeStatus?.call(newStatus);
+    }
   }
 }

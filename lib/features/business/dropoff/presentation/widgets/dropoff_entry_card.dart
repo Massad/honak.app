@@ -10,6 +10,7 @@ import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.d
 import 'package:honak/features/business/dropoff/domain/entities/ticket_activity.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_config.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_picker.dart';
+import 'package:honak/features/business/shared/widgets/photo_toggle_button.dart';
 import 'package:honak/shared/entities/money.dart';
 
 /// Card displaying a single dropoff ticket in the board list.
@@ -630,113 +631,26 @@ class DropoffEntryCard extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 6),
       child: Row(
         children: [
-          // "صورة قبل" button
           Expanded(
-            child: GestureDetector(
+            child: PhotoToggleButton(
+              label: 'صورة قبل',
+              icon: Icons.camera_alt_outlined,
+              hasPhoto: hasPhotoBefore,
               onTap: onPhotoBefore,
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: hasPhotoBefore
-                      ? const Color(0xFFEFF6FF)
-                      : Colors.transparent,
-                  borderRadius: AppRadius.cardInner,
-                  border: Border.all(
-                    color: hasPhotoBefore
-                        ? const Color(0xFF1A73E8)
-                        : Theme.of(context).colorScheme.outlineVariant,
-                    width: 2,
-                    // Dashed border simulated by checking hasPhoto
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.camera_alt_outlined,
-                      size: 13,
-                      color: hasPhotoBefore
-                          ? const Color(0xFF1A73E8)
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      'صورة قبل',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: hasPhotoBefore
-                            ? const Color(0xFF1A73E8)
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    if (hasPhotoBefore) ...[
-                      const SizedBox(width: 4),
-                      const Icon(
-                        Icons.check_circle_rounded,
-                        size: 10,
-                        color: Color(0xFF1A73E8),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
-
-          // "صورة بعد" button
           Expanded(
-            child: GestureDetector(
+            child: PhotoToggleButton(
+              label: 'صورة بعد',
+              icon: Icons.image_outlined,
+              hasPhoto: hasPhotoAfter,
+              activeColor: const Color(0xFF43A047),
               onTap: onPhotoAfter,
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: hasPhotoAfter
-                      ? const Color(0xFFF0FDF4)
-                      : Colors.transparent,
-                  borderRadius: AppRadius.cardInner,
-                  border: Border.all(
-                    color: hasPhotoAfter
-                        ? const Color(0xFF43A047)
-                        : Theme.of(context).colorScheme.outlineVariant,
-                    width: 2,
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.image_outlined,
-                      size: 13,
-                      color: hasPhotoAfter
-                          ? const Color(0xFF43A047)
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      'صورة بعد',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: hasPhotoAfter
-                            ? const Color(0xFF43A047)
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    if (hasPhotoAfter) ...[
-                      const SizedBox(width: 4),
-                      const Icon(
-                        Icons.check_circle_rounded,
-                        size: 10,
-                        color: Color(0xFF43A047),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
             ),
           ),
 
-          // Info request button (optional)
+          // Info request button (optional, dropoff-specific)
           if (onRequestInfo != null) ...[
             const SizedBox(width: AppSpacing.sm),
             GestureDetector(

@@ -9,7 +9,10 @@
     },
     "today_revenue": {
       "total": 12500,
+      "yesterday": 10200,
       "completed_count": 42,
+      "orders_count": 42,
+      "payment_breakdown": {"cash": 8500, "cliq": 2800, "bank": 1200},
       "items": [
         {"service": "مناقيش زعتر × 20", "amount": 1000, "time": "06:30"},
         {"service": "خبز عربي × 50", "amount": 750, "time": "07:00"},

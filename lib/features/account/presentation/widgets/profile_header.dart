@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/router/routes.dart';
+import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/features/account/presentation/pages/account_info_page.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/widgets/app_image.dart';
@@ -26,17 +26,40 @@ class ProfileHeader extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          // Settings icon
-          IconButton(
-            onPressed: () => context.push(Routes.settings),
-            icon: Icon(
-              Icons.settings_outlined,
-              color: context.colorScheme.onSurfaceVariant,
-              size: 24,
+          // "الملف الشخصي" pill button
+          Material(
+            color: context.colorScheme.surfaceContainerLowest,
+            borderRadius: BorderRadius.circular(20),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const AccountInfoPage(),
+                ),
+              ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.xs,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: context.colorScheme.outlineVariant,
+                  ),
+                ),
+                child: Text(
+                  'الملف الشخصي',
+                  style: context.textTheme.labelSmall?.copyWith(
+                    color: context.colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
             ),
           ),
           const Spacer(),
-          // Name + phone
+          // Name + name_en + phone
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -46,6 +69,15 @@ class ProfileHeader extends ConsumerWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              if (user?.nameEn != null && user!.nameEn!.isNotEmpty) ...[
+                const SizedBox(height: 1),
+                Text(
+                  user.nameEn!,
+                  style: context.textTheme.labelSmall?.copyWith(
+                    color: AppColors.textHint,
+                  ),
+                ),
+              ],
               if (user?.phone.isNotEmpty == true) ...[
                 const SizedBox(height: 2),
                 Directionality(

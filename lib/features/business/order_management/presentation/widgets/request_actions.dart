@@ -9,6 +9,8 @@ class RequestActions extends StatelessWidget {
   final VoidCallback onAccept;
   final VoidCallback onDecline;
   final ValueChanged<String> onUpdateStatus;
+  final VoidCallback? onReceipt;
+  final VoidCallback? onChat;
 
   const RequestActions({
     super.key,
@@ -17,6 +19,8 @@ class RequestActions extends StatelessWidget {
     required this.onAccept,
     required this.onDecline,
     required this.onUpdateStatus,
+    this.onReceipt,
+    this.onChat,
   });
 
   @override
@@ -27,7 +31,7 @@ class RequestActions extends StatelessWidget {
       'in_progress' => _buildInProgressActions(),
       'preparing' => _buildPreparingActions(),
       'ready' => _buildReadyActions(),
-      'completed' || 'delivered' => _buildCompletedBadge(),
+      'completed' || 'delivered' => _buildTerminalActions(context),
       'declined' => _buildDeclinedBadge(),
       _ => const SizedBox.shrink(),
     };
@@ -229,34 +233,94 @@ class RequestActions extends StatelessWidget {
     );
   }
 
-  Widget _buildCompletedBadge() {
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        decoration: BoxDecoration(
-          color: const Color(0xFF43A047).withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(20),
+  Widget _buildTerminalActions(BuildContext context) {
+    return Column(
+      children: [
+        // Completed badge
+        Center(
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF43A047).withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'مكتمل',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF43A047),
+                  ),
+                ),
+                SizedBox(width: AppSpacing.sm),
+                Icon(
+                  Icons.check_circle,
+                  size: 20,
+                  color: Color(0xFF43A047),
+                ),
+              ],
+            ),
+          ),
         ),
-        child: const Row(
-          mainAxisSize: MainAxisSize.min,
+        const SizedBox(height: AppSpacing.lg),
+        // Receipt + Chat buttons
+        Row(
           children: [
-            Text(
-              'مكتمل',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF43A047),
+            // Chat button (outline)
+            if (onChat != null)
+              Expanded(
+                child: SizedBox(
+                  height: 48,
+                  child: OutlinedButton.icon(
+                    onPressed: onChat,
+                    icon: const Icon(
+                        Icons.chat_bubble_outline_rounded, size: 18),
+                    label: const Text('محادثة'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSurface,
+                      side: BorderSide(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .outlineVariant),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(width: AppSpacing.sm),
-            Icon(
-              Icons.check_circle,
-              size: 20,
-              color: Color(0xFF43A047),
-            ),
+            if (onChat != null && onReceipt != null)
+              const SizedBox(width: AppSpacing.sm),
+            // Receipt button (primary filled)
+            if (onReceipt != null)
+              Expanded(
+                child: SizedBox(
+                  height: 48,
+                  child: ElevatedButton.icon(
+                    onPressed: onReceipt,
+                    icon: const Icon(Icons.receipt_long_rounded, size: 18),
+                    label: const Text(
+                      'إرسال إيصال',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
-      ),
+      ],
     );
   }
 

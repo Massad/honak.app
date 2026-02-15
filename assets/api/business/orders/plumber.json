@@ -1,0 +1,120 @@
+{
+  "pending": [
+    {
+      "id": "AP-101",
+      "customer": "رنا ب.",
+      "avatar": "https://picsum.photos/seed/rana/50/50",
+      "type": "quote",
+      "summary": "تسرب مياه — حمام رئيسي",
+      "total": "بانتظار التسعير",
+      "time": "منذ ٢٠ دقيقة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ١٠:٠٠ ص",
+      "urgent": true,
+      "description": "تسرب مياه من السيفون تحت المغسلة في الحمام الرئيسي. المياه تتسرب بشكل مستمر.",
+      "location_detail": "الحمام الرئيسي — الطابق الأول",
+      "customer_address": "تلاع العلي، عمّان",
+      "photos_count": 2
+    },
+    {
+      "id": "AP-102",
+      "customer": "خالد ن.",
+      "avatar": "https://picsum.photos/seed/khaled2/50/50",
+      "type": "quote",
+      "summary": "تركيب سخان مياه جديد",
+      "total": "بانتظار التسعير",
+      "time": "منذ ساعة",
+      "created_at": "١٤ فبراير ٢٠٢٦ · ٩:١٥ ص",
+      "urgent": false,
+      "description": "أريد تركيب سخان مياه كهربائي ٥٠ لتر. السخان موجود عندي، أحتاج تركيب فقط مع التوصيلات.",
+      "location_detail": "المطبخ",
+      "customer_address": "الصويفية، عمّان"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "AP-098",
+      "customer": "عمر ح.",
+      "avatar": "https://picsum.photos/seed/omar3/50/50",
+      "type": "quote",
+      "summary": "تسرب مياه — مقبول",
+      "total": "٨٠ د.أ",
+      "time": "أمس",
+      "created_at": "١٣ فبراير ٢٠٢٦ · ٤:٠٠ م",
+      "status": "accepted",
+      "description": "تسرب مياه من أنبوب الماء البارد تحت المجلى",
+      "location_detail": "المطبخ — أنبوب تحت المجلى",
+      "customer_address": "خلدا، عمّان",
+      "quote_sent": {
+        "labor": 50,
+        "materials": 30,
+        "total": 80,
+        "items": ["استبدال أنبوب", "وصلات نحاس", "كشف التسرب"]
+      },
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "٤:٠٠ م", "done": true },
+        { "status": "quoted", "label": "تم إرسال عرض السعر", "time": "٤:٣٠ م", "done": true },
+        { "status": "accepted", "label": "تم قبول العرض", "time": "٤:٤٥ م", "done": true },
+        { "status": "scheduled", "label": "موعد: غداً ١٠ ص", "time": "", "done": false },
+        { "status": "completed", "label": "مكتمل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "in_progress": [
+    {
+      "id": "AP-095",
+      "customer": "هند ك.",
+      "avatar": "https://picsum.photos/seed/hind/50/50",
+      "type": "quote",
+      "summary": "تركيب خلاط — قيد التنفيذ",
+      "total": "٤٥ د.أ",
+      "time": "اليوم ٨:٠٠ ص",
+      "created_at": "١٢ فبراير ٢٠٢٦ · ١:٠٠ م",
+      "status": "in_progress",
+      "description": "تركيب خلاط مطبخ جديد",
+      "customer_address": "دابوق، عمّان",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "١:٠٠ م", "done": true },
+        { "status": "quoted", "label": "تم إرسال العرض", "time": "١:٣٠ م", "done": true },
+        { "status": "accepted", "label": "تم القبول", "time": "١:٤٥ م", "done": true },
+        { "status": "in_progress", "label": "الفني في الموقع", "time": "٨:٠٠ ص", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "", "done": false }
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "id": "AP-090",
+      "customer": "ريم ب.",
+      "avatar": "https://picsum.photos/seed/reem/50/50",
+      "type": "quote",
+      "summary": "تركيب سخان — مكتمل",
+      "total": "١٢٠ د.أ",
+      "time": "منذ يومين",
+      "created_at": "١١ فبراير ٢٠٢٦ · ٣:٠٠ م",
+      "status": "completed",
+      "description": "تركيب سخان مياه جديد مع كامل التوصيلات",
+      "timeline": [
+        { "status": "pending", "label": "تم استلام الطلب", "time": "٣:٠٠ م", "done": true },
+        { "status": "quoted", "label": "عرض السعر", "time": "٣:٣٠ م", "done": true },
+        { "status": "accepted", "label": "تم القبول", "time": "٣:٤٥ م", "done": true },
+        { "status": "in_progress", "label": "قيد التنفيذ", "time": "١٠:٠٠ ص", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "١:٠٠ م", "done": true }
+      ]
+    },
+    {
+      "id": "AP-088",
+      "customer": "سمر ف.",
+      "avatar": "https://picsum.photos/seed/samar/50/50",
+      "type": "quote",
+      "summary": "صيانة مجلى — مكتمل",
+      "total": "٣٥ د.أ",
+      "time": "منذ ٣ أيام",
+      "created_at": "١٠ فبراير ٢٠٢٦ · ٩:٠٠ ص",
+      "status": "completed",
+      "timeline": [
+        { "status": "pending", "label": "تم الاستلام", "time": "٩:٠٠ ص", "done": true },
+        { "status": "completed", "label": "مكتمل", "time": "١١:٠٠ ص", "done": true }
+      ]
+    }
+  ]
+}
