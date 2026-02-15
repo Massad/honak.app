@@ -8,8 +8,13 @@ import 'package:honak/shared/entities/money.dart';
 
 class AlternativeCard extends StatefulWidget {
   final Message message;
+  final bool isBusinessMode;
 
-  const AlternativeCard({super.key, required this.message});
+  const AlternativeCard({
+    super.key,
+    required this.message,
+    this.isBusinessMode = false,
+  });
 
   @override
   State<AlternativeCard> createState() => _AlternativeCardState();
@@ -256,11 +261,16 @@ class _AlternativeCardState extends State<AlternativeCard> {
         children: [
           Expanded(
             child: OutlinedButton.icon(
-              onPressed: () => setState(() => _status = 'declined'),
+              onPressed: widget.isBusinessMode
+                  ? null
+                  : () => setState(() => _status = 'declined'),
               icon: const Icon(Icons.close, size: 16),
               label: const Text('رفض'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: context.colorScheme.onSurfaceVariant,
+                disabledForegroundColor: context
+                    .colorScheme.onSurfaceVariant
+                    .withValues(alpha: 0.38),
                 side: BorderSide(color: context.colorScheme.outlineVariant),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSpacing.md),
@@ -274,11 +284,15 @@ class _AlternativeCardState extends State<AlternativeCard> {
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: FilledButton.icon(
-              onPressed: () => setState(() => _status = 'accepted'),
+              onPressed: widget.isBusinessMode
+                  ? null
+                  : () => setState(() => _status = 'accepted'),
               icon: const Icon(Icons.check, size: 16),
               label: const Text('قبول'),
               style: FilledButton.styleFrom(
                 backgroundColor: AppColors.success,
+                disabledBackgroundColor:
+                    AppColors.success.withValues(alpha: 0.38),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSpacing.md),
                 ),

@@ -3,6 +3,7 @@
 // Parsed from [Message.metadata] — no freezed needed since
 // they are read-only view models for rendering cards.
 
+import 'package:honak/features/chat/domain/entities/chat_info_template_item.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 
 class ProductCardData {
@@ -159,6 +160,7 @@ class QuoteData {
   final String id;
   final List<QuoteItem> items;
   final int subtotalCents;
+  final int? visitFeeCents;
   final int? discountCents;
   final int totalCents;
   final int? validDays;
@@ -169,6 +171,7 @@ class QuoteData {
     required this.id,
     required this.items,
     required this.subtotalCents,
+    this.visitFeeCents,
     this.discountCents,
     required this.totalCents,
     this.validDays,
@@ -186,6 +189,7 @@ class QuoteData {
           .map((i) => QuoteItem.fromJson(i as Map<String, dynamic>))
           .toList(),
       subtotalCents: quote['subtotal'] as int? ?? 0,
+      visitFeeCents: quote['visit_fee'] as int?,
       discountCents: quote['discount'] as int?,
       totalCents: quote['total'] as int? ?? 0,
       validDays: quote['valid_days'] as int?,
@@ -193,4 +197,73 @@ class QuoteData {
       status: metadata['status'] as String? ?? 'pending',
     );
   }
+}
+
+class InfoRequestItem {
+  final String label;
+  final String? description;
+  final String type; // photo | video | text | location | document | choice
+  final List<String>? options;
+
+  const InfoRequestItem({
+    required this.label,
+    this.description,
+    this.type = 'text',
+    this.options,
+  });
+
+  factory InfoRequestItem.fromJson(Map<String, dynamic> json) {
+    return InfoRequestItem(
+      label: json['label'] as String? ?? '',
+      description: json['description'] as String?,
+      type: json['type'] as String? ?? 'text',
+      options: (json['options'] as List?)?.cast<String>(),
+    );
+  }
+}
+
+class InfoRequestData {
+  final String question;
+  final List<InfoRequestItem> items;
+  final String status; // pending, responded
+
+  const InfoRequestData({
+    required this.question,
+    required this.items,
+    this.status = 'pending',
+  });
+
+  factory InfoRequestData.fromMetadata(Map<String, dynamic> metadata) {
+    final rawItems = metadata['info_items'] as List? ?? [];
+    return InfoRequestData(
+      question: metadata['question'] as String? ?? '',
+      items: rawItems
+          .map((i) => InfoRequestItem.fromJson(i as Map<String, dynamic>))
+          .toList(),
+      status: metadata['status'] as String? ?? 'pending',
+    );
+  }
+
+  factory InfoRequestData.fromAskInfoResult(AskInfoResult result) {
+    final t = result.selectedItem;
+    return InfoRequestData(
+      question: 'طلب معلومات إضافية',
+      items: [
+        InfoRequestItem(
+          label: t.labelAr,
+          description: t.descriptionAr,
+          type: t.type,
+          options: t.optionsAr,
+        ),
+      ],
+    );
+  }
+}
+
+/// Result returned from [AskInfoSheet] when the user taps send.
+class AskInfoResult {
+  final ChatInfoTemplateItem selectedItem;
+  final String? note;
+
+  const AskInfoResult({required this.selectedItem, this.note});
 }

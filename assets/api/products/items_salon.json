@@ -13,6 +13,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 1,
+      "team_member_ids": ["tm_owner", "tm_noor"],
       "option_groups": []
     },
     {
@@ -27,6 +28,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 2,
+      "team_member_ids": ["tm_owner", "tm_noor"],
       "option_groups": []
     },
     {
@@ -41,6 +43,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 3,
+      "team_member_ids": ["tm_owner", "tm_noor"],
       "option_groups": []
     },
     {
@@ -55,6 +58,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 4,
+      "team_member_ids": ["tm_owner", "tm_heba"],
       "option_groups": []
     },
     {
@@ -69,6 +73,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 5,
+      "team_member_ids": ["tm_owner", "tm_heba"],
       "option_groups": []
     },
     {
@@ -83,6 +88,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 6,
+      "team_member_ids": ["tm_owner", "tm_heba"],
       "option_groups": []
     },
     {
@@ -97,6 +103,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 7,
+      "team_member_ids": ["tm_owner", "tm_heba"],
       "option_groups": []
     },
     {
@@ -111,6 +118,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 8,
+      "team_member_ids": ["tm_owner", "tm_heba"],
       "option_groups": []
     },
     {
@@ -125,6 +133,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 9,
+      "team_member_ids": ["tm_owner", "tm_noor"],
       "option_groups": []
     },
     {
@@ -139,6 +148,7 @@
       "in_stock": true,
       "page_id": "salon-rania",
       "sort_order": 10,
+      "team_member_ids": ["tm_owner", "tm_noor"],
       "option_groups": []
     }
   ],

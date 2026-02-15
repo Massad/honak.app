@@ -1404,4 +1404,400 @@ class AppLocalizationsEn extends AppLocalizations {
   String daysAgo(int days) {
     return 'قبل $days يوم';
   }
+
+  @override
+  String get bizCustomerActiveSubscribers => 'Active subscribers';
+
+  @override
+  String get bizCustomerTotal => 'Customers';
+
+  @override
+  String get bizCustomerReturnRate => 'Return rate';
+
+  @override
+  String get bizCustomerOrdersPerCustomer => 'Orders/customer';
+
+  @override
+  String get bizCustomerSubscribers => 'Subscribers';
+
+  @override
+  String get bizCustomerAllCustomers => 'All Customers';
+
+  @override
+  String get bizCustomerInvite => 'Invite';
+
+  @override
+  String get bizCustomerSearchHint => 'Search by name or phone...';
+
+  @override
+  String get bizCustomerSortRecent => 'Recent';
+
+  @override
+  String get bizCustomerSortOrders => 'Most orders';
+
+  @override
+  String get bizCustomerSortValue => 'Highest value';
+
+  @override
+  String get bizCustomerBadgeNew => 'New customer';
+
+  @override
+  String get bizCustomerBadgeActive => 'Active customer';
+
+  @override
+  String get bizCustomerBadgeRepeat => 'Repeat customer';
+
+  @override
+  String get bizCustomerBadgeInterested => 'Interested';
+
+  @override
+  String get bizCustomerBadgePast => 'Past customer';
+
+  @override
+  String get bizCustomerNoCustomers => 'No customers';
+
+  @override
+  String get bizCustomerOrders => 'orders';
+
+  @override
+  String get bizCustomerChatOnly => 'Chat only';
+
+  @override
+  String get bizCustomerSubscribed => 'Subscribed';
+
+  @override
+  String get bizCustomerSubscription => 'Subscription';
+
+  @override
+  String get bizCustomerActivity => 'Activity';
+
+  @override
+  String get bizCustomerLastOrder => 'Last order';
+
+  @override
+  String get bizCustomerLastActivity => 'Last activity';
+
+  @override
+  String get bizCustomerSource => 'Source';
+
+  @override
+  String get bizCustomerSourceOrganic => 'Organic';
+
+  @override
+  String get bizCustomerSourceInvited => 'Invited';
+
+  @override
+  String get bizCustomerSourceManual => 'Manual';
+
+  @override
+  String get bizCustomerPrivateNotes => 'Private notes';
+
+  @override
+  String get bizCustomerNotesHint =>
+      'Add a private note about this customer (visible to team only)...';
+
+  @override
+  String get bizCustomerChat => 'Chat';
+
+  @override
+  String get bizCustomerNewOrder => 'New order';
+
+  @override
+  String get bizCustomerPayment => 'Payment';
+
+  @override
+  String get bizCustomerTotalSpent => 'Total';
+
+  @override
+  String get bizCustomerActive => 'Active';
+
+  @override
+  String get bizCustomerEnded => 'Ended';
+
+  @override
+  String bizCustomerExpiresAt(String date) {
+    return 'Expires $date';
+  }
+
+  @override
+  String get bizInviteTitle => 'Invite customer';
+
+  @override
+  String get bizInvitePhoneHint => 'Phone: 07XXXXXXXX';
+
+  @override
+  String get bizInviteNameHint => 'Customer name (optional)';
+
+  @override
+  String get bizInviteAttachPackage => 'Attach package (optional)';
+
+  @override
+  String get bizInviteNoPackage => 'No package';
+
+  @override
+  String get bizInviteDirectActivate =>
+      'Activate subscription now (cash payment)';
+
+  @override
+  String get bizInviteAdd => 'Add';
+
+  @override
+  String get bizInviteActivate => 'Activate';
+
+  @override
+  String get bizInviteWhatsApp => 'WhatsApp';
+
+  @override
+  String get bizInviteSentInvites => 'Sent invites';
+
+  @override
+  String get bizInvitePending => 'Pending';
+
+  @override
+  String get bizInviteRegistered => 'Registered';
+
+  @override
+  String get bizInviteSubscribed => 'Subscribed';
+
+  @override
+  String get bizInviteExpired => 'Expired';
+
+  @override
+  String get bizInviteWithdrawn => 'Withdrawn';
+
+  @override
+  String get bizInviteWithdraw => 'Withdraw invite';
+
+  @override
+  String get bizInviteSentToday => 'Today';
+
+  @override
+  String bizInviteSentDaysAgo(int days) {
+    return '$days days ago';
+  }
+
+  @override
+  String bizInviteExpiresInDays(int days) {
+    return 'Expires in $days days';
+  }
+
+  @override
+  String get bizInviteNoInvites => 'No invites';
+
+  @override
+  String get bizInviteLinkCopied => 'Link copied';
+
+  @override
+  String get bizInviteRegisteredFilter => 'Registered';
+
+  @override
+  String get bizInviteAllFilter => 'All';
+
+  @override
+  String get bizInviteSearchHint => 'Search by name or phone...';
+
+  @override
+  String get bizSubFilterAll => 'All';
+
+  @override
+  String get bizSubFilterAuto => 'Auto';
+
+  @override
+  String get bizSubFilterRemind => 'Remind';
+
+  @override
+  String get bizSubFilterLow => 'Low balance';
+
+  @override
+  String get bizSubTodayAutoOrders => 'Today\'s auto-orders';
+
+  @override
+  String get bizSubConfirm => 'Confirm';
+
+  @override
+  String get bizSubSkip => 'Skip';
+
+  @override
+  String get bizSubConfirmedLabel => 'Confirmed';
+
+  @override
+  String get bizSubSkippedLabel => 'Skipped';
+
+  @override
+  String bizSubCreditsBefore(int before, int after) {
+    return 'Credits: $before → $after after confirm';
+  }
+
+  @override
+  String get bizSubStatusActive => 'Active';
+
+  @override
+  String get bizSubStatusDepleted => 'Depleted';
+
+  @override
+  String get bizSubStatusPaused => 'Paused';
+
+  @override
+  String get bizSubStatusEnded => 'Ended';
+
+  @override
+  String bizSubExpiresAt(String date) {
+    return 'Expires $date';
+  }
+
+  @override
+  String get bizSubNoSubscribers => 'No subscribers';
+
+  @override
+  String get bizSubRenewReminder => 'Renewal reminder';
+
+  @override
+  String bizSubReminderSent(String name) {
+    return 'Reminder sent to $name';
+  }
+
+  @override
+  String bizSubOrderConfirmed(String name) {
+    return 'Order confirmed for $name';
+  }
+
+  @override
+  String bizSubOrderSkipped(String name) {
+    return 'Order skipped for $name';
+  }
+
+  @override
+  String get bizSubAutoMode => 'Auto';
+
+  @override
+  String get bizSubRemindMode => 'Remind';
+
+  @override
+  String bizManageSubTitle(String name) {
+    return 'Manage $name\'s subscription';
+  }
+
+  @override
+  String get bizManageAdjustCredits => 'Adjust credits';
+
+  @override
+  String get bizManageAdjustCreditsDesc => 'Add or deduct credits manually';
+
+  @override
+  String get bizManagePause => 'Pause';
+
+  @override
+  String get bizManagePauseDesc => 'Freeze subscription temporarily';
+
+  @override
+  String get bizManageResume => 'Resume subscription';
+
+  @override
+  String get bizManageResumeDesc => 'Reactivate subscription now';
+
+  @override
+  String get bizManageCancel => 'Cancel subscription';
+
+  @override
+  String get bizManageCancelDesc =>
+      'End subscription and delete remaining credits';
+
+  @override
+  String bizManageResumed(String name) {
+    return 'Subscription resumed for $name';
+  }
+
+  @override
+  String get bizConfirmPauseTitle => 'Pause subscription';
+
+  @override
+  String bizConfirmPauseDesc(String pkg) {
+    return 'The \"$pkg\" subscription will be frozen until you reactivate it manually. No auto-orders will be sent during the pause.';
+  }
+
+  @override
+  String get bizConfirmCancelTitle => 'Cancel subscription';
+
+  @override
+  String bizConfirmCancelDesc(String pkg) {
+    return 'The \"$pkg\" subscription will be permanently ended. The customer won\'t be able to use remaining credits.';
+  }
+
+  @override
+  String bizConfirmCancelWarning(int credits) {
+    return '$credits remaining credits will be deleted. This action cannot be undone.';
+  }
+
+  @override
+  String get bizConfirmPackageLabel => 'Package';
+
+  @override
+  String get bizConfirmRemainingLabel => 'Remaining credits';
+
+  @override
+  String get bizConfirmDeliveryMode => 'Delivery mode';
+
+  @override
+  String get bizConfirmTotalOrders => 'Total orders';
+
+  @override
+  String bizConfirmTotalOrdersValue(int count) {
+    return '$count orders';
+  }
+
+  @override
+  String get bizConfirmPauseBtn => 'Pause';
+
+  @override
+  String get bizConfirmCancelBtn => 'Confirm cancellation';
+
+  @override
+  String get bizConfirmBack => 'Cancel';
+
+  @override
+  String bizConfirmPaused(String name) {
+    return 'Subscription paused for $name';
+  }
+
+  @override
+  String bizConfirmCancelled(String name) {
+    return 'Subscription cancelled for $name';
+  }
+
+  @override
+  String get bizSubCreditsUnit => 'credits';
+
+  @override
+  String get bizCustomerAvgOrder => 'Avg order';
+
+  @override
+  String get bizCustomerMemberSince => 'Member since';
+
+  @override
+  String get bizCustomerCall => 'Call';
+
+  @override
+  String get bizCustomerRecentOrders => 'Recent orders';
+
+  @override
+  String get bizCustomerNoOrders => 'No orders yet';
+
+  @override
+  String get bizInviteSummaryPending => 'Pending';
+
+  @override
+  String get bizInviteSummaryRegistered => 'Registered';
+
+  @override
+  String get bizInviteSummarySubscribed => 'Subscribed';
+
+  @override
+  String get bizInviteConversionRate => 'Conversion';
+
+  @override
+  String get bizInviteSelectPackage => 'Select package';
+
+  @override
+  String get bizInviteDirectActivateLabel =>
+      'Activate subscription immediately (cash payment)';
 }

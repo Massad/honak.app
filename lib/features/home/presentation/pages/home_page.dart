@@ -36,39 +36,46 @@ class HomePage extends ConsumerWidget {
     final isGuest = authState is AuthGuest;
 
     return Scaffold(
-      appBar: AppBar(
-        title: SvgPicture.asset(
-          Theme.of(context).brightness == Brightness.dark
-              ? 'assets/icons/icon_dark.svg'
-              : 'assets/icons/icon_light.svg',
-          height: 28,
-        ),
-        actions: [
-          Stack(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.notifications_outlined),
-                onPressed: () => context.push(Routes.notifications),
-              ),
-              Positioned(
-                top: 12,
-                left: 12,
-                child: Container(
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.primary,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: context.colorScheme.surface,
-                      width: 1,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: AppBar(
+            centerTitle: true,
+            title: SvgPicture.asset(
+              Theme.of(context).brightness == Brightness.dark
+                  ? 'assets/icons/icon_dark.svg'
+                  : 'assets/icons/icon_light.svg',
+              height: 28,
+            ),
+            actions: [
+              Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.notifications_outlined),
+                    onPressed: () => context.push(Routes.notifications),
+                  ),
+                  Positioned(
+                    top: 12,
+                    right: 12,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.primary,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: context.colorScheme.surface,
+                          width: 1,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () async {

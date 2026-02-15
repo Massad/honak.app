@@ -4,6 +4,14 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
+
+/// Input limits for quote fields.
+abstract final class QuoteLimits {
+  static const int maxDescriptionLength = 100;
+  static const int maxNotesLength = 300;
+  static const int maxLineItems = 10;
+}
 
 class QuoteBuilderSheet extends StatefulWidget {
   final void Function(QuoteData quote) onSend;
@@ -50,9 +58,10 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
   }
 
   bool get _isValid {
-    return _items.any((item) =>
-        item.descriptionController.text.trim().isNotEmpty &&
-        item.priceCents > 0);
+    // Every line item must have a name. Price 0 is OK.
+    return _items.isNotEmpty &&
+        _items.every(
+            (item) => item.descriptionController.text.trim().isNotEmpty);
   }
 
   @override
@@ -60,8 +69,23 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildHandle(),
-        _buildHeader(context),
+        AppSheetHeader(
+          title: 'عرض سعر',
+          leading: Container(
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              color: AppColors.warning.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.receipt_long_outlined,
+              size: 15,
+              color: AppColors.warning,
+            ),
+          ),
+          onClose: () => Navigator.pop(context),
+        ),
         Flexible(
           child: SingleChildScrollView(
             padding: const EdgeInsetsDirectional.symmetric(
@@ -72,15 +96,16 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
               children: [
                 _buildLineItems(),
                 const SizedBox(height: AppSpacing.sm),
-                _buildAddButton(),
-                const SizedBox(height: AppSpacing.lg),
+                if (_items.length < QuoteLimits.maxLineItems)
+                  _buildAddButton(),
+                const SizedBox(height: AppSpacing.xl),
                 _buildDiscount(),
                 const SizedBox(height: AppSpacing.lg),
                 _buildNotes(),
                 const SizedBox(height: AppSpacing.lg),
                 _buildValiditySelector(),
                 const SizedBox(height: AppSpacing.lg),
-                _buildTotalPreview(),
+                _buildSummary(),
                 const SizedBox(height: AppSpacing.xl),
               ],
             ),
@@ -91,77 +116,24 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     );
   }
 
-  Widget _buildHandle() {
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(top: AppSpacing.sm),
-      child: Container(
-        width: 36,
-        height: 4,
-        decoration: BoxDecoration(
-          color: context.colorScheme.outlineVariant,
-          borderRadius: BorderRadius.circular(2),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(
-        start: AppSpacing.lg,
-        end: AppSpacing.sm,
-        top: AppSpacing.md,
-        bottom: AppSpacing.sm,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              'عرض سعر',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: context.colorScheme.onSurface,
-              ),
-            ),
-          ),
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.close, size: 20),
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-        ],
-      ),
-    );
-  }
+  // ─── Line items ─────────────────────────────────────────────
 
   Widget _buildLineItems() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'البنود',
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        ...List.generate(_items.length, (i) {
-          return _LineItemRow(
-            item: _items[i],
-            showRemove: _items.length > 1,
-            onRemove: () {
-              setState(() {
-                _items[i].dispose();
-                _items.removeAt(i);
-              });
-            },
-            onChanged: () => setState(() {}),
-          );
-        }),
-      ],
+      children: List.generate(_items.length, (i) {
+        return _LineItemCard(
+          item: _items[i],
+          index: i + 1,
+          showRemove: _items.length > 1,
+          onRemove: () {
+            setState(() {
+              _items[i].dispose();
+              _items.removeAt(i);
+            });
+          },
+          onChanged: () => setState(() {}),
+        );
+      }),
     );
   }
 
@@ -171,14 +143,11 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
       child: Container(
         width: double.infinity,
         padding: const EdgeInsetsDirectional.symmetric(
-          vertical: AppSpacing.sm,
+          vertical: AppSpacing.md,
         ),
         decoration: BoxDecoration(
-          border: Border.all(
-            color: context.colorScheme.outlineVariant,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: context.colorScheme.outlineVariant),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -199,131 +168,104 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     );
   }
 
+  // ─── Discount ───────────────────────────────────────────────
+
   Widget _buildDiscount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'خصم (اختياري)',
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.xs),
-        TextField(
-          controller: _discountController,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          onChanged: (_) => setState(() {}),
-          decoration: InputDecoration(
-            hintText: '0.00',
-            hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant),
-            suffixText: 'د.أ',
-            suffixStyle: TextStyle(
-              color: context.colorScheme.onSurfaceVariant,
-              fontSize: 13,
-            ),
-            filled: true,
-            fillColor: context.colorScheme.surfaceContainerLowest,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
-            ),
-            isDense: true,
-          ),
-          style: const TextStyle(fontSize: 14),
-        ),
-      ],
+    return _FieldSection(
+      label: 'خصم (اختياري)',
+      child: _OutlinedMoneyField(
+        controller: _discountController,
+        onChanged: (_) => setState(() {}),
+      ),
     );
   }
 
+  // ─── Notes ──────────────────────────────────────────────────
+
   Widget _buildNotes() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'ملاحظات (اختياري)',
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
+    return _FieldSection(
+      label: 'ملاحظات للعميل (اختياري)',
+      child: TextField(
+        controller: _notesController,
+        maxLines: 3,
+        minLines: 2,
+        maxLength: QuoteLimits.maxNotesLength,
+        decoration: InputDecoration(
+          hintText: 'مثال: يشمل الكشف والتشخيص. المواد أصلية مع ضمان سنة.',
+          hintStyle: TextStyle(
             color: context.colorScheme.onSurfaceVariant,
+            fontSize: 13,
           ),
-        ),
-        const SizedBox(height: AppSpacing.xs),
-        TextField(
-          controller: _notesController,
-          maxLines: 3,
-          minLines: 2,
-          decoration: InputDecoration(
-            hintText: 'أي ملاحظات إضافية...',
-            hintStyle: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 14),
-            filled: true,
-            fillColor: context.colorScheme.surfaceContainerLowest,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsetsDirectional.all(AppSpacing.md),
-            isDense: true,
+          filled: true,
+          fillColor: context.colorScheme.surfaceContainerLowest,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: context.colorScheme.outlineVariant),
           ),
-          style: const TextStyle(fontSize: 14),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: context.colorScheme.outlineVariant),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: AppColors.warning),
+          ),
+          contentPadding: const EdgeInsetsDirectional.all(AppSpacing.md),
+          isDense: true,
+          counterText: '',
         ),
-      ],
+        style: const TextStyle(fontSize: 14),
+      ),
     );
   }
+
+  // ─── Validity ───────────────────────────────────────────────
 
   Widget _buildValiditySelector() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'صلاحية العرض',
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-        ),
+        _SectionLabel('العرض صالح لمدة'),
         const SizedBox(height: AppSpacing.sm),
         Row(
           children: _validDayOptions.map((days) {
             final isSelected = _validDays == days;
-            return Padding(
-              padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
-              child: GestureDetector(
-                onTap: () => setState(() => _validDays = days),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: 14,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppColors.warning.withValues(alpha: 0.12)
-                        : context.colorScheme.surfaceContainerLow,
-                    border: Border.all(
-                      color: isSelected
-                          ? AppColors.warning
-                          : context.colorScheme.outlineVariant,
-                      width: isSelected ? 1.5 : 1,
+            final label = days == 1 ? '١ يوم' : '$days أيام';
+            return Expanded(
+              child: Padding(
+                padding: EdgeInsetsDirectional.only(
+                  end: days != _validDayOptions.last ? AppSpacing.sm : 0,
+                ),
+                child: GestureDetector(
+                  onTap: () => setState(() => _validDays = days),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsetsDirectional.symmetric(
+                      vertical: 10,
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    '$days يوم',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.w400,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
                       color: isSelected
                           ? AppColors.warning
-                          : context.colorScheme.onSurface,
+                          : context.colorScheme.surfaceContainerLow,
+                      border: Border.all(
+                        color: isSelected
+                            ? AppColors.warning
+                            : context.colorScheme.outlineVariant,
+                        width: isSelected ? 1.5 : 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight:
+                            isSelected ? FontWeight.w600 : FontWeight.w400,
+                        color: isSelected
+                            ? Colors.white
+                            : context.colorScheme.onSurface,
+                      ),
                     ),
                   ),
                 ),
@@ -335,10 +277,14 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     );
   }
 
-  Widget _buildTotalPreview() {
+  // ─── Summary ────────────────────────────────────────────────
+
+  Widget _buildSummary() {
+    final hasDiscount = _discountCents > 0;
+    final validityLabel = _validDays == 1 ? '١ يوم' : '$_validDays أيام';
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: AppColors.warning.withValues(alpha: 0.06),
         border: Border.all(
@@ -348,34 +294,91 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
       ),
       child: Column(
         children: [
-          if (_discountCents > 0) ...[
-            _previewRow(
-              'المجموع الفرعي',
-              Money(_subtotalCents).toFormattedArabic(),
+          // Header
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.sm,
             ),
-            const SizedBox(height: 4),
-            _previewRow(
-              'خصم',
-              '- ${Money(_discountCents).toFormattedArabic()}',
-              color: AppColors.success,
+            decoration: BoxDecoration(
+              color: AppColors.warning.withValues(alpha: 0.06),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(11),
+                topRight: Radius.circular(11),
+              ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.symmetric(vertical: 6),
-              child: Divider(height: 1, color: context.colorScheme.outlineVariant),
+            child: const Row(
+              children: [
+                Icon(Icons.receipt_long_outlined,
+                    size: 14, color: AppColors.warning),
+                SizedBox(width: AppSpacing.xs),
+                Text(
+                  'ملخص العرض',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.warning,
+                  ),
+                ),
+              ],
             ),
-          ],
-          _previewRow(
-            'الإجمالي',
-            Money(_totalCents).toFormattedArabic(),
-            isBold: true,
-            color: AppColors.warning,
+          ),
+          // Body
+          Padding(
+            padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+            child: Column(
+              children: [
+                if (hasDiscount) ...[
+                  _summaryRow(
+                    'المجموع الفرعي',
+                    Money(_subtotalCents).toFormattedArabic(),
+                  ),
+                  const SizedBox(height: 4),
+                  _summaryRow(
+                    'خصم',
+                    '- ${Money(_discountCents).toFormattedArabic()}',
+                    color: AppColors.success,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.symmetric(vertical: 8),
+                    child: Divider(
+                        height: 1,
+                        color: AppColors.warning.withValues(alpha: 0.2)),
+                  ),
+                ],
+                _summaryRow(
+                  'الإجمالي',
+                  Money(_totalCents).toFormattedArabic(),
+                  isBold: true,
+                  color: AppColors.warning,
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    const Icon(Icons.timer_outlined,
+                        size: 12, color: AppColors.warning),
+                    const SizedBox(width: 3),
+                    Text(
+                      'صالح لمدة $validityLabel',
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.warning,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _previewRow(
+  Widget _summaryRow(
     String label,
     String value, {
     Color? color,
@@ -404,35 +407,44 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
     );
   }
 
+  // ─── Send button ────────────────────────────────────────────
+
   Widget _buildSendButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       child: SizedBox(
         width: double.infinity,
-        child: FilledButton.icon(
+        child: FilledButton(
           onPressed: _isValid ? () => _send(context) : null,
-          icon: const Icon(Icons.send_rounded, size: 18),
-          label: const Text('إرسال عرض السعر'),
           style: FilledButton.styleFrom(
             backgroundColor: AppColors.warning,
             disabledBackgroundColor: context.colorScheme.outlineVariant,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            padding: const EdgeInsetsDirectional.symmetric(
-              vertical: 14,
-            ),
+            padding: const EdgeInsetsDirectional.symmetric(vertical: 14),
+          ),
+          // In RTL Row: Text=RIGHT (start), Icon=LEFT (end) ✓
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('إرسال'),
+              SizedBox(width: AppSpacing.sm),
+              Icon(Icons.send_rounded, size: 18),
+            ],
           ),
         ),
       ),
     );
   }
 
+  // ─── Send logic ─────────────────────────────────────────────
+
   void _send(BuildContext context) {
     final quoteItems = _items
-        .where((item) =>
-            item.descriptionController.text.trim().isNotEmpty &&
-            item.priceCents > 0)
+        .where(
+            (item) => item.descriptionController.text.trim().isNotEmpty)
         .map((item) => QuoteItem(
               description: item.descriptionController.text.trim(),
               quantity: item.quantity,
@@ -459,6 +471,97 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
   }
 }
 
+// ═══════════════════════════════════════════════════════════════
+// Shared helpers
+// ═══════════════════════════════════════════════════════════════
+
+class _SectionLabel extends StatelessWidget {
+  final String text;
+  const _SectionLabel(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w500,
+        color: context.colorScheme.onSurfaceVariant,
+      ),
+    );
+  }
+}
+
+class _FieldSection extends StatelessWidget {
+  final String label;
+  final Widget child;
+
+  const _FieldSection({required this.label, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionLabel(label),
+        const SizedBox(height: AppSpacing.xs),
+        child,
+      ],
+    );
+  }
+}
+
+/// Outlined money input matching Figma style.
+class _OutlinedMoneyField extends StatelessWidget {
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+
+  const _OutlinedMoneyField({
+    required this.controller,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = context.colorScheme;
+    return TextField(
+      controller: controller,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        hintText: '0.00',
+        hintStyle: TextStyle(color: cs.onSurfaceVariant, fontSize: 13),
+        suffixText: 'د.أ',
+        suffixStyle: TextStyle(color: cs.onSurfaceVariant, fontSize: 13),
+        filled: true,
+        fillColor: cs.surfaceContainerLowest,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: cs.outlineVariant),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: cs.outlineVariant),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: AppColors.warning),
+        ),
+        contentPadding: const EdgeInsetsDirectional.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm,
+        ),
+        isDense: true,
+      ),
+      style: const TextStyle(fontSize: 14),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Line item model + card
+// ═══════════════════════════════════════════════════════════════
+
 class _LineItem {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
@@ -480,14 +583,27 @@ class _LineItem {
   }
 }
 
-class _LineItemRow extends StatelessWidget {
+/// A single quote line item card matching Figma layout:
+///
+/// ```
+/// ┌──────────────────────────────────────┐
+/// │                            بند 1     │
+/// │  ┌──────────────────────────────┐    │
+/// │  │ مثال: كشف وتشخيص التسريب...   │    │
+/// │  └──────────────────────────────┘    │
+/// │  الكمية  [+ 1 -]  السعر  [__] د.أ   │
+/// └──────────────────────────────────────┘
+/// ```
+class _LineItemCard extends StatelessWidget {
   final _LineItem item;
+  final int index;
   final bool showRemove;
   final VoidCallback onRemove;
   final VoidCallback onChanged;
 
-  const _LineItemRow({
+  const _LineItemCard({
     required this.item,
+    required this.index,
     required this.showRemove,
     required this.onRemove,
     required this.onChanged,
@@ -495,133 +611,222 @@ class _LineItemRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
+
     return Container(
-      margin: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
-      padding: const EdgeInsetsDirectional.all(AppSpacing.sm),
+      margin: const EdgeInsetsDirectional.only(bottom: AppSpacing.md),
+      padding: const EdgeInsetsDirectional.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: context.colorScheme.surfaceContainerLowest,
+        border: Border.all(color: cs.outlineVariant),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
+      child: Stack(
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: TextField(
-                  controller: item.descriptionController,
-                  onChanged: (_) => onChanged(),
-                  decoration: InputDecoration(
-                    hintText: 'وصف البند',
-                    hintStyle:
-                        TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 13),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsetsDirectional.symmetric(
-                      horizontal: AppSpacing.sm,
-                    ),
-                    isDense: true,
-                  ),
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ),
-              if (showRemove)
-                IconButton(
-                  onPressed: onRemove,
-                  icon: const Icon(Icons.close, size: 16),
-                  color: context.colorScheme.onSurfaceVariant,
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
+              // "بند N" label
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  'بند $index',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: cs.onSurfaceVariant,
                   ),
                 ),
-            ],
-          ),
-          Divider(height: 1, color: context.colorScheme.outlineVariant),
-          const SizedBox(height: AppSpacing.xs),
-          Row(
-            children: [
-              // Quantity stepper
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: context.colorScheme.outlineVariant),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _StepperButton(
-                      icon: Icons.remove,
-                      onTap: item.quantity > 1
-                          ? () {
-                              item.quantity--;
-                              onChanged();
-                            }
-                          : null,
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.symmetric(
-                        horizontal: AppSpacing.sm,
-                      ),
-                      child: Text(
-                        '${item.quantity}',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    _StepperButton(
-                      icon: Icons.add,
-                      onTap: () {
-                        item.quantity++;
-                        onChanged();
-                      },
-                    ),
-                  ],
-                ),
               ),
-              const SizedBox(width: AppSpacing.sm),
-              // Price input
-              Expanded(
-                child: TextField(
-                  controller: item.priceController,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  onChanged: (_) => onChanged(),
-                  textAlign: TextAlign.end,
-                  decoration: InputDecoration(
-                    hintText: '0.00',
-                    hintStyle:
-                        TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 13),
-                    suffixText: 'د.أ',
-                    suffixStyle: TextStyle(
-                      color: context.colorScheme.onSurfaceVariant,
+              const SizedBox(height: AppSpacing.sm),
+              // Description field (outlined)
+              TextField(
+                controller: item.descriptionController,
+                onChanged: (_) => onChanged(),
+                maxLength: QuoteLimits.maxDescriptionLength,
+                decoration: InputDecoration(
+                  hintText: 'مثال: كشف وتشخيص التسريب...',
+                  hintStyle: TextStyle(
+                    color: cs.onSurfaceVariant,
+                    fontSize: 13,
+                  ),
+                  filled: true,
+                  fillColor: cs.surfaceContainerLowest,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: cs.outlineVariant),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: cs.outlineVariant),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: AppColors.warning),
+                  ),
+                  contentPadding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: AppSpacing.sm,
+                  ),
+                  isDense: true,
+                  counterText: '',
+                ),
+                style: const TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              // Price + Quantity row
+              // RTL: [الكمية stepper] on RIGHT, [السعر field] on LEFT
+              Row(
+                children: [
+                  // Quantity section (start = RIGHT in RTL)
+                  Text(
+                    'الكمية',
+                    style: TextStyle(
                       fontSize: 12,
+                      color: cs.onSurfaceVariant,
                     ),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsetsDirectional.symmetric(
-                      horizontal: AppSpacing.sm,
-                    ),
-                    isDense: true,
                   ),
-                  style: const TextStyle(fontSize: 14),
-                ),
+                  const SizedBox(width: AppSpacing.sm),
+                  _Stepper(
+                    value: item.quantity,
+                    onIncrement: () {
+                      item.quantity++;
+                      onChanged();
+                    },
+                    onDecrement: item.quantity > 1
+                        ? () {
+                            item.quantity--;
+                            onChanged();
+                          }
+                        : null,
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  // Price section (end = LEFT in RTL)
+                  Text(
+                    'السعر',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: cs.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: TextField(
+                      controller: item.priceController,
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true),
+                      onChanged: (_) => onChanged(),
+                      decoration: InputDecoration(
+                        hintText: '0.00',
+                        hintStyle: TextStyle(
+                          color: cs.onSurfaceVariant,
+                          fontSize: 13,
+                        ),
+                        suffixText: 'د.أ',
+                        suffixStyle: TextStyle(
+                          color: cs.onSurfaceVariant,
+                          fontSize: 12,
+                        ),
+                        filled: true,
+                        fillColor: cs.surfaceContainerLowest,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: cs.outlineVariant),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: cs.outlineVariant),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              const BorderSide(color: AppColors.warning),
+                        ),
+                        contentPadding:
+                            const EdgeInsetsDirectional.symmetric(
+                          horizontal: AppSpacing.sm,
+                          vertical: AppSpacing.sm,
+                        ),
+                        isDense: true,
+                      ),
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
+          // Remove button — top end corner (LEFT in RTL)
+          if (showRemove)
+            PositionedDirectional(
+              top: 0,
+              end: 0,
+              child: GestureDetector(
+                onTap: onRemove,
+                child: Container(
+                  width: 22,
+                  height: 22,
+                  decoration: BoxDecoration(
+                    color: cs.surfaceContainerHighest,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.close,
+                    size: 12,
+                    color: cs.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
   }
 }
 
-class _StepperButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback? onTap;
+/// Compact quantity stepper: `[+ N -]` in a bordered container.
+class _Stepper extends StatelessWidget {
+  final int value;
+  final VoidCallback onIncrement;
+  final VoidCallback? onDecrement;
 
-  const _StepperButton({required this.icon, this.onTap});
+  const _Stepper({
+    required this.value,
+    required this.onIncrement,
+    this.onDecrement,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final cs = context.colorScheme;
+
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: cs.outlineVariant),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _btn(Icons.add, onIncrement, cs),
+          Padding(
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.sm,
+            ),
+            child: Text(
+              '$value',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          _btn(Icons.remove, onDecrement, cs),
+        ],
+      ),
+    );
+  }
+
+  Widget _btn(IconData icon, VoidCallback? onTap, ColorScheme cs) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -631,7 +836,7 @@ class _StepperButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 16,
-          color: onTap != null ? context.colorScheme.onSurface : context.colorScheme.onSurfaceVariant,
+          color: onTap != null ? cs.onSurface : cs.onSurfaceVariant,
         ),
       ),
     );

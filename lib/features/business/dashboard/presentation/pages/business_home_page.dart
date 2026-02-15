@@ -9,7 +9,8 @@ import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/features/business/catalog_management/presentation/pages/manage_page.dart';
 import 'package:honak/features/business/catalog_management/presentation/pages/villa_manage_page.dart';
 import 'package:honak/features/business/directory_management/presentation/pages/directory_manage_page.dart';
-import 'package:honak/shared/widgets/empty_state.dart';
+import 'package:honak/features/business/customers/presentation/pages/biz_customers_tab.dart';
+import 'package:honak/features/business/page_settings/presentation/providers/settings_provider.dart';
 
 /// Business Home screen with horizontal sub-tabs.
 /// Matches Figma BusinessHome.tsx: Dashboard | Manage | Content | Customers.
@@ -38,8 +39,8 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
     super.dispose();
   }
 
-  void _rebuildTabs(BusinessContext? bizContext) {
-    final newTabs = _buildTabList(bizContext);
+  void _rebuildTabs(BusinessContext? bizContext, {bool isFullEngagement = true}) {
+    final newTabs = _buildTabList(bizContext, isFullEngagement: isFullEngagement);
     if (newTabs.length != _tabs.length ||
         !_tabsMatch(newTabs, _tabs)) {
       _tabs = newTabs;
@@ -60,7 +61,10 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
     return true;
   }
 
-  List<_HomeTab> _buildTabList(BusinessContext? bizContext) {
+  List<_HomeTab> _buildTabList(
+    BusinessContext? bizContext, {
+    bool isFullEngagement = true,
+  }) {
     if (bizContext == null) return [];
 
     final archetype = bizContext.archetype;
@@ -89,7 +93,8 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
       label: context.l10n.bizTabContent,
     ));
 
-    if (!isReduced && !isDirectory) {
+    // Customers tab: requires non-reduced archetype + full engagement
+    if (!isReduced && !isDirectory && isFullEngagement) {
       tabs.add(_HomeTab(
         id: 'customers',
         icon: Icons.people_outlined,
@@ -103,7 +108,10 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
   @override
   Widget build(BuildContext context) {
     final bizContext = ref.watch(businessContextProvider);
-    _rebuildTabs(bizContext);
+    final settingsAsync = ref.watch(pageSettingsProvider);
+    final isFullEngagement =
+        (settingsAsync.valueOrNull?.engagementLevel ?? 'full') == 'full';
+    _rebuildTabs(bizContext, isFullEngagement: isFullEngagement);
 
     if (_tabs.isEmpty) return const SizedBox.shrink();
 
@@ -161,11 +169,7 @@ class _BusinessHomePageState extends ConsumerState<BusinessHomePage>
           : const BusinessManagePage(),
       'directory_manage' => const DirectoryManagePage(),
       'content' => const ContentTab(),
-      'customers' => EmptyState(
-          icon: Icons.people_outlined,
-          title: context.l10n.contentCustomersComingSoon,
-          subtitle: '',
-        ),
+      'customers' => const BizCustomersTab(),
       _ => const SizedBox.shrink(),
     };
   }

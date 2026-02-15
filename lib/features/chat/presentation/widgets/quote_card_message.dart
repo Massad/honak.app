@@ -32,6 +32,9 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
 
   QuoteData get _quote => QuoteData.fromMetadata(widget.message.metadata);
 
+  bool get _hasBreakdown =>
+      (_quote.discountCents != null && _quote.discountCents! > 0);
+
   Color get _borderColor => switch (_status) {
         'accepted' => AppColors.success,
         'declined' || 'expired' => context.colorScheme.onSurfaceVariant,
@@ -73,8 +76,7 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
             if (_quote.validDays != null && _status == 'pending')
               _buildValidity(),
             if (_status != 'pending') _buildStatusBadge(),
-            if (_status == 'pending' && !widget.isBusinessMode)
-              _buildActions(),
+            if (_status == 'pending') _buildActions(),
             _buildTimestamp(),
           ],
         ),
@@ -172,19 +174,22 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
         children: [
           Divider(height: 1, color: context.colorScheme.outlineVariant),
           const SizedBox(height: AppSpacing.sm),
-          if (_quote.discountCents != null && _quote.discountCents! > 0) ...[
+          if (_hasBreakdown) ...[
             _totalRow(
               'المجموع الفرعي',
               Money(_quote.subtotalCents).toFormattedArabic(),
               isBold: false,
             ),
-            const SizedBox(height: 2),
-            _totalRow(
-              'خصم',
-              '- ${Money(_quote.discountCents!).toFormattedArabic()}',
-              color: AppColors.success,
-              isBold: false,
-            ),
+            if (_quote.discountCents != null &&
+                _quote.discountCents! > 0) ...[
+              const SizedBox(height: 2),
+              _totalRow(
+                'خصم',
+                '- ${Money(_quote.discountCents!).toFormattedArabic()}',
+                color: AppColors.success,
+                isBold: false,
+              ),
+            ],
             const SizedBox(height: 4),
           ],
           _totalRow(
@@ -331,9 +336,14 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
         children: [
           Expanded(
             child: OutlinedButton(
-              onPressed: () => setState(() => _status = 'declined'),
+              onPressed: widget.isBusinessMode
+                  ? null
+                  : () => setState(() => _status = 'declined'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: context.colorScheme.onSurfaceVariant,
+                disabledForegroundColor: context
+                    .colorScheme.onSurfaceVariant
+                    .withValues(alpha: 0.38),
                 side: BorderSide(color: context.colorScheme.outlineVariant),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSpacing.md),
@@ -348,9 +358,13 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: FilledButton(
-              onPressed: () => setState(() => _status = 'accepted'),
+              onPressed: widget.isBusinessMode
+                  ? null
+                  : () => setState(() => _status = 'accepted'),
               style: FilledButton.styleFrom(
                 backgroundColor: AppColors.success,
+                disabledBackgroundColor:
+                    AppColors.success.withValues(alpha: 0.38),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSpacing.md),
                 ),

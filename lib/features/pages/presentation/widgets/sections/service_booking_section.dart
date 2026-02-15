@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/service_item_card.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/team_member_grid.dart';
-import 'package:honak/features/pages/presentation/widgets/sections/booking_wizard_sheet.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/catalog_section_helpers.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart';
+import 'package:honak/shared/mixins/section_filter_mixin.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
-import 'package:honak/shared/extensions/sort_extensions.dart';
+import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
+import 'package:honak/shared/widgets/section_search_bar.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 /// Service list with categories, search, pricing, duration, and team members.
@@ -27,7 +30,7 @@ class ServiceBookingSection extends ConsumerStatefulWidget {
   /// scrollable widgets.
   final List<Widget> headerSlivers;
 
-  /// If provided, called instead of the default [BookingWizardSheet] when a
+  /// If provided, called instead of the default booking wizard when a
   /// service item is tapped. Used by queue-type pages to show the
   /// [QueueOrScheduleSheet] instead.
   final void Function(Item item)? onBookServiceOverride;
@@ -47,49 +50,8 @@ class ServiceBookingSection extends ConsumerStatefulWidget {
       _ServiceBookingSectionState();
 }
 
-class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
-  static const _pageSize = 12;
-
-  String? _selectedCategory;
-  String _searchQuery = '';
-  int _visibleCount = _pageSize;
-
-  List<Item> _filterItems(List<Item> items) {
-    var filtered = items;
-
-    if (_selectedCategory != null) {
-      filtered = filtered
-          .where((item) => item.categoryName == _selectedCategory)
-          .toList();
-    }
-
-    if (_searchQuery.isNotEmpty) {
-      final query = _searchQuery.toLowerCase();
-      filtered = filtered.where((item) {
-        final nameMatch = item.nameAr.toLowerCase().contains(query);
-        final descMatch =
-            item.descriptionAr?.toLowerCase().contains(query) ?? false;
-        return nameMatch || descMatch;
-      }).toList();
-    }
-
-    return filtered.sortedByOrder((i) => i.sortOrder);
-  }
-
-  List<String> _extractCategories(List<Item> items) {
-    final sorted = items.sortedByOrder((i) => i.sortOrder);
-    final categories = <String>[];
-    final seen = <String>{};
-    for (final item in sorted) {
-      if (item.categoryName != null &&
-          item.categoryName!.isNotEmpty &&
-          seen.add(item.categoryName!)) {
-        categories.add(item.categoryName!);
-      }
-    }
-    return categories;
-  }
-
+class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection>
+    with SectionFilterMixin {
   /// Builds the sliver list for the service booking section.
   /// Exposed so parent widgets (queue/dropoff wrappers) can embed these
   /// slivers directly into their own CustomScrollView instead of nesting.
@@ -119,52 +81,25 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
       // Category pills
       if (categories.isNotEmpty)
         SliverToBoxAdapter(
-          child: _ServiceCategoryPills(
+          child: CategoryFilterPills(
             categories: categories,
-            selected: _selectedCategory,
-            onSelected: (cat) => setState(() {
-              _selectedCategory = cat;
-              _visibleCount = _pageSize;
-            }),
+            selected: selectedCategory,
+            onSelected: selectCategory,
           ),
         ),
 
       // Search bar
       SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg,
-            vertical: AppSpacing.sm,
-          ),
-          child: TextField(
-            onChanged: (value) => setState(() {
-              _searchQuery = value;
-              _visibleCount = _pageSize;
-            }),
-            decoration: InputDecoration(
-              hintText:
-                  '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u062e\u062f\u0645\u0627\u062a...',
-              prefixIcon: const Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              filled: true,
-              fillColor: context.colorScheme.surfaceContainerHighest,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg,
-                vertical: AppSpacing.md,
-              ),
-              isDense: true,
-            ),
-          ),
+        child: SectionSearchBar(
+          hintText: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u062e\u062f\u0645\u0627\u062a...',
+          onChanged: updateSearch,
         ),
       ),
 
       // Empty state
       if (visible.isEmpty)
         const SliverToBoxAdapter(
-          child: _ServiceEmptyState(),
+          child: SectionEmptySearch(),
         )
       else ...[
         // Service list
@@ -204,12 +139,10 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
         // Show more
         if (hasMore)
           SliverToBoxAdapter(
-            child: _ServiceShowMoreButton(
+            child: SectionShowMoreButton(
               visibleCount: visible.length,
               totalCount: filtered.length,
-              onPressed: () => setState(() {
-                _visibleCount += _pageSize;
-              }),
+              onPressed: showMore,
             ),
           ),
       ],
@@ -232,15 +165,18 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
     List<Map<String, dynamic>> teamMembers,
   ) {
     final durationMinutes = item.sortOrder > 0 ? item.sortOrder : 30;
-
-    BookingWizardSheet.show(
-      context: context,
-      pageName: widget.pageName,
-      serviceId: item.id,
-      serviceName: item.nameAr,
-      priceCents: item.price.cents,
-      durationMinutes: durationMinutes,
-      teamMembers: teamMembers,
+    showAppSheet(
+      context,
+      builder: (_) => ItemPickerSheet(
+        pageSlug: '',
+        wizardMode: PickerWizardMode.book,
+        preSelectedItem: item,
+        teamMembers: teamMembers,
+        pageName: widget.pageName,
+        durationMinutes: durationMinutes,
+        title: 'حجز موعد',
+        onBookingConfirmed: (_) {},
+      ),
     );
   }
 
@@ -259,10 +195,10 @@ class _ServiceBookingSectionState extends ConsumerState<ServiceBookingSection> {
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),
       ),
       data: (items) {
-        final categories = _extractCategories(items);
-        final filtered = _filterItems(items);
-        final visible = filtered.take(_visibleCount).toList();
-        final hasMore = filtered.length > _visibleCount;
+        final categories = extractCategories(items);
+        final filtered = baseFilterItems(items);
+        final visible = filtered.take(visibleCount).toList();
+        final hasMore = filtered.length > visibleCount;
 
         return CustomScrollView(
           slivers: [
@@ -301,108 +237,6 @@ class _TeamMembersSection extends ConsumerWidget {
         if (members.isEmpty) return const SizedBox.shrink();
         return TeamMemberGrid(members: members);
       },
-    );
-  }
-}
-
-class _ServiceCategoryPills extends StatelessWidget {
-  final List<String> categories;
-  final String? selected;
-  final ValueChanged<String?> onSelected;
-
-  const _ServiceCategoryPills({
-    required this.categories,
-    required this.selected,
-    required this.onSelected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.lg,
-          vertical: AppSpacing.sm,
-        ),
-        itemCount: categories.length + 1,
-        separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.sm),
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return FilterChip(
-              label: const Text('الكل'),
-              selected: selected == null,
-              onSelected: (_) => onSelected(null),
-              showCheckmark: false,
-              visualDensity: VisualDensity.compact,
-            );
-          }
-          final category = categories[index - 1];
-          return FilterChip(
-            label: Text(category),
-            selected: selected == category,
-            onSelected: (_) =>
-                onSelected(selected == category ? null : category),
-            showCheckmark: false,
-            visualDensity: VisualDensity.compact,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _ServiceShowMoreButton extends StatelessWidget {
-  final int visibleCount;
-  final int totalCount;
-  final VoidCallback onPressed;
-
-  const _ServiceShowMoreButton({
-    required this.visibleCount,
-    required this.totalCount,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-        child: TextButton(
-          onPressed: onPressed,
-          child: Text(
-            'عرض المزيد ($visibleCount من $totalCount)',
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ServiceEmptyState extends StatelessWidget {
-  const _ServiceEmptyState();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.search_off,
-            size: 48,
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text(
-            'لا توجد نتائج',
-            style: context.textTheme.bodyLarge?.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

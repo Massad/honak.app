@@ -6,16 +6,32 @@ import 'package:honak/core/theme/app_spacing.dart';
 
 /// Config-driven mapping: which Power Chat actions each archetype supports.
 const _archetypeActions = <Archetype, List<String>>{
-  Archetype.catalogOrder: ['send_product', 'send_quote'],
-  Archetype.menuOrder: ['send_product', 'send_quote'],
-  Archetype.serviceBooking: ['send_product', 'send_availability', 'send_quote'],
-  Archetype.quoteRequest: ['send_quote', 'send_availability', 'send_product'],
+  Archetype.catalogOrder: ['send_product', 'ask_info', 'send_quote'],
+  Archetype.menuOrder: ['send_product', 'ask_info', 'send_quote'],
+  Archetype.serviceBooking: [
+    'send_product',
+    'send_availability',
+    'ask_info',
+    'send_quote',
+  ],
+  Archetype.quoteRequest: [
+    'ask_info',
+    'send_quote',
+    'send_availability',
+    'send_product',
+  ],
   Archetype.portfolioInquiry: [
     'send_product',
+    'ask_info',
     'send_availability',
     'send_quote',
   ],
-  Archetype.reservation: ['send_availability', 'send_quote', 'send_product'],
+  Archetype.reservation: [
+    'send_availability',
+    'ask_info',
+    'send_quote',
+    'send_product',
+  ],
   Archetype.followOnly: [],
   Archetype.directory: [],
 };
@@ -56,6 +72,7 @@ class PowerChatMenu extends StatelessWidget {
   final VoidCallback onSendProduct;
   final VoidCallback onSendAvailability;
   final VoidCallback onSendQuote;
+  final VoidCallback onAskInfo;
   final VoidCallback onClose;
 
   const PowerChatMenu({
@@ -64,6 +81,7 @@ class PowerChatMenu extends StatelessWidget {
     required this.onSendProduct,
     required this.onSendAvailability,
     required this.onSendQuote,
+    required this.onAskInfo,
     required this.onClose,
   });
 
@@ -82,6 +100,12 @@ class PowerChatMenu extends StatelessWidget {
             label: 'أوقات متاحة',
             icon: Icons.schedule,
             color: AppColors.success,
+          ),
+        'ask_info' => const _ActionDef(
+            key: 'ask_info',
+            label: 'طلب معلومات',
+            icon: Icons.help_outline_rounded,
+            color: AppColors.warning,
           ),
         'send_quote' => const _ActionDef(
             key: 'send_quote',
@@ -173,6 +197,8 @@ class PowerChatMenu extends StatelessWidget {
                             onSendProduct();
                           case 'send_availability':
                             onSendAvailability();
+                          case 'ask_info':
+                            onAskInfo();
                           case 'send_quote':
                             onSendQuote();
                         }

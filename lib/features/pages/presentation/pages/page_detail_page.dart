@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:honak/config/archetype.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/business/dropoff/presentation/providers/dropoff_providers.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/customer_dropoff_view.dart';
 import 'package:honak/features/business/queue/domain/entities/customer_queue_entry.dart';
@@ -22,8 +23,9 @@ import 'package:honak/features/pages/presentation/widgets/page_skeleton.dart';
 import 'package:honak/features/pages/presentation/widgets/page_tab_bar.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/sections.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/directory_tab.dart';
-import 'package:honak/features/pages/presentation/widgets/sections/booking_wizard_sheet.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/shared.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 import 'package:honak/features/pages/presentation/pages/claim_request_page.dart';
 import 'package:honak/shared/widgets/coverage_banner.dart';
 import 'package:honak/shared/widgets/error_view.dart';
@@ -404,7 +406,7 @@ class _ServiceBookingWithDropoff extends ConsumerWidget {
 ///
 /// Manages local queue entry state for demo. When the user taps "حجز" on a
 /// service item, shows [QueueOrScheduleSheet] ("today / book later") instead
-/// of the default [BookingWizardSheet]. Joining the queue creates a local
+/// of the default booking wizard. Joining the queue creates a local
 /// [CustomerQueueEntry] so the tracker renders immediately.
 class _ServiceBookingWithQueue extends ConsumerStatefulWidget {
   final PageDetail page;
@@ -510,7 +512,7 @@ class _ServiceBookingWithQueueState
   ///
   /// Matches the tapped [item] to a [ServicePackage] by `nameAr`. If matched,
   /// shows [QueueOrScheduleSheet] ("today / book later"). If no match, falls
-  /// back to the standard [BookingWizardSheet].
+  /// back to the standard booking wizard.
   void _handleBookService(
     BuildContext context,
     dynamic item,
@@ -518,8 +520,6 @@ class _ServiceBookingWithQueueState
   ) {
     // item is an Item from catalog/domain/entities/item.dart
     final itemName = item.nameAr as String;
-    final itemId = item.id as String;
-    final itemPriceCents = item.price.cents as int;
 
     // If there's already an active queue entry, block and show dialog
     final activeEntry = _demoEntry ??
@@ -553,13 +553,17 @@ class _ServiceBookingWithQueueState
       final durationMinutes = (item.sortOrder as int) > 0
           ? item.sortOrder as int
           : 30;
-      BookingWizardSheet.show(
-        context: context,
-        pageName: widget.page.name,
-        serviceId: itemId,
-        serviceName: itemName,
-        priceCents: itemPriceCents,
-        durationMinutes: durationMinutes,
+      showAppSheet(
+        context,
+        builder: (_) => ItemPickerSheet(
+          pageSlug: widget.page.slug,
+          wizardMode: PickerWizardMode.book,
+          preSelectedItem: item as Item,
+          pageName: widget.page.name,
+          durationMinutes: durationMinutes,
+          title: 'حجز موعد',
+          onBookingConfirmed: (_) {},
+        ),
       );
       return;
     }
@@ -614,13 +618,17 @@ class _ServiceBookingWithQueueState
         final durationMinutes = (item.sortOrder as int) > 0
             ? item.sortOrder as int
             : matchedPackage.durationMin;
-        BookingWizardSheet.show(
-          context: context,
-          pageName: widget.page.name,
-          serviceId: itemId,
-          serviceName: itemName,
-          priceCents: itemPriceCents,
-          durationMinutes: durationMinutes,
+        showAppSheet(
+          context,
+          builder: (_) => ItemPickerSheet(
+            pageSlug: widget.page.slug,
+            wizardMode: PickerWizardMode.book,
+            preSelectedItem: item as Item,
+            pageName: widget.page.name,
+            durationMinutes: durationMinutes,
+            title: 'حجز موعد',
+            onBookingConfirmed: (_) {},
+          ),
         );
       },
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 
 /// Small colored badge showing price increase/decrease overlay on item images.
-/// Used by both CatalogItemCard and MenuItemCard.
+/// Used by OfferingItemCard.
 class PriceChangeBadge extends StatelessWidget {
   final PriceChange priceChange;
 

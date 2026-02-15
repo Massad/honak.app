@@ -684,5 +684,212 @@
     "placeholders": {
       "days": {"type": "int"}
     }
-  }
+  },
+
+  "bizCustomerActiveSubscribers": "مشترك نشط",
+  "bizCustomerTotal": "عميل",
+  "bizCustomerReturnRate": "عودة",
+  "bizCustomerOrdersPerCustomer": "طلب/عميل",
+  "bizCustomerSubscribers": "مشتركون",
+  "bizCustomerAllCustomers": "جميع العملاء",
+  "bizCustomerInvite": "دعوة",
+  "bizCustomerSearchHint": "بحث بالاسم أو الهاتف...",
+  "bizCustomerSortRecent": "الأحدث",
+  "bizCustomerSortOrders": "الأكثر طلبات",
+  "bizCustomerSortValue": "الأعلى قيمة",
+  "bizCustomerBadgeNew": "عميل جديد",
+  "bizCustomerBadgeActive": "عميل نشط",
+  "bizCustomerBadgeRepeat": "عميل متكرر",
+  "bizCustomerBadgeInterested": "مهتم",
+  "bizCustomerBadgePast": "عميل سابق",
+  "bizCustomerNoCustomers": "لا يوجد عملاء",
+  "bizCustomerOrders": "طلب",
+  "bizCustomerChatOnly": "محادثة فقط",
+  "bizCustomerSubscribed": "مشترك",
+  "bizCustomerSubscription": "الاشتراك",
+  "bizCustomerActivity": "النشاط",
+  "bizCustomerLastOrder": "آخر طلب",
+  "bizCustomerLastActivity": "آخر نشاط",
+  "bizCustomerSource": "المصدر",
+  "bizCustomerSourceOrganic": "عضوي",
+  "bizCustomerSourceInvited": "دعوة",
+  "bizCustomerSourceManual": "يدوي",
+  "bizCustomerPrivateNotes": "ملاحظات خاصة",
+  "bizCustomerNotesHint": "أضف ملاحظة خاصة عن هذا العميل (مرئية للفريق فقط)...",
+  "bizCustomerChat": "محادثة",
+  "bizCustomerNewOrder": "طلب جديد",
+  "bizCustomerPayment": "الدفع",
+  "bizCustomerTotalSpent": "إجمالي",
+  "bizCustomerActive": "نشط",
+  "bizCustomerEnded": "منتهي",
+  "bizCustomerExpiresAt": "ينتهي {date}",
+  "@bizCustomerExpiresAt": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "bizInviteTitle": "دعوة عميل",
+  "bizInvitePhoneHint": "رقم الهاتف: 07XXXXXXXX",
+  "bizInviteNameHint": "اسم العميل (اختياري)",
+  "bizInviteAttachPackage": "إرفاق باقة (اختياري)",
+  "bizInviteNoPackage": "بدون باقة",
+  "bizInviteDirectActivate": "تفعيل الاشتراك فوراً (دفع نقدي)",
+  "bizInviteAdd": "إضافة",
+  "bizInviteActivate": "تفعيل",
+  "bizInviteWhatsApp": "واتساب",
+  "bizInviteSentInvites": "الدعوات المرسلة",
+  "bizInvitePending": "بانتظار",
+  "bizInviteRegistered": "سجّل",
+  "bizInviteSubscribed": "مشترك",
+  "bizInviteExpired": "منتهية",
+  "bizInviteWithdrawn": "ملغاة",
+  "bizInviteWithdraw": "سحب الدعوة",
+  "bizInviteSentToday": "اليوم",
+  "bizInviteSentDaysAgo": "قبل {days} يوم",
+  "@bizInviteSentDaysAgo": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "bizInviteExpiresInDays": "تنتهي خلال {days} يوم",
+  "@bizInviteExpiresInDays": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "bizInviteNoInvites": "لا توجد دعوات",
+  "bizInviteLinkCopied": "تم نسخ الرابط",
+  "bizInviteRegisteredFilter": "سجّلوا",
+  "bizInviteAllFilter": "الكل",
+  "bizInviteSearchHint": "بحث بالاسم أو رقم الهاتف...",
+
+  "bizSubFilterAll": "الكل",
+  "bizSubFilterAuto": "تلقائي",
+  "bizSubFilterRemind": "تذكير",
+  "bizSubFilterLow": "رصيد منخفض",
+  "bizSubTodayAutoOrders": "طلبات اليوم التلقائية",
+  "bizSubConfirm": "تأكيد",
+  "bizSubSkip": "تخطي",
+  "bizSubConfirmedLabel": "تم التأكيد",
+  "bizSubSkippedLabel": "تم التخطي",
+  "bizSubCreditsBefore": "رصيد: {before} ← {after} بعد التأكيد",
+  "@bizSubCreditsBefore": {
+    "placeholders": {
+      "before": {"type": "int"},
+      "after": {"type": "int"}
+    }
+  },
+  "bizSubStatusActive": "نشط",
+  "bizSubStatusDepleted": "نفد الرصيد",
+  "bizSubStatusPaused": "متوقف",
+  "bizSubStatusEnded": "منتهي",
+  "bizSubExpiresAt": "ينتهي {date}",
+  "@bizSubExpiresAt": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "bizSubNoSubscribers": "لا يوجد مشتركون",
+  "bizSubRenewReminder": "تذكير بالتجديد",
+  "bizSubReminderSent": "تم إرسال تذكير لـ {name}",
+  "@bizSubReminderSent": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "bizSubOrderConfirmed": "تم تأكيد طلب {name}",
+  "@bizSubOrderConfirmed": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "bizSubOrderSkipped": "تم تخطي طلب {name}",
+  "@bizSubOrderSkipped": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "bizSubAutoMode": "تلقائي",
+  "bizSubRemindMode": "تذكير",
+
+  "bizManageSubTitle": "إدارة اشتراك {name}",
+  "@bizManageSubTitle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "bizManageAdjustCredits": "تعديل الرصيد",
+  "bizManageAdjustCreditsDesc": "إضافة أو خصم رصيد يدوياً",
+  "bizManagePause": "إيقاف مؤقت",
+  "bizManagePauseDesc": "تجميد الاشتراك لفترة محددة",
+  "bizManageResume": "استئناف الاشتراك",
+  "bizManageResumeDesc": "إعادة تفعيل الاشتراك فوراً",
+  "bizManageCancel": "إلغاء الاشتراك",
+  "bizManageCancelDesc": "إنهاء الاشتراك وحذف الرصيد المتبقي",
+  "bizManageResumed": "تم استئناف اشتراك {name}",
+  "@bizManageResumed": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+
+  "bizConfirmPauseTitle": "إيقاف الاشتراك مؤقتاً",
+  "bizConfirmPauseDesc": "سيتم تجميد اشتراك \"{pkg}\" حتى تقوم بإعادة تفعيله يدوياً. لن يتم إرسال طلبات تلقائية خلال فترة التوقف.",
+  "@bizConfirmPauseDesc": {
+    "placeholders": {
+      "pkg": {"type": "String"}
+    }
+  },
+  "bizConfirmCancelTitle": "إلغاء الاشتراك",
+  "bizConfirmCancelDesc": "سيتم إنهاء اشتراك \"{pkg}\" نهائياً. لن يتمكن العميل من استخدام الرصيد المتبقي.",
+  "@bizConfirmCancelDesc": {
+    "placeholders": {
+      "pkg": {"type": "String"}
+    }
+  },
+  "bizConfirmCancelWarning": "سيتم حذف {credits} وحدة متبقية من رصيد العميل. هذا الإجراء لا يمكن التراجع عنه.",
+  "@bizConfirmCancelWarning": {
+    "placeholders": {
+      "credits": {"type": "int"}
+    }
+  },
+  "bizConfirmPackageLabel": "الباقة",
+  "bizConfirmRemainingLabel": "الرصيد المتبقي",
+  "bizConfirmDeliveryMode": "نمط التوصيل",
+  "bizConfirmTotalOrders": "إجمالي الطلبات",
+  "bizConfirmTotalOrdersValue": "{count} طلب",
+  "@bizConfirmTotalOrdersValue": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizConfirmPauseBtn": "إيقاف مؤقت",
+  "bizConfirmCancelBtn": "تأكيد الإلغاء",
+  "bizConfirmBack": "تراجع",
+  "bizConfirmPaused": "تم إيقاف اشتراك {name} مؤقتاً",
+  "@bizConfirmPaused": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "bizConfirmCancelled": "تم إلغاء اشتراك {name}",
+  "@bizConfirmCancelled": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "bizSubCreditsUnit": "وحدة",
+
+  "bizCustomerAvgOrder": "معدل الطلب",
+  "bizCustomerMemberSince": "عضو منذ",
+  "bizCustomerCall": "اتصال",
+  "bizCustomerRecentOrders": "الطلبات الأخيرة",
+  "bizCustomerNoOrders": "لا توجد طلبات بعد",
+
+  "bizInviteSummaryPending": "بانتظار",
+  "bizInviteSummaryRegistered": "سجّلوا",
+  "bizInviteSummarySubscribed": "اشتركوا",
+  "bizInviteConversionRate": "نسبة التحويل",
+  "bizInviteSelectPackage": "اختر باقة",
+  "bizInviteDirectActivateLabel": "تفعيل الاشتراك فوراً (دفع نقدي)"
 }

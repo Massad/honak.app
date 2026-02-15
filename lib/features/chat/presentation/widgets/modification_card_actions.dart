@@ -16,77 +16,53 @@ class ModificationPendingFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isBusinessMode) {
-      return Padding(
-        padding: const EdgeInsetsDirectional.only(
-          start: AppSpacing.md,
-          end: AppSpacing.md,
-          bottom: AppSpacing.md,
-        ),
-        child: Row(
-          textDirection: TextDirection.ltr,
-          children: [
-            Expanded(
-              child: OutlinedButton.icon(
-                onPressed: onReject,
-                icon: const Icon(Icons.close, size: 16),
-                label: const Text('رفض'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                  side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSpacing.md),
-                  ),
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    vertical: AppSpacing.sm,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: FilledButton.icon(
-                onPressed: onApprove,
-                icon: const Icon(Icons.check, size: 16),
-                label: const Text('موافقة'),
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.success,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSpacing.md),
-                  ),
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    vertical: AppSpacing.sm,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+    final cs = Theme.of(context).colorScheme;
 
-    // Customer mode — waiting
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsetsDirectional.symmetric(vertical: AppSpacing.sm),
-      decoration: BoxDecoration(
-        color: AppColors.warning.withValues(alpha: 0.1),
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(14),
-          bottomRight: Radius.circular(14),
-        ),
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(
+        start: AppSpacing.md,
+        end: AppSpacing.md,
+        bottom: AppSpacing.md,
       ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        textDirection: TextDirection.ltr,
         children: [
-          Icon(Icons.schedule, size: 14, color: AppColors.warning),
-          SizedBox(width: AppSpacing.xs),
-          Text(
-            'بانتظار موافقة المتجر',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: AppColors.warning,
+          Expanded(
+            child: OutlinedButton.icon(
+              onPressed: isBusinessMode ? onReject : null,
+              icon: const Icon(Icons.close, size: 16),
+              label: const Text('رفض'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: cs.onSurfaceVariant,
+                disabledForegroundColor:
+                    cs.onSurfaceVariant.withValues(alpha: 0.38),
+                side: BorderSide(color: cs.outlineVariant),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSpacing.md),
+                ),
+                padding: const EdgeInsetsDirectional.symmetric(
+                  vertical: AppSpacing.sm,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: FilledButton.icon(
+              onPressed: isBusinessMode ? onApprove : null,
+              icon: const Icon(Icons.check, size: 16),
+              label: const Text('موافقة'),
+              style: FilledButton.styleFrom(
+                backgroundColor: AppColors.success,
+                disabledBackgroundColor:
+                    AppColors.success.withValues(alpha: 0.38),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSpacing.md),
+                ),
+                padding: const EdgeInsetsDirectional.symmetric(
+                  vertical: AppSpacing.sm,
+                ),
+              ),
             ),
           ),
         ],

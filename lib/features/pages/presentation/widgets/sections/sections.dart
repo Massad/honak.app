@@ -1,10 +1,8 @@
-export 'catalog_item_card.dart';
 export 'section_empty_state.dart';
 export 'catalog_section.dart';
 export 'directory_section.dart';
 export 'floating_cart_bar.dart';
 export 'follow_only_section.dart';
-export 'menu_item_card.dart';
 export 'menu_section.dart';
 export 'portfolio_section.dart';
 export 'quote_request_section.dart';

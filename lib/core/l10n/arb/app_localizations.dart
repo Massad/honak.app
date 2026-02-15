@@ -2689,6 +2689,726 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'قبل {days} يوم'**
   String daysAgo(int days);
+
+  /// No description provided for @bizCustomerActiveSubscribers.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشترك نشط'**
+  String get bizCustomerActiveSubscribers;
+
+  /// No description provided for @bizCustomerTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get bizCustomerTotal;
+
+  /// No description provided for @bizCustomerReturnRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'عودة'**
+  String get bizCustomerReturnRate;
+
+  /// No description provided for @bizCustomerOrdersPerCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب/عميل'**
+  String get bizCustomerOrdersPerCustomer;
+
+  /// No description provided for @bizCustomerSubscribers.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشتركون'**
+  String get bizCustomerSubscribers;
+
+  /// No description provided for @bizCustomerAllCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'جميع العملاء'**
+  String get bizCustomerAllCustomers;
+
+  /// No description provided for @bizCustomerInvite.
+  ///
+  /// In ar, this message translates to:
+  /// **'دعوة'**
+  String get bizCustomerInvite;
+
+  /// No description provided for @bizCustomerSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث بالاسم أو الهاتف...'**
+  String get bizCustomerSearchHint;
+
+  /// No description provided for @bizCustomerSortRecent.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحدث'**
+  String get bizCustomerSortRecent;
+
+  /// No description provided for @bizCustomerSortOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكثر طلبات'**
+  String get bizCustomerSortOrders;
+
+  /// No description provided for @bizCustomerSortValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأعلى قيمة'**
+  String get bizCustomerSortValue;
+
+  /// No description provided for @bizCustomerBadgeNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل جديد'**
+  String get bizCustomerBadgeNew;
+
+  /// No description provided for @bizCustomerBadgeActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل نشط'**
+  String get bizCustomerBadgeActive;
+
+  /// No description provided for @bizCustomerBadgeRepeat.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل متكرر'**
+  String get bizCustomerBadgeRepeat;
+
+  /// No description provided for @bizCustomerBadgeInterested.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهتم'**
+  String get bizCustomerBadgeInterested;
+
+  /// No description provided for @bizCustomerBadgePast.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل سابق'**
+  String get bizCustomerBadgePast;
+
+  /// No description provided for @bizCustomerNoCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد عملاء'**
+  String get bizCustomerNoCustomers;
+
+  /// No description provided for @bizCustomerOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب'**
+  String get bizCustomerOrders;
+
+  /// No description provided for @bizCustomerChatOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'محادثة فقط'**
+  String get bizCustomerChatOnly;
+
+  /// No description provided for @bizCustomerSubscribed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشترك'**
+  String get bizCustomerSubscribed;
+
+  /// No description provided for @bizCustomerSubscription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاشتراك'**
+  String get bizCustomerSubscription;
+
+  /// No description provided for @bizCustomerActivity.
+  ///
+  /// In ar, this message translates to:
+  /// **'النشاط'**
+  String get bizCustomerActivity;
+
+  /// No description provided for @bizCustomerLastOrder.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر طلب'**
+  String get bizCustomerLastOrder;
+
+  /// No description provided for @bizCustomerLastActivity.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نشاط'**
+  String get bizCustomerLastActivity;
+
+  /// No description provided for @bizCustomerSource.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصدر'**
+  String get bizCustomerSource;
+
+  /// No description provided for @bizCustomerSourceOrganic.
+  ///
+  /// In ar, this message translates to:
+  /// **'عضوي'**
+  String get bizCustomerSourceOrganic;
+
+  /// No description provided for @bizCustomerSourceInvited.
+  ///
+  /// In ar, this message translates to:
+  /// **'دعوة'**
+  String get bizCustomerSourceInvited;
+
+  /// No description provided for @bizCustomerSourceManual.
+  ///
+  /// In ar, this message translates to:
+  /// **'يدوي'**
+  String get bizCustomerSourceManual;
+
+  /// No description provided for @bizCustomerPrivateNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات خاصة'**
+  String get bizCustomerPrivateNotes;
+
+  /// No description provided for @bizCustomerNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف ملاحظة خاصة عن هذا العميل (مرئية للفريق فقط)...'**
+  String get bizCustomerNotesHint;
+
+  /// No description provided for @bizCustomerChat.
+  ///
+  /// In ar, this message translates to:
+  /// **'محادثة'**
+  String get bizCustomerChat;
+
+  /// No description provided for @bizCustomerNewOrder.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب جديد'**
+  String get bizCustomerNewOrder;
+
+  /// No description provided for @bizCustomerPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفع'**
+  String get bizCustomerPayment;
+
+  /// No description provided for @bizCustomerTotalSpent.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي'**
+  String get bizCustomerTotalSpent;
+
+  /// No description provided for @bizCustomerActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشط'**
+  String get bizCustomerActive;
+
+  /// No description provided for @bizCustomerEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتهي'**
+  String get bizCustomerEnded;
+
+  /// No description provided for @bizCustomerExpiresAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'ينتهي {date}'**
+  String bizCustomerExpiresAt(String date);
+
+  /// No description provided for @bizInviteTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دعوة عميل'**
+  String get bizInviteTitle;
+
+  /// No description provided for @bizInvitePhoneHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف: 07XXXXXXXX'**
+  String get bizInvitePhoneHint;
+
+  /// No description provided for @bizInviteNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم العميل (اختياري)'**
+  String get bizInviteNameHint;
+
+  /// No description provided for @bizInviteAttachPackage.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرفاق باقة (اختياري)'**
+  String get bizInviteAttachPackage;
+
+  /// No description provided for @bizInviteNoPackage.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون باقة'**
+  String get bizInviteNoPackage;
+
+  /// No description provided for @bizInviteDirectActivate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل الاشتراك فوراً (دفع نقدي)'**
+  String get bizInviteDirectActivate;
+
+  /// No description provided for @bizInviteAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة'**
+  String get bizInviteAdd;
+
+  /// No description provided for @bizInviteActivate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل'**
+  String get bizInviteActivate;
+
+  /// No description provided for @bizInviteWhatsApp.
+  ///
+  /// In ar, this message translates to:
+  /// **'واتساب'**
+  String get bizInviteWhatsApp;
+
+  /// No description provided for @bizInviteSentInvites.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدعوات المرسلة'**
+  String get bizInviteSentInvites;
+
+  /// No description provided for @bizInvitePending.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار'**
+  String get bizInvitePending;
+
+  /// No description provided for @bizInviteRegistered.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل'**
+  String get bizInviteRegistered;
+
+  /// No description provided for @bizInviteSubscribed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشترك'**
+  String get bizInviteSubscribed;
+
+  /// No description provided for @bizInviteExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتهية'**
+  String get bizInviteExpired;
+
+  /// No description provided for @bizInviteWithdrawn.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملغاة'**
+  String get bizInviteWithdrawn;
+
+  /// No description provided for @bizInviteWithdraw.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب الدعوة'**
+  String get bizInviteWithdraw;
+
+  /// No description provided for @bizInviteSentToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get bizInviteSentToday;
+
+  /// No description provided for @bizInviteSentDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل {days} يوم'**
+  String bizInviteSentDaysAgo(int days);
+
+  /// No description provided for @bizInviteExpiresInDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنتهي خلال {days} يوم'**
+  String bizInviteExpiresInDays(int days);
+
+  /// No description provided for @bizInviteNoInvites.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد دعوات'**
+  String get bizInviteNoInvites;
+
+  /// No description provided for @bizInviteLinkCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ الرابط'**
+  String get bizInviteLinkCopied;
+
+  /// No description provided for @bizInviteRegisteredFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلوا'**
+  String get bizInviteRegisteredFilter;
+
+  /// No description provided for @bizInviteAllFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get bizInviteAllFilter;
+
+  /// No description provided for @bizInviteSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث بالاسم أو رقم الهاتف...'**
+  String get bizInviteSearchHint;
+
+  /// No description provided for @bizSubFilterAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get bizSubFilterAll;
+
+  /// No description provided for @bizSubFilterAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي'**
+  String get bizSubFilterAuto;
+
+  /// No description provided for @bizSubFilterRemind.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير'**
+  String get bizSubFilterRemind;
+
+  /// No description provided for @bizSubFilterLow.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد منخفض'**
+  String get bizSubFilterLow;
+
+  /// No description provided for @bizSubTodayAutoOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلبات اليوم التلقائية'**
+  String get bizSubTodayAutoOrders;
+
+  /// No description provided for @bizSubConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد'**
+  String get bizSubConfirm;
+
+  /// No description provided for @bizSubSkip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطي'**
+  String get bizSubSkip;
+
+  /// No description provided for @bizSubConfirmedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم التأكيد'**
+  String get bizSubConfirmedLabel;
+
+  /// No description provided for @bizSubSkippedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم التخطي'**
+  String get bizSubSkippedLabel;
+
+  /// No description provided for @bizSubCreditsBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد: {before} ← {after} بعد التأكيد'**
+  String bizSubCreditsBefore(int before, int after);
+
+  /// No description provided for @bizSubStatusActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشط'**
+  String get bizSubStatusActive;
+
+  /// No description provided for @bizSubStatusDepleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'نفد الرصيد'**
+  String get bizSubStatusDepleted;
+
+  /// No description provided for @bizSubStatusPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوقف'**
+  String get bizSubStatusPaused;
+
+  /// No description provided for @bizSubStatusEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتهي'**
+  String get bizSubStatusEnded;
+
+  /// No description provided for @bizSubExpiresAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'ينتهي {date}'**
+  String bizSubExpiresAt(String date);
+
+  /// No description provided for @bizSubNoSubscribers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مشتركون'**
+  String get bizSubNoSubscribers;
+
+  /// No description provided for @bizSubRenewReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بالتجديد'**
+  String get bizSubRenewReminder;
+
+  /// No description provided for @bizSubReminderSent.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إرسال تذكير لـ {name}'**
+  String bizSubReminderSent(String name);
+
+  /// No description provided for @bizSubOrderConfirmed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تأكيد طلب {name}'**
+  String bizSubOrderConfirmed(String name);
+
+  /// No description provided for @bizSubOrderSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تخطي طلب {name}'**
+  String bizSubOrderSkipped(String name);
+
+  /// No description provided for @bizSubAutoMode.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي'**
+  String get bizSubAutoMode;
+
+  /// No description provided for @bizSubRemindMode.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير'**
+  String get bizSubRemindMode;
+
+  /// No description provided for @bizManageSubTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة اشتراك {name}'**
+  String bizManageSubTitle(String name);
+
+  /// No description provided for @bizManageAdjustCredits.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الرصيد'**
+  String get bizManageAdjustCredits;
+
+  /// No description provided for @bizManageAdjustCreditsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة أو خصم رصيد يدوياً'**
+  String get bizManageAdjustCreditsDesc;
+
+  /// No description provided for @bizManagePause.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get bizManagePause;
+
+  /// No description provided for @bizManagePauseDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجميد الاشتراك لفترة محددة'**
+  String get bizManagePauseDesc;
+
+  /// No description provided for @bizManageResume.
+  ///
+  /// In ar, this message translates to:
+  /// **'استئناف الاشتراك'**
+  String get bizManageResume;
+
+  /// No description provided for @bizManageResumeDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة تفعيل الاشتراك فوراً'**
+  String get bizManageResumeDesc;
+
+  /// No description provided for @bizManageCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء الاشتراك'**
+  String get bizManageCancel;
+
+  /// No description provided for @bizManageCancelDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنهاء الاشتراك وحذف الرصيد المتبقي'**
+  String get bizManageCancelDesc;
+
+  /// No description provided for @bizManageResumed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم استئناف اشتراك {name}'**
+  String bizManageResumed(String name);
+
+  /// No description provided for @bizConfirmPauseTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف الاشتراك مؤقتاً'**
+  String get bizConfirmPauseTitle;
+
+  /// No description provided for @bizConfirmPauseDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم تجميد اشتراك \"{pkg}\" حتى تقوم بإعادة تفعيله يدوياً. لن يتم إرسال طلبات تلقائية خلال فترة التوقف.'**
+  String bizConfirmPauseDesc(String pkg);
+
+  /// No description provided for @bizConfirmCancelTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء الاشتراك'**
+  String get bizConfirmCancelTitle;
+
+  /// No description provided for @bizConfirmCancelDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم إنهاء اشتراك \"{pkg}\" نهائياً. لن يتمكن العميل من استخدام الرصيد المتبقي.'**
+  String bizConfirmCancelDesc(String pkg);
+
+  /// No description provided for @bizConfirmCancelWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم حذف {credits} وحدة متبقية من رصيد العميل. هذا الإجراء لا يمكن التراجع عنه.'**
+  String bizConfirmCancelWarning(int credits);
+
+  /// No description provided for @bizConfirmPackageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الباقة'**
+  String get bizConfirmPackageLabel;
+
+  /// No description provided for @bizConfirmRemainingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد المتبقي'**
+  String get bizConfirmRemainingLabel;
+
+  /// No description provided for @bizConfirmDeliveryMode.
+  ///
+  /// In ar, this message translates to:
+  /// **'نمط التوصيل'**
+  String get bizConfirmDeliveryMode;
+
+  /// No description provided for @bizConfirmTotalOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الطلبات'**
+  String get bizConfirmTotalOrders;
+
+  /// No description provided for @bizConfirmTotalOrdersValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} طلب'**
+  String bizConfirmTotalOrdersValue(int count);
+
+  /// No description provided for @bizConfirmPauseBtn.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get bizConfirmPauseBtn;
+
+  /// No description provided for @bizConfirmCancelBtn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد الإلغاء'**
+  String get bizConfirmCancelBtn;
+
+  /// No description provided for @bizConfirmBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'تراجع'**
+  String get bizConfirmBack;
+
+  /// No description provided for @bizConfirmPaused.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إيقاف اشتراك {name} مؤقتاً'**
+  String bizConfirmPaused(String name);
+
+  /// No description provided for @bizConfirmCancelled.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إلغاء اشتراك {name}'**
+  String bizConfirmCancelled(String name);
+
+  /// No description provided for @bizSubCreditsUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة'**
+  String get bizSubCreditsUnit;
+
+  /// No description provided for @bizCustomerAvgOrder.
+  ///
+  /// In ar, this message translates to:
+  /// **'معدل الطلب'**
+  String get bizCustomerAvgOrder;
+
+  /// No description provided for @bizCustomerMemberSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'عضو منذ'**
+  String get bizCustomerMemberSince;
+
+  /// No description provided for @bizCustomerCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال'**
+  String get bizCustomerCall;
+
+  /// No description provided for @bizCustomerRecentOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطلبات الأخيرة'**
+  String get bizCustomerRecentOrders;
+
+  /// No description provided for @bizCustomerNoOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد طلبات بعد'**
+  String get bizCustomerNoOrders;
+
+  /// No description provided for @bizInviteSummaryPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار'**
+  String get bizInviteSummaryPending;
+
+  /// No description provided for @bizInviteSummaryRegistered.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلوا'**
+  String get bizInviteSummaryRegistered;
+
+  /// No description provided for @bizInviteSummarySubscribed.
+  ///
+  /// In ar, this message translates to:
+  /// **'اشتركوا'**
+  String get bizInviteSummarySubscribed;
+
+  /// No description provided for @bizInviteConversionRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة التحويل'**
+  String get bizInviteConversionRate;
+
+  /// No description provided for @bizInviteSelectPackage.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر باقة'**
+  String get bizInviteSelectPackage;
+
+  /// No description provided for @bizInviteDirectActivateLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل الاشتراك فوراً (دفع نقدي)'**
+  String get bizInviteDirectActivateLabel;
 }
 
 class _AppLocalizationsDelegate

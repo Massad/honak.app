@@ -21,7 +21,7 @@
       "active": true,
       "is_owner": false,
       "permissions": ["manage_availability", "manage_orders"],
-      "service_ids": ["biz_item_s01", "biz_item_s02", "biz_item_s03", "biz_item_s06", "biz_item_s14", "biz_item_s18"],
+      "service_ids": ["item_sr01", "item_sr02", "item_sr03", "item_sr09", "item_sr10"],
       "location_ids": [],
       "joined_at": "2025-03-15"
     },
@@ -33,7 +33,7 @@
       "active": true,
       "is_owner": false,
       "permissions": ["manage_availability", "manage_orders"],
-      "service_ids": ["biz_item_s07", "biz_item_s08", "biz_item_s21", "biz_item_s22", "biz_item_s25", "biz_item_s26"],
+      "service_ids": ["item_sr04", "item_sr05", "item_sr06", "item_sr07", "item_sr08"],
       "location_ids": [],
       "joined_at": "2025-04-20"
     },
@@ -45,7 +45,7 @@
       "active": false,
       "is_owner": false,
       "permissions": ["manage_orders"],
-      "service_ids": ["biz_item_s09", "biz_item_s10", "biz_item_s27", "biz_item_s28", "biz_item_s29", "biz_item_s30", "biz_item_s31", "biz_item_s32"],
+      "service_ids": [],
       "location_ids": [],
       "joined_at": "2025-06-01"
     }

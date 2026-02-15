@@ -6,23 +6,50 @@ import 'package:honak/shared/widgets/app_image.dart';
 
 /// Compact item row for picker lists.
 ///
-/// Shows image + name + description + price + "has options" indicator.
-/// Extracted from ProductPickerSheet._ItemTile.
+/// Shows image + name + description + price + optional radio indicator.
+/// When [showRadio] is true, a radio circle appears at the **end** side
+/// (left in RTL, right in LTR) and the row highlights when [isSelected].
 class ItemTile extends StatelessWidget {
   final Item item;
   final VoidCallback onTap;
+  final bool isSelected;
+  final bool showRadio;
 
-  const ItemTile({super.key, required this.item, required this.onTap});
+  const ItemTile({
+    super.key,
+    required this.item,
+    required this.onTap,
+    this.isSelected = false,
+    this.showRadio = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+
     return InkWell(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.symmetric(
+      borderRadius: showRadio ? BorderRadius.circular(12) : null,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        padding: EdgeInsetsDirectional.symmetric(
           vertical: AppSpacing.sm,
+          horizontal: showRadio ? AppSpacing.md : 0,
         ),
+        decoration: showRadio
+            ? BoxDecoration(
+                color: isSelected
+                    ? AppColors.primary.withValues(alpha: 0.04)
+                    : cs.surface,
+                border: Border.all(
+                  color: isSelected
+                      ? AppColors.primary.withValues(alpha: 0.4)
+                      : cs.outlineVariant,
+                  width: isSelected ? 1.5 : 1,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              )
+            : null,
         child: Row(
           children: [
             if (item.images.isNotEmpty) ...[
@@ -100,9 +127,40 @@ class ItemTile extends StatelessWidget {
                   ),
               ],
             ),
+            // Radio indicator — end side (LEFT in RTL)
+            if (showRadio) ...[
+              const SizedBox(width: AppSpacing.sm),
+              _RadioIndicator(isSelected: isSelected),
+            ],
           ],
         ),
       ),
+    );
+  }
+}
+
+class _RadioIndicator extends StatelessWidget {
+  final bool isSelected;
+  const _RadioIndicator({required this.isSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      width: 22,
+      height: 22,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isSelected ? AppColors.primary : Colors.transparent,
+        border: Border.all(
+          color: isSelected ? AppColors.primary : cs.outline,
+          width: 2,
+        ),
+      ),
+      child: isSelected
+          ? const Icon(Icons.check, size: 14, color: Colors.white)
+          : null,
     );
   }
 }

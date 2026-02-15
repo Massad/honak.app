@@ -26,6 +26,11 @@ _$ItemImpl _$$ItemImplFromJson(Map<String, dynamic> json) => _$ItemImpl(
   inStock: json['in_stock'] as bool? ?? true,
   pageId: json['page_id'] as String?,
   sortOrder: (json['sort_order'] as num?)?.toInt() ?? 0,
+  teamMemberIds:
+      (json['team_member_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$$ItemImplToJson(_$ItemImpl instance) =>
@@ -43,6 +48,7 @@ Map<String, dynamic> _$$ItemImplToJson(_$ItemImpl instance) =>
       'in_stock': instance.inStock,
       'page_id': instance.pageId,
       'sort_order': instance.sortOrder,
+      'team_member_ids': instance.teamMemberIds,
     };
 
 _$OptionGroupImpl _$$OptionGroupImplFromJson(Map<String, dynamic> json) =>

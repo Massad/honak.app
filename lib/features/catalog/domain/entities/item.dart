@@ -30,6 +30,7 @@ class Item with _$Item {
     @JsonKey(name: 'in_stock') @Default(true) bool inStock,
     @JsonKey(name: 'page_id') String? pageId,
     @JsonKey(name: 'sort_order') @Default(0) int sortOrder,
+    @JsonKey(name: 'team_member_ids') @Default([]) List<String> teamMemberIds,
   }) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);

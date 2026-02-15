@@ -4,23 +4,42 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
-import 'package:honak/features/chat/presentation/providers/chat_provider.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/booking_step_confirm.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/booking_step_datetime.dart';
+import 'package:honak/features/pages/presentation/widgets/sections/booking_step_team.dart';
 import 'package:honak/shared/entities/selected_item.dart';
-import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
+import 'package:honak/shared/widgets/item_selection/item_browse_step.dart';
 import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
-import 'package:honak/shared/widgets/item_selection/item_tile.dart';
+import 'package:honak/shared/widgets/wizard_step_indicator.dart';
 
 enum ItemPickerMode { singlePick, multiPick }
 
-/// Unified item browse + select sheet.
-///
-/// Two-step flow:
-/// - Step 1 (browse): search + category pills + item list tiles
-/// - Step 2 (configure): shown only when item has option groups
-///
-/// Items without options → single tap selects immediately (step 2 skipped).
-///
-/// Replaces ProductPickerSheet with full option group support.
+enum PickerWizardMode { pick, book }
+
+class BookingResult {
+  final String serviceId;
+  final String serviceName;
+  final int priceCents;
+  final int durationMinutes;
+  final String? memberId;
+  final String? memberName;
+  final DateTime? date;
+  final String? time;
+  final String? notes;
+
+  const BookingResult({
+    required this.serviceId,
+    required this.serviceName,
+    required this.priceCents,
+    required this.durationMinutes,
+    this.memberId,
+    this.memberName,
+    this.date,
+    this.time,
+    this.notes,
+  });
+}
+
 class ItemPickerSheet extends ConsumerStatefulWidget {
   final String pageSlug;
   final void Function(SelectedItem)? onItemSelected;
@@ -29,6 +48,14 @@ class ItemPickerSheet extends ConsumerStatefulWidget {
   final String title;
   final bool showQuantity;
   final List<SelectedItem> initialSelections;
+
+  // Wizard params
+  final PickerWizardMode wizardMode;
+  final List<Map<String, dynamic>> teamMembers;
+  final Item? preSelectedItem;
+  final String? pageName;
+  final int? durationMinutes;
+  final void Function(BookingResult)? onBookingConfirmed;
 
   const ItemPickerSheet({
     super.key,
@@ -39,32 +66,101 @@ class ItemPickerSheet extends ConsumerStatefulWidget {
     this.title = 'اختر منتج',
     this.showQuantity = true,
     this.initialSelections = const [],
+    this.wizardMode = PickerWizardMode.pick,
+    this.teamMembers = const [],
+    this.preSelectedItem,
+    this.pageName,
+    this.durationMinutes,
+    this.onBookingConfirmed,
   });
 
   @override
   ConsumerState<ItemPickerSheet> createState() => _ItemPickerSheetState();
 }
 
-class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
-  String _searchQuery = '';
-  String? _selectedCategory;
+enum _WizardStep { browse, team, dateTime, confirm }
 
-  // Step 2: item being configured (null = step 1)
+class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
+  // Wizard navigation
+  late List<_WizardStep> _steps;
+  int _currentStep = 0;
+
+  // Browse state
+  Item? _selectedItem;
+  late List<SelectedItem> _selections;
+
+  // Configure state (pick mode only)
   Item? _configuringItem;
 
-  // Multi-pick selections
-  late List<SelectedItem> _selections;
+  // Team state
+  String? _selectedMemberId;
+  String? _selectedMemberName;
+
+  // DateTime state
+  DateTime? _selectedDate;
+  String? _selectedTime;
+
+  // Confirm state
+  final _notesController = TextEditingController();
+
+  int get _durationMinutes =>
+      widget.durationMinutes ??
+      ((_selectedItem?.sortOrder ?? 0) > 0
+          ? _selectedItem!.sortOrder
+          : 30);
 
   @override
   void initState() {
     super.initState();
+    if (widget.wizardMode == PickerWizardMode.book) {
+      _steps = [
+        if (widget.preSelectedItem == null) _WizardStep.browse,
+        if (widget.teamMembers
+            .where((m) => m['active'] != false)
+            .isNotEmpty)
+          _WizardStep.team,
+        _WizardStep.dateTime,
+        _WizardStep.confirm,
+      ];
+      if (widget.preSelectedItem != null) {
+        _selectedItem = widget.preSelectedItem;
+      }
+    } else {
+      _steps = [_WizardStep.browse];
+    }
     _selections = List.of(widget.initialSelections);
   }
 
-  bool _isItemSelected(String itemId) =>
-      _selections.any((s) => s.itemId == itemId);
+  @override
+  void dispose() {
+    _notesController.dispose();
+    super.dispose();
+  }
 
-  void _selectItemDirect(Item item) {
+  // ── Pick mode handlers (unchanged from original) ───────────
+
+  bool _isItemSelected(String itemId) {
+    if (widget.mode == ItemPickerMode.singlePick) {
+      return _selectedItem?.id == itemId;
+    }
+    return _selections.any((s) => s.itemId == itemId);
+  }
+
+  void _handleItemTap(Item item) {
+    if (widget.mode == ItemPickerMode.singlePick) {
+      setState(() {
+        _selectedItem = _selectedItem?.id == item.id ? null : item;
+      });
+    } else {
+      if (item.optionGroups.isNotEmpty) {
+        setState(() => _configuringItem = item);
+      } else {
+        _toggleMultiPickItem(item);
+      }
+    }
+  }
+
+  void _toggleMultiPickItem(Item item) {
     final selected = SelectedItem(
       itemId: item.id,
       name: item.nameAr,
@@ -73,27 +169,32 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
       categoryName: item.categoryName,
       description: item.descriptionAr,
     );
-
-    if (widget.mode == ItemPickerMode.singlePick) {
-      widget.onItemSelected?.call(selected);
-      Navigator.pop(context);
-    } else {
-      setState(() {
-        if (_isItemSelected(item.id)) {
-          _selections.removeWhere((s) => s.itemId == item.id);
-        } else {
-          _selections.add(selected);
-        }
-      });
-    }
+    setState(() {
+      if (_isItemSelected(item.id)) {
+        _selections.removeWhere((s) => s.itemId == item.id);
+      } else {
+        _selections.add(selected);
+      }
+    });
   }
 
-  void _handleItemTap(Item item) {
+  void _handleSinglePickSend() {
+    final item = _selectedItem;
+    if (item == null) return;
+
     if (item.optionGroups.isNotEmpty) {
-      // Has options — go to step 2
       setState(() => _configuringItem = item);
     } else {
-      _selectItemDirect(item);
+      final selected = SelectedItem(
+        itemId: item.id,
+        name: item.nameAr,
+        image: item.images.isNotEmpty ? item.images.first : null,
+        basePriceCents: item.price.cents,
+        categoryName: item.categoryName,
+        description: item.descriptionAr,
+      );
+      widget.onItemSelected?.call(selected);
+      Navigator.pop(context);
     }
   }
 
@@ -103,7 +204,6 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
       Navigator.pop(context);
     } else {
       setState(() {
-        // Replace if already selected, otherwise add
         _selections.removeWhere((s) => s.itemId == selected.itemId);
         _selections.add(selected);
         _configuringItem = null;
@@ -116,50 +216,259 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
     Navigator.pop(context);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return _configuringItem != null
-        ? _buildConfigStep()
-        : _buildBrowseStep();
+  // ── Book mode handlers ─────────────────────────────────────
+
+  void _handleBrowseItemTap(Item item) {
+    setState(() {
+      _selectedItem = _selectedItem?.id == item.id ? null : item;
+    });
+    if (_selectedItem != null) {
+      _next();
+    }
   }
 
-  Widget _buildBrowseStep() {
-    final cs = Theme.of(context).colorScheme;
-    final itemsAsync = ref.watch(businessItemsProvider(widget.pageSlug));
+  bool get _canProceed {
+    switch (_steps[_currentStep]) {
+      case _WizardStep.browse:
+        return _selectedItem != null;
+      case _WizardStep.team:
+        return true;
+      case _WizardStep.dateTime:
+        return _selectedDate != null && _selectedTime != null;
+      case _WizardStep.confirm:
+        return true;
+    }
+  }
 
+  void _next() {
+    if (_currentStep < _steps.length - 1 && _canProceed) {
+      setState(() => _currentStep++);
+    }
+  }
+
+  void _back() {
+    if (_currentStep > 0) {
+      setState(() => _currentStep--);
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
+  void _confirm() {
+    final result = BookingResult(
+      serviceId: _selectedItem?.id ?? '',
+      serviceName: _selectedItem?.nameAr ?? '',
+      priceCents: _selectedItem?.price.cents ?? 0,
+      durationMinutes: _durationMinutes,
+      memberId: _selectedMemberId,
+      memberName: _selectedMemberName,
+      date: _selectedDate,
+      time: _selectedTime,
+      notes: _notesController.text.isNotEmpty
+          ? _notesController.text
+          : null,
+    );
+    widget.onBookingConfirmed?.call(result);
+    Navigator.of(context).pop();
+    context.showSnackBar('تم تأكيد الحجز بنجاح');
+  }
+
+  // ── Build ──────────────────────────────────────────────────
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.wizardMode == PickerWizardMode.book) {
+      return _buildBookMode();
+    }
+    return _buildPickMode();
+  }
+
+  // ── Pick mode layout (identical to original) ───────────────
+
+  Widget _buildPickMode() {
+    if (_configuringItem != null) {
+      return ItemConfigurationStep(
+        item: _configuringItem!,
+        showQuantity: widget.showQuantity,
+        confirmLabel:
+            widget.mode == ItemPickerMode.singlePick ? 'إرسال' : 'إضافة',
+        onConfirm: _handleConfigured,
+        onBack: () => setState(() => _configuringItem = null),
+      );
+    }
+
+    final cs = Theme.of(context).colorScheme;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         _buildHandle(cs),
         _buildBrowseHeader(cs),
-        _buildSearchBar(cs),
         Flexible(
-          child: itemsAsync.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (e, _) => Center(
-              child: Text(
-                'حدث خطأ في تحميل المنتجات',
-                style: TextStyle(color: context.colorScheme.onSurfaceVariant),
-              ),
-            ),
-            data: (items) => _buildItemList(items, cs),
+          child: ItemBrowseStep(
+            pageSlug: widget.pageSlug,
+            showRadio: true,
+            teamMembers: widget.teamMembers,
+            selectedItem: widget.mode == ItemPickerMode.singlePick
+                ? _selectedItem
+                : null,
+            selectedIds: widget.mode == ItemPickerMode.multiPick
+                ? _selections.map((s) => s.itemId).toSet()
+                : const {},
+            onItemTap: _handleItemTap,
           ),
         ),
-        if (widget.mode == ItemPickerMode.multiPick) _buildMultiPickFooter(),
+        if (widget.mode == ItemPickerMode.singlePick)
+          _buildSinglePickFooter()
+        else
+          _buildMultiPickFooter(),
       ],
     );
   }
 
-  Widget _buildConfigStep() {
-    return ItemConfigurationStep(
-      item: _configuringItem!,
-      showQuantity: widget.showQuantity,
-      confirmLabel:
-          widget.mode == ItemPickerMode.singlePick ? 'إرسال' : 'إضافة',
-      onConfirm: _handleConfigured,
-      onBack: () => setState(() => _configuringItem = null),
+  // ── Book mode layout ───────────────────────────────────────
+
+  Widget _buildBookMode() {
+    final cs = context.colorScheme;
+    final isLastStep = _steps[_currentStep] == _WizardStep.confirm;
+
+    final stepLabels = _steps.map((s) {
+      switch (s) {
+        case _WizardStep.browse:
+          return 'الخدمة';
+        case _WizardStep.team:
+          return 'الموظف';
+        case _WizardStep.dateTime:
+          return 'الموعد';
+        case _WizardStep.confirm:
+          return 'تأكيد';
+      }
+    }).toList();
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Handle bar
+        Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: AppSpacing.sm),
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: cs.outlineVariant,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+        ),
+        // Header
+        _buildBookHeader(cs),
+        // Step indicator
+        WizardStepIndicator(
+          labels: stepLabels,
+          currentStep: _currentStep,
+        ),
+        const SizedBox(height: AppSpacing.md),
+        // Step content
+        Flexible(child: _buildStepContent()),
+        // Bottom bar
+        _WizardBottomBar(
+          isFirstStep: _currentStep == 0,
+          isLastStep: isLastStep,
+          canProceed: _canProceed,
+          onBack: _back,
+          onNext: isLastStep ? _confirm : _next,
+        ),
+      ],
     );
   }
+
+  Widget _buildBookHeader(ColorScheme cs) {
+    final serviceName = _selectedItem?.nameAr ?? '';
+    final pageName = widget.pageName ?? '';
+    final subtitle = serviceName.isNotEmpty && pageName.isNotEmpty
+        ? '$serviceName \u2014 $pageName'
+        : serviceName.isNotEmpty
+            ? serviceName
+            : pageName;
+
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg, AppSpacing.md, AppSpacing.sm, 0,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'حجز موعد',
+                  style: context.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (subtitle.isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.xxs),
+                  Text(
+                    subtitle,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: cs.onSurfaceVariant,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.close),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStepContent() {
+    switch (_steps[_currentStep]) {
+      case _WizardStep.browse:
+        return ItemBrowseStep(
+          pageSlug: widget.pageSlug,
+          teamMembers: widget.teamMembers,
+          selectedItem: _selectedItem,
+          onItemTap: _handleBrowseItemTap,
+        );
+      case _WizardStep.team:
+        return TeamStepContent(
+          members: widget.teamMembers,
+          selectedMemberId: _selectedMemberId,
+          onSelected: (id, name) => setState(() {
+            _selectedMemberId = id;
+            _selectedMemberName = name;
+          }),
+        );
+      case _WizardStep.dateTime:
+        return DateTimeStepContent(
+          durationMinutes: _durationMinutes,
+          selectedDate: _selectedDate,
+          selectedTime: _selectedTime,
+          onDateSelected: (d) => setState(() => _selectedDate = d),
+          onTimeSelected: (t) => setState(() => _selectedTime = t),
+        );
+      case _WizardStep.confirm:
+        return ConfirmStepContent(
+          serviceName: _selectedItem?.nameAr ?? '',
+          priceCents: _selectedItem?.price.cents ?? 0,
+          durationMinutes: _durationMinutes,
+          memberName: _selectedMemberName,
+          selectedDate: _selectedDate,
+          selectedTime: _selectedTime,
+          notesController: _notesController,
+        );
+    }
+  }
+
+  // ── Shared pick mode sub-widgets ───────────────────────────
 
   Widget _buildHandle(ColorScheme cs) {
     return Padding(
@@ -205,124 +514,45 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
     );
   }
 
-  Widget _buildSearchBar(ColorScheme cs) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.lg,
-        vertical: AppSpacing.xs,
+  Widget _buildSinglePickFooter() {
+    return Container(
+      padding: EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.md + MediaQuery.of(context).padding.bottom,
       ),
-      child: TextField(
-        onChanged: (v) => setState(() => _searchQuery = v),
-        decoration: InputDecoration(
-          hintText: 'بحث...',
-          hintStyle: TextStyle(
-            color: cs.onSurfaceVariant,
-            fontSize: 14,
-          ),
-          prefixIcon: Icon(
-            Icons.search,
-            size: 20,
-            color: cs.onSurfaceVariant,
-          ),
-          filled: true,
-          fillColor: cs.surfaceContainerLowest,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AppSpacing.md,
-            vertical: AppSpacing.sm,
-          ),
-          isDense: true,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        border: Border(
+          top: BorderSide(
+              color: context.colorScheme.outlineVariant, width: 0.5),
         ),
-        style: const TextStyle(fontSize: 14),
       ),
-    );
-  }
-
-  Widget _buildItemList(List<Item> items, ColorScheme cs) {
-    final categories = items
-        .where((i) => i.categoryName != null)
-        .map((i) => i.categoryName!)
-        .toSet()
-        .toList();
-
-    var filtered = items.where((item) {
-      if (_searchQuery.isNotEmpty) {
-        final q = _searchQuery.toLowerCase();
-        final nameMatch = item.nameAr.toLowerCase().contains(q) ||
-            (item.nameEn?.toLowerCase().contains(q) ?? false);
-        final descMatch =
-            item.descriptionAr?.toLowerCase().contains(q) ?? false;
-        if (!nameMatch && !descMatch) return false;
-      }
-      if (_selectedCategory != null) {
-        return item.categoryName == _selectedCategory;
-      }
-      return true;
-    }).toList();
-
-    return Column(
-      children: [
-        if (categories.isNotEmpty)
-          CategoryFilterPills(
-            categories: categories,
-            selected: _selectedCategory,
-            onSelected: (cat) => setState(() => _selectedCategory = cat),
+      child: SizedBox(
+        width: double.infinity,
+        child: FilledButton(
+          onPressed: _selectedItem != null ? _handleSinglePickSend : null,
+          style: FilledButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            disabledBackgroundColor: context.colorScheme.outlineVariant,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding:
+                const EdgeInsetsDirectional.symmetric(vertical: 14),
           ),
-        const SizedBox(height: AppSpacing.xs),
-        Expanded(
-          child: filtered.isEmpty
-              ? Center(
-                  child: Text(
-                    'لا توجد نتائج',
-                    style: TextStyle(
-                      color: cs.onSurfaceVariant,
-                      fontSize: 14,
-                    ),
-                  ),
-                )
-              : ListView.separated(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppSpacing.lg,
-                  ),
-                  itemCount: filtered.length,
-                  separatorBuilder: (_, __) => Divider(
-                    height: 1,
-                    color: cs.outlineVariant,
-                  ),
-                  itemBuilder: (context, index) {
-                    final item = filtered[index];
-                    final isSelected = _isItemSelected(item.id);
-
-                    return Stack(
-                      children: [
-                        ItemTile(
-                          item: item,
-                          onTap: () => _handleItemTap(item),
-                        ),
-                        if (widget.mode == ItemPickerMode.multiPick &&
-                            isSelected)
-                          Positioned.directional(
-                            textDirection: Directionality.of(context),
-                            end: 0,
-                            top: 0,
-                            bottom: 0,
-                            child: const Center(
-                              child: Icon(
-                                Icons.check_circle,
-                                size: 20,
-                                color: AppColors.success,
-                              ),
-                            ),
-                          ),
-                      ],
-                    );
-                  },
-                ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('إرسال'),
+              SizedBox(width: AppSpacing.sm),
+              Icon(Icons.send_rounded, size: 18),
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 
@@ -337,7 +567,8 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         border: Border(
-          top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5),
+          top: BorderSide(
+              color: context.colorScheme.outlineVariant, width: 0.5),
         ),
       ),
       child: Row(
@@ -364,6 +595,61 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Wizard bottom bar (book mode) ───────────────────────────
+
+class _WizardBottomBar extends StatelessWidget {
+  final bool isFirstStep;
+  final bool isLastStep;
+  final bool canProceed;
+  final VoidCallback onBack;
+  final VoidCallback onNext;
+
+  const _WizardBottomBar({
+    required this.isFirstStep,
+    required this.isLastStep,
+    required this.canProceed,
+    required this.onBack,
+    required this.onNext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg,
+      ),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: context.colorScheme.outlineVariant),
+        ),
+      ),
+      child: Row(
+        textDirection: TextDirection.ltr,
+        children: [
+          if (!isFirstStep)
+            Expanded(
+              child: OutlinedButton(
+                onPressed: onBack,
+                child: const Text('رجوع'),
+              ),
+            )
+          else
+            const Spacer(),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: FilledButton(
+              onPressed: canProceed ? onNext : null,
+              child: Text(
+                isLastStep ? 'تأكيد الحجز' : 'التالي',
               ),
             ),
           ),

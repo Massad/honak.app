@@ -1400,4 +1400,397 @@ class AppLocalizationsAr extends AppLocalizations {
   String daysAgo(int days) {
     return 'قبل $days يوم';
   }
+
+  @override
+  String get bizCustomerActiveSubscribers => 'مشترك نشط';
+
+  @override
+  String get bizCustomerTotal => 'عميل';
+
+  @override
+  String get bizCustomerReturnRate => 'عودة';
+
+  @override
+  String get bizCustomerOrdersPerCustomer => 'طلب/عميل';
+
+  @override
+  String get bizCustomerSubscribers => 'مشتركون';
+
+  @override
+  String get bizCustomerAllCustomers => 'جميع العملاء';
+
+  @override
+  String get bizCustomerInvite => 'دعوة';
+
+  @override
+  String get bizCustomerSearchHint => 'بحث بالاسم أو الهاتف...';
+
+  @override
+  String get bizCustomerSortRecent => 'الأحدث';
+
+  @override
+  String get bizCustomerSortOrders => 'الأكثر طلبات';
+
+  @override
+  String get bizCustomerSortValue => 'الأعلى قيمة';
+
+  @override
+  String get bizCustomerBadgeNew => 'عميل جديد';
+
+  @override
+  String get bizCustomerBadgeActive => 'عميل نشط';
+
+  @override
+  String get bizCustomerBadgeRepeat => 'عميل متكرر';
+
+  @override
+  String get bizCustomerBadgeInterested => 'مهتم';
+
+  @override
+  String get bizCustomerBadgePast => 'عميل سابق';
+
+  @override
+  String get bizCustomerNoCustomers => 'لا يوجد عملاء';
+
+  @override
+  String get bizCustomerOrders => 'طلب';
+
+  @override
+  String get bizCustomerChatOnly => 'محادثة فقط';
+
+  @override
+  String get bizCustomerSubscribed => 'مشترك';
+
+  @override
+  String get bizCustomerSubscription => 'الاشتراك';
+
+  @override
+  String get bizCustomerActivity => 'النشاط';
+
+  @override
+  String get bizCustomerLastOrder => 'آخر طلب';
+
+  @override
+  String get bizCustomerLastActivity => 'آخر نشاط';
+
+  @override
+  String get bizCustomerSource => 'المصدر';
+
+  @override
+  String get bizCustomerSourceOrganic => 'عضوي';
+
+  @override
+  String get bizCustomerSourceInvited => 'دعوة';
+
+  @override
+  String get bizCustomerSourceManual => 'يدوي';
+
+  @override
+  String get bizCustomerPrivateNotes => 'ملاحظات خاصة';
+
+  @override
+  String get bizCustomerNotesHint =>
+      'أضف ملاحظة خاصة عن هذا العميل (مرئية للفريق فقط)...';
+
+  @override
+  String get bizCustomerChat => 'محادثة';
+
+  @override
+  String get bizCustomerNewOrder => 'طلب جديد';
+
+  @override
+  String get bizCustomerPayment => 'الدفع';
+
+  @override
+  String get bizCustomerTotalSpent => 'إجمالي';
+
+  @override
+  String get bizCustomerActive => 'نشط';
+
+  @override
+  String get bizCustomerEnded => 'منتهي';
+
+  @override
+  String bizCustomerExpiresAt(String date) {
+    return 'ينتهي $date';
+  }
+
+  @override
+  String get bizInviteTitle => 'دعوة عميل';
+
+  @override
+  String get bizInvitePhoneHint => 'رقم الهاتف: 07XXXXXXXX';
+
+  @override
+  String get bizInviteNameHint => 'اسم العميل (اختياري)';
+
+  @override
+  String get bizInviteAttachPackage => 'إرفاق باقة (اختياري)';
+
+  @override
+  String get bizInviteNoPackage => 'بدون باقة';
+
+  @override
+  String get bizInviteDirectActivate => 'تفعيل الاشتراك فوراً (دفع نقدي)';
+
+  @override
+  String get bizInviteAdd => 'إضافة';
+
+  @override
+  String get bizInviteActivate => 'تفعيل';
+
+  @override
+  String get bizInviteWhatsApp => 'واتساب';
+
+  @override
+  String get bizInviteSentInvites => 'الدعوات المرسلة';
+
+  @override
+  String get bizInvitePending => 'بانتظار';
+
+  @override
+  String get bizInviteRegistered => 'سجّل';
+
+  @override
+  String get bizInviteSubscribed => 'مشترك';
+
+  @override
+  String get bizInviteExpired => 'منتهية';
+
+  @override
+  String get bizInviteWithdrawn => 'ملغاة';
+
+  @override
+  String get bizInviteWithdraw => 'سحب الدعوة';
+
+  @override
+  String get bizInviteSentToday => 'اليوم';
+
+  @override
+  String bizInviteSentDaysAgo(int days) {
+    return 'قبل $days يوم';
+  }
+
+  @override
+  String bizInviteExpiresInDays(int days) {
+    return 'تنتهي خلال $days يوم';
+  }
+
+  @override
+  String get bizInviteNoInvites => 'لا توجد دعوات';
+
+  @override
+  String get bizInviteLinkCopied => 'تم نسخ الرابط';
+
+  @override
+  String get bizInviteRegisteredFilter => 'سجّلوا';
+
+  @override
+  String get bizInviteAllFilter => 'الكل';
+
+  @override
+  String get bizInviteSearchHint => 'بحث بالاسم أو رقم الهاتف...';
+
+  @override
+  String get bizSubFilterAll => 'الكل';
+
+  @override
+  String get bizSubFilterAuto => 'تلقائي';
+
+  @override
+  String get bizSubFilterRemind => 'تذكير';
+
+  @override
+  String get bizSubFilterLow => 'رصيد منخفض';
+
+  @override
+  String get bizSubTodayAutoOrders => 'طلبات اليوم التلقائية';
+
+  @override
+  String get bizSubConfirm => 'تأكيد';
+
+  @override
+  String get bizSubSkip => 'تخطي';
+
+  @override
+  String get bizSubConfirmedLabel => 'تم التأكيد';
+
+  @override
+  String get bizSubSkippedLabel => 'تم التخطي';
+
+  @override
+  String bizSubCreditsBefore(int before, int after) {
+    return 'رصيد: $before ← $after بعد التأكيد';
+  }
+
+  @override
+  String get bizSubStatusActive => 'نشط';
+
+  @override
+  String get bizSubStatusDepleted => 'نفد الرصيد';
+
+  @override
+  String get bizSubStatusPaused => 'متوقف';
+
+  @override
+  String get bizSubStatusEnded => 'منتهي';
+
+  @override
+  String bizSubExpiresAt(String date) {
+    return 'ينتهي $date';
+  }
+
+  @override
+  String get bizSubNoSubscribers => 'لا يوجد مشتركون';
+
+  @override
+  String get bizSubRenewReminder => 'تذكير بالتجديد';
+
+  @override
+  String bizSubReminderSent(String name) {
+    return 'تم إرسال تذكير لـ $name';
+  }
+
+  @override
+  String bizSubOrderConfirmed(String name) {
+    return 'تم تأكيد طلب $name';
+  }
+
+  @override
+  String bizSubOrderSkipped(String name) {
+    return 'تم تخطي طلب $name';
+  }
+
+  @override
+  String get bizSubAutoMode => 'تلقائي';
+
+  @override
+  String get bizSubRemindMode => 'تذكير';
+
+  @override
+  String bizManageSubTitle(String name) {
+    return 'إدارة اشتراك $name';
+  }
+
+  @override
+  String get bizManageAdjustCredits => 'تعديل الرصيد';
+
+  @override
+  String get bizManageAdjustCreditsDesc => 'إضافة أو خصم رصيد يدوياً';
+
+  @override
+  String get bizManagePause => 'إيقاف مؤقت';
+
+  @override
+  String get bizManagePauseDesc => 'تجميد الاشتراك لفترة محددة';
+
+  @override
+  String get bizManageResume => 'استئناف الاشتراك';
+
+  @override
+  String get bizManageResumeDesc => 'إعادة تفعيل الاشتراك فوراً';
+
+  @override
+  String get bizManageCancel => 'إلغاء الاشتراك';
+
+  @override
+  String get bizManageCancelDesc => 'إنهاء الاشتراك وحذف الرصيد المتبقي';
+
+  @override
+  String bizManageResumed(String name) {
+    return 'تم استئناف اشتراك $name';
+  }
+
+  @override
+  String get bizConfirmPauseTitle => 'إيقاف الاشتراك مؤقتاً';
+
+  @override
+  String bizConfirmPauseDesc(String pkg) {
+    return 'سيتم تجميد اشتراك \"$pkg\" حتى تقوم بإعادة تفعيله يدوياً. لن يتم إرسال طلبات تلقائية خلال فترة التوقف.';
+  }
+
+  @override
+  String get bizConfirmCancelTitle => 'إلغاء الاشتراك';
+
+  @override
+  String bizConfirmCancelDesc(String pkg) {
+    return 'سيتم إنهاء اشتراك \"$pkg\" نهائياً. لن يتمكن العميل من استخدام الرصيد المتبقي.';
+  }
+
+  @override
+  String bizConfirmCancelWarning(int credits) {
+    return 'سيتم حذف $credits وحدة متبقية من رصيد العميل. هذا الإجراء لا يمكن التراجع عنه.';
+  }
+
+  @override
+  String get bizConfirmPackageLabel => 'الباقة';
+
+  @override
+  String get bizConfirmRemainingLabel => 'الرصيد المتبقي';
+
+  @override
+  String get bizConfirmDeliveryMode => 'نمط التوصيل';
+
+  @override
+  String get bizConfirmTotalOrders => 'إجمالي الطلبات';
+
+  @override
+  String bizConfirmTotalOrdersValue(int count) {
+    return '$count طلب';
+  }
+
+  @override
+  String get bizConfirmPauseBtn => 'إيقاف مؤقت';
+
+  @override
+  String get bizConfirmCancelBtn => 'تأكيد الإلغاء';
+
+  @override
+  String get bizConfirmBack => 'تراجع';
+
+  @override
+  String bizConfirmPaused(String name) {
+    return 'تم إيقاف اشتراك $name مؤقتاً';
+  }
+
+  @override
+  String bizConfirmCancelled(String name) {
+    return 'تم إلغاء اشتراك $name';
+  }
+
+  @override
+  String get bizSubCreditsUnit => 'وحدة';
+
+  @override
+  String get bizCustomerAvgOrder => 'معدل الطلب';
+
+  @override
+  String get bizCustomerMemberSince => 'عضو منذ';
+
+  @override
+  String get bizCustomerCall => 'اتصال';
+
+  @override
+  String get bizCustomerRecentOrders => 'الطلبات الأخيرة';
+
+  @override
+  String get bizCustomerNoOrders => 'لا توجد طلبات بعد';
+
+  @override
+  String get bizInviteSummaryPending => 'بانتظار';
+
+  @override
+  String get bizInviteSummaryRegistered => 'سجّلوا';
+
+  @override
+  String get bizInviteSummarySubscribed => 'اشتركوا';
+
+  @override
+  String get bizInviteConversionRate => 'نسبة التحويل';
+
+  @override
+  String get bizInviteSelectPackage => 'اختر باقة';
+
+  @override
+  String get bizInviteDirectActivateLabel => 'تفعيل الاشتراك فوراً (دفع نقدي)';
 }

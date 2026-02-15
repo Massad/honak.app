@@ -59,7 +59,7 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
         children: [
           _buildHeader(),
           _buildProductInfo(context),
-          if (!widget.isBusinessMode && _status == 'sent') _buildAction(),
+          if (_status == 'sent') _buildAction(),
           if (_status == 'added') _buildAddedBadge(),
           _buildTimestamp(context),
         ],
@@ -254,11 +254,15 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
       child: SizedBox(
         width: double.infinity,
         child: FilledButton.icon(
-          onPressed: () => setState(() => _status = 'added'),
+          onPressed: widget.isBusinessMode
+              ? null
+              : () => setState(() => _status = 'added'),
           icon: const Icon(Icons.add_shopping_cart, size: 16),
           label: const Text('أضف للطلب'),
           style: FilledButton.styleFrom(
             backgroundColor: _borderColor,
+            disabledBackgroundColor:
+                _borderColor.withValues(alpha: 0.38),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSpacing.md),
             ),

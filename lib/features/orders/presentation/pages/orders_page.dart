@@ -7,6 +7,7 @@ import 'package:honak/features/orders/presentation/widgets/orders_skeleton.dart'
 import 'package:honak/features/orders/presentation/widgets/orders_tab_content.dart';
 import 'package:honak/features/requests/domain/entities/entities.dart';
 import 'package:honak/features/requests/presentation/providers/provider.dart';
+import 'package:honak/shared/providers/nav_badge_provider.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/features/subscriptions/presentation/providers/subscription_providers.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/subscriptions_tab.dart';
@@ -112,7 +113,9 @@ class _OrdersBody extends StatelessWidget {
   }
 
   List<CustomerRequest> get _activeRequests => _filter(
-        requests.where((r) => _activeStatuses.contains(r.status)).toList(),
+        requests
+            .where((r) => activeRequestStatuses.contains(r.status))
+            .toList(),
       );
 
   List<CustomerRequest> get _upcomingRequests => _filter(
@@ -128,18 +131,6 @@ class _OrdersBody extends StatelessWidget {
             .where((r) => _completedStatuses.contains(r.status))
             .toList(),
       );
-
-  static const _activeStatuses = {
-    'pending',
-    'pending_review',
-    'accepted',
-    'in_progress',
-    'preparing',
-    'suggested',
-    'pending_reschedule',
-    'modification_requested',
-    'alternative_offered',
-  };
 
   static const _completedStatuses = {
     'completed',

@@ -46,6 +46,8 @@ mixin _$Item {
   String? get pageId => throw _privateConstructorUsedError;
   @JsonKey(name: 'sort_order')
   int get sortOrder => throw _privateConstructorUsedError;
+  @JsonKey(name: 'team_member_ids')
+  List<String> get teamMemberIds => throw _privateConstructorUsedError;
 
   /// Serializes this Item to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -75,6 +77,7 @@ abstract class $ItemCopyWith<$Res> {
     @JsonKey(name: 'in_stock') bool inStock,
     @JsonKey(name: 'page_id') String? pageId,
     @JsonKey(name: 'sort_order') int sortOrder,
+    @JsonKey(name: 'team_member_ids') List<String> teamMemberIds,
   });
 }
 
@@ -106,6 +109,7 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
     Object? inStock = null,
     Object? pageId = freezed,
     Object? sortOrder = null,
+    Object? teamMemberIds = null,
   }) {
     return _then(
       _value.copyWith(
@@ -161,6 +165,10 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
                 ? _value.sortOrder
                 : sortOrder // ignore: cast_nullable_to_non_nullable
                       as int,
+            teamMemberIds: null == teamMemberIds
+                ? _value.teamMemberIds
+                : teamMemberIds // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
           )
           as $Val,
     );
@@ -189,6 +197,7 @@ abstract class _$$ItemImplCopyWith<$Res> implements $ItemCopyWith<$Res> {
     @JsonKey(name: 'in_stock') bool inStock,
     @JsonKey(name: 'page_id') String? pageId,
     @JsonKey(name: 'sort_order') int sortOrder,
+    @JsonKey(name: 'team_member_ids') List<String> teamMemberIds,
   });
 }
 
@@ -217,6 +226,7 @@ class __$$ItemImplCopyWithImpl<$Res>
     Object? inStock = null,
     Object? pageId = freezed,
     Object? sortOrder = null,
+    Object? teamMemberIds = null,
   }) {
     return _then(
       _$ItemImpl(
@@ -272,6 +282,10 @@ class __$$ItemImplCopyWithImpl<$Res>
             ? _value.sortOrder
             : sortOrder // ignore: cast_nullable_to_non_nullable
                   as int,
+        teamMemberIds: null == teamMemberIds
+            ? _value._teamMemberIds
+            : teamMemberIds // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
       ),
     );
   }
@@ -295,8 +309,11 @@ class _$ItemImpl implements _Item {
     @JsonKey(name: 'in_stock') this.inStock = true,
     @JsonKey(name: 'page_id') this.pageId,
     @JsonKey(name: 'sort_order') this.sortOrder = 0,
+    @JsonKey(name: 'team_member_ids')
+    final List<String> teamMemberIds = const [],
   }) : _images = images,
-       _optionGroups = optionGroups;
+       _optionGroups = optionGroups,
+       _teamMemberIds = teamMemberIds;
 
   factory _$ItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$ItemImplFromJson(json);
@@ -352,10 +369,18 @@ class _$ItemImpl implements _Item {
   @override
   @JsonKey(name: 'sort_order')
   final int sortOrder;
+  final List<String> _teamMemberIds;
+  @override
+  @JsonKey(name: 'team_member_ids')
+  List<String> get teamMemberIds {
+    if (_teamMemberIds is EqualUnmodifiableListView) return _teamMemberIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_teamMemberIds);
+  }
 
   @override
   String toString() {
-    return 'Item(id: $id, nameAr: $nameAr, nameEn: $nameEn, descriptionAr: $descriptionAr, descriptionEn: $descriptionEn, price: $price, images: $images, optionGroups: $optionGroups, categoryId: $categoryId, categoryName: $categoryName, inStock: $inStock, pageId: $pageId, sortOrder: $sortOrder)';
+    return 'Item(id: $id, nameAr: $nameAr, nameEn: $nameEn, descriptionAr: $descriptionAr, descriptionEn: $descriptionEn, price: $price, images: $images, optionGroups: $optionGroups, categoryId: $categoryId, categoryName: $categoryName, inStock: $inStock, pageId: $pageId, sortOrder: $sortOrder, teamMemberIds: $teamMemberIds)';
   }
 
   @override
@@ -383,7 +408,11 @@ class _$ItemImpl implements _Item {
             (identical(other.inStock, inStock) || other.inStock == inStock) &&
             (identical(other.pageId, pageId) || other.pageId == pageId) &&
             (identical(other.sortOrder, sortOrder) ||
-                other.sortOrder == sortOrder));
+                other.sortOrder == sortOrder) &&
+            const DeepCollectionEquality().equals(
+              other._teamMemberIds,
+              _teamMemberIds,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -403,6 +432,7 @@ class _$ItemImpl implements _Item {
     inStock,
     pageId,
     sortOrder,
+    const DeepCollectionEquality().hash(_teamMemberIds),
   );
 
   /// Create a copy of Item
@@ -434,6 +464,7 @@ abstract class _Item implements Item {
     @JsonKey(name: 'in_stock') final bool inStock,
     @JsonKey(name: 'page_id') final String? pageId,
     @JsonKey(name: 'sort_order') final int sortOrder,
+    @JsonKey(name: 'team_member_ids') final List<String> teamMemberIds,
   }) = _$ItemImpl;
 
   factory _Item.fromJson(Map<String, dynamic> json) = _$ItemImpl.fromJson;
@@ -476,6 +507,9 @@ abstract class _Item implements Item {
   @override
   @JsonKey(name: 'sort_order')
   int get sortOrder;
+  @override
+  @JsonKey(name: 'team_member_ids')
+  List<String> get teamMemberIds;
 
   /// Create a copy of Item
   /// with the given fields replaced by the non-null parameter values.

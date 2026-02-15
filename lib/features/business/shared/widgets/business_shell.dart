@@ -8,9 +8,9 @@ import 'package:honak/features/business/order_management/presentation/pages/list
 import 'package:honak/features/business/page_settings/presentation/pages/settings_page.dart';
 import 'package:honak/features/business/shared/widgets/business_app_bar.dart';
 import 'package:honak/features/chat/presentation/pages/business_chat_list_page.dart';
-import 'package:honak/features/chat/presentation/providers/chat_provider.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/providers/nav_badge_provider.dart';
 
 // Business bottom navigation matching Figma MVP:
 //
@@ -75,7 +75,9 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
         tabs: tabs,
         currentIndex: _currentIndex,
         onTabChanged: (i) => setState(() => _currentIndex = i),
-        chatBadge: isReducedNav ? 0 : ref.watch(unreadChatCountProvider),
+        badges: isReducedNav
+            ? const NavBadges()
+            : ref.watch(businessNavBadgesProvider),
       ),
     );
   }
@@ -93,27 +95,32 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
         icon: Icons.home_outlined,
         selectedIcon: Icons.home,
         label: 'الرئيسية',
+        tab: NavTab.home,
       ),
       const _TabDef(
         icon: Icons.bar_chart_outlined,
         selectedIcon: Icons.bar_chart,
         label: 'إحصائيات',
+        tab: NavTab.insights,
       ),
       _TabDef(
         icon: Icons.shopping_bag_outlined,
         selectedIcon: Icons.shopping_bag,
         label: ctx.requestsTabLabel,
         isCenter: true,
+        tab: NavTab.orders,
       ),
       const _TabDef(
         icon: Icons.chat_outlined,
         selectedIcon: Icons.chat,
         label: 'المحادثات',
+        tab: NavTab.chat,
       ),
       const _TabDef(
         icon: Icons.settings_outlined,
         selectedIcon: Icons.settings,
         label: 'الصفحة',
+        tab: NavTab.account,
       ),
     ];
   }
@@ -170,12 +177,14 @@ class _TabDef {
   final IconData selectedIcon;
   final String label;
   final bool isCenter;
+  final NavTab? tab;
 
   const _TabDef({
     required this.icon,
     required this.selectedIcon,
     required this.label,
     this.isCenter = false,
+    this.tab,
   });
 }
 
@@ -189,13 +198,13 @@ class _BusinessBottomNav extends StatelessWidget {
   final List<_TabDef> tabs;
   final int currentIndex;
   final ValueChanged<int> onTabChanged;
-  final int chatBadge;
+  final NavBadges badges;
 
   const _BusinessBottomNav({
     required this.tabs,
     required this.currentIndex,
     required this.onTabChanged,
-    required this.chatBadge,
+    required this.badges,
   });
 
   int? get _centerIndex {
@@ -222,7 +231,7 @@ class _BusinessBottomNav extends StatelessWidget {
       ),
       child: SafeArea(
         child: SizedBox(
-          height: 56,
+          height: 48,
           child: Stack(
             clipBehavior: Clip.none,
             children: [
@@ -238,19 +247,19 @@ class _BusinessBottomNav extends StatelessWidget {
                     return GestureDetector(
                       onTap: () => onTabChanged(i),
                       behavior: HitTestBehavior.opaque,
-                      child: const SizedBox(width: 64, height: 56),
+                      child: const SizedBox(width: 56, height: 48),
                     );
                   }
 
-                  final showBadge =
-                      tab.label == 'المحادثات' && chatBadge > 0;
+                  final badgeCount =
+                      tab.tab != null ? badges[tab.tab!] : 0;
 
                   return _BottomNavItem(
                     icon: tab.icon,
                     selectedIcon: tab.selectedIcon,
                     label: tab.label,
                     isSelected: isSelected,
-                    badge: showBadge ? chatBadge : 0,
+                    badge: badgeCount,
                     onTap: () => onTabChanged(i),
                   );
                 }),
@@ -269,6 +278,9 @@ class _BusinessBottomNav extends StatelessWidget {
                       selectedIcon: tabs[centerIdx].selectedIcon,
                       label: tabs[centerIdx].label,
                       isSelected: centerIdx == currentIndex,
+                      badgeCount: tabs[centerIdx].tab != null
+                          ? badges[tabs[centerIdx].tab!]
+                          : 0,
                       onTap: () => onTabChanged(centerIdx),
                     ),
                   ),
@@ -292,6 +304,7 @@ class _CenterNavButton extends StatelessWidget {
   final IconData selectedIcon;
   final String label;
   final bool isSelected;
+  final int badgeCount;
   final VoidCallback onTap;
 
   const _CenterNavButton({
@@ -299,6 +312,7 @@ class _CenterNavButton extends StatelessWidget {
     required this.selectedIcon,
     required this.label,
     required this.isSelected,
+    this.badgeCount = 0,
     required this.onTap,
   });
 
@@ -308,14 +322,13 @@ class _CenterNavButton extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width: 64,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Raised orange circle
-            Transform.translate(
-              offset: const Offset(0, -10),
-              child: Container(
+        width: 56,
+        child: Transform.translate(
+          offset: const Offset(0, -10),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
@@ -336,22 +349,36 @@ class _CenterNavButton extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                 ),
               ),
-            ),
-            Transform.translate(
-              offset: const Offset(0, -8),
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight:
-                      isSelected ? FontWeight.w600 : FontWeight.normal,
-                  color: isSelected ? _centerOrange : Theme.of(context).colorScheme.onSurfaceVariant,
+              if (badgeCount > 0)
+                PositionedDirectional(
+                  top: -2,
+                  end: -2,
+                  child: Container(
+                    constraints: const BoxConstraints(minWidth: 18),
+                    height: 18,
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.error,
+                      borderRadius: BorderRadius.circular(9),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.surface,
+                        width: 2,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        badgeCount > 99 ? '+99' : '$badgeCount',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.surface,
+                          fontSize: 9,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -385,7 +412,7 @@ class _BottomNavItem extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width: 64,
+        width: 48,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -395,7 +422,7 @@ class _BottomNavItem extends StatelessWidget {
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
+                    horizontal: 12,
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
@@ -406,7 +433,7 @@ class _BottomNavItem extends StatelessWidget {
                   ),
                   child: Icon(
                     isSelected ? selectedIcon : icon,
-                    size: 22,
+                    size: 24,
                     color:
                         isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
@@ -414,7 +441,7 @@ class _BottomNavItem extends StatelessWidget {
                 if (badge > 0)
                   PositionedDirectional(
                     top: -2,
-                    end: 4,
+                    end: 0,
                     child: Container(
                       constraints: const BoxConstraints(minWidth: 18),
                       height: 18,
@@ -442,18 +469,14 @@ class _BottomNavItem extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight:
-                    isSelected ? FontWeight.w600 : FontWeight.normal,
-                color:
-                    isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+            const SizedBox(height: 4),
+            Container(
+              width: 4,
+              height: 4,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isSelected ? AppColors.primary : Colors.transparent,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

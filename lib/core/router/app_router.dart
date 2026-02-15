@@ -11,7 +11,6 @@ import 'package:honak/features/catalog/presentation/pages/item_detail_page.dart'
 import 'package:honak/features/chat/domain/entities/conversation.dart';
 import 'package:honak/features/chat/presentation/pages/detail_page.dart';
 import 'package:honak/features/chat/presentation/pages/list_page.dart';
-import 'package:honak/features/chat/presentation/providers/chat_provider.dart';
 import 'package:honak/features/explore/domain/entities/category.dart';
 import 'package:honak/features/explore/presentation/pages/category_browse_page.dart';
 import 'package:honak/features/explore/presentation/pages/explore_page.dart';
@@ -19,7 +18,6 @@ import 'package:honak/features/explore/presentation/pages/search_page.dart';
 import 'package:honak/features/home/presentation/pages/home_page.dart';
 import 'package:honak/features/home/presentation/pages/post_detail_page.dart';
 import 'package:honak/features/notifications/presentation/pages/list_page.dart';
-import 'package:honak/features/notifications/presentation/providers/notification_provider.dart';
 import 'package:honak/features/pages/presentation/pages/page_detail_page.dart';
 import 'package:honak/features/orders/presentation/pages/orders_page.dart';
 import 'package:honak/features/account/presentation/pages/account_page.dart';
@@ -41,6 +39,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
+import 'package:honak/shared/providers/nav_badge_provider.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _customerShellKey = GlobalKey<NavigatorState>();
@@ -336,15 +335,13 @@ class _AppShell extends ConsumerWidget {
       return BusinessShell(customerShell: navigationShell);
     }
 
-    final unreadChats = ref.watch(unreadChatCountProvider);
-    final unreadNotifs = ref.watch(unreadNotificationCountProvider).valueOrNull ?? 0;
+    final badges = ref.watch(customerNavBadgesProvider);
 
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: _CustomerBottomNav(
         navigationShell: navigationShell,
-        unreadChats: unreadChats,
-        unreadNotifs: unreadNotifs,
+        badges: badges,
       ),
     );
   }
@@ -388,13 +385,11 @@ class _PlaceholderPage extends StatelessWidget {
 
 class _CustomerBottomNav extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
-  final int unreadChats;
-  final int unreadNotifs;
+  final NavBadges badges;
 
   const _CustomerBottomNav({
     required this.navigationShell,
-    required this.unreadChats,
-    required this.unreadNotifs,
+    required this.badges,
   });
 
   @override
@@ -415,11 +410,9 @@ class _CustomerBottomNav extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: AppSpacing.sm,
-            right: AppSpacing.sm,
-            top: AppSpacing.xs,
-            bottom: AppSpacing.xs,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.sm,
+            vertical: 6,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -448,6 +441,7 @@ class _CustomerBottomNav extends StatelessWidget {
               ),
               _CenterTab(
                 isActive: currentIndex == 2,
+                badgeCount: badges[NavTab.orders],
                 onTap: () => navigationShell.goBranch(
                   2,
                   initialLocation: currentIndex == 2,
@@ -459,7 +453,7 @@ class _CustomerBottomNav extends StatelessWidget {
                 icon: Icons.chat_outlined,
                 activeIcon: Icons.chat,
                 label: 'المحادثات',
-                badgeCount: unreadChats,
+                badgeCount: badges[NavTab.chat],
                 onTap: () => navigationShell.goBranch(
                   3,
                   initialLocation: currentIndex == 3,
@@ -471,7 +465,7 @@ class _CustomerBottomNav extends StatelessWidget {
                 icon: Icons.person_outlined,
                 activeIcon: Icons.person,
                 label: 'حسابي',
-                badgeCount: unreadNotifs,
+                badgeCount: badges[NavTab.account],
                 onTap: () => navigationShell.goBranch(
                   4,
                   initialLocation: currentIndex == 4,
@@ -515,7 +509,7 @@ class _NavItem extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width: 64,
+        width: 48,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -528,16 +522,7 @@ class _NavItem extends StatelessWidget {
                 color: _isActive ? primary : grey,
               ),
             ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: _isActive ? FontWeight.w600 : FontWeight.normal,
-                color: _isActive ? primary : grey,
-              ),
-            ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 4),
             Container(
               width: 4,
               height: 4,
@@ -555,9 +540,14 @@ class _NavItem extends StatelessWidget {
 
 class _CenterTab extends StatelessWidget {
   final bool isActive;
+  final int badgeCount;
   final VoidCallback onTap;
 
-  const _CenterTab({required this.isActive, required this.onTap});
+  const _CenterTab({
+    required this.isActive,
+    this.badgeCount = 0,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -565,54 +555,39 @@ class _CenterTab extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width: 64,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Transform.translate(
-              offset: const Offset(0, -12),
-              child: Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [AppColors.primary, Color(0xFF4DA3FF)],
+        width: 56,
+        child: Transform.translate(
+          offset: const Offset(0, -12),
+          child: Badge(
+            isLabelVisible: badgeCount > 0,
+            label: Text(badgeCount > 99 ? '99+' : '$badgeCount'),
+            child: Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [AppColors.primary, Color(0xFF4DA3FF)],
+                ),
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 4),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primary.withValues(alpha: 0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
                   ),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 4),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.3),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                alignment: Alignment.center,
-                child: const Icon(
-                  Icons.shopping_bag,
-                  size: 24,
-                  color: Colors.white,
-                ),
+                ],
+              ),
+              alignment: Alignment.center,
+              child: const Icon(
+                Icons.shopping_bag,
+                size: 24,
+                color: Colors.white,
               ),
             ),
-            Transform.translate(
-              offset: const Offset(0, -8),
-              child: Text(
-                'طلباتي',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight:
-                      isActive ? FontWeight.w600 : FontWeight.normal,
-                  color: isActive
-                      ? context.colorScheme.primary
-                      : context.colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

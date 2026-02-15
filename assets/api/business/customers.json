@@ -1,0 +1,376 @@
+{
+  "abu-ahmad-water": {
+    "customers": [
+      {
+        "id": "user-sara",
+        "name": "سارة",
+        "phone": "0791234567",
+        "avatar": "https://i.pravatar.cc/100?img=5",
+        "area": "عبدون",
+        "badge": "repeat",
+        "total_orders": 12,
+        "total_spent": 4500,
+        "last_order_date": "2026-02-08",
+        "last_activity_date": "2026-02-08",
+        "usual_payment": "كاش",
+        "subscription": {
+          "id": "sub-1",
+          "package_name": "باقة 10 قوارير",
+          "remaining_credits": 6,
+          "total_credits": 10,
+          "expires_at": "2026-05-09",
+          "model": "visits_and_date",
+          "recurring_mode": "auto_send",
+          "recurring_frequency": "أحد + أربعاء",
+          "status": "active"
+        },
+        "source": "organic",
+        "created_at": "2025-08-15",
+        "recent_orders": [
+          {"date": "2026-02-08", "summary": "2 × قارورة 19 لتر", "amount": 400, "status": "delivered"},
+          {"date": "2026-02-05", "summary": "2 × قارورة 19 لتر", "amount": 400, "status": "delivered"},
+          {"date": "2026-02-01", "summary": "3 × قارورة 19 لتر", "amount": 600, "status": "delivered"},
+          {"date": "2026-01-28", "summary": "2 × قارورة 19 لتر", "amount": 400, "status": "delivered"},
+          {"date": "2026-01-25", "summary": "1 × قارورة 10 لتر", "amount": 150, "status": "delivered"}
+        ]
+      },
+      {
+        "id": "user-ahmad",
+        "name": "أحمد",
+        "phone": "0787654321",
+        "avatar": "https://i.pravatar.cc/100?img=8",
+        "area": "الشميساني",
+        "badge": "repeat",
+        "total_orders": 18,
+        "total_spent": 7200,
+        "last_order_date": "2026-02-06",
+        "last_activity_date": "2026-02-06",
+        "usual_payment": "كليك",
+        "subscription": {
+          "id": "sub-3",
+          "package_name": "باقة 10 قوارير",
+          "remaining_credits": 4,
+          "total_credits": 10,
+          "expires_at": "2026-04-20",
+          "model": "visits_and_date",
+          "recurring_mode": "auto_send",
+          "recurring_frequency": "اثنين + خميس",
+          "status": "active"
+        },
+        "source": "organic",
+        "created_at": "2025-06-20",
+        "recent_orders": [
+          {"date": "2026-02-06", "summary": "3 × قارورة 19 لتر", "amount": 600, "status": "delivered"},
+          {"date": "2026-02-03", "summary": "2 × قارورة 19 لتر", "amount": 400, "status": "delivered"},
+          {"date": "2026-01-30", "summary": "3 × قارورة 19 لتر", "amount": 600, "status": "delivered"}
+        ]
+      },
+      {
+        "id": "user-khaled",
+        "name": "خالد",
+        "phone": "0771112233",
+        "avatar": "https://i.pravatar.cc/100?img=12",
+        "area": "طبربور",
+        "badge": "past",
+        "total_orders": 22,
+        "total_spent": 9900,
+        "last_order_date": "2026-01-05",
+        "last_activity_date": "2026-01-05",
+        "usual_payment": "كاش",
+        "subscription": {
+          "id": "sub-5",
+          "package_name": "باقة 20 قارورة",
+          "remaining_credits": 0,
+          "total_credits": 20,
+          "expires_at": null,
+          "model": "visits_only",
+          "recurring_mode": "remind",
+          "recurring_frequency": "أربعاء",
+          "status": "depleted"
+        },
+        "source": "organic",
+        "created_at": "2025-04-10"
+      },
+      {
+        "id": "user-mohammad",
+        "name": "محمد",
+        "phone": "0795554433",
+        "avatar": "https://i.pravatar.cc/100?img=15",
+        "area": "الجبيهة",
+        "badge": "active",
+        "total_orders": 5,
+        "total_spent": 1500,
+        "last_order_date": "2026-02-03",
+        "last_activity_date": "2026-02-03",
+        "usual_payment": "كاش",
+        "source": "organic",
+        "created_at": "2025-12-01"
+      },
+      {
+        "id": "user-layla",
+        "name": "ليلى",
+        "phone": "0781119988",
+        "area": "الصويفية",
+        "badge": "interested",
+        "total_orders": 0,
+        "total_spent": 0,
+        "last_activity_date": "2026-02-05",
+        "source": "organic",
+        "created_at": "2026-02-02"
+      },
+      {
+        "id": "user-omar",
+        "name": "عمر",
+        "phone": "0799887766",
+        "avatar": "https://i.pravatar.cc/100?img=33",
+        "area": "الرابية",
+        "badge": "new",
+        "total_orders": 1,
+        "total_spent": 150,
+        "last_order_date": "2026-02-09",
+        "last_activity_date": "2026-02-09",
+        "usual_payment": "كاش",
+        "source": "invited",
+        "created_at": "2026-02-08"
+      }
+    ],
+    "invites": [
+      {
+        "id": "inv-1",
+        "phone": "0799XXXXXXX",
+        "name": "أبو طارق",
+        "package_id": "pkg-1",
+        "package_name": "باقة 10 قوارير",
+        "method": "whatsapp",
+        "sent_at": "2026-02-03",
+        "expires_at": "2026-02-17",
+        "status": "pending"
+      },
+      {
+        "id": "inv-2",
+        "phone": "0785XXXXXXX",
+        "name": "عمر",
+        "package_id": "pkg-1",
+        "package_name": "باقة 10 قوارير",
+        "method": "manual",
+        "sent_at": "2026-02-05",
+        "expires_at": "2026-02-19",
+        "status": "subscribed",
+        "customer_id": "user-omar"
+      },
+      {
+        "id": "inv-3",
+        "phone": "0776543210",
+        "name": "",
+        "method": "link",
+        "sent_at": "2026-01-20",
+        "expires_at": "2026-02-03",
+        "status": "expired"
+      },
+      {
+        "id": "inv-4",
+        "phone": "0788112233",
+        "name": "فراس",
+        "package_id": "pkg-2",
+        "package_name": "باقة 20 قارورة",
+        "method": "manual",
+        "sent_at": "2026-02-08",
+        "expires_at": "2026-02-22",
+        "status": "pending"
+      },
+      {
+        "id": "inv-5",
+        "phone": "0791234500",
+        "name": "أم سامي",
+        "method": "whatsapp",
+        "sent_at": "2026-01-15",
+        "expires_at": "2026-01-29",
+        "status": "registered"
+      },
+      {
+        "id": "inv-6",
+        "phone": "0782223344",
+        "name": "",
+        "package_id": "pkg-1",
+        "package_name": "باقة 10 قوارير",
+        "method": "manual",
+        "sent_at": "2026-02-09",
+        "expires_at": "2026-02-23",
+        "status": "pending"
+      },
+      {
+        "id": "inv-7",
+        "phone": "0795556677",
+        "name": "يوسف",
+        "method": "whatsapp",
+        "sent_at": "2026-01-25",
+        "expires_at": "2026-02-08",
+        "status": "withdrawn"
+      }
+    ],
+    "auto_orders": [
+      {
+        "customer": "سارة",
+        "items": "2 × قارورة 19 لتر",
+        "credits_before": 6,
+        "credits_after": 4,
+        "status": "pending"
+      },
+      {
+        "customer": "أحمد",
+        "items": "3 × قارورة 19 لتر",
+        "credits_before": 4,
+        "credits_after": 1,
+        "status": "pending"
+      }
+    ],
+    "packages": [
+      {"id": "pkg-1", "name": "باقة 10 قوارير", "price": 15000},
+      {"id": "pkg-2", "name": "باقة 20 قارورة", "price": 25000}
+    ]
+  },
+  "salon-rania": {
+    "customers": [
+      {
+        "id": "user-sara",
+        "name": "سارة",
+        "phone": "0791234567",
+        "avatar": "https://i.pravatar.cc/100?img=5",
+        "area": "عبدون",
+        "badge": "repeat",
+        "total_orders": 8,
+        "total_spent": 5600,
+        "last_order_date": "2026-02-08",
+        "last_activity_date": "2026-02-08",
+        "usual_payment": "كاش",
+        "subscription": {
+          "id": "sub-2",
+          "package_name": "باقة العناية الشهرية",
+          "remaining_credits": 2,
+          "total_credits": 4,
+          "expires_at": "2026-04-09",
+          "model": "visits_and_date",
+          "recurring_mode": "auto_send",
+          "recurring_frequency": "كل أسبوعين · خميس",
+          "status": "active"
+        },
+        "source": "organic",
+        "created_at": "2025-09-10"
+      },
+      {
+        "id": "user-reem",
+        "name": "ريم",
+        "phone": "0781110099",
+        "avatar": "https://i.pravatar.cc/100?img=9",
+        "area": "الدوار السابع",
+        "badge": "active",
+        "total_orders": 4,
+        "total_spent": 3200,
+        "last_order_date": "2026-02-07",
+        "last_activity_date": "2026-02-07",
+        "usual_payment": "كليك",
+        "source": "organic",
+        "created_at": "2025-11-15"
+      },
+      {
+        "id": "user-huda",
+        "name": "هدى",
+        "phone": "0799001122",
+        "avatar": "https://i.pravatar.cc/100?img=20",
+        "area": "خلدا",
+        "badge": "new",
+        "total_orders": 1,
+        "total_spent": 700,
+        "last_order_date": "2026-02-09",
+        "last_activity_date": "2026-02-09",
+        "usual_payment": "كاش",
+        "source": "invited",
+        "created_at": "2026-02-08"
+      }
+    ],
+    "invites": [
+      {
+        "id": "inv-r1",
+        "phone": "0785001122",
+        "name": "نور",
+        "package_id": "pkg-3",
+        "package_name": "باقة العناية الشهرية",
+        "method": "whatsapp",
+        "sent_at": "2026-02-07",
+        "expires_at": "2026-02-21",
+        "status": "pending"
+      }
+    ]
+  },
+  "abu-sulaiman-gas": {
+    "customers": [
+      { "id": "user-sara", "name": "سارة", "phone": "0791234567", "avatar": "https://i.pravatar.cc/100?img=5", "area": "عبدون", "badge": "repeat", "total_orders": 15, "total_spent": 10500, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "organic", "created_at": "2025-06-01" },
+      { "id": "user-ahmad", "name": "أحمد", "phone": "0787654321", "avatar": "https://i.pravatar.cc/100?img=8", "area": "خلدا", "badge": "repeat", "total_orders": 22, "total_spent": 15400, "last_order_date": "2026-02-07", "last_activity_date": "2026-02-07", "usual_payment": "كاش", "source": "organic", "created_at": "2025-03-15" },
+      { "id": "user-nadia", "name": "نادية", "phone": "0799887766", "avatar": "https://i.pravatar.cc/100?img=28", "area": "الصويفية", "badge": "active", "total_orders": 6, "total_spent": 4200, "last_order_date": "2026-02-05", "last_activity_date": "2026-02-05", "usual_payment": "كاش", "source": "organic", "created_at": "2025-10-01" },
+      { "id": "user-khaled-g", "name": "خالد", "phone": "0771112233", "avatar": "https://i.pravatar.cc/100?img=12", "area": "تلاع العلي", "badge": "repeat", "total_orders": 18, "total_spent": 12600, "last_order_date": "2026-02-08", "last_activity_date": "2026-02-08", "usual_payment": "كاش", "source": "organic", "created_at": "2025-04-20" },
+      { "id": "user-fatima", "name": "فاطمة ق.", "phone": "0785001234", "avatar": "https://i.pravatar.cc/100?img=23", "area": "الجبيهة", "badge": "new", "total_orders": 2, "total_spent": 1400, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "invited", "created_at": "2026-01-20" }
+    ],
+    "invites": []
+  },
+  "dr-khaled-clinic": {
+    "customers": [
+      { "id": "user-sara-c", "name": "سارة", "phone": "0791234567", "avatar": "https://i.pravatar.cc/100?img=5", "area": "عبدون", "badge": "repeat", "total_orders": 5, "total_spent": 12000, "last_order_date": "2026-02-04", "last_activity_date": "2026-02-04", "usual_payment": "كاش", "source": "organic", "created_at": "2025-08-01" },
+      { "id": "user-rania-c", "name": "رانية", "phone": "0791111111", "avatar": "https://i.pravatar.cc/100?img=21", "area": "الصويفية", "badge": "active", "total_orders": 3, "total_spent": 7500, "last_order_date": "2026-01-28", "last_activity_date": "2026-01-28", "usual_payment": "كاش", "source": "organic", "created_at": "2025-10-15" },
+      { "id": "user-ahmad-c", "name": "أحمد", "phone": "0787654321", "avatar": "https://i.pravatar.cc/100?img=8", "area": "جبل عمّان", "badge": "repeat", "total_orders": 8, "total_spent": 16000, "last_order_date": "2026-02-06", "last_activity_date": "2026-02-06", "usual_payment": "كليك", "source": "organic", "created_at": "2025-05-01" },
+      { "id": "user-hind", "name": "هند", "phone": "0795553322", "avatar": "https://i.pravatar.cc/100?img=24", "area": "الشميساني", "badge": "active", "total_orders": 4, "total_spent": 10000, "last_order_date": "2026-02-03", "last_activity_date": "2026-02-03", "usual_payment": "كاش", "source": "organic", "created_at": "2025-11-01" },
+      { "id": "user-majed", "name": "ماجد", "phone": "0781114455", "avatar": "https://i.pravatar.cc/100?img=32", "area": "تلاع العلي", "badge": "new", "total_orders": 1, "total_spent": 2000, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "organic", "created_at": "2026-02-01" }
+    ],
+    "invites": []
+  },
+  "hara-coffee": {
+    "customers": [
+      { "id": "user-yasmin", "name": "ياسمين", "phone": "0791112200", "avatar": "https://i.pravatar.cc/100?img=20", "area": "جبل عمّان", "badge": "repeat", "total_orders": 30, "total_spent": 7500, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كليك", "source": "organic", "created_at": "2025-03-01" },
+      { "id": "user-sara-hc", "name": "سارة", "phone": "0791234567", "avatar": "https://i.pravatar.cc/100?img=5", "area": "عبدون", "badge": "repeat", "total_orders": 18, "total_spent": 4500, "last_order_date": "2026-02-08", "last_activity_date": "2026-02-08", "usual_payment": "فيزا", "source": "organic", "created_at": "2025-07-01" },
+      { "id": "user-omar-hc", "name": "عمر", "phone": "0799887766", "avatar": "https://i.pravatar.cc/100?img=33", "area": "الصويفية", "badge": "active", "total_orders": 8, "total_spent": 2200, "last_order_date": "2026-02-06", "last_activity_date": "2026-02-06", "usual_payment": "كاش", "source": "organic", "created_at": "2025-11-01" }
+    ],
+    "invites": []
+  },
+  "hayat-pharmacy": {
+    "customers": [
+      { "id": "user-nadia-hp", "name": "نادية", "phone": "0799887766", "avatar": "https://i.pravatar.cc/100?img=28", "area": "الصويفية", "badge": "repeat", "total_orders": 12, "total_spent": 14400, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كليك", "source": "organic", "created_at": "2025-05-01" },
+      { "id": "user-sara-hp", "name": "سارة", "phone": "0791234567", "avatar": "https://i.pravatar.cc/100?img=5", "area": "عبدون", "badge": "active", "total_orders": 6, "total_spent": 8000, "last_order_date": "2026-02-05", "last_activity_date": "2026-02-05", "usual_payment": "كاش", "source": "organic", "created_at": "2025-09-01" },
+      { "id": "user-reem-hp", "name": "ريم", "phone": "0781110099", "avatar": "https://i.pravatar.cc/100?img=9", "area": "دير غبار", "badge": "active", "total_orders": 4, "total_spent": 4800, "last_order_date": "2026-02-03", "last_activity_date": "2026-02-03", "usual_payment": "كاش", "source": "organic", "created_at": "2025-12-01" }
+    ],
+    "invites": []
+  },
+  "golden-oven-bakery": {
+    "customers": [
+      { "id": "user-um-khaled", "name": "أم خالد", "phone": "0791115500", "avatar": "https://i.pravatar.cc/100?img=25", "area": "جبل الحسين", "badge": "repeat", "total_orders": 45, "total_spent": 6750, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "organic", "created_at": "2024-06-01" },
+      { "id": "user-abu-samer", "name": "أبو سامر", "phone": "0795551100", "avatar": "https://i.pravatar.cc/100?img=35", "area": "جبل الحسين", "badge": "repeat", "total_orders": 60, "total_spent": 9000, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "organic", "created_at": "2024-01-01" }
+    ],
+    "invites": []
+  },
+  "nabulsi-sweets": {
+    "customers": [
+      { "id": "user-rajaa", "name": "رجاء", "phone": "0791116600", "avatar": "https://i.pravatar.cc/100?img=26", "area": "جبل عمّان", "badge": "repeat", "total_orders": 20, "total_spent": 30000, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "organic", "created_at": "2024-03-01" },
+      { "id": "user-khaled-ns", "name": "خالد", "phone": "0771112233", "avatar": "https://i.pravatar.cc/100?img=12", "area": "الشميساني", "badge": "repeat", "total_orders": 15, "total_spent": 22500, "last_order_date": "2026-02-07", "last_activity_date": "2026-02-07", "usual_payment": "كليك", "source": "organic", "created_at": "2024-06-01" }
+    ],
+    "invites": []
+  },
+  "abu-ali-market": {
+    "customers": [
+      { "id": "user-um-samer", "name": "أم سامر", "phone": "0799223344", "avatar": "https://i.pravatar.cc/100?img=30", "area": "خلدا", "badge": "repeat", "total_orders": 35, "total_spent": 8750, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "organic", "created_at": "2024-08-01" },
+      { "id": "user-ahmad-am", "name": "أحمد", "phone": "0787654321", "avatar": "https://i.pravatar.cc/100?img=8", "area": "خلدا", "badge": "repeat", "total_orders": 28, "total_spent": 7000, "last_order_date": "2026-02-08", "last_activity_date": "2026-02-08", "usual_payment": "كاش", "source": "organic", "created_at": "2024-06-01" }
+    ],
+    "invites": []
+  },
+  "alkhair-butcher": {
+    "customers": [
+      { "id": "user-abu-omar", "name": "أبو عمر", "phone": "0795551122", "avatar": "https://i.pravatar.cc/100?img=35", "area": "ماركا", "badge": "repeat", "total_orders": 25, "total_spent": 37500, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كاش", "source": "organic", "created_at": "2024-01-01" },
+      { "id": "user-ahmad-kb", "name": "أحمد", "phone": "0787654321", "avatar": "https://i.pravatar.cc/100?img=8", "area": "ماركا", "badge": "active", "total_orders": 10, "total_spent": 15000, "last_order_date": "2026-02-06", "last_activity_date": "2026-02-06", "usual_payment": "كاش", "source": "organic", "created_at": "2024-09-01" }
+    ],
+    "invites": []
+  },
+  "tazej-juice": {
+    "customers": [
+      { "id": "user-reem-tj", "name": "ريم", "phone": "0781110099", "avatar": "https://i.pravatar.cc/100?img=22", "area": "الجبيهة", "badge": "repeat", "total_orders": 40, "total_spent": 6000, "last_order_date": "2026-02-09", "last_activity_date": "2026-02-09", "usual_payment": "كليك", "source": "organic", "created_at": "2024-09-01" },
+      { "id": "user-yousef-tj", "name": "يوسف", "phone": "0790000040", "avatar": "https://i.pravatar.cc/100?img=18", "area": "الجبيهة", "badge": "repeat", "total_orders": 25, "total_spent": 3750, "last_order_date": "2026-02-08", "last_activity_date": "2026-02-08", "usual_payment": "كاش", "source": "organic", "created_at": "2025-01-01" }
+    ],
+    "invites": []
+  }
+}

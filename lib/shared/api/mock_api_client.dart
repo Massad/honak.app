@@ -119,6 +119,7 @@ class MockApiClient implements ApiClient {
       'biz_categories' => ['business/categories_$bizType'],
       'dashboard' => ['business/dashboard/$bizType'],
       'packages' => ['subscriptions/packages_$pageId'],
+      'team' => ['settings/team_$bizType'],
       'queue' || 'dropoff' => ['business/$bizType'],
       'requests' => ['business/requests/$bizType'],
       _ => <String>[],
@@ -142,6 +143,7 @@ class MockApiClient implements ApiClient {
       'dashboard' => 'business/dashboard/government',
       'packages' => 'subscriptions/packages_abu-ahmad-water',
       'queue' => 'business/car_wash',
+      'team' => 'settings/team_salon',
       'dropoff' => 'business/laundry',
       'requests' => 'business/requests_pending',
       _ => 'pages/page_restaurant',
@@ -312,6 +314,8 @@ class MockApiClient implements ApiClient {
           return 'feed/feed_home';
         case 'members':
           return 'pages/page_team_members';
+        case 'team':
+          return await _resolvePageSubFixture(pageId, 'team');
         case 'queue':
           return await _resolvePageSubFixture(pageId, 'queue');
         case 'dropoff':
@@ -342,7 +346,7 @@ class MockApiClient implements ApiClient {
         case 'posts':
           return 'feed/feed_home';
         case 'team':
-          return 'settings/team';
+          return await _resolvePageSubFixture(pageId, 'team');
         case 'hours':
           return 'settings/hours';
         case 'branches':
@@ -694,6 +698,31 @@ class MockApiClient implements ApiClient {
         // Fallback: return empty directory data
         return _buildResponse<T>(
           {'success': true, 'data': {'tenants': [], 'floors': []}},
+          fromJson,
+        );
+      }
+    }
+
+    // Business customers — keyed by page slug (handle)
+    if (path == '/v1/biz/customers') {
+      final pageId = queryParams?['page_id'] as String?;
+      if (pageId != null) {
+        try {
+          final rawData =
+              await _loadFixture('business/customers') as Map<String, dynamic>;
+          final pageData = rawData[pageId] as Map<String, dynamic>?;
+          if (pageData != null) {
+            return _buildResponse<T>(
+              {'success': true, 'data': pageData},
+              fromJson,
+              queryParams: queryParams,
+            );
+          }
+        } catch (_) {
+          // Fallback: empty
+        }
+        return _buildResponse<T>(
+          {'success': true, 'data': {'customers': [], 'invites': []}},
           fromJson,
         );
       }

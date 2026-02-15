@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
-import 'package:honak/features/pages/presentation/widgets/sections/catalog_item_card.dart';
+import 'package:honak/shared/widgets/offering_item_card.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/catalog_section_helpers.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/floating_cart_bar.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/catalog_filter_sheet.dart';
-import 'package:honak/features/requests/domain/entities/cart.dart';
-import 'package:honak/features/requests/presentation/widgets/order_request_sheet.dart';
-import 'package:honak/shared/entities/money.dart';
-import 'package:honak/shared/entities/selected_item.dart';
+import 'package:honak/shared/mixins/section_filter_mixin.dart';
+import 'package:honak/shared/mixins/section_cart_mixin.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/highlights_banner.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/packages_section.dart';
 import 'package:honak/shared/widgets/credit_chip.dart';
 import 'package:honak/shared/widgets/credit_history_sheet.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
-import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/item_selection/category_filter_pills.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
-import 'package:honak/shared/extensions/sort_extensions.dart';
-import 'package:honak/shared/widgets/item_selection/item_configuration_step.dart';
+import 'package:honak/shared/widgets/section_search_bar.dart';
 
 /// Product list with category filtering, search, cart, and pagination.
 /// Used by the catalogOrder archetype (water delivery, grocery, retail).
@@ -43,9 +38,8 @@ class CatalogSection extends ConsumerStatefulWidget {
   ConsumerState<CatalogSection> createState() => _CatalogSectionState();
 }
 
-class _CatalogSectionState extends ConsumerState<CatalogSection> {
-  static const _pageSize = 12;
-
+class _CatalogSectionState extends ConsumerState<CatalogSection>
+    with SectionFilterMixin, SectionCartMixin {
   // Mock credit history for demo (Phase 1)
   static final _mockCreditHistory = [
     CreditHistoryEntry(
@@ -65,10 +59,6 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
     ),
   ];
 
-  String? _selectedCategory;
-  String _searchQuery = '';
-  int _visibleCount = _pageSize;
-  final List<SelectedItem> _cart = [];
   CatalogFilterState _filterState = CatalogFilterState.empty;
   final _searchController = TextEditingController();
 
@@ -78,26 +68,10 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
     super.dispose();
   }
 
+  /// Catalog-specific filter: applies base filter then adds price, stock,
+  /// multi-category, and sort filters on top.
   List<Item> _filterItems(List<Item> items) {
-    var filtered = items;
-
-    // Category pill filter
-    if (_selectedCategory != null) {
-      filtered = filtered
-          .where((item) => item.categoryName == _selectedCategory)
-          .toList();
-    }
-
-    // Text search
-    if (_searchQuery.isNotEmpty) {
-      final query = _searchQuery.toLowerCase();
-      filtered = filtered.where((item) {
-        final nameMatch = item.nameAr.toLowerCase().contains(query);
-        final descMatch =
-            item.descriptionAr?.toLowerCase().contains(query) ?? false;
-        return nameMatch || descMatch;
-      }).toList();
-    }
+    var filtered = baseFilterItems(items);
 
     // In-stock filter
     if (_filterState.showInStockOnly) {
@@ -137,14 +111,15 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
       case SortOption.popular:
         break;
       case SortOption.defaultSort:
-        filtered = filtered.sortedByOrder((i) => i.sortOrder);
+        // Already sorted by baseFilterItems
+        break;
     }
 
     return filtered;
   }
 
   void _openFilterSheet(List<Item> allItems) {
-    final categories = _extractCategories(allItems);
+    final categories = extractCategories(allItems);
     CatalogFilterSheet.show(
       context: context,
       initialState: _filterState,
@@ -156,96 +131,8 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
       onApply: (state) {
         setState(() {
           _filterState = state;
-          _visibleCount = _pageSize;
+          visibleCount = SectionFilterMixin.sectionPageSize;
         });
-      },
-    );
-  }
-
-  List<String> _extractCategories(List<Item> items) {
-    final sorted = items.sortedByOrder((i) => i.sortOrder);
-    final categories = <String>[];
-    final seen = <String>{};
-    for (final item in sorted) {
-      if (item.categoryName != null &&
-          item.categoryName!.isNotEmpty &&
-          seen.add(item.categoryName!)) {
-        categories.add(item.categoryName!);
-      }
-    }
-    return categories;
-  }
-
-  int get _cartItemCount =>
-      _cart.fold(0, (sum, si) => sum + si.quantity);
-
-  Money get _cartTotal =>
-      Money(_cart.fold(0, (sum, si) => sum + si.totalPriceCents));
-
-  int _quantityForItem(String itemId) =>
-      _cart.where((si) => si.itemId == itemId).fold(0, (sum, si) => sum + si.quantity);
-
-  void _handleQuantityChanged(Item item, int qty) {
-    setState(() {
-      if (qty <= 0) {
-        _cart.removeWhere((si) => si.itemId == item.id);
-      } else {
-        final idx = _cart.indexWhere((si) => si.itemId == item.id);
-        if (idx >= 0) {
-          _cart[idx] = _cart[idx].copyWith(quantity: qty);
-        } else {
-          _cart.add(SelectedItem(
-            itemId: item.id,
-            name: item.nameAr,
-            image: item.images.isNotEmpty ? item.images.first : null,
-            basePriceCents: item.price.cents,
-            quantity: qty,
-          ));
-        }
-      }
-    });
-  }
-
-  void _showItemConfigSheet(Item item) {
-    showAppSheet(
-      context,
-      maxHeightFraction: 0.85,
-      builder: (ctx) => ItemConfigurationStep(
-        item: item,
-        confirmLabel: '\u0625\u0636\u0627\u0641\u0629 \u0644\u0644\u0633\u0644\u0629',
-        onConfirm: (selectedItem) {
-          Navigator.of(ctx).pop();
-          setState(() => _cart.add(selectedItem));
-        },
-        onBack: () => Navigator.of(ctx).pop(),
-      ),
-    );
-  }
-
-  void _openOrderSheet(BuildContext context) {
-    final cartItems = _cart.map((si) => CartItem.fromSelectedItem(si)).toList();
-
-    final cart = Cart(
-      pageId: widget.pageId,
-      pageName: widget.page?.name ?? '',
-      items: cartItems,
-    );
-
-    OrderRequestSheet.show(
-      context: context,
-      cart: cart,
-      pageName: widget.page?.name ?? '',
-      paymentMethods: widget.page?.paymentMethods ?? const ['\u0646\u0642\u062f\u0627\u064b'],
-      onSubmit: (data) {
-        Navigator.of(context).pop();
-        setState(() => _cart.clear());
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628\u0643 \u0628\u0646\u062c\u0627\u062d \u2014 \u0633\u064a\u062a\u0645 \u0627\u0644\u0631\u062f \u0642\u0631\u064a\u0628\u0627\u064b',
-            ),
-          ),
-        );
       },
     );
   }
@@ -263,10 +150,10 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
         onRetry: () => ref.invalidate(pageItemsProvider(widget.pageId)),
       ),
       data: (items) {
-        final categories = _extractCategories(items);
+        final categories = extractCategories(items);
         final filtered = _filterItems(items);
-        final visible = filtered.take(_visibleCount).toList();
-        final hasMore = filtered.length > _visibleCount;
+        final visible = filtered.take(visibleCount).toList();
+        final hasMore = filtered.length > visibleCount;
 
         return Stack(
           children: [
@@ -337,81 +224,24 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                   SliverToBoxAdapter(
                     child: CategoryFilterPills(
                       categories: categories,
-                      selected: _selectedCategory,
-                      onSelected: (cat) => setState(() {
-                        _selectedCategory = cat;
-                        _visibleCount = _pageSize;
-                      }),
+                      selected: selectedCategory,
+                      onSelected: selectCategory,
                     ),
                   ),
 
                 // Search bar + filter button
                 SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.lg,
-                      vertical: AppSpacing.sm,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _searchController,
-                            onChanged: (value) => setState(() {
-                              _searchQuery = value;
-                              _visibleCount = _pageSize;
-                            }),
-                            decoration: InputDecoration(
-                              hintText: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a...',
-                              hintStyle: TextStyle(
-                                color: context.colorScheme.onSurfaceVariant
-                                    .withValues(alpha: 0.6),
-                                fontSize: 14,
-                              ),
-                              prefixIcon: Icon(
-                                Icons.search,
-                                size: 20,
-                                color: context.colorScheme.onSurfaceVariant
-                                    .withValues(alpha: 0.6),
-                              ),
-                              suffixIcon: _searchQuery.isNotEmpty
-                                  ? IconButton(
-                                      icon: Icon(
-                                        Icons.close,
-                                        size: 18,
-                                        color: context
-                                            .colorScheme.onSurfaceVariant,
-                                      ),
-                                      onPressed: () => setState(() {
-                                        _searchController.clear();
-                                        _searchQuery = '';
-                                        _visibleCount = _pageSize;
-                                      }),
-                                    )
-                                  : null,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: context
-                                  .colorScheme.surfaceContainerHighest
-                                  .withValues(alpha: 0.7),
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: AppSpacing.lg,
-                                vertical: AppSpacing.md,
-                              ),
-                              isDense: true,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.sm),
-                        // Filter button with badge
-                        CatalogFilterButton(
-                          activeCount: _filterState.activeCount,
-                          onTap: () => _openFilterSheet(items),
-                        ),
-                      ],
+                  child: SectionSearchBar(
+                    hintText: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a...',
+                    onChanged: updateSearch,
+                    controller: _searchController,
+                    onClear: () {
+                      _searchController.clear();
+                      updateSearch('');
+                    },
+                    trailing: CatalogFilterButton(
+                      activeCount: _filterState.activeCount,
+                      onTap: () => _openFilterSheet(items),
                     ),
                   ),
                 ),
@@ -435,13 +265,13 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                           return Padding(
                             padding:
                                 const EdgeInsets.only(bottom: AppSpacing.sm),
-                            child: CatalogItemCard(
+                            child: OfferingItemCard(
                               item: item,
-                              quantity: _quantityForItem(item.id),
+                              quantity: quantityForItem(item.id),
                               onQuantityChanged: (qty) =>
-                                  _handleQuantityChanged(item, qty),
+                                  handleQuantityChanged(item, qty),
                               onAdd: item.optionGroups.isNotEmpty
-                                  ? () => _showItemConfigSheet(item)
+                                  ? () => showItemConfigSheet(context, item)
                                   : null,
                               activePriceChange:
                                   widget.page?.activePriceChange,
@@ -459,9 +289,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                       child: SectionShowMoreButton(
                         visibleCount: visible.length,
                         totalCount: filtered.length,
-                        onPressed: () => setState(() {
-                          _visibleCount += _pageSize;
-                        }),
+                        onPressed: showMore,
                       ),
                     ),
 
@@ -487,7 +315,7 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
                 // Bottom padding for cart bar
                 SliverToBoxAdapter(
                   child: SizedBox(
-                    height: _cart.isNotEmpty
+                    height: cart.isNotEmpty
                         ? AppSpacing.xxl + 80
                         : AppSpacing.xxl,
                   ),
@@ -496,19 +324,24 @@ class _CatalogSectionState extends ConsumerState<CatalogSection> {
             ),
 
             // Floating cart bar
-            if (_cart.isNotEmpty)
+            if (cart.isNotEmpty)
               Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
                 child: FloatingCartBar(
-                  itemCount: _cartItemCount,
-                  total: _cartTotal,
+                  itemCount: cartItemCount,
+                  total: cartTotal,
                   onSendOrder: () => AuthGate.require(
                     context,
                     ref,
                     trigger: LoginPromptTrigger.order,
-                    onAuthed: () => _openOrderSheet(context),
+                    onAuthed: () => openOrderSheet(
+                      context,
+                      pageId: widget.pageId,
+                      pageName: widget.page?.name ?? '',
+                      paymentMethods: widget.page?.paymentMethods ?? const ['\u0646\u0642\u062f\u0627\u064b'],
+                    ),
                   ),
                 ),
               ),
