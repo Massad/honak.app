@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/directory_floor.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Filter state for the directory tab.
 class DirectoryFilters {
@@ -284,20 +285,17 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                 textDirection: TextDirection.ltr,
                 children: [
                   Expanded(
-                    child: OutlinedButton(
+                    child: btn.Button(
                       onPressed: _reset,
-                      // "إعادة تعيين"
-                      child: const Text(
-                        '\u0625\u0639\u0627\u062f\u0629 \u062a\u0639\u064a\u064a\u0646',
-                      ),
+                      label: '\u0625\u0639\u0627\u062f\u0629 \u062a\u0639\u064a\u064a\u0646',
+                      variant: btn.Variant.outlined,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
-                    child: FilledButton(
+                    child: btn.Button(
                       onPressed: () => Navigator.pop(context, _draft),
-                      // "تطبيق"
-                      child: const Text('\u062a\u0637\u0628\u064a\u0642'),
+                      label: '\u062a\u0637\u0628\u064a\u0642',
                     ),
                   ),
                 ],

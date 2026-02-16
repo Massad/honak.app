@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/shared/widgets/money_text.dart';
 import 'package:honak/shared/widgets/price_change_badge.dart';
 
@@ -212,22 +213,17 @@ class _AddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = context.colorScheme.primary;
     return SizedBox(
       height: 32,
       child: Badge(
         isLabelVisible: quantity > 0,
         label: Text('$quantity'),
         offset: const Offset(-4, -4),
-        child: FilledButton.tonal(
+        child: btn.Button(
           onPressed: onTap,
-          style: FilledButton.styleFrom(
-            backgroundColor: primary.withValues(alpha: 0.08),
-            foregroundColor: primary,
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            visualDensity: VisualDensity.compact,
-          ),
-          child: const Text('\u0625\u0636\u0627\u0641\u0629'),
+          label: '\u0625\u0636\u0627\u0641\u0629',
+          variant: btn.Variant.tonal,
+          size: btn.ButtonSize.small,
         ),
       ),
     );
@@ -250,15 +246,11 @@ class _CartControls extends StatelessWidget {
     if (quantity == 0) {
       return SizedBox(
         height: 32,
-        child: FilledButton.tonal(
+        child: btn.Button(
           onPressed: () => onChanged(1),
-          style: FilledButton.styleFrom(
-            backgroundColor: primary.withValues(alpha: 0.08),
-            foregroundColor: primary,
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            visualDensity: VisualDensity.compact,
-          ),
-          child: const Text('\u0625\u0636\u0627\u0641\u0629'),
+          label: '\u0625\u0636\u0627\u0641\u0629',
+          variant: btn.Variant.tonal,
+          size: btn.ButtonSize.small,
         ),
       );
     }

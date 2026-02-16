@@ -6,6 +6,7 @@ import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/shared/widgets/item_selection/item_option_selector.dart';
 
 /// Step 2 of the item picker: configure options + quantity + confirm.
@@ -342,24 +343,13 @@ class _ItemConfigurationStepState extends State<ItemConfigurationStep> {
           ),
           const SizedBox(width: AppSpacing.lg),
           Expanded(
-            child: FilledButton(
+            child: btn.Button(
               onPressed: _isComplete
                   ? () => widget.onConfirm(_buildSelectedItem())
                   : null,
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                widget.confirmLabel,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              label: widget.confirmLabel,
+              size: btn.ButtonSize.large,
+              expand: true,
             ),
           ),
         ],

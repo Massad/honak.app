@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 enum LoginPromptTrigger {
   follow,
@@ -264,28 +265,14 @@ class _LoginPromptContent extends StatelessWidget {
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AppSpacing.xxl,
           ),
-          child: SizedBox(
-            width: double.infinity,
-            height: 52,
-            child: FilledButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                context.go(Routes.login);
-              },
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.lg),
-                ),
-              ),
-              child: Text(
-                'إنشاء حساب مجاناً',
-                style: context.textTheme.titleSmall?.copyWith(
-                  color: AppColors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+          child: btn.Button(
+            onPressed: () {
+              Navigator.of(context).pop();
+              context.go(Routes.login);
+            },
+            label: 'إنشاء حساب مجاناً',
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
         ),
         const SizedBox(height: AppSpacing.md),

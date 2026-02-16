@@ -15,6 +15,7 @@ import 'package:honak/features/pages/presentation/widgets/sections/directory_tab
 import 'package:honak/shared/providers/api_provider.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 // ── Customer-facing directory data provider ──
 
@@ -370,13 +371,11 @@ class _DirectoryTabState extends ConsumerState<DirectoryTab> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  child: TextButton(
+                  child: btn.Button(
                     onPressed: () =>
                         setState(() => _visibleCount += _pageSize),
-                    // "تحميل المزيد (X من Y)"
-                    child: Text(
-                      '\u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0645\u0632\u064a\u062f (${visible.length} \u0645\u0646 ${filtered.length})',
-                    ),
+                    label: '\u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0645\u0632\u064a\u062f (${visible.length} \u0645\u0646 ${filtered.length})',
+                    variant: btn.Variant.text,
                   ),
                 ),
               ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/booking_step_confirm.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/booking_step_datetime.dart';
@@ -529,29 +529,12 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
               color: context.colorScheme.outlineVariant, width: 0.5),
         ),
       ),
-      child: SizedBox(
-        width: double.infinity,
-        child: FilledButton(
-          onPressed: _selectedItem != null ? _handleSinglePickSend : null,
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            disabledBackgroundColor: context.colorScheme.outlineVariant,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding:
-                const EdgeInsetsDirectional.symmetric(vertical: 14),
-          ),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('إرسال'),
-              SizedBox(width: AppSpacing.sm),
-              Icon(Icons.send_rounded, size: 18),
-            ],
-          ),
-        ),
+      child: btn.Button(
+        onPressed: _selectedItem != null ? _handleSinglePickSend : null,
+        label: 'إرسال',
+        icon: const btn.ButtonIcon(Icons.send_rounded),
+        size: btn.ButtonSize.large,
+        expand: true,
       ),
     );
   }
@@ -582,21 +565,9 @@ class _ItemPickerSheetState extends ConsumerState<ItemPickerSheet> {
             ),
           ),
           const Spacer(),
-          FilledButton(
+          btn.Button(
             onPressed: _selections.isNotEmpty ? _handleMultiPickDone : null,
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'تم',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            label: 'تم',
           ),
         ],
       ),
@@ -637,20 +608,21 @@ class _WizardBottomBar extends StatelessWidget {
         children: [
           if (!isFirstStep)
             Expanded(
-              child: OutlinedButton(
+              child: btn.Button(
                 onPressed: onBack,
-                child: const Text('رجوع'),
+                label: 'رجوع',
+                variant: btn.Variant.outlined,
+                expand: true,
               ),
             )
           else
             const Spacer(),
           const SizedBox(width: AppSpacing.md),
           Expanded(
-            child: FilledButton(
+            child: btn.Button(
               onPressed: canProceed ? onNext : null,
-              child: Text(
-                isLastStep ? 'تأكيد الحجز' : 'التالي',
-              ),
+              label: isLastStep ? 'تأكيد الحجز' : 'التالي',
+              expand: true,
             ),
           ),
         ],

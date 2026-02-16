@@ -9,6 +9,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class PhoneInputPage extends ConsumerStatefulWidget {
   const PhoneInputPage({super.key});
@@ -250,49 +251,14 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                     const SizedBox(height: AppSpacing.xxl),
 
                     // Continue button
-                    GestureDetector(
-                      onTap: _isPhoneValid && !_isLoading
+                    btn.Button(
+                      onPressed: _isPhoneValid && !_isLoading
                           ? _onContinue
                           : null,
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          color: _isPhoneValid
-                              ? AppColors.primary
-                              : AppColors.primary.withValues(alpha: 0.5),
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.md),
-                          boxShadow: _isPhoneValid
-                              ? [
-                                  BoxShadow(
-                                    color:
-                                        AppColors.primary.withValues(alpha: 0.3),
-                                    blurRadius: 12,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ]
-                              : null,
-                        ),
-                        alignment: Alignment.center,
-                        child: _isLoading
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: AppColors.white,
-                                ),
-                              )
-                            : Text(
-                                'إرسال رمز التحقق',
-                                style:
-                                    context.textTheme.titleMedium?.copyWith(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                      ),
+                      label: 'إرسال رمز التحقق',
+                      isLoading: _isLoading,
+                      size: btn.ButtonSize.large,
+                      expand: true,
                     ),
 
                     const Spacer(),

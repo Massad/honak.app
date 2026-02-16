@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/shared/api/api_error.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class ErrorView extends StatelessWidget {
   final String? message;
@@ -33,10 +34,10 @@ class ErrorView extends StatelessWidget {
             ),
             if (onRetry != null) ...[
               const SizedBox(height: 16),
-              FilledButton.icon(
+              btn.Button(
                 onPressed: onRetry,
-                icon: const Icon(Icons.refresh),
-                label: const Text('إعادة المحاولة'),
+                label: 'إعادة المحاولة',
+                icon: const btn.ButtonIcon(Icons.refresh),
               ),
             ],
           ],

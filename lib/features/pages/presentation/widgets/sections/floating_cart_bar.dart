@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Sticky bottom bar showing cart summary and send order button.
 /// Only shown when the cart has items.
@@ -68,17 +69,10 @@ class FloatingCartBar extends StatelessWidget {
               ),
             ),
             // Send order button
-            FilledButton(
+            btn.Button(
               onPressed: onSendOrder,
-              style: FilledButton.styleFrom(
-                backgroundColor: context.colorScheme.surface,
-                foregroundColor: context.colorScheme.primary,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xl,
-                  vertical: AppSpacing.md,
-                ),
-              ),
-              child: const Text('إرسال الطلب'),
+              label: 'إرسال الطلب',
+              variant: btn.Variant.tonal,
             ),
           ],
         ),

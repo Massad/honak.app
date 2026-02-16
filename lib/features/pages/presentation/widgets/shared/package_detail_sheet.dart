@@ -8,6 +8,7 @@ import 'package:honak/features/pages/presentation/widgets/shared/packages_sectio
     show iconEmojiForPackage;
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 void showPackageDetailSheet(
   BuildContext context, {
@@ -553,7 +554,7 @@ class PackageDetailSheet extends StatelessWidget {
         top: false,
         child: SizedBox(
           width: double.infinity,
-          child: ElevatedButton(
+          child: btn.Button(
             onPressed: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
@@ -563,7 +564,9 @@ class PackageDetailSheet extends StatelessWidget {
                 ),
               );
             },
-            child: Text(label),
+            label: label,
+            expand: true,
+            size: btn.ButtonSize.large,
           ),
         ),
       ),

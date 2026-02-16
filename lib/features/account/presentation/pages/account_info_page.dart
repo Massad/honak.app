@@ -8,6 +8,7 @@ import 'package:honak/features/account/presentation/widgets/sub_screen_header.da
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:intl/intl.dart' hide TextDirection;
 
 class AccountInfoPage extends ConsumerStatefulWidget {
@@ -62,29 +63,11 @@ class _AccountInfoPageState extends ConsumerState<AccountInfoPage> {
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: SubScreenHeader(
         title: 'معلومات الحساب',
-        trailing: TextButton.icon(
+        trailing: btn.Button(
           onPressed: _hasChanges ? _handleSave : null,
-          icon: Icon(
-            Icons.check,
-            size: 14,
-            color: _hasChanges ? Colors.white : AppColors.textHint,
-          ),
-          label: Text(
-            'حفظ',
-            style: TextStyle(
-              color: _hasChanges ? Colors.white : AppColors.textHint,
-            ),
-          ),
-          style: TextButton.styleFrom(
-            backgroundColor:
-                _hasChanges ? AppColors.primary : AppColors.border,
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.md,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppRadius.sm),
-            ),
-          ),
+          label: 'حفظ',
+          icon: btn.ButtonIcon(Icons.check, size: 14),
+          size: btn.ButtonSize.small,
         ),
       ),
       body: ListView(

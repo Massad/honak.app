@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Orange gradient banner showing active specials/offers.
 /// Used by both CatalogSection and MenuSection.
@@ -155,24 +156,12 @@ class SectionShowMoreButton extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           SizedBox(
             width: double.infinity,
-            child: OutlinedButton(
+            child: btn.Button(
               onPressed: onPressed,
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                side: BorderSide(
-                  color: context.colorScheme.outlineVariant,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                '\u0639\u0631\u0636 \u0627\u0644\u0645\u0632\u064a\u062f',
-                style: TextStyle(
-                  color: context.colorScheme.onSurfaceVariant,
-                  fontSize: 14,
-                ),
-              ),
+              label: '\u0639\u0631\u0636 \u0627\u0644\u0645\u0632\u064a\u062f',
+              variant: btn.Variant.outlined,
+              expand: true,
+              size: btn.ButtonSize.large,
             ),
           ),
         ],

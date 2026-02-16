@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/shared/widgets/money_text.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Card for a service item in the service booking section.
 /// Compact row layout: name + description + duration + price + book button.
@@ -136,20 +137,11 @@ class _CompactBookButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 36,
-      child: FilledButton.icon(
-        onPressed: onPressed,
-        icon: const Icon(Icons.calendar_today, size: 14),
-        label: const Text('حجز'),
-        style: FilledButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-          textStyle: context.textTheme.labelMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-          visualDensity: VisualDensity.compact,
-        ),
-      ),
+    return btn.Button(
+      onPressed: onPressed,
+      label: 'حجز',
+      icon: const btn.ButtonIcon(Icons.calendar_today, size: 14),
+      size: btn.ButtonSize.small,
     );
   }
 }

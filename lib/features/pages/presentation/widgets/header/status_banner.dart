@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Status banner for temporarily closed, relocated, or permanently closed pages.
 class StatusBanner extends StatelessWidget {
@@ -126,9 +127,11 @@ class _Banner extends StatelessWidget {
             ),
           ),
           if (actionLabel != null)
-            TextButton(
+            btn.Button(
               onPressed: onAction,
-              child: Text(actionLabel!, style: TextStyle(color: color)),
+              label: actionLabel!,
+              variant: btn.Variant.text,
+              size: btn.ButtonSize.small,
             ),
         ],
       ),

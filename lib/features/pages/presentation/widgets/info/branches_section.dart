@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/features/pages/presentation/pages/branches_page.dart';
 import 'package:honak/shared/entities/location.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Displays location info: single address or multiple branch cards.
 /// For pages with many branches (>5), shows city filter chips.
@@ -57,9 +58,11 @@ class BranchesSection extends StatelessWidget {
                     style: context.textTheme.bodyMedium,
                   ),
                 ),
-                TextButton(
+                btn.Button(
                   onPressed: () {},
-                  child: const Text('\u0641\u062a\u062d \u0641\u064a \u0627\u0644\u062e\u0631\u0627\u0626\u0637'),
+                  label: '\u0641\u062a\u062d \u0641\u064a \u0627\u0644\u062e\u0631\u0627\u0626\u0637',
+                  variant: btn.Variant.text,
+                  size: btn.ButtonSize.small,
                 ),
               ],
             ),
@@ -185,13 +188,12 @@ class _BranchCard extends StatelessWidget {
             SizedBox(height: AppSpacing.sm),
             Align(
               alignment: AlignmentDirectional.centerEnd,
-              child: TextButton.icon(
+              child: btn.Button(
                 onPressed: () {},
-                icon: const Icon(Icons.map_outlined, size: 16),
-                label: const Text('\u0641\u062a\u062d \u0641\u064a \u0627\u0644\u062e\u0631\u0627\u0626\u0637'),
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 12),
-                ),
+                label: '\u0641\u062a\u062d \u0641\u064a \u0627\u0644\u062e\u0631\u0627\u0626\u0637',
+                icon: const btn.ButtonIcon(Icons.map_outlined),
+                variant: btn.Variant.text,
+                size: btn.ButtonSize.small,
               ),
             ),
           ],

@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/account/presentation/widgets/sub_screen_header.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class HelpSupportPage extends StatefulWidget {
   const HelpSupportPage({super.key});
@@ -104,38 +105,23 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
                 Row(
                   children: [
                     Expanded(
-                      child: FilledButton.icon(
+                      child: btn.Button(
                         onPressed: () {},
-                        icon: const Icon(Icons.chat, size: 16),
-                        label: const Text('واتساب'),
-                        style: FilledButton.styleFrom(
-                          backgroundColor: const Color(0xFF25D366),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: AppSpacing.md,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.card,
-                          ),
-                        ),
+                        label: 'واتساب',
+                        icon: btn.ButtonIcon(Icons.chat, size: 16),
+                        style: btn.Style.success,
+                        size: btn.ButtonSize.large,
+                        expand: true,
                       ),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
-                      child: FilledButton.icon(
+                      child: btn.Button(
                         onPressed: () {},
-                        icon: const Icon(Icons.phone, size: 16),
-                        label: const Text('اتصال'),
-                        style: FilledButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: AppSpacing.md,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.card,
-                          ),
-                        ),
+                        label: 'اتصال',
+                        icon: btn.ButtonIcon(Icons.phone, size: 16),
+                        size: btn.ButtonSize.large,
+                        expand: true,
                       ),
                     ),
                   ],
@@ -317,38 +303,23 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
                     textDirection: TextDirection.ltr,
                     children: [
                       Expanded(
-                        child: FilledButton(
+                        child: btn.Button(
                           onPressed: () =>
                               setState(() => _showReport = false),
-                          style: FilledButton.styleFrom(
-                            backgroundColor: AppColors.border,
-                            foregroundColor: AppColors.textPrimary,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: AppSpacing.md,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: AppRadius.card,
-                            ),
-                          ),
-                          child: const Text('إلغاء'),
+                          label: 'إلغاء',
+                          variant: btn.Variant.tonal,
+                          size: btn.ButtonSize.large,
+                          expand: true,
                         ),
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Expanded(
-                        child: FilledButton.icon(
+                        child: btn.Button(
                           onPressed: _handleSubmitReport,
-                          icon: const Icon(Icons.send, size: 14),
-                          label: const Text('إرسال'),
-                          style: FilledButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: AppSpacing.md,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: AppRadius.card,
-                            ),
-                          ),
+                          label: 'إرسال',
+                          icon: btn.ButtonIcon(Icons.send, size: 14),
+                          size: btn.ButtonSize.large,
+                          expand: true,
                         ),
                       ),
                     ],

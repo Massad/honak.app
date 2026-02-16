@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Collapsible floor section header with floor name, label, and tenant count.
 class FloorSectionHeader extends StatelessWidget {
@@ -144,13 +145,11 @@ class DirectoryEmptyState extends StatelessWidget {
             ),
             if (hasFilters || hasSearch) ...[
               const SizedBox(height: AppSpacing.md),
-              TextButton.icon(
+              btn.Button(
                 onPressed: onClearFilters,
-                icon: const Icon(Icons.filter_alt_off, size: 18),
-                // "مسح الفلاتر"
-                label: const Text(
-                  '\u0645\u0633\u062d \u0627\u0644\u0641\u0644\u0627\u062a\u0631',
-                ),
+                label: '\u0645\u0633\u062d \u0627\u0644\u0641\u0644\u0627\u062a\u0631',
+                icon: const btn.ButtonIcon(Icons.filter_alt_off),
+                variant: btn.Variant.text,
               ),
             ],
           ],

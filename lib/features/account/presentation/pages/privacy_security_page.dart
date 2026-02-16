@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/account/presentation/widgets/sub_screen_header.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class PrivacySecurityPage extends StatefulWidget {
   const PrivacySecurityPage({super.key});
@@ -166,17 +167,14 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
                                 ],
                               ),
                             ),
-                            TextButton(
+                            btn.Button(
                               onPressed: () {
                                 setState(() => _blockedPages.removeAt(i));
                                 context.showSnackBar('تم إلغاء الحظر');
                               },
-                              child: Text(
-                                'إلغاء الحظر',
-                                style: context.textTheme.labelSmall?.copyWith(
-                                  color: AppColors.primary,
-                                ),
-                              ),
+                              label: 'إلغاء الحظر',
+                              variant: btn.Variant.text,
+                              size: btn.ButtonSize.small,
                             ),
                           ],
                         ),
@@ -431,34 +429,22 @@ class _DeleteAccountSheet extends StatelessWidget {
             textDirection: TextDirection.ltr,
             children: [
               Expanded(
-                child: FilledButton(
+                child: btn.Button(
                   onPressed: onCancel,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.border,
-                    foregroundColor: AppColors.textPrimary,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.card,
-                    ),
-                  ),
-                  child: const Text('إلغاء'),
+                  label: 'إلغاء',
+                  variant: btn.Variant.tonal,
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
-                child: FilledButton(
+                child: btn.Button(
                   onPressed: onConfirm,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.error,
-                    foregroundColor: Colors.white,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.card,
-                    ),
-                  ),
-                  child: const Text('حذف الحساب'),
+                  label: 'حذف الحساب',
+                  style: btn.Style.danger,
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
               ),
             ],

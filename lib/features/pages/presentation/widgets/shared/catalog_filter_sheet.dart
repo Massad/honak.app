@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Sort options for catalog items.
 enum SortOption { defaultSort, priceLowHigh, priceHighLow, newest, popular }
@@ -432,18 +433,14 @@ class _CatalogFilterSheetState extends State<CatalogFilterSheet> {
             ),
             child: SizedBox(
               width: double.infinity,
-              child: FilledButton(
+              child: btn.Button(
                 onPressed: () {
                   widget.onApply(_state);
                   Navigator.of(context).pop();
                 },
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text('تطبيق'),
+                label: 'تطبيق',
+                expand: true,
+                size: btn.ButtonSize.large,
               ),
             ),
           ),

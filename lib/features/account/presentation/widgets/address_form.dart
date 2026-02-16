@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/account/domain/entities/address.dart';
 import 'package:honak/features/account/presentation/widgets/sub_screen_header.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class AddressFormPage extends StatefulWidget {
   final Address? address;
@@ -105,29 +106,11 @@ class _AddressFormPageState extends State<AddressFormPage> {
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: SubScreenHeader(
         title: _isEdit ? 'تعديل العنوان' : 'عنوان جديد',
-        trailing: TextButton.icon(
+        trailing: btn.Button(
           onPressed: _canSave ? _handleSave : null,
-          icon: Icon(
-            Icons.check,
-            size: 14,
-            color: _canSave ? Colors.white : AppColors.textHint,
-          ),
-          label: Text(
-            'حفظ',
-            style: TextStyle(
-              color: _canSave ? Colors.white : AppColors.textHint,
-            ),
-          ),
-          style: TextButton.styleFrom(
-            backgroundColor:
-                _canSave ? AppColors.primary : AppColors.border,
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppSpacing.md,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppRadius.sm),
-            ),
-          ),
+          label: 'حفظ',
+          icon: btn.ButtonIcon(Icons.check, size: 14),
+          size: btn.ButtonSize.small,
         ),
       ),
       body: ListView(

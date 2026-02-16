@@ -11,6 +11,7 @@ import 'package:honak/shared/providers/nav_badge_provider.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/features/subscriptions/presentation/providers/subscription_providers.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/subscriptions_tab.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Customer "My Orders" page — "طلباتي" with 4 tabs.
 class OrdersPage extends ConsumerStatefulWidget {
@@ -363,10 +364,11 @@ class _ErrorState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
-            TextButton.icon(
+            btn.Button(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh),
-              label: const Text('إعادة المحاولة'),
+              label: 'إعادة المحاولة',
+              icon: const btn.ButtonIcon(Icons.refresh),
+              variant: btn.Variant.text,
             ),
           ],
         ),

@@ -7,6 +7,7 @@ import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/requests/presentation/widgets/quote_request_sheet.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Data-driven overview for quote request businesses.
 /// Used by the quoteRequest archetype (plumber, electrician).
@@ -221,44 +222,36 @@ class QuoteRequestSection extends ConsumerWidget {
         const SizedBox(height: AppSpacing.xxxl),
 
         // CTA button
-        SizedBox(
-          width: double.infinity,
-          child: FilledButton.icon(
-            onPressed: () {
-              AuthGate.require(
-                context,
-                ref,
-                trigger: LoginPromptTrigger.quote,
-                onAuthed: () {
-                  QuoteRequestSheet.show(
-                    context: context,
-                    pageName: page?.name ?? '',
-                    onSubmit: (data) {
-                      Navigator.of(context).pop();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628\u0643 \u0628\u0646\u062c\u0627\u062d \u2014 \u0633\u064a\u062a\u0645 \u0627\u0644\u0631\u062f \u0642\u0631\u064a\u0628\u0627\u064b',
-                          ),
+        btn.Button(
+          onPressed: () {
+            AuthGate.require(
+              context,
+              ref,
+              trigger: LoginPromptTrigger.quote,
+              onAuthed: () {
+                QuoteRequestSheet.show(
+                  context: context,
+                  pageName: page?.name ?? '',
+                  onSubmit: (data) {
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628\u0643 \u0628\u0646\u062c\u0627\u062d \u2014 \u0633\u064a\u062a\u0645 \u0627\u0644\u0631\u062f \u0642\u0631\u064a\u0628\u0627\u064b',
                         ),
-                      );
-                    },
-                  );
-                },
-              );
-            },
-            icon: const Icon(Icons.request_quote_outlined),
-            label: Text(
-              page?.archetype != null
-                  ? Archetype.fromKey(page!.archetype!).displayNameAr
-                  : 'اطلب عرض سعر',
-            ),
-            style: FilledButton.styleFrom(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSpacing.lg,
-              ),
-            ),
-          ),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          },
+          label: page?.archetype != null
+              ? Archetype.fromKey(page!.archetype!).displayNameAr
+              : 'اطلب عرض سعر',
+          icon: const btn.ButtonIcon(Icons.request_quote_outlined),
+          expand: true,
+          size: btn.ButtonSize.large,
         ),
       ],
     );

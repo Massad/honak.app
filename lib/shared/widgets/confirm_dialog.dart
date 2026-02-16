@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Reusable confirmation dialog with two actions.
 ///
@@ -54,25 +55,19 @@ class ConfirmDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-
     return AlertDialog(
       title: Text(title),
       content: Text(message),
       actions: [
-        TextButton(
+        btn.Button(
           onPressed: () => Navigator.pop(context, false),
-          child: Text(cancelLabel ?? context.l10n.cancel),
+          label: cancelLabel ?? context.l10n.cancel,
+          variant: btn.Variant.text,
         ),
-        FilledButton(
-          style: isDestructive
-              ? FilledButton.styleFrom(
-                  backgroundColor: scheme.error,
-                  foregroundColor: scheme.onError,
-                )
-              : null,
+        btn.Button(
           onPressed: () => Navigator.pop(context, true),
-          child: Text(confirmLabel ?? context.l10n.ok),
+          label: confirmLabel ?? context.l10n.ok,
+          style: isDestructive ? btn.Style.danger : btn.Style.primary,
         ),
       ],
       // Keep Cancel left, Confirm right regardless of RTL

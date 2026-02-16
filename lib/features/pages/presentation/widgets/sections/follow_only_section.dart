@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Follow-only section for pages with no catalog or ordering.
 /// Used by the followOnly archetype (municipality, NGO).
@@ -258,18 +259,13 @@ class _DefaultFollowState extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSpacing.xxxl),
-            FilledButton.icon(
+            btn.Button(
               onPressed: () {
                 // TODO: Trigger follow action
               },
-              icon: const Icon(Icons.add),
-              label: const Text('متابعة'),
-              style: FilledButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xxxl,
-                  vertical: AppSpacing.md,
-                ),
-              ),
+              label: 'متابعة',
+              icon: const btn.ButtonIcon(Icons.add),
+              size: btn.ButtonSize.large,
             ),
           ],
         ),

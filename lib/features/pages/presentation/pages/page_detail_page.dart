@@ -29,6 +29,7 @@ import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 import 'package:honak/features/pages/presentation/pages/claim_request_page.dart';
 import 'package:honak/shared/widgets/coverage_banner.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class PageDetailPage extends ConsumerStatefulWidget {
   final String handle;
@@ -533,9 +534,10 @@ class _ServiceBookingWithQueueState
             'لديك حجز قائم بالدور. الغِ الحالي أولاً لحجز خدمة جديدة.',
           ),
           actions: [
-            TextButton(
+            btn.Button(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('حسناً'),
+              label: 'حسناً',
+              variant: btn.Variant.text,
             ),
           ],
         ),

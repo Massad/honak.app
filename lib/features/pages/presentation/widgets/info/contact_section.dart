@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Contact section: phone, WhatsApp, CliQ, external links.
 class ContactSection extends StatelessWidget {
@@ -85,16 +86,21 @@ class _ContactButton extends StatelessWidget {
     required this.onTap,
   });
 
+  btn.Style _resolveStyle(BuildContext context) {
+    if (color == Colors.green || color == const Color(0xFF25D366)) {
+      return btn.Style.success;
+    }
+    return btn.Style.primary;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton.icon(
+    return btn.Button(
       onPressed: onTap,
-      icon: Icon(icon, size: 18, color: color),
-      label: Text(label),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: color,
-        side: BorderSide(color: color.withValues(alpha: 0.4)),
-      ),
+      label: label,
+      icon: btn.ButtonIcon(icon),
+      variant: btn.Variant.outlined,
+      style: _resolveStyle(context),
     );
   }
 }

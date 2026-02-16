@@ -10,6 +10,7 @@ import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Gallery grid with category pills, inquiry CTA, and custom work CTA.
 /// Used by the portfolioInquiry archetype (photographer, designer).
@@ -172,13 +173,12 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
                           padding: const EdgeInsets.symmetric(
                             vertical: AppSpacing.md,
                           ),
-                          child: TextButton(
+                          child: btn.Button(
                             onPressed: () => setState(() {
                               _visibleCount += _pageSize;
                             }),
-                            child: Text(
-                              'عرض المزيد (${visible.length} من ${filtered.length})',
-                            ),
+                            label: 'عرض المزيد (${visible.length} من ${filtered.length})',
+                            variant: btn.Variant.text,
                           ),
                         ),
                       ),
@@ -211,17 +211,15 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
                               ),
                             ),
                             const SizedBox(height: AppSpacing.md),
-                            SizedBox(
-                              width: double.infinity,
-                              child: FilledButton(
-                                onPressed: () => AuthGate.require(
-                                  context,
-                                  ref,
-                                  trigger: LoginPromptTrigger.general,
-                                  onAuthed: () => _openInquirySheet(context),
-                                ),
-                                child: const Text('إرسال استفسار'),
+                            btn.Button(
+                              onPressed: () => AuthGate.require(
+                                context,
+                                ref,
+                                trigger: LoginPromptTrigger.general,
+                                onAuthed: () => _openInquirySheet(context),
                               ),
+                              label: 'إرسال استفسار',
+                              expand: true,
                             ),
                           ],
                         ),
@@ -242,20 +240,17 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
               bottom: AppSpacing.lg,
               left: AppSpacing.lg,
               right: AppSpacing.lg,
-              child: FilledButton.icon(
+              child: btn.Button(
                 onPressed: () => AuthGate.require(
                   context,
                   ref,
                   trigger: LoginPromptTrigger.general,
                   onAuthed: () => _openInquirySheet(context),
                 ),
-                icon: const Icon(Icons.chat_outlined),
-                label: const Text('استفسر الآن'),
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppSpacing.lg,
-                  ),
-                ),
+                label: 'استفسر الآن',
+                icon: const btn.ButtonIcon(Icons.chat_outlined),
+                expand: true,
+                size: btn.ButtonSize.large,
               ),
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Pagination button (NOT infinite scroll).
 /// Shows "Show More" button with a count of showing/total items.
@@ -33,14 +34,10 @@ class LoadMoreButton extends StatelessWidget {
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
             else
-              TextButton(
+              btn.Button(
                 onPressed: onLoadMore,
-                child: Text(
-                  '\u0639\u0631\u0636 \u0627\u0644\u0645\u0632\u064a\u062f',
-                  style: context.textTheme.labelLarge?.copyWith(
-                    color: context.colorScheme.primary,
-                  ),
-                ),
+                label: '\u0639\u0631\u0636 \u0627\u0644\u0645\u0632\u064a\u062f',
+                variant: btn.Variant.text,
               ),
             SizedBox(height: AppSpacing.xs),
             Text(

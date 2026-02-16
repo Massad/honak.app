@@ -10,6 +10,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class OtpVerificationPage extends ConsumerStatefulWidget {
   final String phone;
@@ -275,47 +276,12 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                     const SizedBox(height: AppSpacing.xxl),
 
                     // Verify button
-                    GestureDetector(
-                      onTap: _isOtpValid && !_isLoading ? _onVerify : null,
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          color: _isOtpValid
-                              ? AppColors.primary
-                              : AppColors.primary.withValues(alpha: 0.5),
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.md),
-                          boxShadow: _isOtpValid
-                              ? [
-                                  BoxShadow(
-                                    color:
-                                        AppColors.primary.withValues(alpha: 0.3),
-                                    blurRadius: 12,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ]
-                              : null,
-                        ),
-                        alignment: Alignment.center,
-                        child: _isLoading
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: AppColors.white,
-                                ),
-                              )
-                            : Text(
-                                'تحقق',
-                                style:
-                                    context.textTheme.titleMedium?.copyWith(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                      ),
+                    btn.Button(
+                      onPressed: _isOtpValid && !_isLoading ? _onVerify : null,
+                      label: 'تحقق',
+                      isLoading: _isLoading,
+                      size: btn.ButtonSize.large,
+                      expand: true,
                     ),
 
                     if (_attemptsLeft < 3) ...[

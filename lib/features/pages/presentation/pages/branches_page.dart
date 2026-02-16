@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full-screen page listing all branches with search and city filters.
 /// Pushed as [MaterialPageRoute] (no GoRouter route needed).
@@ -281,15 +282,12 @@ class _BranchListCard extends StatelessWidget {
             SizedBox(height: AppSpacing.sm),
             Align(
               alignment: AlignmentDirectional.centerEnd,
-              child: TextButton.icon(
+              child: btn.Button(
                 onPressed: () {},
-                icon: const Icon(Icons.map_outlined, size: 16),
-                // "فتح في الخرائط"
-                label: const Text(
-                    '\u0641\u062a\u062d \u0641\u064a \u0627\u0644\u062e\u0631\u0627\u0626\u0637'),
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 12),
-                ),
+                label: '\u0641\u062a\u062d \u0641\u064a \u0627\u0644\u062e\u0631\u0627\u0626\u0637',
+                icon: const btn.ButtonIcon(Icons.map_outlined),
+                variant: btn.Variant.text,
+                size: btn.ButtonSize.small,
               ),
             ),
           ],

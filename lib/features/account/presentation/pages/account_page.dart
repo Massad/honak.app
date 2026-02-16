@@ -5,6 +5,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/features/account/presentation/pages/account_info_page.dart';
 import 'package:honak/features/account/presentation/pages/help_support_page.dart';
 import 'package:honak/features/account/presentation/pages/my_addresses_page.dart';
@@ -140,16 +141,17 @@ class AccountPage extends ConsumerWidget {
         title: Text(context.l10n.logout),
         content: Text(context.l10n.logoutConfirm),
         actions: [
-          TextButton(
+          btn.Button(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(context.l10n.cancel),
+            label: context.l10n.cancel,
+            variant: btn.Variant.text,
           ),
-          FilledButton(
+          btn.Button(
             onPressed: () {
               Navigator.pop(ctx);
               ref.read(authProvider.notifier).logout();
             },
-            child: Text(context.l10n.logout),
+            label: context.l10n.logout,
           ),
         ],
       ),
@@ -198,12 +200,11 @@ class _GuestView extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppSpacing.xxl),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: () => context.go(Routes.welcome),
-                  child: const Text('\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644'),
-                ),
+              btn.Button(
+                onPressed: () => context.go(Routes.welcome),
+                label: '\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644',
+                expand: true,
+                size: btn.ButtonSize.large,
               ),
             ],
           ),

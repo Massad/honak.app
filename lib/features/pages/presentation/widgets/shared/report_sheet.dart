@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 // ─── Report reason model ────────────────────────────────────
 
@@ -382,19 +383,14 @@ class _ReportSheetState extends State<ReportSheet> {
             child: SizedBox(
               width: double.infinity,
               height: 48,
-              child: FilledButton(
+              child: btn.Button(
                 onPressed: _canSubmit ? _handleSubmit : null,
-                style: FilledButton.styleFrom(
-                  backgroundColor: _canSubmit ? _accentColor : null,
-                  disabledBackgroundColor:
-                      context.colorScheme.surfaceContainerHighest,
-                  disabledForegroundColor:
-                      context.colorScheme.outlineVariant,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: Text(submitLabel),
+                label: submitLabel,
+                expand: true,
+                size: btn.ButtonSize.large,
+                style: _isPlatformManaged
+                    ? btn.Style.primary
+                    : btn.Style.danger,
               ),
             ),
           ),

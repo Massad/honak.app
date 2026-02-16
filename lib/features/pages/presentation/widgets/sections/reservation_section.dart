@@ -15,6 +15,7 @@ import 'package:honak/shared/widgets/money_text.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Space cards with category filtering, pagination, and villa support.
 /// Used by the reservation archetype (hotel, event venue, villa/chalet).
@@ -204,13 +205,12 @@ class _ReservationSectionState extends ConsumerState<ReservationSection> {
                       padding: const EdgeInsets.symmetric(
                         vertical: AppSpacing.md,
                       ),
-                      child: TextButton(
+                      child: btn.Button(
                         onPressed: () => setState(() {
                           _visibleCount += _pageSize;
                         }),
-                        child: Text(
-                          'عرض المزيد (${visible.length} من ${filtered.length})',
-                        ),
+                        label: 'عرض المزيد (${visible.length} من ${filtered.length})',
+                        variant: btn.Variant.text,
                       ),
                     ),
                   ),
@@ -436,12 +436,10 @@ class _SpaceCard extends StatelessWidget {
                   ),
                   if (item.inStock && onBook != null) ...[
                     const SizedBox(height: AppSpacing.md),
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: onBook,
-                        child: const Text('\u0637\u0644\u0628 \u062d\u062c\u0632'),
-                      ),
+                    btn.Button(
+                      onPressed: onBook,
+                      label: '\u0637\u0644\u0628 \u062d\u062c\u0632',
+                      expand: true,
                     ),
                   ],
                 ],
