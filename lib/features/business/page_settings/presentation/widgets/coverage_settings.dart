@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/coverage_zone.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/coverage_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class CoverageSettings extends ConsumerWidget {
   final VoidCallback onClose;
@@ -174,7 +175,7 @@ class _ZoneHeader extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          TextButton(
+          Button(
             onPressed: () {
               for (final z in zones) {
                 if (allActive && z.active || !allActive && !z.active) {
@@ -182,10 +183,9 @@ class _ZoneHeader extends ConsumerWidget {
                 }
               }
             },
-            child: Text(
-              allActive ? 'إلغاء الكل' : 'تحديد الكل',
-              style: const TextStyle(fontSize: 11, color: AppColors.primary),
-            ),
+            label: allActive ? 'إلغاء الكل' : 'تحديد الكل',
+            variant: Variant.text,
+            size: ButtonSize.small,
           ),
           const Spacer(),
           Text(
@@ -300,26 +300,34 @@ class _NeighborhoodItem extends ConsumerWidget {
           ],
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              ref
-                  .read(coverageProvider.notifier)
-                  .updateZoneFee(zone.id, null);
-              Navigator.pop(ctx);
-            },
-            child: const Text('افتراضي'),
-          ),
-          TextButton(
-            onPressed: () {
-              final fee = int.tryParse(controller.text);
-              if (fee != null) {
-                ref
-                    .read(coverageProvider.notifier)
-                    .updateZoneFee(zone.id, fee);
-              }
-              Navigator.pop(ctx);
-            },
-            child: const Text('حفظ'),
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              Button(
+                onPressed: () {
+                  ref
+                      .read(coverageProvider.notifier)
+                      .updateZoneFee(zone.id, null);
+                  Navigator.pop(ctx);
+                },
+                label: 'افتراضي',
+                variant: Variant.text,
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Button(
+                onPressed: () {
+                  final fee = int.tryParse(controller.text);
+                  if (fee != null) {
+                    ref
+                        .read(coverageProvider.notifier)
+                        .updateZoneFee(zone.id, fee);
+                  }
+                  Navigator.pop(ctx);
+                },
+                label: 'حفظ',
+                variant: Variant.text,
+              ),
+            ],
           ),
         ],
       ),

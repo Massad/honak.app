@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/queue/domain/entities/customer_queue_entry.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Shows the cancel confirmation bottom sheet.
 Future<void> showQueueCancelSheet({
@@ -122,41 +123,24 @@ class _QueueCancelSheet extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.xxl),
                 // Confirm cancel button
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      onConfirm();
-                    },
-                    style: FilledButton.styleFrom(
-                      backgroundColor: AppColors.error,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: AppRadius.button,
-                      ),
-                    ),
-                    child: const Text('نعم، إلغاء الحجز'),
-                  ),
+                btn.Button(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    onConfirm();
+                  },
+                  label: 'نعم، إلغاء الحجز',
+                  style: btn.Style.danger,
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 // Stay in queue button
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () => Navigator.pop(context),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: context.colorScheme.onSurfaceVariant,
-                      side: BorderSide(color: context.colorScheme.outlineVariant),
-                      padding:
-                          const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: AppRadius.button,
-                      ),
-                    ),
-                    child: const Text('لا، البقاء بالدور'),
-                  ),
+                btn.Button(
+                  onPressed: () => Navigator.pop(context),
+                  label: 'لا، البقاء بالدور',
+                  variant: btn.Variant.outlined,
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
               ],
             ),

@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Shows a bottom sheet to pick team members for a service item.
 /// Returns the selected member IDs, or null if dismissed.
@@ -183,27 +184,11 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
             // Done button
             Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => Navigator.pop(context, _selected.toList()),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'تم',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+              child: btn.Button(
+                onPressed: () => Navigator.pop(context, _selected.toList()),
+                label: 'تم',
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ),
       ],

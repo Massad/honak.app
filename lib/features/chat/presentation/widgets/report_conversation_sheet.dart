@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 // ─── Report reason model ────────────────────────────────────
 
@@ -461,24 +462,13 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
         const SizedBox(height: AppSpacing.lg),
 
         // Next button
-        SizedBox(
-          width: double.infinity,
-          height: 48,
-          child: FilledButton(
-            onPressed: _canProceedFromReason
-                ? () => setState(() => _step = 3)
-                : null,
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              disabledBackgroundColor:
-                  context.colorScheme.surfaceContainerHighest,
-              disabledForegroundColor: context.colorScheme.outlineVariant,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.md),
-              ),
-            ),
-            child: const Text('متابعة'),
-          ),
+        Button(
+          onPressed: _canProceedFromReason
+              ? () => setState(() => _step = 3)
+              : null,
+          label: 'متابعة',
+          size: ButtonSize.large,
+          expand: true,
         ),
       ],
     );
@@ -669,26 +659,13 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
         const SizedBox(height: AppSpacing.lg),
 
         // Submit button
-        SizedBox(
-          width: double.infinity,
-          height: 48,
-          child: FilledButton.icon(
-            onPressed: _canSubmit ? _handleSubmit : null,
-            icon: Transform.flip(
-              flipX: true,
-              child: const Icon(Icons.send, size: 14),
-            ),
-            label: const Text('إرسال البلاغ'),
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.error,
-              disabledBackgroundColor:
-                  context.colorScheme.surfaceContainerHighest,
-              disabledForegroundColor: context.colorScheme.outlineVariant,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.md),
-              ),
-            ),
-          ),
+        Button(
+          onPressed: _canSubmit ? _handleSubmit : null,
+          label: 'إرسال البلاغ',
+          icon: ButtonIcon(Icons.send, size: 14),
+          style: Style.danger,
+          size: ButtonSize.large,
+          expand: true,
         ),
       ],
     );

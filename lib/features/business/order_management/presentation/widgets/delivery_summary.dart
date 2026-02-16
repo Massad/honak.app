@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/domain/entities/truck.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/driving_mode_sheets.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 /// End-of-route summary report showing stats, inventory, revenue, sources.
@@ -483,23 +484,15 @@ class DeliverySummary extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            height: 48,
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                onEndRoute();
-                              },
-                              icon: const Icon(Icons.check, size: 14),
-                              label: const Text('إنهاء المسار'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: AppRadius.cardInner,
-                                ),
-                              ),
-                            ),
+                          child: Button(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              onEndRoute();
+                            },
+                            label: 'إنهاء المسار',
+                            icon: const ButtonIcon(Icons.check),
+                            size: ButtonSize.large,
+                            expand: true,
                           ),
                         ),
                         const SizedBox(width: 8),

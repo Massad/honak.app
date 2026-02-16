@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
 import 'package:honak/features/chat/presentation/widgets/alternative_item_row.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class AlternativeCard extends StatefulWidget {
   final Message message;
@@ -260,46 +261,26 @@ class _AlternativeCardState extends State<AlternativeCard> {
         textDirection: TextDirection.ltr,
         children: [
           Expanded(
-            child: OutlinedButton.icon(
+            child: Button(
               onPressed: widget.isBusinessMode
                   ? null
                   : () => setState(() => _status = 'declined'),
-              icon: const Icon(Icons.close, size: 16),
-              label: const Text('رفض'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: context.colorScheme.onSurfaceVariant,
-                disabledForegroundColor: context
-                    .colorScheme.onSurfaceVariant
-                    .withValues(alpha: 0.38),
-                side: BorderSide(color: context.colorScheme.outlineVariant),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                ),
-                padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: AppSpacing.sm,
-                ),
-              ),
+              label: 'رفض',
+              icon: ButtonIcon(Icons.close, size: 16),
+              variant: Variant.outlined,
+              size: ButtonSize.small,
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: FilledButton.icon(
+            child: Button(
               onPressed: widget.isBusinessMode
                   ? null
                   : () => setState(() => _status = 'accepted'),
-              icon: const Icon(Icons.check, size: 16),
-              label: const Text('قبول'),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.success,
-                disabledBackgroundColor:
-                    AppColors.success.withValues(alpha: 0.38),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                ),
-                padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: AppSpacing.sm,
-                ),
-              ),
+              label: 'قبول',
+              icon: ButtonIcon(Icons.check, size: 16),
+              style: Style.success,
+              size: ButtonSize.small,
             ),
           ),
         ],

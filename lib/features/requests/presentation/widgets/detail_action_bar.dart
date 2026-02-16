@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Container for action buttons at the bottom of request detail page.
 class DetailActionBar extends StatelessWidget {
@@ -55,21 +56,13 @@ class DetailOutlinedAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-      child: SizedBox(
-        width: double.infinity,
-        child: OutlinedButton.icon(
-          onPressed: onPressed,
-          icon: Icon(icon, size: 16),
-          label: Text(label),
-          style: OutlinedButton.styleFrom(
-            foregroundColor: AppColors.primary,
-            side: const BorderSide(color: AppColors.primary),
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-            shape: RoundedRectangleBorder(
-              borderRadius: AppRadius.button,
-            ),
-          ),
-        ),
+      child: btn.Button(
+        onPressed: onPressed,
+        label: label,
+        icon: btn.ButtonIcon(icon),
+        variant: btn.Variant.outlined,
+        size: btn.ButtonSize.large,
+        expand: true,
       ),
     );
   }
@@ -92,10 +85,12 @@ class DetailTextAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton.icon(
+    return btn.Button(
       onPressed: onPressed,
-      icon: Icon(icon, size: 14, color: color),
-      label: Text(label, style: TextStyle(color: color)),
+      label: label,
+      icon: btn.ButtonIcon(icon),
+      variant: btn.Variant.text,
+      style: btn.Style.danger,
     );
   }
 }

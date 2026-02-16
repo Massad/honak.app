@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class RecurringCustomersSection extends StatelessWidget {
   const RecurringCustomersSection({super.key});
@@ -28,19 +29,14 @@ class RecurringCustomersSection extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            GestureDetector(
-              onTap: () => _showToast(
+            btn.Button(
+              onPressed: () => _showToast(
                 context,
                 '\u0642\u0631\u064a\u0628\u0627\u064b \u2014 \u0639\u0631\u0636 \u0627\u0644\u0643\u0644',
               ),
-              child: Text(
-                '\u0639\u0631\u0636 \u0627\u0644\u0643\u0644',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.primary,
-                ),
-              ),
+              label: '\u0639\u0631\u0636 \u0627\u0644\u0643\u0644',
+              variant: btn.Variant.text,
+              size: btn.ButtonSize.small,
             ),
           ],
         ),

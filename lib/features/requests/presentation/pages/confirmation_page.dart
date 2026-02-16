@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full-screen success page shown after submitting a request.
 class RequestConfirmationPage extends StatelessWidget {
@@ -94,41 +95,20 @@ class RequestConfirmationPage extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xxl),
 
                 // Buttons
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    onPressed: onViewRequest,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.md,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                      ),
-                    ),
-                    child: const Text('عرض الطلب'),
-                  ),
+                btn.Button(
+                  onPressed: onViewRequest,
+                  label: 'عرض الطلب',
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
                 const SizedBox(height: AppSpacing.md),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: onBackToPage,
-                    icon: const Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: Icon(Icons.arrow_back, size: 16),
-                    ),
-                    label: const Text('العودة للصفحة'),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.md,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                      ),
-                    ),
-                  ),
+                btn.Button(
+                  onPressed: onBackToPage,
+                  label: 'العودة للصفحة',
+                  icon: const btn.ButtonIcon(Icons.arrow_back),
+                  variant: btn.Variant.outlined,
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
               ],
             ),

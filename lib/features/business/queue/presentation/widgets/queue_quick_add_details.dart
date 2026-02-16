@@ -382,26 +382,12 @@ class _DetailsStepState extends State<_DetailsStep> {
         const SizedBox(height: AppSpacing.md),
         _buildTotalSection(),
         const SizedBox(height: AppSpacing.md),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            onPressed: _canSubmit ? _submit : null,
-            icon: const Icon(Icons.add, size: 18),
-            label: const Text(
-              'إضافة للدور',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Theme.of(context).colorScheme.surface,
-              disabledBackgroundColor: Theme.of(context).colorScheme.outline,
-              disabledForegroundColor: Theme.of(context).colorScheme.surface,
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.cardInner,
-              ),
-            ),
-          ),
+        btn.Button(
+          onPressed: _canSubmit ? _submit : null,
+          label: 'إضافة للدور',
+          icon: const btn.ButtonIcon(Icons.add),
+          size: btn.ButtonSize.large,
+          expand: true,
         ),
         const SizedBox(height: AppSpacing.lg),
       ],

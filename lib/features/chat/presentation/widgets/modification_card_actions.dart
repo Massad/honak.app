@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class ModificationPendingFooter extends StatelessWidget {
   final bool isBusinessMode;
@@ -16,8 +17,6 @@ class ModificationPendingFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
     return Padding(
       padding: const EdgeInsetsDirectional.only(
         start: AppSpacing.md,
@@ -28,41 +27,22 @@ class ModificationPendingFooter extends StatelessWidget {
         textDirection: TextDirection.ltr,
         children: [
           Expanded(
-            child: OutlinedButton.icon(
+            child: Button(
               onPressed: isBusinessMode ? onReject : null,
-              icon: const Icon(Icons.close, size: 16),
-              label: const Text('رفض'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: cs.onSurfaceVariant,
-                disabledForegroundColor:
-                    cs.onSurfaceVariant.withValues(alpha: 0.38),
-                side: BorderSide(color: cs.outlineVariant),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                ),
-                padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: AppSpacing.sm,
-                ),
-              ),
+              label: 'رفض',
+              icon: ButtonIcon(Icons.close, size: 16),
+              variant: Variant.outlined,
+              size: ButtonSize.small,
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: FilledButton.icon(
+            child: Button(
               onPressed: isBusinessMode ? onApprove : null,
-              icon: const Icon(Icons.check, size: 16),
-              label: const Text('موافقة'),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.success,
-                disabledBackgroundColor:
-                    AppColors.success.withValues(alpha: 0.38),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                ),
-                padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: AppSpacing.sm,
-                ),
-              ),
+              label: 'موافقة',
+              icon: ButtonIcon(Icons.check, size: 16),
+              style: Style.success,
+              size: ButtonSize.small,
             ),
           ),
         ],

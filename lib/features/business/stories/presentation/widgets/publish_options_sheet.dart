@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 /// Re-publish / publish-options bottom sheet matching Figma.
@@ -228,34 +229,18 @@ class _PublishOptionsSheetState extends State<PublishOptionsSheet> {
                 const SizedBox(height: 20),
 
                 // Confirm button
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: FilledButton.icon(
-                    onPressed: _canConfirm ? _handleConfirm : null,
-                    icon: Icon(
-                      _isScheduled ? Icons.schedule : Icons.send,
-                      size: 16,
-                    ),
-                    label: Text(
-                      _isScheduled
-                          ? context.l10n.storyRepublishSchedule
-                          : context.l10n.storyRepublishNow,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                    style: FilledButton.styleFrom(
-                      backgroundColor: _isScheduled
-                          ? const Color(0xFF1A73E8)
-                          : const Color(0xFF43A047),
-                      disabledBackgroundColor: (_isScheduled
-                              ? const Color(0xFF1A73E8)
-                              : const Color(0xFF43A047))
-                          .withValues(alpha: 0.4),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
+                Button(
+                  onPressed: _canConfirm ? _handleConfirm : null,
+                  label: _isScheduled
+                      ? context.l10n.storyRepublishSchedule
+                      : context.l10n.storyRepublishNow,
+                  icon: ButtonIcon(
+                    _isScheduled ? Icons.schedule : Icons.send,
+                    size: 16,
                   ),
+                  style: _isScheduled ? Style.primary : Style.success,
+                  size: ButtonSize.large,
+                  expand: true,
                 ),
               ],
             ),

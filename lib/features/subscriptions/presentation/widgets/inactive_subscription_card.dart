@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/renewal_request_sheet.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class InactiveSubscriptionCard extends StatelessWidget {
   final Subscription subscription;
@@ -59,20 +60,12 @@ class InactiveSubscriptionCard extends StatelessWidget {
             const SizedBox(width: AppSpacing.sm),
             _StatusChip(status: subscription.status),
             const SizedBox(width: AppSpacing.sm),
-            SizedBox(
-              height: 30,
-              child: OutlinedButton(
-                onPressed: () =>
-                    showRenewalRequestSheet(context, subscription),
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  textStyle: const TextStyle(fontSize: 11),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppRadius.button,
-                  ),
-                ),
-                child: const Text('تجديد'),
-              ),
+            btn.Button(
+              onPressed: () =>
+                  showRenewalRequestSheet(context, subscription),
+              label: 'تجديد',
+              variant: btn.Variant.outlined,
+              size: btn.ButtonSize.small,
             ),
           ],
         ),

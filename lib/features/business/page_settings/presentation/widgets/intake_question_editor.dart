@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/intake_question.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Expanded editor for a single intake question.
 /// Shows question text, field type selector, options, required toggle, delete.
@@ -241,19 +242,13 @@ class _IntakeQuestionEditorState extends State<IntakeQuestionEditor> {
         // Delete button
         Align(
           alignment: AlignmentDirectional.centerStart,
-          child: TextButton.icon(
+          child: Button(
             onPressed: widget.onRemove,
-            icon: const Icon(Icons.delete_outline, size: 16),
-            label: const Text(
-              'حذف السؤال',
-              style: TextStyle(fontSize: 12),
-            ),
-            style: TextButton.styleFrom(
-              foregroundColor: AppColors.error,
-              padding: EdgeInsets.zero,
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
+            label: 'حذف السؤال',
+            icon: ButtonIcon(Icons.delete_outline),
+            variant: Variant.text,
+            style: Style.danger,
+            size: ButtonSize.small,
           ),
         ),
       ],

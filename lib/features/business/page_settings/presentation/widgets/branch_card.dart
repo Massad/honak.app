@@ -9,6 +9,7 @@ import 'package:honak/features/business/page_settings/presentation/providers/bra
 import 'package:honak/features/business/page_settings/presentation/providers/venue_search_provider.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class BranchCard extends ConsumerStatefulWidget {
   final Branch branch;
@@ -121,17 +122,26 @@ class _BranchCardState extends ConsumerState<BranchCard> {
           textAlign: TextAlign.end,
         ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('إلغاء'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(ctx);
-              ref.read(branchProvider.notifier).removeBranch(widget.branch.id);
-              context.showSnackBar('تم حذف الفرع');
-            },
-            child: Text('حذف', style: TextStyle(color: AppColors.error)),
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              Button(
+                onPressed: () => Navigator.pop(ctx),
+                label: 'إلغاء',
+                variant: Variant.text,
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Button(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  ref.read(branchProvider.notifier).removeBranch(widget.branch.id);
+                  context.showSnackBar('تم حذف الفرع');
+                },
+                label: 'حذف',
+                variant: Variant.text,
+                style: Style.danger,
+              ),
+            ],
           ),
         ],
       ),
@@ -314,26 +324,13 @@ class _BranchCardState extends ConsumerState<BranchCard> {
                   const SizedBox(height: AppSpacing.md),
 
                   // Delete button
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton.icon(
-                      onPressed: _deleteBranch,
-                      icon: Icon(Icons.delete_outline,
-                          size: 16, color: AppColors.error),
-                      label: Text(
-                        'حذف الفرع',
-                        style: TextStyle(color: AppColors.error),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(
-                            color: AppColors.error.withValues(alpha: 0.3)),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: AppSpacing.sm),
-                      ),
-                    ),
+                  Button(
+                    onPressed: _deleteBranch,
+                    label: 'حذف الفرع',
+                    icon: ButtonIcon(Icons.delete_outline),
+                    variant: Variant.outlined,
+                    style: Style.danger,
+                    expand: true,
                   ),
                 ],
               ),

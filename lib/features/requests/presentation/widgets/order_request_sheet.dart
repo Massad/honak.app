@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/cart.dart';
 import 'package:honak/features/requests/presentation/widgets/order_sheet_sections.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Bottom sheet for catalog_order + menu_order archetypes.
 ///
@@ -248,19 +248,12 @@ class _OrderBodyState extends State<_OrderBody> {
         ),
         child: SizedBox(
           width: double.infinity,
-          child: FilledButton.icon(
+          child: btn.Button(
             onPressed: _submit,
-            icon: const Icon(Icons.send, size: 18),
-            label: Text(
-              'إرسال طلب الشراء — ${widget.cart.subtotal.toFormattedArabic()}',
-            ),
-            style: FilledButton.styleFrom(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppSpacing.lg),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.lg),
-              ),
-            ),
+            label: 'إرسال طلب الشراء — ${widget.cart.subtotal.toFormattedArabic()}',
+            icon: const btn.ButtonIcon(Icons.send),
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
         ),
       ),

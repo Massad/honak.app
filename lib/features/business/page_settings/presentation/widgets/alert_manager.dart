@@ -7,6 +7,7 @@ import 'package:honak/features/business/page_settings/presentation/providers/ale
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/confirm_dialog.dart';
 
 class AlertManager extends ConsumerWidget {
@@ -213,39 +214,29 @@ class _AlertBody extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final title = titleCtrl.text.trim();
-                      final body = bodyCtrl.text.trim();
-                      if (title.isEmpty || body.isEmpty) return;
-                      final now = DateTime.now()
-                              .millisecondsSinceEpoch ~/
-                          1000;
-                      ref
-                          .read(alertProvider.notifier)
-                          .addAlert(BusinessAlert(
-                            id: 'alrt_${DateTime.now().millisecondsSinceEpoch}',
-                            title: title,
-                            body: body,
-                            severity: severity,
-                            active: true,
-                            createdAt: now,
-                          ));
-                      Navigator.pop(ctx);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Theme.of(context).colorScheme.surface,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                    ),
-                    child: const Text('حفظ التنبيه',
-                        style: TextStyle(fontSize: 14)),
-                  ),
+                Button(
+                  onPressed: () {
+                    final title = titleCtrl.text.trim();
+                    final body = bodyCtrl.text.trim();
+                    if (title.isEmpty || body.isEmpty) return;
+                    final now = DateTime.now()
+                            .millisecondsSinceEpoch ~/
+                        1000;
+                    ref
+                        .read(alertProvider.notifier)
+                        .addAlert(BusinessAlert(
+                          id: 'alrt_${DateTime.now().millisecondsSinceEpoch}',
+                          title: title,
+                          body: body,
+                          severity: severity,
+                          active: true,
+                          createdAt: now,
+                        ));
+                    Navigator.pop(ctx);
+                  },
+                  label: 'حفظ التنبيه',
+                  expand: true,
+                  size: ButtonSize.large,
                 ),
               ]),
         ),
@@ -379,17 +370,13 @@ class _AlertCard extends ConsumerWidget {
           const SizedBox(height: AppSpacing.sm),
           Align(
             alignment: AlignmentDirectional.centerStart,
-            child: TextButton.icon(
+            child: Button(
               onPressed: () => _confirmEndAlert(context, ref),
-              icon: const Icon(Icons.stop_circle_outlined, size: 16),
-              label: const Text('إنهاء التنبيه',
-                  style: TextStyle(fontSize: 12)),
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.error,
-                padding: EdgeInsets.zero,
-                minimumSize: Size.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
+              label: 'إنهاء التنبيه',
+              icon: ButtonIcon(Icons.stop_circle_outlined),
+              variant: Variant.text,
+              style: Style.danger,
+              size: ButtonSize.small,
             ),
           ),
         ],

@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/queue/domain/entities/available_add_on.dart';
 import 'package:honak/features/business/queue/domain/entities/service_package.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Shows the "queue or schedule" bottom sheet.
 ///
@@ -450,23 +451,18 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
         Row(
           children: [
             Expanded(
-              child: OutlinedButton(
+              child: btn.Button(
                 onPressed: () => setState(() => _step = 'choice'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: context.colorScheme.onSurfaceVariant,
-                  side: BorderSide(color: context.colorScheme.outlineVariant),
-                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppRadius.button,
-                  ),
-                ),
-                child: const Text('رجوع'),
+                label: 'رجوع',
+                variant: btn.Variant.outlined,
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(
               flex: 2,
-              child: FilledButton.icon(
+              child: btn.Button(
                 onPressed: () {
                   Navigator.pop(context);
                   widget.onJoinQueue(
@@ -476,15 +472,10 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                         : _selectedAddOnIds.toList(),
                   );
                 },
-                icon: const Icon(Icons.navigation, size: 16),
-                label: const Text('احجز مكانك بالدور'),
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppRadius.button,
-                  ),
-                ),
+                label: 'احجز مكانك بالدور',
+                icon: const btn.ButtonIcon(Icons.navigation),
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ),
           ],

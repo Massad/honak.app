@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/customer_request.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Bottom sheet for rescheduling a booking or reservation.
 class RescheduleSheet extends StatefulWidget {
@@ -157,19 +158,12 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
               top: false,
               child: SizedBox(
                 width: double.infinity,
-                child: FilledButton.icon(
+                child: btn.Button(
                   onPressed: _isValid ? _handleSubmit : null,
-                  icon: const Icon(Icons.send, size: 16),
-                  label: const Text('\u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628 \u0627\u0644\u062a\u0639\u062f\u064a\u0644'),
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    disabledBackgroundColor: context.colorScheme.outlineVariant,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppRadius.lg),
-                    ),
-                  ),
+                  label: '\u0625\u0631\u0633\u0627\u0644 \u0637\u0644\u0628 \u0627\u0644\u062a\u0639\u062f\u064a\u0644',
+                  icon: const btn.ButtonIcon(Icons.send),
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
               ),
             ),

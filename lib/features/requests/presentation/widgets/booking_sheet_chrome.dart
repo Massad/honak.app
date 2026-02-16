@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Drag handle bar at the top of the booking bottom sheet.
 class BookingSheetDragHandle extends StatelessWidget {
@@ -160,17 +161,12 @@ class BookingSubmitButton extends StatelessWidget {
         ),
         child: SizedBox(
           width: double.infinity,
-          child: FilledButton.icon(
+          child: btn.Button(
             onPressed: questionsValid ? onSubmit : null,
-            icon: const Icon(Icons.calendar_today, size: 18),
-            label: Text('إرسال طلب الحجز$servicePriceStr'),
-            style: FilledButton.styleFrom(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppSpacing.lg),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.lg),
-              ),
-            ),
+            label: 'إرسال طلب الحجز$servicePriceStr',
+            icon: const btn.ButtonIcon(Icons.calendar_today),
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
         ),
       ),

@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/customer_request.dart';
 import 'package:honak/features/requests/presentation/providers/provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Provider for completed orders suitable for reorder.
 /// Filters for order-type requests with completed/delivered status, limited to 5.
@@ -197,31 +197,17 @@ class _ReorderCard extends StatelessWidget {
             ),
             const Spacer(),
             // Reorder button
-            SizedBox(
-              width: double.infinity,
-              height: 32,
-              child: FilledButton.icon(
-                onPressed: () {
-                  if (request.businessSlug != null) {
-                    context.push(
-                        Routes.pagePath(request.businessSlug!));
-                  }
-                },
-                icon: const Icon(Icons.replay, size: 14),
-                label: Text(
-                  context.l10n.reorderButton,
-                  style: const TextStyle(fontSize: 12),
-                ),
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.sm),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
+            btn.Button(
+              onPressed: () {
+                if (request.businessSlug != null) {
+                  context.push(
+                      Routes.pagePath(request.businessSlug!));
+                }
+              },
+              label: context.l10n.reorderButton,
+              icon: const btn.ButtonIcon(Icons.replay),
+              size: btn.ButtonSize.small,
+              expand: true,
             ),
           ],
         ),

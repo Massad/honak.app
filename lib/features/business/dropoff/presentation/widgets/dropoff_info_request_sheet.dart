@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_info_template.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Shows a bottom sheet for requesting info/photos from a customer.
 ///
@@ -105,34 +106,16 @@ class _InfoRequestSheetState extends State<_InfoRequestSheet> {
               const SizedBox(height: AppSpacing.lg),
 
               // Send button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: _selectedIds.isNotEmpty
-                      ? () => Navigator.pop(context, _selectedIds.toList())
-                      : null,
-                  icon: const Icon(Icons.send_rounded, size: 16),
-                  label: Text(
-                    _selectedIds.isEmpty
-                        ? 'إرسال'
-                        : 'إرسال (${_selectedIds.length})',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    disabledBackgroundColor: Theme.of(context).colorScheme.outline,
-                    disabledForegroundColor: Theme.of(context).colorScheme.surface,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.cardInner,
-                    ),
-                  ),
-                ),
+              Button(
+                onPressed: _selectedIds.isNotEmpty
+                    ? () => Navigator.pop(context, _selectedIds.toList())
+                    : null,
+                label: _selectedIds.isEmpty
+                    ? 'إرسال'
+                    : 'إرسال (${_selectedIds.length})',
+                icon: const ButtonIcon(Icons.send_rounded),
+                size: ButtonSize.large,
+                expand: true,
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

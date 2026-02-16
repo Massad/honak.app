@@ -7,6 +7,7 @@ import 'package:honak/features/business/stories/presentation/providers/my_storie
 import 'package:honak/features/business/stories/presentation/providers/story_creator_provider.dart';
 import 'package:honak/features/stories/domain/entities/story_slide.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:uuid/uuid.dart';
 
@@ -171,31 +172,20 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
           const SizedBox(height: 16),
 
           // Publish button
-          SizedBox(
-            height: 48,
-            child: FilledButton.icon(
-              onPressed: () {
-                _publishStory(ref);
-                context.showSnackBar(context.l10n.storyPublished);
-                Navigator.of(context).pop(true);
-              },
-              icon: Icon(
-                isScheduled ? Icons.schedule : Icons.send,
-                size: 16,
-              ),
-              label: Text(
-                isScheduled ? 'جدولة القصة' : 'نشر الآن',
-                style: const TextStyle(fontSize: 14),
-              ),
-              style: FilledButton.styleFrom(
-                backgroundColor: isScheduled
-                    ? const Color(0xFF1A73E8)
-                    : const Color(0xFF43A047),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
+          Button(
+            onPressed: () {
+              _publishStory(ref);
+              context.showSnackBar(context.l10n.storyPublished);
+              Navigator.of(context).pop(true);
+            },
+            label: isScheduled ? 'جدولة القصة' : 'نشر الآن',
+            icon: ButtonIcon(
+              isScheduled ? Icons.schedule : Icons.send,
+              size: 16,
             ),
+            style: isScheduled ? Style.primary : Style.success,
+            size: ButtonSize.large,
+            expand: true,
           ),
           const SizedBox(height: 16),
         ],

@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Opens the renewal request bottom sheet for a subscription.
 void showRenewalRequestSheet(BuildContext context, Subscription subscription) {
@@ -167,25 +168,12 @@ class _RenewalRequestSheetState extends State<_RenewalRequestSheet> {
               const SizedBox(height: AppSpacing.xl),
 
               // Submit button
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: _handleSubmit,
-                  icon: const Icon(Icons.send, size: 18),
-                  label: const Text(
-                    'إرسال طلب التجديد',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.md,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
+              btn.Button(
+                onPressed: _handleSubmit,
+                label: 'إرسال طلب التجديد',
+                icon: const btn.ButtonIcon(Icons.send),
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ],
           ],

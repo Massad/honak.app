@@ -6,6 +6,7 @@ import 'package:honak/features/business/stories/domain/entities/my_story.dart';
 import 'package:honak/features/business/stories/presentation/providers/story_creator_provider.dart';
 import 'package:honak/features/business/stories/presentation/widgets/publish_options.dart';
 import 'package:honak/features/business/stories/presentation/widgets/text_layer_editor.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/confirm_dialog.dart';
 
 /// Dark immersive story creator — single-view with unified toolbar.
@@ -111,36 +112,21 @@ class _StoryCreatorPageState extends ConsumerState<StoryCreatorPage> {
           actions: [
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 8),
-              child: FilledButton.icon(
+              child: Button(
                 onPressed: hasContent
                     ? () => _onPublish(context, ref)
                     : () => context.showSnackBar(
                           context.l10n.storyAddContentFirst,
                         ),
-                icon: Icon(
+                label: _isEditMode
+                    ? context.l10n.storyEdit
+                    : context.l10n.storyPublish,
+                icon: ButtonIcon(
                   _isEditMode ? Icons.check : Icons.send,
                   size: 14,
                 ),
-                label: Text(
-                  _isEditMode
-                      ? context.l10n.storyEdit
-                      : context.l10n.storyPublish,
-                ),
-                style: FilledButton.styleFrom(
-                  backgroundColor: hasContent
-                      ? const Color(0xFF43A047)
-                      : const Color(0xFF43A047).withValues(alpha: 0.4),
-                  foregroundColor: Theme.of(context).colorScheme.surface,
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  minimumSize: const Size(0, 32),
-                  textStyle: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
+                style: Style.success,
+                size: ButtonSize.small,
               ),
             ),
           ],

@@ -8,6 +8,7 @@ import 'package:honak/features/requests/domain/entities/entities.dart';
 import 'package:honak/features/requests/presentation/providers/provider.dart';
 import 'package:honak/features/requests/presentation/widgets/request_list_card.dart';
 import 'package:honak/features/requests/presentation/widgets/request_list_skeleton.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Customer "My Requests" page — "\u0637\u0644\u0628\u0627\u062a\u064a".
 ///
@@ -270,10 +271,11 @@ class _ErrorState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
-            TextButton.icon(
+            btn.Button(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh),
-              label: const Text('\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629'),
+              label: '\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629',
+              icon: const btn.ButtonIcon(Icons.refresh),
+              variant: btn.Variant.text,
             ),
           ],
         ),

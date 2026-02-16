@@ -8,6 +8,7 @@ import 'package:honak/features/business/page_settings/presentation/providers/pac
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/confirm_dialog.dart';
 
 class PackagesManager extends ConsumerStatefulWidget {
@@ -472,33 +473,21 @@ class _PackageEditorSheetState extends State<_PackageEditorSheet> {
               const SizedBox(height: AppSpacing.xl),
 
               // Save button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _save,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: Text(
-                    widget.existing != null ? 'حفظ التعديلات' : 'إنشاء الباقة',
-                  ),
-                ),
+              Button(
+                onPressed: _save,
+                label: widget.existing != null ? 'حفظ التعديلات' : 'إنشاء الباقة',
+                expand: true,
+                size: ButtonSize.large,
               ),
 
               // Delete button (existing only)
               if (widget.existing != null) ...[
                 const SizedBox(height: AppSpacing.sm),
-                TextButton(
+                Button(
                   onPressed: _confirmDelete,
-                  child: const Text(
-                    'حذف الباقة',
-                    style: TextStyle(color: Colors.red),
-                  ),
+                  label: 'حذف الباقة',
+                  variant: Variant.text,
+                  style: Style.danger,
                 ),
               ],
             ],

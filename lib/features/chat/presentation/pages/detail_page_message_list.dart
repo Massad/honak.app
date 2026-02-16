@@ -31,18 +31,11 @@ class _ReportSelectionFooter extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           height: 48,
-          child: FilledButton(
+          child: Button(
             onPressed: enabled ? onContinue : null,
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              disabledBackgroundColor:
-                  context.colorScheme.surfaceContainerHighest,
-              disabledForegroundColor: context.colorScheme.outlineVariant,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: Text('متابعة ($selectedCount)'),
+            label: 'متابعة ($selectedCount)',
+            size: ButtonSize.large,
+            expand: true,
           ),
         ),
       ),

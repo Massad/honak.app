@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/features/business/post_create/presentation/providers/provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 
@@ -411,37 +411,12 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
   }
 
   Widget _buildPublishButton() {
-    return SizedBox(
-      height: 52,
-      child: ElevatedButton(
-        onPressed: _canPublish ? _handlePublish : null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: Theme.of(context).colorScheme.surface,
-          disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-          disabledForegroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
-          elevation: 0,
-        ),
-        child: _isPublishing
-            ? SizedBox(
-                width: 22,
-                height: 22,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-              )
-            : const Text(
-                'نشر',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-      ),
+    return Button(
+      onPressed: _canPublish ? _handlePublish : null,
+      label: 'نشر',
+      size: ButtonSize.large,
+      expand: true,
+      isLoading: _isPublishing,
     );
   }
 }

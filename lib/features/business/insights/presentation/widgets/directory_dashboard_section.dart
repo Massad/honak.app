@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Dashboard section for directory archetype (malls, plazas).
 /// Shows stats grid, recently linked tenants, and quick actions.
@@ -177,14 +178,11 @@ class _RecentlyLinkedSection extends StatelessWidget {
               ),
             ),
             if (items.length > 3)
-              TextButton(
+              Button(
                 onPressed: () {},
-                child: Text(
-                  'عرض الكل',
-                  style: context.textTheme.labelMedium?.copyWith(
-                    color: AppColors.primary,
-                  ),
-                ),
+                label: 'عرض الكل',
+                variant: Variant.text,
+                size: ButtonSize.small,
               ),
           ],
         ),

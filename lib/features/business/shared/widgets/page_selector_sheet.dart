@@ -9,6 +9,7 @@ import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class PageSelectorSheet extends ConsumerWidget {
   const PageSelectorSheet({super.key});
@@ -80,44 +81,16 @@ class PageSelectorSheet extends ConsumerWidget {
             // Back to customer mode
             Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
-              child: Material(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(14),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(14),
-                  onTap: () {
-                    Navigator.pop(context);
-                    ref.read(appModeProvider.notifier).switchToCustomerMode();
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.lg,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'العودة لوضع العميل',
-                          style: context.textTheme.titleSmall?.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.sm),
-                        Icon(
-                          Icons.store_outlined,
-                          size: 20,
-                          color: AppColors.primary,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              child: btn.Button(
+                onPressed: () {
+                  Navigator.pop(context);
+                  ref.read(appModeProvider.notifier).switchToCustomerMode();
+                },
+                label: 'العودة لوضع العميل',
+                icon: btn.ButtonIcon(Icons.store_outlined),
+                variant: btn.Variant.outlined,
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ),
           ],

@@ -5,6 +5,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/data/settings_repository.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 final _pageInfoProvider = FutureProvider<Map<String, dynamic>>((ref) async {
   return SettingsRepository().getPageInfo();
@@ -87,18 +88,13 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
           ),
           child: Row(
             children: [
-              TextButton(
+              Button(
                 onPressed: () {
                   context.showSnackBar('تم الحفظ');
                   widget.onClose();
                 },
-                child: Text(
-                  'حفظ',
-                  style: TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                label: 'حفظ',
+                variant: Variant.text,
               ),
               const Spacer(),
               Text(
@@ -275,18 +271,12 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
-        TextButton.icon(
+        Button(
           onPressed: () => _showAddCustomPaymentDialog(context),
-          icon: const Icon(Icons.add, size: 16),
-          label: const Text(
-            'إضافة طريقة دفع',
-            style: TextStyle(fontSize: 12),
-          ),
-          style: TextButton.styleFrom(
-            foregroundColor: AppColors.primary,
-            padding: EdgeInsetsDirectional.zero,
-            visualDensity: VisualDensity.compact,
-          ),
+          label: 'إضافة طريقة دفع',
+          icon: ButtonIcon(Icons.add),
+          variant: Variant.text,
+          size: ButtonSize.small,
         ),
       ],
     );
@@ -384,14 +374,13 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
           Row(
             textDirection: TextDirection.ltr,
             children: [
-              TextButton(
+              Button(
                 onPressed: () => Navigator.of(ctx).pop(),
-                child: Text(
-                  'إلغاء',
-                  style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
-                ),
+                label: 'إلغاء',
+                variant: Variant.text,
               ),
-              TextButton(
+              const SizedBox(width: AppSpacing.sm),
+              Button(
                 onPressed: () {
                   final name = controller.text.trim();
                   if (name.isNotEmpty) {
@@ -399,10 +388,8 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
                   }
                   Navigator.of(ctx).pop();
                 },
-                child: const Text(
-                  'إضافة',
-                  style: TextStyle(color: AppColors.primary),
-                ),
+                label: 'إضافة',
+                variant: Variant.text,
               ),
             ],
           ),

@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/domain/entities/price_change.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/price_change/wizard_steps.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_item.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full-screen 5-step wizard for creating / editing a price change.
 class PriceChangeWizardPage extends StatefulWidget {
@@ -351,17 +352,15 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
       child: Row(
         textDirection: TextDirection.ltr,
         children: [
-          TextButton(
+          btn.Button(
             onPressed: _onBack,
-            child: Text(
-              _step == 0 ? 'إلغاء' : 'السابق',
-              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
-            ),
+            label: _step == 0 ? 'إلغاء' : 'السابق',
+            variant: btn.Variant.text,
           ),
           const Spacer(),
-          FilledButton(
+          btn.Button(
             onPressed: _canAdvance ? _onNext : null,
-            child: Text(isFinal ? 'تأكيد وتطبيق' : 'التالي'),
+            label: isFinal ? 'تأكيد وتطبيق' : 'التالي',
           ),
         ],
       ),

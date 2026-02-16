@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Shows a bottom sheet to add a new team member with phone, role suggestions,
 /// and permission toggles.
@@ -336,28 +337,11 @@ class _AddMemberContentState extends State<_AddMemberContent> {
               // Submit button
               Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _canAdd ? _submit : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Theme.of(context).colorScheme.surface,
-                      disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: AppSpacing.md),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text(
-                      'إضافة العضو',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
+                child: Button(
+                  onPressed: _canAdd ? _submit : null,
+                  label: 'إضافة العضو',
+                  expand: true,
+                  size: ButtonSize.large,
                 ),
         ),
       ],

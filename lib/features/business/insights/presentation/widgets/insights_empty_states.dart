@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Unclaimed page lockout state.
 class UnclaimedInsightsState extends StatelessWidget {
@@ -66,21 +67,12 @@ class VisibilityOnlyBanner extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
-          SizedBox(
-            height: 36,
-            child: ElevatedButton(
-              onPressed: () {
-                // TODO: Navigate to engagement settings
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1A73E8),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text('تفعيل الطلبات', style: TextStyle(fontSize: 12)),
-            ),
+          Button(
+            onPressed: () {
+              // TODO: Navigate to engagement settings
+            },
+            label: 'تفعيل الطلبات',
+            size: ButtonSize.small,
           ),
         ],
       ),

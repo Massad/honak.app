@@ -3,6 +3,7 @@ import 'package:honak/config/archetype.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Config-driven mapping: which Power Chat actions each archetype supports.
 const _archetypeActions = <Archetype, List<String>>{
@@ -165,10 +166,11 @@ class PowerChatMenu extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(
+                  Button(
                     onPressed: onClose,
-                    icon: const Icon(Icons.close, size: 20),
-                    color: cs.onSurfaceVariant,
+                    icon: ButtonIcon(Icons.close, size: 20, color: cs.onSurfaceVariant),
+                    variant: Variant.text,
+                    size: ButtonSize.small,
                   ),
                 ],
               ),

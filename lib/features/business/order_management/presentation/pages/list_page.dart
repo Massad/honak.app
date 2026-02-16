@@ -8,6 +8,7 @@ import 'package:honak/features/business/order_management/presentation/providers/
 import 'package:honak/features/business/order_management/presentation/providers/truck_provider.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/request_card.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/truck_detail_overlay.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/truck_status_cards.dart';
 import 'package:honak/features/business/dropoff/presentation/providers/dropoff_providers.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
@@ -615,10 +616,11 @@ class _ErrorState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
-            TextButton.icon(
+            Button(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh),
-              label: const Text('إعادة المحاولة'),
+              label: 'إعادة المحاولة',
+              icon: const ButtonIcon(Icons.refresh),
+              variant: Variant.text,
             ),
           ],
         ),

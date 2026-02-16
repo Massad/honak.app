@@ -9,6 +9,7 @@ import 'package:honak/features/chat/domain/entities/conversation.dart';
 import 'package:honak/features/chat/presentation/providers/chat_provider.dart';
 import 'package:honak/features/chat/presentation/widgets/chat_list_skeleton.dart';
 import 'package:honak/features/chat/presentation/widgets/conversation_card.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 
 // Business-specific chat list matching Figma design:
@@ -127,10 +128,11 @@ class _BusinessChatListPageState extends ConsumerState<BusinessChatListPage> {
                         ?.copyWith(color: context.colorScheme.onSurfaceVariant),
                   ),
                   const SizedBox(height: AppSpacing.lg),
-                  TextButton(
+                  Button(
                     onPressed: () =>
                         ref.invalidate(conversationsProvider),
-                    child: const Text('إعادة المحاولة'),
+                    label: 'إعادة المحاولة',
+                    variant: Variant.text,
                   ),
                 ],
               ),
@@ -179,16 +181,18 @@ class _BusinessChatListPageState extends ConsumerState<BusinessChatListPage> {
             ),
           ],
           const Spacer(),
-          IconButton(
+          Button(
             onPressed: () => setState(() {
               _showSearch = !_showSearch;
               if (!_showSearch) _searchQuery = '';
             }),
-            icon: Icon(
+            icon: ButtonIcon(
               _showSearch ? Icons.close : Icons.search,
               size: 20,
               color: context.colorScheme.onSurfaceVariant,
             ),
+            variant: Variant.text,
+            size: ButtonSize.small,
           ),
         ],
       ),

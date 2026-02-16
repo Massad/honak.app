@@ -11,6 +11,7 @@ import 'package:honak/features/requests/presentation/widgets/reschedule_sheet.da
 import 'package:honak/features/requests/presentation/widgets/status_timeline.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full request detail page (customer view).
 class CustomerRequestDetailPage extends StatefulWidget {
@@ -225,23 +226,13 @@ class _CustomerRequestDetailPageState
 
     if (status == 'completed') {
       return DetailActionBar(children: [
-        SizedBox(
-          width: double.infinity,
-          child: FilledButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.replay, size: 16),
-            label: Text(
-              _reorderLabels[_request.type] ?? 'إعادة الطلب',
-            ),
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.success,
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.button,
-              ),
-            ),
-          ),
+        btn.Button(
+          onPressed: () {},
+          label: _reorderLabels[_request.type] ?? 'إعادة الطلب',
+          icon: const btn.ButtonIcon(Icons.replay),
+          style: btn.Style.success,
+          size: btn.ButtonSize.large,
+          expand: true,
         ),
       ]);
     }

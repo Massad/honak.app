@@ -10,6 +10,7 @@ import 'package:honak/features/business/order_management/presentation/pages/driv
 import 'package:honak/features/business/order_management/presentation/providers/truck_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 // ═══════════════════════════════════════════════════════════════
 // Show function
@@ -336,28 +337,21 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            // Override button — orange #FF9800
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: FilledButton.icon(
-                onPressed: () {
-                  setState(() {
-                    _offDayOverride = (
-                      by: 'مستخدم النظام',
-                      at: DateTime.now().toIso8601String(),
-                    );
-                  });
-                },
-                icon: const Icon(Icons.local_shipping, size: 16),
-                label: const Text('بدء المسار رغم العطلة'),
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF9800),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.md),
-                  ),
-                ),
-              ),
+            // Override button
+            Button(
+              onPressed: () {
+                setState(() {
+                  _offDayOverride = (
+                    by: 'مستخدم النظام',
+                    at: DateTime.now().toIso8601String(),
+                  );
+                });
+              },
+              label: 'بدء المسار رغم العطلة',
+              icon: const ButtonIcon(Icons.local_shipping),
+              style: Style.warning,
+              size: ButtonSize.large,
+              expand: true,
             ),
           ],
         ),
@@ -367,18 +361,18 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
     // Normal route action (may include override reminder if overriding)
     final status = truck.today.status;
     final String label;
-    final Color bgColor;
+    final Style buttonStyle;
 
     switch (status) {
       case TruckStatus.notStarted:
         label = 'ابدأ المسار';
-        bgColor = AppColors.success;
+        buttonStyle = Style.success;
       case TruckStatus.onRoute:
         label = 'تابع المسار';
-        bgColor = AppColors.primary;
+        buttonStyle = Style.primary;
       case TruckStatus.routeComplete:
         label = 'عرض الملخص';
-        bgColor = const Color(0xFF9E9E9E);
+        buttonStyle = Style.info;
     }
 
     return Container(
@@ -420,20 +414,13 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
             ),
             const SizedBox(height: AppSpacing.sm),
           ],
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: FilledButton.icon(
-              onPressed: () => _navigateToDrivingMode(truck),
-              icon: const Icon(Icons.location_on, size: 16),
-              label: Text(label),
-              style: FilledButton.styleFrom(
-                backgroundColor: bgColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                ),
-              ),
-            ),
+          Button(
+            onPressed: () => _navigateToDrivingMode(truck),
+            label: label,
+            icon: const ButtonIcon(Icons.location_on),
+            style: buttonStyle,
+            size: ButtonSize.large,
+            expand: true,
           ),
         ],
       ),

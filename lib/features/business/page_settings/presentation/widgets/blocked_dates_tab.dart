@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/business_hours.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/hours_provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Tab 2: Blocked dates — connected to provider.
 class BlockedDatesTab extends ConsumerStatefulWidget {
@@ -132,20 +133,11 @@ class _BlockedDatesTabState extends ConsumerState<BlockedDatesTab> {
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-          OutlinedButton.icon(
+          Button(
             onPressed: _addDate,
-            icon: const Icon(Icons.add, size: 16),
-            label: const Text('إضافة تاريخ محظور'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.primary,
-              side: BorderSide(
-                color:
-                    AppColors.primary.withValues(alpha: 0.3),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            label: 'إضافة تاريخ محظور',
+            variant: Variant.outlined,
+            icon: ButtonIcon(Icons.add),
           ),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant_status.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Overlay for picking featured tenants — checkbox list, max 8 selections.
 class FeaturedPickerOverlay extends StatefulWidget {
@@ -70,9 +71,11 @@ class _FeaturedPickerOverlayState extends State<FeaturedPickerOverlay> {
         centerTitle: true,
         elevation: 0,
         actions: [
-          TextButton(
+          btn.Button(
             onPressed: () => widget.onSave(_selected.toList()),
-            child: const Text('حفظ'),
+            label: 'حفظ',
+            variant: btn.Variant.text,
+            size: btn.ButtonSize.small,
           ),
         ],
       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 void showCancelSubscriptionSheet(
   BuildContext context,
@@ -69,38 +69,23 @@ class _CancelSubscriptionSheet extends StatelessWidget {
             _NoticeBanner(noticeDays: noticeDays),
           ],
           const SizedBox(height: AppSpacing.xxl),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: () {
-                Navigator.pop(context);
-                context.showSnackBar('تم إلغاء الاشتراك');
-              },
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.error,
-                padding:
-                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-              child: const Text('تأكيد الإلغاء'),
-            ),
+          btn.Button(
+            onPressed: () {
+              Navigator.pop(context);
+              context.showSnackBar('تم إلغاء الاشتراك');
+            },
+            label: 'تأكيد الإلغاء',
+            style: btn.Style.danger,
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
           const SizedBox(height: AppSpacing.sm),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton(
-              onPressed: () => Navigator.pop(context),
-              style: OutlinedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-              child: const Text('العودة'),
-            ),
+          btn.Button(
+            onPressed: () => Navigator.pop(context),
+            label: 'العودة',
+            variant: btn.Variant.outlined,
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
         ],
       ),

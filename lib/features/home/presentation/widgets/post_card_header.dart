@@ -6,6 +6,7 @@ import 'package:honak/features/home/domain/entities/post.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Compact single-row attribution: avatar + name + verified + type badge + time/promoted + optional follow.
 class CompactAttribution extends ConsumerWidget {
@@ -91,27 +92,17 @@ class CompactAttribution extends ConsumerWidget {
             ),
           ),
           if (showFollow && !isPromoted)
-            SizedBox(
-              height: 28,
-              child: TextButton(
-                onPressed: () => ref
-                    .read(followProvider(
-                            (pageId: pageId, isFollowing: isFollowing))
-                        .notifier)
-                    .toggle(),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-                  visualDensity: VisualDensity.compact,
-                ),
-                child: Text(
-                  following ? context.l10n.following : context.l10n.follow,
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: following
-                        ? context.colorScheme.onSurfaceVariant
-                        : context.colorScheme.primary,
-                  ),
-                ),
-              ),
+            btn.Button(
+              onPressed: () => ref
+                  .read(followProvider(
+                          (pageId: pageId, isFollowing: isFollowing))
+                      .notifier)
+                  .toggle(),
+              label: following ? context.l10n.following : context.l10n.follow,
+              variant: following
+                  ? btn.Variant.text
+                  : btn.Variant.tonal,
+              size: btn.ButtonSize.small,
             ),
         ],
       ),

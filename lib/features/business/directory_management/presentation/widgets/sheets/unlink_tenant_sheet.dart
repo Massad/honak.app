@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Confirmation sheet for unlinking a tenant — reason selection + confirm.
 class UnlinkTenantSheet extends StatefulWidget {
@@ -97,25 +98,14 @@ class _UnlinkTenantSheetState extends State<UnlinkTenantSheet> {
               const SizedBox(height: AppSpacing.lg),
 
               // Confirm button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _selectedReason != null
-                      ? () => widget.onConfirm(_selectedReason!)
-                      : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.error,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button,
-                    ),
-                  ),
-                  child: const Text(
-                    'إلغاء الربط',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ),
+              btn.Button(
+                onPressed: _selectedReason != null
+                    ? () => widget.onConfirm(_selectedReason!)
+                    : null,
+                label: 'إلغاء الربط',
+                style: btn.Style.danger,
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
 
               const SizedBox(height: AppSpacing.lg),

@@ -33,6 +33,7 @@ import 'package:honak/features/business/page_settings/presentation/widgets/team_
 import 'package:honak/features/business/page_settings/presentation/widgets/tenant_manager.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/venue_settings.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 enum _SubScreen {
   main,
@@ -592,28 +593,12 @@ class _VerificationCard extends StatelessWidget {
       child: Row(
         children: [
           if (!isVerified)
-            TextButton(
+            Button(
               onPressed: () =>
                   context.showSnackBar('قريباً: طلب التوثيق'),
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 12, vertical: 4),
-                minimumSize: Size.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                backgroundColor:
-                    AppColors.primary.withValues(alpha: 0.1),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: Text(
-                'توثيق الآن',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              label: 'توثيق الآن',
+              variant: Variant.tonal,
+              size: ButtonSize.small,
             ),
           if (isVerified)
             Container(

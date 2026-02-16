@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Shows a bottom sheet for bulk team assignment to multiple items.
 Future<void> showTeamAssignSheet(
@@ -196,30 +197,14 @@ class _TeamAssignContentState extends State<_TeamAssignContent> {
             // Apply button
             Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    widget.onApply(_selected.toList());
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'تطبيق',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+              child: btn.Button(
+                onPressed: () {
+                  widget.onApply(_selected.toList());
+                  Navigator.pop(context);
+                },
+                label: 'تطبيق',
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ),
       ],

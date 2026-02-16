@@ -7,6 +7,7 @@ import 'package:honak/features/business/queue/domain/entities/available_add_on.d
 import 'package:honak/features/business/queue/domain/entities/customer_queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/service_package.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Modification request sent from the customer.
 class QueueModificationRequest {
@@ -180,21 +181,11 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
-              child: SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: _canSubmit ? _handleSubmit : null,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.md,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button,
-                    ),
-                  ),
-                  child: const Text('إرسال طلب التعديل'),
-                ),
+              child: btn.Button(
+                onPressed: _canSubmit ? _handleSubmit : null,
+                label: 'إرسال طلب التعديل',
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ),
           ),
@@ -541,19 +532,11 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
             ),
           ),
           const SizedBox(height: AppSpacing.xxl),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: () => Navigator.pop(context),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-              child: const Text('تم'),
-            ),
+          btn.Button(
+            onPressed: () => Navigator.pop(context),
+            label: 'تم',
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
         ],
       ),

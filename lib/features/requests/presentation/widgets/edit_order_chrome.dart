@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Drag handle for the edit-order bottom sheet.
 class EditOrderDragHandle extends StatelessWidget {
@@ -177,31 +178,20 @@ class EditOrderActions extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: OutlinedButton(
+              child: btn.Button(
                 onPressed: onCancel,
-                style: OutlinedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button),
-                ),
-                child: const Text('إلغاء'),
+                label: 'إلغاء',
+                variant: btn.Variant.outlined,
+                size: btn.ButtonSize.large,
               ),
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(
-              child: FilledButton.icon(
+              child: btn.Button(
                 onPressed: canSave ? onSave : null,
-                icon: const Icon(Icons.send, size: 16),
-                label: const Text('إرسال طلب التعديل'),
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  disabledBackgroundColor: context.colorScheme.outlineVariant,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button),
-                ),
+                label: 'إرسال طلب التعديل',
+                icon: const btn.ButtonIcon(Icons.send),
+                size: btn.ButtonSize.large,
               ),
             ),
           ],

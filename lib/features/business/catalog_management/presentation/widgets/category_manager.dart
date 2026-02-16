@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 part 'category_manager_widgets.dart';
 
@@ -224,30 +225,26 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                 textDirection: TextDirection.ltr,
                 children: [
                   Expanded(
-                    child: OutlinedButton(
+                    child: btn.Button(
                       onPressed: () => Navigator.pop(ctx),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                        shape: RoundedRectangleBorder(borderRadius: AppRadius.cardInner),
-                        side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
-                      ),
-                      child: const Text('إلغاء'),
+                      label: 'إلغاء',
+                      variant: btn.Variant.outlined,
+                      size: btn.ButtonSize.large,
+                      expand: true,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(
-                    child: FilledButton.icon(
+                    child: btn.Button(
                       onPressed: () {
                         Navigator.pop(ctx);
                         _performDelete(cat);
                       },
-                      style: FilledButton.styleFrom(
-                        backgroundColor: AppColors.error,
-                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                        shape: RoundedRectangleBorder(borderRadius: AppRadius.cardInner),
-                      ),
-                      icon: const Icon(Icons.delete_outline, size: 16),
-                      label: const Text('حذف التصنيف'),
+                      label: 'حذف التصنيف',
+                      icon: const btn.ButtonIcon(Icons.delete_outline, size: 16),
+                      style: btn.Style.danger,
+                      size: btn.ButtonSize.large,
+                      expand: true,
                     ),
                   ),
                 ],

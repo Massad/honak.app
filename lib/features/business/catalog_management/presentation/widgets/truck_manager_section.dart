@@ -11,6 +11,7 @@ import 'package:honak/features/business/page_settings/domain/entities/team_membe
 import 'package:honak/features/business/page_settings/presentation/providers/team_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 // ═══════════════════════════════════════════════════════════════
 // TruckManagerSection — inline truck management for Manage tab.
@@ -785,28 +786,19 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                     ),
                   if (!widget.isNew) const SizedBox(width: AppSpacing.sm),
                   Expanded(
-                    child: SizedBox(
-                      height: 48,
-                      child: FilledButton.icon(
-                        onPressed: _name.trim().isEmpty
-                            ? null
-                            : () {
-                                Navigator.pop(context);
-                                _showToast(widget.isNew
-                                    ? 'تمت إضافة الشاحنة'
-                                    : 'تم حفظ التغييرات');
-                              },
-                        icon: const Icon(Icons.check, size: 14),
-                        label: const Text('حفظ'),
-                        style: FilledButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          disabledBackgroundColor:
-                              context.colorScheme.surfaceContainerLow,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppRadius.md),
-                          ),
-                        ),
-                      ),
+                    child: btn.Button(
+                      onPressed: _name.trim().isEmpty
+                          ? null
+                          : () {
+                              Navigator.pop(context);
+                              _showToast(widget.isNew
+                                  ? 'تمت إضافة الشاحنة'
+                                  : 'تم حفظ التغييرات');
+                            },
+                      label: 'حفظ',
+                      icon: const btn.ButtonIcon(Icons.check, size: 14),
+                      size: btn.ButtonSize.large,
+                      expand: true,
                     ),
                   ),
                 ],
@@ -1121,19 +1113,10 @@ class _EmptyState extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.xl),
-          SizedBox(
-            height: 40,
-            child: FilledButton.icon(
-              onPressed: onAdd,
-              icon: const Icon(Icons.add, size: 14),
-              label: const Text('إضافة شاحنة', style: TextStyle(fontSize: 12)),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                ),
-              ),
-            ),
+          btn.Button(
+            onPressed: onAdd,
+            label: 'إضافة شاحنة',
+            icon: const btn.ButtonIcon(Icons.add, size: 14),
           ),
         ],
       ),
@@ -1167,10 +1150,11 @@ class _ErrorState extends StatelessWidget {
             style: TextStyle(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.lg),
-          TextButton.icon(
+          btn.Button(
             onPressed: onRetry,
-            icon: const Icon(Icons.refresh, size: 18),
-            label: const Text('إعادة المحاولة'),
+            label: 'إعادة المحاولة',
+            icon: const btn.ButtonIcon(Icons.refresh, size: 18),
+            variant: btn.Variant.text,
           ),
         ],
       ),

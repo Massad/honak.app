@@ -7,6 +7,7 @@ import 'package:honak/features/chat/data/chat_info_template_store.dart';
 import 'package:honak/features/chat/domain/entities/chat_info_template_item.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
 import 'package:honak/features/chat/presentation/widgets/ask_info_edit_widgets.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/selectable_tile.dart';
 
 /// Bottom sheet for composing a structured info request.
@@ -202,10 +203,11 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
               ),
             ),
           ),
-          IconButton(
+          Button(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.close, size: 20),
-            color: context.colorScheme.onSurfaceVariant,
+            icon: ButtonIcon(Icons.close, size: 20, color: context.colorScheme.onSurfaceVariant),
+            variant: Variant.text,
+            size: ButtonSize.small,
           ),
         ],
       ),
@@ -291,29 +293,13 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
     final canSend = _selectedId != null;
     return Padding(
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
-      child: SizedBox(
-        width: double.infinity,
-        child: FilledButton(
-          onPressed: canSend ? () => _send(context) : null,
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.warning,
-            disabledBackgroundColor: context.colorScheme.outlineVariant,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsetsDirectional.symmetric(vertical: 14),
-          ),
-          // Row children: [Text, Icon] — in RTL, Text=RIGHT, Icon=LEFT ✓
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('إرسال'),
-              SizedBox(width: AppSpacing.sm),
-              Icon(Icons.arrow_back, size: 18),
-            ],
-          ),
-        ),
+      child: Button(
+        onPressed: canSend ? () => _send(context) : null,
+        label: 'إرسال',
+        icon: ButtonIcon(Icons.arrow_back),
+        style: Style.warning,
+        size: ButtonSize.large,
+        expand: true,
       ),
     );
   }
@@ -487,16 +473,16 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
                 'سيتم إرجاع القائمة للعناصر الافتراضية وحذف أي تعديلات.',
               ),
               actions: [
-                TextButton(
+                Button(
                   onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text('إلغاء'),
+                  label: 'إلغاء',
+                  variant: Variant.text,
                 ),
-                TextButton(
+                Button(
                   onPressed: () => Navigator.pop(ctx, true),
-                  child: Text(
-                    'استعادة',
-                    style: TextStyle(color: AppColors.error),
-                  ),
+                  label: 'استعادة',
+                  variant: Variant.text,
+                  style: Style.danger,
                 ),
               ],
             ),

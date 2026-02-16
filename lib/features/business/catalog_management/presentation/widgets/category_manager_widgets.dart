@@ -129,20 +129,11 @@ class _SummaryCard extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          FilledButton.icon(
+          btn.Button(
             onPressed: onAdd,
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md,
-                vertical: AppSpacing.sm,
-              ),
-              minimumSize: Size.zero,
-              shape: RoundedRectangleBorder(borderRadius: AppRadius.cardInner),
-              textStyle: context.textTheme.labelSmall,
-            ),
-            icon: const Icon(Icons.add, size: 14),
-            label: const Text('تصنيف جديد'),
+            label: 'تصنيف جديد',
+            icon: const btn.ButtonIcon(Icons.add, size: 14),
+            size: btn.ButtonSize.small,
           ),
         ],
       ),
@@ -390,11 +381,12 @@ class _EmptyState extends StatelessWidget {
             style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.md),
-          TextButton.icon(
+          btn.Button(
             onPressed: onAdd,
-            icon: const Icon(Icons.add, size: 12),
-            label: const Text('إضافة تصنيف'),
-            style: TextButton.styleFrom(textStyle: context.textTheme.labelSmall),
+            label: 'إضافة تصنيف',
+            icon: const btn.ButtonIcon(Icons.add, size: 12),
+            variant: btn.Variant.text,
+            size: btn.ButtonSize.small,
           ),
         ],
       ),

@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/settings_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class PageStatusSettings extends ConsumerStatefulWidget {
   final VoidCallback? onClose;
@@ -71,20 +72,29 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
           textAlign: TextAlign.end,
         ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('إلغاء'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(ctx);
-              ref
-                  .read(pageSettingsProvider.notifier)
-                  .updatePageStatus('permanent_closed');
-              context.showSnackBar('تم إغلاق الصفحة');
-              widget.onClose?.call();
-            },
-            child: Text('تأكيد', style: TextStyle(color: AppColors.error)),
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              Button(
+                onPressed: () => Navigator.pop(ctx),
+                label: 'إلغاء',
+                variant: Variant.text,
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Button(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  ref
+                      .read(pageSettingsProvider.notifier)
+                      .updatePageStatus('permanent_closed');
+                  context.showSnackBar('تم إغلاق الصفحة');
+                  widget.onClose?.call();
+                },
+                label: 'تأكيد',
+                variant: Variant.text,
+                style: Style.danger,
+              ),
+            ],
           ),
         ],
       ),
@@ -301,24 +311,11 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
               top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
           ),
-          child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: _save,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Theme.of(context).colorScheme.surface,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              ),
-              child: const Text(
-                'حفظ',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ),
+          child: Button(
+            onPressed: _save,
+            label: 'حفظ',
+            expand: true,
+            size: ButtonSize.large,
           ),
         ),
       ],

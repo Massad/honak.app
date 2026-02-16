@@ -3,6 +3,7 @@ import 'package:honak/config/business_type_config.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class MassActionBar extends StatelessWidget {
   final int selectedCount;
@@ -338,33 +339,17 @@ class _MassDiscountContentState extends State<_MassDiscountContent> {
 
                 const SizedBox(height: AppSpacing.lg),
 
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _isValid
-                        ? () {
-                            widget.onApply(int.parse(_controller.text));
-                            Navigator.pop(context);
-                          }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange.shade700,
-                      foregroundColor: Theme.of(context).colorScheme.surface,
-                      disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: AppSpacing.md),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text(
-                      'تطبيق الخصم',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
+                btn.Button(
+                  onPressed: _isValid
+                      ? () {
+                          widget.onApply(int.parse(_controller.text));
+                          Navigator.pop(context);
+                        }
+                      : null,
+                  label: 'تطبيق الخصم',
+                  style: btn.Style.warning,
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
         ],
       ),

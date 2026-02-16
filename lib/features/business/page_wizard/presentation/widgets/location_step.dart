@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_wizard/presentation/providers/wizard_provider.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class LocationStep extends ConsumerStatefulWidget {
   const LocationStep({super.key});
@@ -71,18 +72,17 @@ class _LocationStepState extends ConsumerState<LocationStep> {
           const SizedBox(height: AppSpacing.md),
 
           // Use my location button
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: state.isOnlineOnly
-                  ? null
-                  : () {
-                      _addressController.text = '\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646';
-                      notifier.setAddress('\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646');
-                    },
-              icon: const Icon(Icons.my_location, size: 18),
-              label: const Text('استخدم موقعي الحالي'),
-            ),
+          btn.Button(
+            onPressed: state.isOnlineOnly
+                ? null
+                : () {
+                    _addressController.text = '\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646';
+                    notifier.setAddress('\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646');
+                  },
+            icon: const btn.ButtonIcon(Icons.my_location, size: 18),
+            label: '\u0627\u0633\u062a\u062e\u062f\u0645 \u0645\u0648\u0642\u0639\u064a \u0627\u0644\u062d\u0627\u0644\u064a',
+            variant: btn.Variant.outlined,
+            expand: true,
           ),
           const SizedBox(height: AppSpacing.lg),
 

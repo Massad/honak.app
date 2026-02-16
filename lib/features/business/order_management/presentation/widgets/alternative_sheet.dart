@@ -7,6 +7,7 @@ import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 
 /// 3-step alternative suggestion sheet:
@@ -224,26 +225,11 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
 
         const SizedBox(height: AppSpacing.lg),
 
-        SizedBox(
-          height: 48,
-          child: ElevatedButton(
-            onPressed: _selectedReason != null ? _goNext : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Theme.of(context).colorScheme.surface,
-              disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'التالي',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+        Button(
+          onPressed: _selectedReason != null ? _goNext : null,
+          label: 'التالي',
+          size: ButtonSize.large,
+          expand: true,
         ),
         const SizedBox(height: AppSpacing.sm),
       ],
@@ -283,43 +269,23 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
           const SizedBox(height: AppSpacing.sm),
         ],
 
-        OutlinedButton.icon(
+        Button(
           onPressed: _openItemPicker,
-          icon: const Icon(Icons.add, size: 18),
-          label: Text(_pickedItems.isEmpty ? 'اختر من المنتجات' : 'إضافة المزيد'),
-          style: OutlinedButton.styleFrom(
-            foregroundColor: AppColors.primary,
-            side: const BorderSide(color: AppColors.primary),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 14),
-          ),
+          label: _pickedItems.isEmpty ? 'اختر من المنتجات' : 'إضافة المزيد',
+          icon: const ButtonIcon(Icons.add),
+          variant: Variant.outlined,
+          size: ButtonSize.large,
+          expand: true,
         ),
 
         const SizedBox(height: AppSpacing.lg),
 
-        SizedBox(
-          height: 48,
-          child: ElevatedButton(
-            onPressed:
-                _pickedItems.isNotEmpty ? () => setState(() => _step = 2) : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Theme.of(context).colorScheme.surface,
-              disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'التالي',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+        Button(
+          onPressed:
+              _pickedItems.isNotEmpty ? () => setState(() => _step = 2) : null,
+          label: 'التالي',
+          size: ButtonSize.large,
+          expand: true,
         ),
         const SizedBox(height: AppSpacing.sm),
       ],
@@ -415,35 +381,12 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
         ),
         const SizedBox(height: AppSpacing.xl),
 
-        SizedBox(
-          height: 48,
-          child: ElevatedButton(
-            onPressed: _canSend ? _handleSend : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Theme.of(context).colorScheme.surface,
-              disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: _isLoading
-                ? SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                  )
-                : const Text(
-                    'إرسال اقتراح',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-          ),
+        Button(
+          onPressed: _canSend ? _handleSend : null,
+          label: 'إرسال اقتراح',
+          size: ButtonSize.large,
+          expand: true,
+          isLoading: _isLoading,
         ),
         const SizedBox(height: AppSpacing.sm),
       ],

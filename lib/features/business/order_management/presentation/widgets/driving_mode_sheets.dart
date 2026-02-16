@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/domain/entities/truck.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 // ═══════════════════════════════════════════════════════════════
 // Constants
@@ -630,29 +631,21 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
           ),
           const SizedBox(height: AppSpacing.lg),
           // Save button
-          SizedBox(
-            height: 48,
-            child: ElevatedButton.icon(
-              onPressed: () {
-                widget.onSave(
-                  widget.item.position,
-                  _fullDel,
-                  _emptyCol,
-                  _payment,
-                  _noteController.text,
-                );
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.check, size: 16),
-              label: const Text('حفظ التعديلات'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
-              ),
-            ),
+          Button(
+            onPressed: () {
+              widget.onSave(
+                widget.item.position,
+                _fullDel,
+                _emptyCol,
+                _payment,
+                _noteController.text,
+              );
+              Navigator.pop(context);
+            },
+            label: 'حفظ التعديلات',
+            icon: const ButtonIcon(Icons.check),
+            size: ButtonSize.large,
+            expand: true,
           ),
         ],
       ),
@@ -1062,28 +1055,21 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
           ),
           const SizedBox(height: AppSpacing.lg),
           // Confirm button
-          SizedBox(
-            height: 48,
-            child: ElevatedButton.icon(
-              onPressed: () {
-                widget.onConfirm(
-                  _fullDel,
-                  _emptyCol,
-                  _payment,
-                  _noteController.text,
-                );
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.check, size: 16),
-              label: const Text('تأكيد التسليم'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.success,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
-              ),
-            ),
+          Button(
+            onPressed: () {
+              widget.onConfirm(
+                _fullDel,
+                _emptyCol,
+                _payment,
+                _noteController.text,
+              );
+              Navigator.pop(context);
+            },
+            label: 'تأكيد التسليم',
+            icon: const ButtonIcon(Icons.check),
+            style: Style.success,
+            size: ButtonSize.large,
+            expand: true,
           ),
         ],
       ),
@@ -1278,26 +1264,19 @@ class _SkipSheetState extends State<SkipSheet> {
             }).toList(),
           ),
           const SizedBox(height: AppSpacing.lg),
-          SizedBox(
-            height: 48,
-            child: ElevatedButton.icon(
-              onPressed: () {
-                final reason = _reason == 'other'
-                    ? _otherController.text
-                    : _reason;
-                widget.onSkip(reason, _dest);
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.skip_next, size: 16),
-              label: const Text('تخطي والتالي'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.secondary,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
-              ),
-            ),
+          Button(
+            onPressed: () {
+              final reason = _reason == 'other'
+                  ? _otherController.text
+                  : _reason;
+              widget.onSkip(reason, _dest);
+              Navigator.pop(context);
+            },
+            label: 'تخطي والتالي',
+            icon: const ButtonIcon(Icons.skip_next),
+            style: Style.warning,
+            size: ButtonSize.large,
+            expand: true,
           ),
         ],
       ),
@@ -1367,23 +1346,15 @@ class _ReloadSheetState extends State<ReloadSheet> {
             step: 5,
           ),
           const SizedBox(height: AppSpacing.xxl),
-          SizedBox(
-            height: 48,
-            child: ElevatedButton.icon(
-              onPressed: () {
-                widget.onReload(_newFull, _emptiesDrop);
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.refresh, size: 16),
-              label: const Text('تأكيد \u2014 بداية جديدة'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.cardInner,
-                ),
-              ),
-            ),
+          Button(
+            onPressed: () {
+              widget.onReload(_newFull, _emptiesDrop);
+              Navigator.pop(context);
+            },
+            label: 'تأكيد \u2014 بداية جديدة',
+            icon: const ButtonIcon(Icons.refresh),
+            size: ButtonSize.large,
+            expand: true,
           ),
         ],
       ),

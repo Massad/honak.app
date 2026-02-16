@@ -9,6 +9,7 @@ import 'package:honak/features/business/catalog_management/presentation/provider
 import 'package:honak/features/business/catalog_management/presentation/providers/stock_manager_provider.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_item.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 // ═══════════════════════════════════════════════════════════════
 // Stock Manager Sheet
@@ -761,11 +762,12 @@ class _StockStepper extends ConsumerWidget {
           },
         ),
         actions: [
-          TextButton(
+          btn.Button(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('إلغاء'),
+            label: 'إلغاء',
+            variant: btn.Variant.text,
           ),
-          FilledButton(
+          btn.Button(
             onPressed: () {
               final parsed = int.tryParse(controller.text);
               if (parsed != null) {
@@ -779,7 +781,7 @@ class _StockStepper extends ConsumerWidget {
               }
               Navigator.pop(ctx);
             },
-            child: const Text('تأكيد'),
+            label: 'تأكيد',
           ),
         ],
       ),
@@ -1223,7 +1225,7 @@ class _FooterBar extends ConsumerWidget {
             ),
           if (totalChanges > 0) const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: FilledButton.icon(
+            child: btn.Button(
               onPressed: totalChanges > 0
                   ? () {
                       // In real app: API call to save
@@ -1243,14 +1245,10 @@ class _FooterBar extends ConsumerWidget {
                       Navigator.pop(context);
                     }
                   : null,
-              icon: const Icon(Icons.save_outlined, size: 16),
-              label: Text('حفظ التعديلات ($totalChanges)'),
-              style: FilledButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+              label: 'حفظ التعديلات ($totalChanges)',
+              icon: const btn.ButtonIcon(Icons.save_outlined, size: 16),
+              size: btn.ButtonSize.large,
+              expand: true,
             ),
           ),
         ],

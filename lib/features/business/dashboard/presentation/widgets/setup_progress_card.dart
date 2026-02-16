@@ -4,6 +4,7 @@ import 'package:honak/config/archetype.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// A setup step for page onboarding.
 class SetupStep {
@@ -375,26 +376,11 @@ class _StepItem extends StatelessWidget {
 
             // Action button (only for pending steps)
             if (!step.done)
-              GestureDetector(
-                onTap: onAction,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  child: Text(
-                    step.actionLabel,
-                    style: const TextStyle(
-                      fontSize: 10,
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+              btn.Button(
+                onPressed: onAction,
+                label: step.actionLabel,
+                variant: btn.Variant.tonal,
+                size: btn.ButtonSize.small,
               ),
           ],
         ),

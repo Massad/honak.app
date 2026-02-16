@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
-import 'package:honak/core/theme/app_colors.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/notifications/domain/entities/app_notification.dart';
 import 'package:honak/features/notifications/presentation/providers/notification_provider.dart';
@@ -128,12 +128,11 @@ class _NotificationListPageState extends ConsumerState<NotificationListPage> {
             onPressed: () => Navigator.pop(context),
           ),
         ],
-        leading: TextButton(
+        leading: btn.Button(
           onPressed: _markAllAsRead,
-          child: Text(
-            'تعيين الكل كمقروء',
-            style: TextStyle(fontSize: 11, color: AppColors.primary),
-          ),
+          label: 'تعيين الكل كمقروء',
+          variant: btn.Variant.text,
+          size: btn.ButtonSize.small,
         ),
         leadingWidth: 130,
       ),

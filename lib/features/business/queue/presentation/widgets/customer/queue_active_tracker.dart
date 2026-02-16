@@ -13,6 +13,7 @@ import 'package:honak/features/business/queue/presentation/widgets/customer/queu
 import 'package:honak/features/business/queue/presentation/widgets/customer/queue_modify_sheet.dart';
 import 'package:honak/features/business/queue/presentation/widgets/customer/queue_ready_card.dart';
 import 'package:honak/features/business/queue/presentation/widgets/customer/queue_selection_summary.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Displays the active queue tracking card for the customer.
 ///
@@ -197,21 +198,13 @@ class _WaitingCard extends StatelessWidget {
     return Column(
       children: [
         if (entry.status == QueueStatus.waiting && !entry.onTheWay)
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: onMarkOnMyWay,
-              icon: const Icon(Icons.navigation, size: 14),
-              label: const Text('أنا ادور — في الطريق'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.success,
-                side: const BorderSide(color: AppColors.success),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-            ),
+          btn.Button(
+            onPressed: onMarkOnMyWay,
+            label: 'أنا ادور — في الطريق',
+            icon: const btn.ButtonIcon(Icons.navigation),
+            variant: btn.Variant.outlined,
+            style: btn.Style.success,
+            expand: true,
           )
         else if (entry.onTheWay)
           Container(
@@ -238,49 +231,32 @@ class _WaitingCard extends StatelessWidget {
             ),
           ),
         const SizedBox(height: AppSpacing.sm),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: () => showQueueModifySheet(
-              context: context,
-              entry: entry,
-              packages: packages,
-              availableAddOns: availableAddOns,
-              isInProgress: false,
-              onSubmit: onRequestModification,
-            ),
-            icon: const Icon(Icons.edit_outlined, size: 14),
-            label: const Text('طلب تعديل'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: context.colorScheme.onSurfaceVariant,
-              side: BorderSide(color: context.colorScheme.outlineVariant),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.button,
-              ),
-            ),
+        btn.Button(
+          onPressed: () => showQueueModifySheet(
+            context: context,
+            entry: entry,
+            packages: packages,
+            availableAddOns: availableAddOns,
+            isInProgress: false,
+            onSubmit: onRequestModification,
           ),
+          label: 'طلب تعديل',
+          icon: const btn.ButtonIcon(Icons.edit_outlined),
+          variant: btn.Variant.outlined,
+          expand: true,
         ),
         const SizedBox(height: AppSpacing.sm),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: () => showQueueCancelSheet(
-              context: context,
-              entry: entry,
-              onConfirm: onCancelEntry,
-            ),
-            icon: const Icon(Icons.close, size: 14),
-            label: const Text('إلغاء الحجز'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.error,
-              side: BorderSide(color: context.colorScheme.outlineVariant),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.button,
-              ),
-            ),
+        btn.Button(
+          onPressed: () => showQueueCancelSheet(
+            context: context,
+            entry: entry,
+            onConfirm: onCancelEntry,
           ),
+          label: 'إلغاء الحجز',
+          icon: const btn.ButtonIcon(Icons.close),
+          variant: btn.Variant.outlined,
+          style: btn.Style.danger,
+          expand: true,
         ),
       ],
     );
@@ -420,28 +396,19 @@ class _InProgressCardState extends State<_InProgressCard> {
           ),
         ),
         const SizedBox(height: AppSpacing.md),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: () => showQueueModifySheet(
-              context: context,
-              entry: widget.entry,
-              packages: widget.packages,
-              availableAddOns: widget.availableAddOns,
-              isInProgress: true,
-              onSubmit: widget.onRequestModification,
-            ),
-            icon: const Icon(Icons.edit_outlined, size: 14),
-            label: const Text('طلب تعديل'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: context.colorScheme.onSurfaceVariant,
-              side: BorderSide(color: context.colorScheme.outlineVariant),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              shape: RoundedRectangleBorder(
-                borderRadius: AppRadius.button,
-              ),
-            ),
+        btn.Button(
+          onPressed: () => showQueueModifySheet(
+            context: context,
+            entry: widget.entry,
+            packages: widget.packages,
+            availableAddOns: widget.availableAddOns,
+            isInProgress: true,
+            onSubmit: widget.onRequestModification,
           ),
+          label: 'طلب تعديل',
+          icon: const btn.ButtonIcon(Icons.edit_outlined),
+          variant: btn.Variant.outlined,
+          expand: true,
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(

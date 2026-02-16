@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 class SuggestedPagesCard extends StatelessWidget {
@@ -88,33 +89,19 @@ class _SuggestedPageMiniCard extends ConsumerWidget {
               const Spacer(),
               Padding(
                 padding: EdgeInsets.only(bottom: AppSpacing.sm),
-                child: SizedBox(
-                  height: 28,
-                  child: TextButton(
-                    onPressed: () => ref
-                        .read(followProvider(
-                                (pageId: page.id, isFollowing: page.isFollowing))
-                            .notifier)
-                        .toggle(),
-                    style: TextButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: AppSpacing.md),
-                      visualDensity: VisualDensity.compact,
-                      backgroundColor: isFollowing
-                          ? null
-                          : context.colorScheme.primary.withValues(alpha: 0.1),
-                    ),
-                    child: Text(
-                      isFollowing
-                          ? context.l10n.following
-                          : context.l10n.follow,
-                      style: context.textTheme.labelSmall?.copyWith(
-                        color: isFollowing
-                            ? context.colorScheme.onSurfaceVariant
-                            : context.colorScheme.primary,
-                      ),
-                    ),
-                  ),
+                child: btn.Button(
+                  onPressed: () => ref
+                      .read(followProvider(
+                              (pageId: page.id, isFollowing: page.isFollowing))
+                          .notifier)
+                      .toggle(),
+                  label: isFollowing
+                      ? context.l10n.following
+                      : context.l10n.follow,
+                  variant: isFollowing
+                      ? btn.Variant.text
+                      : btn.Variant.tonal,
+                  size: btn.ButtonSize.small,
                 ),
               ),
             ],

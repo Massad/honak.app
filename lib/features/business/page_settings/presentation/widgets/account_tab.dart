@@ -8,6 +8,7 @@ import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 import 'account_tab_cards.dart';
 import 'settings_section.dart';
@@ -208,23 +209,20 @@ class AccountTab extends ConsumerWidget {
           Row(
             textDirection: TextDirection.ltr,
             children: [
-              TextButton(
+              Button(
                 onPressed: () => Navigator.pop(ctx),
-                child: Text(
-                  'إلغاء',
-                  style: TextStyle(color: Theme.of(ctx).colorScheme.onSurfaceVariant),
-                ),
+                label: 'إلغاء',
+                variant: Variant.text,
               ),
               const SizedBox(width: AppSpacing.sm),
-              TextButton(
+              Button(
                 onPressed: () {
                   Navigator.pop(ctx);
                   ref.read(authProvider.notifier).logout();
                 },
-                child: const Text(
-                  'خروج',
-                  style: TextStyle(color: AppColors.error),
-                ),
+                label: 'خروج',
+                variant: Variant.text,
+                style: Style.danger,
               ),
             ],
           ),

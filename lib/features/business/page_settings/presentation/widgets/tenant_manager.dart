@@ -6,6 +6,7 @@ import 'package:honak/features/business/page_settings/domain/entities/tenant.dar
 import 'package:honak/features/business/page_settings/presentation/providers/tenant_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class TenantManager extends ConsumerWidget {
   final VoidCallback onClose;
@@ -166,19 +167,30 @@ class _TenantBody extends ConsumerWidget {
             ]),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('إلغاء')),
-            TextButton(
-              onPressed: () {
-                final name = nameCtrl.text.trim();
-                if (name.isEmpty) return;
-                ref.read(tenantProvider.notifier).addTenant(Tenant(
-                  id: 'tnt_${DateTime.now().millisecondsSinceEpoch}',
-                  name: name, floor: floorCtrl.text.trim(),
-                  unit: unitCtrl.text.trim(), businessType: typeCtrl.text.trim(), status: status,
-                ));
-                Navigator.pop(ctx);
-              },
-              child: const Text('إضافة'),
+            Row(
+              textDirection: TextDirection.ltr,
+              children: [
+                Button(
+                  onPressed: () => Navigator.pop(ctx),
+                  label: 'إلغاء',
+                  variant: Variant.text,
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Button(
+                  onPressed: () {
+                    final name = nameCtrl.text.trim();
+                    if (name.isEmpty) return;
+                    ref.read(tenantProvider.notifier).addTenant(Tenant(
+                      id: 'tnt_${DateTime.now().millisecondsSinceEpoch}',
+                      name: name, floor: floorCtrl.text.trim(),
+                      unit: unitCtrl.text.trim(), businessType: typeCtrl.text.trim(), status: status,
+                    ));
+                    Navigator.pop(ctx);
+                  },
+                  label: 'إضافة',
+                  variant: Variant.text,
+                ),
+              ],
             ),
           ],
         ),

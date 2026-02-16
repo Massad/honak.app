@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/settings_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Category options per business type.
 const carryCategoryOptions = <String, List<String>>{
@@ -204,34 +205,18 @@ class CatalogStrategy extends ConsumerWidget {
               const SizedBox(height: AppSpacing.xl),
 
               // Save button
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('تم حفظ الإعدادات'),
-                      ),
-                    );
-                    onClose();
-                  },
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.md,
+              Button(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('تم حفظ الإعدادات'),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'حفظ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
+                  );
+                  onClose();
+                },
+                label: 'حفظ',
+                expand: true,
+                size: ButtonSize.large,
               ),
             ],
           ),

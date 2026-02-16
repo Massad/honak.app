@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/queue/domain/entities/customer_queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Post-queue dismissible banner shown after a queue entry is completed,
 /// no-show, or cancelled.
@@ -100,32 +101,20 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
           Row(
             children: [
               Expanded(
-                child: FilledButton(
+                child: btn.Button(
                   onPressed: widget.onRebook,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button,
-                    ),
-                  ),
-                  child: const Text('احجز مرة أخرى'),
+                  label: 'احجز مرة أخرى',
+                  expand: true,
                 ),
               ),
               if (widget.onViewDetail != null) ...[
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
-                  child: OutlinedButton(
+                  child: btn.Button(
                     onPressed: widget.onViewDetail,
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: context.colorScheme.onSurfaceVariant,
-                      side: BorderSide(color: context.colorScheme.outlineVariant),
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: AppRadius.button,
-                      ),
-                    ),
-                    child: const Text('التفاصيل'),
+                    label: 'التفاصيل',
+                    variant: btn.Variant.outlined,
+                    expand: true,
                   ),
                 ),
               ],
@@ -174,19 +163,10 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: widget.onRebook,
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-              child: const Text('احجز من جديد'),
-            ),
+          btn.Button(
+            onPressed: widget.onRebook,
+            label: 'احجز من جديد',
+            expand: true,
           ),
         ],
       ),
@@ -231,19 +211,10 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: widget.onRebook,
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-              child: const Text('احجز من جديد'),
-            ),
+          btn.Button(
+            onPressed: widget.onRebook,
+            label: 'احجز من جديد',
+            expand: true,
           ),
         ],
       ),

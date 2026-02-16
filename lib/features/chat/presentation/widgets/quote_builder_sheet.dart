@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Input limits for quote fields.
 abstract final class QuoteLimits {
@@ -412,29 +413,13 @@ class _QuoteBuilderSheetState extends State<QuoteBuilderSheet> {
   Widget _buildSendButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
-      child: SizedBox(
-        width: double.infinity,
-        child: FilledButton(
-          onPressed: _isValid ? () => _send(context) : null,
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.warning,
-            disabledBackgroundColor: context.colorScheme.outlineVariant,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsetsDirectional.symmetric(vertical: 14),
-          ),
-          // In RTL Row: Text=RIGHT (start), Icon=LEFT (end) ✓
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('إرسال'),
-              SizedBox(width: AppSpacing.sm),
-              Icon(Icons.send_rounded, size: 18),
-            ],
-          ),
-        ),
+      child: Button(
+        onPressed: _isValid ? () => _send(context) : null,
+        label: 'إرسال',
+        icon: ButtonIcon(Icons.send_rounded),
+        style: Style.warning,
+        size: ButtonSize.large,
+        expand: true,
       ),
     );
   }

@@ -9,6 +9,7 @@ import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/renewal_request_sheet.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/subscription_menu_sheet.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class SubscriptionCard extends StatelessWidget {
   final Subscription subscription;
@@ -252,37 +253,21 @@ class _ActionButtons extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: FilledButton(
+            child: btn.Button(
               onPressed: () =>
                   context.push(Routes.pagePath(subscription.pageId)),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-              child: Text(
-                orderLabel,
-                style: const TextStyle(fontSize: 12),
-              ),
+              label: orderLabel,
+              size: btn.ButtonSize.small,
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: OutlinedButton(
+            child: btn.Button(
               onPressed: () =>
                   showRenewalRequestSheet(context, subscription),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppRadius.button,
-                ),
-              ),
-              child: const Text(
-                'تجديد',
-                style: TextStyle(fontSize: 12),
-              ),
+              label: 'تجديد',
+              variant: btn.Variant.outlined,
+              size: btn.ButtonSize.small,
             ),
           ),
         ],

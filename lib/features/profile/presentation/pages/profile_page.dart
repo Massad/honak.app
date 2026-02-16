@@ -8,6 +8,7 @@ import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -110,16 +111,18 @@ class ProfilePage extends ConsumerWidget {
         title: Text(context.l10n.logout),
         content: Text(context.l10n.logoutConfirm),
         actions: [
-          TextButton(
+          btn.Button(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(context.l10n.cancel),
+            label: context.l10n.cancel,
+            variant: btn.Variant.text,
           ),
-          FilledButton(
+          btn.Button(
             onPressed: () {
               Navigator.pop(ctx);
               ref.read(authProvider.notifier).logout();
             },
-            child: Text(context.l10n.logout),
+            label: context.l10n.logout,
+            style: btn.Style.danger,
           ),
         ],
       ),

@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/shared/widgets/selection_sheet.dart';
 
 // ═══════════════════════════════════════════════════════════════
@@ -405,29 +406,17 @@ class WizardBottomNav extends StatelessWidget {
         textDirection: TextDirection.ltr,
         children: [
           // Back / Cancel
-          TextButton(
+          btn.Button(
             onPressed: onBack,
-            child: Text(
-              currentStep == 0 ? 'إلغاء' : 'السابق',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
+            label: currentStep == 0 ? 'إلغاء' : 'السابق',
+            variant: btn.Variant.text,
           ),
           const Spacer(),
           // Next / Save
-          FilledButton(
+          btn.Button(
             onPressed: canGoNext && !saving ? onNext : null,
-            child: saving
-                ? SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                  )
-                : Text(isFinal ? 'حفظ' : 'التالي'),
+            label: isFinal ? 'حفظ' : 'التالي',
+            isLoading: saving,
           ),
         ],
       ),

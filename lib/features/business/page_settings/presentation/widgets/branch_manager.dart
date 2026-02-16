@@ -11,6 +11,7 @@ import 'package:honak/features/business/page_settings/domain/entities/branch.dar
 import 'package:honak/features/business/page_settings/presentation/providers/branch_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/branch_card.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 final _citiesProvider = FutureProvider<List<Map<String, dynamic>>>((ref) async {
   final jsonStr =
@@ -255,24 +256,11 @@ class _BranchListState extends ConsumerState<_BranchList> {
               top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
             ),
           ),
-          child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: _save,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Theme.of(context).colorScheme.surface,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              ),
-              child: const Text(
-                'حفظ',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ),
+          child: Button(
+            onPressed: _save,
+            label: 'حفظ',
+            expand: true,
+            size: ButtonSize.large,
           ),
         ),
       ],

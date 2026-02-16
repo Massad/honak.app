@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Amenity checklist overlay — checkbox grid of ~15 common amenities.
 class AmenityManagerOverlay extends StatefulWidget {
@@ -74,9 +75,11 @@ class _AmenityManagerOverlayState extends State<AmenityManagerOverlay> {
         centerTitle: true,
         elevation: 0,
         actions: [
-          TextButton(
+          btn.Button(
             onPressed: () => widget.onSave(_selected.toList()),
-            child: const Text('حفظ'),
+            label: 'حفظ',
+            variant: btn.Variant.text,
+            size: btn.ButtonSize.small,
           ),
         ],
       ),

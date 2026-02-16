@@ -8,6 +8,7 @@ import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const BusinessAppBar({super.key});
@@ -154,18 +155,20 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: const EdgeInsetsDirectional.only(end: AppSpacing.xs),
-          child: IconButton(
-            onPressed: () => context.showSnackBar('قريباً: الإشعارات'),
-            icon: Badge(
-              label: const Text(
-                '5',
-                style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
-              ),
-              backgroundColor: AppColors.error,
-              child: Icon(
+          child: Badge(
+            label: const Text(
+              '5',
+              style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+            ),
+            backgroundColor: AppColors.error,
+            child: btn.Button(
+              onPressed: () => context.showSnackBar('قريباً: الإشعارات'),
+              icon: btn.ButtonIcon(
                 Icons.notifications_outlined,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
+              variant: btn.Variant.text,
+              size: btn.ButtonSize.small,
             ),
           ),
         ),

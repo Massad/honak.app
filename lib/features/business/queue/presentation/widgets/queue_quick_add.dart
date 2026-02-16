@@ -12,6 +12,7 @@ import 'package:honak/features/business/queue/domain/entities/queue_status.dart'
 import 'package:honak/features/business/queue/domain/entities/service_package.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 part 'queue_quick_add_details.dart';
 part 'queue_quick_add_widgets.dart';

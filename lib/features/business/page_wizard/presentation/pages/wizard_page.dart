@@ -12,6 +12,7 @@ import 'package:honak/features/business/page_wizard/presentation/widgets/page_in
 import 'package:honak/features/business/page_wizard/presentation/widgets/payment_step.dart';
 import 'package:honak/features/business/page_wizard/presentation/widgets/type_picker_step.dart';
 import 'package:honak/features/business/page_wizard/presentation/widgets/wizard_done.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class WizardPage extends ConsumerWidget {
   const WizardPage({super.key});
@@ -69,10 +70,7 @@ class WizardPage extends ConsumerWidget {
             AppSpacing.lg,
             AppSpacing.lg,
           ),
-          child: SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: FilledButton(
+          child: btn.Button(
               onPressed: notifier.canProceed
                   ? () {
                       if (state.step == 6) {
@@ -82,18 +80,13 @@ class WizardPage extends ConsumerWidget {
                       }
                     }
                   : null,
-              child: state.step == 6
-                  ? const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.auto_awesome, size: 18),
-                        SizedBox(width: AppSpacing.sm),
-                        Text('نشر الصفحة'),
-                      ],
-                    )
-                  : const Text('التالي'),
+              label: state.step == 6 ? 'نشر الصفحة' : 'التالي',
+              icon: state.step == 6
+                  ? const btn.ButtonIcon(Icons.auto_awesome)
+                  : null,
+              size: btn.ButtonSize.large,
+              expand: true,
             ),
-          ),
         ),
       ),
     );

@@ -14,6 +14,7 @@ import 'package:honak/features/stories/presentation/providers/stories_provider.d
     show storyContentProvider;
 import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 
 enum _ChatFilter { all, requests, messages }
@@ -122,9 +123,10 @@ class _ChatListPageState extends ConsumerState<ChatListPage> {
                           ),
                     ),
                     SizedBox(height: AppSpacing.lg),
-                    TextButton(
+                    Button(
                       onPressed: () => ref.invalidate(conversationsProvider),
-                      child: const Text('إعادة المحاولة'),
+                      label: 'إعادة المحاولة',
+                      variant: Variant.text,
                     ),
                   ],
                 ),

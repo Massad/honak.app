@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Identity verification before invite — shows page info + confirm/cancel.
 class TenantInviteConfirm extends StatelessWidget {
@@ -99,39 +99,23 @@ class TenantInviteConfirm extends StatelessWidget {
             children: [
               // Cancel
               Expanded(
-                child: OutlinedButton(
+                child: btn.Button(
                   onPressed: onCancel,
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.md,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button,
-                    ),
-                  ),
-                  child: const Text('لا، ارجع'),
+                  label: 'لا، ارجع',
+                  variant: btn.Variant.outlined,
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
 
               // Confirm
               Expanded(
-                child: ElevatedButton(
+                child: btn.Button(
                   onPressed: onConfirm,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSpacing.md,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button,
-                    ),
-                  ),
-                  child: const Text(
-                    'نعم، أدعوهم',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
+                  label: 'نعم، أدعوهم',
+                  size: btn.ButtonSize.large,
+                  expand: true,
                 ),
               ),
             ],

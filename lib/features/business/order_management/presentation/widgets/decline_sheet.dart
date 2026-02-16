@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/presentation/providers/provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class DeclineSheet extends ConsumerStatefulWidget {
   final String requestId;
@@ -216,35 +217,13 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
             const SizedBox(height: AppSpacing.xl),
 
             // Confirm button
-            SizedBox(
-              height: 48,
-              child: ElevatedButton(
-                onPressed: _canSubmit ? _handleDecline : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.error,
-                  foregroundColor: Theme.of(context).colorScheme.surface,
-                  disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: _isLoading
-                    ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Theme.of(context).colorScheme.surface,
-                        ),
-                      )
-                    : const Text(
-                        'رفض الطلب',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-              ),
+            Button(
+              onPressed: _canSubmit ? _handleDecline : null,
+              label: 'رفض الطلب',
+              style: Style.danger,
+              size: ButtonSize.large,
+              expand: true,
+              isLoading: _isLoading,
             ),
             const SizedBox(height: AppSpacing.sm),
           ],

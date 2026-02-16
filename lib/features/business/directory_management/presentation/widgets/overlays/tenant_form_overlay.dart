@@ -7,6 +7,7 @@ import 'package:honak/features/business/directory_management/domain/entities/dir
 import 'package:honak/features/business/directory_management/domain/entities/tenant.dart';
 import 'package:honak/features/business/directory_management/presentation/widgets/sheets/tenant_invite_confirm.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full-screen overlay for adding or editing a tenant.
 ///
@@ -136,9 +137,11 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
         elevation: 0,
         actions: [
           if (_mode != _FormMode.search)
-            TextButton(
+            btn.Button(
               onPressed: _name.isNotEmpty ? _handleSave : null,
-              child: const Text('حفظ'),
+              label: 'حفظ',
+              variant: btn.Variant.text,
+              size: btn.ButtonSize.small,
             ),
         ],
       ),
@@ -305,12 +308,14 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
                   ],
                 ),
               ),
-              TextButton(
+              btn.Button(
                 onPressed: () => setState(() {
                   _selectedPage = null;
                   _mode = _FormMode.search;
                 }),
-                child: const Text('تغيير', style: TextStyle(fontSize: 12)),
+                label: 'تغيير',
+                variant: btn.Variant.text,
+                size: btn.ButtonSize.small,
               ),
             ],
           ),

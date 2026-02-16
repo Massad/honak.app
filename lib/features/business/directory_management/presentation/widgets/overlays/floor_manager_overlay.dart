@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/directory_floor.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Overlay for managing floors — reorderable list with add/edit/delete.
 class FloorManagerOverlay extends StatefulWidget {
@@ -132,9 +133,11 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
         centerTitle: true,
         elevation: 0,
         actions: [
-          TextButton(
+          btn.Button(
             onPressed: () => widget.onSave(_floors),
-            child: const Text('حفظ'),
+            label: 'حفظ',
+            variant: btn.Variant.text,
+            size: btn.ButtonSize.small,
           ),
         ],
       ),
@@ -205,20 +208,15 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
                     Row(
                       textDirection: TextDirection.ltr,
                       children: [
-                        TextButton(
+                        btn.Button(
                           onPressed: _cancelEdit,
-                          child: const Text('إلغاء'),
+                          label: 'إلغاء',
+                          variant: btn.Variant.text,
                         ),
                         const SizedBox(width: AppSpacing.sm),
-                        ElevatedButton(
+                        btn.Button(
                           onPressed: _saveEdit,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Theme.of(context).colorScheme.surface,
-                          ),
-                          child: Text(
-                            _editIndex != null ? 'تحديث' : 'إضافة',
-                          ),
+                          label: _editIndex != null ? 'تحديث' : 'إضافة',
                         ),
                       ],
                     ),
@@ -333,13 +331,12 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: _startAdd,
-                    icon: const Icon(Icons.add, size: 18),
-                    label: const Text('إضافة طابق'),
-                  ),
+                child: btn.Button(
+                  onPressed: _startAdd,
+                  label: 'إضافة طابق',
+                  icon: const btn.ButtonIcon(Icons.add),
+                  variant: btn.Variant.outlined,
+                  expand: true,
                 ),
               ),
             ),

@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class AvailabilityPickerSheet extends StatefulWidget {
   final void Function(
@@ -138,10 +139,11 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
               ),
             ),
           ),
-          IconButton(
+          Button(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.close, size: 20),
-            color: context.colorScheme.onSurfaceVariant,
+            icon: ButtonIcon(Icons.close, size: 20, color: context.colorScheme.onSurfaceVariant),
+            variant: Variant.text,
+            size: ButtonSize.small,
           ),
         ],
       ),
@@ -340,22 +342,13 @@ class _AvailabilityPickerSheetState extends State<AvailabilityPickerSheet> {
       padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
       child: SizedBox(
         width: double.infinity,
-        child: FilledButton.icon(
+        child: Button(
           onPressed: isEnabled ? () => _send(context) : null,
-          icon: const Icon(Icons.send_rounded, size: 18),
-          label: Text(
-            isEnabled ? 'إرسال ($count أوقات)' : 'اختر وقت واحد على الأقل',
-          ),
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.success,
-            disabledBackgroundColor: context.colorScheme.outlineVariant,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsetsDirectional.symmetric(
-              vertical: 14,
-            ),
-          ),
+          label: isEnabled ? 'إرسال ($count أوقات)' : 'اختر وقت واحد على الأقل',
+          icon: ButtonIcon(Icons.send_rounded),
+          style: Style.success,
+          size: ButtonSize.large,
+          expand: true,
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Mock platform data for Phase 1.
 class _PlatformData {
@@ -306,34 +307,15 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
                   const SizedBox(height: AppSpacing.lg),
 
                   // Sync Now button
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton.icon(
-                      onPressed:
-                          isSyncing ? null : () => _syncNow(platform),
-                      icon: isSyncing
-                          ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : const Icon(Icons.refresh, size: 18),
-                      label: Text(
-                        isSyncing ? 'جاري المزامنة...' : 'مزامنة الآن',
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primary,
-                        side: const BorderSide(color: AppColors.primary),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: AppSpacing.md,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
+                  Button(
+                    onPressed:
+                        isSyncing ? null : () => _syncNow(platform),
+                    label: isSyncing ? 'جاري المزامنة...' : 'مزامنة الآن',
+                    variant: Variant.outlined,
+                    icon: isSyncing ? null : ButtonIcon(Icons.refresh),
+                    isLoading: isSyncing,
+                    expand: true,
+                    size: ButtonSize.large,
                   ),
 
                   const SizedBox(height: AppSpacing.md),
@@ -341,18 +323,12 @@ class _CatalogSyncSettingsState extends State<CatalogSyncSettings> {
                   // Disconnect button
                   Align(
                     alignment: AlignmentDirectional.centerStart,
-                    child: TextButton(
+                    child: Button(
                       onPressed: () => _disconnect(platform),
-                      style: TextButton.styleFrom(
-                        foregroundColor: AppColors.error,
-                        padding: EdgeInsets.zero,
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      child: const Text(
-                        'فصل',
-                        style: TextStyle(fontSize: 12),
-                      ),
+                      label: 'فصل',
+                      variant: Variant.text,
+                      style: Style.danger,
+                      size: ButtonSize.small,
                     ),
                   ),
                 ],
@@ -431,21 +407,10 @@ class _ConnectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 32,
-      child: FilledButton(
-        onPressed: onTap,
-        style: FilledButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: Theme.of(context).colorScheme.surface,
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-        ),
-        child: const Text('ربط'),
-      ),
+    return Button(
+      onPressed: onTap,
+      label: 'ربط',
+      size: ButtonSize.small,
     );
   }
 }

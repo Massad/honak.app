@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/customer_questions_section.dart';
 import 'package:honak/features/requests/presentation/widgets/quote_sheet_sections.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Bottom sheet for the quote_request archetype.
 ///
@@ -246,17 +246,12 @@ class _QuoteBodyState extends State<_QuoteBody> {
         ),
         child: SizedBox(
           width: double.infinity,
-          child: FilledButton.icon(
+          child: btn.Button(
             onPressed: _canSubmit ? _submit : null,
-            icon: const Icon(Icons.send, size: 18),
-            label: const Text('إرسال طلب المعاينة'),
-            style: FilledButton.styleFrom(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppSpacing.lg),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.lg),
-              ),
-            ),
+            label: 'إرسال طلب المعاينة',
+            icon: const btn.ButtonIcon(Icons.send),
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/confirm_dialog.dart';
 
 class RelocationSettings extends StatefulWidget {
@@ -212,36 +213,17 @@ class _RelocationSettingsState extends State<RelocationSettings> {
           textDirection: TextDirection.ltr,
           children: [
             Expanded(
-              child: OutlinedButton(
+              child: Button(
                 onPressed: _onCancelConfirmation,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.onSurface,
-                  side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.md),
-                  ),
-                ),
-                child: const Text('إلغاء', style: TextStyle(fontSize: 13)),
+                label: 'إلغاء',
+                variant: Variant.outlined,
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
-              child: FilledButton(
+              child: Button(
                 onPressed: hasAddress ? _onConfirmActivation : null,
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  disabledBackgroundColor: Theme.of(context).colorScheme.outlineVariant,
-                  disabledForegroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.md),
-                  ),
-                ),
-                child: const Text(
-                  'تأكيد وإشعار المتابعين',
-                  style: TextStyle(fontSize: 12),
-                ),
+                label: 'تأكيد وإشعار المتابعين',
               ),
             ),
           ],
@@ -294,21 +276,13 @@ class _RelocationSettingsState extends State<RelocationSettings> {
         const SizedBox(height: AppSpacing.lg),
 
         // Stop button
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: _showStopConfirmation,
-            icon: const Icon(Icons.stop_circle_outlined, size: 16),
-            label: const Text('إيقاف', style: TextStyle(fontSize: 13)),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.error,
-              side: BorderSide(color: AppColors.error.withValues(alpha: 0.3)),
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.md),
-              ),
-            ),
-          ),
+        Button(
+          onPressed: _showStopConfirmation,
+          label: 'إيقاف',
+          icon: ButtonIcon(Icons.stop_circle_outlined),
+          variant: Variant.outlined,
+          style: Style.danger,
+          expand: true,
         ),
       ],
     );

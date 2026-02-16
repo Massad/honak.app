@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class MessageInput extends StatefulWidget {
   final void Function(String text) onSend;
@@ -138,15 +139,11 @@ class _MessageInputState extends State<MessageInput> {
           ),
           child: Row(
             children: [
-              IconButton(
+              Button(
                 onPressed: () {},
-                icon: const Icon(Icons.attach_file_rounded),
-                color: cs.onSurfaceVariant,
-                iconSize: 22,
-                constraints: const BoxConstraints(
-                  minWidth: 40,
-                  minHeight: 40,
-                ),
+                icon: ButtonIcon(Icons.attach_file_rounded, size: 22, color: cs.onSurfaceVariant),
+                variant: Variant.text,
+                size: ButtonSize.small,
               ),
               Expanded(
                 child: Container(

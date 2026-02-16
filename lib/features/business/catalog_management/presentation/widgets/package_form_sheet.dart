@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 void showPackageFormSheet(
   BuildContext context, {
@@ -367,32 +368,17 @@ class _PackageFormContentState extends State<_PackageFormContent> {
           const SizedBox(height: AppSpacing.xl),
 
           // Save button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                _showToast(
-                  '\u0642\u0631\u064a\u0628\u0627\u064b \u2014 \u062d\u0641\u0638 \u0627\u0644\u0628\u0627\u0642\u0629',
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Theme.of(context).colorScheme.surface,
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                _isEditing
-                    ? '\u062d\u0641\u0638 \u0627\u0644\u062a\u0639\u062f\u064a\u0644\u0627\u062a'
-                    : '\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0628\u0627\u0642\u0629',
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+          btn.Button(
+            onPressed: () {
+              _showToast(
+                '\u0642\u0631\u064a\u0628\u0627\u064b \u2014 \u062d\u0641\u0638 \u0627\u0644\u0628\u0627\u0642\u0629',
+              );
+            },
+            label: _isEditing
+                ? '\u062d\u0641\u0638 \u0627\u0644\u062a\u0639\u062f\u064a\u0644\u0627\u062a'
+                : '\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0628\u0627\u0642\u0629',
+            size: btn.ButtonSize.large,
+            expand: true,
           ),
 
           // Delete button (edit mode only)

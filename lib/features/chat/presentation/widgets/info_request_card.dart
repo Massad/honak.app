@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Card shown when the business requests additional information from the customer.
 ///
@@ -232,21 +233,11 @@ class InfoRequestCard extends StatelessWidget {
           const SizedBox(width: AppSpacing.sm),
           Icon(icon, size: 18, color: AppColors.warning),
           const SizedBox(width: AppSpacing.sm),
-          SizedBox(
-            height: 30,
-            child: FilledButton(
-              onPressed: isBusinessMode ? null : () {},
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.warning,
-                disabledBackgroundColor:
-                    AppColors.warning.withValues(alpha: 0.38),
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: AppSpacing.md,
-                ),
-                textStyle: const TextStyle(fontSize: 12),
-              ),
-              child: const Text('ارسال'),
-            ),
+          Button(
+            onPressed: isBusinessMode ? null : () {},
+            label: 'ارسال',
+            style: Style.warning,
+            size: ButtonSize.small,
           ),
         ],
       ),

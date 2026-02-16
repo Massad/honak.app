@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 Future<void> showFilterSheet(
   BuildContext context, {
@@ -235,30 +236,14 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
               const SizedBox(height: AppSpacing.md),
 
               // Apply button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    widget.onApply(_categoryId, _status);
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: Text(
-                    'عرض النتائج ($_filteredCount)',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+              btn.Button(
+                onPressed: () {
+                  widget.onApply(_categoryId, _status);
+                  Navigator.pop(context);
+                },
+                label: 'عرض النتائج ($_filteredCount)',
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
         ],
       ),

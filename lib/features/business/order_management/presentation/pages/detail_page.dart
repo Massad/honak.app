@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/presentation/providers/provider.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/alternative_sheet.dart';
@@ -16,6 +15,7 @@ import 'package:honak/features/business/shared/domain/entities/entities.dart';
 import 'package:honak/features/chat/domain/entities/conversation.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/receipt_sheet.dart';
 
 /// Arabic labels for request types.
@@ -341,20 +341,13 @@ class _SummaryTab extends StatelessWidget {
         ],
         const SizedBox(height: AppSpacing.xxl),
         if (request.status == 'pending') ...[
-          SizedBox(
-            height: 48,
-            child: OutlinedButton.icon(
-              onPressed: onAlternative,
-              icon: const Icon(Icons.swap_horiz, size: 18),
-              label: const Text('اقتراح بديل'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.primary,
-                side: const BorderSide(color: AppColors.primary),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
+          Button(
+            onPressed: onAlternative,
+            label: 'اقتراح بديل',
+            icon: const ButtonIcon(Icons.swap_horiz),
+            variant: Variant.outlined,
+            size: ButtonSize.large,
+            expand: true,
           ),
           const SizedBox(height: AppSpacing.sm),
         ],
@@ -389,21 +382,13 @@ class _MessageCustomerButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      width: double.infinity,
-      height: 44,
-      child: OutlinedButton.icon(
-        onPressed: onOpenChat,
-        icon: const Icon(Icons.chat_outlined, size: 18),
-        label: Text('مراسلة ${request.customer.name}'),
-        style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.primary,
-          side: const BorderSide(color: AppColors.primary),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
+    return Button(
+      onPressed: onOpenChat,
+      label: 'مراسلة ${request.customer.name}',
+      icon: const ButtonIcon(Icons.chat_outlined),
+      variant: Variant.outlined,
+      size: ButtonSize.large,
+      expand: true,
     );
   }
 }

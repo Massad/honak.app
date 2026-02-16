@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Late cancellation warning with fee info and reschedule option.
 class LateCancelSheet extends StatelessWidget {
@@ -109,53 +110,30 @@ class LateCancelSheet extends StatelessWidget {
                   ],
                   if (onReschedule != null) ...[
                     const SizedBox(height: AppSpacing.lg),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: onReschedule,
-                        icon: const Icon(Icons.calendar_today, size: 16),
-                        label: const Text(
-                            '\u064a\u0645\u0643\u0646\u0643 \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u062c\u062f\u0648\u0644\u0629 \u0628\u062f\u0644\u0627\u064b \u0645\u0646 \u0627\u0644\u0625\u0644\u063a\u0627\u0621'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.primary,
-                          side: const BorderSide(color: AppColors.primary),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: AppSpacing.md),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: AppRadius.button),
-                        ),
-                      ),
+                    btn.Button(
+                      onPressed: onReschedule,
+                      label: '\u064a\u0645\u0643\u0646\u0643 \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u062c\u062f\u0648\u0644\u0629 \u0628\u062f\u0644\u0627\u064b \u0645\u0646 \u0627\u0644\u0625\u0644\u063a\u0627\u0621',
+                      icon: const btn.ButtonIcon(Icons.calendar_today),
+                      variant: btn.Variant.outlined,
+                      size: btn.ButtonSize.large,
+                      expand: true,
                     ),
                   ],
                   const SizedBox(height: AppSpacing.xxl),
-                  _fullWidthButton(
-                    FilledButton(
-                      onPressed: onClose,
-                      style: FilledButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: AppSpacing.md),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.button),
-                      ),
-                      child: const Text('\u0627\u0644\u0627\u062d\u062a\u0641\u0627\u0638 \u0628\u0627\u0644\u062d\u062c\u0632'),
-                    ),
+                  btn.Button(
+                    onPressed: onClose,
+                    label: '\u0627\u0644\u0627\u062d\u062a\u0641\u0627\u0638 \u0628\u0627\u0644\u062d\u062c\u0632',
+                    size: btn.ButtonSize.large,
+                    expand: true,
                   ),
                   const SizedBox(height: AppSpacing.sm),
-                  _fullWidthButton(
-                    OutlinedButton(
-                      onPressed: onConfirm,
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.error,
-                        side: BorderSide(
-                            color: AppColors.error.withValues(alpha: 0.3)),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: AppSpacing.md),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.button),
-                      ),
-                      child: const Text('\u0625\u0644\u063a\u0627\u0621 \u0639\u0644\u0649 \u0623\u064a \u062d\u0627\u0644'),
-                    ),
+                  btn.Button(
+                    onPressed: onConfirm,
+                    label: '\u0625\u0644\u063a\u0627\u0621 \u0639\u0644\u0649 \u0623\u064a \u062d\u0627\u0644',
+                    variant: btn.Variant.outlined,
+                    style: btn.Style.danger,
+                    size: btn.ButtonSize.large,
+                    expand: true,
                   ),
                 ],
               ),
@@ -165,9 +143,6 @@ class LateCancelSheet extends StatelessWidget {
       ),
     );
   }
-
-  Widget _fullWidthButton(Widget button) =>
-      SizedBox(width: double.infinity, child: button);
 }
 
 class _WarningBox extends StatelessWidget {

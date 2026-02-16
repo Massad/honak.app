@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/features/business/stories/domain/entities/my_story.dart';
 import 'package:honak/features/business/stories/presentation/pages/story_creator_page.dart';
 import 'package:honak/features/business/stories/presentation/providers/my_stories_provider.dart';
@@ -342,24 +343,12 @@ class _ContentTabState extends ConsumerState<ContentTab> {
                       ),
                       child: Row(
                         children: [
-                          GestureDetector(
-                            onTap: _openCreator,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(Icons.add,
-                                    size: 14, color: Color(0xFF1A73E8)),
-                                const SizedBox(width: 2),
-                                Text(
-                                  context.l10n.storyCreateNew,
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    color: Color(0xFF1A73E8),
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
+                          btn.Button(
+                            onPressed: _openCreator,
+                            label: context.l10n.storyCreateNew,
+                            icon: btn.ButtonIcon(Icons.add),
+                            variant: btn.Variant.text,
+                            size: btn.ButtonSize.small,
                           ),
                           const Spacer(),
                           Text(

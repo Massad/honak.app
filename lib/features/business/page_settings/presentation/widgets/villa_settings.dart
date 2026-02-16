@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class VillaSettings extends ConsumerStatefulWidget {
   final VoidCallback onClose;
@@ -1039,12 +1040,11 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-          TextButton(
+          Button(
             onPressed: () => context.showSnackBar('قريباً'),
-            child: const Text(
-              'إدارة الصور',
-              style: TextStyle(fontSize: 11, color: AppColors.primary),
-            ),
+            label: 'إدارة الصور',
+            variant: Variant.text,
+            size: ButtonSize.small,
           ),
         ],
       ),

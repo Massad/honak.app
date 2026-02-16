@@ -35,6 +35,7 @@ import 'package:honak/features/chat/presentation/widgets/system_message.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
+import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 part 'detail_page_actions.dart';
@@ -110,11 +111,12 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
-                    TextButton(
+                    Button(
                       onPressed: () => ref.invalidate(
                         conversationMessagesProvider(_conv.id),
                       ),
-                      child: const Text('إعادة المحاولة'),
+                      label: 'إعادة المحاولة',
+                      variant: Variant.text,
                     ),
                   ],
                 ),
@@ -286,16 +288,20 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
 
     // Default delete selection bar
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.close),
+      leading: Button(
         onPressed: _clearSelection,
+        icon: ButtonIcon(Icons.close),
+        variant: Variant.text,
+        size: ButtonSize.small,
       ),
       title: Text('$count محدد'),
       centerTitle: true,
       actions: [
-        IconButton(
-          icon: const Icon(Icons.delete_outline, color: AppColors.error),
+        Button(
           onPressed: _deleteSelectedForMe,
+          icon: ButtonIcon(Icons.delete_outline, color: AppColors.error),
+          variant: Variant.text,
+          size: ButtonSize.small,
         ),
       ],
     );
@@ -380,9 +386,11 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
             ),
           ],
         ),
-        IconButton(
-          icon: const Icon(Icons.arrow_forward_ios, size: 20),
+        Button(
           onPressed: () => Navigator.pop(context),
+          icon: ButtonIcon(Icons.arrow_forward_ios, size: 20),
+          variant: Variant.text,
+          size: ButtonSize.small,
         ),
       ],
     );

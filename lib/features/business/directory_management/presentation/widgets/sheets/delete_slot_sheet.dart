@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Delete confirmation sheet — warning text + red delete button.
 class DeleteSlotSheet extends StatelessWidget {
@@ -67,23 +68,12 @@ class DeleteSlotSheet extends StatelessWidget {
               const SizedBox(height: AppSpacing.xl),
 
               // Delete button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: onConfirm,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.error,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
-                    padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button,
-                    ),
-                  ),
-                  child: const Text(
-                    'حذف نهائي',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ),
+              btn.Button(
+                onPressed: onConfirm,
+                label: 'حذف نهائي',
+                style: btn.Style.danger,
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
 
               const SizedBox(height: AppSpacing.lg),

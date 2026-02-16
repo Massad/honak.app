@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/presentation/widgets/late_cancel_sheet.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Bottom sheet confirming cancellation.
 ///
@@ -98,33 +99,20 @@ class _SimpleCancelSheet extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSpacing.xxl),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                onPressed: onConfirm,
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.error,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button),
-                ),
-                child: const Text('\u0646\u0639\u0645\u060c \u0625\u0644\u063a\u0627\u0621'),
-              ),
+            btn.Button(
+              onPressed: onConfirm,
+              label: '\u0646\u0639\u0645\u060c \u0625\u0644\u063a\u0627\u0621',
+              style: btn.Style.danger,
+              size: btn.ButtonSize.large,
+              expand: true,
             ),
             const SizedBox(height: AppSpacing.sm),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: onClose,
-                style: OutlinedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.button),
-                ),
-                child: const Text('\u062a\u0631\u0627\u062c\u0639'),
-              ),
+            btn.Button(
+              onPressed: onClose,
+              label: '\u062a\u0631\u0627\u062c\u0639',
+              variant: btn.Variant.outlined,
+              size: btn.ButtonSize.large,
+              expand: true,
             ),
           ],
         ),

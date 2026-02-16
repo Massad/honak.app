@@ -31,6 +31,7 @@ import 'package:honak/features/business/catalog_management/presentation/widgets/
 import 'package:honak/features/business/page_settings/presentation/providers/team_provider.dart';
 import 'package:honak/shared/extensions/sort_extensions.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 enum _ManageMode { normal, select, reorder }
 
@@ -1449,10 +1450,11 @@ class _ErrorState extends StatelessWidget {
                 ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.lg),
-          TextButton.icon(
+          btn.Button(
             onPressed: onRetry,
-            icon: const Icon(Icons.refresh, size: 18),
-            label: const Text('إعادة المحاولة'),
+            label: 'إعادة المحاولة',
+            icon: const btn.ButtonIcon(Icons.refresh, size: 18),
+            variant: btn.Variant.text,
           ),
         ],
       ),

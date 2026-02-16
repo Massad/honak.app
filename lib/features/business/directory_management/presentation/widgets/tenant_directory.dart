@@ -23,6 +23,7 @@ import 'package:honak/features/business/directory_management/presentation/widget
 import 'package:honak/features/business/directory_management/presentation/widgets/tenant_directory_stats.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Core management widget for the directory — assembles stats, config chips,
 /// filters, coverage bar, and tenant card list. Launched from [DirectoryManagePage].
@@ -637,10 +638,11 @@ class _ErrorState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
-            TextButton.icon(
+            btn.Button(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh, size: 18),
-              label: const Text('إعادة المحاولة'),
+              label: 'إعادة المحاولة',
+              icon: const btn.ButtonIcon(Icons.refresh),
+              variant: btn.Variant.text,
             ),
           ],
         ),

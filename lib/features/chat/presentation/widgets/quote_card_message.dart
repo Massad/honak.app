@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class QuoteCardMessage extends StatefulWidget {
   final Message message;
@@ -335,44 +336,24 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
         textDirection: TextDirection.ltr,
         children: [
           Expanded(
-            child: OutlinedButton(
+            child: Button(
               onPressed: widget.isBusinessMode
                   ? null
                   : () => setState(() => _status = 'declined'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: context.colorScheme.onSurfaceVariant,
-                disabledForegroundColor: context
-                    .colorScheme.onSurfaceVariant
-                    .withValues(alpha: 0.38),
-                side: BorderSide(color: context.colorScheme.outlineVariant),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                ),
-                padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: AppSpacing.sm,
-                ),
-              ),
-              child: const Text('رفض'),
+              label: 'رفض',
+              variant: Variant.outlined,
+              size: ButtonSize.small,
             ),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: FilledButton(
+            child: Button(
               onPressed: widget.isBusinessMode
                   ? null
                   : () => setState(() => _status = 'accepted'),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.success,
-                disabledBackgroundColor:
-                    AppColors.success.withValues(alpha: 0.38),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                ),
-                padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: AppSpacing.sm,
-                ),
-              ),
-              child: const Text('قبول'),
+              label: 'قبول',
+              style: Style.success,
+              size: ButtonSize.small,
             ),
           ),
         ],

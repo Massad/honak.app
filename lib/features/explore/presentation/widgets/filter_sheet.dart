@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/explore/presentation/providers/explore_providers.dart';
 import 'package:honak/features/explore/presentation/providers/filter_provider.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class ExploreFilterSheet extends ConsumerStatefulWidget {
   const ExploreFilterSheet({super.key});
@@ -43,11 +44,13 @@ class _ExploreFilterSheetState extends ConsumerState<ExploreFilterSheet> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              TextButton(
+              btn.Button(
                 onPressed: () => setState(
                   () => _draft = ExploreFilterState.empty,
                 ),
-                child: Text(context.l10n.filterReset),
+                label: context.l10n.filterReset,
+                variant: btn.Variant.text,
+                size: btn.ButtonSize.small,
               ),
             ],
           ),
@@ -150,15 +153,14 @@ class _ExploreFilterSheetState extends ConsumerState<ExploreFilterSheet> {
         // Apply button
         Padding(
           padding: EdgeInsets.all(AppSpacing.lg),
-          child: SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: () {
-                ref.read(exploreFilterProvider.notifier).update(_draft);
-                Navigator.of(context).pop();
-              },
-              child: Text(context.l10n.filterApply),
-            ),
+          child: btn.Button(
+            onPressed: () {
+              ref.read(exploreFilterProvider.notifier).update(_draft);
+              Navigator.of(context).pop();
+            },
+            label: context.l10n.filterApply,
+            expand: true,
+            size: btn.ButtonSize.large,
           ),
         ),
       ],

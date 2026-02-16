@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_wizard/presentation/providers/wizard_provider.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class WizardDone extends ConsumerWidget {
   const WizardDone({super.key});
@@ -113,7 +114,7 @@ class WizardDone extends ConsumerWidget {
               Row(
                 children: [
                   Expanded(
-                    child: OutlinedButton.icon(
+                    child: btn.Button(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -122,13 +123,15 @@ class WizardDone extends ConsumerWidget {
                           ),
                         );
                       },
-                      icon: const Icon(Icons.qr_code, size: 18),
-                      label: const Text('QR Code'),
+                      icon: const btn.ButtonIcon(Icons.qr_code, size: 18),
+                      label: 'QR Code',
+                      variant: btn.Variant.outlined,
+                      expand: true,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
-                    child: OutlinedButton.icon(
+                    child: btn.Button(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -137,8 +140,10 @@ class WizardDone extends ConsumerWidget {
                           ),
                         );
                       },
-                      icon: const Icon(Icons.inventory_2_outlined, size: 18),
-                      label: const Text('\u0625\u0639\u062f\u0627\u062f \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a'),
+                      icon: const btn.ButtonIcon(Icons.inventory_2_outlined, size: 18),
+                      label: '\u0625\u0639\u062f\u0627\u062f \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a',
+                      variant: btn.Variant.outlined,
+                      expand: true,
                     ),
                   ),
                 ],
@@ -147,17 +152,15 @@ class WizardDone extends ConsumerWidget {
               const Spacer(flex: 3),
 
               // CTA: Go to manage page
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: FilledButton(
-                  onPressed: () {
-                    // For Phase 1, just pop back — business mode switch
-                    // would happen when the page is created on backend
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('\u0627\u0644\u0630\u0647\u0627\u0628 \u0644\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0635\u0641\u062d\u0629'),
-                ),
+              btn.Button(
+                onPressed: () {
+                  // For Phase 1, just pop back — business mode switch
+                  // would happen when the page is created on backend
+                  Navigator.of(context).pop();
+                },
+                label: '\u0627\u0644\u0630\u0647\u0627\u0628 \u0644\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0635\u0641\u062d\u0629',
+                size: btn.ButtonSize.large,
+                expand: true,
               ),
             ],
           ),

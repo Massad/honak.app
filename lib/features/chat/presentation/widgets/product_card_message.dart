@@ -6,6 +6,7 @@ import 'package:honak/features/chat/domain/entities/message.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class ProductCardMessage extends StatefulWidget {
   final Message message;
@@ -251,26 +252,14 @@ class _ProductCardMessageState extends State<ProductCardMessage> {
         end: AppSpacing.md,
         bottom: AppSpacing.sm,
       ),
-      child: SizedBox(
-        width: double.infinity,
-        child: FilledButton.icon(
-          onPressed: widget.isBusinessMode
-              ? null
-              : () => setState(() => _status = 'added'),
-          icon: const Icon(Icons.add_shopping_cart, size: 16),
-          label: const Text('أضف للطلب'),
-          style: FilledButton.styleFrom(
-            backgroundColor: _borderColor,
-            disabledBackgroundColor:
-                _borderColor.withValues(alpha: 0.38),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.md),
-            ),
-            padding: const EdgeInsetsDirectional.symmetric(
-              vertical: AppSpacing.sm,
-            ),
-          ),
-        ),
+      child: Button(
+        onPressed: widget.isBusinessMode
+            ? null
+            : () => setState(() => _status = 'added'),
+        label: 'أضف للطلب',
+        icon: ButtonIcon(Icons.add_shopping_cart, size: 16),
+        size: ButtonSize.small,
+        expand: true,
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/domain/entities/truck.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Quick order entry sheet used during driving mode.
 /// Designed for speed — capture a walk-up/phone/whatsapp order in <30s.
@@ -436,65 +437,40 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     Row(
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            height: 48,
-                            child: ElevatedButton.icon(
-                              onPressed: _canSubmit
-                                  ? () {
-                                      final item = _buildItem(
-                                        QueueItemStatus.delivered,
-                                      );
-                                      widget.onAddAndDeliver(item);
-                                      Navigator.pop(context);
-                                    }
-                                  : null,
-                              icon:
-                                  const Icon(Icons.check, size: 14),
-                              label:
-                                  const Text('أضف وسل\u0651م الآن'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.success,
-                                foregroundColor: Colors.white,
-                                disabledBackgroundColor:
-                                    context.colorScheme.surfaceContainerHighest,
-                                disabledForegroundColor:
-                                    context.colorScheme.onSurfaceVariant,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: AppRadius.cardInner,
-                                ),
-                              ),
-                            ),
+                          child: Button(
+                            onPressed: _canSubmit
+                                ? () {
+                                    final item = _buildItem(
+                                      QueueItemStatus.delivered,
+                                    );
+                                    widget.onAddAndDeliver(item);
+                                    Navigator.pop(context);
+                                  }
+                                : null,
+                            label: 'أضف وسل\u0651م الآن',
+                            icon: const ButtonIcon(Icons.check),
+                            style: Style.success,
+                            size: ButtonSize.large,
+                            expand: true,
                           ),
                         ),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: SizedBox(
-                            height: 48,
-                            child: OutlinedButton.icon(
-                              onPressed: _canSubmit
-                                  ? () {
-                                      final item = _buildItem(
-                                        QueueItemStatus.pending,
-                                      );
-                                      widget.onAddToQueue(item);
-                                      Navigator.pop(context);
-                                    }
-                                  : null,
-                              icon:
-                                  const Icon(Icons.add, size: 14),
-                              label: const Text('أضف للدور'),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: AppColors.primary,
-                                side: BorderSide(
-                                  color: _canSubmit
-                                      ? AppColors.primary
-                                      : context.colorScheme.outlineVariant,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: AppRadius.cardInner,
-                                ),
-                              ),
-                            ),
+                          child: Button(
+                            onPressed: _canSubmit
+                                ? () {
+                                    final item = _buildItem(
+                                      QueueItemStatus.pending,
+                                    );
+                                    widget.onAddToQueue(item);
+                                    Navigator.pop(context);
+                                  }
+                                : null,
+                            label: 'أضف للدور',
+                            icon: const ButtonIcon(Icons.add),
+                            variant: Variant.outlined,
+                            size: ButtonSize.large,
+                            expand: true,
                           ),
                         ),
                       ],

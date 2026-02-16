@@ -3,6 +3,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class ImageMessage extends StatelessWidget {
   final Message message;
@@ -100,9 +101,11 @@ class ImageMessage extends StatelessWidget {
             Positioned(
               top: MediaQuery.of(context).padding.top + 8,
               left: 8,
-              child: IconButton(
-                icon: const Icon(Icons.close, color: AppColors.white, size: 28),
+              child: Button(
                 onPressed: () => Navigator.pop(context),
+                icon: ButtonIcon(Icons.close, size: 28, color: AppColors.white),
+                variant: Variant.text,
+                size: ButtonSize.small,
               ),
             ),
           ],

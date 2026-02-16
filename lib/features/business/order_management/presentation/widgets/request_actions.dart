@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Action buttons shown based on request status.
 class RequestActions extends StatelessWidget {
@@ -41,51 +42,27 @@ class RequestActions extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: SizedBox(
-            height: 48,
-            child: OutlinedButton.icon(
-              onPressed: isLoading ? null : onDecline,
-              icon: const Icon(Icons.close, size: 18),
-              label: const Text('رفض'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.error,
-                side: const BorderSide(color: AppColors.error),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
+          child: Button(
+            onPressed: isLoading ? null : onDecline,
+            label: 'رفض',
+            icon: const ButtonIcon(Icons.close),
+            style: Style.danger,
+            variant: Variant.outlined,
+            size: ButtonSize.large,
+            expand: true,
           ),
         ),
         const SizedBox(width: AppSpacing.md),
         Expanded(
           flex: 2,
-          child: SizedBox(
-            height: 48,
-            child: ElevatedButton.icon(
-              onPressed: isLoading ? null : onAccept,
-              icon: isLoading
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Colors.white,
-                      ),
-                    )
-                  : const Icon(Icons.check, size: 18),
-              label: const Text(
-                'قبول الطلب',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF43A047),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
+          child: Button(
+            onPressed: isLoading ? null : onAccept,
+            label: 'قبول الطلب',
+            icon: const ButtonIcon(Icons.check),
+            style: Style.success,
+            size: ButtonSize.large,
+            expand: true,
+            isLoading: isLoading,
           ),
         ),
       ],
@@ -96,140 +73,61 @@ class RequestActions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SizedBox(
-          height: 48,
-          child: ElevatedButton.icon(
-            onPressed: isLoading ? null : () => onUpdateStatus('in_progress'),
-            icon: isLoading
-                ? const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
-                  )
-                : const Icon(Icons.local_shipping_outlined, size: 18),
-            label: const Text(
-              'بدء التنفيذ',
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
+        Button(
+          onPressed: isLoading ? null : () => onUpdateStatus('in_progress'),
+          label: 'بدء التنفيذ',
+          icon: const ButtonIcon(Icons.local_shipping_outlined),
+          size: ButtonSize.large,
+          expand: true,
+          isLoading: isLoading,
         ),
         const SizedBox(height: AppSpacing.sm),
-        SizedBox(
-          height: 48,
-          child: OutlinedButton.icon(
-            onPressed: isLoading ? null : () => onUpdateStatus('completed'),
-            icon: const Icon(Icons.check_circle_outline, size: 18),
-            label: const Text('تم التسليم'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF43A047),
-              side: const BorderSide(color: Color(0xFF43A047)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
+        Button(
+          onPressed: isLoading ? null : () => onUpdateStatus('completed'),
+          label: 'تم التسليم',
+          icon: const ButtonIcon(Icons.check_circle_outline),
+          style: Style.success,
+          variant: Variant.outlined,
+          size: ButtonSize.large,
+          expand: true,
         ),
       ],
     );
   }
 
   Widget _buildInProgressActions() {
-    return SizedBox(
-      height: 48,
-      child: ElevatedButton.icon(
-        onPressed: isLoading ? null : () => onUpdateStatus('completed'),
-        icon: isLoading
-            ? const SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: Colors.white,
-                ),
-              )
-            : const Icon(Icons.check_circle_outline, size: 18),
-        label: const Text(
-          'تم التسليم',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF43A047),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
+    return Button(
+      onPressed: isLoading ? null : () => onUpdateStatus('completed'),
+      label: 'تم التسليم',
+      icon: const ButtonIcon(Icons.check_circle_outline),
+      style: Style.success,
+      size: ButtonSize.large,
+      expand: true,
+      isLoading: isLoading,
     );
   }
 
   Widget _buildPreparingActions() {
-    return SizedBox(
-      height: 48,
-      child: ElevatedButton.icon(
-        onPressed: isLoading ? null : () => onUpdateStatus('ready'),
-        icon: isLoading
-            ? const SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: Colors.white,
-                ),
-              )
-            : const Icon(Icons.check_circle_outline, size: 18),
-        label: const Text(
-          'جاهز للتسليم',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFFF9800),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
+    return Button(
+      onPressed: isLoading ? null : () => onUpdateStatus('ready'),
+      label: 'جاهز للتسليم',
+      icon: const ButtonIcon(Icons.check_circle_outline),
+      style: Style.warning,
+      size: ButtonSize.large,
+      expand: true,
+      isLoading: isLoading,
     );
   }
 
   Widget _buildReadyActions() {
-    return SizedBox(
-      height: 48,
-      child: ElevatedButton.icon(
-        onPressed: isLoading ? null : () => onUpdateStatus('delivered'),
-        icon: isLoading
-            ? const SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: Colors.white,
-                ),
-              )
-            : const Icon(Icons.local_shipping, size: 18),
-        label: const Text(
-          'تم التسليم',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF43A047),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
+    return Button(
+      onPressed: isLoading ? null : () => onUpdateStatus('delivered'),
+      label: 'تم التسليم',
+      icon: const ButtonIcon(Icons.local_shipping),
+      style: Style.success,
+      size: ButtonSize.large,
+      expand: true,
+      isLoading: isLoading,
     );
   }
 
@@ -270,52 +168,27 @@ class RequestActions extends StatelessWidget {
         // Receipt + Chat buttons
         Row(
           children: [
-            // Chat button (outline)
             if (onChat != null)
               Expanded(
-                child: SizedBox(
-                  height: 48,
-                  child: OutlinedButton.icon(
-                    onPressed: onChat,
-                    icon: const Icon(
-                        Icons.chat_bubble_outline_rounded, size: 18),
-                    label: const Text('محادثة'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSurface,
-                      side: BorderSide(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .outlineVariant),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
+                child: Button(
+                  onPressed: onChat,
+                  label: 'محادثة',
+                  icon: const ButtonIcon(Icons.chat_bubble_outline_rounded),
+                  variant: Variant.outlined,
+                  size: ButtonSize.large,
+                  expand: true,
                 ),
               ),
             if (onChat != null && onReceipt != null)
               const SizedBox(width: AppSpacing.sm),
-            // Receipt button (primary filled)
             if (onReceipt != null)
               Expanded(
-                child: SizedBox(
-                  height: 48,
-                  child: ElevatedButton.icon(
-                    onPressed: onReceipt,
-                    icon: const Icon(Icons.receipt_long_rounded, size: 18),
-                    label: const Text(
-                      'إرسال إيصال',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
+                child: Button(
+                  onPressed: onReceipt,
+                  label: 'إرسال إيصال',
+                  icon: const ButtonIcon(Icons.receipt_long_rounded),
+                  size: ButtonSize.large,
+                  expand: true,
                 ),
               ),
           ],

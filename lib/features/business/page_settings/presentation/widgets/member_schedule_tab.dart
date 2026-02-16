@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/business_hours.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/hours_provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 /// Per-employee schedule tab inside [MemberDetailScreen].
 /// Currently displays the page-level schedule as read-only reference.
@@ -72,22 +73,12 @@ class MemberScheduleTab extends ConsumerWidget {
           const SizedBox(height: AppSpacing.lg),
 
           // Placeholder button
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: null,
-              icon: const Icon(Icons.edit_calendar_outlined, size: 18),
-              label: const Text('تخصيص جدول — قريباً'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                side: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
-                padding:
-                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                ),
-              ),
-            ),
+          Button(
+            onPressed: null,
+            label: 'تخصيص جدول — قريباً',
+            icon: ButtonIcon(Icons.edit_calendar_outlined),
+            variant: Variant.outlined,
+            expand: true,
           ),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Drag handle, title ("طلب حجز"), page name, and close button.
 class ReservationSheetHeader extends StatelessWidget {
@@ -126,19 +126,12 @@ class ReservationSheetFooter extends StatelessWidget {
   }
 
   Widget _submitButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: FilledButton.icon(
-        onPressed: canSubmitAll ? onSubmit : null,
-        icon: const Icon(Icons.send, size: 16),
-        label: const Text('إرسال طلب الحجز'),
-        style: FilledButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.lg),
-          ),
-        ),
-      ),
+    return btn.Button(
+      onPressed: canSubmitAll ? onSubmit : null,
+      label: 'إرسال طلب الحجز',
+      icon: const btn.ButtonIcon(Icons.send),
+      size: btn.ButtonSize.large,
+      expand: true,
     );
   }
 
@@ -148,32 +141,20 @@ class ReservationSheetFooter extends StatelessWidget {
         if (!isFirst)
           Padding(
             padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
-            child: OutlinedButton.icon(
+            child: btn.Button(
               onPressed: onBack,
-              icon: const Icon(Icons.arrow_forward, size: 14),
-              label: const Text('رجوع'),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.lg,
-                  vertical: AppSpacing.md,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.lg),
-                ),
-              ),
+              label: 'رجوع',
+              icon: const btn.ButtonIcon(Icons.arrow_forward),
+              variant: btn.Variant.outlined,
+              size: btn.ButtonSize.large,
             ),
           ),
         Expanded(
-          child: FilledButton.icon(
+          child: btn.Button(
             onPressed: canAdvance ? onNext : null,
-            icon: const Icon(Icons.chevron_left, size: 16),
-            label: const Text('التالي'),
-            style: FilledButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.lg),
-              ),
-            ),
+            label: 'التالي',
+            icon: const btn.ButtonIcon(Icons.chevron_left),
+            size: btn.ButtonSize.large,
           ),
         ),
       ],
