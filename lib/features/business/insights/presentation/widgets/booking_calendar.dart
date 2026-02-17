@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 
 /// Weekly calendar view showing bookings by day.
 /// Only for service_booking and reservation archetypes.
 class BookingCalendar extends StatelessWidget {
   const BookingCalendar({super.key});
 
-  // Mock booking data: day name -> count
-  static const _days = ['سبت', 'أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة'];
+  // Mock booking data: count per day
   static const _counts = [8, 5, 3, 6, 4, 7, 2];
   static const _maxCount = 8;
 
+  static List<String> _dayNames(AppLocalizations l10n) => [
+        l10n.insightsDaySat,
+        l10n.insightsDaySun,
+        l10n.insightsDayMon,
+        l10n.insightsDayTue,
+        l10n.insightsDayWed,
+        l10n.insightsDayThu,
+        l10n.insightsDayFri,
+      ];
+
   @override
   Widget build(BuildContext context) {
+    final days = _dayNames(context.l10n);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -25,21 +38,21 @@ class BookingCalendar extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'جدول الحجوزات',
-            style: TextStyle(fontSize: 14, color: Color(0xFF111827)),
+          Text(
+            context.l10n.insightsBookingSchedule,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
           ),
           const SizedBox(height: 12),
           // Week navigator
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(Icons.chevron_right, size: 20, color: Color(0xFF9CA3AF)),
+              const Icon(Icons.chevron_right, size: 20, color: Color(0xFF9CA3AF)),
               Text(
-                'الأسبوع الحالي',
-                style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                context.l10n.insightsCurrentWeek,
+                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
               ),
-              Icon(Icons.chevron_left, size: 20, color: Color(0xFF9CA3AF)),
+              const Icon(Icons.chevron_left, size: 20, color: Color(0xFF9CA3AF)),
             ],
           ),
           const SizedBox(height: 12),
@@ -55,7 +68,7 @@ class BookingCalendar extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        _days[i],
+                        days[i],
                         style: const TextStyle(
                           fontSize: 10,
                           color: Color(0xFF9CA3AF),

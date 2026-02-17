@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -79,7 +80,7 @@ class CustomerQueuePosition extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'تم التوصيل',
+                context.l10n.bizReqCqDelivered,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.success,
                   fontWeight: FontWeight.w600,
@@ -106,8 +107,9 @@ class CustomerQueuePosition extends StatelessWidget {
           if (deliveredAt != null) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
-              'تم التسليم الساعة $deliveredAt'
-              '${driverName != null ? ' بواسطة $driverName' : ''}',
+              driverName != null
+                  ? context.l10n.bizReqCqDeliveredAtBy(deliveredAt!, driverName!)
+                  : context.l10n.bizReqCqDeliveredAt(deliveredAt!),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: context.colorScheme.onSurfaceVariant,
                 fontSize: 12,
@@ -120,8 +122,9 @@ class CustomerQueuePosition extends StatelessWidget {
           if (deliveredQty != null) ...[
             const SizedBox(height: AppSpacing.xxs),
             Text(
-              '$deliveredQty قارورة تم تسليمها'
-              '${emptiesCollected != null ? ' · $emptiesCollected فارغة تم جمعها' : ''}',
+              emptiesCollected != null
+                  ? context.l10n.bizReqCqDeliveredQtyEmpties(deliveredQty!, emptiesCollected!)
+                  : context.l10n.bizReqCqDeliveredQty(deliveredQty!),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: context.colorScheme.onSurfaceVariant,
                 fontSize: 10,
@@ -134,7 +137,7 @@ class CustomerQueuePosition extends StatelessWidget {
           if (creditsDeducted != null) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
-              'الرصيد: ${creditsDeducted!.before} ← ${creditsDeducted!.after} (تم الخصم تلقائياً)',
+              context.l10n.bizReqCqCreditsDeducted(creditsDeducted!.before, creditsDeducted!.after),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppColors.primary,
                 fontSize: 10,
@@ -165,7 +168,7 @@ class CustomerQueuePosition extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'تم تخطي التوصيل',
+                context.l10n.bizReqCqSkipped,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.warning,
                   fontWeight: FontWeight.w600,
@@ -189,7 +192,7 @@ class CustomerQueuePosition extends StatelessWidget {
           if (rescheduledTo != null) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
-              'تمت إعادة الجدولة: $rescheduledTo',
+              context.l10n.bizReqCqRescheduled(rescheduledTo!),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppColors.primary,
                 fontSize: 10,
@@ -210,10 +213,10 @@ class CustomerQueuePosition extends StatelessWidget {
           bg: const Color(0xFFF5F5F5),
           border: const Color(0xFFE0E0E0),
           iconBg: const Color(0xFF9E9E9E),
-          label: 'طلبك في مسار اليوم',
+          label: context.l10n.bizReqCqQueued,
           desc: estimatedMinutes != null
-              ? 'المتوقع: $estimatedMinutes — ${estimatedMinutes! + 20} دقيقة'
-              : 'سيتم التوصيل اليوم',
+              ? context.l10n.bizReqCqQueuedEta(estimatedMinutes!, estimatedMinutes! + 20)
+              : context.l10n.bizReqCqQueuedToday,
           labelColor: Color(0xFF616161),
           descColor: context.colorScheme.onSurfaceVariant,
           icon: Icons.local_shipping_outlined,
@@ -222,10 +225,10 @@ class CustomerQueuePosition extends StatelessWidget {
           bg: AppColors.primary.withValues(alpha: 0.08),
           border: AppColors.primary.withValues(alpha: 0.25),
           iconBg: AppColors.primary,
-          label: 'السائق في المنطقة',
+          label: context.l10n.bizReqCqOnRoute,
           desc: estimatedMinutes != null
-              ? 'المتوقع: $estimatedMinutes — ${estimatedMinutes! + 15} دقيقة'
-              : 'السائق يقترب',
+              ? context.l10n.bizReqCqQueuedEta(estimatedMinutes!, estimatedMinutes! + 15)
+              : context.l10n.bizReqCqOnRouteApproaching,
           labelColor: AppColors.primary,
           descColor: context.colorScheme.onSurfaceVariant,
           icon: Icons.local_shipping_outlined,
@@ -234,8 +237,8 @@ class CustomerQueuePosition extends StatelessWidget {
           bg: AppColors.success.withValues(alpha: 0.08),
           border: AppColors.success.withValues(alpha: 0.35),
           iconBg: AppColors.success,
-          label: 'السائق في طريقه إليك!',
-          desc: 'المتوقع: ٥ — ١٠ دقائق',
+          label: context.l10n.bizReqCqNext,
+          desc: context.l10n.bizReqCqNextEta,
           labelColor: AppColors.success,
           descColor: AppColors.success,
           icon: Icons.navigation_outlined,
@@ -396,7 +399,7 @@ class CustomerQueuePosition extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'جهّز للاستلام:',
+                        context.l10n.bizReqCqPrepare,
                         style:
                             Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.success,
@@ -460,7 +463,7 @@ class CustomerQueuePosition extends StatelessWidget {
                     _CallButton(phone: driverPhone!, compact: false),
                   const Spacer(),
                   Text(
-                    'السائق: $driverName',
+                    context.l10n.bizReqCqDriverLabel(driverName!),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: context.colorScheme.onSurfaceVariant,
                       fontSize: 12,
@@ -524,7 +527,7 @@ class _CallButton extends StatelessWidget {
               Icon(Icons.phone, size: 10, color: AppColors.white),
               const SizedBox(width: AppSpacing.xs),
               Text(
-                'اتصال',
+                context.l10n.bizReqCqCall,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.surface,
                   fontSize: 10,

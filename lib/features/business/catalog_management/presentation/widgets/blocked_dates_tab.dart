@@ -65,13 +65,13 @@ class _BlockedDatesTabState extends State<BlockedDatesTab> {
           Row(
             children: [
               _addBlockButton('recurring', Icons.repeat,
-                  AppColors.secondary, 'يوم أسبوعي'),
+                  AppColors.secondary, context.l10n.blockWeekly),
               const SizedBox(width: AppSpacing.sm),
               _addBlockButton(
-                  'specific', Icons.event_busy, AppColors.error, 'يوم محدد'),
+                  'specific', Icons.event_busy, AppColors.error, context.l10n.blockSpecific),
               const SizedBox(width: AppSpacing.sm),
               _addBlockButton('range', Icons.date_range,
-                  const Color(0xFF7B1FA2), 'فترة زمنية'),
+                  const Color(0xFF7B1FA2), context.l10n.blockRange),
             ],
           ),
           const SizedBox(height: AppSpacing.lg),
@@ -103,11 +103,11 @@ class _BlockedDatesTabState extends State<BlockedDatesTab> {
                 const Icon(Icons.calendar_today,
                     size: 40, color: AppColors.divider),
                 const SizedBox(height: AppSpacing.md),
-                const Text('لا يوجد تواريخ محظورة',
+                Text(context.l10n.blockNoBlocked,
                     style:
-                        TextStyle(fontSize: 14, color: AppColors.textHint)),
+                        const TextStyle(fontSize: 14, color: AppColors.textHint)),
                 const SizedBox(height: AppSpacing.xs),
-                Text('أضف حظر لأيام أو فترات لا تستقبل فيها طلبات',
+                Text(context.l10n.blockNoBlockedHint,
                     style: TextStyle(
                         fontSize: 10,
                         color: AppColors.textHint.withValues(alpha: 0.6))),
@@ -126,9 +126,8 @@ class _BlockedDatesTabState extends State<BlockedDatesTab> {
               borderRadius: BorderRadius.circular(AppRadius.md),
               border: Border.all(color: const Color(0xFFBBDEFB)),
             ),
-            child: const Text(
-              'التواريخ المحظورة تلغي الجدول الأسبوعي — العملاء لن '
-              'يتمكنوا من الحجز في هذه الأوقات.',
+            child: Text(
+              context.l10n.blockInfoBox,
               style: TextStyle(fontSize: 10, color: AppColors.primary),
               textAlign: TextAlign.right,
             ),
@@ -209,12 +208,12 @@ class _BlockCard extends StatelessWidget {
 
   const _BlockCard({required this.block, required this.onRemove});
 
-  String get _description {
+  String _description(BuildContext context) {
     switch (block.type) {
       case 'recurring':
         final day =
             weekdays.where((d) => d.id == block.weekday).firstOrNull;
-        return 'كل ${day?.label ?? block.weekday}';
+        return context.l10n.blockEveryDay(day?.label ?? block.weekday ?? '');
       case 'specific':
         return formatBlockDate(block.date ?? '');
       case 'range':
@@ -253,7 +252,7 @@ class _BlockCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(_description,
+                Text(_description(context),
                     style: TextStyle(
                         fontSize: 14,
                         color: context.colorScheme.onSurface),

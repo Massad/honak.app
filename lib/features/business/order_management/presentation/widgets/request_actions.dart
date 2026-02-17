@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/button.dart';
@@ -26,25 +28,26 @@ class RequestActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return switch (status) {
-      'pending' => _buildPendingActions(),
-      'accepted' => _buildAcceptedActions(),
-      'in_progress' => _buildInProgressActions(),
-      'preparing' => _buildPreparingActions(),
-      'ready' => _buildReadyActions(),
-      'completed' || 'delivered' => _buildTerminalActions(context),
-      'declined' => _buildDeclinedBadge(),
+      'pending' => _buildPendingActions(l10n),
+      'accepted' => _buildAcceptedActions(l10n),
+      'in_progress' => _buildInProgressActions(l10n),
+      'preparing' => _buildPreparingActions(l10n),
+      'ready' => _buildReadyActions(l10n),
+      'completed' || 'delivered' => _buildTerminalActions(context, l10n),
+      'declined' => _buildDeclinedBadge(l10n),
       _ => const SizedBox.shrink(),
     };
   }
 
-  Widget _buildPendingActions() {
+  Widget _buildPendingActions(AppLocalizations l10n) {
     return Row(
       children: [
         Expanded(
           child: Button(
             onPressed: isLoading ? null : onDecline,
-            label: 'رفض',
+            label: l10n.bizReqDecline,
             icon: const ButtonIcon(Icons.close),
             style: Style.danger,
             variant: Variant.outlined,
@@ -57,7 +60,7 @@ class RequestActions extends StatelessWidget {
           flex: 2,
           child: Button(
             onPressed: isLoading ? null : onAccept,
-            label: 'قبول الطلب',
+            label: l10n.bizReqAcceptOrder,
             icon: const ButtonIcon(Icons.check),
             style: Style.success,
             size: ButtonSize.large,
@@ -69,13 +72,13 @@ class RequestActions extends StatelessWidget {
     );
   }
 
-  Widget _buildAcceptedActions() {
+  Widget _buildAcceptedActions(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Button(
           onPressed: isLoading ? null : () => onUpdateStatus('in_progress'),
-          label: 'بدء التنفيذ',
+          label: l10n.bizReqStartExecution,
           icon: const ButtonIcon(Icons.local_shipping_outlined),
           size: ButtonSize.large,
           expand: true,
@@ -84,7 +87,7 @@ class RequestActions extends StatelessWidget {
         const SizedBox(height: AppSpacing.sm),
         Button(
           onPressed: isLoading ? null : () => onUpdateStatus('completed'),
-          label: 'تم التسليم',
+          label: l10n.bizReqMarkDelivered,
           icon: const ButtonIcon(Icons.check_circle_outline),
           style: Style.success,
           variant: Variant.outlined,
@@ -95,10 +98,10 @@ class RequestActions extends StatelessWidget {
     );
   }
 
-  Widget _buildInProgressActions() {
+  Widget _buildInProgressActions(AppLocalizations l10n) {
     return Button(
       onPressed: isLoading ? null : () => onUpdateStatus('completed'),
-      label: 'تم التسليم',
+      label: l10n.bizReqMarkDelivered,
       icon: const ButtonIcon(Icons.check_circle_outline),
       style: Style.success,
       size: ButtonSize.large,
@@ -107,10 +110,10 @@ class RequestActions extends StatelessWidget {
     );
   }
 
-  Widget _buildPreparingActions() {
+  Widget _buildPreparingActions(AppLocalizations l10n) {
     return Button(
       onPressed: isLoading ? null : () => onUpdateStatus('ready'),
-      label: 'جاهز للتسليم',
+      label: l10n.bizReqReadyForDelivery,
       icon: const ButtonIcon(Icons.check_circle_outline),
       style: Style.warning,
       size: ButtonSize.large,
@@ -119,10 +122,10 @@ class RequestActions extends StatelessWidget {
     );
   }
 
-  Widget _buildReadyActions() {
+  Widget _buildReadyActions(AppLocalizations l10n) {
     return Button(
       onPressed: isLoading ? null : () => onUpdateStatus('delivered'),
-      label: 'تم التسليم',
+      label: l10n.bizReqMarkDelivered,
       icon: const ButtonIcon(Icons.local_shipping),
       style: Style.success,
       size: ButtonSize.large,
@@ -131,7 +134,7 @@ class RequestActions extends StatelessWidget {
     );
   }
 
-  Widget _buildTerminalActions(BuildContext context) {
+  Widget _buildTerminalActions(BuildContext context, AppLocalizations l10n) {
     return Column(
       children: [
         // Completed badge
@@ -143,19 +146,19 @@ class RequestActions extends StatelessWidget {
               color: const Color(0xFF43A047).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'مكتمل',
-                  style: TextStyle(
+                  l10n.bizReqStatusCompleted,
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF43A047),
                   ),
                 ),
-                SizedBox(width: AppSpacing.sm),
-                Icon(
+                const SizedBox(width: AppSpacing.sm),
+                const Icon(
                   Icons.check_circle,
                   size: 20,
                   color: Color(0xFF43A047),
@@ -172,7 +175,7 @@ class RequestActions extends StatelessWidget {
               Expanded(
                 child: Button(
                   onPressed: onChat,
-                  label: 'محادثة',
+                  label: l10n.bizReqChat,
                   icon: const ButtonIcon(Icons.chat_bubble_outline_rounded),
                   variant: Variant.outlined,
                   size: ButtonSize.large,
@@ -185,7 +188,7 @@ class RequestActions extends StatelessWidget {
               Expanded(
                 child: Button(
                   onPressed: onReceipt,
-                  label: 'إرسال إيصال',
+                  label: l10n.bizReqSendReceipt,
                   icon: const ButtonIcon(Icons.receipt_long_rounded),
                   size: ButtonSize.large,
                   expand: true,
@@ -197,7 +200,7 @@ class RequestActions extends StatelessWidget {
     );
   }
 
-  Widget _buildDeclinedBadge() {
+  Widget _buildDeclinedBadge(AppLocalizations l10n) {
     return Center(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -205,19 +208,19 @@ class RequestActions extends StatelessWidget {
           color: AppColors.error.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: const Row(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'مرفوض',
-              style: TextStyle(
+              l10n.bizReqStatusDeclined,
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
                 color: AppColors.error,
               ),
             ),
-            SizedBox(width: AppSpacing.sm),
-            Icon(
+            const SizedBox(width: AppSpacing.sm),
+            const Icon(
               Icons.block,
               size: 20,
               color: AppColors.error,

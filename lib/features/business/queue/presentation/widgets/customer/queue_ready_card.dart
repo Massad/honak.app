@@ -32,7 +32,7 @@ class QueueReadyCard extends StatelessWidget {
           const Icon(Icons.check_circle, size: 48, color: Colors.white),
           const SizedBox(height: AppSpacing.md),
           Text(
-            'سيارتك جاهزة!',
+            context.l10n.queueCarReady,
             style: context.textTheme.titleMedium?.copyWith(
               color: Theme.of(context).colorScheme.surface,
               fontWeight: FontWeight.bold,
@@ -112,7 +112,7 @@ class QueueReadyCard extends StatelessWidget {
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(
-                      'ادفع عند الاستلام — ${entry.paymentMethods.join(' / ')}',
+                      context.l10n.queuePayOnPickup(entry.paymentMethods.join(' / ')),
                       style: context.textTheme.labelSmall?.copyWith(
                         color: Theme.of(context).colorScheme.surface,
                       ),

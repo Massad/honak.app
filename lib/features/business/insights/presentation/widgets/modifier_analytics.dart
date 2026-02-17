@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Shows popular menu modifiers. Only for menu_order archetype.
 class ModifierAnalytics extends StatelessWidget {
@@ -32,14 +33,14 @@ class ModifierAnalytics extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'تحليل التعديلات',
-            style: TextStyle(fontSize: 14, color: Color(0xFF111827)),
+          Text(
+            context.l10n.insightsModifierAnalysis,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF111827)),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'الإضافات والتعديلات الأكثر طلباً',
-            style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+          Text(
+            context.l10n.insightsModifierSubtitle,
+            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
           ),
           const SizedBox(height: 12),
           ..._modifiers.map((m) => Padding(
@@ -78,7 +79,7 @@ class _ModifierRow extends StatelessWidget {
           children: [
             Text(name, style: const TextStyle(fontSize: 12, color: Color(0xFF374151))),
             Text(
-              '$count مرة',
+              context.l10n.insightsTimesCount(count),
               style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280)),
             ),
           ],

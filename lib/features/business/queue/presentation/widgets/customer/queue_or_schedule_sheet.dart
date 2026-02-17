@@ -171,8 +171,8 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
           iconColor: AppColors.primary,
           borderColor: AppColors.primary,
           bgColor: AppColors.primary.withValues(alpha: 0.03),
-          title: 'اليوم — بالدور',
-          subtitle: 'احجز مكانك بالدور وتعال لما يقرب دورك',
+          title: context.l10n.queueTodayByQueue,
+          subtitle: context.l10n.queueTodayByQueueSubtitle,
           enabled: !widget.isPaused,
           onTap: _handleQueueToday,
           bottomWidget: _buildQueueStatsRow(context),
@@ -186,8 +186,8 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
           iconColor: context.colorScheme.onSurfaceVariant,
           borderColor: context.colorScheme.outlineVariant,
           bgColor: null,
-          title: 'موعد لاحق',
-          subtitle: 'اختر يوم ووقت يناسبك',
+          title: context.l10n.queueBookLater,
+          subtitle: context.l10n.queueBookLaterSubtitle,
           enabled: true,
           onTap: () {
             Navigator.pop(context);
@@ -296,7 +296,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
             const Icon(Icons.pause_circle, size: 14, color: AppColors.warning),
             const SizedBox(width: AppSpacing.xs),
             Text(
-              'الدور متوقف مؤقتاً',
+              context.l10n.queuePausedTemporarily,
               style: context.textTheme.labelSmall?.copyWith(
                 color: AppColors.warning,
               ),
@@ -321,7 +321,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
           const Icon(Icons.people_outline, size: 14, color: AppColors.primary),
           const SizedBox(width: AppSpacing.xs),
           Text(
-            '${widget.queueSize} بالانتظار',
+            context.l10n.queueQueueSizeWaiting(widget.queueSize),
             style: context.textTheme.labelSmall?.copyWith(
               color: AppColors.primary,
             ),
@@ -330,7 +330,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
           const Icon(Icons.access_time, size: 14, color: AppColors.primary),
           const SizedBox(width: AppSpacing.xs),
           Text(
-            '~${widget.estimatedWaitMin} دقيقة',
+            context.l10n.queueApproxMinutes(widget.estimatedWaitMin),
             style: context.textTheme.labelSmall?.copyWith(
               color: AppColors.primary,
             ),
@@ -358,7 +358,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'إضافات اختيارية',
+          context.l10n.queueOptionalAddOns,
           style: context.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.w600,
           ),
@@ -431,7 +431,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'المجموع',
+                context.l10n.queueTotal,
                 style: context.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
@@ -453,7 +453,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
             Expanded(
               child: btn.Button(
                 onPressed: () => setState(() => _step = 'choice'),
-                label: 'رجوع',
+                label: context.l10n.back,
                 variant: btn.Variant.outlined,
                 size: btn.ButtonSize.large,
                 expand: true,
@@ -472,7 +472,7 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                         : _selectedAddOnIds.toList(),
                   );
                 },
-                label: 'احجز مكانك بالدور',
+                label: context.l10n.queueReserveSpot,
                 icon: const btn.ButtonIcon(Icons.navigation),
                 size: btn.ButtonSize.large,
                 expand: true,

@@ -1,3 +1,6 @@
+import 'package:flutter/widgets.dart';
+import 'package:honak/core/extensions/context_ext.dart';
+
 enum QueueStatus {
   waiting,
   onTheWay,
@@ -6,12 +9,13 @@ enum QueueStatus {
   completed,
   noShow;
 
-  String get labelAr => switch (this) {
-        waiting => 'بالانتظار',
-        onTheWay => 'في الطريق',
-        inProgress => 'قيد التنفيذ',
-        ready => 'جاهز',
-        completed => 'مكتمل',
-        noShow => 'لم يحضر',
+  /// Localized label via l10n. Requires [BuildContext].
+  String label(BuildContext context) => switch (this) {
+        waiting => context.l10n.queueLabelWaiting,
+        onTheWay => context.l10n.queueLabelOnTheWay,
+        inProgress => context.l10n.queueLabelInProgress,
+        ready => context.l10n.queueLabelReady,
+        completed => context.l10n.queueLabelCompleted,
+        noShow => context.l10n.queueLabelNoShow,
       };
 }

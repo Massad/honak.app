@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
@@ -85,19 +86,20 @@ class _HeaderRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Row(
       children: [
         // Stats on the left side (in RTL, visually left)
         if (activeCount > 0) ...[
           _StatsBadge(
-            label: '$activeCount نشطة',
+            label: l10n.bizReqTrucksActive(activeCount),
             color: AppColors.success,
             background: AppColors.success.withValues(alpha: 0.08),
           ),
           const SizedBox(width: AppSpacing.xs),
         ],
         Text(
-          '$totalDelivered تسليم · $totalRemaining متبقي',
+          l10n.bizReqTrucksStats(totalDelivered, totalRemaining),
           style: TextStyle(
             fontSize: 10,
             color: context.colorScheme.onSurfaceVariant,
@@ -106,7 +108,7 @@ class _HeaderRow extends StatelessWidget {
         const Spacer(),
         // Title on the right side (in RTL, visually right)
         Text(
-          'الشاحنات',
+          l10n.bizReqTrucks,
           style: TextStyle(
             fontSize: 12,
             color: context.colorScheme.onSurface,
@@ -141,10 +143,11 @@ class _TruckCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final isOffToday = !truck.deliveryDays.contains(todayDay);
     final statusInfo = isOffToday
-        ? _StatusInfo.offToday
-        : _StatusInfo.fromStatus(truck.today.status);
+        ? _StatusInfo.offToday(l10n)
+        : _StatusInfo.fromStatus(truck.today.status, l10n);
     final total = truck.today.deliveredCount + truck.today.remainingCount;
     final progress = total > 0 ? truck.today.deliveredCount / total : 0.0;
 
@@ -207,7 +210,7 @@ class _TruckCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              'الطلبات ستنتقل ليوم التوصيل القادم',
+                              l10n.bizReqTruckOrdersDeferred,
                               style: TextStyle(
                                 fontSize: 10,
                                 color: context.colorScheme.onSurfaceVariant,
@@ -356,35 +359,35 @@ class _StatusInfo {
     required this.background,
   });
 
-  static const onRoute = _StatusInfo(
-    label: 'على المسار',
+  static _StatusInfo onRoute(AppLocalizations l10n) => _StatusInfo(
+    label: l10n.bizReqTruckOnRoute,
     color: AppColors.success,
-    background: Color(0x1443A047), // green-50 equivalent
+    background: const Color(0x1443A047), // green-50 equivalent
   );
 
-  static const notStarted = _StatusInfo(
-    label: 'لم يبدأ',
-    color: Color(0xFF9E9E9E),
-    background: Color(0xFFF5F5F5),
+  static _StatusInfo notStarted(AppLocalizations l10n) => _StatusInfo(
+    label: l10n.bizReqTruckNotStarted,
+    color: const Color(0xFF9E9E9E),
+    background: const Color(0xFFF5F5F5),
   );
 
-  static const routeComplete = _StatusInfo(
-    label: 'اكتمل',
+  static _StatusInfo routeComplete(AppLocalizations l10n) => _StatusInfo(
+    label: l10n.bizReqTruckComplete,
     color: AppColors.primary,
-    background: Color(0x141A73E8), // blue-50 equivalent
+    background: const Color(0x141A73E8), // blue-50 equivalent
   );
 
-  static const offToday = _StatusInfo(
-    label: 'عطلة اليوم',
-    color: Color(0xFFBDBDBD),
-    background: Color(0xFFFAFAFA),
+  static _StatusInfo offToday(AppLocalizations l10n) => _StatusInfo(
+    label: l10n.bizReqTruckOffToday,
+    color: const Color(0xFFBDBDBD),
+    background: const Color(0xFFFAFAFA),
   );
 
-  factory _StatusInfo.fromStatus(TruckStatus status) {
+  static _StatusInfo fromStatus(TruckStatus status, AppLocalizations l10n) {
     return switch (status) {
-      TruckStatus.onRoute => onRoute,
-      TruckStatus.notStarted => notStarted,
-      TruckStatus.routeComplete => routeComplete,
+      TruckStatus.onRoute => onRoute(l10n),
+      TruckStatus.notStarted => notStarted(l10n),
+      TruckStatus.routeComplete => routeComplete(l10n),
     };
   }
 }

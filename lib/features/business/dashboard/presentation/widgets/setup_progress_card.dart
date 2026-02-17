@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:honak/config/archetype.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
@@ -25,60 +26,60 @@ class SetupStep {
 
 /// Returns the setup steps for a given archetype.
 /// In demo mode, first 3 steps are marked as done.
-List<SetupStep> getSetupSteps(Archetype archetype) {
+List<SetupStep> getSetupSteps(Archetype archetype, AppLocalizations l10n) {
   final productsLabel = switch (archetype) {
-    Archetype.menuOrder => 'أضف أصناف القائمة',
-    Archetype.serviceBooking => 'أضف خدماتك',
-    Archetype.catalogOrder => 'أضف منتجاتك',
-    _ => 'أضف محتوى صفحتك',
+    Archetype.menuOrder => l10n.bizSetupStepProductsMenu,
+    Archetype.serviceBooking => l10n.bizSetupStepProductsService,
+    Archetype.catalogOrder => l10n.bizSetupStepProductsCatalog,
+    _ => l10n.bizSetupStepProducts,
   };
 
   final steps = <SetupStep>[
-    const SetupStep(
+    SetupStep(
       id: 'logo',
-      label: 'أضف شعار / صورة الصفحة',
+      label: l10n.bizSetupStepLogo,
       icon: Icons.camera_alt_outlined,
       done: true, // demo: done
-      actionLabel: 'إضافة',
+      actionLabel: l10n.bizSetupActionAdd,
     ),
-    const SetupStep(
+    SetupStep(
       id: 'location',
-      label: 'حدد موقعك على الخريطة',
+      label: l10n.bizSetupStepLocation,
       icon: Icons.location_on_outlined,
       done: true, // demo: done
-      actionLabel: 'تحديد',
+      actionLabel: l10n.bizSetupActionSet,
     ),
-    const SetupStep(
+    SetupStep(
       id: 'hours',
-      label: 'أضف ساعات العمل',
+      label: l10n.bizSetupStepHours,
       icon: Icons.access_time_outlined,
       done: true, // demo: done
-      actionLabel: 'إضافة',
+      actionLabel: l10n.bizSetupActionAdd,
     ),
     SetupStep(
       id: 'products',
       label: productsLabel,
       icon: Icons.inventory_2_outlined,
       done: false, // demo: pending
-      actionLabel: 'إضافة',
+      actionLabel: l10n.bizSetupActionAdd,
     ),
-    const SetupStep(
+    SetupStep(
       id: 'payment',
-      label: 'حدد طرق الدفع المقبولة',
+      label: l10n.bizSetupStepPayment,
       icon: Icons.credit_card_outlined,
       done: false, // demo: pending
-      actionLabel: 'تحديد',
+      actionLabel: l10n.bizSetupActionSet,
     ),
   ];
 
   // Optional team step for service businesses
   if (archetype == Archetype.serviceBooking) {
-    steps.add(const SetupStep(
+    steps.add(SetupStep(
       id: 'team',
-      label: 'أضف فريق العمل',
+      label: l10n.bizSetupStepTeam,
       icon: Icons.people_outlined,
       done: false, // demo: pending
-      actionLabel: 'إضافة',
+      actionLabel: l10n.bizSetupActionAdd,
     ));
   }
 
@@ -107,7 +108,7 @@ class _SetupProgressCardState extends State<SetupProgressCard>
 
   @override
   Widget build(BuildContext context) {
-    final steps = getSetupSteps(widget.archetype);
+    final steps = getSetupSteps(widget.archetype, context.l10n);
     final doneCount = steps.where((s) => s.done).length;
     final totalCount = steps.length;
     final progress = (doneCount / totalCount * 100).round();
@@ -204,14 +205,14 @@ class _SetupProgressCardState extends State<SetupProgressCard>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'أكمل إعداد صفحتك',
+                    context.l10n.bizSetupTitle,
                     style: context.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   Text(
-                    '$doneCount من $totalCount خطوات مكتملة',
+                    context.l10n.bizSetupProgress(doneCount, totalCount),
                     style: TextStyle(
                       fontSize: 10,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -397,10 +398,10 @@ class _MotivationalMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final message = progress < 50
-        ? 'أكمل الإعداد خلال ٣ دقائق وابدأ باستقبال الطلبات!'
+        ? context.l10n.bizSetupMotivationStart
         : progress < 100
-            ? 'أوشكت! خطوتين فقط وتصير صفحتك جاهزة'
-            : 'ممتاز! صفحتك جاهزة لاستقبال العملاء';
+            ? context.l10n.bizSetupMotivationAlmost
+            : context.l10n.bizSetupMotivationDone;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),

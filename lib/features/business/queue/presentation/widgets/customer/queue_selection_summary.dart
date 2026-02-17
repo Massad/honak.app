@@ -75,7 +75,7 @@ class QueueSelectionSummary extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'المجموع',
+                  context.l10n.queueTotal,
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.onSurface,
                     fontWeight: FontWeight.w600,

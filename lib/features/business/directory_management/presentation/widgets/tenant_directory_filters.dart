@@ -37,7 +37,7 @@ class TenantDirectoryFilters extends StatelessWidget {
             ),
             children: [
               _FilterChip(
-                label: 'الكل',
+                label: context.l10n.dirFilterAll,
                 count: stats.total,
                 isActive: activeStatusFilter == null,
                 color: context.colorScheme.onSurface,
@@ -45,7 +45,7 @@ class TenantDirectoryFilters extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               _FilterChip(
-                label: TenantStatus.claimed.label,
+                label: TenantStatus.claimed.localizedLabel(context.l10n),
                 count: stats.claimed,
                 isActive: activeStatusFilter == 'claimed',
                 color: TenantStatus.claimed.color,
@@ -55,7 +55,7 @@ class TenantDirectoryFilters extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               _FilterChip(
-                label: TenantStatus.newTenant.label,
+                label: TenantStatus.newTenant.localizedLabel(context.l10n),
                 count: stats.newThisWeek,
                 isActive: activeStatusFilter == 'new',
                 color: TenantStatus.newTenant.color,
@@ -65,7 +65,7 @@ class TenantDirectoryFilters extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               _FilterChip(
-                label: TenantStatus.invited.label,
+                label: TenantStatus.invited.localizedLabel(context.l10n),
                 count: stats.invited,
                 isActive: activeStatusFilter == 'invited',
                 color: TenantStatus.invited.color,
@@ -75,7 +75,7 @@ class TenantDirectoryFilters extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               _FilterChip(
-                label: TenantStatus.unclaimed.label,
+                label: TenantStatus.unclaimed.localizedLabel(context.l10n),
                 count: stats.unclaimed,
                 isActive: activeStatusFilter == 'unclaimed',
                 color: TenantStatus.unclaimed.color,
@@ -113,7 +113,7 @@ class TenantDirectoryFilters extends StatelessWidget {
                 child: TextField(
             onChanged: onSearchChanged,
             decoration: InputDecoration(
-              hintText: 'ابحث عن متجر أو رقم وحدة...',
+              hintText: context.l10n.dirSearchHint,
               hintStyle: TextStyle(
                 fontSize: 13,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,

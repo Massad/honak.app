@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
@@ -95,7 +96,7 @@ class _TeamAssignContentState extends State<_TeamAssignContent> {
           child: Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Text(
-              'تعيين فريق لـ ${widget.selectedCount} ${widget.itemLabelAr}',
+              context.l10n.catalogAssignTeamFor(widget.selectedCount, widget.itemLabelAr),
               style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -202,7 +203,7 @@ class _TeamAssignContentState extends State<_TeamAssignContent> {
                   widget.onApply(_selected.toList());
                   Navigator.pop(context);
                 },
-                label: 'تطبيق',
+                label: context.l10n.catalogApply,
                 size: btn.ButtonSize.large,
                 expand: true,
               ),

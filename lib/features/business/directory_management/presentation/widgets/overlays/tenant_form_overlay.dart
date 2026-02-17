@@ -98,7 +98,8 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
         .firstOrNull;
     if (existingTenant != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('هذه الصفحة مربوطة بالفعل')),
+        SnackBar(
+            content: Text(context.l10n.dirTenantFormPageAlreadyLinked)),
       );
       return;
     }
@@ -130,7 +131,9 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
           onPressed: widget.onClose,
         ),
         title: Text(
-          widget.tenant != null ? 'تعديل مستأجر' : 'إضافة مستأجر',
+          widget.tenant != null
+              ? context.l10n.dirTenantFormEditTitle
+              : context.l10n.dirTenantFormAddTitle,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
@@ -139,7 +142,7 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
           if (_mode != _FormMode.search)
             btn.Button(
               onPressed: _name.isNotEmpty ? _handleSave : null,
-              label: 'حفظ',
+              label: context.l10n.save,
               variant: btn.Variant.text,
               size: btn.ButtonSize.small,
             ),
@@ -166,7 +169,7 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
             onChanged: (q) => setState(() => _searchQuery = q),
             autofocus: true,
             decoration: InputDecoration(
-              hintText: 'ابحث عن صفحة في حُنُك...',
+              hintText: context.l10n.dirTenantFormSearchHint,
               hintStyle: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
               prefixIcon:
                   Icon(Icons.search, size: 20, color: Theme.of(context).colorScheme.onSurfaceVariant),
@@ -189,8 +192,8 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
               ? Center(
                   child: Text(
                     _searchQuery.isEmpty
-                        ? 'ابحث عن صفحة لربطها كمستأجر'
-                        : 'لا توجد نتائج',
+                        ? context.l10n.dirTenantFormSearchEmpty
+                        : context.l10n.dirNoResults,
                     style:
                         TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   ),
@@ -217,9 +220,9 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
             padding: const EdgeInsets.all(AppSpacing.lg),
             child: GestureDetector(
               onTap: () => setState(() => _mode = _FormMode.create),
-              child: const Text(
-                'أو أنشئ مستأجر جديد',
-                style: TextStyle(
+              child: Text(
+                context.l10n.dirTenantFormCreateNew,
+                style: const TextStyle(
                   fontSize: 13,
                   color: AppColors.primary,
                   fontWeight: FontWeight.w500,
@@ -313,7 +316,7 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
                   _selectedPage = null;
                   _mode = _FormMode.search;
                 }),
-                label: 'تغيير',
+                label: context.l10n.dirTenantFormChange,
                 variant: btn.Variant.text,
                 size: btn.ButtonSize.small,
               ),
@@ -328,10 +331,10 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
 
         // Unit input
         _buildField(
-          label: 'رقم الوحدة',
+          label: context.l10n.dirTenantFormUnitLabel,
           value: _unit,
           onChanged: (v) => setState(() => _unit = v),
-          hint: 'مثال: A-12',
+          hint: context.l10n.dirTenantFormUnitHint,
         ),
         const SizedBox(height: AppSpacing.lg),
 
@@ -356,7 +359,7 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
                     color: AppColors.primary),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
-                  'البحث عن صفحة',
+                  context.l10n.dirTenantFormSearchForPage,
                   style: TextStyle(
                     fontSize: 12,
                     color: AppColors.primary,
@@ -370,16 +373,16 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
 
         // Name
         _buildField(
-          label: 'اسم المستأجر',
+          label: context.l10n.dirTenantFormNameLabel,
           value: _name,
           onChanged: (v) => setState(() => _name = v),
-          hint: 'اسم المحل أو النشاط',
+          hint: context.l10n.dirTenantFormNameHint,
         ),
         if (_isDuplicate)
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.xs),
             child: Text(
-              'يوجد مستأجر بنفس الاسم',
+              context.l10n.dirTenantFormDuplicateName,
               style: TextStyle(fontSize: 11, color: AppColors.error),
             ),
           ),
@@ -391,10 +394,10 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
 
         // Unit
         _buildField(
-          label: 'رقم الوحدة',
+          label: context.l10n.dirTenantFormUnitLabel,
           value: _unit,
           onChanged: (v) => setState(() => _unit = v),
-          hint: 'مثال: A-12',
+          hint: context.l10n.dirTenantFormUnitHint,
         ),
         const SizedBox(height: AppSpacing.lg),
 
@@ -404,10 +407,10 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
 
         // Phone (optional)
         _buildField(
-          label: 'رقم الهاتف (اختياري)',
+          label: context.l10n.dirTenantFormPhoneLabel,
           value: _phone,
           onChanged: (v) => setState(() => _phone = v),
-          hint: '07XXXXXXXX',
+          hint: context.l10n.dirTenantFormPhoneHint,
           keyboardType: TextInputType.phone,
         ),
       ],
@@ -469,7 +472,7 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'الطابق',
+          context.l10n.dirTenantFormFloorLabel,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
@@ -499,7 +502,7 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'التصنيف',
+          context.l10n.dirTenantFormCategoryLabel,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
@@ -638,9 +641,9 @@ class _SearchResultCard extends StatelessWidget {
                                 .withValues(alpha: 0.1),
                             borderRadius: AppRadius.pill,
                           ),
-                          child: const Text(
-                            'في مولك',
-                            style: TextStyle(
+                          child: Text(
+                            context.l10n.dirTenantFormInYourMall,
+                            style: const TextStyle(
                               fontSize: 9,
                               fontWeight: FontWeight.w600,
                               color: Color(0xFF16A34A),
@@ -657,7 +660,8 @@ class _SearchResultCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${page['followers']} متابع',
+                    context.l10n
+                        .dirTenantFormFollowers(page['followers'] as int),
                     style: context.textTheme.labelSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
@@ -676,7 +680,7 @@ class _SearchResultCard extends StatelessWidget {
                   borderRadius: AppRadius.button,
                 ),
                 child: Text(
-                  'دعوة',
+                  context.l10n.dirTenantFormInviteBtn,
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,

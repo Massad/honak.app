@@ -10,6 +10,7 @@ import 'package:honak/features/notifications/presentation/providers/notification
 import 'package:honak/features/notifications/presentation/widgets/notification_card.dart';
 import 'package:honak/features/notifications/presentation/widgets/notification_filter_chip.dart';
 import 'package:honak/features/notifications/presentation/widgets/notification_list_skeleton.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 
 class NotificationListPage extends ConsumerStatefulWidget {
@@ -121,10 +122,7 @@ class _NotificationListPageState extends ConsumerState<NotificationListPage> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Directionality(
-              textDirection: TextDirection.ltr,
-              child: Icon(Icons.arrow_back_ios_new, size: 20),
-            ),
+            icon: Icon(AppDirection.backIcon(context), size: 20),
             onPressed: () => Navigator.pop(context),
           ),
         ],

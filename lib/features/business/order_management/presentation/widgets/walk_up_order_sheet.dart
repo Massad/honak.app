@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -33,16 +34,16 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
   PaymentType _payment = PaymentType.cash;
   final _noteController = TextEditingController();
 
-  static const _sourceOptions = [
-    (id: OrderSource.walkUp, label: 'عشوائي', icon: Icons.shuffle),
-    (id: OrderSource.phoneCall, label: 'اتصال', icon: Icons.phone),
-    (id: OrderSource.whatsapp, label: 'واتساب', icon: Icons.chat),
+  List<({OrderSource id, String label, IconData icon})> _sourceOptions(AppLocalizations l10n) => [
+    (id: OrderSource.walkUp, label: l10n.bizReqWalkUpSourceWalkUp, icon: Icons.shuffle),
+    (id: OrderSource.phoneCall, label: l10n.bizReqWalkUpSourcePhone, icon: Icons.phone),
+    (id: OrderSource.whatsapp, label: l10n.bizReqWalkUpSourceWhatsapp, icon: Icons.chat),
   ];
 
-  static const _paymentOptions = [
-    (id: PaymentType.cash, label: 'نقدا\u064B'),
-    (id: PaymentType.credits, label: 'رصيد'),
-    (id: PaymentType.onAccount, label: 'على الحساب'),
+  List<({PaymentType id, String label})> _paymentOptions(AppLocalizations l10n) => [
+    (id: PaymentType.cash, label: l10n.bizReqWalkUpPayCash),
+    (id: PaymentType.credits, label: l10n.bizReqWalkUpPayCredits),
+    (id: PaymentType.onAccount, label: l10n.bizReqWalkUpPayOnAccount),
   ];
 
   bool get _canSubmit => _qty > 0;
@@ -53,10 +54,10 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
       status: status,
       customerName:
           _nameController.text.trim().isEmpty
-              ? 'زبون عابر'
+              ? context.l10n.bizReqWalkUpDefaultCustomer
               : _nameController.text.trim(),
       customerPhone: _phoneController.text.trim(),
-      address: 'نقطة GPS',
+      address: context.l10n.bizReqWalkUpGpsPoint,
       coordinates: const LatLng(lat: 31.955, lng: 35.873),
       items: [QueueOrderItem(name: widget.productName, qty: _qty)],
       source: _source,
@@ -91,7 +92,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
             children: [
               Expanded(
                 child: Text(
-                  'طلب سريع',
+                  context.l10n.bizReqWalkUpTitle,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -127,7 +128,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                   children: [
                     // Source selector
                     Text(
-                      'مصدر الطلب',
+                      context.l10n.bizReqWalkUpSource,
                       style: TextStyle(
                         fontSize: 12,
                         color: context.colorScheme.onSurfaceVariant,
@@ -135,7 +136,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Row(
-                      children: _sourceOptions.map((s) {
+                      children: _sourceOptions(context.l10n).map((s) {
                         final active = _source == s.id;
                         return Expanded(
                           child: Padding(
@@ -195,7 +196,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              'من؟',
+                              context.l10n.bizReqWalkUpWho,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: context.colorScheme.onSurfaceVariant,
@@ -214,7 +215,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                             borderRadius: AppRadius.pill,
                           ),
                           child: Text(
-                            'اختياري',
+                            context.l10n.optional,
                             style: TextStyle(
                               fontSize: 10,
                               color: context.colorScheme.onSurfaceVariant
@@ -229,7 +230,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        hintText: 'اسم الزبون',
+                        hintText: context.l10n.bizReqWalkUpCustomerName,
                         hintStyle: TextStyle(
                           fontSize: 14,
                           color: context.colorScheme.onSurfaceVariant,
@@ -253,7 +254,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                       keyboardType: TextInputType.phone,
                       textDirection: TextDirection.ltr,
                       decoration: InputDecoration(
-                        hintText: 'رقم الهاتف (اختياري)',
+                        hintText: context.l10n.bizReqWalkUpPhoneOptional,
                         hintStyle: TextStyle(
                           fontSize: 14,
                           color: context.colorScheme.onSurfaceVariant,
@@ -323,7 +324,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     const SizedBox(height: AppSpacing.lg),
                     // Empties
                     Text(
-                      'فوارغ للجمع',
+                      context.l10n.bizReqWalkUpEmpties,
                       style: TextStyle(
                         fontSize: 12,
                         color: context.colorScheme.onSurfaceVariant,
@@ -366,7 +367,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     const SizedBox(height: AppSpacing.lg),
                     // Payment
                     Text(
-                      'الدفع',
+                      context.l10n.bizReqWalkUpPayment,
                       style: TextStyle(
                         fontSize: 12,
                         color: context.colorScheme.onSurfaceVariant,
@@ -374,7 +375,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Row(
-                      children: _paymentOptions.map((p) {
+                      children: _paymentOptions(context.l10n).map((p) {
                         final active = _payment == p.id;
                         return Expanded(
                           child: Padding(
@@ -415,7 +416,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     TextField(
                       controller: _noteController,
                       decoration: InputDecoration(
-                        hintText: 'ملاحظة (اختياري)',
+                        hintText: context.l10n.bizReqWalkUpNoteHint,
                         hintStyle: TextStyle(
                           fontSize: 14,
                           color: context.colorScheme.onSurfaceVariant,
@@ -447,7 +448,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                     Navigator.pop(context);
                                   }
                                 : null,
-                            label: 'أضف وسل\u0651م الآن',
+                            label: context.l10n.bizReqWalkUpAddDeliver,
                             icon: const ButtonIcon(Icons.check),
                             style: Style.success,
                             size: ButtonSize.large,
@@ -466,7 +467,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                                     Navigator.pop(context);
                                   }
                                 : null,
-                            label: 'أضف للدور',
+                            label: context.l10n.bizReqWalkUpAddQueue,
                             icon: const ButtonIcon(Icons.add),
                             variant: Variant.outlined,
                             size: ButtonSize.large,

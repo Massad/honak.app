@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -187,7 +188,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       _full = (_full - fullDel).clamp(0, 9999);
       _empty = _empty + emptyCol;
     });
-    _showToast('تم تسليم طلب $name');
+    _showToast(context.l10n.bizReqDmDeliveredToast(name));
   }
 
   void _handleSkip(String reason, String dest) {
@@ -206,7 +207,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         return q;
       }).toList();
     });
-    _showToast('تم تخطي $name');
+    _showToast(context.l10n.bizReqDmSkippedToast(name));
   }
 
   void _handleWalkUpDeliver(QueueItem item) {
@@ -222,7 +223,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       _full = (_full - (item.items.isNotEmpty ? item.items.first.qty : 1))
           .clamp(0, 9999);
     });
-    _showToast('تم تسليم طلب ${item.customerName}');
+    _showToast(context.l10n.bizReqDmWalkUpDelivered(item.customerName));
   }
 
   void _handleWalkUpQueue(QueueItem item) {
@@ -233,7 +234,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       );
       _queue.add(newItem);
     });
-    _showToast('تمت إضافة ${item.customerName} للدور');
+    _showToast(context.l10n.bizReqDmAddedToQueue(item.customerName));
   }
 
   void _handleReload(int newFull, int emptiesDropped) {
@@ -242,7 +243,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       _empty = (_empty - emptiesDropped).clamp(0, 9999);
       _reloads++;
     });
-    _showToast('تم التحميل \u2014 بداية جديدة');
+    _showToast(context.l10n.bizReqDmReloaded);
   }
 
   void _handleStartNext(int position) {
@@ -267,7 +268,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       );
     });
     if (item != null) {
-      _showToast('تم إخطار ${item.customerName} \u2014 جاري التوجه');
+      _showToast(context.l10n.bizReqDmNotified(item.customerName));
     }
   }
 
@@ -281,7 +282,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         return q;
       }).toList();
     });
-    _showToast('تم إلغاء التوجه \u2014 اختر التالي');
+    _showToast(context.l10n.bizReqDmCancelledNav);
   }
 
   /// Undo a delivery — revert to pending, restore inventory.
@@ -310,7 +311,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       _full = _full + oldFull;
       _empty = (_empty - oldEmpty).clamp(0, 9999);
     });
-    _showToast('تم التراجع عن تسليم ${item.customerName}');
+    _showToast(context.l10n.bizReqDmUndone(item.customerName));
   }
 
   /// Open edit sheet for a delivered item.
@@ -356,7 +357,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       _empty = (_empty - emptyDelta).clamp(0, 9999);
       _editingItem = null;
     });
-    _showToast('تم تعديل تسليم ${item.customerName}');
+    _showToast(context.l10n.bizReqDmEditSaved(item.customerName));
   }
 
   void _showSheet(Widget Function(BuildContext) builder) {
@@ -483,7 +484,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
               child: Row(
                 children: [
                   Text(
-                    'الخروج',
+                    context.l10n.bizReqDmExit,
                     style: TextStyle(
                       fontSize: 12,
                       color: context.colorScheme.onSurfaceVariant,
@@ -528,21 +529,21 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _inventoryItem(
-              'ممتلئ',
+              context.l10n.bizReqInvFull,
               '$_full',
               AppColors.primary,
               Icons.water_drop,
             ),
             Container(width: 1, height: 24, color: context.colorScheme.outlineVariant),
             _inventoryItem(
-              'فارغ',
+              context.l10n.bizReqInvEmpty,
               '$_empty',
               context.colorScheme.onSurfaceVariant,
               Icons.water_drop_outlined,
             ),
             Container(width: 1, height: 24, color: context.colorScheme.outlineVariant),
             _inventoryItem(
-              'محجوز',
+              context.l10n.bizReqInvReservedCount(_reserved),
               '$_reserved',
               AppColors.secondary,
               Icons.lock_outline,
@@ -589,7 +590,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'جاري التوجه',
+            context.l10n.bizReqDmHeadingTo,
             style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: 8),
@@ -648,18 +649,18 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                               color: AppColors.secondary.withAlpha(20),
                               borderRadius: AppRadius.pill,
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.star,
                                   size: 8,
                                   color: AppColors.secondary,
                                 ),
-                                SizedBox(width: 2),
+                                const SizedBox(width: 2),
                                 Text(
-                                  'جديد',
-                                  style: TextStyle(
+                                  context.l10n.bizReqDmNewCustomer,
+                                  style: const TextStyle(
                                     fontSize: 9,
                                     color: AppColors.secondary,
                                   ),
@@ -715,7 +716,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     if (item.creditsRemaining != null)
                       _chipBadge(
                         Icons.credit_card,
-                        'رصيد: ${item.creditsRemaining}',
+                        context.l10n.bizReqDmCreditsLabel(item.creditsRemaining!),
                         AppColors.primary,
                       ),
                   ],
@@ -726,23 +727,23 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                   children: [
                     _actionBtn(
                       icon: Icons.navigation,
-                      label: 'خريطة',
+                      label: context.l10n.bizReqDmMap,
                       color: AppColors.primary,
                       textColor: Colors.white,
-                      onTap: () => _showToast('قريبا\u064B'),
+                      onTap: () => _showToast(context.l10n.bizReqDmComingSoon),
                     ),
                     const SizedBox(width: 8),
                     _actionBtn(
                       icon: Icons.phone,
-                      label: 'اتصال',
+                      label: context.l10n.bizReqDmCall,
                       color: context.colorScheme.surfaceVariant,
                       textColor: context.colorScheme.onSurface,
-                      onTap: () => _showToast('قريبا\u064B'),
+                      onTap: () => _showToast(context.l10n.bizReqDmComingSoon),
                     ),
                     const SizedBox(width: 8),
                     _actionBtn(
                       icon: Icons.skip_next,
-                      label: 'تخطي',
+                      label: context.l10n.bizReqDmSkip,
                       color: AppColors.secondary.withAlpha(20),
                       textColor: AppColors.secondary,
                       onTap: () => _showSheet(
@@ -755,7 +756,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     const SizedBox(width: 8),
                     _actionBtn(
                       icon: Icons.cancel_outlined,
-                      label: 'إلغاء',
+                      label: context.l10n.bizReqDmCancel,
                       color: AppColors.error.withAlpha(20),
                       textColor: AppColors.error,
                       onTap: _handleStopCurrent,
@@ -765,7 +766,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                 const SizedBox(height: AppSpacing.md),
                 // Swipe to deliver
                 SwipeButton(
-                  label: 'اسحب للتسليم',
+                  label: context.l10n.bizReqDmSwipeDeliver,
                   icon: Icons.check,
                   color: AppColors.success,
                   onConfirm: () => _showSheet(
@@ -843,7 +844,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
           const Icon(Icons.check, size: 40, color: AppColors.success),
           const SizedBox(height: AppSpacing.md),
           Text(
-            'اكتمل المسار!',
+            context.l10n.bizReqDmRouteComplete,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -852,7 +853,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
           ),
           const SizedBox(height: 4),
           Text(
-            'تم تسليم جميع الطلبات',
+            context.l10n.bizReqDmAllDelivered,
             style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
           ),
         ],
@@ -875,8 +876,8 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         children: [
           Text(
             current != null
-                ? 'الدور (${pending.length} متبقي)'
-                : 'اختر التالي (${pending.length} متبقي)',
+                ? context.l10n.bizReqDmQueueRemaining(pending.length)
+                : context.l10n.bizReqDmPickNext(pending.length),
             style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: 8),
@@ -893,8 +894,8 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
     final ref = _referencePoint;
     final dist = _distKm(ref, item.coordinates);
     final distLabel = dist < 1
-        ? '${(dist * 1000).round()}م'
-        : '${dist.toStringAsFixed(1)}كم';
+        ? context.l10n.bizReqDmDistMeters((dist * 1000).round())
+        : context.l10n.bizReqDmDistKm(dist.toStringAsFixed(1));
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -995,7 +996,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           ],
                         ),
                         Text(
-                          '${item.items.map((i) => '${i.qty} قارورة').join(', ')} \u00B7 ${item.address.split('\u060C').first}',
+                          '${item.items.map((i) => '${i.qty} ${context.l10n.bizReqDmBottle}').join(', ')} \u00B7 ${item.address.split('\u060C').first}',
                           style: TextStyle(
                             fontSize: 10,
                             color: context.colorScheme.onSurfaceVariant,
@@ -1077,17 +1078,17 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           AppColors.success,
                         ),
                       if (item.payment == PaymentType.credits)
-                        _chipBadge(Icons.credit_card, 'رصيد', AppColors.primary),
+                        _chipBadge(Icons.credit_card, context.l10n.bizReqSheetPayCredits, AppColors.primary),
                       if (item.payment == PaymentType.cash)
                         _chipBadge(
                           Icons.payments_outlined,
-                          'نقدا\u064B',
+                          context.l10n.bizReqSheetPayCash,
                           context.colorScheme.onSurfaceVariant,
                         ),
                       if (item.payment == PaymentType.onAccount)
                         _chipBadge(
                           Icons.description_outlined,
-                          'آجل',
+                          context.l10n.bizReqSheetPayOnAccount,
                           context.colorScheme.onSurfaceVariant,
                         ),
                     ],
@@ -1098,7 +1099,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => _showToast('قريبا\u064B'),
+                          onTap: () => _showToast(context.l10n.bizReqDmComingSoon),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
@@ -1115,7 +1116,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  'خريطة',
+                                  context.l10n.bizReqDmMap,
                                   style: TextStyle(
                                     fontSize: 10,
                                     color: context.colorScheme.onSurface,
@@ -1129,7 +1130,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => _showToast('قريبا\u064B'),
+                          onTap: () => _showToast(context.l10n.bizReqDmComingSoon),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
@@ -1146,7 +1147,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  'اتصال',
+                                  context.l10n.bizReqDmCall,
                                   style: TextStyle(
                                     fontSize: 10,
                                     color: context.colorScheme.onSurface,
@@ -1163,7 +1164,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                   // Swipe to start / swap button
                   if (current == null)
                     SwipeButton(
-                      label: 'اسحب لبدء التوصيل',
+                      label: context.l10n.bizReqDmSwipeStart,
                       icon: Icons.navigation,
                       color: AppColors.primary,
                       onConfirm: () => _handleStartNext(item.position),
@@ -1188,7 +1189,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           _previewPos = null;
                         });
                         _showToast(
-                          'تم تبديل \u2014 ${item.customerName} هو التالي',
+                          context.l10n.bizReqDmSwapped(item.customerName),
                         );
                         Future.delayed(
                           const Duration(milliseconds: 200),
@@ -1211,18 +1212,18 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           ),
                           borderRadius: AppRadius.cardInner,
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.swap_horiz,
                               size: 16,
                               color: AppColors.secondary,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Text(
-                              'تبديل مع الطلب الحالي',
-                              style: TextStyle(
+                              context.l10n.bizReqDmSwapCurrent,
+                              style: const TextStyle(
                                 fontSize: 12,
                                 color: AppColors.secondary,
                               ),
@@ -1272,11 +1273,11 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add, size: 14, color: AppColors.white),
-                    SizedBox(width: 6),
+                    const Icon(Icons.add, size: 14, color: AppColors.white),
+                    const SizedBox(width: 6),
                     Text(
-                      'طلب سريع',
-                      style: TextStyle(
+                      context.l10n.bizReqDmQuickOrder,
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.white,
                       ),
@@ -1312,7 +1313,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    'تحميل',
+                    context.l10n.bizReqDmReload,
                     style: TextStyle(
                       fontSize: 12,
                       color: context.colorScheme.onSurfaceVariant,
@@ -1343,15 +1344,15 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
               ),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.local_shipping,
                     size: 14,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 6),
+                  const SizedBox(width: 6),
                   Text(
-                    'إنهاء',
-                    style: TextStyle(fontSize: 12, color: AppColors.white),
+                    context.l10n.bizReqDmEndRoute,
+                    style: const TextStyle(fontSize: 12, color: AppColors.white),
                   ),
                 ],
               ),

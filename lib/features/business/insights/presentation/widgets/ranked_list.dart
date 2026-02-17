@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/features/business/insights/domain/entities/insight_entities.dart';
 
 /// Ranked list with medals, progress bars, and count+unit labels.
@@ -145,16 +146,16 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 48),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 48),
       child: Center(
         child: Column(
           children: [
-            Icon(Icons.inventory_2_outlined, size: 32, color: Color(0xFFD1D5DB)),
-            SizedBox(height: 8),
+            const Icon(Icons.inventory_2_outlined, size: 32, color: Color(0xFFD1D5DB)),
+            const SizedBox(height: 8),
             Text(
-              'لا توجد بيانات كافية',
-              style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF)),
+              context.l10n.insightsInsufficientData,
+              style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF)),
             ),
           ],
         ),

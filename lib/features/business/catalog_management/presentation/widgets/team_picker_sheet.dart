@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
@@ -109,7 +110,7 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
                   GestureDetector(
                     onTap: _toggleAll,
                     child: Text(
-                      allSelected ? 'إلغاء الكل' : 'تحديد الكل',
+                      allSelected ? context.l10n.catalogDeselectAll : context.l10n.catalogSelectAll,
                       style: TextStyle(
                         fontSize: 12,
                         color: AppColors.primary,
@@ -119,7 +120,7 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
                   ),
                   const Spacer(),
                   Text(
-                    'المختصين المعينين (${_selected.length}/${_pickable.length})',
+                    context.l10n.catalogAssignedSpecialists(_selected.length, _pickable.length),
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -163,7 +164,7 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
                         children: [
                           Expanded(
                             child: Text(
-                              'لم يتم تعيين أي مختص — العملاء لن يتمكنوا من اختيار مزود الخدمة',
+                              context.l10n.catalogNoSpecialistWarning,
                               style: TextStyle(
                                 fontSize: 11,
                                 color: AppColors.warning,
@@ -186,7 +187,7 @@ class _TeamPickerContentState extends State<_TeamPickerContent> {
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: btn.Button(
                 onPressed: () => Navigator.pop(context, _selected.toList()),
-                label: 'تم',
+                label: context.l10n.done,
                 size: btn.ButtonSize.large,
                 expand: true,
               ),

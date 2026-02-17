@@ -122,7 +122,7 @@ class _StockManagerContentState extends ConsumerState<_StockManagerContent> {
             error: (e, _) => Center(
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.xxl),
-                child: Text('خطأ: $e'),
+                child: Text(context.l10n.stockError('$e')),
               ),
             ),
             data: (items) {
@@ -235,7 +235,7 @@ class _Header extends ConsumerWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
           Text(
-            'تحديث المخزون',
+            context.l10n.stockUpdateTitle,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -251,7 +251,7 @@ class _Header extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                '$totalChanges تعديل',
+                context.l10n.stockEditCount(totalChanges),
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.amber.shade800,
@@ -297,7 +297,7 @@ class _SearchField extends StatelessWidget {
     return TextField(
       onChanged: onChanged,
       decoration: InputDecoration(
-        hintText: 'ابحث عن منتج...',
+        hintText: context.l10n.stockSearchHint,
         hintStyle: TextStyle(
           fontSize: 12,
           color: context.colorScheme.onSurfaceVariant,
@@ -359,9 +359,9 @@ class _FilterPills extends StatelessWidget {
     final outCount = stockItems.where((i) => i.stock! <= 0).length;
 
     final filters = [
-      (mode: StockFilterMode.all, label: 'الكل', count: stockItems.length),
-      (mode: StockFilterMode.low, label: 'مخزون منخفض', count: lowCount),
-      (mode: StockFilterMode.out, label: 'نفذ', count: outCount),
+      (mode: StockFilterMode.all, label: context.l10n.all, count: stockItems.length),
+      (mode: StockFilterMode.low, label: context.l10n.stockFilterLow, count: lowCount),
+      (mode: StockFilterMode.out, label: context.l10n.stockFilterOut, count: outCount),
     ];
 
     return Row(
@@ -531,7 +531,7 @@ class _StockItemCard extends ConsumerWidget {
                         if (currentStock <= 0 && !hasChange) ...[
                           const SizedBox(width: 4),
                           _StatusPill(
-                            label: 'نفذ',
+                            label: context.l10n.stockStatusOut,
                             color: AppColors.error,
                           ),
                         ] else if (stockRatio <= 1.0 &&
@@ -539,7 +539,7 @@ class _StockItemCard extends ConsumerWidget {
                             !hasChange) ...[
                           const SizedBox(width: 4),
                           _StatusPill(
-                            label: 'منخفض',
+                            label: context.l10n.stockStatusLow,
                             color: Colors.amber.shade700,
                             icon: Icons.warning_amber_rounded,
                           ),
@@ -743,9 +743,9 @@ class _StockStepper extends ConsumerWidget {
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           textAlign: TextAlign.center,
-          decoration: const InputDecoration(
-            labelText: 'الكمية الجديدة',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: context.l10n.stockNewQuantity,
+            border: const OutlineInputBorder(),
           ),
           onSubmitted: (v) {
             final parsed = int.tryParse(v);
@@ -764,7 +764,7 @@ class _StockStepper extends ConsumerWidget {
         actions: [
           btn.Button(
             onPressed: () => Navigator.pop(ctx),
-            label: 'إلغاء',
+            label: context.l10n.cancel,
             variant: btn.Variant.text,
           ),
           btn.Button(
@@ -781,7 +781,7 @@ class _StockStepper extends ConsumerWidget {
               }
               Navigator.pop(ctx);
             },
-            label: 'تأكيد',
+            label: context.l10n.stockConfirm,
           ),
         ],
       ),
@@ -891,7 +891,7 @@ class _ThresholdEditorState extends ConsumerState<_ThresholdEditor> {
             Icon(Icons.settings, size: 12, color: AppColors.primary),
             const SizedBox(width: 6),
             Text(
-              'الحد الأدنى:',
+              context.l10n.stockMinThreshold,
               style: TextStyle(
                 fontSize: 10,
                 color: context.colorScheme.onSurfaceVariant,
@@ -965,7 +965,7 @@ class _ThresholdEditorState extends ConsumerState<_ThresholdEditor> {
             if (widget.hasChange) ...[
               const SizedBox(width: 6),
               Text(
-                '(كان ${widget.originalThreshold})',
+                context.l10n.stockWasValue(widget.originalThreshold),
                 style: TextStyle(
                   fontSize: 9,
                   color: context.colorScheme.onSurfaceVariant,
@@ -1015,7 +1015,7 @@ class _ChangeIndicator extends StatelessWidget {
                 Icon(Icons.inventory_2_outlined,
                     size: 10, color: Colors.amber.shade600),
                 const SizedBox(width: 4),
-                Text('كمية: ',
+                Text(context.l10n.stockQuantityLabel,
                     style: TextStyle(
                         fontSize: 10,
                         color: context.colorScheme.onSurfaceVariant)),
@@ -1051,7 +1051,7 @@ class _ChangeIndicator extends StatelessWidget {
               children: [
                 Icon(Icons.settings, size: 10, color: AppColors.primary),
                 const SizedBox(width: 4),
-                Text('حد أدنى: ',
+                Text(context.l10n.stockThresholdLabel,
                     style: TextStyle(
                         fontSize: 10,
                         color: context.colorScheme.onSurfaceVariant)),
@@ -1133,9 +1133,9 @@ class _EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final message = switch (filterMode) {
-      StockFilterMode.low => 'لا توجد منتجات بمخزون منخفض',
-      StockFilterMode.out => 'لا توجد منتجات نافذة',
-      StockFilterMode.all => 'لا توجد منتجات',
+      StockFilterMode.low => context.l10n.stockNoLowProducts,
+      StockFilterMode.out => context.l10n.stockNoOutProducts,
+      StockFilterMode.all => context.l10n.stockNoProducts,
     };
 
     return Center(
@@ -1213,7 +1213,7 @@ class _FooterBar extends ConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'تراجع',
+                      context.l10n.stockUndo,
                       style: TextStyle(
                         fontSize: 12,
                         color: context.colorScheme.onSurfaceVariant,
@@ -1231,9 +1231,9 @@ class _FooterBar extends ConsumerWidget {
                       // In real app: API call to save
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('تم تحديث المخزون ($totalChanges تعديل)'),
+                          content: Text(context.l10n.stockUpdated(totalChanges)),
                           action: SnackBarAction(
-                            label: 'تراجع',
+                            label: context.l10n.stockUndo,
                             onPressed: () {
                               // Undo would restore here
                             },
@@ -1245,7 +1245,7 @@ class _FooterBar extends ConsumerWidget {
                       Navigator.pop(context);
                     }
                   : null,
-              label: 'حفظ التعديلات ($totalChanges)',
+              label: context.l10n.stockSaveChanges(totalChanges),
               icon: const btn.ButtonIcon(Icons.save_outlined, size: 16),
               size: btn.ButtonSize.large,
               expand: true,

@@ -69,7 +69,7 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
           Row(
             children: [
               Text(
-                'لوحة الدور',
+                context.l10n.queueBoard,
                 style: context.textTheme.titleMedium?.copyWith(
                   color: context.colorScheme.onSurface,
                 ),
@@ -116,7 +116,7 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
               children: [
                 _StatChip(
                   icon: Icons.people_outline_rounded,
-                  label: 'بالانتظار',
+                  label: context.l10n.queueLabelWaiting,
                   value: '$waitingCount',
                   color: AppColors.secondary,
                   bgColor: const Color(0xFFFFF8E1),
@@ -128,7 +128,7 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
                 const SizedBox(width: AppSpacing.sm),
                 _StatChip(
                   icon: Icons.play_arrow_rounded,
-                  label: 'قيد الخدمة',
+                  label: context.l10n.queueInProgress,
                   value: '$inProgressCount',
                   color: AppColors.primary,
                   bgColor: const Color(0xFFEFF6FF),
@@ -140,7 +140,7 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
                 const SizedBox(width: AppSpacing.sm),
                 _StatChip(
                   icon: Icons.check_circle_outline_rounded,
-                  label: 'مكتمل',
+                  label: context.l10n.queueCompleted,
                   value: '$completedCount',
                   color: AppColors.success,
                   bgColor: const Color(0xFFF0FDF4),
@@ -152,8 +152,8 @@ class _QueueHeaderDelegate extends SliverPersistentHeaderDelegate {
                 const SizedBox(width: AppSpacing.sm),
                 _StatChip(
                   icon: Icons.schedule_rounded,
-                  label: 'وقت الانتظار',
-                  value: '~$estimatedWaitMin د',
+                  label: context.l10n.queueWaitTime,
+                  value: context.l10n.queueEstimatedWaitMin(estimatedWaitMin),
                   color: const Color(0xFF7B1FA2),
                   bgColor: const Color(0xFFF3E5F5),
                 ),
@@ -266,7 +266,7 @@ class _PauseToggleButton extends StatelessWidget {
             ),
             const SizedBox(width: AppSpacing.xs),
             Text(
-              isPaused ? 'الدور متوقف' : 'إيقاف الدور',
+              isPaused ? context.l10n.queuePaused : context.l10n.queuePauseQueue,
               style: context.textTheme.bodySmall?.copyWith(
                 color: isPaused ? AppColors.error : Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 12,
@@ -304,7 +304,7 @@ class _PauseBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'الدور متوقف مؤقتاً',
+                  context.l10n.queuePausedTemporarily,
                   style: context.textTheme.bodySmall?.copyWith(
                     color: AppColors.error,
                     fontSize: 12,
@@ -312,7 +312,7 @@ class _PauseBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.xxs),
                 Text(
-                  'لن يتمكن العملاء من حجز مكان بالدور حالياً',
+                  context.l10n.queuePauseCustomerNotice,
                   style: context.textTheme.labelSmall?.copyWith(
                     color: const Color(0xFFEF5350),
                     fontSize: 10,
@@ -324,7 +324,7 @@ class _PauseBanner extends StatelessWidget {
           GestureDetector(
             onTap: onResume,
             child: Text(
-              'استئناف',
+              context.l10n.queueResume,
               style: context.textTheme.bodySmall?.copyWith(
                 color: AppColors.error,
                 fontSize: 12,
@@ -483,7 +483,7 @@ class _QueueColumn extends StatelessWidget {
                     ? (newStatus) => onChangeStatus!(entry.id, newStatus)
                     : null,
                 onOpenChat: onOpenChat,
-                activityLog: generateQueueActivity(entry),
+                activityLog: generateQueueActivity(entry, context),
                 advanceLabel: advanceLabel,
                 advanceIcon: advanceIcon,
                 advanceColor: advanceColor,
@@ -529,7 +529,7 @@ class _CompletedSection extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'مكتمل اليوم (${entries.length})',
+                context.l10n.queueCompletedToday(entries.length),
                 style: context.textTheme.bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 12,
@@ -554,7 +554,7 @@ class _CompletedSection extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
                 child: Text(
-                  'لا توجد طلبات مكتملة اليوم',
+                  context.l10n.queueNoCompletedToday,
                   style: context.textTheme.bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.outline,
                     fontSize: 12,
@@ -619,7 +619,7 @@ class _RevenueSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'ملخص اليوم',
+                context.l10n.queueDaySummary,
                 style: context.textTheme.bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 12,
@@ -649,7 +649,7 @@ class _RevenueSummary extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
-                      'إجمالي السيارات',
+                      context.l10n.queueTotalVehicles,
                       style: context.textTheme.labelSmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
@@ -671,7 +671,7 @@ class _RevenueSummary extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
-                      'إيراد مكتمل (د.أ)',
+                      context.l10n.queueCompletedRevenueJod,
                       style: context.textTheme.labelSmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
@@ -693,7 +693,7 @@ class _RevenueSummary extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
-                      'إيراد قادم (د.أ)',
+                      context.l10n.queuePendingRevenueJod,
                       style: context.textTheme.labelSmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,

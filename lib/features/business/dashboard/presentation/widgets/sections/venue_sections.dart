@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dashboard/presentation/widgets/sections/core_sections.dart';
@@ -70,7 +71,7 @@ class OccupancySection extends StatelessWidget {
               ),
             ),
             Text(
-              '$booked ليلة محجوزة من $total',
+              context.l10n.bizOccupancyBookedOf(booked as int, total as int),
               style: TextStyle(
                 fontSize: 10,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -96,7 +97,7 @@ class OccupancySection extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  ' :مغادرة اليوم',
+                  ' ${context.l10n.bizOccupancyCheckoutToday}',
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -114,7 +115,7 @@ class OccupancySection extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  ' :وصول اليوم',
+                  ' ${context.l10n.bizOccupancyCheckinToday}',
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -168,7 +169,7 @@ class UpcomingReservationsSection extends StatelessWidget {
                 children: [
                   if (total != null)
                     Text(
-                      '${formatJod(total)} د.أ',
+                      '${formatJod(total)} ${AppLocalizations.of(context).bizRevenueCurrency}',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -287,7 +288,7 @@ class RecentlyLinkedSection extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.xs),
               Text(
-                'بحاجة مراجعة',
+                context.l10n.bizLinkedNeedsReview,
                 style: TextStyle(
                   fontSize: 11,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -406,7 +407,7 @@ class RecentlyLinkedSection extends StatelessWidget {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                'عرض الصفحة',
+                                context.l10n.bizLinkedViewPage,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppColors.primary,
@@ -434,7 +435,7 @@ class RecentlyLinkedSection extends StatelessWidget {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                'تمام',
+                                context.l10n.bizLinkedApprove,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Theme.of(context).colorScheme.surface,
@@ -465,7 +466,7 @@ class RecentlyLinkedSection extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'تمت المراجعة',
+                        context.l10n.bizLinkedReviewed,
                         style: TextStyle(
                           fontSize: 10,
                           color: AppColors.success,

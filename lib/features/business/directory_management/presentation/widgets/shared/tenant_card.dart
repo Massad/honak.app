@@ -134,7 +134,7 @@ class _StatusBadge extends StatelessWidget {
         borderRadius: AppRadius.pill,
       ),
       child: Text(
-        isClosed ? 'مغلق مؤقتاً' : 'مفتوح',
+        isClosed ? context.l10n.dirClosedStatus : context.l10n.dirOpenStatus,
         style: context.textTheme.labelSmall?.copyWith(
           color: isClosed
               ? context.colorScheme.onSurfaceVariant

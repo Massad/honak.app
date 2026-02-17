@@ -29,7 +29,7 @@ class HistoryCard extends StatelessWidget {
           GestureDetector(
             onTap: () {
               context.showSnackBar(
-                  '\u062a\u0641\u0627\u0635\u064a\u0644: ${request.id}');
+                  context.l10n.ordersDetailSnackbar(request.id));
             },
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.md),
@@ -51,7 +51,7 @@ class HistoryCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          _buildSummary(),
+                          _buildSummary(context),
                           style: context.textTheme.bodySmall?.copyWith(
                             color: context.colorScheme.onSurfaceVariant,
                             fontSize: 11,
@@ -79,21 +79,21 @@ class HistoryCard extends StatelessWidget {
     );
   }
 
-  String _buildSummary() {
+  String _buildSummary(BuildContext context) {
     switch (request.type) {
       case 'order':
         final count = request.itemsCount > 0
             ? request.itemsCount
             : request.items.length;
-        return '$count \u0623\u0635\u0646\u0627\u0641';
+        return context.l10n.ordersItemsCount(count);
       case 'booking':
         if (request.timeSlot != null) return request.timeSlot!;
-        return '\u062d\u062c\u0632';
+        return context.l10n.booking;
       case 'quote':
       case 'inquiry':
         return request.description ?? '';
       case 'reservation':
-        return request.dateRange ?? '\u062d\u062c\u0632 \u0645\u0643\u0627\u0646';
+        return request.dateRange ?? context.l10n.ordersPlaceReservation;
       default:
         return '';
     }
@@ -150,7 +150,7 @@ class _HistoryActions extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () => context.showSnackBar('\u0623\u0639\u062f \u0627\u0644\u0637\u0644\u0628'),
+              onTap: () => context.showSnackBar(context.l10n.reorderButton),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: AppSpacing.sm),
@@ -160,7 +160,7 @@ class _HistoryActions extends StatelessWidget {
                     Icon(Icons.replay, size: 12, color: AppColors.success),
                     const SizedBox(width: AppSpacing.xs),
                     Text(
-                      '\u0623\u0639\u062f \u0627\u0644\u0637\u0644\u0628',
+                      context.l10n.reorderButton,
                       style: context.textTheme.bodySmall?.copyWith(
                         color: AppColors.success,
                         fontSize: 10,
@@ -175,7 +175,7 @@ class _HistoryActions extends StatelessWidget {
           Expanded(
             child: GestureDetector(
               onTap: () => context.showSnackBar(
-                  '\u062a\u0641\u0627\u0635\u064a\u0644: ${request.id}'),
+                  context.l10n.ordersDetailSnackbar(request.id)),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: AppSpacing.sm),
@@ -186,7 +186,7 @@ class _HistoryActions extends StatelessWidget {
                         size: 12, color: context.colorScheme.onSurfaceVariant),
                     const SizedBox(width: AppSpacing.xs),
                     Text(
-                      '\u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644',
+                      context.l10n.ordersViewDetails,
                       style: context.textTheme.bodySmall?.copyWith(
                             color: context.colorScheme.onSurfaceVariant,
                         fontSize: 10,

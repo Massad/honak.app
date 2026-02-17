@@ -109,7 +109,7 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
     if (floor.tenantCount > 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('لا يمكن حذف "${floor.name}" — يحتوي على مستأجرين'),
+          content: Text(context.l10n.dirFloorCannotDelete(floor.name)),
         ),
       );
       return;
@@ -126,16 +126,16 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
           icon: const Icon(Icons.close),
           onPressed: widget.onClose,
         ),
-        title: const Text(
-          'إدارة الطوابق',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        title: Text(
+          context.l10n.dirFloorManagerTitle,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         elevation: 0,
         actions: [
           btn.Button(
             onPressed: () => widget.onSave(_floors),
-            label: 'حفظ',
+            label: context.l10n.save,
             variant: btn.Variant.text,
             size: btn.ButtonSize.small,
           ),
@@ -161,14 +161,16 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      _editIndex != null ? 'تعديل طابق' : 'طابق جديد',
+                      _editIndex != null
+                          ? context.l10n.dirFloorEdit
+                          : context.l10n.dirFloorNew,
                       style: context.textTheme.titleSmall,
                     ),
                     const SizedBox(height: AppSpacing.md),
                     TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        hintText: 'اسم الطابق (مثال: الطابق الأرضي)',
+                        hintText: context.l10n.dirFloorNameHint,
                         hintStyle: TextStyle(
                           fontSize: 13,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -188,7 +190,7 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
                     TextField(
                       controller: _labelController,
                       decoration: InputDecoration(
-                        hintText: 'تسمية مختصرة (اختياري، مثال: أرضي)',
+                        hintText: context.l10n.dirFloorLabelHint,
                         hintStyle: TextStyle(
                           fontSize: 13,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -210,13 +212,15 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
                       children: [
                         btn.Button(
                           onPressed: _cancelEdit,
-                          label: 'إلغاء',
+                          label: context.l10n.cancel,
                           variant: btn.Variant.text,
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         btn.Button(
                           onPressed: _saveEdit,
-                          label: _editIndex != null ? 'تحديث' : 'إضافة',
+                          label: _editIndex != null
+                              ? context.l10n.dirFloorUpdate
+                              : context.l10n.dirFloorAdd,
                         ),
                       ],
                     ),
@@ -230,7 +234,7 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
             child: _floors.isEmpty
                 ? Center(
                     child: Text(
-                      'لا توجد طوابق',
+                      context.l10n.dirFloorEmpty,
                       style: TextStyle(
                         fontSize: 13,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -292,7 +296,8 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
                                       ),
                                     ),
                                   Text(
-                                    '${floor.tenantCount} مستأجر',
+                                    context.l10n
+                                        .dirTenantCount(floor.tenantCount),
                                     style:
                                         context.textTheme.labelSmall?.copyWith(
                                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -333,7 +338,7 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 child: btn.Button(
                   onPressed: _startAdd,
-                  label: 'إضافة طابق',
+                  label: context.l10n.dirFloorAddBtn,
                   icon: const btn.ButtonIcon(Icons.add),
                   variant: btn.Variant.outlined,
                   expand: true,

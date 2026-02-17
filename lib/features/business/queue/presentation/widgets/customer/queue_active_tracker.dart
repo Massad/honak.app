@@ -111,7 +111,7 @@ class _WaitingCard extends StatelessWidget {
                   ),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
-                    'أنت بالدور',
+                    context.l10n.queueYouAreInQueue,
                     style: context.textTheme.labelSmall?.copyWith(
                       color: Colors.white70,
                     ),
@@ -128,7 +128,7 @@ class _WaitingCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'رقمك بالدور',
+                context.l10n.queueYourPosition,
                 style: context.textTheme.labelSmall?.copyWith(
                   color: Colors.white70,
                   fontSize: 10,
@@ -146,15 +146,15 @@ class _WaitingCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _miniStat(context,
-                        value: '${entry.aheadCount}', label: 'قبلك'),
+                        value: '${entry.aheadCount}', label: context.l10n.queueAheadCount),
                     Container(
                       width: 1,
                       height: 32,
                       color: Colors.white.withValues(alpha: 0.2),
                     ),
                     _miniStat(context,
-                        value: '~${entry.estimatedWaitMin} د',
-                        label: 'وقت الانتظار'),
+                        value: context.l10n.queueEstimatedWaitMin(entry.estimatedWaitMin),
+                        label: context.l10n.queueWaitTimeLabel),
                   ],
                 ),
               ),
@@ -200,7 +200,7 @@ class _WaitingCard extends StatelessWidget {
         if (entry.status == QueueStatus.waiting && !entry.onTheWay)
           btn.Button(
             onPressed: onMarkOnMyWay,
-            label: 'أنا ادور — في الطريق',
+            label: context.l10n.queueImOnMyWay,
             icon: const btn.ButtonIcon(Icons.navigation),
             variant: btn.Variant.outlined,
             style: btn.Style.success,
@@ -221,7 +221,7 @@ class _WaitingCard extends StatelessWidget {
                 const Icon(Icons.check, size: 14, color: Colors.white),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
-                  'أنت في الطريق',
+                  context.l10n.queueOnMyWayConfirmed,
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.surface,
                     fontWeight: FontWeight.w500,
@@ -240,7 +240,7 @@ class _WaitingCard extends StatelessWidget {
             isInProgress: false,
             onSubmit: onRequestModification,
           ),
-          label: 'طلب تعديل',
+          label: context.l10n.queueRequestModification,
           icon: const btn.ButtonIcon(Icons.edit_outlined),
           variant: btn.Variant.outlined,
           expand: true,
@@ -252,7 +252,7 @@ class _WaitingCard extends StatelessWidget {
             entry: entry,
             onConfirm: onCancelEntry,
           ),
-          label: 'إلغاء الحجز',
+          label: context.l10n.queueCancelReservation,
           icon: const btn.ButtonIcon(Icons.close),
           variant: btn.Variant.outlined,
           style: btn.Style.danger,
@@ -341,7 +341,7 @@ class _InProgressCardState extends State<_InProgressCard> {
                   _PulsingDot(),
                   const SizedBox(width: AppSpacing.sm),
                   Text(
-                    'جاري العمل على سيارتك',
+                    context.l10n.queueWorkingOnCar,
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.surface,
                       fontWeight: FontWeight.w600,
@@ -364,13 +364,13 @@ class _InProgressCardState extends State<_InProgressCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '$elapsedMin دقيقة مضت',
+                          context.l10n.queueMinutesPassed(elapsedMin),
                           style: context.textTheme.labelSmall?.copyWith(
                             color: Colors.white70,
                           ),
                         ),
                         Text(
-                          'من $durationMin دقيقة',
+                          context.l10n.queueOutOfMinutes(durationMin),
                           style: context.textTheme.labelSmall?.copyWith(
                             color: Colors.white70,
                           ),
@@ -405,14 +405,14 @@ class _InProgressCardState extends State<_InProgressCard> {
             isInProgress: true,
             onSubmit: widget.onRequestModification,
           ),
-          label: 'طلب تعديل',
+          label: context.l10n.queueRequestModification,
           icon: const btn.ButtonIcon(Icons.edit_outlined),
           variant: btn.Variant.outlined,
           expand: true,
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          'لا يمكن الإلغاء بعد بدء الخدمة — تواصل عبر المحادثة',
+          context.l10n.queueCannotCancelNotice,
           textAlign: TextAlign.center,
           style: context.textTheme.labelSmall?.copyWith(
             color: context.colorScheme.onSurfaceVariant,

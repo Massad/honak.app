@@ -31,12 +31,22 @@ class QueueDetailView extends StatefulWidget {
 }
 
 class _QueueDetailViewState extends State<QueueDetailView> {
-  late final List<QueueActivityEntry> _activityLog;
+  late List<QueueActivityEntry> _activityLog;
+  bool _activityLogGenerated = false;
 
   @override
   void initState() {
     super.initState();
-    _activityLog = generateQueueActivity(widget.entry);
+    _activityLog = [];
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_activityLogGenerated) {
+      _activityLog = generateQueueActivity(widget.entry, context);
+      _activityLogGenerated = true;
+    }
   }
 
   QueueEntry get entry => widget.entry;
@@ -162,7 +172,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                           const SizedBox(width: 4),
                           _Badge(
                             icon: Icons.workspace_premium_rounded,
-                            label: 'مشترك',
+                            label: context.l10n.queueSubscriber,
                             color: const Color(0xFFFF9800),
                             bgColor: const Color(0xFFFFF8E1),
                           ),
@@ -171,7 +181,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'وصول: ${_formatTime(entry.checkedInAt)} · ${entry.packageName}',
+                      '${context.l10n.queueArrival}: ${_formatTime(entry.checkedInAt)} · ${entry.packageName}',
                       style: TextStyle(
                         fontSize: 10,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -220,7 +230,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
       QueueStatus.completed,
     ];
     final currentIdx = statusFlow.indexOf(entry.status);
-    final statusConf = QueueStatusConfig.of(entry.status);
+    final statusConf = QueueStatusConfig.ofLocalized(entry.status, context);
 
     return _SectionCard(
       child: Column(
@@ -281,7 +291,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                     entry.startedAt != null) ...[
                   const Spacer(),
                   Text(
-                    '${_elapsedMinutes(entry.startedAt!)} د مضت · من أصل ~${entry.estimatedDurationMin} د',
+                    context.l10n.queueElapsedMinutes(_elapsedMinutes(entry.startedAt!), entry.estimatedDurationMin),
                     style: TextStyle(
                       fontSize: 10,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -306,13 +316,13 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                 borderRadius: AppRadius.cardInner,
                 border: Border.all(color: const Color(0xFFE53935)),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.block_rounded, size: 14, color: Color(0xFFE53935)),
-                  SizedBox(width: AppSpacing.sm),
+                  const Icon(Icons.block_rounded, size: 14, color: Color(0xFFE53935)),
+                  const SizedBox(width: AppSpacing.sm),
                   Text(
-                    'لم يحضر',
-                    style: TextStyle(fontSize: 12, color: Color(0xFFE53935)),
+                    context.l10n.queueNoShowLabel,
+                    style: const TextStyle(fontSize: 12, color: Color(0xFFE53935)),
                   ),
                 ],
               ),
@@ -332,7 +342,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'العميل',
+            context.l10n.queueCustomer,
             style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -387,7 +397,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                           ),
                           const SizedBox(width: AppSpacing.sm),
                           Text(
-                            'اتصال',
+                            context.l10n.queueCall,
                             style: const TextStyle(
                               fontSize: 10,
                               color: Color(0xFF1A73E8),
@@ -431,14 +441,14 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                     color: const Color(0xFF1A73E8),
                     borderRadius: BorderRadius.circular(AppRadius.lg),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.chat_rounded, size: 13, color: Colors.white),
-                      SizedBox(width: 6),
+                      const Icon(Icons.chat_rounded, size: 13, color: Colors.white),
+                      const SizedBox(width: 6),
                       Text(
-                        'محادثة',
-                        style: TextStyle(fontSize: 11, color: Colors.white),
+                        context.l10n.queueChat,
+                        style: const TextStyle(fontSize: 11, color: Colors.white),
                       ),
                     ],
                   ),
@@ -461,7 +471,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'السيارة',
+            context.l10n.queueVehicle,
             style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -541,7 +551,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'الخدمة',
+            context.l10n.queueService,
             style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -574,7 +584,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
               Icon(Icons.access_time_rounded, size: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               const SizedBox(width: 4),
               Text(
-                'مدة متوقعة: ~${entry.estimatedDurationMin} دقيقة',
+                context.l10n.queueEstimatedDuration(entry.estimatedDurationMin),
                 style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
@@ -584,7 +594,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
           if (entry.addOns.isNotEmpty) ...[
             Divider(height: AppSpacing.lg, color: Theme.of(context).colorScheme.surfaceContainerLowest),
             Text(
-              'إضافات',
+              context.l10n.queueAddOns,
               style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: AppSpacing.xs),
@@ -622,7 +632,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'المجموع قبل الخصم',
+                  context.l10n.queueSubtotalBeforeDiscount,
                   style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
                 Text(
@@ -643,7 +653,9 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                 Row(
                   children: [
                     Text(
-                      'خصم ${entry.discount!.type == "percentage" ? "${(entry.discount!.value / 100).round()}%" : ""}',
+                      entry.discount!.type == 'percentage'
+                          ? context.l10n.queueDiscountPercent((entry.discount!.value / 100).round())
+                          : context.l10n.queueDiscountLabel,
                       style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xFFFF9800),
@@ -685,7 +697,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'الإجمالي',
+                context.l10n.queueGrandTotal,
                 style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               Text(
@@ -718,7 +730,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'صور التوثيق',
+            context.l10n.queueDocPhotos,
             style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -727,7 +739,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
               Expanded(
                 child: _PhotoButton(
                   icon: Icons.camera_alt_rounded,
-                  label: 'صورة قبل',
+                  label: context.l10n.queuePhotoBefore,
                   captured: hasBefore,
                   activeColor: const Color(0xFF1A73E8),
                   activeBg: const Color(0xFFEFF6FF),
@@ -737,7 +749,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
               Expanded(
                 child: _PhotoButton(
                   icon: Icons.image_rounded,
-                  label: 'صورة بعد',
+                  label: context.l10n.queuePhotoAfter,
                   captured: hasAfter,
                   activeColor: const Color(0xFF43A047),
                   activeBg: const Color(0xFFF0FDF4),
@@ -767,9 +779,9 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                 color: Color(0xFFFF9800),
               ),
               const SizedBox(width: 6),
-              const Text(
-                'ملاحظات',
-                style: TextStyle(fontSize: 10, color: Color(0xFFFF9800)),
+              Text(
+                context.l10n.queueNotes,
+                style: const TextStyle(fontSize: 10, color: Color(0xFFFF9800)),
               ),
             ],
           ),
@@ -807,18 +819,18 @@ class _QueueDetailViewState extends State<QueueDetailView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'التوقيتات',
+            context.l10n.queueTimings,
             style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
-          _TimingRow(label: 'الوصول', epoch: entry.checkedInAt),
+          _TimingRow(label: context.l10n.queueTimingArrival, epoch: entry.checkedInAt),
           if (entry.startedAt != null)
-            _TimingRow(label: 'بدء الخدمة', epoch: entry.startedAt!),
+            _TimingRow(label: context.l10n.queueTimingServiceStart, epoch: entry.startedAt!),
           if (entry.completedAt != null &&
               entry.status == QueueStatus.completed)
-            _TimingRow(label: 'اكتمال', epoch: entry.completedAt!),
+            _TimingRow(label: context.l10n.queueTimingCompleted, epoch: entry.completedAt!),
           if (entry.completedAt != null && entry.status == QueueStatus.ready)
-            _TimingRow(label: 'جاهز', epoch: entry.completedAt!),
+            _TimingRow(label: context.l10n.queueTimingReady, epoch: entry.completedAt!),
         ],
       ),
     );
@@ -882,7 +894,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        'محادثة',
+                        context.l10n.queueChat,
                         style: TextStyle(
                           fontSize: 12,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -984,19 +996,19 @@ class _SourceBadge extends StatelessWidget {
     final (icon, label, color, bgColor) = switch (source) {
       QueueSource.appReserve => (
           Icons.smartphone_rounded,
-          'حجز',
+          context.l10n.queueSourceReserve,
           const Color(0xFF1A73E8),
           const Color(0xFFEFF6FF),
         ),
       QueueSource.phone => (
           Icons.phone_in_talk_rounded,
-          'هاتف',
+          context.l10n.queueSourcePhone,
           const Color(0xFF7B1FA2),
           const Color(0xFFF3E5F5),
         ),
       QueueSource.walkIn => (
           Icons.directions_walk_rounded,
-          'حضوري',
+          context.l10n.queueSourceWalkIn,
           Theme.of(context).colorScheme.onSurfaceVariant,
           Theme.of(context).colorScheme.surfaceContainerLow,
         ),
@@ -1066,7 +1078,7 @@ class _ProgressCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final conf = QueueStatusConfig.of(status);
+    final conf = QueueStatusConfig.ofLocalized(status, context);
 
     final Color bgColor;
     final Color borderColor;
@@ -1162,11 +1174,11 @@ class _PhotoButton extends StatelessWidget {
             ),
           ),
           if (captured)
-            const Padding(
-              padding: EdgeInsetsDirectional.only(top: 2),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(top: 2),
               child: Text(
-                '✓ تم التقاط',
-                style: TextStyle(fontSize: 9, color: Color(0xFF43A047)),
+                context.l10n.queuePhotoCaptured,
+                style: const TextStyle(fontSize: 9, color: Color(0xFF43A047)),
               ),
             ),
         ],
@@ -1233,17 +1245,17 @@ class _AdvanceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final (label, icon, color) = switch (status) {
       QueueStatus.waiting || QueueStatus.onTheWay => (
-          'ابدأ الخدمة',
+          context.l10n.queueStartService,
           Icons.play_arrow_rounded,
           const Color(0xFF1A73E8),
         ),
       QueueStatus.inProgress => (
-          'جاهز ✓',
+          context.l10n.queueReadyCheck,
           Icons.check_circle_rounded,
           const Color(0xFF43A047),
         ),
       QueueStatus.ready => (
-          'تم الاستلام',
+          context.l10n.queuePickedUp,
           Icons.check_circle_rounded,
           Theme.of(context).colorScheme.onSurface,
         ),

@@ -19,9 +19,9 @@ class OrdersActiveTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (requests.isEmpty) {
-      return const OrdersEmptyTabState(
+      return OrdersEmptyTabState(
         icon: Icons.shopping_bag_outlined,
-        message: 'لا توجد طلبات نشطة',
+        message: context.l10n.ordersEmptyActive,
       );
     }
 
@@ -51,9 +51,9 @@ class OrdersUpcomingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (requests.isEmpty) {
-      return const OrdersEmptyTabState(
+      return OrdersEmptyTabState(
         icon: Icons.calendar_today_outlined,
-        message: 'لا توجد مواعيد قادمة',
+        message: context.l10n.ordersEmptyUpcoming,
       );
     }
 
@@ -169,7 +169,7 @@ class UpcomingBookingCard extends StatelessWidget {
                         children: [
                           if (request.guestCount != null) ...[
                             Text(
-                              '${request.guestCount} ضيوف',
+                              context.l10n.ordersGuestsCount(request.guestCount!),
                               style: context.textTheme.bodySmall?.copyWith(
                                 color: context.colorScheme.onSurfaceVariant,
                                 fontSize: 10,
@@ -235,9 +235,9 @@ class OrdersHistoryTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (requests.isEmpty) {
-      return const OrdersEmptyTabState(
+      return OrdersEmptyTabState(
         icon: Icons.check_circle_outline,
-        message: 'لا توجد طلبات سابقة',
+        message: context.l10n.ordersEmptyHistory,
       );
     }
 

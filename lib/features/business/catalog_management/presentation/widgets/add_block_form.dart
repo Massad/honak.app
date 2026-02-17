@@ -146,16 +146,16 @@ class _AddBlockFormState extends State<AddBlockForm> {
           const SizedBox(height: AppSpacing.md),
 
           // Reason
-          const Text('السبب (اختياري)',
+          Text(context.l10n.blockReasonOptional,
               style:
-                  TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                  const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: _reasonCtrl,
             textAlign: TextAlign.right,
             style: const TextStyle(fontSize: 13),
             decoration: InputDecoration(
-              hintText: 'مثال: إجازة عيد، صيانة...',
+              hintText: context.l10n.blockReasonHint,
               hintStyle:
                   const TextStyle(fontSize: 12, color: AppColors.textHint),
               filled: true,
@@ -195,8 +195,8 @@ class _AddBlockFormState extends State<AddBlockForm> {
                       borderRadius: BorderRadius.circular(AppRadius.md),
                     ),
                     alignment: Alignment.center,
-                    child: const Text('إلغاء',
-                        style: TextStyle(
+                    child: Text(context.l10n.cancel,
+                        style: const TextStyle(
                             fontSize: 12, color: AppColors.textSecondary)),
                   ),
                 ),
@@ -217,7 +217,7 @@ class _AddBlockFormState extends State<AddBlockForm> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('إضافة',
+                        Text(context.l10n.blockAdd,
                             style: TextStyle(
                                 fontSize: 12,
                                 color: _canSave
@@ -245,9 +245,9 @@ class _AddBlockFormState extends State<AddBlockForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const Text('اختر اليوم',
+        Text(context.l10n.blockChooseDay,
             style:
-                TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
         const SizedBox(height: AppSpacing.sm),
         Row(
           children: weekdays.map((day) {
@@ -280,7 +280,7 @@ class _AddBlockFormState extends State<AddBlockForm> {
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          'سيتم حظر كل ${weekdays.where((d) => d.id == _weekday).first.label} تلقائياً',
+          context.l10n.blockRecurringInfo(weekdays.where((d) => d.id == _weekday).first.label),
           style: const TextStyle(fontSize: 10, color: AppColors.textHint),
         ),
       ],
@@ -291,14 +291,14 @@ class _AddBlockFormState extends State<AddBlockForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const Text('التاريخ',
+        Text(context.l10n.blockDate,
             style:
-                TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
         const SizedBox(height: AppSpacing.sm),
         _datePickerButton(
           _date != null
               ? '${_date!.day} ${arabicMonths[_date!.month - 1]} ${_date!.year}'
-              : 'اختر التاريخ',
+              : context.l10n.blockChooseDate,
           () => _pickDate(isStart: true),
         ),
       ],
@@ -309,25 +309,25 @@ class _AddBlockFormState extends State<AddBlockForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const Text('من',
+        Text(context.l10n.blockFrom,
             style:
-                TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
         const SizedBox(height: AppSpacing.sm),
         _datePickerButton(
           _startDate != null
               ? '${_startDate!.day} ${arabicMonths[_startDate!.month - 1]} ${_startDate!.year}'
-              : 'تاريخ البداية',
+              : context.l10n.blockStartDate,
           () => _pickDate(isStart: true),
         ),
         const SizedBox(height: AppSpacing.sm),
-        const Text('إلى',
+        Text(context.l10n.blockTo,
             style:
-                TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
         const SizedBox(height: AppSpacing.sm),
         _datePickerButton(
           _endDate != null
               ? '${_endDate!.day} ${arabicMonths[_endDate!.month - 1]} ${_endDate!.year}'
-              : 'تاريخ النهاية',
+              : context.l10n.blockEndDate,
           () => _pickDate(isStart: false),
         ),
       ],

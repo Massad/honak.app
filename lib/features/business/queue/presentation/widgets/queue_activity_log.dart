@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_activity_utils.dart';
 import 'package:honak/features/business/shared/entities/activity_action_config.dart';
@@ -11,11 +12,14 @@ import 'package:honak/features/business/shared/widgets/activity_log.dart';
 
 /// Converts a domain-specific [QueueActivityEntry] to the shared
 /// [ActivityLogEntry] UI model using the shared helper.
-ActivityLogEntry toQueueActivityLogEntry(QueueActivityEntry e) {
+ActivityLogEntry toQueueActivityLogEntry(
+  QueueActivityEntry e,
+  BuildContext context,
+) {
   return buildActivityLogEntry(
     id: e.id,
     timestamp: e.timestamp,
-    label: e.action.labelAr,
+    label: e.action.label(context),
     config: queueActionConfigs[e.action]!,
     actorName: e.actorName,
     actorRole: e.actorRole,
@@ -35,9 +39,9 @@ void showQueueActivityLogSheet(
 }) {
   showActivityLogSheet(
     context,
-    title: 'سجل النشاط',
+    title: context.l10n.queueActivityLog,
     subtitle: '${entry.customerName} — ${entry.packageName}',
-    entries: activityLog.map(toQueueActivityLogEntry).toList(),
+    entries: activityLog.map((e) => toQueueActivityLogEntry(e, context)).toList(),
   );
 }
 
@@ -58,7 +62,7 @@ class QueueActivityPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ActivityLogPreview(
-      entries: entries.map(toQueueActivityLogEntry).toList(),
+      entries: entries.map((e) => toQueueActivityLogEntry(e, context)).toList(),
       maxEntries: maxEntries,
       onViewFull: onViewFull,
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
@@ -34,45 +35,45 @@ void showTruckDetailOverlay(
 // Constants
 // ═══════════════════════════════════════════════════════════════
 
-const _statusMap = {
-  TruckStatus.onRoute: ('على المسار', AppColors.success),
-  TruckStatus.notStarted: ('لم يبدأ', Color(0xFF9E9E9E)),
-  TruckStatus.routeComplete: ('اكتمل', AppColors.primary),
+Map<TruckStatus, (String, Color)> _statusMap(AppLocalizations l10n) => {
+  TruckStatus.onRoute: (l10n.bizReqTruckOnRoute, AppColors.success),
+  TruckStatus.notStarted: (l10n.bizReqTruckNotStarted, const Color(0xFF9E9E9E)),
+  TruckStatus.routeComplete: (l10n.bizReqTruckComplete, AppColors.primary),
 };
 
-const _dayLabels = [
-  ('sat', 'سبت'),
-  ('sun', 'أحد'),
-  ('mon', 'اثنين'),
-  ('tue', 'ثلاثاء'),
-  ('wed', 'أربعاء'),
-  ('thu', 'خميس'),
-  ('fri', 'جمعة'),
+List<(String, String)> _dayLabels(AppLocalizations l10n) => [
+  ('sat', l10n.bizReqTdDaySat),
+  ('sun', l10n.bizReqTdDaySun),
+  ('mon', l10n.bizReqTdDayMon),
+  ('tue', l10n.bizReqTdDayTue),
+  ('wed', l10n.bizReqTdDayWed),
+  ('thu', l10n.bizReqTdDayThu),
+  ('fri', l10n.bizReqTdDayFri),
 ];
 
-const _dayLabelsMap = {
-  'sun': 'الأحد',
-  'mon': 'الاثنين',
-  'tue': 'الثلاثاء',
-  'wed': 'الأربعاء',
-  'thu': 'الخميس',
-  'fri': 'الجمعة',
-  'sat': 'السبت',
+Map<String, String> _dayLabelsMap(AppLocalizations l10n) => {
+  'sun': l10n.bizReqTdDaySun,
+  'mon': l10n.bizReqTdDayMon,
+  'tue': l10n.bizReqTdDayTue,
+  'wed': l10n.bizReqTdDayWed,
+  'thu': l10n.bizReqTdDayThu,
+  'fri': l10n.bizReqTdDayFri,
+  'sat': l10n.bizReqTdDaySat,
 };
 
 const _allDays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
-const _paymentLabels = {
-  PaymentType.credits: ('رصيد', Icons.credit_card),
-  PaymentType.cash: ('نقدا', Icons.payments_outlined),
-  PaymentType.onAccount: ('آجل', Icons.description_outlined),
+Map<PaymentType, (String, IconData)> _paymentLabels(AppLocalizations l10n) => {
+  PaymentType.credits: (l10n.bizReqSheetPayCredits, Icons.credit_card),
+  PaymentType.cash: (l10n.bizReqSheetPayCash, Icons.payments_outlined),
+  PaymentType.onAccount: (l10n.bizReqSheetPayOnAccount, Icons.description_outlined),
 };
 
-const _skipReasonLabels = {
-  'customer_not_home': 'العميل غير موجود',
-  'cant_access': 'لا يمكن الوصول',
-  'customer_delay': 'طلب تأجيل',
-  'out_of_stock': 'نفاد المخزون',
+Map<String, String> _skipReasonLabels(AppLocalizations l10n) => {
+  'customer_not_home': l10n.bizReqSkipNotHome,
+  'cant_access': l10n.bizReqSkipCantAccess,
+  'customer_delay': l10n.bizReqSkipCustomerDelay,
+  'out_of_stock': l10n.bizReqSkipOutOfStock,
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -104,13 +105,13 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
 
   bool get _effectivelyOff => _isOffToday && _offDayOverride == null;
 
-  String? get _nextDeliveryDay {
+  String? _getNextDeliveryDay(AppLocalizations l10n) {
     final now = DateTime.now();
     final currentIdx = now.weekday % 7;
     for (var offset = 1; offset <= 7; offset++) {
       final nextDay = _allDays[(currentIdx + offset) % 7];
       if (widget.truck.deliveryDays.contains(nextDay)) {
-        return _dayLabelsMap[nextDay];
+        return _dayLabelsMap(l10n)[nextDay];
       }
     }
     return null;
@@ -120,9 +121,11 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
   Widget build(BuildContext context) {
     final truck = widget.truck;
     final truckColor = _parseColor(truck.color);
+    final l10n = context.l10n;
+    final nextDeliveryDay = _getNextDeliveryDay(l10n);
     final status = _effectivelyOff
-        ? ('عطلة اليوم', const Color(0xFF9E9E9E))
-        : (_statusMap[truck.today.status] ?? ('غير معروف', Theme.of(context).colorScheme.onSurfaceVariant));
+        ? (l10n.bizReqTdOffToday, const Color(0xFF9E9E9E))
+        : (_statusMap(l10n)[truck.today.status] ?? (l10n.bizReqTdUnknown, Theme.of(context).colorScheme.onSurfaceVariant));
     final (statusLabel, statusColor) = status;
 
     return Column(
@@ -152,7 +155,7 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
                   pageSlug: widget.pageSlug,
                   truckColor: truckColor,
                   isOffToday: _effectivelyOff,
-                  nextDeliveryDay: _nextDeliveryDay,
+                  nextDeliveryDay: nextDeliveryDay,
                 )
               : _ActivityTab(
                   truck: truck,
@@ -162,7 +165,7 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
         ),
 
         // Bottom action
-        _buildBottomAction(truck),
+        _buildBottomAction(truck, nextDeliveryDay),
       ],
     );
   }
@@ -250,13 +253,13 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
           Row(
             children: [
               _TabChip(
-                label: 'نظرة عامة',
+                label: context.l10n.bizReqTdOverview,
                 isActive: _tabIndex == 0,
                 onTap: () => setState(() => _tabIndex = 0),
               ),
               const SizedBox(width: AppSpacing.sm),
               _TabChip(
-                label: 'النشاط',
+                label: context.l10n.bizReqTdActivity,
                 isActive: _tabIndex == 1,
                 onTap: () => setState(() => _tabIndex = 1),
               ),
@@ -284,13 +287,13 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
           truck: truck,
           initialQueue: queue,
           pageName: bizContext?.page.name ?? '',
-          productName: bizContext?.config?.orderLabels.itemUnit ?? 'وحدة',
+          productName: bizContext?.config?.orderLabels.itemUnit ?? context.l10n.bizReqSheetUnit,
         ),
       ),
     );
   }
 
-  Widget _buildBottomAction(Truck truck) {
+  Widget _buildBottomAction(Truck truck, String? nextDeliveryDay) {
     // Effectively off: show amber banner + orange override button
     if (_effectivelyOff) {
       return Container(
@@ -316,13 +319,13 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'الشاحنة في عطلة اليوم',
+                          context.l10n.bizReqTdTruckOffToday,
                           style: TextStyle(fontSize: 12, color: context.colorScheme.onSurface),
                         ),
                         Text(
-                          _nextDeliveryDay != null
-                              ? 'الطلبات ستنتقل لـ $_nextDeliveryDay'
-                              : 'لا توجد أيام توصيل محددة',
+                          nextDeliveryDay != null
+                              ? context.l10n.bizReqTdOrdersMoveTo(nextDeliveryDay)
+                              : context.l10n.bizReqTdNoDeliveryDays,
                           style: TextStyle(
                             fontSize: 10,
                             color: context.colorScheme.onSurfaceVariant,
@@ -342,12 +345,12 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
               onPressed: () {
                 setState(() {
                   _offDayOverride = (
-                    by: 'مستخدم النظام',
+                    by: context.l10n.bizReqTdSystemUser,
                     at: DateTime.now().toIso8601String(),
                   );
                 });
               },
-              label: 'بدء المسار رغم العطلة',
+              label: context.l10n.bizReqTdStartDespiteOff,
               icon: const ButtonIcon(Icons.local_shipping),
               style: Style.warning,
               size: ButtonSize.large,
@@ -365,13 +368,13 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
 
     switch (status) {
       case TruckStatus.notStarted:
-        label = 'ابدأ المسار';
+        label = context.l10n.bizReqTdStartRoute;
         buttonStyle = Style.success;
       case TruckStatus.onRoute:
-        label = 'تابع المسار';
+        label = context.l10n.bizReqTdContinueRoute;
         buttonStyle = Style.primary;
       case TruckStatus.routeComplete:
-        label = 'عرض الملخص';
+        label = context.l10n.bizReqTdViewSummary;
         buttonStyle = Style.info;
     }
 
@@ -399,7 +402,7 @@ class _TruckDetailSheetState extends ConsumerState<_TruckDetailSheet> {
                 children: [
                   Expanded(
                     child: Text(
-                      'تشغيل استثنائي — هذا يوم عطلة للشاحنة',
+                      context.l10n.bizReqTdExceptionalOp,
                       style: TextStyle(
                         fontSize: 10,
                         color: Colors.amber.shade800,
@@ -514,14 +517,14 @@ class _OverviewTab extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${truck.today.deliveredCount}/$total تسليم',
+                    context.l10n.bizReqTdDeliveryCount(truck.today.deliveredCount, total),
                     style: TextStyle(
                       fontSize: 10,
                       color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   Text(
-                    'تقدم المسار',
+                    context.l10n.bizReqTdRouteProgress,
                     style: TextStyle(
                       fontSize: 12,
                       color: context.colorScheme.onSurface,
@@ -545,22 +548,22 @@ class _OverviewTab extends ConsumerWidget {
                 children: [
                   _StatCell(
                     value: '${delivered.length}',
-                    label: 'تم التسليم',
+                    label: context.l10n.bizReqSumDelivered,
                     color: AppColors.success,
                   ),
                   _StatCell(
                     value: '${current.length}',
-                    label: 'حالي',
+                    label: context.l10n.bizReqTdCurrent,
                     color: AppColors.primary,
                   ),
                   _StatCell(
                     value: '${pending.length}',
-                    label: 'متبقي',
+                    label: context.l10n.bizReqTdRemaining,
                     color: context.colorScheme.onSurface,
                   ),
                   _StatCell(
                     value: '${skipped.length}',
-                    label: 'تخطي',
+                    label: context.l10n.bizReqTdSkipCount,
                     color: AppColors.warning,
                   ),
                 ],
@@ -577,7 +580,7 @@ class _OverviewTab extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'المخزون',
+                  context.l10n.bizReqTdInventoryTitle,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -599,7 +602,7 @@ class _OverviewTab extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            'فارغ تم جمعه',
+                            context.l10n.bizReqTdEmptyCollected,
                             style: TextStyle(
                               fontSize: 10,
                               color: context.colorScheme.onSurfaceVariant,
@@ -620,7 +623,7 @@ class _OverviewTab extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            'ممتلئ (من ${truck.capacityFull})',
+                            context.l10n.bizReqTdFullOf(truck.capacityFull),
                             style: TextStyle(
                               fontSize: 10,
                               color: context.colorScheme.onSurfaceVariant,
@@ -665,7 +668,7 @@ class _OverviewTab extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'الشاحنة في عطلة اليوم',
+                      context.l10n.bizReqTdTruckOffToday,
                       style: TextStyle(
                         fontSize: 12,
                         color: context.colorScheme.onSurface,
@@ -679,8 +682,8 @@ class _OverviewTab extends ConsumerWidget {
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   pending.isNotEmpty
-                      ? '${pending.length} طلب سيتم ترحيلهم تلقائيا إلى ${nextDeliveryDay ?? 'يوم التوصيل القادم'}'
-                      : 'لا توجد طلبات معلقة',
+                      ? context.l10n.bizReqTdPendingDeferred(pending.length, nextDeliveryDay ?? '')
+                      : context.l10n.bizReqTdNoPending,
                   style: TextStyle(
                     fontSize: 10,
                     color: context.colorScheme.onSurfaceVariant,
@@ -701,7 +704,7 @@ class _OverviewTab extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    'السائق',
+                    context.l10n.bizReqTdDriver,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -762,7 +765,7 @@ class _OverviewTab extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'مناطق التغطية',
+                      context.l10n.bizReqTdCoverageZones,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -790,7 +793,7 @@ class _OverviewTab extends ConsumerWidget {
                       child: Row(
                         children: [
                           Text(
-                            '${zone.approximateAreaKm2} كم²',
+                            context.l10n.bizReqTdAreaKm2(zone.approximateAreaKm2.toString()),
                             style: TextStyle(
                               fontSize: 10,
                               color: context.colorScheme.onSurfaceVariant,
@@ -833,7 +836,7 @@ class _OverviewTab extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    'الجدول',
+                    context.l10n.bizReqTdSchedule,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -859,7 +862,7 @@ class _OverviewTab extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        'ساعات العمل',
+                        context.l10n.bizReqTdWorkHours,
                         style: TextStyle(
                           fontSize: 10,
                           color: context.colorScheme.onSurface,
@@ -872,7 +875,7 @@ class _OverviewTab extends ConsumerWidget {
                 spacing: AppSpacing.xs,
                 runSpacing: AppSpacing.xs,
                 alignment: WrapAlignment.end,
-                children: _dayLabels.map((d) {
+                children: _dayLabels(context.l10n).map((d) {
                   final (id, label) = d;
                   final isActive = truck.deliveryDays.contains(id);
                   return Container(
@@ -909,7 +912,7 @@ class _OverviewTab extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    'السعة',
+                    context.l10n.bizReqTdCapacity,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -942,7 +945,7 @@ class _OverviewTab extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            'فوارغ',
+                            context.l10n.bizReqTdEmpties,
                             style: TextStyle(
                               fontSize: 9,
                               color: context.colorScheme.onSurfaceVariant,
@@ -971,7 +974,7 @@ class _OverviewTab extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            'ممتلئ',
+                            context.l10n.bizReqInvFull,
                             style: TextStyle(
                               fontSize: 9,
                               color: context.colorScheme.onSurfaceVariant,
@@ -1019,7 +1022,7 @@ class _ActivityTab extends ConsumerWidget {
       truckRouteQueueProvider((pageSlug: pageSlug, truckId: truck.id)),
     );
     final queue = routeData?.queue ?? [];
-    final activityLog = _buildActivityLog(queue, truck, offDayOverride);
+    final activityLog = _buildActivityLog(queue, truck, context.l10n, offDayOverride);
 
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -1027,7 +1030,7 @@ class _ActivityTab extends ConsumerWidget {
         Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Text(
-            'نشاط اليوم',
+            context.l10n.bizReqTdTodayActivity,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -1047,7 +1050,7 @@ class _ActivityTab extends ConsumerWidget {
                         size: 32, color: context.colorScheme.outlineVariant),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'لم يبدأ المسار بعد',
+                      context.l10n.bizReqTdRouteNotStarted,
                       style: TextStyle(
                         fontSize: 12,
                         color: context.colorScheme.onSurfaceVariant,
@@ -1179,16 +1182,16 @@ class _ActivityEntryRow extends StatelessWidget {
                         children: [
                           if (entry.payment != null) ...[
                             _BadgeChip(
-                              icon: _paymentLabels[entry.payment]?.$2 ??
+                              icon: _paymentLabels(context.l10n)[entry.payment]?.$2 ??
                                   Icons.payments,
-                              label: _paymentLabels[entry.payment]?.$1 ?? '',
+                              label: _paymentLabels(context.l10n)[entry.payment]?.$1 ?? '',
                             ),
                             const SizedBox(width: AppSpacing.xs),
                           ],
                           if (entry.source != null)
                             _BadgeChip(
                               icon: _sourceIcon(entry.source!),
-                              label: sourceLabels[entry.source] ?? '',
+                              label: sourceLabels(context.l10n)[entry.source] ?? '',
                             ),
                         ],
                       ),
@@ -1222,8 +1225,8 @@ class _ActivityEntryRow extends StatelessWidget {
                       padding: const EdgeInsets.only(top: AppSpacing.xxs),
                       child: Text(
                         entry.rescheduled == 'tomorrow'
-                            ? '← تم ترحيله للغد'
-                            : '← تم ترحيله إلى ${entry.rescheduled}',
+                            ? context.l10n.bizReqTdRescheduledTomorrow
+                            : context.l10n.bizReqTdRescheduledTo(entry.rescheduled!),
                         style: TextStyle(
                           fontSize: 9,
                           color: context.colorScheme.onSurfaceVariant,
@@ -1272,7 +1275,7 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'المسارات السابقة (${history.length})',
+                context.l10n.bizReqTdPreviousRoutes(history.length),
                 style: TextStyle(
                   fontSize: 12,
                   color: context.colorScheme.onSurface,
@@ -1312,7 +1315,7 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
                                 borderRadius: AppRadius.pill,
                               ),
                               child: Text(
-                                '${h.totalDelivered} تسليم',
+                                context.l10n.bizReqTdDeliveryBadge(h.totalDelivered),
                                 style: const TextStyle(
                                   fontSize: 9,
                                   color: AppColors.success,
@@ -1332,7 +1335,7 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
                                   borderRadius: AppRadius.pill,
                                 ),
                                 child: Text(
-                                  '${h.totalSkipped} تخطي',
+                                  context.l10n.bizReqTdSkipBadge(h.totalSkipped),
                                   style: const TextStyle(
                                     fontSize: 9,
                                     color: AppColors.warning,
@@ -1364,7 +1367,7 @@ class _RouteHistorySectionState extends ConsumerState<_RouteHistorySection> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${h.startedAt} – ${h.endedAt} (${h.durationMinutes ~/ 60}س ${h.durationMinutes % 60}د)',
+                          context.l10n.bizReqTdRouteTime(h.startedAt, h.endedAt, h.durationMinutes ~/ 60, h.durationMinutes % 60),
                           style: TextStyle(
                             fontSize: 10,
                             color: context.colorScheme.onSurfaceVariant,
@@ -1515,7 +1518,8 @@ class _ActivityEntry {
 
 List<_ActivityEntry> _buildActivityLog(
   List<QueueItem> queue,
-  Truck truck, [
+  Truck truck,
+  AppLocalizations l10n, [
   ({String by, String at})? offDayOverride,
 ]) {
   final entries = <_ActivityEntry>[];
@@ -1523,8 +1527,8 @@ List<_ActivityEntry> _buildActivityLog(
   // Off-day override — logged before route_start since it happens first
   if (offDayOverride != null) {
     entries.add(_ActivityEntry(
-      label: 'تشغيل استثنائي في يوم العطلة',
-      detail: 'تم التفعيل بواسطة ${offDayOverride.by}',
+      label: l10n.bizReqTdExceptionalOpLog,
+      detail: l10n.bizReqTdActivatedBy(offDayOverride.by),
       icon: Icons.warning_amber_rounded,
       color: const Color(0xFFFF9800),
       time: offDayOverride.at,
@@ -1534,8 +1538,8 @@ List<_ActivityEntry> _buildActivityLog(
   // Route start
   if (truck.today.startedAt != null) {
     entries.add(_ActivityEntry(
-      label: 'بدء المسار',
-      detail: 'تحميل ${truck.capacityFull} وحدة',
+      label: l10n.bizReqTdRouteStart,
+      detail: l10n.bizReqTdLoadedUnits(truck.capacityFull),
       icon: Icons.local_shipping,
       color: AppColors.primary,
       time: truck.today.startedAt!,
@@ -1544,11 +1548,10 @@ List<_ActivityEntry> _buildActivityLog(
 
   // Delivered items
   for (final q in queue.where((q) => q.status == QueueItemStatus.delivered)) {
-    final exchangeInfo = _getExchangeInfo(q);
+    final exchangeInfo = _getExchangeInfo(q, l10n);
     entries.add(_ActivityEntry(
-      label: 'تسليم — ${q.customerName}',
-      detail:
-          '${q.fullDelivered ?? 0} وحدة · ${q.emptiesCollected ?? 0} فارغ$exchangeInfo',
+      label: l10n.bizReqTdDelivery(q.customerName),
+      detail: l10n.bizReqTdDeliveryDetail(q.fullDelivered ?? 0, q.emptiesCollected ?? 0, exchangeInfo),
       icon: Icons.check_circle,
       color: AppColors.success,
       time: q.deliveredAt ?? '',
@@ -1561,8 +1564,8 @@ List<_ActivityEntry> _buildActivityLog(
   // Skipped items
   for (final q in queue.where((q) => q.status == QueueItemStatus.skipped)) {
     entries.add(_ActivityEntry(
-      label: 'تخطي — ${q.customerName}',
-      detail: _skipReasonLabels[q.skipReason] ?? q.skipReason ?? 'تم التخطي',
+      label: l10n.bizReqTdSkipLabel(q.customerName),
+      detail: _skipReasonLabels(l10n)[q.skipReason] ?? q.skipReason ?? l10n.bizReqSumSkipped,
       icon: Icons.skip_next,
       color: AppColors.warning,
       time: q.deliveredAt ?? truck.today.startedAt ?? '',
@@ -1573,9 +1576,8 @@ List<_ActivityEntry> _buildActivityLog(
   // Route end
   if (truck.today.endedAt != null) {
     entries.add(_ActivityEntry(
-      label: 'انتهاء المسار',
-      detail:
-          '${truck.today.deliveredCount} تسليم · ${truck.today.currentEmpty} فارغ',
+      label: l10n.bizReqTdRouteEnd,
+      detail: l10n.bizReqTdRouteEndDetail(truck.today.deliveredCount, truck.today.currentEmpty),
       icon: Icons.local_shipping,
       color: const Color(0xFF9E9E9E),
       time: truck.today.endedAt!,
@@ -1588,15 +1590,15 @@ List<_ActivityEntry> _buildActivityLog(
   return entries;
 }
 
-String _getExchangeInfo(QueueItem q) {
+String _getExchangeInfo(QueueItem q, AppLocalizations l10n) {
   final delivered = q.fullDelivered ?? 0;
   final collected = q.emptiesCollected ?? 0;
   if (delivered > 0 && collected > 0) {
     final diff = delivered - collected;
-    if (diff > 0) return ' · $diff جديد (بدون فارغ)';
-    if (diff < 0) return ' · ${diff.abs()} فارغ زيادة';
+    if (diff > 0) return ' \u00B7 ${l10n.bizReqTdNewNoEmpty(diff)}';
+    if (diff < 0) return ' \u00B7 ${l10n.bizReqTdExtraEmpty(diff.abs())}';
   }
-  if (delivered > 0 && collected == 0) return ' · بدون استبدال';
+  if (delivered > 0 && collected == 0) return ' \u00B7 ${l10n.bizReqTdNoExchange}';
   return '';
 }
 

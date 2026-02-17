@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/request_card_sections.dart';
@@ -65,7 +67,7 @@ class RequestCustomerHeader extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                requestTimeAgo(createdAt),
+                requestTimeAgo(createdAt, context.l10n),
                 style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -97,7 +99,8 @@ class RequestStatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = requestStatusColor(status);
-    final label = requestStatusLabel(status);
+    final l10n = context.l10n;
+    final label = requestStatusLabel(status, l10n);
 
     return Align(
       alignment: AlignmentDirectional.centerEnd,
@@ -147,7 +150,7 @@ class RequestItemsList extends StatelessWidget {
         child: Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Text(
-            '$itemsCount أصناف',
+            context.l10n.bizReqItemsCount(itemsCount),
             style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -182,7 +185,7 @@ class RequestItemsList extends StatelessWidget {
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
               child: Text(
-                'الأصناف',
+                context.l10n.bizReqItems,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -306,7 +309,7 @@ class RequestTotalRow extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            'المجموع',
+            context.l10n.bizReqTotal,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w600,
             ),
@@ -344,7 +347,7 @@ class RequestNoteSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'ملاحظة العميل',
+                context.l10n.bizReqCustomerNote,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -401,7 +404,7 @@ class RequestDeclineReasonSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'سبب الرفض',
+                context.l10n.bizReqDeclineReason,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,

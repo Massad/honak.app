@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/domain/entities/price_change.dart';
@@ -77,14 +78,14 @@ String _valueText(PriceChange change) {
   return '$sign$formatted د.أ';
 }
 
-String _scopeText(PriceChange change) {
+String _scopeText(PriceChange change, BuildContext context) {
   switch (change.scope) {
     case 'category':
       return change.categoryNames.join('، ');
     case 'specific':
-      return '${change.affectedCount} عنصر';
+      return context.l10n.pcScopeSpecificCount(change.affectedCount);
     default:
-      return 'جميع الأصناف';
+      return context.l10n.pcAllItems;
   }
 }
 
@@ -183,7 +184,7 @@ class _EmptyCard extends StatelessWidget {
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
-              'تغييرات الأسعار',
+              context.l10n.pcPriceChanges,
               style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ),
@@ -201,7 +202,7 @@ class _EmptyCard extends StatelessWidget {
                   Icon(Icons.add, size: 12, color: Colors.white),
                   SizedBox(width: 4),
                   Text(
-                    'تغيير جديد',
+                    context.l10n.pcNewChange,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
@@ -264,7 +265,7 @@ class _ActiveCard extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: Text(
-                  _scopeText(change),
+                  _scopeText(change, context),
                   style: TextStyle(
                     fontSize: 13,
                     color: color.withValues(alpha: 0.8),
@@ -290,7 +291,7 @@ class _ActiveCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                '${change.affectedCount} عنصر متأثر',
+                context.l10n.pcAffectedItemCount(change.affectedCount),
                 style: TextStyle(
                   fontSize: 11,
                   color: color.withValues(alpha: 0.7),
@@ -304,7 +305,7 @@ class _ActiveCard extends StatelessWidget {
               ),
               const SizedBox(width: 2),
               Text(
-                change.isPublic ? 'عام' : 'خاص',
+                change.isPublic ? context.l10n.pcPublic : context.l10n.pcPrivate,
                 style: TextStyle(
                   fontSize: 11,
                   color: color.withValues(alpha: 0.6),
@@ -336,7 +337,7 @@ class _ActiveCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '$daysLeft يوم متبقي',
+                  context.l10n.pcDayRemainingCount(daysLeft),
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
@@ -359,7 +360,7 @@ class _ActiveCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _ActionButton(
-                  label: 'تعديل',
+                  label: context.l10n.pcEdit,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                   bgColor: Colors.white.withValues(alpha: 0.7),
                   onTap: onEdit,
@@ -368,7 +369,7 @@ class _ActiveCard extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: _ActionButton(
-                  label: 'إيقاف الآن',
+                  label: context.l10n.pcStopNow,
                   color: AppColors.error,
                   bgColor: AppColors.error.withValues(alpha: 0.1),
                   onTap: onStop,
@@ -429,7 +430,7 @@ class _ScheduledCard extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: Text(
-                  _scopeText(change),
+                  _scopeText(change, context),
                   style: TextStyle(
                     fontSize: 13,
                     color: AppColors.primary.withValues(alpha: 0.8),
@@ -448,7 +449,7 @@ class _ScheduledCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'يبدأ بعد $daysUntil يوم',
+              context.l10n.pcStartsInDays(daysUntil),
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -462,7 +463,7 @@ class _ScheduledCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _ActionButton(
-                  label: 'تعديل',
+                  label: context.l10n.pcEdit,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                   bgColor: Colors.white.withValues(alpha: 0.7),
                   onTap: onEdit,
@@ -471,7 +472,7 @@ class _ScheduledCard extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: _ActionButton(
-                  label: 'إلغاء',
+                  label: context.l10n.cancel,
                   color: AppColors.error,
                   bgColor: AppColors.error.withValues(alpha: 0.1),
                   onTap: onCancel,
@@ -505,7 +506,7 @@ class _HistoryLink extends StatelessWidget {
             Icon(Icons.access_time, size: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
             const SizedBox(width: 4),
             Text(
-              'سجل تغييرات الأسعار ($count)',
+              context.l10n.pcHistoryCount(count),
               style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(width: 2),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
@@ -35,10 +36,10 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
   bool _isLoading = false;
   List<SelectedItem> _pickedItems = [];
 
-  static const _reasons = [
-    ('alternative_available', 'البديل متوفر'),
-    ('suggest_other', 'نقترح خيارات أخرى'),
-    ('text_only', 'ملاحظة نصية فقط'),
+  List<(String, String)> _reasons(AppLocalizations l10n) => [
+    ('alternative_available', l10n.bizReqAltAvailable),
+    ('suggest_other', l10n.bizReqAltSuggestOther),
+    ('text_only', l10n.bizReqAltTextOnly),
   ];
 
   @override
@@ -82,7 +83,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
       builder: (_) => ItemPickerSheet(
         pageSlug: slug,
         mode: ItemPickerMode.multiPick,
-        title: 'اختر البدائل',
+        title: context.l10n.bizReqAltPickItems,
         initialSelections: _pickedItems,
         onItemsSelected: (items) {
           setState(() {
@@ -101,7 +102,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
     await Future<void>.delayed(const Duration(milliseconds: 500));
 
     if (mounted) {
-      context.showSnackBar('تم إرسال الاقتراح');
+      context.showSnackBar(context.l10n.bizReqSuggestionSent);
       Navigator.of(context).pop(true);
     }
   }
@@ -135,7 +136,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
             Align(
               alignment: AlignmentDirectional.centerEnd,
               child: Text(
-                'اقتراح بديل',
+                context.l10n.bizReqAltTitle,
                 style: context.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -153,6 +154,8 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
   }
 
   Widget _buildReasonStep() {
+    final l10n = context.l10n;
+    final reasons = _reasons(l10n);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -160,7 +163,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
         Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Text(
-            'اختر نوع الاقتراح',
+            l10n.bizReqAltChooseType,
             style: TextStyle(
               fontSize: 13,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -169,7 +172,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
         ),
         const SizedBox(height: AppSpacing.md),
 
-        ..._reasons.map((r) {
+        ...reasons.map((r) {
           final isSelected = _selectedReason == r.$1;
           return Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -227,7 +230,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
 
         Button(
           onPressed: _selectedReason != null ? _goNext : null,
-          label: 'التالي',
+          label: context.l10n.next,
           size: ButtonSize.large,
           expand: true,
         ),
@@ -237,6 +240,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
   }
 
   Widget _buildItemPickerStep() {
+    final l10n = context.l10n;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -247,7 +251,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
         Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Text(
-            'اختر البدائل المقترحة',
+            l10n.bizReqAltChooseItems,
             style: TextStyle(
               fontSize: 13,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -271,7 +275,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
 
         Button(
           onPressed: _openItemPicker,
-          label: _pickedItems.isEmpty ? 'اختر من المنتجات' : 'إضافة المزيد',
+          label: _pickedItems.isEmpty ? l10n.bizReqAltSelectProducts : l10n.bizReqAltAddMore,
           icon: const ButtonIcon(Icons.add),
           variant: Variant.outlined,
           size: ButtonSize.large,
@@ -283,7 +287,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
         Button(
           onPressed:
               _pickedItems.isNotEmpty ? () => setState(() => _step = 2) : null,
-          label: 'التالي',
+          label: l10n.next,
           size: ButtonSize.large,
           expand: true,
         ),
@@ -308,7 +312,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Text(
-              'البدائل المقترحة (${_pickedItems.length})',
+              context.l10n.bizReqAltSuggestedCount(_pickedItems.length),
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -344,7 +348,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
         Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Text(
-            'أضف ملاحظة للعميل',
+            context.l10n.bizReqAltAddNote,
             style: TextStyle(
               fontSize: 13,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -360,7 +364,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
           maxLines: 3,
           onChanged: (_) => setState(() {}),
           decoration: InputDecoration(
-            hintText: 'مثال: الصنف غير متوفر، لكن يوجد بديل مشابه...',
+            hintText: context.l10n.bizReqAltNoteHint,
             hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
             filled: true,
             fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
@@ -383,7 +387,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
 
         Button(
           onPressed: _canSend ? _handleSend : null,
-          label: 'إرسال اقتراح',
+          label: context.l10n.bizReqAltSend,
           size: ButtonSize.large,
           expand: true,
           isLoading: _isLoading,
@@ -398,18 +402,18 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
       alignment: AlignmentDirectional.centerEnd,
       child: GestureDetector(
         onTap: () => setState(() => _step = targetStep),
-        child: const Row(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'رجوع',
-              style: TextStyle(
+              context.l10n.back,
+              style: const TextStyle(
                 fontSize: 13,
                 color: AppColors.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Icon(
               Icons.arrow_forward_ios,
               size: 12,

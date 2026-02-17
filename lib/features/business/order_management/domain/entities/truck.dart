@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 
 part 'truck.freezed.dart';
 part 'truck.g.dart';
@@ -372,25 +373,25 @@ const truckColors = [
   '#00897B',
 ];
 
-const sourceLabels = {
-  OrderSource.recurringAuto: 'تلقائي',
-  OrderSource.appOrder: 'طلب تطبيق',
-  OrderSource.walkUp: 'عشوائي',
-  OrderSource.phoneCall: 'اتصال',
-  OrderSource.whatsapp: 'واتساب',
-  OrderSource.adHoc: 'يدوي',
+Map<OrderSource, String> sourceLabels(AppLocalizations l10n) => {
+  OrderSource.recurringAuto: l10n.bizReqSheetSourceAuto,
+  OrderSource.appOrder: l10n.bizReqSheetSourceApp,
+  OrderSource.walkUp: l10n.bizReqSheetSourceWalkUp,
+  OrderSource.phoneCall: l10n.bizReqSheetSourcePhone,
+  OrderSource.whatsapp: l10n.bizReqSheetSourceWhatsapp,
+  OrderSource.adHoc: l10n.bizReqSheetSourceAdHoc,
 };
 
-const skipReasons = [
-  ('customer_not_home', 'العميل غير موجود'),
-  ('cant_access', 'لا يمكن الوصول للموقع'),
-  ('customer_delay', 'العميل طلب تأجيل'),
-  ('out_of_stock', 'نفاد المخزون'),
-  ('other', 'سبب آخر'),
+List<(String, String)> skipReasons(AppLocalizations l10n) => [
+  ('customer_not_home', l10n.bizReqSkipNotHome),
+  ('cant_access', l10n.bizReqSkipCantAccess),
+  ('customer_delay', l10n.bizReqSkipCustomerDelay),
+  ('out_of_stock', l10n.bizReqSkipOutOfStock),
+  ('other', l10n.bizReqSkipOther),
 ];
 
-const skipDestinations = [
-  ('end_of_queue', 'نهاية الدور اليوم'),
-  ('tomorrow', 'دور الغد'),
-  ('remove', 'إزالة من الدور'),
+List<(String, String)> skipDestinations(AppLocalizations l10n) => [
+  ('end_of_queue', l10n.bizReqSkipDestEndOfQueue),
+  ('tomorrow', l10n.bizReqSkipDestTomorrow),
+  ('remove', l10n.bizReqSkipDestRemove),
 ];

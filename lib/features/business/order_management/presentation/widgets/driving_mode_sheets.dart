@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -10,20 +11,20 @@ import 'package:honak/shared/widgets/button.dart';
 // Constants
 // ═══════════════════════════════════════════════════════════════
 
-const _paymentOptions = [
-  (id: PaymentType.cash, label: 'نقدا\u064B', icon: Icons.payments_outlined),
-  (id: PaymentType.credits, label: 'رصيد', icon: Icons.credit_card),
-  (id: PaymentType.onAccount, label: 'آجل', icon: Icons.description_outlined),
+List<({PaymentType id, String label, IconData icon})> paymentOptions(AppLocalizations l10n) => [
+  (id: PaymentType.cash, label: l10n.bizReqSheetPayCash, icon: Icons.payments_outlined),
+  (id: PaymentType.credits, label: l10n.bizReqSheetPayCredits, icon: Icons.credit_card),
+  (id: PaymentType.onAccount, label: l10n.bizReqSheetPayOnAccount, icon: Icons.description_outlined),
 ];
 
-String paymentLabel(PaymentType type) {
+String paymentLabel(PaymentType type, AppLocalizations l10n) {
   switch (type) {
     case PaymentType.cash:
-      return 'نقدا\u064B';
+      return l10n.bizReqSheetPayCash;
     case PaymentType.credits:
-      return 'رصيد';
+      return l10n.bizReqSheetPayCredits;
     case PaymentType.onAccount:
-      return 'آجل';
+      return l10n.bizReqSheetPayOnAccount;
   }
 }
 
@@ -41,32 +42,32 @@ class SourceBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final _sourceConfig = {
       OrderSource.recurringAuto: (
-        label: 'تلقائي',
+        label: context.l10n.bizReqSheetSourceAuto,
         icon: Icons.refresh,
-        color: Color(0xFF7B1FA2),
+        color: const Color(0xFF7B1FA2),
       ),
       OrderSource.appOrder: (
-        label: 'طلب تطبيق',
+        label: context.l10n.bizReqSheetSourceApp,
         icon: Icons.smartphone,
         color: AppColors.primary,
       ),
       OrderSource.walkUp: (
-        label: 'عشوائي',
+        label: context.l10n.bizReqSheetSourceWalkUp,
         icon: Icons.shuffle,
         color: AppColors.success,
       ),
       OrderSource.phoneCall: (
-        label: 'اتصال',
+        label: context.l10n.bizReqSheetSourcePhone,
         icon: Icons.phone,
         color: AppColors.secondary,
       ),
       OrderSource.whatsapp: (
-        label: 'واتساب',
+        label: context.l10n.bizReqSheetSourceWhatsapp,
         icon: Icons.chat,
-        color: Color(0xFF25D366),
+        color: const Color(0xFF25D366),
       ),
       OrderSource.adHoc: (
-        label: 'يدوي',
+        label: context.l10n.bizReqSheetSourceAdHoc,
         icon: Icons.add,
         color: context.colorScheme.onSurfaceVariant,
       ),
@@ -150,7 +151,7 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'تم التسليم (${widget.items.length})',
+                  context.l10n.bizReqSheetDelivered(widget.items.length),
                   style: TextStyle(
                     fontSize: 10,
                     color: context.colorScheme.onSurfaceVariant,
@@ -223,7 +224,7 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                           Row(
                             children: [
                               Text(
-                                '$totalQty وحدة',
+                                context.l10n.bizReqSheetUnitCount(totalQty),
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: context.colorScheme.onSurfaceVariant,
@@ -253,7 +254,7 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                           children: [
                             if (d.actualPayment != null)
                               _deliveredBadge(
-                                paymentLabel(d.actualPayment!),
+                                paymentLabel(d.actualPayment!, context.l10n),
                                 context.colorScheme.onSurfaceVariant,
                                 context.colorScheme.surfaceContainerHighest,
                               ),
@@ -261,7 +262,7 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                                 d.emptiesCollected! > 0) ...[
                               const SizedBox(width: 4),
                               _deliveredBadge(
-                                '${d.emptiesCollected} فارغ',
+                                context.l10n.bizReqSheetEmptyCount(d.emptiesCollected!),
                                 context.colorScheme.onSurfaceVariant,
                                 context.colorScheme.surfaceContainerHighest,
                               ),
@@ -313,17 +314,17 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                                               BorderRadius.circular(
                                                   AppRadius.sm),
                                         ),
-                                        child: const Row(
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Icon(Icons.edit_outlined,
+                                            const Icon(Icons.edit_outlined,
                                                 size: 10,
                                                 color: AppColors.primary),
-                                            SizedBox(width: 4),
+                                            const SizedBox(width: 4),
                                             Text(
-                                              'تعديل البيانات',
-                                              style: TextStyle(
+                                              context.l10n.bizReqSheetEditData,
+                                              style: const TextStyle(
                                                 fontSize: 10,
                                                 color: AppColors.primary,
                                               ),
@@ -350,17 +351,17 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                                               BorderRadius.circular(
                                                   AppRadius.sm),
                                         ),
-                                        child: const Row(
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Icon(Icons.undo,
+                                            const Icon(Icons.undo,
                                                 size: 10,
                                                 color: AppColors.error),
-                                            SizedBox(width: 4),
+                                            const SizedBox(width: 4),
                                             Text(
-                                              'تراجع',
-                                              style: TextStyle(
+                                              context.l10n.bizReqSheetUndo,
+                                              style: const TextStyle(
                                                 fontSize: 10,
                                                 color: AppColors.error,
                                               ),
@@ -382,7 +383,7 @@ class _DeliveredCollapseState extends State<DeliveredCollapse> {
                           child: Align(
                             alignment: AlignmentDirectional.centerEnd,
                             child: Text(
-                              'مضى أكثر من ٣٠ دقيقة — لا يمكن التعديل',
+                              context.l10n.bizReqSheetExpired,
                               style: TextStyle(
                                 fontSize: 8,
                                 color: context.colorScheme.onSurfaceVariant
@@ -479,8 +480,8 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _SheetHeader(
-            title: 'تعديل بيانات التسليم',
-            subtitle: 'تعديل الكميات أو طريقة الدفع',
+            title: context.l10n.bizReqSheetEditTitle,
+            subtitle: context.l10n.bizReqSheetEditSubtitle,
             onClose: () => Navigator.pop(context),
           ),
           // Customer info
@@ -529,7 +530,7 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'التعديل سيُسجّل في سجل النشاط مع الوقت والقيم الأصلية',
+                    context.l10n.bizReqSheetEditWarning,
                     style: TextStyle(
                       fontSize: 10,
                       color: Colors.amber[800],
@@ -545,7 +546,7 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
             children: [
               Expanded(
                 child: _Counter(
-                  label: 'ممتلئ تم تسليمه',
+                  label: context.l10n.bizReqSheetFullDelivered,
                   value: _fullDel,
                   onChanged: (v) => setState(() => _fullDel = v),
                   incrementColor: AppColors.primary,
@@ -553,7 +554,7 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
               ),
               Expanded(
                 child: _Counter(
-                  label: 'فوارغ تم جمعها',
+                  label: context.l10n.bizReqSheetEmptiesCollected,
                   value: _emptyCol,
                   onChanged: (v) => setState(() => _emptyCol = v),
                   incrementColor: context.colorScheme.onSurfaceVariant,
@@ -564,7 +565,7 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
           const SizedBox(height: AppSpacing.lg),
           // Payment selector
           Row(
-            children: _paymentOptions.map((opt) {
+            children: paymentOptions(context.l10n).map((opt) {
               final active = _payment == opt.id;
               return Expanded(
                 child: Padding(
@@ -612,7 +613,7 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
           TextField(
             controller: _noteController,
             decoration: InputDecoration(
-              hintText: 'ملاحظة (اختياري)',
+              hintText: context.l10n.bizReqSheetNoteHint,
               hintStyle: TextStyle(
                 fontSize: 14,
                 color: context.colorScheme.onSurfaceVariant,
@@ -642,7 +643,7 @@ class _EditDeliverySheetState extends State<EditDeliverySheet> {
               );
               Navigator.pop(context);
             },
-            label: 'حفظ التعديلات',
+            label: context.l10n.bizReqSheetSaveEdit,
             icon: const ButtonIcon(Icons.check),
             size: ButtonSize.large,
             expand: true,
@@ -862,7 +863,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _SheetHeader(
-            title: 'تأكيد التسليم',
+            title: context.l10n.bizReqSheetConfirmTitle,
             onClose: () => Navigator.pop(context),
           ),
           // Customer info
@@ -883,7 +884,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                   ),
                 ),
                 Text(
-                  '$qty قارورة \u00B7 ${widget.item.address.split('\u060C').first}',
+                  '${context.l10n.bizReqSheetUnitCount(qty)} \u00B7 ${widget.item.address.split('\u060C').first}',
                   style: TextStyle(
                     fontSize: 10,
                     color: context.colorScheme.onSurfaceVariant,
@@ -898,7 +899,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
             children: [
               Expanded(
                 child: _Counter(
-                  label: 'ممتلئ تم تسليمه',
+                  label: context.l10n.bizReqSheetFullDelivered,
                   value: _fullDel,
                   onChanged: (v) => setState(() => _fullDel = v),
                   incrementColor: AppColors.primary,
@@ -906,7 +907,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
               ),
               Expanded(
                 child: _Counter(
-                  label: 'فوارغ تم جمعها',
+                  label: context.l10n.bizReqSheetEmptiesCollected,
                   value: _emptyCol,
                   onChanged: (v) => setState(() => _emptyCol = v),
                   incrementColor: context.colorScheme.onSurfaceVariant,
@@ -936,7 +937,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'فرق الاستبدال',
+                        context.l10n.bizReqSheetExchangeDiff,
                         style: TextStyle(
                           fontSize: 12,
                           color: context.colorScheme.onSurface,
@@ -947,13 +948,13 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                   const SizedBox(height: 4),
                   if (exchangeUnits > 0)
                     _infoRow(
-                      'استبدال (فارغ \u2194 ممتلئ)',
-                      '$exchangeUnits وحدة',
+                      context.l10n.bizReqSheetExchange,
+                      context.l10n.bizReqSheetUnitCount(exchangeUnits),
                       AppColors.success,
                     ),
                   _infoRow(
-                    'جديد (بدون فارغ)',
-                    '$newUnits وحدة',
+                    context.l10n.bizReqSheetNewNoEmpty,
+                    context.l10n.bizReqSheetUnitCount(newUnits),
                     AppColors.secondary,
                   ),
                 ],
@@ -963,7 +964,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
           const SizedBox(height: AppSpacing.lg),
           // Payment selector
           Row(
-            children: _paymentOptions.map((opt) {
+            children: paymentOptions(context.l10n).map((opt) {
               final active = _payment == opt.id;
               return Expanded(
                 child: Padding(
@@ -1003,7 +1004,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
           if (paymentChanged) ...[
             const SizedBox(height: 6),
             Text(
-              'تم تغيير الدفع من ${paymentLabel(widget.item.payment)} إلى ${paymentLabel(_payment)}',
+              context.l10n.bizReqSheetPaymentChanged(paymentLabel(widget.item.payment, context.l10n), paymentLabel(_payment, context.l10n)),
               style: const TextStyle(
                 fontSize: 10,
                 color: AppColors.secondary,
@@ -1022,7 +1023,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  'رصيد: ${widget.item.creditsRemaining} \u2190 ${(widget.item.creditsRemaining! - _fullDel).clamp(0, 9999)} بعد التأكيد',
+                  context.l10n.bizReqSheetCreditsAfter(widget.item.creditsRemaining!, (widget.item.creditsRemaining! - _fullDel).clamp(0, 9999)),
                   style: const TextStyle(
                     fontSize: 10,
                     color: AppColors.primary,
@@ -1036,7 +1037,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
           TextField(
             controller: _noteController,
             decoration: InputDecoration(
-              hintText: 'ملاحظة (اختياري)',
+              hintText: context.l10n.bizReqSheetNoteHint,
               hintStyle: TextStyle(
                 fontSize: 14,
                 color: context.colorScheme.onSurfaceVariant,
@@ -1065,7 +1066,7 @@ class _DeliverConfirmSheetState extends State<DeliverConfirmSheet> {
               );
               Navigator.pop(context);
             },
-            label: 'تأكيد التسليم',
+            label: context.l10n.bizReqSheetConfirmDelivery,
             icon: const ButtonIcon(Icons.check),
             style: Style.success,
             size: ButtonSize.large,
@@ -1130,7 +1131,7 @@ class _SkipSheetState extends State<SkipSheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _SheetHeader(
-            title: 'تخطي التوصيل؟',
+            title: context.l10n.bizReqSheetSkipTitle,
             onClose: () => Navigator.pop(context),
           ),
           // Customer info
@@ -1151,7 +1152,7 @@ class _SkipSheetState extends State<SkipSheet> {
                   ),
                 ),
                 Text(
-                  '${widget.item.items.map((i) => '${i.qty} قارورة').join(', ')} \u00B7 ${widget.item.address.split('\u060C').first}',
+                  '${widget.item.items.map((i) => '${i.qty} ${context.l10n.bizReqDmBottle}').join(', ')} \u00B7 ${widget.item.address.split('\u060C').first}',
                   style: TextStyle(
                     fontSize: 10,
                     color: context.colorScheme.onSurfaceVariant,
@@ -1162,7 +1163,7 @@ class _SkipSheetState extends State<SkipSheet> {
           ),
           const SizedBox(height: AppSpacing.lg),
           // Reasons
-          ...skipReasons.map((r) {
+          ...skipReasons(context.l10n).map((r) {
             final (id, label) = r;
             final selected = _reason == id;
             return Padding(
@@ -1205,7 +1206,7 @@ class _SkipSheetState extends State<SkipSheet> {
               child: TextField(
                 controller: _otherController,
                 decoration: InputDecoration(
-                  hintText: 'السبب...',
+                  hintText: context.l10n.bizReqSheetSkipReasonHint,
                   hintStyle: TextStyle(
                     fontSize: 14,
                     color: context.colorScheme.onSurfaceVariant,
@@ -1225,12 +1226,12 @@ class _SkipSheetState extends State<SkipSheet> {
             ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'نقل إلى:',
+            context.l10n.bizReqSheetMoveTo,
             style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(
-            children: skipDestinations.map((d) {
+            children: skipDestinations(context.l10n).map((d) {
               final (id, label) = d;
               final selected = _dest == id;
               return Expanded(
@@ -1272,7 +1273,7 @@ class _SkipSheetState extends State<SkipSheet> {
               widget.onSkip(reason, _dest);
               Navigator.pop(context);
             },
-            label: 'تخطي والتالي',
+            label: context.l10n.bizReqSheetSkipConfirm,
             icon: const ButtonIcon(Icons.skip_next),
             style: Style.warning,
             size: ButtonSize.large,
@@ -1324,13 +1325,13 @@ class _ReloadSheetState extends State<ReloadSheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _SheetHeader(
-            title: 'تحميل جديد',
-            subtitle: 'عدت للمستودع وحم\u0651لت الشاحنة',
+            title: context.l10n.bizReqSheetReloadTitle,
+            subtitle: context.l10n.bizReqSheetReloadSubtitle,
             onClose: () => Navigator.pop(context),
           ),
           const SizedBox(height: AppSpacing.sm),
           _Counter(
-            label: 'ممتلئ تم تحميله',
+            label: context.l10n.bizReqSheetFullLoaded,
             value: _newFull,
             onChanged: (v) => setState(() => _newFull = v),
             incrementColor: AppColors.primary,
@@ -1339,7 +1340,7 @@ class _ReloadSheetState extends State<ReloadSheet> {
           ),
           const SizedBox(height: AppSpacing.xl),
           _Counter(
-            label: 'فوارغ تم تنزيلها',
+            label: context.l10n.bizReqSheetEmptiesDropped,
             value: _emptiesDrop,
             onChanged: (v) => setState(() => _emptiesDrop = v),
             incrementColor: context.colorScheme.onSurfaceVariant,
@@ -1351,7 +1352,7 @@ class _ReloadSheetState extends State<ReloadSheet> {
               widget.onReload(_newFull, _emptiesDrop);
               Navigator.pop(context);
             },
-            label: 'تأكيد \u2014 بداية جديدة',
+            label: context.l10n.bizReqSheetReloadConfirm,
             icon: const ButtonIcon(Icons.refresh),
             size: ButtonSize.large,
             expand: true,

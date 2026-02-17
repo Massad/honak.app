@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
 import 'package:honak/features/business/dropoff/domain/entities/ticket_activity.dart';
@@ -16,19 +17,19 @@ void showDropoffActivityLogSheet(
 }) {
   showActivityLogSheet(
     context,
-    title: 'سجل النشاط',
+    title: context.l10n.dropoffActivityLog,
     subtitle: '#${ticket.ticketNumber} — ${ticket.customerName}',
-    entries: activityLog.map((e) => toActivityLogEntry(e)).toList(),
+    entries: activityLog.map((e) => toActivityLogEntry(context, e)).toList(),
   );
 }
 
 /// Converts a domain-specific [TicketActivityEntry] to the shared
 /// [ActivityLogEntry] UI model.
-ActivityLogEntry toActivityLogEntry(TicketActivityEntry e) {
+ActivityLogEntry toActivityLogEntry(BuildContext context, TicketActivityEntry e) {
   return ActivityLogEntry(
     id: e.id,
     timestamp: e.timestamp,
-    label: e.action.labelAr,
+    label: e.action.label(context),
     icon: activityActionIcon(e.action),
     color: activityActionColor(e.action),
     actorName: e.actorName,
@@ -52,14 +53,14 @@ Future<DropoffStatus?> showDropoffStatusPicker(
   List<TicketActivityEntry> activityLog = const [],
   VoidCallback? onViewFullLog,
 }) {
-  final currentConfig = DropoffStatusConfig.of(ticket.status);
+  final currentConfig = DropoffStatusConfig.ofLocalized(ticket.status, context);
   final currentIdx =
       DropoffStatusConfig.allStatuses.indexOf(ticket.status);
 
   final options = DropoffStatusConfig.allStatuses
       .where((s) => s != ticket.status)
       .map((status) {
-    final conf = DropoffStatusConfig.of(status);
+    final conf = DropoffStatusConfig.ofLocalized(status, context);
     final statusIdx = DropoffStatusConfig.allStatuses.indexOf(status);
     return StatusOption<DropoffStatus>(
       status: status,
@@ -71,7 +72,7 @@ Future<DropoffStatus?> showDropoffStatusPicker(
   Widget? preview;
   if (activityLog.isNotEmpty) {
     preview = ActivityLogPreview(
-      entries: activityLog.map((e) => toActivityLogEntry(e)).toList(),
+      entries: activityLog.map((e) => toActivityLogEntry(context, e)).toList(),
       onViewFull: () {
         Navigator.pop(context); // close picker first
         onViewFullLog?.call();
@@ -81,7 +82,7 @@ Future<DropoffStatus?> showDropoffStatusPicker(
 
   return showGenericStatusPicker<DropoffStatus>(
     context,
-    title: 'تغيير حالة التذكرة',
+    title: context.l10n.dropoffChangeTicketStatus,
     subtitle: '#${ticket.ticketNumber} — ${ticket.customerName}',
     currentConfig: currentConfig,
     availableStatuses: options,

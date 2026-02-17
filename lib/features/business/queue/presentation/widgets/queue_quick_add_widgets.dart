@@ -66,7 +66,7 @@ class _PackageCard extends StatelessWidget {
                             borderRadius: AppRadius.pill,
                           ),
                           child: Text(
-                            'الأكثر طلباً',
+                            context.l10n.queueMostPopular,
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -138,7 +138,7 @@ class _PackageCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'د.أ',
+                  context.l10n.jod,
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -146,7 +146,7 @@ class _PackageCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
-                  '~${package.durationMin} د',
+                  context.l10n.queueEstimatedWaitMin(package.durationMin),
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -207,7 +207,7 @@ class _PackageSummary extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '~${package.durationMin} دقيقة',
+                  context.l10n.queueApproxMinutes(package.durationMin),
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -218,9 +218,9 @@ class _PackageSummary extends StatelessWidget {
           ),
           GestureDetector(
             onTap: onChange,
-            child: const Text(
-              'تغيير',
-              style: TextStyle(
+            child: Text(
+              context.l10n.queueChange,
+              style: const TextStyle(
                 fontSize: 10,
                 color: AppColors.primary,
                 fontWeight: FontWeight.w500,
@@ -330,7 +330,7 @@ class _ChipGroup extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    'أخرى',
+                    context.l10n.queueOther,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,

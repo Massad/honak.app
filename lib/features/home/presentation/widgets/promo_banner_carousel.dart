@@ -90,10 +90,7 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
               itemCount: _banners.length,
               itemBuilder: (context, index) {
                 final banner = _banners[index];
-                return _BannerCard(
-                  banner: banner,
-                  isRtl: isRtl,
-                );
+                return _BannerCard(banner: banner, isRtl: isRtl);
               },
             ),
           ),
@@ -125,10 +122,7 @@ class _BannerCard extends StatelessWidget {
   final _PromoBanner banner;
   final bool isRtl;
 
-  const _BannerCard({
-    required this.banner,
-    required this.isRtl,
-  });
+  const _BannerCard({required this.banner, required this.isRtl});
 
   @override
   Widget build(BuildContext context) {
@@ -155,80 +149,90 @@ class _BannerCard extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Icon + label
-                  Row(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final isCompact = constraints.maxHeight <= 110;
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.local_offer_outlined,
-                        size: 14,
-                        color: Colors.white.withValues(alpha: 0.8),
+                      // Icon + label
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.local_offer_outlined,
+                            size: isCompact ? 12 : 14,
+                            color: Colors.white.withValues(alpha: 0.8),
+                          ),
+                          SizedBox(width: AppSpacing.xs),
+                          Text(
+                            isRtl ? 'هناك.app' : 'honak.app',
+                            style: TextStyle(
+                              fontSize: isCompact ? 9 : 10,
+                              color: Colors.white.withValues(alpha: 0.8),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: AppSpacing.xs),
+                      SizedBox(height: isCompact ? 4 : 6),
+                      // Title
                       Text(
-                        isRtl ? 'هناك.app' : 'honak.app',
+                        isRtl ? banner.titleAr : banner.titleEn,
                         style: TextStyle(
-                          fontSize: 10,
+                          fontSize: isCompact ? 16 : 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          height: 1.1,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: isCompact ? 4 : 6),
+                      // Subtitle
+                      Text(
+                        isRtl ? banner.subtitleAr : banner.subtitleEn,
+                        style: TextStyle(
+                          fontSize: isCompact ? 11 : 12,
                           color: Colors.white.withValues(alpha: 0.8),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const Spacer(),
+                      // CTA button
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppSpacing.lg,
+                          vertical: isCompact ? 5 : AppSpacing.sm,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              isRtl ? 'تصفّح الآن' : 'Browse now',
+                              style: TextStyle(
+                                fontSize: isCompact ? 11 : 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(width: AppSpacing.xs),
+                            Icon(
+                              isRtl ? Icons.arrow_back : Icons.arrow_forward,
+                              size: isCompact ? 11 : 12,
+                              color: Colors.white,
+                            ),
+                          ],
                         ),
                       ),
                     ],
-                  ),
-                  // Title
-                  Text(
-                    isRtl ? banner.titleAr : banner.titleEn,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  // Subtitle
-                  Text(
-                    isRtl ? banner.subtitleAr : banner.subtitleEn,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.white.withValues(alpha: 0.8),
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  // CTA button
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppSpacing.lg,
-                      vertical: AppSpacing.sm,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          isRtl ? 'تصفّح الآن' : 'Browse now',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(width: AppSpacing.xs),
-                        Icon(
-                          isRtl ? Icons.arrow_back : Icons.arrow_forward,
-                          size: 12,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),

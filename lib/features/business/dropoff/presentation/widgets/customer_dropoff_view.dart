@@ -17,12 +17,12 @@ import 'package:honak/shared/entities/money.dart';
 ///
 /// Does NOT use a provider. Takes tickets as a constructor param.
 class CustomerDropoffView extends StatefulWidget {
-  final String sectionLabel;
+  final String? sectionLabel;
   final List<DropoffTicket> tickets;
 
   const CustomerDropoffView({
     super.key,
-    this.sectionLabel = 'تتبع قطعك',
+    this.sectionLabel,
     required this.tickets,
   });
 
@@ -95,7 +95,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
           ),
           const SizedBox(width: AppSpacing.sm),
           Text(
-            widget.sectionLabel,
+            widget.sectionLabel ?? context.l10n.dropoffTrackYourItems,
             style: context.textTheme.titleSmall?.copyWith(
               color: context.colorScheme.onSurface,
             ),
@@ -140,7 +140,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'لا توجد قطع قيد المعالجة حالياً',
+            context.l10n.dropoffNoItemsProcessing,
             style: context.textTheme.bodySmall?.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 12,
@@ -148,7 +148,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            'يمكنك إحضار قطعك للمحل وسنتابع حالتها هنا',
+            context.l10n.dropoffBringItemsHint,
             textAlign: TextAlign.center,
             style: context.textTheme.labelSmall?.copyWith(
               color: Theme.of(context).colorScheme.outline,
@@ -215,7 +215,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
                       child: Text(
-                        '${ticket.items.length} قطع',
+                        context.l10n.dropoffItemsCount(ticket.items.length),
                         style: context.textTheme.labelSmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 10,
@@ -308,7 +308,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                     )),
                     if (ticket.items.length > 3)
                       Text(
-                        '+${ticket.items.length - 3} قطع أخرى',
+                        context.l10n.dropoffMoreItems(ticket.items.length - 3),
                         style: context.textTheme.labelSmall?.copyWith(
                           color: AppColors.primary,
                           fontSize: 10,

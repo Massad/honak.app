@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -85,7 +86,7 @@ class _GuestJourneyCardState extends State<GuestJourneyCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'مراحل الحجز',
+                        context.l10n.bizReqGjTitle,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -226,9 +227,9 @@ class _GuestJourneyCardState extends State<GuestJourneyCard> {
                                       .withValues(alpha: 0.1),
                                   borderRadius: AppRadius.pill,
                                 ),
-                                child: const Text(
-                                  'تم',
-                                  style: TextStyle(
+                                child: Text(
+                                  context.l10n.bizReqGjDone,
+                                  style: const TextStyle(
                                     fontSize: 9,
                                     color: AppColors.success,
                                     fontWeight: FontWeight.w600,
@@ -271,7 +272,7 @@ class _GuestJourneyCardState extends State<GuestJourneyCard> {
   ) {
     final cs = Theme.of(context).colorScheme;
     final customerName = widget.request.customer.name;
-    final space = widget.spaceName ?? 'المكان';
+    final space = widget.spaceName ?? context.l10n.bizReqGjSpaceDefault;
     final checkin = widget.checkinDate ?? '';
     final checkout = widget.checkoutDate ?? '';
 
@@ -327,14 +328,14 @@ class _GuestJourneyCardState extends State<GuestJourneyCard> {
                 color: AppColors.primary.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.map_outlined, size: 12, color: AppColors.primary),
-                  SizedBox(width: 4),
+                  const Icon(Icons.map_outlined, size: 12, color: AppColors.primary),
+                  const SizedBox(width: 4),
                   Text(
-                    'عرض الموقع على الخريطة',
-                    style: TextStyle(
+                    context.l10n.bizReqGjViewMap,
+                    style: const TextStyle(
                       fontSize: 10,
                       color: AppColors.primary,
                       fontWeight: FontWeight.w500,
@@ -353,7 +354,7 @@ class _GuestJourneyCardState extends State<GuestJourneyCard> {
               const Spacer(),
               // Send notification button
               _ActionButton(
-                label: 'إرسال إشعار',
+                label: context.l10n.bizReqGjSendNotification,
                 icon: Icons.notifications_outlined,
                 color: AppColors.primary,
                 onTap: () => widget.onSendNotification?.call(stage),
@@ -361,7 +362,7 @@ class _GuestJourneyCardState extends State<GuestJourneyCard> {
               if (canAdvance) ...[
                 const SizedBox(width: AppSpacing.sm),
                 _ActionButton(
-                  label: 'تأكيد ${stage.label}',
+                  label: context.l10n.bizReqGjConfirmStage(stage.label),
                   icon: Icons.check,
                   color: AppColors.success,
                   onTap: () =>

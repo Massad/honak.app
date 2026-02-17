@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -152,7 +153,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
                         Row(
                           children: [
                             Text(
-                              'شروط الحجز المثبّتة',
+                              context.l10n.bizReqSnapTitle,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -170,7 +171,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
                                 borderRadius: AppRadius.pill,
                               ),
                               child: Text(
-                                'مرجع',
+                                context.l10n.bizReqSnapReference,
                                 style: TextStyle(
                                   fontSize: 9,
                                   color: _purple,
@@ -181,7 +182,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
                           ],
                         ),
                         Text(
-                          'تم التثبيت ${_snap.capturedAt}',
+                          context.l10n.bizReqSnapCapturedAt(_snap.capturedAt),
                           style: TextStyle(
                             fontSize: 10,
                             color: cs.onSurfaceVariant,
@@ -225,8 +226,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
                         const SizedBox(width: 6),
                         Expanded(
                           child: Text(
-                            'هذه نسخة مثبّتة من شروط الحجز كما كانت لحظة إرسال الطلب. '
-                            'لا يمكن تعديلها وتُستخدم كمرجع في حال وجود خلاف.',
+                            context.l10n.bizReqSnapInfoBanner,
                             style: TextStyle(
                               fontSize: 10,
                               color: _purple.withValues(alpha: 0.8),
@@ -291,7 +291,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
             Icon(Icons.receipt_long_outlined, size: 10, color: cs.onSurfaceVariant),
             const SizedBox(width: 4),
             Text(
-              'التسعير عند الحجز',
+              context.l10n.bizReqSnapPricing,
               style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
             ),
           ],
@@ -307,22 +307,22 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
             children: [
               if (price.basePricePerNight != null)
                 _PriceRow(
-                  label: 'السعر لكل ليلة',
+                  label: context.l10n.bizReqSnapPricePerNight,
                   value: Money(price.basePricePerNight!).toFormattedArabic(),
                 ),
               if (price.totalNights != null)
                 _PriceRow(
-                  label: 'عدد الليالي',
+                  label: context.l10n.bizReqSnapNights,
                   value: '${price.totalNights}',
                 ),
               if (price.cleaningFee != null)
                 _PriceRow(
-                  label: 'رسوم التنظيف',
+                  label: context.l10n.bizReqSnapCleaningFee,
                   value: Money(price.cleaningFee!).toFormattedArabic(),
                 ),
               if (price.discountAmount != null)
                 _PriceRow(
-                  label: price.discountLabel ?? 'خصم',
+                  label: price.discountLabel ?? context.l10n.bizReqSnapDiscount,
                   value: '-${Money(price.discountAmount!).toFormattedArabic()}',
                   valueColor: AppColors.success,
                 ),
@@ -335,7 +335,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
                   ),
                 ),
                 child: _PriceRow(
-                  label: 'المجموع',
+                  label: context.l10n.bizReqSnapTotal,
                   value: Money(price.total).toFormattedArabic(),
                   valueColor: AppColors.primary,
                   isBold: true,
@@ -343,7 +343,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
               ),
               if (price.depositRequired > 0)
                 _PriceRow(
-                  label: 'العربون المطلوب',
+                  label: context.l10n.bizReqSnapDeposit,
                   value: Money(price.depositRequired).toFormattedArabic(),
                   valueColor: AppColors.warning,
                 ),
@@ -360,21 +360,21 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
 
     String? feeText;
     if (policy.lateCancelFeeType == 'keep_deposit') {
-      feeText = 'الإلغاء المتأخر: يحتفظ بالعربون';
+      feeText = context.l10n.bizReqSnapCancelKeepDeposit;
     } else if (policy.lateCancelFeeType == 'percentage' &&
         policy.lateCancelPercentage != null) {
-      feeText = 'الإلغاء المتأخر: ${policy.lateCancelPercentage}% من المبلغ';
+      feeText = context.l10n.bizReqSnapCancelPercent(policy.lateCancelPercentage!);
     } else if (policy.lateCancelFeeType == 'fixed' &&
         policy.lateCancelAmount != null) {
       feeText =
-          'الإلغاء المتأخر: ${Money(policy.lateCancelAmount!).toFormattedArabic()}';
+          context.l10n.bizReqSnapCancelFixed(Money(policy.lateCancelAmount!).toFormattedArabic());
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'سياسة الإلغاء عند الحجز',
+          context.l10n.bizReqSnapCancelPolicy,
           style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
         ),
         const SizedBox(height: 6),
@@ -389,7 +389,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                policy.lateCancelMessage ?? 'لا توجد سياسة إلغاء',
+                policy.lateCancelMessage ?? context.l10n.bizReqSnapNoCancelPolicy,
                 style: TextStyle(fontSize: 11, color: cs.onSurface, height: 1.4),
               ),
               if (feeText != null) ...[
@@ -415,7 +415,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'قوانين المنزل عند الحجز',
+          context.l10n.bizReqSnapHouseRules,
           style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
         ),
         const SizedBox(height: 6),
@@ -460,7 +460,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
             Icon(Icons.shield_outlined, size: 10, color: cs.onSurfaceVariant),
             const SizedBox(width: 4),
             Text(
-              'بنود السلامة والمسؤولية ($ackCount/${_snap.disclaimers.length} تم الموافقة)',
+              context.l10n.bizReqSnapDisclaimers(ackCount, _snap.disclaimers.length),
               style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
             ),
           ],
@@ -510,9 +510,9 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
                                       .withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
-                                child: const Text(
-                                  'وافق ✓',
-                                  style: TextStyle(
+                                child: Text(
+                                  context.l10n.bizReqSnapAcknowledged,
+                                  style: const TextStyle(
                                     fontSize: 8,
                                     color: AppColors.success,
                                   ),
@@ -555,7 +555,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
             Icon(Icons.fact_check_outlined, size: 10, color: cs.onSurfaceVariant),
             const SizedBox(width: 4),
             Text(
-              'إجابات العميل (${_snap.questions.length})',
+              context.l10n.bizReqSnapQuestions(_snap.questions.length),
               style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
             ),
           ],
@@ -607,7 +607,7 @@ class _OrderSnapshotDisplayState extends State<OrderSnapshotDisplay> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'طرق الدفع المتاحة عند الحجز',
+          context.l10n.bizReqSnapPaymentMethods,
           style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
         ),
         const SizedBox(height: 6),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
@@ -139,8 +140,8 @@ class _PackageFormContentState extends State<_PackageFormContent> {
         // Title
         Text(
           _isEditing
-              ? '\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u0628\u0627\u0642\u0629'
-              : '\u0625\u0636\u0627\u0641\u0629 \u0628\u0627\u0642\u0629',
+              ? context.l10n.pkgEditTitle
+              : context.l10n.pkgAddTitle,
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -157,8 +158,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
             controller: _nameCtrl,
             textDirection: TextDirection.rtl,
             decoration: InputDecoration(
-              labelText:
-                  '\u0627\u0633\u0645 \u0627\u0644\u0628\u0627\u0642\u0629',
+              labelText: context.l10n.pkgName,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -172,7 +172,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
             textDirection: TextDirection.rtl,
             maxLines: 3,
             decoration: InputDecoration(
-              labelText: '\u0627\u0644\u0648\u0635\u0641',
+              labelText: context.l10n.pkgDescription,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -186,8 +186,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             textDirection: TextDirection.ltr,
             decoration: InputDecoration(
-              labelText:
-                  '\u0627\u0644\u0633\u0639\u0631 (\u062f.\u0623)',
+              labelText: context.l10n.pkgPriceJod,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -197,7 +196,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
 
           // Subscription model section title
           Text(
-            '\u0646\u0645\u0648\u0630\u062c \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643',
+            context.l10n.pkgSubscriptionModel,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -210,9 +209,9 @@ class _PackageFormContentState extends State<_PackageFormContent> {
           SwitchListTile(
             value: _hasCredits,
             onChanged: _onCreditsToggled,
-            title: const Text(
-              '\u0631\u0635\u064a\u062f \u0645\u062d\u062f\u062f',
-              style: TextStyle(fontSize: 14),
+            title: Text(
+              context.l10n.pkgLimitedCredits,
+              style: const TextStyle(fontSize: 14),
             ),
             activeTrackColor: AppColors.primary.withValues(alpha: 0.5),
             thumbColor: WidgetStateProperty.resolveWith(
@@ -227,9 +226,9 @@ class _PackageFormContentState extends State<_PackageFormContent> {
           SwitchListTile(
             value: _hasEndDate,
             onChanged: _onEndDateToggled,
-            title: const Text(
-              '\u062a\u0627\u0631\u064a\u062e \u0627\u0646\u062a\u0647\u0627\u0621',
-              style: TextStyle(fontSize: 14),
+            title: Text(
+              context.l10n.pkgEndDate,
+              style: const TextStyle(fontSize: 14),
             ),
             activeTrackColor: AppColors.primary.withValues(alpha: 0.5),
             thumbColor: WidgetStateProperty.resolveWith(
@@ -249,8 +248,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
               keyboardType: TextInputType.number,
               textDirection: TextDirection.ltr,
               decoration: InputDecoration(
-                labelText:
-                    '\u0639\u062f\u062f \u0627\u0644\u0631\u0635\u064a\u062f',
+                labelText: context.l10n.pkgCreditsCount,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -293,7 +291,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
           // Validity months
           if (_hasEndDate) ...[
             Text(
-              '\u0645\u062f\u0629 \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643 (\u0623\u0634\u0647\u0631)',
+              context.l10n.pkgDurationMonths,
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -370,13 +368,11 @@ class _PackageFormContentState extends State<_PackageFormContent> {
           // Save button
           btn.Button(
             onPressed: () {
-              _showToast(
-                '\u0642\u0631\u064a\u0628\u0627\u064b \u2014 \u062d\u0641\u0638 \u0627\u0644\u0628\u0627\u0642\u0629',
-              );
+              _showToast(context.l10n.pkgSaveSoon);
             },
             label: _isEditing
-                ? '\u062d\u0641\u0638 \u0627\u0644\u062a\u0639\u062f\u064a\u0644\u0627\u062a'
-                : '\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0628\u0627\u0642\u0629',
+                ? context.l10n.pkgSaveChanges
+                : context.l10n.pkgAddPackage,
             size: btn.ButtonSize.large,
             expand: true,
           ),
@@ -387,12 +383,10 @@ class _PackageFormContentState extends State<_PackageFormContent> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  _showToast(
-                    '\u0642\u0631\u064a\u0628\u0627\u064b \u2014 \u062d\u0630\u0641 \u0627\u0644\u0628\u0627\u0642\u0629',
-                  );
+                  _showToast(context.l10n.pkgDeleteSoon);
                 },
-                child: const Text(
-                  '\u062d\u0630\u0641 \u0627\u0644\u0628\u0627\u0642\u0629',
+                child: Text(
+                  context.l10n.pkgDeletePackage,
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -412,12 +406,9 @@ class _PackageFormContentState extends State<_PackageFormContent> {
   }
 
   String get _modelDescription => switch (_model) {
-        'visits_and_date' =>
-          '\u064a\u0646\u062a\u0647\u064a \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643 \u0639\u0646\u062f \u0646\u0641\u0627\u062f \u0627\u0644\u0631\u0635\u064a\u062f \u0623\u0648 \u0639\u0646\u062f \u0627\u0646\u062a\u0647\u0627\u0621 \u0627\u0644\u0645\u062f\u0629 \u2014 \u0623\u064a\u0647\u0645\u0627 \u0623\u0642\u0631\u0628',
-        'visits_only' =>
-          '\u064a\u0646\u062a\u0647\u064a \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643 \u0641\u0642\u0637 \u0639\u0646\u062f \u0646\u0641\u0627\u062f \u0627\u0644\u0631\u0635\u064a\u062f \u2014 \u0628\u062f\u0648\u0646 \u062a\u0627\u0631\u064a\u062e \u0627\u0646\u062a\u0647\u0627\u0621',
-        'date_only' =>
-          '\u0627\u0634\u062a\u0631\u0627\u0643 \u0632\u0645\u0646\u064a \u2014 \u0627\u0644\u0639\u0645\u064a\u0644 \u064a\u0633\u062a\u062e\u062f\u0645 \u0628\u0644\u0627 \u062d\u062f\u0648\u062f \u062e\u0644\u0627\u0644 \u0627\u0644\u0645\u062f\u0629',
+        'visits_and_date' => context.l10n.pkgModelVisitsAndDate,
+        'visits_only' => context.l10n.pkgModelVisitsOnly,
+        'date_only' => context.l10n.pkgModelDateOnly,
         _ => '',
       };
 }

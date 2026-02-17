@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/config/archetype.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dashboard/presentation/providers/dashboard_provider.dart';
 import 'package:honak/features/business/insights/domain/entities/insight_entities.dart';
@@ -76,8 +77,8 @@ class _FullInsightsScreen extends ConsumerWidget {
           Expanded(
             child: insightsAsync.when(
               loading: () => const _InsightsSkeleton(),
-              error: (_, __) => const Center(
-                child: Text('حدث خطأ في تحميل الإحصائيات'),
+              error: (_, __) => Center(
+                child: Text(context.l10n.insightsLoadError),
               ),
               data: (data) => _InsightsContent(
                 data: data,
@@ -125,9 +126,9 @@ class _StickyHeader extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'الإحصائيات',
-                style: TextStyle(
+              Text(
+                context.l10n.insightsTitle,
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF111827),
@@ -164,7 +165,7 @@ class _StickyHeader extends StatelessWidget {
                       borderRadius: BorderRadius.circular(999),
                     ),
                     child: Text(
-                      p.labelAr,
+                      p.label(context.l10n),
                       style: TextStyle(
                         fontSize: 12,
                         color: isSelected ? Colors.white : const Color(0xFF6B7280),
@@ -330,8 +331,8 @@ class _DirectoryInsightsContent extends ConsumerWidget {
 
     return dashData.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => const Center(
-        child: Text('حدث خطأ في تحميل البيانات'),
+      error: (_, __) => Center(
+        child: Text(context.l10n.insightsDataLoadError),
       ),
       data: (data) {
         return ListView(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
@@ -81,7 +82,7 @@ class _CompactInventory extends StatelessWidget {
         const Icon(Icons.water_drop_outlined, size: 12, color: AppColors.primary),
         const SizedBox(width: 6),
         Text(
-          '$full ممتلئ',
+          context.l10n.bizReqInvFullCount(full),
           style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
         ),
         const _Dot(),
@@ -89,13 +90,13 @@ class _CompactInventory extends StatelessWidget {
         Icon(Icons.inventory_2_outlined, size: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
         const SizedBox(width: 6),
         Text(
-          '$empty فارغ',
+          context.l10n.bizReqInvEmptyCount(empty),
           style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
         const _Dot(),
         // Reserved
         Text(
-          '$reserved محجوز',
+          context.l10n.bizReqInvReservedCount(reserved),
           style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
         ),
         const SizedBox(width: AppSpacing.sm),
@@ -161,10 +162,10 @@ class _ExpandedInventory extends StatelessWidget {
                   child: _CounterColumn(
                     icon: Icons.water_drop_outlined,
                     iconColor: AppColors.primary,
-                    label: 'ممتلئ',
+                    label: context.l10n.bizReqInvFull,
                     count: full,
                     countColor: _numberColor(full),
-                    subtitle: 'من $capacityFull محمّل',
+                    subtitle: context.l10n.bizReqInvLoadedOf(capacityFull),
                     onDecrement:
                         full > 0 ? () => onFullChange?.call(-1) : null,
                     onIncrement: () => onFullChange?.call(1),
@@ -181,10 +182,10 @@ class _ExpandedInventory extends StatelessWidget {
                   child: _CounterColumn(
                     icon: Icons.inventory_2_outlined,
                     iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                    label: 'فارغ',
+                    label: context.l10n.bizReqInvEmpty,
                     count: empty,
                     countColor: context.colorScheme.onSurfaceVariant,
-                    subtitle: 'تم جمعها اليوم',
+                    subtitle: context.l10n.bizReqInvCollectedToday,
                     onDecrement:
                         empty > 0 ? () => onEmptyChange?.call(-1) : null,
                     onIncrement: () => onEmptyChange?.call(1),
@@ -206,14 +207,14 @@ class _ExpandedInventory extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '$available متاح لطلبات جديدة',
+                  context.l10n.bizReqInvAvailableNew(available),
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Text(
-                  '$reserved محجوز لطلبات قادمة',
+                  context.l10n.bizReqInvReservedUpcoming(reserved),
                   style: const TextStyle(
                     fontSize: 10,
                     color: AppColors.primary,
@@ -226,22 +227,21 @@ class _ExpandedInventory extends StatelessWidget {
           // ── Stock warnings ────────────────────────────
           if (full == 0)
             _WarningBanner(
-              message: 'الشاحنة فارغة — تحتاج تحميل جديد',
+              message: context.l10n.bizReqInvEmptyWarning,
               color: AppColors.error,
               backgroundColor: const Color(0xFFFFF5F5),
               borderColor: const Color(0xFFFFCDD2),
             )
           else if (full > 0 && full < reserved)
             _WarningBanner(
-              message:
-                  'المخزون غير كافٍ — ${reserved - full} طلبات قد تحتاج تأجيل',
+              message: context.l10n.bizReqInvShortageWarning(reserved - full),
               color: AppColors.warning,
               backgroundColor: const Color(0xFFFFF8E1),
               borderColor: const Color(0xFFFFECB3),
             )
           else if (full > 0 && full <= 5 && full >= reserved)
             _WarningBanner(
-              message: 'مخزون منخفض — فكّر بالتحميل',
+              message: context.l10n.bizReqInvLowWarning,
               color: AppColors.warning,
               backgroundColor: const Color(0xFFFFF8E1),
               borderColor: const Color(0xFFFFECB3),

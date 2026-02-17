@@ -15,19 +15,19 @@ class _SourceBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final (label, color, bgColor, icon) = switch (source) {
       QueueSource.appReserve => (
-          'حجز',
+          context.l10n.queueSourceReserve,
           const Color(0xFF1A73E8),
           const Color(0xFFEFF6FF),
           Icons.smartphone_rounded,
         ),
       QueueSource.phone => (
-          'هاتف',
+          context.l10n.queueSourcePhone,
           const Color(0xFF7B1FA2),
           const Color(0xFFFAF5FF),
           Icons.phone_in_talk_rounded,
         ),
       QueueSource.walkIn => (
-          'حضوري',
+          context.l10n.queueSourceWalkIn,
           context.colorScheme.onSurfaceVariant,
           context.colorScheme.surfaceContainerLow,
           Icons.directions_walk_rounded,
@@ -92,7 +92,7 @@ class _OnTheWayBadgeState extends State<_OnTheWayBadge>
             const Icon(Icons.navigation_rounded,
                 size: 9, color: Color(0xFF43A047)),
             const SizedBox(width: 2),
-            Text('ادور',
+            Text(context.l10n.queueOnTheWayBadge,
                 style: context.textTheme.labelSmall
                     ?.copyWith(color: const Color(0xFF43A047), fontSize: 10)),
           ],
@@ -151,7 +151,7 @@ class _LiveTimerState extends State<_LiveTimer> {
             : (const Color(0xFF1A73E8), const Color(0xFFEFF6FF));
 
     final text =
-        isOvertime ? '+${remaining.abs()} د تأخير' : '$remaining د متبقية';
+        isOvertime ? context.l10n.queueMinOvertime(remaining.abs()) : context.l10n.queueMinRemaining(remaining);
 
     return Container(
       padding:
@@ -181,7 +181,7 @@ class _StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final conf = QueueStatusConfig.of(status);
+    final conf = QueueStatusConfig.ofLocalized(status, context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -224,13 +224,13 @@ Future<QueueStatus?> _showQueueStatusPicker(
   required String customerName,
   required String packageName,
 }) {
-  final currentConfig = QueueStatusConfig.of(currentStatus);
+  final currentConfig = QueueStatusConfig.ofLocalized(currentStatus, context);
   final currentIdx = QueueStatusConfig.statusOrder.indexOf(currentStatus);
 
   final options = QueueStatusConfig.pickerStatuses
       .where((s) => s != currentStatus)
       .map((s) {
-    final conf = QueueStatusConfig.of(s);
+    final conf = QueueStatusConfig.ofLocalized(s, context);
     final targetIdx = QueueStatusConfig.statusOrder.indexOf(s);
     return StatusOption<QueueStatus>(
       status: s,
@@ -241,7 +241,7 @@ Future<QueueStatus?> _showQueueStatusPicker(
 
   return showGenericStatusPicker<QueueStatus>(
     context,
-    title: 'تغيير حالة الطلب',
+    title: context.l10n.queueChangeStatus,
     subtitle: '$customerName — $packageName',
     currentConfig: currentConfig,
     availableStatuses: options,

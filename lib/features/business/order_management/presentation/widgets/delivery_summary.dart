@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -87,7 +88,7 @@ class DeliverySummary extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'ملخص المسار',
+                      context.l10n.bizReqSumTitle,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -141,7 +142,9 @@ class DeliverySummary extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'المدة: $hours ساعة${mins > 0 ? ' $mins دقيقة' : ''}',
+                          mins > 0
+                              ? context.l10n.bizReqSumDurationMinutes(hours, mins)
+                              : context.l10n.bizReqSumDuration(hours),
                           style: TextStyle(
                             fontSize: 14,
                             color: context.colorScheme.onSurface,
@@ -158,7 +161,7 @@ class DeliverySummary extends StatelessWidget {
                           iconColor: AppColors.success,
                           bgColor: AppColors.success.withAlpha(20),
                           count: delivered.length,
-                          label: 'تم التسليم',
+                          label: context.l10n.bizReqSumDelivered,
                         ),
                         const SizedBox(width: 8),
                         _StatCard(
@@ -166,7 +169,7 @@ class DeliverySummary extends StatelessWidget {
                           iconColor: AppColors.secondary,
                           bgColor: AppColors.secondary.withAlpha(20),
                           count: skipped.length,
-                          label: 'تم التخطي',
+                          label: context.l10n.bizReqSumSkipped,
                         ),
                         const SizedBox(width: 8),
                         _StatCard(
@@ -174,7 +177,7 @@ class DeliverySummary extends StatelessWidget {
                           iconColor: AppColors.error,
                           bgColor: AppColors.error.withAlpha(20),
                           count: failed.length + pending.length,
-                          label: 'لم يُسل\u0651م',
+                          label: context.l10n.bizReqSumNotDelivered,
                         ),
                       ],
                     ),
@@ -183,26 +186,26 @@ class DeliverySummary extends StatelessWidget {
                     _SectionCard(
                       icon: Icons.inventory_2_outlined,
                       iconColor: AppColors.primary,
-                      title: 'المخزون',
+                      title: context.l10n.bizReqSumInventory,
                       children: [
-                        _Row(label: 'بدأ بـ', value: '${truck.capacityFull} ممتلئ'),
+                        _Row(label: context.l10n.bizReqSumStartedWith, value: context.l10n.bizReqSumFullCount(truck.capacityFull)),
                         if (reloads > 0)
                           _Row(
-                            label: 'إعادة تحميل',
-                            value: '+$reloads مرة',
+                            label: context.l10n.bizReqSumReloads,
+                            value: context.l10n.bizReqSumReloadTimes(reloads),
                             valueColor: AppColors.primary,
                           ),
                         _Row(
-                          label: 'تم التسليم',
-                          value: '-$totalDelivered ممتلئ',
+                          label: context.l10n.bizReqSumDelivered,
+                          value: context.l10n.bizReqSumDeliveredCount(totalDelivered),
                           valueColor: AppColors.success,
                         ),
                         _Row(
-                          label: 'متبقي',
-                          value: '${truck.today.currentFull} ممتلئ',
+                          label: context.l10n.bizReqSumRemaining,
+                          value: context.l10n.bizReqSumFullCount(truck.today.currentFull),
                         ),
                         const Divider(height: 16),
-                        _Row(label: 'فوارغ تم جمعها', value: '$totalEmpties'),
+                        _Row(label: context.l10n.bizReqSumEmptiesCollected, value: '$totalEmpties'),
                         // Exchange vs new breakdown
                         Builder(
                           builder: (context) {
@@ -221,13 +224,13 @@ class DeliverySummary extends StatelessWidget {
                               children: [
                                 const Divider(height: 16),
                                 _Row(
-                                  label: 'استبدال (فارغ \u2194 ممتلئ)',
-                                  value: '$totalExchange وحدة',
+                                  label: context.l10n.bizReqSheetExchange,
+                                  value: context.l10n.bizReqSheetUnitCount(totalExchange),
                                   valueColor: AppColors.success,
                                 ),
                                 _Row(
-                                  label: 'جديد (بدون فارغ)',
-                                  value: '$totalNew وحدة',
+                                  label: context.l10n.bizReqSheetNewNoEmpty,
+                                  value: context.l10n.bizReqSheetUnitCount(totalNew),
                                   valueColor: AppColors.secondary,
                                 ),
                               ],
@@ -241,29 +244,29 @@ class DeliverySummary extends StatelessWidget {
                     _SectionCard(
                       icon: Icons.payments_outlined,
                       iconColor: AppColors.success,
-                      title: 'الإيرادات',
+                      title: context.l10n.bizReqSumRevenue,
                       children: [
                         _Row(
-                          label: 'رصيد مسبق',
-                          value: '$creditUnits وحدة',
+                          label: context.l10n.bizReqSumPrepaid,
+                          value: context.l10n.bizReqSheetUnitCount(creditUnits),
                           leadingIcon: Icons.credit_card,
                           leadingIconColor: AppColors.primary,
                         ),
                         _Row(
-                          label: 'نقد',
-                          value: '$cashUnits وحدة',
+                          label: context.l10n.bizReqSumCash,
+                          value: context.l10n.bizReqSheetUnitCount(cashUnits),
                           leadingIcon: Icons.payments_outlined,
                           leadingIconColor: AppColors.success,
                         ),
                         _Row(
-                          label: 'على الحساب',
-                          value: '$accountUnits وحدة',
+                          label: context.l10n.bizReqSumOnAccount,
+                          value: context.l10n.bizReqSheetUnitCount(accountUnits),
                           leadingIcon: Icons.description_outlined,
                           leadingIconColor: context.colorScheme.onSurfaceVariant,
                         ),
                         const Divider(height: 16),
                         _Row(
-                          label: 'إجمالي الوحدات',
+                          label: context.l10n.bizReqSumTotalUnits,
                           value: '${creditUnits + cashUnits + accountUnits}',
                           bold: true,
                         ),
@@ -284,8 +287,8 @@ class DeliverySummary extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'تغييرات طريقة الدفع:',
+                            Text(
+                              context.l10n.bizReqSumPaymentChanges,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: AppColors.primary,
@@ -309,7 +312,7 @@ class DeliverySummary extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '${paymentLabel(q.payment)} \u2190 ${paymentLabel(q.actualPayment!)}',
+                                      '${paymentLabel(q.payment, context.l10n)} \u2190 ${paymentLabel(q.actualPayment!, context.l10n)}',
                                       style: const TextStyle(
                                         fontSize: 10,
                                         color: AppColors.primary,
@@ -337,7 +340,7 @@ class DeliverySummary extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'ملاحظات السائق:',
+                              context.l10n.bizReqSumDriverNotes,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: context.colorScheme.onSurface,
@@ -380,7 +383,7 @@ class DeliverySummary extends StatelessWidget {
                     _SectionCard(
                       icon: Icons.local_shipping_outlined,
                       iconColor: AppColors.secondary,
-                      title: 'مصادر الطلبات',
+                      title: context.l10n.bizReqSumSources,
                       children: sources.entries
                           .toList()
                         ..sort((a, b) => b.value.compareTo(a.value)),
@@ -401,7 +404,7 @@ class DeliverySummary extends StatelessWidget {
                                       SourceBadge(source: e.key),
                                       const SizedBox(width: 4),
                                       Text(
-                                        '${sourceLabels[e.key] ?? e.key.name}: ${e.value}',
+                                        '${sourceLabels(context.l10n)[e.key] ?? e.key.name}: ${e.value}',
                                         style: TextStyle(
                                           fontSize: 12,
                                           color: context.colorScheme.onSurface,
@@ -438,8 +441,8 @@ class DeliverySummary extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'تم التخطي:',
+                            Text(
+                              context.l10n.bizReqSumSkippedList,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: AppColors.secondary,
@@ -456,7 +459,7 @@ class DeliverySummary extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${q.customerName} \u2014 ${_skipReasonLabel(q.skipReason)}',
+                                      '${q.customerName} \u2014 ${_skipReasonLabel(q.skipReason, context.l10n)}',
                                       style: TextStyle(
                                         fontSize: 10,
                                         color: context.colorScheme.onSurfaceVariant,
@@ -464,8 +467,8 @@ class DeliverySummary extends StatelessWidget {
                                     ),
                                     Text(
                                       q.rescheduledTo != null
-                                          ? '\u2190 ${q.rescheduledTo == 'tomorrow' ? 'الغد' : q.rescheduledTo}'
-                                          : 'أُزيل',
+                                          ? '\u2190 ${q.rescheduledTo == 'tomorrow' ? context.l10n.bizReqSumTomorrow : q.rescheduledTo}'
+                                          : context.l10n.bizReqSumRemoved,
                                       style: TextStyle(
                                         fontSize: 10,
                                         color: AppColors.secondary.withAlpha(200),
@@ -489,7 +492,7 @@ class DeliverySummary extends StatelessWidget {
                               Navigator.pop(context);
                               onEndRoute();
                             },
-                            label: 'إنهاء المسار',
+                            label: context.l10n.bizReqSumEndRoute,
                             icon: const ButtonIcon(Icons.check),
                             size: ButtonSize.large,
                             expand: true,
@@ -499,8 +502,8 @@ class DeliverySummary extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('قريبا\u064B'),
+                              SnackBar(
+                                content: Text(context.l10n.bizReqDmComingSoon),
                                 behavior: SnackBarBehavior.floating,
                               ),
                             );
@@ -529,9 +532,9 @@ class DeliverySummary extends StatelessWidget {
           );
   }
 
-  String _skipReasonLabel(String? reason) {
+  String _skipReasonLabel(String? reason, AppLocalizations l10n) {
     if (reason == null) return '';
-    for (final r in skipReasons) {
+    for (final r in skipReasons(l10n)) {
       if (r.$1 == reason) return r.$2;
     }
     return reason;

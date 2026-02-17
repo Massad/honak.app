@@ -145,7 +145,7 @@ class _StatsHeader extends StatelessWidget {
               const Icon(Icons.people_outline, size: 16, color: Colors.white),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'الدور الحالي',
+                context.l10n.queueCurrentQueue,
                 style: context.textTheme.labelSmall?.copyWith(
                   color: Theme.of(context).colorScheme.surface,
                 ),
@@ -162,7 +162,7 @@ class _StatsHeader extends StatelessWidget {
                     borderRadius: AppRadius.pill,
                   ),
                   child: Text(
-                    'الدور متوقف مؤقتاً',
+                    context.l10n.queuePausedTemporarily,
                     style: context.textTheme.labelSmall?.copyWith(
                       color: Theme.of(context).colorScheme.surface,
                       fontSize: 10,
@@ -177,17 +177,17 @@ class _StatsHeader extends StatelessWidget {
             children: [
               _StatItem(
                 value: '$currentQueueSize',
-                label: 'بالانتظار',
+                label: context.l10n.queueLabelWaiting,
               ),
               _verticalDivider(),
               _StatItem(
                 value: '$inProgressCount',
-                label: 'قيد الخدمة',
+                label: context.l10n.queueInProgress,
               ),
               _verticalDivider(),
               _StatItem(
                 value: '~$estimatedWaitMin',
-                label: 'دقيقة انتظار',
+                label: context.l10n.queueWaitMinutes,
                 icon: Icons.access_time,
               ),
             ],

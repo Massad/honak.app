@@ -93,7 +93,7 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'لا يمكن حذف "$cat" — يحتوي على $count مستأجر',
+            context.l10n.dirCategoryCannotDelete(cat, count),
           ),
         ),
       );
@@ -111,16 +111,16 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
           icon: const Icon(Icons.close),
           onPressed: widget.onClose,
         ),
-        title: const Text(
-          'إدارة التصنيفات',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        title: Text(
+          context.l10n.dirCategoryManagerTitle,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         elevation: 0,
         actions: [
           btn.Button(
             onPressed: () => widget.onSave(_categories),
-            label: 'حفظ',
+            label: context.l10n.save,
             variant: btn.Variant.text,
             size: btn.ButtonSize.small,
           ),
@@ -146,7 +146,9 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      _editIndex != null ? 'تعديل تصنيف' : 'تصنيف جديد',
+                      _editIndex != null
+                          ? context.l10n.dirCategoryEdit
+                          : context.l10n.dirCategoryNew,
                       style: context.textTheme.titleSmall,
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -154,7 +156,7 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
                       controller: _controller,
                       autofocus: true,
                       decoration: InputDecoration(
-                        hintText: 'اسم التصنيف',
+                        hintText: context.l10n.dirCategoryNameHint,
                         hintStyle: TextStyle(
                           fontSize: 13,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -176,13 +178,15 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
                       children: [
                         btn.Button(
                           onPressed: _cancelEdit,
-                          label: 'إلغاء',
+                          label: context.l10n.cancel,
                           variant: btn.Variant.text,
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         btn.Button(
                           onPressed: _saveEdit,
-                          label: _editIndex != null ? 'تحديث' : 'إضافة',
+                          label: _editIndex != null
+                              ? context.l10n.dirCategoryUpdate
+                              : context.l10n.dirCategoryAdd,
                         ),
                       ],
                     ),
@@ -196,7 +200,7 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
             child: _categories.isEmpty
                 ? Center(
                     child: Text(
-                      'لا توجد تصنيفات',
+                      context.l10n.dirCategoryEmpty,
                       style: TextStyle(
                         fontSize: 13,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -235,7 +239,7 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
                                   Text(cat,
                                       style: context.textTheme.titleSmall),
                                   Text(
-                                    '$count مستأجر',
+                                    context.l10n.dirTenantCount(count),
                                     style:
                                         context.textTheme.labelSmall?.copyWith(
                                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -275,7 +279,7 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 child: btn.Button(
                   onPressed: _startAdd,
-                  label: 'إضافة تصنيف',
+                  label: context.l10n.dirCategoryAddBtn,
                   icon: const btn.ButtonIcon(Icons.add),
                   variant: btn.Variant.outlined,
                   expand: true,

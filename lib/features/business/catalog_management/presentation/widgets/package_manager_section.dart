@@ -27,13 +27,10 @@ class PackageManagerSection extends StatelessWidget {
     },
   ];
 
-  static String _modelLabel(String model) => switch (model) {
-        'visits_and_date' =>
-          '\u0632\u064a\u0627\u0631\u0627\u062a + \u062a\u0627\u0631\u064a\u062e',
-        'visits_only' =>
-          '\u0639\u062f\u062f \u0632\u064a\u0627\u0631\u0627\u062a',
-        'date_only' =>
-          '\u0627\u0634\u062a\u0631\u0627\u0643 \u0632\u0645\u0646\u064a',
+  static String _modelLabel(BuildContext context, String model) => switch (model) {
+        'visits_and_date' => context.l10n.pkgModelVisitsDate,
+        'visits_only' => context.l10n.pkgModelVisits,
+        'date_only' => context.l10n.pkgModelTime,
         _ => model,
       };
 
@@ -56,7 +53,7 @@ class PackageManagerSection extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                '\u0627\u0644\u0628\u0627\u0642\u0627\u062a \u0648\u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643\u0627\u062a',
+                context.l10n.pkgSectionTitle,
                 style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -79,7 +76,7 @@ class PackageManagerSection extends StatelessWidget {
                       Icon(Icons.add, size: 14, color: Colors.white),
                       SizedBox(width: 4),
                       Text(
-                        '\u0625\u0636\u0627\u0641\u0629 \u0628\u0627\u0642\u0629',
+                        context.l10n.pkgAddBtn,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -138,7 +135,7 @@ class PackageManagerSection extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
-                '\u0625\u0636\u0627\u0641\u0629 \u0628\u0627\u0642\u0629 \u0623\u0648 \u0627\u0634\u062a\u0631\u0627\u0643 \u0644\u0639\u0645\u0644\u0627\u0626\u0643',
+                context.l10n.pkgEmptyHint,
                 style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -198,7 +195,7 @@ class PackageManagerSection extends StatelessWidget {
                 GestureDetector(
                   onTap: () => _showToast(
                     context,
-                    '\u0642\u0631\u064a\u0628\u0627\u064b \u2014 \u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u062d\u0627\u0644\u0629',
+                    context.l10n.pkgStatusChange,
                   ),
                   child: Icon(
                     active
@@ -233,8 +230,8 @@ class PackageManagerSection extends StatelessWidget {
                         ),
                         child: Text(
                           active
-                              ? '\u0641\u0639\u0651\u0627\u0644'
-                              : '\u0645\u062e\u0641\u064a',
+                              ? context.l10n.pkgActive
+                              : context.l10n.pkgHidden,
                           style: TextStyle(
                             fontSize: 9,
                             fontWeight: FontWeight.w600,
@@ -275,7 +272,7 @@ class PackageManagerSection extends StatelessWidget {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
-                          _modelLabel(model),
+                          _modelLabel(context, model),
                           style: TextStyle(
                             fontSize: 9,
                             color: Theme.of(context).colorScheme.onSurfaceVariant,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -58,9 +59,9 @@ class _DeliveryEstimationConfigWidgetState
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // ── Mode selection ──
-          _SectionLabel('نوع التتبع'),
+          _SectionLabel(context.l10n.bizReqEstTrackingType),
           const SizedBox(height: AppSpacing.sm),
-          ..._modeOptions.map((opt) => Padding(
+          ..._modeOptions(context.l10n).map((opt) => Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                 child: _ModeCard(
                   label: opt.label,
@@ -73,11 +74,11 @@ class _DeliveryEstimationConfigWidgetState
           const SizedBox(height: AppSpacing.xl),
 
           // ── Visibility toggles ──
-          _SectionLabel('ماذا يرى العميل؟'),
+          _SectionLabel(context.l10n.bizReqEstCustomerSees),
           const SizedBox(height: AppSpacing.sm),
           _ToggleRow(
-            label: 'ترتيبه في الدور',
-            desc: 'مثال: أنت #3 في مسار اليوم',
+            label: context.l10n.bizReqEstQueuePosition,
+            desc: context.l10n.bizReqEstQueuePositionDesc,
             value: _form.showQueuePosition,
             onChanged: (v) =>
                 _update(_form.copyWith(showQueuePosition: v)),
@@ -85,16 +86,16 @@ class _DeliveryEstimationConfigWidgetState
           ),
           const SizedBox(height: AppSpacing.sm),
           _ToggleRow(
-            label: 'اسم السائق وهاتفه',
-            desc: 'يمكنه الاتصال بالسائق مباشرة',
+            label: context.l10n.bizReqEstDriverContact,
+            desc: context.l10n.bizReqEstDriverContactDesc,
             value: _form.showDriverContact,
             onChanged: (v) =>
                 _update(_form.copyWith(showDriverContact: v)),
           ),
           const SizedBox(height: AppSpacing.sm),
           _ToggleRow(
-            label: 'تتبع مباشر',
-            desc: 'خريطة مباشرة لموقع الشاحنة (قريباً)',
+            label: context.l10n.bizReqEstLiveTracking,
+            desc: context.l10n.bizReqEstLiveTrackingDesc,
             value: _form.showLiveTracking,
             onChanged: (_) {},
             disabled: true,
@@ -105,25 +106,25 @@ class _DeliveryEstimationConfigWidgetState
 
           // ── Text fields ──
           _ConfigTextField(
-            label: 'وقت التوصيل المعتاد',
+            label: context.l10n.bizReqEstDeliveryWindow,
             value: _form.typicalDeliveryWindow,
-            placeholder: 'مثال: ١-٢ ساعة بعد بداية المسار',
+            placeholder: context.l10n.bizReqEstDeliveryWindowHint,
             onChanged: (v) =>
                 _update(_form.copyWith(typicalDeliveryWindow: v)),
           ),
           const SizedBox(height: AppSpacing.lg),
           _ConfigTextField(
-            label: 'أيام التوصيل',
+            label: context.l10n.bizReqEstDeliveryDays,
             value: _form.routeDaysLabel,
-            placeholder: 'مثال: أحد، ثلاثاء، خميس',
+            placeholder: context.l10n.bizReqEstDeliveryDaysHint,
             onChanged: (v) =>
                 _update(_form.copyWith(routeDaysLabel: v)),
           ),
           const SizedBox(height: AppSpacing.lg),
           _ConfigTextField(
-            label: 'رسالة خارج أيام التوصيل',
+            label: context.l10n.bizReqEstOffDayMessage,
             value: _form.offDayMessage,
-            placeholder: 'مثال: التوصيل القادم: صباح الأحد',
+            placeholder: context.l10n.bizReqEstOffDayMessageHint,
             onChanged: (v) =>
                 _update(_form.copyWith(offDayMessage: v)),
           ),
@@ -142,21 +143,21 @@ class _DeliveryEstimationConfigWidgetState
 // Mode options data
 // ═══════════════════════════════════════════════════════════════
 
-const _modeOptions = [
+List<({EstimationMode mode, String label, String desc})> _modeOptions(AppLocalizations l10n) => [
   (
     mode: EstimationMode.routeBased,
-    label: 'حسب المسار',
-    desc: 'يرى العميل ترتيبه في دور التوصيل وعدد المتبقين قبله',
+    label: l10n.bizReqEstModeRoute,
+    desc: l10n.bizReqEstModeRouteDesc,
   ),
   (
     mode: EstimationMode.timeEstimate,
-    label: 'تقدير زمني',
-    desc: 'يظهر "خلال ٣٠-٦٠ دقيقة" بدون تفاصيل الدور',
+    label: l10n.bizReqEstModeTime,
+    desc: l10n.bizReqEstModeTimeDesc,
   ),
   (
     mode: EstimationMode.nextRouteDay,
-    label: 'يوم التوصيل التالي',
-    desc: 'يرى العميل أقرب يوم توصيل فقط (بدون تتبع)',
+    label: l10n.bizReqEstModeNextDay,
+    desc: l10n.bizReqEstModeNextDayDesc,
   ),
 ];
 
@@ -305,7 +306,7 @@ class _ToggleRow extends StatelessWidget {
                           borderRadius: AppRadius.pill,
                         ),
                         child: Text(
-                          'قريباً',
+                          context.l10n.bizReqEstComingSoon,
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: AppColors.warning,
@@ -458,7 +459,7 @@ class _PreviewSection extends StatelessWidget {
               Icon(Icons.visibility_outlined, size: 9, color: context.colorScheme.onSurfaceVariant),
               const SizedBox(width: AppSpacing.xs),
               Text(
-                'كيف يراها العميل',
+                context.l10n.bizReqEstPreviewTitle,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: context.colorScheme.onSurfaceVariant,
                   fontSize: 10,
@@ -470,7 +471,7 @@ class _PreviewSection extends StatelessWidget {
           CustomerQueuePosition(
             status: DeliveryTrackingStatus.onRoute,
             estimatedMinutes: 25,
-            driverName: form.showDriverContact ? 'محمود' : null,
+            driverName: form.showDriverContact ? context.l10n.bizReqEstPreviewDriver : null,
             driverPhone: form.showDriverContact ? '0791234567' : null,
             showDriverContact: form.showDriverContact,
             variant: CustomerQueueVariant.full,

@@ -123,7 +123,7 @@ class WeeklyScheduleTab extends StatelessWidget {
             border: Border.all(color: const Color(0xFFBBDEFB)),
           ),
           child: Text(
-            '$_enabledCount أيام عمل في الأسبوع · اضغط على اليوم لتعديل الساعات',
+            context.l10n.scheduleWorkDays,
             style: const TextStyle(fontSize: 11, color: AppColors.primary),
             textAlign: TextAlign.right,
           ),
@@ -228,8 +228,8 @@ class WeeklyScheduleTab extends StatelessWidget {
                                 fontSize: 10, color: AppColors.textHint),
                           ),
                         if (!ds.enabled)
-                          const Text('مغلق',
-                              style: TextStyle(
+                          Text(context.l10n.scheduleClosed,
+                              style: const TextStyle(
                                   fontSize: 10, color: AppColors.textHint)),
                       ],
                     ),
@@ -274,8 +274,8 @@ class WeeklyScheduleTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           // Main shift
-          const Text('الفترة الأولى',
-              style: TextStyle(fontSize: 10, color: AppColors.textHint)),
+          Text(context.l10n.scheduleFirstShift,
+              style: const TextStyle(fontSize: 10, color: AppColors.textHint)),
           const SizedBox(height: AppSpacing.sm),
           _timePickerRow(
             context,
@@ -296,7 +296,7 @@ class WeeklyScheduleTab extends StatelessWidget {
                       size: 12, color: AppColors.error),
                 ),
                 const Spacer(),
-                Text('فترة إضافية ${i + 2}',
+                Text(context.l10n.scheduleExtraShift(i + 2),
                     style: const TextStyle(
                         fontSize: 10, color: AppColors.textHint)),
               ],
@@ -326,11 +326,11 @@ class WeeklyScheduleTab extends StatelessWidget {
                       color: const Color(0xFFE3F2FD),
                       borderRadius: BorderRadius.circular(AppRadius.sm),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('نسخ لكل أيام العمل',
-                            style: TextStyle(
+                        Text(context.l10n.scheduleCopyToAll,
+                            style: const TextStyle(
                                 fontSize: 10, color: AppColors.primary)),
                         SizedBox(width: 4),
                         Icon(Icons.copy,
@@ -352,11 +352,11 @@ class WeeklyScheduleTab extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppRadius.sm),
                       border: Border.all(color: AppColors.textHint),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('إضافة فترة',
-                            style: TextStyle(
+                        Text(context.l10n.scheduleAddShift,
+                            style: const TextStyle(
                                 fontSize: 10,
                                 color: AppColors.textSecondary)),
                         SizedBox(width: 4),

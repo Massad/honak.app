@@ -48,7 +48,7 @@ class _OrdersPageState extends ConsumerState<OrdersPage>
       
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('طلباتي'),
+        title: Text(context.l10n.myOrders),
         actions: [
           IconButton(
             icon: Icon(_showSearch ? Icons.close : Icons.search, size: 22),
@@ -160,7 +160,7 @@ class _OrdersBody extends StatelessWidget {
             child: TextField(
               autofocus: true,
               decoration: InputDecoration(
-                hintText: 'ابحث في طلباتك...',
+                hintText: context.l10n.ordersSearchHint,
                 prefixIcon: const Icon(Icons.search, size: 20),
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(
@@ -251,10 +251,10 @@ class _OrdersTabBar extends StatelessWidget {
         fontSize: 13,
       ),
       tabs: [
-        _TabWithBadge(label: 'نشطة', count: activeCount),
-        _TabWithBadge(label: 'قادمة', count: upcomingCount),
-        _TabWithBadge(label: 'السجل', count: historyCount),
-        _TabWithBadge(label: 'اشتراكاتي', count: subscriptionCount),
+        _TabWithBadge(label: context.l10n.ordersTabActive, count: activeCount),
+        _TabWithBadge(label: context.l10n.ordersTabUpcoming, count: upcomingCount),
+        _TabWithBadge(label: context.l10n.ordersTabHistory, count: historyCount),
+        _TabWithBadge(label: context.l10n.ordersTabSubscriptions, count: subscriptionCount),
       ],
     );
   }
@@ -358,7 +358,7 @@ class _ErrorState extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              'حدث خطأ أثناء تحميل الطلبات',
+              context.l10n.ordersLoadError,
               style: context.textTheme.bodyMedium?.copyWith(
                 color: context.colorScheme.onSurfaceVariant,
               ),
@@ -366,7 +366,7 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             btn.Button(
               onPressed: onRetry,
-              label: 'إعادة المحاولة',
+              label: context.l10n.retry,
               icon: const btn.ButtonIcon(Icons.refresh),
               variant: btn.Variant.text,
             ),

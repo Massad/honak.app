@@ -158,7 +158,7 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'الحالة الحالية',
+                    context.l10n.bizCurrentStatus,
                     style: TextStyle(
                       fontSize: 10,
                       color: Theme.of(context)
@@ -198,7 +198,7 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          'الحالية',
+                          context.l10n.bizCurrentLabel,
                           style: TextStyle(
                             fontSize: 10,
                             color:
@@ -224,7 +224,7 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'نقل إلى',
+                    context.l10n.bizMoveTo,
                     style: TextStyle(
                       fontSize: 10,
                       color: Theme.of(context)
@@ -290,9 +290,9 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                                     color: const Color(0xFFFFF3E0),
                                     borderRadius: AppRadius.pill,
                                   ),
-                                  child: const Text(
-                                    'تراجع',
-                                    style: TextStyle(
+                                  child: Text(
+                                    context.l10n.bizRevert,
+                                    style: const TextStyle(
                                       fontSize: 9,
                                       color: Color(0xFFFF9800),
                                     ),

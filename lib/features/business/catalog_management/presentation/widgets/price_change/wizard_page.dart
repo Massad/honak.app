@@ -31,12 +31,13 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
   int _step = 0;
   late final TextEditingController _valueController;
 
-  static const _stepLabels = [
-    'القيمة',
-    'النطاق',
-    'الجدول',
-    'الإعلان',
-    'التأكيد',
+  // Step labels resolved via l10n in _buildHeader
+  List<String> _stepLabels(BuildContext context) => [
+    context.l10n.pcStepValue,
+    context.l10n.pcStepScope,
+    context.l10n.pcStepSchedule,
+    context.l10n.pcStepAnnouncement,
+    context.l10n.pcStepConfirm,
   ];
 
   // Wizard state
@@ -209,7 +210,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
               ),
               const Spacer(),
               Text(
-                _stepLabels[_step],
+                _stepLabels(context)[_step],
                 style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -219,7 +220,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
                 padding:
                     const EdgeInsetsDirectional.only(end: AppSpacing.md),
                 child: Text(
-                  '${_step + 1} من 5',
+                  context.l10n.pcStepOf(_step + 1, 5),
                   style: context.textTheme.bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
@@ -354,13 +355,13 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
         children: [
           btn.Button(
             onPressed: _onBack,
-            label: _step == 0 ? 'إلغاء' : 'السابق',
+            label: _step == 0 ? context.l10n.cancel : context.l10n.previous,
             variant: btn.Variant.text,
           ),
           const Spacer(),
           btn.Button(
             onPressed: _canAdvance ? _onNext : null,
-            label: isFinal ? 'تأكيد وتطبيق' : 'التالي',
+            label: isFinal ? context.l10n.pcConfirmAndApply : context.l10n.next,
           ),
         ],
       ),

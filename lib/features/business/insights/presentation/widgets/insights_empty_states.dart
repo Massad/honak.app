@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/shared/widgets/button.dart';
 
 /// Unclaimed page lockout state.
@@ -7,26 +8,26 @@ class UnclaimedInsightsState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Padding(
-        padding: EdgeInsets.all(48),
+        padding: const EdgeInsets.all(48),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.lock_outline, size: 40, color: Color(0xFFD1D5DB)),
-            SizedBox(height: 16),
+            const Icon(Icons.lock_outline, size: 40, color: Color(0xFFD1D5DB)),
+            const SizedBox(height: 16),
             Text(
-              'الإحصائيات غير متاحة',
-              style: TextStyle(
+              context.l10n.insightsUnavailable,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: Color(0xFF111827),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'هذه الصفحة لم تتم المطالبة بها بعد',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+              context.l10n.insightsPageUnclaimed,
+              style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
             ),
           ],
         ),
@@ -51,9 +52,9 @@ class VisibilityOnlyBanner extends StatelessWidget {
         children: [
           const Icon(Icons.visibility_outlined, size: 24, color: Color(0xFF1A73E8)),
           const SizedBox(height: 8),
-          const Text(
-            'فعّل الطلبات لعرض إحصائيات متقدمة',
-            style: TextStyle(
+          Text(
+            context.l10n.insightsEnableOrdersAdvanced,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: Color(0xFF111827),
@@ -61,9 +62,9 @@ class VisibilityOnlyBanner extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
-          const Text(
-            'صفحتك حالياً في وضع الواجهة فقط',
-            style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+          Text(
+            context.l10n.insightsVisibilityOnly,
+            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
@@ -71,7 +72,7 @@ class VisibilityOnlyBanner extends StatelessWidget {
             onPressed: () {
               // TODO: Navigate to engagement settings
             },
-            label: 'تفعيل الطلبات',
+            label: context.l10n.insightsEnableOrders,
             size: ButtonSize.small,
           ),
         ],

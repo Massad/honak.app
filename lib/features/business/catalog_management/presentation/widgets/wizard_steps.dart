@@ -80,19 +80,19 @@ class WizardStepBasics extends StatelessWidget {
       padding: AppSpacing.screenPadding,
       children: [
         // Name field
-        const _FieldLabel(label: 'الاسم *'),
+        _FieldLabel(label: context.l10n.wizardItemName),
         const SizedBox(height: AppSpacing.sm),
         TextField(
           controller: nameCtrl,
           decoration: wizardInputDecoration(
-            hint: config?.itemLabelAr ?? 'اسم العنصر',
+            hint: config?.itemLabelAr ?? context.l10n.wizardItemNameHint,
           ),
         ),
 
         // Category selector
         if (config?.hasCategory ?? true) ...[
           const SizedBox(height: AppSpacing.xl),
-          const _FieldLabel(label: 'التصنيف'),
+          _FieldLabel(label: context.l10n.wizardCategory),
           const SizedBox(height: AppSpacing.sm),
           _CategoryTapField(
             selectedId: selectedCategoryId,
@@ -104,10 +104,10 @@ class WizardStepBasics extends StatelessWidget {
         // Image placeholder
         if (config?.hasImage ?? true) ...[
           const SizedBox(height: AppSpacing.xl),
-          const _FieldLabel(label: 'الصورة'),
+          _FieldLabel(label: context.l10n.wizardImage),
           const SizedBox(height: AppSpacing.sm),
           GestureDetector(
-            onTap: () => context.showSnackBar('قريباً: رفع الصور'),
+            onTap: () => context.showSnackBar(context.l10n.wizardImageComingSoon),
             child: Container(
               height: 120,
               decoration: BoxDecoration(
@@ -129,7 +129,7 @@ class WizardStepBasics extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'إضافة صورة',
+                      context.l10n.wizardAddImage,
                       style: TextStyle(
                         fontSize: 12,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -177,12 +177,12 @@ class WizardStepDetails extends StatelessWidget {
       children: [
         // Description
         if (config?.hasDescription ?? false) ...[
-          const _FieldLabel(label: 'الوصف'),
+          _FieldLabel(label: context.l10n.wizardDescription),
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: descCtrl,
             maxLines: 3,
-            decoration: wizardInputDecoration(hint: 'وصف مختصر...'),
+            decoration: wizardInputDecoration(hint: context.l10n.wizardDescriptionHint),
           ),
           const SizedBox(height: AppSpacing.xl),
         ],
@@ -204,7 +204,7 @@ class WizardStepDetails extends StatelessWidget {
 
         // Price
         if (config?.hasPrice ?? true) ...[
-          const _FieldLabel(label: 'السعر (د.أ)'),
+          _FieldLabel(label: context.l10n.wizardPriceJod),
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: priceCtrl,
@@ -220,7 +220,7 @@ class WizardStepDetails extends StatelessWidget {
         // Discount
         if (config?.canDiscount ?? false) ...[
           const SizedBox(height: AppSpacing.xl),
-          const _FieldLabel(label: 'نسبة الخصم (%)'),
+          _FieldLabel(label: context.l10n.wizardDiscountPercent),
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: discountCtrl,
@@ -262,25 +262,25 @@ class WizardStepAvailability extends StatelessWidget {
       padding: AppSpacing.screenPadding,
       children: [
         // Status selector
-        const _FieldLabel(label: 'الحالة'),
+        _FieldLabel(label: context.l10n.catalogStatus),
         const SizedBox(height: AppSpacing.md),
         Wrap(
           spacing: AppSpacing.sm,
           children: [
             _StatusChip(
-              label: 'متاح',
+              label: context.l10n.catalogStatusAvailable,
               color: AppColors.success,
               isSelected: status == 'active',
               onTap: () => onStatusChanged('active'),
             ),
             _StatusChip(
-              label: 'نفذت الكمية',
+              label: context.l10n.catalogStatusOutOfStock,
               color: AppColors.warning,
               isSelected: status == 'out_of_stock',
               onTap: () => onStatusChanged('out_of_stock'),
             ),
             _StatusChip(
-              label: 'مخفي',
+              label: context.l10n.catalogStatusHidden,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               isSelected: status == 'hidden',
               onTap: () => onStatusChanged('hidden'),
@@ -291,7 +291,7 @@ class WizardStepAvailability extends StatelessWidget {
         // Stock field
         if (config?.quantityMode == QuantityMode.perItem) ...[
           const SizedBox(height: AppSpacing.xl),
-          const _FieldLabel(label: 'الكمية المتوفرة'),
+          _FieldLabel(label: context.l10n.wizardAvailableQty),
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: stockCtrl,
@@ -343,7 +343,7 @@ class WizardStepAvailability extends StatelessWidget {
                   ],
                   const Spacer(),
                   Text(
-                    'تعيين فريق',
+                    context.l10n.catalogAssignTeam,
                     style: TextStyle(
                       fontSize: 13,
                       color: AppColors.primary.withValues(alpha: 0.8),
@@ -408,14 +408,14 @@ class WizardBottomNav extends StatelessWidget {
           // Back / Cancel
           btn.Button(
             onPressed: onBack,
-            label: currentStep == 0 ? 'إلغاء' : 'السابق',
+            label: currentStep == 0 ? context.l10n.cancel : context.l10n.previous,
             variant: btn.Variant.text,
           ),
           const Spacer(),
           // Next / Save
           btn.Button(
             onPressed: canGoNext && !saving ? onNext : null,
-            label: isFinal ? 'حفظ' : 'التالي',
+            label: isFinal ? context.l10n.save : context.l10n.next,
             isLoading: saving,
           ),
         ],
@@ -523,15 +523,15 @@ class _CategoryTapField extends StatelessWidget {
     required this.onChanged,
   });
 
-  String get _displayText {
-    if (selectedId == null) return 'بدون تصنيف';
+  String _displayText(BuildContext context) {
+    if (selectedId == null) return context.l10n.wizardUncategorized;
     final match = categories.where((c) => c.id == selectedId).firstOrNull;
-    return match?.name ?? 'بدون تصنيف';
+    return match?.name ?? context.l10n.wizardUncategorized;
   }
 
   Future<void> _openSheet(BuildContext context) async {
     final options = [
-      const SelectionOption<String?>(value: null, label: 'بدون تصنيف'),
+      SelectionOption<String?>(value: null, label: context.l10n.wizardUncategorized),
       ...categories.map(
         (cat) => SelectionOption<String?>(value: cat.id, label: cat.name),
       ),
@@ -539,7 +539,7 @@ class _CategoryTapField extends StatelessWidget {
 
     final result = await showSelectionSheet<String?>(
       context: context,
-      title: 'التصنيف',
+      title: context.l10n.wizardCategory,
       options: options,
       selectedValue: selectedId,
     );
@@ -580,7 +580,7 @@ class _CategoryTapField extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              _displayText,
+              _displayText(context),
               style: TextStyle(
                 fontSize: 13,
                 color: isSelected ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurfaceVariant,
@@ -634,7 +634,7 @@ class _PropertyField extends StatelessWidget {
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: wizardInputDecoration(
             hint: property.placeholderAr ?? '0',
-          ).copyWith(suffixText: 'دقيقة'),
+          ).copyWith(suffixText: context.l10n.wizardMinutes),
         ),
     };
   }
@@ -713,7 +713,7 @@ class _ChipListFieldState extends State<_ChipListField> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) => _addChip(),
                 decoration: wizardInputDecoration(
-                  hint: widget.property.placeholderAr ?? 'أضف...',
+                  hint: widget.property.placeholderAr ?? context.l10n.wizardAddMore,
                 ),
               ),
             ),

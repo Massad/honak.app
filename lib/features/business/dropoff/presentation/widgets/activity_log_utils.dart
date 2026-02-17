@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_ticket.dart';
@@ -70,7 +71,11 @@ const _staffPool = [
 }
 
 /// Generates mock activity entries for demo purposes based on ticket state.
-List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
+List<TicketActivityEntry> generateMockActivity(
+  DropoffTicket ticket, {
+  BuildContext? context,
+}) {
+  final l10n = context != null ? context.l10n : null;
   final entries = <TicketActivityEntry>[];
   var idx = 0;
 
@@ -82,7 +87,8 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
     action: TicketActivityAction.ticketCreated,
     actorName: creator.$1,
     actorRole: creator.$2,
-    note: 'تم إنشاء التذكرة ${ticket.ticketNumber}',
+    note: l10n?.dropoffTicketCreatedNote(ticket.ticketNumber) ??
+        'تم إنشاء التذكرة ${ticket.ticketNumber}',
   ));
 
   // 2. Photo before (if any item has it)
@@ -112,8 +118,12 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       action: TicketActivityAction.statusChanged,
       actorName: processor.$1,
       actorRole: processor.$2,
-      from: DropoffStatus.received.labelAr,
-      to: DropoffStatus.processing.labelAr,
+      from: context != null
+          ? DropoffStatus.received.label(context)
+          : DropoffStatus.received.labelAr,
+      to: context != null
+          ? DropoffStatus.processing.label(context)
+          : DropoffStatus.processing.labelAr,
     ));
   }
 
@@ -126,8 +136,11 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       action: TicketActivityAction.infoRequested,
       actorName: infoRequester.$1,
       actorRole: infoRequester.$2,
-      items: const ['صورة إضافية', 'تفاصيل المشكلة'],
-      note: 'تم إرسال الطلب إلى المحادثة',
+      items: [
+        l10n?.dropoffInfoExtraPhoto ?? 'صورة إضافية',
+        l10n?.dropoffInfoProblemDetails ?? 'تفاصيل المشكلة',
+      ],
+      note: l10n?.dropoffInfoSentToChat ?? 'تم إرسال الطلب إلى المحادثة',
     ));
   }
 
@@ -154,8 +167,12 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       action: TicketActivityAction.statusChanged,
       actorName: completer.$1,
       actorRole: completer.$2,
-      from: DropoffStatus.processing.labelAr,
-      to: DropoffStatus.ready.labelAr,
+      from: context != null
+          ? DropoffStatus.processing.label(context)
+          : DropoffStatus.processing.labelAr,
+      to: context != null
+          ? DropoffStatus.ready.label(context)
+          : DropoffStatus.ready.labelAr,
     ));
   }
 
@@ -186,7 +203,7 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       actorName: payer.$1,
       actorRole: payer.$2,
       amount: ticket.totalPrice,
-      method: ticket.paymentMethod ?? 'نقدي',
+      method: ticket.paymentMethod ?? (l10n?.dropoffPaymentCash ?? 'نقدي'),
     ));
   }
 
@@ -199,8 +216,12 @@ List<TicketActivityEntry> generateMockActivity(DropoffTicket ticket) {
       action: TicketActivityAction.statusChanged,
       actorName: deliverer.$1,
       actorRole: deliverer.$2,
-      from: DropoffStatus.ready.labelAr,
-      to: DropoffStatus.delivered.labelAr,
+      from: context != null
+          ? DropoffStatus.ready.label(context)
+          : DropoffStatus.ready.labelAr,
+      to: context != null
+          ? DropoffStatus.delivered.label(context)
+          : DropoffStatus.delivered.labelAr,
     ));
   }
 

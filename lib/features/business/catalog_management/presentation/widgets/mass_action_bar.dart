@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/config/business_type_config.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
@@ -38,28 +39,28 @@ class MassActionBar extends StatelessWidget {
     final actions = <_ActionItem>[
       if (config?.canDiscount == true)
         _ActionItem(
-          label: 'خصم',
+          label: context.l10n.catalogDiscountLabel,
           icon: Icons.local_offer_outlined,
           bgColor: Colors.orange.shade50,
           iconColor: Colors.orange.shade700,
           onTap: onOpenDiscount,
         ),
       _ActionItem(
-        label: 'غير متوفر',
+        label: context.l10n.catalogStatusOutOfStock,
         icon: Icons.cancel_outlined,
         bgColor: Colors.red.shade50,
         iconColor: AppColors.error,
         onTap: () => onStatusChange('out_of_stock'),
       ),
       _ActionItem(
-        label: 'إخفاء',
+        label: context.l10n.catalogHide,
         icon: Icons.visibility_off_outlined,
         bgColor: Theme.of(context).colorScheme.surfaceContainerLow,
         iconColor: Theme.of(context).colorScheme.onSurfaceVariant,
         onTap: () => onStatusChange('hidden'),
       ),
       _ActionItem(
-        label: 'حذف',
+        label: context.l10n.delete,
         icon: Icons.delete_outline,
         bgColor: Colors.red.shade50,
         iconColor: AppColors.error,
@@ -67,7 +68,7 @@ class MassActionBar extends StatelessWidget {
       ),
       if (hasMultipleBranches)
         _ActionItem(
-          label: 'تعيين الفروع',
+          label: context.l10n.catalogAssignBranches,
           icon: Icons.store_outlined,
           bgColor: Colors.blue.shade50,
           iconColor: AppColors.primary,
@@ -75,7 +76,7 @@ class MassActionBar extends StatelessWidget {
         ),
       if (config?.hasCategory == true)
         _ActionItem(
-          label: 'تغيير الفئة',
+          label: context.l10n.catalogChangeCategory,
           icon: Icons.category_outlined,
           bgColor: Colors.blue.shade50,
           iconColor: AppColors.primary,
@@ -83,7 +84,7 @@ class MassActionBar extends StatelessWidget {
         ),
       if (hasTeam)
         _ActionItem(
-          label: 'تعيين فريق',
+          label: context.l10n.catalogAssignTeam,
           icon: Icons.people_outline,
           bgColor: Colors.blue.shade50,
           iconColor: AppColors.primary,
@@ -136,10 +137,10 @@ class MassActionBar extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                const Expanded(
+                Expanded(
                   child: Text(
-                    'عنصر محدد',
-                    style: TextStyle(
+                    context.l10n.catalogSelectedItem,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
@@ -315,7 +316,7 @@ class _MassDiscountContentState extends State<_MassDiscountContent> {
                 ),
 
                 Text(
-                  'تطبيق خصم على ${widget.selectedCount} ${widget.itemLabelAr}',
+                  context.l10n.catalogApplyDiscountOn(widget.selectedCount, widget.itemLabelAr),
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -328,7 +329,7 @@ class _MassDiscountContentState extends State<_MassDiscountContent> {
                   controller: _controller,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: 'نسبة الخصم',
+                    labelText: context.l10n.catalogDiscountPercent,
                     suffixText: '٪',
                     hintText: '10',
                     border: OutlineInputBorder(
@@ -346,7 +347,7 @@ class _MassDiscountContentState extends State<_MassDiscountContent> {
                           Navigator.pop(context);
                         }
                       : null,
-                  label: 'تطبيق الخصم',
+                  label: context.l10n.catalogApplyDiscount,
                   style: btn.Style.warning,
                   size: btn.ButtonSize.large,
                   expand: true,

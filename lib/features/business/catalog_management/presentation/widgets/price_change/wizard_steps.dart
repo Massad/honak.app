@@ -40,7 +40,7 @@ class StepValue extends StatelessWidget {
       padding: AppSpacing.screenPadding,
       children: [
         // Direction
-        const _SectionLabel(label: 'اتجاه التغيير'),
+        _SectionLabel(label: context.l10n.pcDirection),
         const SizedBox(height: AppSpacing.sm),
         Row(
           children: [
@@ -48,7 +48,7 @@ class StepValue extends StatelessWidget {
               child: _OptionCard(
                 icon: Icons.arrow_circle_down_outlined,
                 iconColor: AppColors.success,
-                label: 'تخفيض',
+                label: context.l10n.pcDecrease,
                 isSelected: direction == 'decrease',
                 onTap: () => onDirectionChanged('decrease'),
               ),
@@ -58,7 +58,7 @@ class StepValue extends StatelessWidget {
               child: _OptionCard(
                 icon: Icons.arrow_circle_up_outlined,
                 iconColor: AppColors.warning,
-                label: 'زيادة',
+                label: context.l10n.pcIncrease,
                 isSelected: direction == 'increase',
                 onTap: () => onDirectionChanged('increase'),
               ),
@@ -69,14 +69,14 @@ class StepValue extends StatelessWidget {
         const SizedBox(height: AppSpacing.xxl),
 
         // Method
-        const _SectionLabel(label: 'طريقة التغيير'),
+        _SectionLabel(label: context.l10n.pcMethod),
         const SizedBox(height: AppSpacing.sm),
         Row(
           children: [
             Expanded(
               child: _OptionCard(
                 icon: null,
-                label: 'نسبة مئوية',
+                label: context.l10n.pcPercentage,
                 suffix: '%',
                 isSelected: isPercentage,
                 onTap: () => onMethodChanged('percentage'),
@@ -86,7 +86,7 @@ class StepValue extends StatelessWidget {
             Expanded(
               child: _OptionCard(
                 icon: null,
-                label: 'مبلغ ثابت',
+                label: context.l10n.pcFixedAmount,
                 suffix: 'د.أ',
                 isSelected: !isPercentage,
                 onTap: () => onMethodChanged('fixed'),
@@ -98,7 +98,7 @@ class StepValue extends StatelessWidget {
         const SizedBox(height: AppSpacing.xxl),
 
         // Value input
-        const _SectionLabel(label: 'القيمة'),
+        _SectionLabel(label: context.l10n.pcValue),
         const SizedBox(height: AppSpacing.sm),
         Center(
           child: SizedBox(
@@ -230,7 +230,7 @@ class _StepScopeState extends State<StepScope> {
   Map<String, int> get _categoryGroups {
     final map = <String, int>{};
     for (final item in widget.items) {
-      final cat = item.categoryName ?? 'بدون تصنيف';
+      final cat = item.categoryName ?? '_uncategorized_';
       map[cat] = (map[cat] ?? 0) + 1;
     }
     return map;
@@ -254,7 +254,7 @@ class _StepScopeState extends State<StepScope> {
       children: [
         // Radio: All
         _RadioOption(
-          label: 'جميع ${widget.itemsLabel}',
+          label: '${context.l10n.pcScopeAll} ${widget.itemsLabel}',
           isSelected: widget.scope == 'all',
           onTap: () => widget.onScopeChanged('all'),
         ),
@@ -262,9 +262,10 @@ class _StepScopeState extends State<StepScope> {
           const SizedBox(height: AppSpacing.sm),
           _InfoBox(
             color: AppColors.info,
-            text:
-                'سيتم تطبيق التغيير على جميع ${widget.itemsLabel} '
-                '(${widget.items.length})',
+            text: context.l10n.pcScopeAllInfo(
+              widget.itemsLabel,
+              widget.items.length,
+            ),
           ),
         ],
 
@@ -272,7 +273,7 @@ class _StepScopeState extends State<StepScope> {
 
         // Radio: Category
         _RadioOption(
-          label: 'حسب التصنيف',
+          label: context.l10n.pcScopeCategory,
           isSelected: widget.scope == 'category',
           onTap: () => widget.onScopeChanged('category'),
         ),
@@ -281,8 +282,11 @@ class _StepScopeState extends State<StepScope> {
           ..._categoryGroups.entries.map((entry) {
             final isChecked =
                 widget.categoryNames.contains(entry.key);
+            final displayName = entry.key == '_uncategorized_'
+                ? context.l10n.wizardUncategorized
+                : entry.key;
             return _CheckboxRow(
-              label: '${entry.key} (${entry.value})',
+              label: '$displayName (${entry.value})',
               isChecked: isChecked,
               onChanged: (checked) {
                 final updated = List<String>.from(widget.categoryNames);
@@ -301,7 +305,7 @@ class _StepScopeState extends State<StepScope> {
 
         // Radio: Specific items
         _RadioOption(
-          label: 'عناصر محددة',
+          label: context.l10n.pcScopeSpecific,
           isSelected: widget.scope == 'specific',
           onTap: () => widget.onScopeChanged('specific'),
         ),
@@ -313,7 +317,7 @@ class _StepScopeState extends State<StepScope> {
               controller: _searchCtrl,
               onChanged: (v) => setState(() => _searchQuery = v),
               decoration: InputDecoration(
-                hintText: 'بحث...',
+                hintText: context.l10n.pcSearchHint,
                 hintStyle: TextStyle(
                   fontSize: 13,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -398,16 +402,16 @@ class StepSchedule extends StatelessWidget {
     return !start.isBefore(endsAt!);
   }
 
-  String get _durationNote {
+  String _durationNote(BuildContext context) {
     if (!hasEndDate || endsAt == null) return '';
     final start = startsNow ? DateTime.now() : (startsAt ?? DateTime.now());
     final hours = endsAt!.difference(start).inHours;
     if (hours <= 0) return '';
     final days = hours ~/ 24;
     final remHours = hours % 24;
-    if (days > 0 && remHours > 0) return 'المدة: ~$days يوم و $remHours ساعة';
-    if (days > 0) return 'المدة: ~$days يوم';
-    return 'المدة: ~$remHours ساعة';
+    if (days > 0 && remHours > 0) return context.l10n.pcDurationDaysAndHours(days, remHours);
+    if (days > 0) return context.l10n.pcDurationApprox(days);
+    return context.l10n.pcDurationHoursOnly(remHours);
   }
 
   Future<void> _pickDateTime(BuildContext context, ValueChanged<DateTime> onPick,
@@ -438,7 +442,7 @@ class StepSchedule extends StatelessWidget {
       padding: AppSpacing.screenPadding,
       children: [
         // Start time
-        const _SectionLabel(label: 'وقت البدء'),
+        _SectionLabel(label: context.l10n.pcStartTime),
         const SizedBox(height: AppSpacing.sm),
         Row(
           children: [
@@ -446,7 +450,7 @@ class StepSchedule extends StatelessWidget {
               child: _OptionCard(
                 icon: Icons.flash_on_outlined,
                 iconColor: AppColors.primary,
-                label: 'الآن',
+                label: context.l10n.pcStartNow,
                 isSelected: startsNow,
                 onTap: () => onStartsNowChanged(true),
               ),
@@ -456,7 +460,7 @@ class StepSchedule extends StatelessWidget {
               child: _OptionCard(
                 icon: Icons.schedule_outlined,
                 iconColor: AppColors.primary,
-                label: 'جدولة لاحقاً',
+                label: context.l10n.pcScheduleLater,
                 isSelected: !startsNow,
                 onTap: () => onStartsNowChanged(false),
               ),
@@ -466,7 +470,7 @@ class StepSchedule extends StatelessWidget {
         if (!startsNow) ...[
           const SizedBox(height: AppSpacing.md),
           _DateTimePickerField(
-            label: 'تاريخ ووقت البدء',
+            label: context.l10n.pcStartDateTime,
             date: startsAt,
             onTap: () => _pickDateTime(
               context,
@@ -479,7 +483,7 @@ class StepSchedule extends StatelessWidget {
         const SizedBox(height: AppSpacing.xxl),
 
         // End time
-        const _SectionLabel(label: 'وقت الانتهاء'),
+        _SectionLabel(label: context.l10n.pcEndTime),
         const SizedBox(height: AppSpacing.sm),
         Row(
           children: [
@@ -487,7 +491,7 @@ class StepSchedule extends StatelessWidget {
               child: _OptionCard(
                 icon: Icons.event_outlined,
                 iconColor: AppColors.primary,
-                label: 'تاريخ محدد',
+                label: context.l10n.pcSpecificDate,
                 isSelected: hasEndDate,
                 onTap: () => onHasEndDateChanged(true),
               ),
@@ -497,7 +501,7 @@ class StepSchedule extends StatelessWidget {
               child: _OptionCard(
                 icon: Icons.all_inclusive_outlined,
                 iconColor: AppColors.primary,
-                label: 'بدون نهاية',
+                label: context.l10n.pcNoEnd,
                 isSelected: !hasEndDate,
                 onTap: () => onHasEndDateChanged(false),
               ),
@@ -507,7 +511,7 @@ class StepSchedule extends StatelessWidget {
         if (hasEndDate) ...[
           const SizedBox(height: AppSpacing.md),
           _DateTimePickerField(
-            label: 'تاريخ ووقت الانتهاء',
+            label: context.l10n.pcEndDateTime,
             date: endsAt,
             onTap: () => _pickDateTime(
               context,
@@ -518,11 +522,11 @@ class StepSchedule extends StatelessWidget {
         ],
 
         // Duration note
-        if (_durationNote.isNotEmpty) ...[
+        if (_durationNote(context).isNotEmpty) ...[
           const SizedBox(height: AppSpacing.lg),
           Center(
             child: Text(
-              _durationNote,
+              _durationNote(context),
               style: context.textTheme.bodySmall?.copyWith(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
@@ -537,7 +541,7 @@ class StepSchedule extends StatelessWidget {
         if (_isEndBeforeStart) ...[
           _InfoBox(
             color: AppColors.error,
-            text: 'تاريخ الانتهاء يجب أن يكون بعد تاريخ البدء.',
+            text: context.l10n.pcEndBeforeStartError,
           ),
           const SizedBox(height: AppSpacing.md),
         ],
@@ -545,8 +549,7 @@ class StepSchedule extends StatelessWidget {
         // Tip box
         _InfoBox(
           color: AppColors.warning,
-          text: 'معظم التغييرات الموسمية تستمر ١-٤ أسابيع. '
-              'يمكنك تعديل أو إلغاء التغيير في أي وقت.',
+          text: context.l10n.pcScheduleTip,
         ),
       ],
     );
@@ -612,7 +615,7 @@ class StepVisibility extends StatelessWidget {
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(
-                  'إعلان عام',
+                  context.l10n.pcPublicAnnouncement,
                   style: context.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -628,23 +631,18 @@ class StepVisibility extends StatelessWidget {
         if (isPublic)
           _InfoBox(
             color: AppColors.success,
-            text: 'سيرى العملاء:\n'
-                '• السعر الأصلي مشطوب\n'
-                '• السعر الجديد بارز\n'
-                '• نسبة التغيير\n'
-                '• سبب التغيير (إن وجد)',
+            text: context.l10n.pcPublicCustomerView,
           )
         else
           _InfoBox(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
-            text: 'سيتم تحديث الأسعار بدون إشعار. '
-                'لن يرى العملاء السعر القديم أو نسبة التغيير.',
+            text: context.l10n.pcPrivateUpdateDesc,
           ),
 
         // Reason field (only when public)
         if (isPublic) ...[
           const SizedBox(height: AppSpacing.xxl),
-          const _SectionLabel(label: 'سبب التغيير (اختياري)'),
+          _SectionLabel(label: context.l10n.pcReasonOptional),
           const SizedBox(height: AppSpacing.sm),
           TextField(
             onChanged: onReasonChanged,
@@ -652,7 +650,7 @@ class StepVisibility extends StatelessWidget {
               ..selection = TextSelection.collapsed(offset: reason.length),
             maxLines: 2,
             decoration: InputDecoration(
-              hintText: 'مثال: تخفيضات الصيف...',
+              hintText: context.l10n.pcReasonHint,
               hintStyle: TextStyle(
                 fontSize: 13,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -741,23 +739,25 @@ class StepConfirm extends StatelessWidget {
     return '${value.toStringAsFixed(value == value.truncateToDouble() ? 0 : 2)} د.أ';
   }
 
-  String get _directionText => _isDecrease ? 'تخفيض' : 'زيادة';
+  String _directionText(BuildContext context) =>
+      _isDecrease ? context.l10n.pcDecrease : context.l10n.pcIncrease;
 
-  String get _scopeText {
-    if (scope == 'all') return 'جميع العناصر (${items.length})';
+  String _scopeText(BuildContext context) {
+    if (scope == 'all') return context.l10n.pcScopeAllCount(items.length);
     if (scope == 'category') {
-      return 'تصنيفات: ${categoryNames.join('، ')}';
+      return context.l10n.pcCategoriesLabel(categoryNames.join('، '));
     }
-    return '${itemIds.length} عنصر محدد';
+    return context.l10n.pcSpecificItemsCount(itemIds.length);
   }
 
-  String get _scheduleText {
-    final start = startsNow ? 'فوري' : _formatDate(startsAt);
-    final end = hasEndDate ? _formatDate(endsAt) : 'بدون نهاية';
+  String _scheduleText(BuildContext context) {
+    final start = startsNow ? context.l10n.pcImmediate : _formatDate(startsAt);
+    final end = hasEndDate ? _formatDate(endsAt) : context.l10n.pcNoEnd;
     return '$start → $end';
   }
 
-  String get _publicText => isPublic ? 'إعلان عام' : 'تغيير صامت';
+  String _publicText(BuildContext context) =>
+      isPublic ? context.l10n.pcPublicAnnouncement : context.l10n.pcSilentChange;
 
   List<BizItem> get _affectedItems {
     if (scope == 'all') return items;
@@ -814,7 +814,7 @@ class StepConfirm extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
-                '$_directionText $_valueText',
+                '${_directionText(context)} $_valueText',
                 style: context.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w700,
                   color: _accentColor,
@@ -823,19 +823,19 @@ class StepConfirm extends StatelessWidget {
               const SizedBox(height: AppSpacing.lg),
               _SummaryRow(
                 icon: Icons.layers_outlined,
-                text: _scopeText,
+                text: _scopeText(context),
               ),
               const SizedBox(height: AppSpacing.sm),
               _SummaryRow(
                 icon: Icons.schedule_outlined,
-                text: _scheduleText,
+                text: _scheduleText(context),
               ),
               const SizedBox(height: AppSpacing.sm),
               _SummaryRow(
                 icon: isPublic
                     ? Icons.campaign_outlined
                     : Icons.visibility_off_outlined,
-                text: _publicText,
+                text: _publicText(context),
               ),
               if (reason.isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.sm),
@@ -853,7 +853,7 @@ class StepConfirm extends StatelessWidget {
         // Item previews
         if (previews.isNotEmpty) ...[
           _SectionLabel(
-            label: 'معاينة (${previews.length} من ${affected.length})',
+            label: context.l10n.pcConfirmPreview(previews.length, affected.length),
           ),
           const SizedBox(height: AppSpacing.sm),
           ...previews.map((item) {
@@ -945,8 +945,7 @@ class StepConfirm extends StatelessWidget {
         // One-at-a-time note
         _InfoBox(
           color: AppColors.info,
-          text: 'تغيير واحد فقط مسموح في نفس الوقت. '
-              'أي تغيير جديد سيحل محل التغيير الحالي.',
+          text: context.l10n.pcOneChangeNote,
         ),
       ],
     );

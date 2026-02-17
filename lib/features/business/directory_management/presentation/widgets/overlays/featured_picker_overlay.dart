@@ -64,16 +64,16 @@ class _FeaturedPickerOverlayState extends State<FeaturedPickerOverlay> {
           icon: const Icon(Icons.close),
           onPressed: widget.onClose,
         ),
-        title: const Text(
-          'المستأجرون المميزون',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        title: Text(
+          context.l10n.dirFeaturedTitle,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         elevation: 0,
         actions: [
           btn.Button(
             onPressed: () => widget.onSave(_selected.toList()),
-            label: 'حفظ',
+            label: context.l10n.save,
             variant: btn.Variant.text,
             size: btn.ButtonSize.small,
           ),
@@ -90,7 +90,8 @@ class _FeaturedPickerOverlayState extends State<FeaturedPickerOverlay> {
                     size: 18, color: AppColors.primary),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
-                  '${_selected.length}/$_maxFeatured مميز',
+                  context.l10n
+                      .dirFeaturedCount(_selected.length, _maxFeatured),
                   style: context.textTheme.titleSmall?.copyWith(
                     color: _selected.length >= _maxFeatured
                         ? AppColors.error
@@ -101,9 +102,9 @@ class _FeaturedPickerOverlayState extends State<FeaturedPickerOverlay> {
                 if (_selected.isNotEmpty)
                   GestureDetector(
                     onTap: () => setState(() => _selected.clear()),
-                    child: const Text(
-                      'مسح الكل',
-                      style: TextStyle(
+                    child: Text(
+                      context.l10n.clearAll,
+                      style: const TextStyle(
                         fontSize: 12,
                         color: AppColors.primary,
                       ),
@@ -118,7 +119,7 @@ class _FeaturedPickerOverlayState extends State<FeaturedPickerOverlay> {
             child: eligible.isEmpty
                 ? Center(
                     child: Text(
-                      'لا يوجد مستأجرين مربوطين',
+                      context.l10n.dirFeaturedNoLinked,
                       style: TextStyle(
                           fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
                     ),

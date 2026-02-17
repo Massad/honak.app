@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/domain/entities/price_change.dart';
@@ -22,16 +23,16 @@ Color _statusColor(String status) {
   }
 }
 
-String _statusLabel(String status) {
+String _statusLabel(String status, BuildContext context) {
   switch (status) {
     case 'active':
-      return 'فعّال';
+      return context.l10n.pcStatusActive;
     case 'scheduled':
-      return 'مجدول';
+      return context.l10n.pcStatusScheduled;
     case 'expired':
-      return 'منتهي';
+      return context.l10n.pcStatusEnded;
     case 'cancelled':
-      return 'ملغى';
+      return context.l10n.pcStatusCancelled;
     default:
       return status;
   }
@@ -53,14 +54,14 @@ String _valueText(PriceChange change) {
   return '$sign${(change.value / 100).toStringAsFixed(2)} د.أ';
 }
 
-String _scopeText(PriceChange change) {
+String _scopeText(PriceChange change, BuildContext context) {
   switch (change.scope) {
     case 'category':
       return change.categoryNames.join('، ');
     case 'specific':
-      return '${change.affectedCount} عنصر';
+      return context.l10n.pcScopeSpecificCount(change.affectedCount);
     default:
-      return 'جميع الأصناف';
+      return context.l10n.pcAllItems;
   }
 }
 
@@ -110,7 +111,7 @@ class _PriceChangeHistoryState extends State<PriceChangeHistory> {
       body: Column(
         children: [
           SubScreenAppBar(
-            title: 'سجل تغييرات الأسعار',
+            title: context.l10n.pcHistoryTitle,
             onClose: widget.onClose,
           ),
           Expanded(
@@ -123,8 +124,8 @@ class _PriceChangeHistoryState extends State<PriceChangeHistory> {
                       if (activeOrScheduled != null) ...[
                         _SectionHeader(
                           label: activeOrScheduled.status == 'scheduled'
-                              ? 'مجدول'
-                              : 'فعّال حالياً',
+                              ? context.l10n.pcScheduledLabel
+                              : context.l10n.pcActiveNow,
                         ),
                         const SizedBox(height: AppSpacing.sm),
                         _ChangeCard(
@@ -140,7 +141,7 @@ class _PriceChangeHistoryState extends State<PriceChangeHistory> {
                       ],
                       // Past changes section
                       if (pastChanges.isNotEmpty) ...[
-                        _SectionHeader(label: 'السابقة'),
+                        _SectionHeader(label: context.l10n.pcPrevious),
                         const SizedBox(height: AppSpacing.sm),
                         ...pastChanges.map(
                           (c) => Padding(
@@ -176,7 +177,7 @@ class _EmptyState extends StatelessWidget {
           Icon(Icons.local_offer_outlined, size: 48, color: Theme.of(context).colorScheme.outline),
           const SizedBox(height: AppSpacing.md),
           Text(
-            'لا توجد تغييرات أسعار بعد',
+            context.l10n.pcNoChangesYet,
             style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ],
@@ -249,7 +250,7 @@ class _ChangeCard extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: Text(
-                  _scopeText(change),
+                  _scopeText(change, context),
                   style: TextStyle(
                     fontSize: 12,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -268,7 +269,7 @@ class _ChangeCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  _statusLabel(change.status),
+                  _statusLabel(change.status, context),
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
@@ -296,7 +297,7 @@ class _ChangeCard extends StatelessWidget {
               Text(
                 change.endsAt != null
                     ? '${formatDateAr(change.startsAt)} - ${formatDateAr(change.endsAt!)}'
-                    : '${formatDateAr(change.startsAt)} - مفتوح',
+                    : '${formatDateAr(change.startsAt)} - ${context.l10n.pcOpenEnded}',
                 style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               const Spacer(),
@@ -309,7 +310,7 @@ class _ChangeCard extends StatelessWidget {
               ),
               const SizedBox(width: 2),
               Text(
-                change.isPublic ? 'عام' : 'خاص',
+                change.isPublic ? context.l10n.pcPublic : context.l10n.pcPrivate,
                 style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
@@ -320,7 +321,7 @@ class _ChangeCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _CardButton(
-                  label: 'عرض',
+                  label: context.l10n.pcView,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                   bgColor: Theme.of(context).colorScheme.surfaceContainerLowest,
                   onTap: onView,
@@ -330,7 +331,7 @@ class _ChangeCard extends StatelessWidget {
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: _CardButton(
-                    label: 'إيقاف',
+                    label: context.l10n.pcStop,
                     color: AppColors.error,
                     bgColor: AppColors.error.withValues(alpha: 0.08),
                     onTap: onStop!,
@@ -366,12 +367,12 @@ class _ChangeDetail extends StatelessWidget {
         change.status == 'expired' || change.status == 'cancelled';
 
     // Calculate duration in days
-    String durationText = 'مفتوح';
+    String durationText = context.l10n.pcOpenEnded;
     if (change.endsAt != null) {
       final start = DateTime.parse(change.startsAt);
       final end = DateTime.parse(change.endsAt!);
       final days = end.difference(start).inDays;
-      durationText = '$days يوم';
+      durationText = '$days ${context.l10n.pcDays}';
     }
 
     return Scaffold(
@@ -397,7 +398,7 @@ class _ChangeDetail extends StatelessWidget {
                 const SizedBox(width: 48),
                 const Spacer(),
                 Text(
-                  'تفاصيل تغيير الأسعار',
+                  context.l10n.pcDetailTitle,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
@@ -445,7 +446,7 @@ class _ChangeDetail extends StatelessWidget {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              _scopeText(change),
+                              _scopeText(change, context),
                               style: TextStyle(
                                 fontSize: 13,
                                 color: color.withValues(alpha: 0.8),
@@ -472,7 +473,7 @@ class _ChangeDetail extends StatelessWidget {
                 _DetailCard(
                   children: [
                     _DetailRow(
-                      label: 'الحالة',
+                      label: context.l10n.pcStatus,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
@@ -483,7 +484,7 @@ class _ChangeDetail extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          _statusLabel(change.status),
+                          _statusLabel(change.status, context),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -494,21 +495,21 @@ class _ChangeDetail extends StatelessWidget {
                     ),
                     _DetailDivider(),
                     _DetailRow(
-                      label: 'الفترة',
+                      label: context.l10n.pcPeriod,
                       value: change.endsAt != null
                           ? '${formatDateAr(change.startsAt)} - ${formatDateAr(change.endsAt!)}'
-                          : '${formatDateAr(change.startsAt)} - مفتوح',
+                          : '${formatDateAr(change.startsAt)} - ${context.l10n.pcOpenEnded}',
                     ),
                     _DetailDivider(),
-                    _DetailRow(label: 'المدة', value: durationText),
+                    _DetailRow(label: context.l10n.pcDuration, value: durationText),
                     _DetailDivider(),
                     _DetailRow(
-                      label: 'عناصر متأثرة',
-                      value: '${change.affectedCount} عنصر',
+                      label: context.l10n.pcAffectedItems,
+                      value: context.l10n.pcAffectedItemsCount(change.affectedCount),
                     ),
                     _DetailDivider(),
                     _DetailRow(
-                      label: 'الظهور',
+                      label: context.l10n.pcVisibility,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -521,7 +522,7 @@ class _ChangeDetail extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            change.isPublic ? 'عام للعملاء' : 'خاص (داخلي)',
+                            change.isPublic ? context.l10n.pcPublicToCustomers : context.l10n.pcPrivateInternal,
                             style: TextStyle(
                               fontSize: 13,
                               color: Theme.of(context).colorScheme.onSurface,
@@ -545,7 +546,7 @@ class _ChangeDetail extends StatelessWidget {
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                        'إعادة استخدام هذا التغيير',
+                        context.l10n.pcReuseChange,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

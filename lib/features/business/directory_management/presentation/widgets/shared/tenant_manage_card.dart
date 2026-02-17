@@ -156,7 +156,7 @@ class TenantManageCard extends StatelessWidget {
                 // Edit button
                 _ActionButton(
                   icon: Icons.edit_outlined,
-                  label: 'تعديل',
+                  label: context.l10n.dirTenantEdit,
                   onTap: onEdit,
                 ),
                 const SizedBox(width: AppSpacing.sm),
@@ -166,21 +166,21 @@ class TenantManageCard extends StatelessWidget {
                     status == TenantStatus.newTenant)
                   _ActionButton(
                     icon: Icons.open_in_new,
-                    label: 'عرض الصفحة',
+                    label: context.l10n.dirTenantViewPage,
                     onTap: onViewPage,
                     isPrimary: true,
                   )
                 else if (status == TenantStatus.invited)
                   _ActionButton(
                     icon: Icons.send,
-                    label: 'إعادة الدعوة',
+                    label: context.l10n.dirTenantResendInvite,
                     onTap: onInvite,
                     isPrimary: true,
                   )
                 else
                   _ActionButton(
                     icon: Icons.mail_outline,
-                    label: 'إرسال دعوة',
+                    label: context.l10n.dirTenantSendInvite,
                     onTap: onInvite,
                     isPrimary: true,
                   ),
@@ -298,7 +298,7 @@ class _Badge extends StatelessWidget {
         borderRadius: AppRadius.pill,
       ),
       child: Text(
-        status.label,
+        status.localizedLabel(context.l10n),
         style: context.textTheme.labelSmall?.copyWith(
           color: status.color,
           fontWeight: FontWeight.w600,
@@ -324,32 +324,35 @@ class _StatusSubtitle extends StatelessWidget {
 
     return switch (status) {
       TenantStatus.claimed => Text(
-          'مربوط · ${_timeAgo(tenant.linkedAt)}',
+          context.l10n.dirStatusLinkedAt(_timeAgo(context, tenant.linkedAt)),
           style: style,
         ),
       TenantStatus.newTenant => Text(
-          'مربوط · ${_timeAgo(tenant.linkedAt)}',
+          context.l10n.dirStatusLinkedAt(_timeAgo(context, tenant.linkedAt)),
           style: style,
         ),
       TenantStatus.invited => Text(
-          'دعوة معلّقة · ${_timeAgo(tenant.invitedAt)}',
+          context.l10n
+              .dirStatusPendingInvite(_timeAgo(context, tenant.invitedAt)),
           style: style,
         ),
       TenantStatus.unclaimed => Text(
-          'غير مربوط',
+          status.localizedLabel(context.l10n),
           style: style,
         ),
     };
   }
 
-  String _timeAgo(String? dateStr) {
+  String _timeAgo(BuildContext context, String? dateStr) {
     if (dateStr == null) return '';
     final date = DateTime.tryParse(dateStr);
     if (date == null) return '';
     final diff = DateTime.now().difference(date);
-    if (diff.inDays > 30) return 'منذ ${diff.inDays ~/ 30} شهر';
-    if (diff.inDays > 0) return 'منذ ${diff.inDays} يوم';
-    if (diff.inHours > 0) return 'منذ ${diff.inHours} ساعة';
-    return 'الآن';
+    if (diff.inDays > 30) {
+      return context.l10n.dirTimeAgoMonths(diff.inDays ~/ 30);
+    }
+    if (diff.inDays > 0) return context.l10n.dirTimeAgoDays(diff.inDays);
+    if (diff.inHours > 0) return context.l10n.dirTimeAgoHours(diff.inHours);
+    return context.l10n.dirTimeAgoNow;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
@@ -98,7 +99,7 @@ class ActivityLogPreview extends StatelessWidget {
         Row(
           children: [
             Text(
-              'آخر الإجراءات',
+              context.l10n.bizRecentActions,
               style: TextStyle(
                 fontSize: 10,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -107,9 +108,9 @@ class ActivityLogPreview extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: onViewFull,
-              child: const Text(
-                'عرض السجل الكامل',
-                style: TextStyle(
+              child: Text(
+                context.l10n.bizViewFullLog,
+                style: const TextStyle(
                   fontSize: 10,
                   color: Color(0xFF1A73E8),
                 ),
@@ -175,7 +176,7 @@ class _CompactRow extends StatelessWidget {
             ),
             const SizedBox(width: AppSpacing.sm),
             Text(
-              formatTimeAgo(entry.timestamp),
+              formatTimeAgo(entry.timestamp, context.l10n),
               style: TextStyle(
                 fontSize: 9,
                 color: Theme.of(context).colorScheme.outline,
@@ -209,9 +210,10 @@ class _ActivityLogSheet extends StatelessWidget {
       ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
     // Group by date
+    final l10n = context.l10n;
     final grouped = <String, List<ActivityLogEntry>>{};
     for (final e in sorted) {
-      final dateKey = formatDate(e.timestamp);
+      final dateKey = formatDate(e.timestamp, l10n);
       (grouped[dateKey] ??= []).add(e);
     }
 
@@ -323,7 +325,7 @@ class _ActivityLogSheet extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'لا يوجد نشاط بعد',
+                      context.l10n.bizNoActivityYet,
                       style: TextStyle(
                         fontSize: 12,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -417,7 +419,7 @@ class _TimelineEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final detail = _getDetailText(entry);
+    final detail = _getDetailText(entry, context.l10n);
 
     return Padding(
       padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
@@ -464,7 +466,7 @@ class _TimelineEntry extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      formatTimeAgo(entry.timestamp),
+                      formatTimeAgo(entry.timestamp, context.l10n),
                       style: TextStyle(
                         fontSize: 10,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -625,7 +627,7 @@ class _StatusPill extends StatelessWidget {
 // Helpers — time formatting (shared across all activity logs)
 // ═══════════════════════════════════════════════════════════════
 
-String? _getDetailText(ActivityLogEntry entry) {
+String? _getDetailText(ActivityLogEntry entry, AppLocalizations l10n) {
   // Status change
   if (entry.from != null && entry.to != null) {
     return '${entry.from} → ${entry.to}'; // used for semantic, UI uses pills
@@ -633,22 +635,22 @@ String? _getDetailText(ActivityLogEntry entry) {
   // Payment
   if (entry.amount != null && entry.amount! > 0) {
     final display = Money(entry.amount!).toFormattedArabic();
-    return '$display — ${entry.method ?? 'كاش'}';
+    return '$display — ${entry.method ?? l10n.bizPaymentCash}';
   }
   // Note or generic detail
   return entry.note;
 }
 
-/// Formats an ISO 8601 timestamp as a relative time string in Arabic.
-String formatTimeAgo(String iso) {
+/// Formats an ISO 8601 timestamp as a localized relative time string.
+String formatTimeAgo(String iso, AppLocalizations l10n) {
   final dt = DateTime.tryParse(iso);
   if (dt == null) return iso;
   final diff = DateTime.now().difference(dt);
-  if (diff.inMinutes < 1) return 'الآن';
-  if (diff.inMinutes < 60) return 'قبل ${diff.inMinutes} د';
-  if (diff.inHours < 24) return 'قبل ${diff.inHours} س';
-  if (diff.inDays == 1) return 'أمس';
-  return 'قبل ${diff.inDays} يوم';
+  if (diff.inMinutes < 1) return l10n.bizTimeNow;
+  if (diff.inMinutes < 60) return l10n.bizTimeMinutesAgo(diff.inMinutes);
+  if (diff.inHours < 24) return l10n.bizTimeHoursAgo(diff.inHours);
+  if (diff.inDays == 1) return l10n.bizTimeYesterday;
+  return l10n.bizTimeDaysAgo(diff.inDays);
 }
 
 /// Formats an ISO 8601 timestamp as HH:mm.
@@ -660,23 +662,23 @@ String formatTime(String iso) {
   return '$h:$m';
 }
 
-/// Formats an ISO 8601 timestamp as "day month" in Arabic.
-String formatDate(String iso) {
+/// Formats an ISO 8601 timestamp as localized "day month".
+String formatDate(String iso, AppLocalizations l10n) {
   final dt = DateTime.tryParse(iso);
   if (dt == null) return '';
-  const months = [
-    'يناير',
-    'فبراير',
-    'مارس',
-    'أبريل',
-    'مايو',
-    'يونيو',
-    'يوليو',
-    'أغسطس',
-    'سبتمبر',
-    'أكتوبر',
-    'نوفمبر',
-    'ديسمبر',
+  final months = [
+    l10n.bizDateMonth1,
+    l10n.bizDateMonth2,
+    l10n.bizDateMonth3,
+    l10n.bizDateMonth4,
+    l10n.bizDateMonth5,
+    l10n.bizDateMonth6,
+    l10n.bizDateMonth7,
+    l10n.bizDateMonth8,
+    l10n.bizDateMonth9,
+    l10n.bizDateMonth10,
+    l10n.bizDateMonth11,
+    l10n.bizDateMonth12,
   ];
-  return '${dt.day} ${months[dt.month - 1]}';
+  return l10n.bizDateDayMonth(dt.day, months[dt.month - 1]);
 }

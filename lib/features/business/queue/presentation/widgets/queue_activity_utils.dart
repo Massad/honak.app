@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_source.dart';
@@ -22,15 +23,16 @@ enum QueueActivityAction {
   noteAdded,
   onTheWay;
 
-  String get labelAr => switch (this) {
-        entryCreated => 'تم إضافة للدور',
-        statusChanged => 'تغيير الحالة',
-        photoBefore => 'صورة قبل',
-        photoAfter => 'صورة بعد',
-        noShow => 'لم يحضر',
-        paymentMarked => 'تم الدفع',
-        noteAdded => 'ملاحظة',
-        onTheWay => 'العميل في الطريق',
+  /// Localized label via l10n. Requires [BuildContext].
+  String label(BuildContext context) => switch (this) {
+        entryCreated => context.l10n.queueActivityEntryCreated,
+        statusChanged => context.l10n.queueActivityStatusChanged,
+        photoBefore => context.l10n.queueActivityPhotoBefore,
+        photoAfter => context.l10n.queueActivityPhotoAfter,
+        noShow => context.l10n.queueActivityNoShow,
+        paymentMarked => context.l10n.queueActivityPaymentMarked,
+        noteAdded => context.l10n.queueActivityNoteAdded,
+        onTheWay => context.l10n.queueActivityOnTheWay,
       };
 }
 
@@ -135,7 +137,10 @@ String _offsetTime(String iso, int minutes) {
 }
 
 /// Generates mock activity entries for a queue entry based on its state.
-List<QueueActivityEntry> generateQueueActivity(QueueEntry entry) {
+List<QueueActivityEntry> generateQueueActivity(
+  QueueEntry entry,
+  BuildContext context,
+) {
   final entries = <QueueActivityEntry>[];
   var idx = 0;
 
@@ -154,7 +159,9 @@ List<QueueActivityEntry> generateQueueActivity(QueueEntry entry) {
     actorName: entry.source == QueueSource.appReserve
         ? entry.customerName
         : creator.$1,
-    actorRole: entry.source == QueueSource.appReserve ? 'عميل' : creator.$2,
+    actorRole: entry.source == QueueSource.appReserve
+        ? context.l10n.queueActivityCustomerRole
+        : creator.$2,
     note: '${entry.packageName} — ${entry.customerName}',
   ));
 
@@ -166,7 +173,7 @@ List<QueueActivityEntry> generateQueueActivity(QueueEntry entry) {
       timestamp: _offsetTime(startedIso ?? checkedInIso, -5),
       action: QueueActivityAction.onTheWay,
       actorName: entry.customerName,
-      actorRole: 'عميل',
+      actorRole: context.l10n.queueActivityCustomerRole,
     ));
   }
 
@@ -191,8 +198,8 @@ List<QueueActivityEntry> generateQueueActivity(QueueEntry entry) {
       action: QueueActivityAction.statusChanged,
       actorName: starter.$1,
       actorRole: starter.$2,
-      from: QueueStatus.waiting.labelAr,
-      to: QueueStatus.inProgress.labelAr,
+      from: QueueStatus.waiting.label(context),
+      to: QueueStatus.inProgress.label(context),
     ));
   }
 
@@ -220,8 +227,8 @@ List<QueueActivityEntry> generateQueueActivity(QueueEntry entry) {
       action: QueueActivityAction.statusChanged,
       actorName: completer.$1,
       actorRole: completer.$2,
-      from: QueueStatus.inProgress.labelAr,
-      to: QueueStatus.ready.labelAr,
+      from: QueueStatus.inProgress.label(context),
+      to: QueueStatus.ready.label(context),
     ));
 
     // 7. Photo after
@@ -245,8 +252,8 @@ List<QueueActivityEntry> generateQueueActivity(QueueEntry entry) {
       action: QueueActivityAction.statusChanged,
       actorName: finisher.$1,
       actorRole: finisher.$2,
-      from: QueueStatus.ready.labelAr,
-      to: QueueStatus.completed.labelAr,
+      from: QueueStatus.ready.label(context),
+      to: QueueStatus.completed.label(context),
     ));
 
     // 9. Payment marked
@@ -257,7 +264,7 @@ List<QueueActivityEntry> generateQueueActivity(QueueEntry entry) {
       actorName: finisher.$1,
       actorRole: finisher.$2,
       amount: entry.totalPrice,
-      method: 'كاش',
+      method: context.l10n.queueActivityPaymentCash,
     ));
   }
 

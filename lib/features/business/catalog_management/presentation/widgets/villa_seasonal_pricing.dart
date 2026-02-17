@@ -52,14 +52,14 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
         const SizedBox(height: AppSpacing.lg),
         _buildSubSection(
           context, 'seasons', Icons.calendar_month_outlined, AppColors.primary,
-          'المواسم', '${_seasons.where((s) => s.active).length} نشط',
+          context.l10n.villaSeasons, '${_seasons.where((s) => s.active).length} ${context.l10n.villaActive}',
           _buildSeasonsContent,
         ),
         const SizedBox(height: AppSpacing.md),
         _buildSubSection(
           context, 'holidays', Icons.star_outline, AppColors.secondary,
-          'رسوم الأعياد والمناسبات',
-          '${_holidays.where((h) => h.active).length} نشط',
+          context.l10n.villaHolidaySurcharges,
+          '${_holidays.where((h) => h.active).length} ${context.l10n.villaActive}',
           () => VillaHolidaysContent(
             holidays: _holidays,
             onToggle: (i) {
@@ -72,18 +72,16 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
         const SizedBox(height: AppSpacing.md),
         _buildSubSection(
           context, 'earlybird', Icons.auto_awesome, Colors.purple,
-          'خصم الحجز المبكر',
+          context.l10n.villaEarlyBirdDiscount,
           _earlyBird.active ? '-${_earlyBird.discountPercent}٪' : null,
           () => VillaDiscountContent(
             active: _earlyBird.active,
             daysAhead: _earlyBird.daysAhead,
             discountPercent: _earlyBird.discountPercent,
             color: Colors.purple,
-            toggleLabel: 'تفعيل الخصم',
+            toggleLabel: context.l10n.villaEnableDiscount,
             dayOptions: const [7, 14, 21, 30],
-            infoText: 'العميل يحصل على خصم ${_earlyBird.discountPercent}٪ '
-                'عند الحجز قبل ${_earlyBird.daysAhead} يوم أو أكثر '
-                'من تاريخ الوصول',
+            infoText: context.l10n.villaEarlyBirdInfo(_earlyBird.discountPercent, _earlyBird.daysAhead),
             onToggleActive: () => setState(() {
               _earlyBird = _earlyBird.copyWith(active: !_earlyBird.active);
               _hasChanges = true;
@@ -101,18 +99,16 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
         const SizedBox(height: AppSpacing.md),
         _buildSubSection(
           context, 'lastminute', Icons.timer_outlined, AppColors.error,
-          'عروض اللحظة الأخيرة',
+          context.l10n.villaLastMinuteDeals,
           _lastMinute.active ? '-${_lastMinute.discountPercent}٪' : null,
           () => VillaDiscountContent(
             active: _lastMinute.active,
             daysAhead: _lastMinute.daysAhead,
             discountPercent: _lastMinute.discountPercent,
             color: AppColors.error,
-            toggleLabel: 'تفعيل العرض',
+            toggleLabel: context.l10n.villaEnableDeal,
             dayOptions: const [1, 2, 3, 4],
-            infoText: 'العميل يحصل على خصم ${_lastMinute.discountPercent}٪ '
-                'عند الحجز قبل ${_lastMinute.daysAhead} يوم أو أقل '
-                'من تاريخ الوصول',
+            infoText: context.l10n.villaLastMinuteInfo(_lastMinute.discountPercent, _lastMinute.daysAhead),
             onToggleActive: () => setState(() {
               _lastMinute = _lastMinute.copyWith(active: !_lastMinute.active);
               _hasChanges = true;
@@ -150,11 +146,11 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
           children: [
             Icon(Icons.calendar_month, size: 20, color: AppColors.textHint),
             const SizedBox(height: AppSpacing.xs),
-            const Text('لا يوجد موسم نشط حالياً',
-                style: TextStyle(
+            Text(context.l10n.villaNoActiveSeason,
+                style: const TextStyle(
                     fontSize: 12, color: AppColors.textSecondary)),
-            const Text('أسعارك الأساسية مطبّقة',
-                style: TextStyle(fontSize: 9, color: AppColors.textHint)),
+            Text(context.l10n.villaBasePriceApplied,
+                style: const TextStyle(fontSize: 9, color: AppColors.textHint)),
           ],
         ),
       );
@@ -189,11 +185,11 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
                   color: Colors.white24,
                   borderRadius: AppRadius.pill,
                 ),
-                child: const Row(
+                child: Row(
                     mainAxisSize: MainAxisSize.min, children: [
-                  Icon(Icons.bolt, size: 9, color: Colors.white),
-                  SizedBox(width: 2),
-                  Text('نشط الآن', style: TextStyle(
+                  const Icon(Icons.bolt, size: 9, color: Colors.white),
+                  const SizedBox(width: 2),
+                  Text(context.l10n.villaActiveNow, style: const TextStyle(
                       fontSize: 10, color: Colors.white)),
                 ]),
               ),
@@ -201,11 +197,11 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
           ),
           const SizedBox(height: AppSpacing.md),
           Row(children: [
-            _bannerPrice('أيام الأسبوع', cs.weekdayCents),
+            _bannerPrice(context.l10n.villaWeekdays, cs.weekdayCents),
             Container(width: 1, height: 32, color: Colors.white24,
                 margin: const EdgeInsets.symmetric(
                     horizontal: AppSpacing.lg)),
-            _bannerPrice('نهاية الأسبوع', cs.weekendCents),
+            _bannerPrice(context.l10n.villaWeekend, cs.weekendCents),
           ]),
           const SizedBox(height: AppSpacing.sm),
           Text(formatSeasonRange(cs), style: TextStyle(
@@ -228,7 +224,7 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
             Text(Money(cents).toJodString(), style: const TextStyle(
                 fontSize: 18, color: Colors.white)),
             const SizedBox(width: 4),
-            Text('د.أ/ليلة', style: TextStyle(
+            Text(context.l10n.villaPricePerNight, style: TextStyle(
                 fontSize: 12,
                 color: Colors.white.withValues(alpha: 0.6))),
           ],
@@ -347,7 +343,7 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
                       color: AppColors.primary,
                       borderRadius: AppRadius.pill,
                     ),
-                    child: const Text('الآن', style: TextStyle(
+                    child: Text(context.l10n.villaNow, style: const TextStyle(
                         fontSize: 8, color: Colors.white)),
                   ),
                 if (isCurrent) const SizedBox(width: AppSpacing.xs),
@@ -386,10 +382,10 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
             if (!isEditing)
               Row(children: [
                 Expanded(child: seasonalPriceBox(
-                    context, 'أيام الأسبوع', season.weekdayCents)),
+                    context, context.l10n.villaWeekdays, season.weekdayCents)),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(child: seasonalPriceBox(
-                    context, 'نهاية الأسبوع', season.weekendCents)),
+                    context, context.l10n.villaWeekend, season.weekendCents)),
               ])
             else
               _buildSeasonEdit(season),
@@ -408,7 +404,7 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
       children: [
         Row(children: [
           Expanded(child: seasonalEditInput(
-              context, 'سعر أيام الأسبوع (د.أ/ليلة)', wdCtrl, (v) {
+              context, context.l10n.villaWeekdayPriceJod, wdCtrl, (v) {
             final i = _seasons.indexOf(season);
             _seasons[i] = season.copyWith(
                 weekdayCents: ((double.tryParse(v) ?? 0) * 100).toInt());
@@ -416,7 +412,7 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
           })),
           const SizedBox(width: AppSpacing.sm),
           Expanded(child: seasonalEditInput(
-              context, 'سعر نهاية الأسبوع (د.أ/ليلة)', weCtrl, (v) {
+              context, context.l10n.villaWeekendPriceJod, weCtrl, (v) {
             final i = _seasons.indexOf(season);
             _seasons[i] = season.copyWith(
                 weekendCents: ((double.tryParse(v) ?? 0) * 100).toInt());
@@ -426,12 +422,12 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
         const SizedBox(height: AppSpacing.sm),
         GestureDetector(
           onTap: () => setState(() => _editingSeasonId = null),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.check, size: 10, color: AppColors.primary),
-              SizedBox(width: 4),
-              Text('تم', style: TextStyle(
+              const Icon(Icons.check, size: 10, color: AppColors.primary),
+              const SizedBox(width: 4),
+              Text(context.l10n.done, style: const TextStyle(
                   fontSize: 10, color: AppColors.primary)),
             ],
           ),
@@ -453,8 +449,8 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          const Text('خط زمني للأسعار — ١٢ شهر',
-              style: TextStyle(fontSize: 9, color: AppColors.textHint)),
+          Text(context.l10n.villaTimeline12Months,
+              style: const TextStyle(fontSize: 9, color: AppColors.textHint)),
           const SizedBox(height: AppSpacing.sm),
           ClipRRect(
             borderRadius: BorderRadius.circular(AppRadius.sm),
@@ -513,13 +509,13 @@ class _VillaSeasonalPricingState extends State<VillaSeasonalPricing> {
               color: AppColors.primary.withValues(alpha: 0.2),
               blurRadius: 12, offset: const Offset(0, 4))],
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('حفظ التسعير الموسمي', style: TextStyle(
+            Text(context.l10n.villaSaveSeasonalPricing, style: const TextStyle(
                 fontSize: 14, color: Colors.white)),
-            SizedBox(width: AppSpacing.sm),
-            Icon(Icons.check, size: 16, color: Colors.white),
+            const SizedBox(width: AppSpacing.sm),
+            const Icon(Icons.check, size: 16, color: Colors.white),
           ],
         ),
       ),

@@ -136,7 +136,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
             children: [
               Expanded(
                 child: Text(
-                  'طلب تعديل',
+                  context.l10n.queueModifyRequest,
                   style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -183,7 +183,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: btn.Button(
                 onPressed: _canSubmit ? _handleSubmit : null,
-                label: 'إرسال طلب التعديل',
+                label: context.l10n.queueSubmitModification,
                 size: btn.ButtonSize.large,
                 expand: true,
               ),
@@ -251,7 +251,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'ما الذي تريد تعديله؟',
+          context.l10n.queueWhatToModify,
           style: context.textTheme.labelSmall?.copyWith(
             color: context.colorScheme.onSurfaceVariant,
           ),
@@ -259,7 +259,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
         const SizedBox(height: AppSpacing.md),
         _ModTypeOption(
           icon: Icons.swap_horiz,
-          label: 'تغيير الخدمة',
+          label: context.l10n.queueChangeService,
           selected: _selectedType == 'change_package',
           onTap: () => setState(() => _selectedType = 'change_package'),
         ),
@@ -267,7 +267,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
         if (widget.availableAddOns.isNotEmpty) ...[
           _ModTypeOption(
             icon: Icons.add_circle_outline,
-            label: 'تعديل الإضافات',
+            label: context.l10n.queueModifyAddOns,
             selected: _selectedType == 'change_addons',
             onTap: () => setState(() => _selectedType = 'change_addons'),
           ),
@@ -275,7 +275,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
         ],
         _ModTypeOption(
           icon: Icons.note_add_outlined,
-          label: 'إضافة ملاحظة',
+          label: context.l10n.queueAddNote,
           selected: _selectedType == 'add_note',
           onTap: () => setState(() => _selectedType = 'add_note'),
         ),
@@ -288,7 +288,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'اختر الخدمة الجديدة',
+          context.l10n.queueSelectNewService,
           style: context.textTheme.labelSmall?.copyWith(
             color: context.colorScheme.onSurfaceVariant,
           ),
@@ -327,7 +327,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                             ),
                           ),
                           Text(
-                            '~${pkg.durationMin} دقيقة',
+                            context.l10n.queueApproxMinutes(pkg.durationMin),
                             style: context.textTheme.labelSmall?.copyWith(
                               color: context.colorScheme.onSurfaceVariant,
                             ),
@@ -364,7 +364,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'الإضافات',
+          context.l10n.queueAddOns,
           style: context.textTheme.labelSmall?.copyWith(
             color: context.colorScheme.onSurfaceVariant,
           ),
@@ -434,7 +434,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'ملاحظة',
+          context.l10n.queueNoteLabel,
           style: context.textTheme.labelSmall?.copyWith(
             color: context.colorScheme.onSurfaceVariant,
           ),
@@ -444,7 +444,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
           controller: _noteController,
           maxLines: 3,
           decoration: InputDecoration(
-            hintText: 'اكتب ملاحظتك هنا...',
+            hintText: context.l10n.queueNoteHint,
             hintStyle: context.textTheme.bodyMedium?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -519,14 +519,14 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(
-            'تم إرسال طلب التعديل',
+            context.l10n.queueModificationSent,
             style: context.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'سيتم إشعارك عند مراجعة التعديل',
+            context.l10n.queueModificationNotice,
             style: context.textTheme.bodySmall?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -534,7 +534,7 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
           const SizedBox(height: AppSpacing.xxl),
           btn.Button(
             onPressed: () => Navigator.pop(context),
-            label: 'تم',
+            label: context.l10n.done,
             size: btn.ButtonSize.large,
             expand: true,
           ),

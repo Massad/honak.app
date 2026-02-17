@@ -110,7 +110,7 @@ class _QueueBoardState extends State<QueueBoard> {
         };
       }).toList();
     });
-    _showToast('تم تحديث الحالة');
+    _showToast(context.l10n.queueStatusUpdated);
   }
 
   void _markNoShow(String entryId) {
@@ -121,14 +121,14 @@ class _QueueBoardState extends State<QueueBoard> {
         return e.copyWith(status: QueueStatus.noShow, completedAt: now);
       }).toList();
     });
-    _showToast('تم تسجيل عدم الحضور');
+    _showToast(context.l10n.queueNoShowRecorded);
   }
 
   void _removeEntry(String entryId) {
     setState(() {
       _queue = _queue.where((e) => e.id != entryId).toList();
     });
-    _showToast('تم الحذف');
+    _showToast(context.l10n.queueEntryRemoved);
   }
 
   void _showToast(String message) {
@@ -144,7 +144,7 @@ class _QueueBoardState extends State<QueueBoard> {
     setState(() {
       _queue = [..._queue, entry.copyWith(position: maxPos + 1)];
     });
-    _showToast('تمت الإضافة للدور');
+    _showToast(context.l10n.queueEntryAdded);
   }
 
   void _changeStatus(String entryId, QueueStatus newStatus) {
@@ -162,7 +162,7 @@ class _QueueBoardState extends State<QueueBoard> {
         };
       }).toList();
     });
-    _showToast('تم تحديث الحالة');
+    _showToast(context.l10n.queueStatusUpdated);
   }
 
   void _openDetailView(QueueEntry entry) {
@@ -188,7 +188,7 @@ class _QueueBoardState extends State<QueueBoard> {
             }).toList();
           });
           Navigator.of(context).pop();
-          _showToast('تم تحديث الحالة');
+          _showToast(context.l10n.queueStatusUpdated);
         },
       ),
     );
@@ -248,15 +248,15 @@ class _QueueBoardState extends State<QueueBoard> {
                     _activeFilter == _QueueFilter.waiting) ...[
                   const SizedBox(height: AppSpacing.md),
                   _QueueColumn(
-                    label: 'في الانتظار',
+                    label: context.l10n.queueWaiting,
                     count: waiting.length,
                     color: AppColors.secondary,
                     bgColor: const Color(0xFFFFF8E1),
                     borderColor: const Color(0xFFFFE082),
                     icon: Icons.schedule_rounded,
-                    emptyText: 'لا يوجد أحد بالانتظار',
+                    emptyText: context.l10n.queueNoOneWaiting,
                     entries: waiting,
-                    advanceLabel: 'ابدأ الخدمة',
+                    advanceLabel: context.l10n.queueStartService,
                     advanceIcon: Icons.play_arrow_rounded,
                     advanceColor: AppColors.primary,
                     showNoShow: true,
@@ -265,7 +265,7 @@ class _QueueBoardState extends State<QueueBoard> {
                     onRemove: _removeEntry,
                     onOpenDetail: _openDetailView,
                     onChangeStatus: _changeStatus,
-                    onOpenChat: () => _showToast('المحادثة قريباً'),
+                    onOpenChat: () => _showToast(context.l10n.queueChatComingSoon),
                   ),
                 ],
 
@@ -274,15 +274,15 @@ class _QueueBoardState extends State<QueueBoard> {
                     _activeFilter == _QueueFilter.inProgress) ...[
                   const SizedBox(height: AppSpacing.lg),
                   _QueueColumn(
-                    label: 'قيد الخدمة',
+                    label: context.l10n.queueInProgress,
                     count: inProgress.length,
                     color: AppColors.primary,
                     bgColor: const Color(0xFFEFF6FF),
                     borderColor: const Color(0xFFBFDBFE),
                     icon: Icons.play_arrow_rounded,
-                    emptyText: 'لا توجد سيارات قيد الخدمة',
+                    emptyText: context.l10n.queueNoVehiclesInProgress,
                     entries: inProgress,
-                    advanceLabel: 'جاهز ✓',
+                    advanceLabel: context.l10n.queueReadyCheck,
                     advanceIcon: Icons.check_circle_outline_rounded,
                     advanceColor: AppColors.success,
                     showTimer: true,
@@ -290,7 +290,7 @@ class _QueueBoardState extends State<QueueBoard> {
                     onRemove: _removeEntry,
                     onOpenDetail: _openDetailView,
                     onChangeStatus: _changeStatus,
-                    onOpenChat: () => _showToast('المحادثة قريباً'),
+                    onOpenChat: () => _showToast(context.l10n.queueChatComingSoon),
                   ),
                 ],
 
@@ -299,22 +299,22 @@ class _QueueBoardState extends State<QueueBoard> {
                     _activeFilter == _QueueFilter.inProgress) ...[
                   const SizedBox(height: AppSpacing.lg),
                   _QueueColumn(
-                    label: 'جاهز للاستلام',
+                    label: context.l10n.queueReadyForPickup,
                     count: ready.length,
                     color: AppColors.success,
                     bgColor: const Color(0xFFF0FDF4),
                     borderColor: const Color(0xFFBBF7D0),
                     icon: Icons.check_circle_outline_rounded,
-                    emptyText: 'لا توجد سيارات جاهزة',
+                    emptyText: context.l10n.queueNoVehiclesReady,
                     entries: ready,
-                    advanceLabel: 'تم الاستلام',
+                    advanceLabel: context.l10n.queuePickedUp,
                     advanceIcon: Icons.local_shipping_rounded,
                     advanceColor: const Color(0xFF616161),
                     onAdvance: _advanceStatus,
                     onRemove: _removeEntry,
                     onOpenDetail: _openDetailView,
                     onChangeStatus: _changeStatus,
-                    onOpenChat: () => _showToast('المحادثة قريباً'),
+                    onOpenChat: () => _showToast(context.l10n.queueChatComingSoon),
                   ),
                 ],
 

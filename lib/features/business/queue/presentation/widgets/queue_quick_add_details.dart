@@ -5,39 +5,41 @@ part of 'queue_quick_add.dart';
 // ═════════════════════════════════════════════════════════════════
 
 class _AddOnOption {
-  final String name;
+  final String Function(BuildContext) nameBuilder;
   final int priceCents;
 
-  const _AddOnOption(this.name, this.priceCents);
+  const _AddOnOption(this.nameBuilder, this.priceCents);
+
+  String name(BuildContext context) => nameBuilder(context);
 }
 
-const _kVehicleTypes = [
-  'سيدان',
-  'SUV',
-  'هاتشباك',
-  'بيك أب',
-  'شاحنة صغيرة',
-  'فان',
+List<String> _vehicleTypes(BuildContext context) => [
+  context.l10n.queueVehicleSedan,
+  context.l10n.queueVehicleSuv,
+  context.l10n.queueVehicleHatchback,
+  context.l10n.queueVehiclePickup,
+  context.l10n.queueVehicleMiniTruck,
+  context.l10n.queueVehicleVan,
 ];
 
-const _kVehicleColors = [
-  'أبيض',
-  'أسود',
-  'فضي',
-  'رمادي',
-  'أحمر',
-  'أزرق',
-  'كحلي',
-  'بيج',
-  'أخضر',
+List<String> _vehicleColors(BuildContext context) => [
+  context.l10n.queueColorWhite,
+  context.l10n.queueColorBlack,
+  context.l10n.queueColorSilver,
+  context.l10n.queueColorGray,
+  context.l10n.queueColorRed,
+  context.l10n.queueColorBlue,
+  context.l10n.queueColorNavy,
+  context.l10n.queueColorBeige,
+  context.l10n.queueColorGreen,
 ];
 
-const _kAddOns = [
-  _AddOnOption('تنظيف جلد المقاعد', 300),
-  _AddOnOption('تلميع الإطارات', 150),
-  _AddOnOption('إزالة الشعر (حيوانات أليفة)', 200),
-  _AddOnOption('معطر فاخر', 100),
-  _AddOnOption('تنظيف الصندوق', 200),
+List<_AddOnOption> _addOns() => [
+  _AddOnOption((c) => c.l10n.queueAddOnLeatherCleaning, 300),
+  _AddOnOption((c) => c.l10n.queueAddOnTirePolish, 150),
+  _AddOnOption((c) => c.l10n.queueAddOnPetHairRemoval, 200),
+  _AddOnOption((c) => c.l10n.queueAddOnPremiumFragrance, 100),
+  _AddOnOption((c) => c.l10n.queueAddOnTrunkCleaning, 200),
 ];
 
 // ═════════════════════════════════════════════════════════════════
@@ -59,13 +61,22 @@ class _DetailsStep extends StatefulWidget {
   State<_DetailsStep> createState() => _DetailsStepState();
 }
 
-const _kDiscountReasons = [
-  'عميل مميز',
-  'تعويض عن خدمة سابقة',
-  'عرض خاص',
-  'اشتراك',
-  'أول زيارة',
-  'أخرى',
+const _kDiscountReasonOther = '__other__';
+
+class _DiscountReasonOption {
+  final String key;
+  final String Function(BuildContext) label;
+
+  const _DiscountReasonOption(this.key, this.label);
+}
+
+List<_DiscountReasonOption> _discountReasons() => [
+  _DiscountReasonOption('vip', (c) => c.l10n.queueDiscountReasonVip),
+  _DiscountReasonOption('compensation', (c) => c.l10n.queueDiscountReasonCompensation),
+  _DiscountReasonOption('special_offer', (c) => c.l10n.queueDiscountReasonSpecialOffer),
+  _DiscountReasonOption('subscription', (c) => c.l10n.queueDiscountReasonSubscription),
+  _DiscountReasonOption('first_visit', (c) => c.l10n.queueDiscountReasonFirstVisit),
+  _DiscountReasonOption(_kDiscountReasonOther, (c) => c.l10n.queueDiscountReasonOther),
 ];
 
 class _DetailsStepState extends State<_DetailsStep> {
@@ -105,8 +116,9 @@ class _DetailsStepState extends State<_DetailsStep> {
   /// Subtotal before discount (package + add-ons).
   Money get _subtotal {
     var total = Money(widget.package.price);
+    final addOnList = _addOns();
     for (final i in _selectedAddOns) {
-      total = total + Money(_kAddOns[i].priceCents);
+      total = total + Money(addOnList[i].priceCents);
     }
     return total;
   }
@@ -139,12 +151,15 @@ class _DetailsStepState extends State<_DetailsStep> {
     });
   }
 
-  List<QueueAddOn> get _addOnEntities => _selectedAddOns
-      .map((i) => QueueAddOn(
-            name: _kAddOns[i].name,
-            price: _kAddOns[i].priceCents,
-          ))
-      .toList();
+  List<QueueAddOn> get _addOnEntities {
+    final addOnList = _addOns();
+    return _selectedAddOns
+        .map((i) => QueueAddOn(
+              name: addOnList[i].name(context),
+              price: addOnList[i].priceCents,
+            ))
+        .toList();
+  }
 
   void _submit() {
     if (!_canSubmit) return;
@@ -160,8 +175,10 @@ class _DetailsStepState extends State<_DetailsStep> {
             ? rawValue.round()
             : (rawValue * 100).round(),
         amount: _discountAmountCents,
-        reason: _discountReason ?? 'أخرى',
-        reasonNote: _discountReason == 'أخرى'
+        reason: _discountReason != null
+            ? _discountReasons().firstWhere((r) => r.key == _discountReason).label(context)
+            : context.l10n.queueDiscountReasonOther,
+        reasonNote: _discountReason == _kDiscountReasonOther
             ? _discountNoteCtrl.text.trim()
             : null,
       );
@@ -214,20 +231,20 @@ class _DetailsStepState extends State<_DetailsStep> {
         const SizedBox(height: AppSpacing.lg),
 
         // ── Customer name (required) ──
-        _FieldLabel('اسم العميل *'),
+        _FieldLabel(context.l10n.queueCustomerName),
         const SizedBox(height: AppSpacing.xs),
         TextField(
           controller: _nameCtrl,
           onChanged: (_) => setState(() {}),
           decoration: _inputDecoration(context,
-            hint: 'مثال: أحمد',
+            hint: context.l10n.queueCustomerNameHint,
             prefixIcon: Icons.person_outline,
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
 
         // ── Phone (optional, LTR) ──
-        _FieldLabel('رقم الهاتف (اختياري)'),
+        _FieldLabel(context.l10n.queuePhoneOptional),
         const SizedBox(height: AppSpacing.xs),
         TextField(
           controller: _phoneCtrl,
@@ -241,10 +258,10 @@ class _DetailsStepState extends State<_DetailsStep> {
         const SizedBox(height: AppSpacing.lg),
 
         // ── Vehicle type chips ──
-        _FieldLabel('نوع السيارة'),
+        _FieldLabel(context.l10n.queueVehicleType),
         const SizedBox(height: AppSpacing.sm),
         _ChipGroup(
-          items: _kVehicleTypes,
+          items: _vehicleTypes(context),
           selected: _vehicleType,
           showOther: true,
           onSelected: (v) => setState(() {
@@ -256,16 +273,16 @@ class _DetailsStepState extends State<_DetailsStep> {
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: _vehicleTypeOtherCtrl,
-            decoration: _inputDecoration(context, hint: 'أدخل نوع السيارة...'),
+            decoration: _inputDecoration(context, hint: context.l10n.queueVehicleTypeHint),
           ),
         ],
         const SizedBox(height: AppSpacing.lg),
 
         // ── Vehicle color chips ──
-        _FieldLabel('لون السيارة'),
+        _FieldLabel(context.l10n.queueVehicleColor),
         const SizedBox(height: AppSpacing.sm),
         _ChipGroup(
-          items: _kVehicleColors,
+          items: _vehicleColors(context),
           selected: _vehicleColor,
           showOther: true,
           onSelected: (v) => setState(() {
@@ -277,13 +294,13 @@ class _DetailsStepState extends State<_DetailsStep> {
           const SizedBox(height: AppSpacing.sm),
           TextField(
             controller: _vehicleColorOtherCtrl,
-            decoration: _inputDecoration(context, hint: 'أدخل لون السيارة...'),
+            decoration: _inputDecoration(context, hint: context.l10n.queueVehicleColorHint),
           ),
         ],
         const SizedBox(height: AppSpacing.lg),
 
         // ── Plate number (optional, LTR) ──
-        _FieldLabel('رقم اللوحة (اختياري)'),
+        _FieldLabel(context.l10n.queuePlateOptional),
         const SizedBox(height: AppSpacing.xs),
         TextField(
           controller: _plateCtrl,
@@ -293,10 +310,10 @@ class _DetailsStepState extends State<_DetailsStep> {
         const SizedBox(height: AppSpacing.lg),
 
         // ── Add-ons ──
-        _FieldLabel('إضافات'),
+        _FieldLabel(context.l10n.queueAddOns),
         const SizedBox(height: AppSpacing.sm),
-        ...List.generate(_kAddOns.length, (i) {
-          final addon = _kAddOns[i];
+        ...List.generate(_addOns().length, (i) {
+          final addon = _addOns()[i];
           final selected = _selectedAddOns.contains(i);
           return Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -341,7 +358,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Text(
-                        addon.name,
+                        addon.name(context),
                         style: TextStyle(
                           fontSize: 12,
                           color: Theme.of(context).colorScheme.onSurface,
@@ -368,12 +385,12 @@ class _DetailsStepState extends State<_DetailsStep> {
         const SizedBox(height: AppSpacing.sm),
 
         // ── Notes ──
-        _FieldLabel('ملاحظات (اختياري)'),
+        _FieldLabel(context.l10n.queueNotesOptional),
         const SizedBox(height: AppSpacing.xs),
         TextField(
           controller: _notesCtrl,
           maxLines: 2,
-          decoration: _inputDecoration(context, hint: 'أي ملاحظات خاصة...'),
+          decoration: _inputDecoration(context, hint: context.l10n.queueNotesHint),
         ),
         const SizedBox(height: AppSpacing.lg),
 
@@ -384,7 +401,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         const SizedBox(height: AppSpacing.md),
         btn.Button(
           onPressed: _canSubmit ? _submit : null,
-          label: 'إضافة للدور',
+          label: context.l10n.queueAddToQueue,
           icon: const btn.ButtonIcon(Icons.add),
           size: btn.ButtonSize.large,
           expand: true,
@@ -418,7 +435,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
-                    'إضافة خصم',
+                    context.l10n.queueAddDiscount,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -469,13 +486,13 @@ class _DetailsStepState extends State<_DetailsStep> {
           Row(
             children: [
               _DiscountTypeChip(
-                label: 'مبلغ ثابت (د.أ)',
+                label: context.l10n.queueDiscountFixed,
                 selected: _discountType == 'fixed',
                 onTap: () => setState(() => _discountType = 'fixed'),
               ),
               const SizedBox(width: AppSpacing.sm),
               _DiscountTypeChip(
-                label: 'نسبة مئوية (%)',
+                label: context.l10n.queueDiscountPercentage,
                 selected: _discountType == 'percentage',
                 onTap: () => setState(() => _discountType = 'percentage'),
               ),
@@ -499,16 +516,16 @@ class _DetailsStepState extends State<_DetailsStep> {
           const SizedBox(height: AppSpacing.md),
 
           // Reason chips
-          _FieldLabel('سبب الخصم'),
+          _FieldLabel(context.l10n.queueDiscountReason),
           const SizedBox(height: AppSpacing.sm),
           Wrap(
             spacing: AppSpacing.sm,
             runSpacing: AppSpacing.sm,
-            children: _kDiscountReasons.map((reason) {
-              final selected = _discountReason == reason;
+            children: _discountReasons().map((reason) {
+              final selected = _discountReason == reason.key;
               return GestureDetector(
                 onTap: () => setState(() {
-                  _discountReason = selected ? null : reason;
+                  _discountReason = selected ? null : reason.key;
                 }),
                 child: Container(
                   padding: const EdgeInsetsDirectional.symmetric(
@@ -527,7 +544,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                     borderRadius: AppRadius.pill,
                   ),
                   child: Text(
-                    reason,
+                    reason.label(context),
                     style: TextStyle(
                       fontSize: 11,
                       color: selected
@@ -540,12 +557,12 @@ class _DetailsStepState extends State<_DetailsStep> {
             }).toList(),
           ),
 
-          // Free-text note if "أخرى" selected
-          if (_discountReason == 'أخرى') ...[
+          // Free-text note if "other" selected
+          if (_discountReason == _kDiscountReasonOther) ...[
             const SizedBox(height: AppSpacing.sm),
             TextField(
               controller: _discountNoteCtrl,
-              decoration: _inputDecoration(context, hint: 'سبب الخصم...'),
+              decoration: _inputDecoration(context, hint: context.l10n.queueDiscountReasonHint),
             ),
           ],
           const SizedBox(height: AppSpacing.md),
@@ -564,7 +581,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                   Row(
                     children: [
                       Text(
-                        'المجموع قبل الخصم',
+                        context.l10n.queueSubtotalBeforeDiscount,
                         style: TextStyle(
                           fontSize: 11,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -585,7 +602,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                   Row(
                     children: [
                       Text(
-                        'الخصم',
+                        context.l10n.queueDiscountLabel,
                         style: const TextStyle(
                           fontSize: 11,
                           color: Color(0xFFFF9800),
@@ -605,9 +622,9 @@ class _DetailsStepState extends State<_DetailsStep> {
                   const Divider(height: 12),
                   Row(
                     children: [
-                      const Text(
-                        'بعد الخصم',
-                        style: TextStyle(
+                      Text(
+                        context.l10n.queueAfterDiscount,
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -635,7 +652,7 @@ class _DetailsStepState extends State<_DetailsStep> {
               onTap: _clearDiscount,
               child: Center(
                 child: Text(
-                  'إزالة الخصم',
+                  context.l10n.queueRemoveDiscount,
                   style: TextStyle(
                     fontSize: 11,
                     color: AppColors.error,
@@ -656,7 +673,7 @@ class _DetailsStepState extends State<_DetailsStep> {
           Row(
             children: [
               Text(
-                'المجموع قبل الخصم',
+                context.l10n.queueSubtotalBeforeDiscount,
                 style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               const Spacer(),
@@ -676,9 +693,9 @@ class _DetailsStepState extends State<_DetailsStep> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    'خصم ',
-                    style: TextStyle(fontSize: 11, color: Color(0xFFFF9800)),
+                  Text(
+                    '${context.l10n.queueDiscountLabel} ',
+                    style: const TextStyle(fontSize: 11, color: Color(0xFFFF9800)),
                   ),
                   if (_discountReason != null)
                     Container(
@@ -691,7 +708,7 @@ class _DetailsStepState extends State<_DetailsStep> {
                         borderRadius: AppRadius.pill,
                       ),
                       child: Text(
-                        _discountReason!,
+                        _discountReasons().firstWhere((r) => r.key == _discountReason).label(context),
                         style: const TextStyle(
                           fontSize: 9,
                           color: Color(0xFFFF9800),
@@ -718,7 +735,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         Row(
           children: [
             Text(
-              'الإجمالي',
+              context.l10n.queueGrandTotal,
               style: TextStyle(
                 fontSize: 12,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,

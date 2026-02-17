@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/features/business/insights/domain/entities/insight_entities.dart';
 
 /// Revenue area chart with gradient fill, optional subscription line, and legend.
@@ -32,7 +33,7 @@ class RevenueChart extends StatelessWidget {
           const SizedBox(height: 16),
           SizedBox(
             height: 200,
-            child: _buildChart(),
+            child: _buildChart(context),
           ),
           const SizedBox(height: 12),
           _Legend(data: data),
@@ -41,10 +42,10 @@ class RevenueChart extends StatelessWidget {
     );
   }
 
-  Widget _buildChart() {
+  Widget _buildChart(BuildContext context) {
     if (data.data.isEmpty) {
-      return const Center(
-        child: Text('لا توجد بيانات', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+      return Center(
+        child: Text(context.l10n.insightsNoData, style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
       );
     }
 
@@ -130,7 +131,7 @@ class RevenueChart extends StatelessWidget {
                   final isRevenue = spot.barIndex == 0;
                   return LineTooltipItem(
                     isRevenue
-                        ? '${data.summaryLabel}: ${point.revenue.toStringAsFixed(0)} د.أ'
+                        ? '${data.summaryLabel}: ${point.revenue.toStringAsFixed(0)} ${context.l10n.insightsCurrencyJod}'
                         : '${data.ordersTooltip}: ${point.subscriptionRevenue?.toStringAsFixed(0) ?? ''}',
                     TextStyle(
                       fontSize: 11,
@@ -248,7 +249,7 @@ class _Legend extends StatelessWidget {
               _LegendDot(color: const Color(0xFF1A73E8), label: data.summaryLabel),
               if (hasSubscription) ...[
                 const SizedBox(width: 12),
-                const _LegendDot(color: Color(0xFF43A047), label: 'الاشتراكات'),
+                _LegendDot(color: const Color(0xFF43A047), label: context.l10n.insightsSubscriptions),
               ],
             ],
           ),

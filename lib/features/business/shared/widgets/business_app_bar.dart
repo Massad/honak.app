@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/widgets/page_selector_sheet.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
@@ -51,7 +52,7 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      Icons.arrow_forward,
+                      AppDirection.backIcon(context),
                       size: 14,
                       color: AppColors.primary,
                     ),
@@ -63,7 +64,7 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      'عميل',
+                      context.l10n.bizAppBarCustomer,
                       style: context.textTheme.labelSmall?.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
@@ -162,7 +163,7 @@ class BusinessAppBar extends ConsumerWidget implements PreferredSizeWidget {
             ),
             backgroundColor: AppColors.error,
             child: btn.Button(
-              onPressed: () => context.showSnackBar('قريباً: الإشعارات'),
+              onPressed: () => context.showSnackBar(context.l10n.bizNotificationsComingSoon),
               icon: btn.ButtonIcon(
                 Icons.notifications_outlined,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,

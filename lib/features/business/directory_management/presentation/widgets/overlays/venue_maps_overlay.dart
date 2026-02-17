@@ -25,9 +25,9 @@ class VenueMapsOverlay extends StatelessWidget {
           icon: const Icon(Icons.close),
           onPressed: onClose,
         ),
-        title: const Text(
-          'خرائط الطوابق',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        title: Text(
+          context.l10n.dirMapsTitle,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         elevation: 0,
@@ -35,7 +35,7 @@ class VenueMapsOverlay extends StatelessWidget {
       body: floors.isEmpty
           ? Center(
               child: Text(
-                'أضف طوابق أولاً',
+                context.l10n.dirMapsAddFloorsFirst,
                 style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             )
@@ -84,7 +84,7 @@ class VenueMapsOverlay extends StatelessWidget {
                             ),
                             const SizedBox(height: AppSpacing.sm),
                             Text(
-                              'رفع خريطة الطابق',
+                              context.l10n.dirMapsUpload,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -92,7 +92,7 @@ class VenueMapsOverlay extends StatelessWidget {
                             ),
                             const SizedBox(height: AppSpacing.xs),
                             Text(
-                              'PNG, JPG — حتى 5 MB',
+                              context.l10n.dirMapsFileHint,
                               style: TextStyle(
                                 fontSize: 10,
                                 color: Theme.of(context).colorScheme.outline,
@@ -113,9 +113,9 @@ class VenueMapsOverlay extends StatelessWidget {
                             color: AppColors.primary.withValues(alpha: 0.08),
                             borderRadius: AppRadius.pill,
                           ),
-                          child: const Text(
-                            'قريباً',
-                            style: TextStyle(
+                          child: Text(
+                            context.l10n.comingSoon,
+                            style: const TextStyle(
                               fontSize: 10,
                               color: AppColors.primary,
                               fontWeight: FontWeight.w500,

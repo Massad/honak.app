@@ -79,7 +79,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'تمت الخدمة بنجاح',
+                      context.l10n.queueServiceCompleted,
                       style: context.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColors.success,
@@ -87,7 +87,11 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${widget.entry.packageName} • ${total.toFormattedArabic()} • $durationMin دقيقة',
+                      context.l10n.queueServiceSummary(
+                        widget.entry.packageName,
+                        total.toFormattedArabic(),
+                        durationMin,
+                      ),
                       style: context.textTheme.labelSmall?.copyWith(
                         color: context.colorScheme.onSurfaceVariant,
                       ),
@@ -103,7 +107,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
               Expanded(
                 child: btn.Button(
                   onPressed: widget.onRebook,
-                  label: 'احجز مرة أخرى',
+                  label: context.l10n.queueRebook,
                   expand: true,
                 ),
               ),
@@ -112,7 +116,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
                 Expanded(
                   child: btn.Button(
                     onPressed: widget.onViewDetail,
-                    label: 'التفاصيل',
+                    label: context.l10n.queueDetails,
                     variant: btn.Variant.outlined,
                     expand: true,
                   ),
@@ -153,7 +157,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(
-                  'لم يتم الحضور',
+                  context.l10n.queueNoShowBanner,
                   style: context.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: AppColors.warning,
@@ -165,7 +169,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
           const SizedBox(height: AppSpacing.md),
           btn.Button(
             onPressed: widget.onRebook,
-            label: 'احجز من جديد',
+            label: context.l10n.queueRebookNew,
             expand: true,
           ),
         ],
@@ -201,7 +205,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(
-                  'تم إلغاء الحجز',
+                  context.l10n.queueBookingCancelled,
                   style: context.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: context.colorScheme.onSurfaceVariant,
@@ -213,7 +217,7 @@ class _QueuePostBannerState extends State<QueuePostBanner> {
           const SizedBox(height: AppSpacing.md),
           btn.Button(
             onPressed: widget.onRebook,
-            label: 'احجز من جديد',
+            label: context.l10n.queueRebookNew,
             expand: true,
           ),
         ],

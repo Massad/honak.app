@@ -41,7 +41,7 @@ class BusinessDashboardPage extends ConsumerWidget {
         SetupProgressCard(
           archetype: archetype,
           onAction: (stepId) =>
-              context.showSnackBar('قريباً: إعداد $stepId'),
+              context.showSnackBar(context.l10n.bizDashSetupSoon(stepId)),
         ),
 
         // 2. Revenue overview (not for directory/followOnly)
@@ -58,7 +58,7 @@ class BusinessDashboardPage extends ConsumerWidget {
         // 4. Quick actions
         if (dashboard != null && dashboard.quickActions.isNotEmpty) ...[
           _SectionTitle(
-            title: 'إجراءات سريعة',
+            title: context.l10n.bizDashQuickActions,
             icon: Icons.auto_awesome,
             iconColor: AppColors.secondary,
           ),
@@ -274,7 +274,7 @@ class _QuickActionCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
-        onTap: () => context.showSnackBar('قريباً: ${action.labelAr}'),
+        onTap: () => context.showSnackBar(context.l10n.bizDashQuickActionSoon(action.labelAr)),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
@@ -416,7 +416,7 @@ class _SectionCard extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'لا توجد بيانات بعد',
+                      context.l10n.bizDashNoData,
                       style: context.textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 11,

@@ -270,12 +270,12 @@ class _TextLayerEditorState extends ConsumerState<TextLayerEditor> {
   }
 
   String _hintText(StoryCreatorState state) {
-    if (state.editingLayerId != null) return 'اكتب مباشرة على المعاينة';
+    if (state.editingLayerId != null) return context.l10n.storyHintEditing;
     if (_isDragging) return '↕ ↔';
     if (state.selectedLayerId != null) {
-      return 'اسحب لتحريك · انقر مرتين للتعديل';
+      return context.l10n.storyHintSelected;
     }
-    if (state.textLayers.isNotEmpty) return 'انقر على نص لتحديده';
+    if (state.textLayers.isNotEmpty) return context.l10n.storyHintTapToSelect;
     return '';
   }
 
@@ -454,7 +454,7 @@ class _InteractiveTextLayerState extends State<_InteractiveTextLayer> {
                           filled: false,
                           contentPadding: EdgeInsets.zero,
                           isDense: true,
-                          hintText: 'اكتب هنا...',
+                          hintText: context.l10n.storyTypeHere,
                           hintStyle: style.copyWith(
                             color: Colors.white38,
                           ),

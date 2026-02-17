@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/entities.dart';
@@ -9,16 +10,16 @@ import 'package:honak/shared/widgets/app_image.dart';
 // Status helpers
 // ===============================================================
 
-String requestStatusLabel(String status) {
+String requestStatusLabel(String status, AppLocalizations l10n) {
   return switch (status) {
-    'pending' => 'معلق',
-    'accepted' => 'مقبول',
-    'in_progress' => 'قيد التنفيذ',
-    'preparing' => 'قيد التحضير',
-    'ready' => 'جاهز',
-    'delivered' => 'تم التسليم',
-    'completed' => 'مكتمل',
-    'declined' => 'مرفوض',
+    'pending' => l10n.bizReqStatusPending,
+    'accepted' => l10n.bizReqStatusAccepted,
+    'in_progress' => l10n.bizReqStatusInProgress,
+    'preparing' => l10n.bizReqStatusPreparing,
+    'ready' => l10n.bizReqStatusReady,
+    'delivered' => l10n.bizReqStatusDelivered,
+    'completed' => l10n.bizReqStatusCompleted,
+    'declined' => l10n.bizReqStatusDeclined,
     _ => status,
   };
 }
@@ -51,16 +52,16 @@ Color requestStatusTextColor(String status) {
   };
 }
 
-String requestTimeAgo(int createdAt) {
+String requestTimeAgo(int createdAt, AppLocalizations l10n) {
   final now = DateTime.now();
   final created = DateTime.fromMillisecondsSinceEpoch(createdAt * 1000);
   final diff = now.difference(created);
 
-  if (diff.inMinutes < 1) return 'الآن';
-  if (diff.inMinutes < 60) return 'منذ ${diff.inMinutes} د';
-  if (diff.inHours < 24) return 'منذ ${diff.inHours} س';
-  if (diff.inDays < 7) return 'منذ ${diff.inDays} يوم';
-  return 'منذ ${(diff.inDays / 7).floor()} أسبوع';
+  if (diff.inMinutes < 1) return l10n.bizReqTimeNow;
+  if (diff.inMinutes < 60) return l10n.bizReqTimeMinutes(diff.inMinutes);
+  if (diff.inHours < 24) return l10n.bizReqTimeHours(diff.inHours);
+  if (diff.inDays < 7) return l10n.bizReqTimeDays(diff.inDays);
+  return l10n.bizReqTimeWeeks((diff.inDays / 7).floor());
 }
 
 // ===============================================================
@@ -74,6 +75,7 @@ class RequestCardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Row(
@@ -92,7 +94,7 @@ class RequestCardHeader extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  requestStatusLabel(request.status),
+                  requestStatusLabel(request.status, l10n),
                   style: TextStyle(
                     fontSize: 10,
                     color: requestStatusTextColor(request.status),
@@ -102,7 +104,7 @@ class RequestCardHeader extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                requestTimeAgo(request.createdAt),
+                requestTimeAgo(request.createdAt, l10n),
                 style: TextStyle(
                   fontSize: 10,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -123,7 +125,7 @@ class RequestCardHeader extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                '${request.itemsCount} أصناف',
+                l10n.bizReqItemsCount(request.itemsCount),
                 style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,

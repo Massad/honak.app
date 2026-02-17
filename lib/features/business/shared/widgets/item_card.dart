@@ -34,7 +34,7 @@ class ItemCard extends StatelessWidget {
     return v is int ? v : null;
   }
 
-  String? get _variantSummary {
+  String? _variantSummary(BuildContext context) {
     final parts = <String>[];
     if (config != null) {
       for (final prop in config!.properties) {
@@ -47,7 +47,7 @@ class ItemCard extends StatelessWidget {
       }
     }
     final dur = _durationMinutes;
-    if (dur != null) parts.add('$dur دقيقة');
+    if (dur != null) parts.add('$dur ${context.l10n.bizItemMinutes}');
     return parts.isEmpty ? null : parts.join(' · ');
   }
 
@@ -145,16 +145,20 @@ class ItemCard extends StatelessWidget {
                       ],
 
                       // Variant summary
-                      if (_variantSummary != null) ...[
-                        const SizedBox(height: 2),
-                        Text(
-                          _variantSummary!,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      Builder(builder: (context) {
+                        final summary = _variantSummary(context);
+                        if (summary == null) return const SizedBox.shrink();
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Text(
+                            summary,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
                           ),
-                        ),
-                      ],
+                        );
+                      }),
 
                       // Category tag
                       if (showImage && showCategory) ...[
@@ -266,11 +270,12 @@ class _StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final (label, color) = switch (status) {
-      'active' => ('متاح', AppColors.success),
-      'out_of_stock' => ('نفذ', AppColors.warning),
-      'hidden' => ('مخفي', Theme.of(context).colorScheme.onSurfaceVariant),
-      _ => ('غير معروف', Theme.of(context).colorScheme.onSurfaceVariant),
+      'active' => (l10n.bizItemAvailable, AppColors.success),
+      'out_of_stock' => (l10n.bizItemOutOfStock, AppColors.warning),
+      'hidden' => (l10n.bizItemHidden, Theme.of(context).colorScheme.onSurfaceVariant),
+      _ => (l10n.bizItemUnknown, Theme.of(context).colorScheme.onSurfaceVariant),
     };
 
     return AppBadge.small(label: label, color: color, pill: true);
@@ -371,7 +376,7 @@ class _DiscountBadges extends StatelessWidget {
                 ),
                 const SizedBox(width: 2),
                 Text(
-                  'محدود',
+                  context.l10n.bizItemLimited,
                   style: TextStyle(
                     fontSize: 9,
                     fontWeight: FontWeight.w600,
@@ -403,7 +408,7 @@ class _StockPill extends StatelessWidget {
         : stock > 0
             ? ('$stock',
                 AppColors.warning.withValues(alpha: 0.1), AppColors.warning)
-            : ('نفد',
+            : (context.l10n.bizItemSoldOut,
                 AppColors.error.withValues(alpha: 0.1), AppColors.error);
 
     return Container(

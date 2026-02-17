@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/saved/domain/entities/saved_page.dart';
 import 'package:honak/features/saved/presentation/providers/saved_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/shimmer_loading.dart';
 
 class SavedListPage extends ConsumerWidget {
@@ -16,51 +17,45 @@ class SavedListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final savedPages = ref.watch(savedPagesProvider);
 
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('\u0627\u0644\u0645\u062d\u0641\u0648\u0638\u0627\u062a'),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(Icons.arrow_back),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('\u0627\u0644\u0645\u062d\u0641\u0648\u0638\u0627\u062a'),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(AppDirection.backIcon(context)),
         ),
-        body: Directionality(
-          textDirection: Directionality.of(context),
-          child: savedPages.when(
-            loading: () => const _SavedListSkeleton(),
-            error: (error, _) => Center(
-              child: Text(
-                '\u062d\u062f\u062b \u062e\u0637\u0623',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
-              ),
+      ),
+      body: savedPages.when(
+        loading: () => const _SavedListSkeleton(),
+        error: (error, _) => Center(
+          child: Text(
+            '\u062d\u062f\u062b \u062e\u0637\u0623',
+            style: context.textTheme.bodyMedium?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
             ),
-            data: (pages) {
-              if (pages.isEmpty) {
-                return _EmptyState();
-              }
-              return ListView.separated(
-                padding: const EdgeInsets.all(AppSpacing.lg),
-                itemCount: pages.length,
-                separatorBuilder: (_, __) =>
-                    const SizedBox(height: AppSpacing.sm),
-                itemBuilder: (context, index) => _SavedPageCard(
-                  page: pages[index],
-                  onTap: () {
-                    final handle = pages[index].handle;
-                    if (handle != null) {
-                      context.push(Routes.pagePath(handle));
-                    }
-                  },
-                ),
-              );
-            },
           ),
         ),
+        data: (pages) {
+          if (pages.isEmpty) {
+            return _EmptyState();
+          }
+          return ListView.separated(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            itemCount: pages.length,
+            separatorBuilder: (_, __) =>
+                const SizedBox(height: AppSpacing.sm),
+            itemBuilder: (context, index) => _SavedPageCard(
+              page: pages[index],
+              onTap: () {
+                final handle = pages[index].handle;
+                if (handle != null) {
+                  context.push(Routes.pagePath(handle));
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }
@@ -115,7 +110,7 @@ class _SavedPageCard extends StatelessWidget {
             children: [
               // Chevron
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 18,
                 color: context.colorScheme.outline,
               ),

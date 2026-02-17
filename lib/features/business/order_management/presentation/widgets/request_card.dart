@@ -86,28 +86,28 @@ class RequestCard extends ConsumerWidget {
         children: [
           if (isPending) ...[
             RequestActionChip(
-              label: 'قبول',
+              label: context.l10n.bizReqAccept,
               color: const Color(0xFF43A047),
               icon: Icons.check,
               onTap: () => _handleAccept(context, ref),
             ),
             const SizedBox(width: AppSpacing.sm),
             RequestActionChip(
-              label: 'بديل',
+              label: context.l10n.bizReqAlternative,
               color: AppColors.primary,
               icon: Icons.swap_horiz,
               onTap: () => _handleAlternative(context),
             ),
             const SizedBox(width: AppSpacing.sm),
             RequestActionChip(
-              label: 'رفض',
+              label: context.l10n.bizReqDecline,
               color: const Color(0xFFE53935),
               icon: Icons.close,
               onTap: () => _handleDecline(context),
             ),
           ] else if (isAccepted) ...[
             RequestActionChip(
-              label: 'قيد التنفيذ',
+              label: context.l10n.bizReqInProgress,
               color: AppColors.primary,
               icon: Icons.local_shipping_outlined,
               onTap: null,
@@ -131,12 +131,12 @@ class RequestCard extends ConsumerWidget {
       final repo = ref.read(requestRepositoryProvider);
       await repo.acceptRequest(request.id);
       if (context.mounted) {
-        context.showSnackBar('تم قبول الطلب');
+        context.showSnackBar(context.l10n.bizReqAccepted);
       }
       onInvalidate();
     } catch (e) {
       if (context.mounted) {
-        context.showSnackBar('حدث خطأ', isError: true);
+        context.showSnackBar(context.l10n.bizReqError, isError: true);
       }
     }
   }

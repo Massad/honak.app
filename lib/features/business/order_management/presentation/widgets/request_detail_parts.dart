@@ -46,18 +46,18 @@ class RequestStatusContextBanner extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'العميل أرسل طلب — بانتظار ردك',
-                      style: TextStyle(
+                      context.l10n.bizReqPendingBanner,
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xFF92400E), // amber-800
                       ),
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                     Text(
-                      'يمكنك قبول أو رفض الطلب',
-                      style: TextStyle(
+                      context.l10n.bizReqPendingBannerHint,
+                      style: const TextStyle(
                         fontSize: 10,
                         color: Color(0xFFD97706), // amber-600
                       ),
@@ -85,17 +85,17 @@ class RequestStatusContextBanner extends StatelessWidget {
             border: Border.all(color: const Color(0xFFDCFCE7)), // green-100
           ),
           child: Row(
-            children: const [
-              Icon(
+            children: [
+              const Icon(
                 Icons.check_circle_outline_rounded,
                 size: 14,
                 color: Color(0xFF43A047),
               ),
-              SizedBox(width: AppSpacing.sm),
+              const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: Text(
-                  'تم قبول الطلب — بانتظار التنفيذ',
-                  style: TextStyle(
+                  context.l10n.bizReqAcceptedBanner,
+                  style: const TextStyle(
                     fontSize: 12,
                     color: Color(0xFF166534), // green-800
                   ),
@@ -123,7 +123,7 @@ class RequestActivityLogTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entries = generateRequestActivity(request);
+    final entries = generateRequestActivity(request, context.l10n);
 
     if (entries.isEmpty) {
       return Center(
@@ -137,7 +137,7 @@ class RequestActivityLogTab extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              'لا يوجد سجل بعد',
+              context.l10n.bizReqNoLogYet,
               style: TextStyle(
                 fontSize: 12,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -155,7 +155,7 @@ class RequestActivityLogTab extends StatelessWidget {
     // Group by date
     final grouped = <String, List<ActivityLogEntry>>{};
     for (final e in sorted) {
-      final dateKey = formatDate(e.timestamp);
+      final dateKey = formatDate(e.timestamp, context.l10n);
       (grouped[dateKey] ??= []).add(e);
     }
 
@@ -277,7 +277,7 @@ class _TimelineEntry extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      formatTimeAgo(entry.timestamp),
+                      formatTimeAgo(entry.timestamp, context.l10n),
                       style: TextStyle(
                         fontSize: 10,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -340,7 +340,7 @@ class _TimelineEntry extends StatelessWidget {
                   const SizedBox(height: AppSpacing.xs),
                   _DetailNote(
                     text:
-                        '${_formatMoney(entry.amount!)} — ${entry.method ?? 'كاش'}',
+                        '${_formatMoney(entry.amount!, currency: context.l10n.jod)} — ${entry.method ?? context.l10n.bizReqActivityCash}',
                   ),
                 ] else if (entry.note != null) ...[
                   const SizedBox(height: AppSpacing.xs),
@@ -357,11 +357,11 @@ class _TimelineEntry extends StatelessWidget {
   }
 }
 
-String _formatMoney(int cents) {
+String _formatMoney(int cents, {String currency = 'د.أ'}) {
   final jd = cents ~/ 100;
   final q = cents % 100;
-  if (q == 0) return '$jd د.أ';
-  return '$jd.${q.toString().padLeft(2, '0')} د.أ';
+  if (q == 0) return '$jd $currency';
+  return '$jd.${q.toString().padLeft(2, '0')} $currency';
 }
 
 class _StatusTransition extends StatelessWidget {

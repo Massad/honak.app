@@ -84,7 +84,7 @@ class _TotalTenantsCard extends StatelessWidget {
     final fraction = total > 0 ? claimed / total : 1.0;
 
     return _InsightCard(
-      title: 'إجمالي المستأجرين',
+      title: context.l10n.insightsTotalTenants,
       child: Row(
         children: [
           SizedBox(
@@ -111,7 +111,7 @@ class _TotalTenantsCard extends StatelessWidget {
           const SizedBox(width: AppSpacing.lg),
           Expanded(
             child: Text(
-              '$claimed مربوط · $unclaimed غير مربوط',
+              context.l10n.insightsClaimedUnclaimed(claimed, unclaimed),
               style: context.textTheme.bodyMedium?.copyWith(
                 color: context.colorScheme.onSurfaceVariant,
               ),
@@ -137,7 +137,7 @@ class _FollowerGrowthCard extends StatelessWidget {
     final changePercent = (data['change_percent'] as num?)?.toInt() ?? 0;
 
     return _InsightCard(
-      title: 'نمو المتابعين',
+      title: context.l10n.insightsFollowerGrowth,
       child: Row(
         children: [
           Text(
@@ -171,7 +171,7 @@ class _FollowerGrowthCard extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            '+$thisMonth هذا الشهر',
+            context.l10n.insightsThisMonth(thisMonth as int),
             style: context.textTheme.bodySmall?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -195,7 +195,7 @@ class _OpenNowCard extends StatelessWidget {
     final total = data['total'] ?? 0;
 
     return _InsightCard(
-      title: 'المفتوح الآن',
+      title: context.l10n.insightsOpenNow,
       child: Row(
         children: [
           Container(
@@ -208,7 +208,7 @@ class _OpenNowCard extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
           Text(
-            '$open من $total مفتوح الآن',
+            context.l10n.insightsOpenOfTotal(open as int, total as int),
             style: context.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: context.colorScheme.onSurface,
@@ -235,7 +235,7 @@ class _FloorVisitsCard extends StatelessWidget {
     });
 
     return _InsightCard(
-      title: 'زيارات الطوابق',
+      title: context.l10n.insightsFloorVisits,
       child: Column(
         children: floors.map((f) {
           final map = f as Map<String, dynamic>;
@@ -301,7 +301,7 @@ class _DirectoryViewsCard extends StatelessWidget {
     final thisWeek = data['this_week'] ?? 0;
 
     return _InsightCard(
-      title: 'مشاهدات الدليل',
+      title: context.l10n.insightsDirectoryViews,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -314,7 +314,7 @@ class _DirectoryViewsCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            '$thisWeek مشاهدة هذا الأسبوع',
+            context.l10n.insightsViewsThisWeek(thisWeek as int),
             style: context.textTheme.bodySmall?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -335,7 +335,7 @@ class _TenantClicksCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _InsightCard(
-      title: 'نقرات المتاجر',
+      title: context.l10n.insightsTenantClicks,
       child: Column(
         children: tenants.take(5).map((t) {
           final map = t as Map<String, dynamic>;
@@ -385,7 +385,7 @@ class _TopFloorsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _InsightCard(
-      title: 'أكثر الطوابق نشاطاً',
+      title: context.l10n.insightsTopFloors,
       child: Column(
         children: floors.take(3).map((f) {
           final map = f as Map<String, dynamic>;

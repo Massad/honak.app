@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 
 /// Gradient card showing 2-3 smart tips per business type.
 class SmartTipsSection extends StatelessWidget {
@@ -25,13 +26,13 @@ class SmartTipsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Title row
-          const Row(
+          Row(
             children: [
-              Icon(Icons.star, size: 14, color: Color(0xFFFF9800)),
-              SizedBox(width: 6),
+              const Icon(Icons.star, size: 14, color: Color(0xFFFF9800)),
+              const SizedBox(width: 6),
               Text(
-                'نصائح ذكية',
-                style: TextStyle(
+                context.l10n.insightsSmartTips,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF111827),

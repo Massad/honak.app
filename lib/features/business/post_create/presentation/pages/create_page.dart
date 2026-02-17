@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/post_create/presentation/pages/form_page.dart';
@@ -16,7 +17,7 @@ class CreatePostPage extends ConsumerWidget {
     final archetype = bizContext?.archetype;
 
     // Archetype-aware post types — matches Figma BizCreatePost
-    final postTypes = _getPostTypesForArchetype(archetype?.name);
+    final postTypes = _getPostTypesForArchetype(archetype?.name, context.l10n);
 
     return ListView(
       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -30,7 +31,7 @@ class CreatePostPage extends ConsumerWidget {
         Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Text(
-            'إنشاء منشور',
+            context.l10n.postCreateTitle,
             style: context.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -40,7 +41,7 @@ class CreatePostPage extends ConsumerWidget {
         Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Text(
-            'اختر نوع المنشور الذي تريد إنشاءه',
+            context.l10n.postCreateSubtitle,
             style: TextStyle(
               fontSize: 12,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -67,7 +68,7 @@ class CreatePostPage extends ConsumerWidget {
 
         // Promoted post button
         _PromotedPostButton(
-          onTap: () => context.showSnackBar('قريباً: منشور مروّج'),
+          onTap: () => context.showSnackBar(context.l10n.postPromotedComingSoon),
         ),
       ],
     );
@@ -78,45 +79,45 @@ class CreatePostPage extends ConsumerWidget {
 // Post types per archetype — matches Figma ARCHETYPE_POST_TYPES
 // ═══════════════════════════════════════════════════════════════
 
-List<_PostTypeDef> _getPostTypesForArchetype(String? archetype) {
+List<_PostTypeDef> _getPostTypesForArchetype(String? archetype, AppLocalizations l10n) {
   final allTypes = {
     'update': _PostTypeDef(
       key: 'update',
       icon: Icons.article_outlined,
-      label: 'تحديث',
-      desc: 'إعلان أو خبر',
+      label: l10n.postTypeUpdate,
+      desc: l10n.postTypeUpdateDesc,
       color: const Color(0xFF43A047),
       bgColor: const Color(0xFFE8F5E9),
     ),
     'daily_special': _PostTypeDef(
       key: 'daily_special',
       icon: Icons.auto_awesome_outlined,
-      label: 'عرض اليوم',
-      desc: 'عرض خاص — اختر صنف بسعر مميز',
+      label: l10n.postTypeDailySpecial,
+      desc: l10n.postTypeDailySpecialDesc,
       color: const Color(0xFFFF9800),
       bgColor: const Color(0xFFFFF3E0),
     ),
     'status': _PostTypeDef(
       key: 'status',
       icon: Icons.chat_bubble_outline,
-      label: 'حالة',
-      desc: 'حالة قصيرة (تختفي خلال ٢٤ س)',
+      label: l10n.postTypeStatus,
+      desc: l10n.postTypeStatusDesc,
       color: const Color(0xFF9C27B0),
       bgColor: const Color(0xFFF3E5F5),
     ),
     'photo': _PostTypeDef(
       key: 'photo',
       icon: Icons.camera_alt_outlined,
-      label: 'أعمالنا',
-      desc: 'صور أعمال مكتملة (قبل/بعد)',
+      label: l10n.postTypeOurWork,
+      desc: l10n.postTypeOurWorkDesc,
       color: const Color(0xFFE91E63),
       bgColor: const Color(0xFFFCE4EC),
     ),
     'alert': _PostTypeDef(
       key: 'alert',
       icon: Icons.warning_amber_outlined,
-      label: 'تنبيه',
-      desc: 'تنبيه عاجل أو مهم للمتابعين',
+      label: l10n.postTypeAlert,
+      desc: l10n.postTypeAlertDesc,
       color: const Color(0xFFFF8F00),
       bgColor: const Color(0xFFFFF8E1),
     ),
@@ -181,7 +182,7 @@ class _StoryButton extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'ستوري جديدة',
+                    context.l10n.postNewStory,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.surface,
                       fontSize: 14,
@@ -190,7 +191,7 @@ class _StoryButton extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'شارك لحظات مع متابعيك',
+                    context.l10n.postNewStoryDesc,
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.8),
                       fontSize: 11,
@@ -336,7 +337,7 @@ class _PromotedPostButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'منشور مروّج',
+                context.l10n.postPromoted,
                 style: context.textTheme.bodyMedium?.copyWith(
                   color: AppColors.secondary,
                   fontWeight: FontWeight.w600,

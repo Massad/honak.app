@@ -114,7 +114,7 @@ class _SummaryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '$categoryCount تصنيف',
+                context.l10n.catMgrCategoryCount(categoryCount),
                 style: context.textTheme.bodySmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -131,7 +131,7 @@ class _SummaryCard extends StatelessWidget {
           const Spacer(),
           btn.Button(
             onPressed: onAdd,
-            label: 'تصنيف جديد',
+            label: context.l10n.catMgrNewCategory,
             icon: const btn.ButtonIcon(Icons.add, size: 14),
             size: btn.ButtonSize.small,
           ),
@@ -167,7 +167,7 @@ class _AddCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'اسم التصنيف الجديد',
+              context.l10n.catMgrNewCategoryName,
               style: context.textTheme.labelSmall?.copyWith(
                 color: context.colorScheme.onSurfaceVariant,
               ),
@@ -182,7 +182,7 @@ class _AddCard extends StatelessWidget {
                     textInputAction: TextInputAction.done,
                     onSubmitted: (_) => onConfirm(),
                     decoration: _categoryInputDecoration(context,
-                      hintText: 'مثال: قص شعر، أطباق رئيسية...',
+                      hintText: context.l10n.catMgrNewCategoryHint,
                     ),
                   ),
                 ),
@@ -377,13 +377,13 @@ class _EmptyState extends StatelessWidget {
           Icon(Icons.local_offer_outlined, size: 40, color: Theme.of(context).colorScheme.outline),
           const SizedBox(height: AppSpacing.md),
           Text(
-            'لا توجد تصنيفات بعد',
+            context.l10n.catMgrNoCategories,
             style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.md),
           btn.Button(
             onPressed: onAdd,
-            label: 'إضافة تصنيف',
+            label: context.l10n.catMgrAddCategory,
             icon: const btn.ButtonIcon(Icons.add, size: 12),
             variant: btn.Variant.text,
             size: btn.ButtonSize.small,

@@ -120,12 +120,12 @@ class _AvailabilityOverlayState extends State<AvailabilityOverlay> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('إدارة المواعيد',
+                    Text(context.l10n.availTitle,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: context.colorScheme.onSurface)),
-                    const Text('الجدول الأسبوعي وحظر التواريخ',
+                    Text(context.l10n.availSubtitle,
                         style: TextStyle(
                             fontSize: 10, color: AppColors.textHint)),
                   ],
@@ -143,18 +143,18 @@ class _AvailabilityOverlayState extends State<AvailabilityOverlay> {
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
                   child: _saved
-                      ? const Row(
+                      ? Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('تم الحفظ',
+                            Text(context.l10n.availSaved,
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.white)),
-                            SizedBox(width: 4),
-                            Icon(Icons.check,
+                            const SizedBox(width: 4),
+                            const Icon(Icons.check,
                                 size: 12, color: Colors.white),
                           ],
                         )
-                      : const Text('حفظ',
+                      : Text(context.l10n.save,
                           style: TextStyle(
                               fontSize: 12, color: Colors.white)),
                 ),
@@ -166,9 +166,9 @@ class _AvailabilityOverlayState extends State<AvailabilityOverlay> {
           // Tab pills
           Row(
             children: [
-              _tabPill('الجدول الأسبوعي', _AvailTab.schedule),
+              _tabPill(context.l10n.availScheduleTab, _AvailTab.schedule),
               const SizedBox(width: AppSpacing.sm),
-              _tabPill('حظر مواعيد', _AvailTab.blocks, badge: blockCount),
+              _tabPill(context.l10n.availBlockTab, _AvailTab.blocks, badge: blockCount),
             ],
           ),
         ],

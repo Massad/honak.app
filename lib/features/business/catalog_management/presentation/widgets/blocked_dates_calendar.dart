@@ -48,13 +48,13 @@ class MiniBlockedCalendar extends StatelessWidget {
       child: Column(
         children: [
           // View-only label
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('عرض التواريخ المحظورة',
-                  style: TextStyle(fontSize: 9, color: AppColors.textHint)),
-              SizedBox(width: 6),
-              Icon(Icons.calendar_today, size: 12, color: AppColors.textHint),
+              Text(context.l10n.blockViewBlockedDates,
+                  style: const TextStyle(fontSize: 9, color: AppColors.textHint)),
+              const SizedBox(width: 6),
+              const Icon(Icons.calendar_today, size: 12, color: AppColors.textHint),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -127,11 +127,11 @@ class MiniBlockedCalendar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _legendDot(const Color(0xFF7B1FA2), 'فترة'),
+                _legendDot(const Color(0xFF7B1FA2), context.l10n.blockLegendRange),
                 const SizedBox(width: AppSpacing.md),
-                _legendDot(AppColors.error, 'محدد'),
+                _legendDot(AppColors.error, context.l10n.blockLegendSpecific),
                 const SizedBox(width: AppSpacing.md),
-                _legendDot(AppColors.secondary, 'أسبوعي'),
+                _legendDot(AppColors.secondary, context.l10n.blockLegendWeekly),
               ],
             ),
           ),

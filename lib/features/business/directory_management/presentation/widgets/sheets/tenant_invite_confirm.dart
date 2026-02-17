@@ -60,7 +60,7 @@ class TenantInviteConfirm extends StatelessWidget {
 
         // Followers
         Text(
-          '${page['followers']} متابع',
+          context.l10n.dirTenantFormFollowers(page['followers'] as int),
           style: context.textTheme.labelSmall?.copyWith(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
@@ -69,7 +69,7 @@ class TenantInviteConfirm extends StatelessWidget {
 
         // Confirmation question
         Text(
-          'هل أنت متأكد؟',
+          context.l10n.dirInviteConfirmTitle,
           style: context.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.w600,
           ),
@@ -80,7 +80,7 @@ class TenantInviteConfirm extends StatelessWidget {
             horizontal: AppSpacing.xxl,
           ),
           child: Text(
-            'سيتم إرسال دعوة لهذه الصفحة للانضمام لدليل مولك',
+            context.l10n.dirInviteConfirmDesc,
             textAlign: TextAlign.center,
             style: context.textTheme.bodySmall?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
@@ -101,7 +101,7 @@ class TenantInviteConfirm extends StatelessWidget {
               Expanded(
                 child: btn.Button(
                   onPressed: onCancel,
-                  label: 'لا، ارجع',
+                  label: context.l10n.dirInviteConfirmCancel,
                   variant: btn.Variant.outlined,
                   size: btn.ButtonSize.large,
                   expand: true,
@@ -113,7 +113,7 @@ class TenantInviteConfirm extends StatelessWidget {
               Expanded(
                 child: btn.Button(
                   onPressed: onConfirm,
-                  label: 'نعم، أدعوهم',
+                  label: context.l10n.dirInviteConfirmYes,
                   size: btn.ButtonSize.large,
                   expand: true,
                 ),

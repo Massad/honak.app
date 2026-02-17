@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
@@ -56,9 +57,9 @@ class ActiveFilterStrip extends StatelessWidget {
                   color: AppColors.error.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Text(
-                  'مسح الكل',
-                  style: TextStyle(
+                child: Text(
+                  context.l10n.clearAll,
+                  style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
                     color: AppColors.error,

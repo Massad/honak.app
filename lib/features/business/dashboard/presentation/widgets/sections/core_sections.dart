@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
@@ -24,19 +25,19 @@ class TodaySummarySection extends StatelessWidget {
     return Row(
       children: [
         SummaryChip(
-          label: 'مكتمل',
+          label: context.l10n.bizSummaryCompleted,
           value: '${data['completed'] ?? 0}',
           color: AppColors.success,
         ),
         const SizedBox(width: AppSpacing.sm),
         SummaryChip(
-          label: 'قادم',
+          label: context.l10n.bizSummaryUpcoming,
           value: '${data['upcoming'] ?? 0}',
           color: AppColors.primary,
         ),
         const SizedBox(width: AppSpacing.sm),
         SummaryChip(
-          label: 'ملغي',
+          label: context.l10n.bizSummaryCancelled,
           value: '${data['cancelled'] ?? 0}',
           color: AppColors.error,
         ),
@@ -45,14 +46,14 @@ class TodaySummarySection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '${formatJod(data['revenue'])} د.أ',
+              '${formatJod(data['revenue'])} ${context.l10n.bizRevenueCurrency}',
               style: context.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.success,
               ),
             ),
             Text(
-              'إيراد اليوم',
+              context.l10n.bizSummaryTodayRevenue,
               style: context.textTheme.labelSmall?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 10,
@@ -121,13 +122,13 @@ class TodayRevenueSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${data['completed_count'] ?? 0} خدمات',
+              context.l10n.bizRevenueServicesCount((data['completed_count'] as num?)?.toInt() ?? 0),
               style: context.textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             Text(
-              '${formatJod(data['total'])} د.أ',
+              '${formatJod(data['total'])} ${context.l10n.bizRevenueCurrency}',
               style: context.textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.success,
@@ -154,7 +155,7 @@ class TodayRevenueSection extends StatelessWidget {
                   ),
                   const SizedBox(width: AppSpacing.sm),
                   Text(
-                    '${formatJod(m['amount'])} د.أ',
+                    '${formatJod(m['amount'])} ${AppLocalizations.of(context).bizRevenueCurrency}',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,

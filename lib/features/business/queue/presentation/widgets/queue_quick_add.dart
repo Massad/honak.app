@@ -64,8 +64,8 @@ class _QueueQuickAddSheetState extends State<_QueueQuickAddSheet> {
       children: [
         _SheetHeader(
           title: _selectedPackage == null
-              ? 'اختر الخدمة'
-              : 'تفاصيل العميل',
+              ? context.l10n.queueSelectService
+              : context.l10n.queueCustomerDetails,
           onClose: () => Navigator.pop(context),
         ),
         Flexible(

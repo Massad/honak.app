@@ -3,6 +3,19 @@ import 'dart:ui';
 import 'package:honak/features/business/insights/domain/entities/insight_entities.dart';
 import 'package:honak/features/business/insights/domain/insight_chart_config.dart';
 
+/// Arabic period labels for mock data (simulates server responses).
+String _periodLabelAr(InsightPeriod period) => switch (period) {
+      InsightPeriod.week => 'هذا الأسبوع',
+      InsightPeriod.month => 'هذا الشهر',
+      InsightPeriod.year => 'هذه السنة',
+    };
+
+String _comparisonLabelAr(InsightPeriod period) => switch (period) {
+      InsightPeriod.week => 'مقارنة بالأسبوع الماضي',
+      InsightPeriod.month => 'مقارنة بالشهر الماضي',
+      InsightPeriod.year => 'مقارنة بالسنة الماضية',
+    };
+
 /// Generates mock insights data for a business type + period.
 InsightsData generateMockInsights({
   required String pageId,
@@ -113,11 +126,11 @@ InsightsData _waterDelivery(String pageId, String type, String archetype,
     businessType: type,
     archetype: archetype,
     period: period.name,
-    periodLabel: period.periodLabelAr,
+    periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(450 * m).toInt()} د.أ', change: '+٠٨٪', trend: TrendDirection.up, icon: 'banknote'),
-        InsightCardData(id: 'orders', label: 'الطلبات ${period.periodLabelAr}', value: '${(85 * m).toInt()}', change: '+١٢٪', trend: TrendDirection.up, icon: 'package'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(450 * m).toInt()} د.أ', change: '+٠٨٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'orders', label: 'الطلبات ${_periodLabelAr(period)}', value: '${(85 * m).toInt()}', change: '+١٢٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٥.٣ د.أ', change: '+٠٣٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(120 * m ~/ 4).toInt()}', change: '+٥', trend: TrendDirection.up, icon: 'users'),
       ]),
@@ -136,7 +149,7 @@ InsightsData _waterDelivery(String pageId, String type, String archetype,
       label: labels.revenueLabel,
       summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٢٪ ${period.comparisonLabelAr}',
+      comparison: '+٢٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 45, 80, 9, 15, subscriptions: true),
     ),
@@ -171,10 +184,10 @@ InsightsData _restaurant(String pageId, String type, String archetype,
     businessType: type,
     archetype: archetype,
     period: period.name,
-    periodLabel: period.periodLabelAr,
+    periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(2350 * m).toInt()} د.أ', change: '+٠٨٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(2350 * m).toInt()} د.أ', change: '+٠٨٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(530 * m).toInt()}', change: '+١٢٪', trend: TrendDirection.up, icon: 'utensils'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٨.٥ د.أ', change: '+٥٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(890 * m ~/ 4).toInt()}', change: '+٤٥', trend: TrendDirection.up, icon: 'users'),
@@ -199,7 +212,7 @@ InsightsData _restaurant(String pageId, String type, String archetype,
       label: labels.revenueLabel,
       summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٨٪ ${period.comparisonLabelAr}',
+      comparison: '+٨٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 250, 500, 58, 99),
     ),
@@ -235,7 +248,7 @@ InsightsData _salon(String pageId, String type, String archetype,
     businessType: type,
     archetype: archetype,
     period: period.name,
-    periodLabel: period.periodLabelAr,
+    periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(780 * m).toInt()} د.أ', change: '+١٠٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -264,7 +277,7 @@ InsightsData _salon(String pageId, String type, String archetype,
       label: labels.revenueLabel,
       summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٠٪ ${period.comparisonLabelAr}',
+      comparison: '+١٠٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 80, 140, 4, 8),
     ),
@@ -295,7 +308,7 @@ InsightsData _plumber(String pageId, String type, String archetype,
     businessType: type,
     archetype: archetype,
     period: period.name,
-    periodLabel: period.periodLabelAr,
+    periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات هذا الشهر', value: '${(2500 * m ~/ 4).toInt()} د.أ', change: '+١٥٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -323,7 +336,7 @@ InsightsData _plumber(String pageId, String type, String archetype,
       label: labels.revenueLabel,
       summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٥٪ ${period.comparisonLabelAr}',
+      comparison: '+١٥٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 45, 200, 1, 4),
     ),
@@ -353,7 +366,7 @@ InsightsData _villaRental(String pageId, String type, String archetype,
     businessType: type,
     archetype: archetype,
     period: period.name,
-    periodLabel: period.periodLabelAr,
+    periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'occupancy', label: 'نسبة الإشغال', value: '٧٢٪', change: '+٥٪', trend: TrendDirection.up, icon: 'home'),
@@ -376,7 +389,7 @@ InsightsData _villaRental(String pageId, String type, String archetype,
       label: labels.revenueLabel,
       summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٢٪ ${period.comparisonLabelAr}',
+      comparison: '+١٢٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 0, 600, 0, 3),
     ),
@@ -406,7 +419,7 @@ InsightsData _government(String pageId, String type, String archetype,
     businessType: type,
     archetype: archetype,
     period: period.name,
-    periodLabel: period.periodLabelAr,
+    periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'التفاعل', cards: [
         InsightCardData(id: 'reach', label: 'الوصول', value: '${(2400 * m).toInt()}', change: '+١٨٪', trend: TrendDirection.up, icon: 'eye'),
@@ -449,10 +462,10 @@ InsightsData _cafe(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(1200 * m).toInt()} د.أ', change: '+١٠٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(1200 * m).toInt()} د.أ', change: '+١٠٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(380 * m).toInt()}', change: '+١٥٪', trend: TrendDirection.up, icon: 'coffee'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٣.٢ د.أ', change: '+٤٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(450 * m ~/ 4).toInt()}', change: '+٢٨', trend: TrendDirection.up, icon: 'users'),
@@ -471,7 +484,7 @@ InsightsData _cafe(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٠٪ ${period.comparisonLabelAr}',
+      comparison: '+١٠٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 120, 250, 35, 70),
     ),
@@ -504,10 +517,10 @@ InsightsData _bakery(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(1800 * m).toInt()} د.أ', change: '+١٢٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(1800 * m).toInt()} د.أ', change: '+١٢٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(420 * m).toInt()}', change: '+١٠٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٤.٣ د.أ', change: '+٣٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(600 * m ~/ 4).toInt()}', change: '+٣٥', trend: TrendDirection.up, icon: 'users'),
@@ -526,7 +539,7 @@ InsightsData _bakery(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٢٪ ${period.comparisonLabelAr}',
+      comparison: '+١٢٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 180, 350, 40, 80),
     ),
@@ -559,10 +572,10 @@ InsightsData _juiceBar(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(650 * m).toInt()} د.أ', change: '+١٤٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(650 * m).toInt()} د.أ', change: '+١٤٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(290 * m).toInt()}', change: '+١٨٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٢.٢ د.أ', change: '+٥٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(320 * m ~/ 4).toInt()}', change: '+٢٢', trend: TrendDirection.up, icon: 'users'),
@@ -581,7 +594,7 @@ InsightsData _juiceBar(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٤٪ ${period.comparisonLabelAr}',
+      comparison: '+١٤٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 60, 140, 25, 55),
     ),
@@ -613,7 +626,7 @@ InsightsData _clinic(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(3200 * m).toInt()} د.أ', change: '+٧٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -635,7 +648,7 @@ InsightsData _clinic(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٧٪ ${period.comparisonLabelAr}',
+      comparison: '+٧٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 350, 600, 6, 12),
     ),
@@ -663,7 +676,7 @@ InsightsData _gym(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(2800 * m).toInt()} د.أ', change: '+٩٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -685,7 +698,7 @@ InsightsData _gym(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٩٪ ${period.comparisonLabelAr}',
+      comparison: '+٩٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 300, 500, 20, 35),
     ),
@@ -712,7 +725,7 @@ InsightsData _carWash(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(950 * m).toInt()} د.أ', change: '+١١٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -734,7 +747,7 @@ InsightsData _carWash(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١١٪ ${period.comparisonLabelAr}',
+      comparison: '+١١٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 100, 180, 12, 22),
     ),
@@ -760,7 +773,7 @@ InsightsData _laundry(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(600 * m).toInt()} د.أ', change: '+٨٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -782,7 +795,7 @@ InsightsData _laundry(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٨٪ ${period.comparisonLabelAr}',
+      comparison: '+٨٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 60, 120, 10, 18),
     ),
@@ -808,7 +821,7 @@ InsightsData _oilChange(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(1100 * m).toInt()} د.أ', change: '+٦٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -830,7 +843,7 @@ InsightsData _oilChange(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٦٪ ${period.comparisonLabelAr}',
+      comparison: '+٦٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 120, 200, 8, 14),
     ),
@@ -856,7 +869,7 @@ InsightsData _tailor(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(900 * m).toInt()} د.أ', change: '+٨٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -878,7 +891,7 @@ InsightsData _tailor(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٨٪ ${period.comparisonLabelAr}',
+      comparison: '+٨٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 80, 170, 4, 8),
     ),
@@ -904,7 +917,7 @@ InsightsData _shoeRepair(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(350 * m).toInt()} د.أ', change: '+٥٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -925,7 +938,7 @@ InsightsData _shoeRepair(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٥٪ ${period.comparisonLabelAr}',
+      comparison: '+٥٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 30, 70, 5, 10),
     ),
@@ -951,7 +964,7 @@ InsightsData _mobileRepair(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(1500 * m).toInt()} د.أ', change: '+١٢٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -973,7 +986,7 @@ InsightsData _mobileRepair(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٢٪ ${period.comparisonLabelAr}',
+      comparison: '+١٢٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 150, 280, 6, 12),
     ),
@@ -999,7 +1012,7 @@ InsightsData _watchRepair(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(420 * m).toInt()} د.أ', change: '+٤٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -1020,7 +1033,7 @@ InsightsData _watchRepair(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٤٪ ${period.comparisonLabelAr}',
+      comparison: '+٤٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 40, 80, 3, 6),
     ),
@@ -1046,7 +1059,7 @@ InsightsData _tireShop(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(1400 * m).toInt()} د.أ', change: '+٧٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -1068,7 +1081,7 @@ InsightsData _tireShop(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٧٪ ${period.comparisonLabelAr}',
+      comparison: '+٧٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 140, 260, 8, 15),
     ),
@@ -1094,10 +1107,10 @@ InsightsData _gasDelivery(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(380 * m).toInt()} د.أ', change: '+٦٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(380 * m).toInt()} د.أ', change: '+٦٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(95 * m).toInt()}', change: '+١٠٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٤ د.أ', icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(110 * m ~/ 4).toInt()}', change: '+٨', trend: TrendDirection.up, icon: 'users'),
@@ -1114,7 +1127,7 @@ InsightsData _gasDelivery(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٦٪ ${period.comparisonLabelAr}',
+      comparison: '+٦٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 35, 70, 10, 18),
     ),
@@ -1145,10 +1158,10 @@ InsightsData _clothesStore(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(2200 * m).toInt()} د.أ', change: '+١٥٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(2200 * m).toInt()} د.أ', change: '+١٥٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(85 * m).toInt()}', change: '+١٢٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٢٥.٩ د.أ', change: '+٥٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(200 * m ~/ 4).toInt()}', change: '+٢٥', trend: TrendDirection.up, icon: 'users'),
@@ -1161,7 +1174,7 @@ InsightsData _clothesStore(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٥٪ ${period.comparisonLabelAr}',
+      comparison: '+١٥٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 200, 400, 8, 16),
     ),
@@ -1192,10 +1205,10 @@ InsightsData _onlineStore(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(1800 * m).toInt()} د.أ', change: '+٢٠٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(1800 * m).toInt()} د.أ', change: '+٢٠٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(110 * m).toInt()}', change: '+١٨٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '١٦.٤ د.أ', change: '+٧٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(350 * m ~/ 4).toInt()}', change: '+٤٥', trend: TrendDirection.up, icon: 'users'),
@@ -1209,7 +1222,7 @@ InsightsData _onlineStore(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٢٠٪ ${period.comparisonLabelAr}',
+      comparison: '+٢٠٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 180, 350, 12, 22),
     ),
@@ -1241,10 +1254,10 @@ InsightsData _miniMarket(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(850 * m).toInt()} د.أ', change: '+٧٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(850 * m).toInt()} د.أ', change: '+٧٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(200 * m).toInt()}', change: '+١٠٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٤.٣ د.أ', change: '+٢٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(280 * m ~/ 4).toInt()}', change: '+١٥', trend: TrendDirection.up, icon: 'users'),
@@ -1257,7 +1270,7 @@ InsightsData _miniMarket(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٧٪ ${period.comparisonLabelAr}',
+      comparison: '+٧٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 80, 160, 22, 38),
     ),
@@ -1289,10 +1302,10 @@ InsightsData _butcher(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(1600 * m).toInt()} د.أ', change: '+٩٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(1600 * m).toInt()} د.أ', change: '+٩٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(130 * m).toInt()}', change: '+١١٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '١٢.٣ د.أ', change: '+٤٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(180 * m ~/ 4).toInt()}', change: '+١٨', trend: TrendDirection.up, icon: 'users'),
@@ -1305,7 +1318,7 @@ InsightsData _butcher(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٩٪ ${period.comparisonLabelAr}',
+      comparison: '+٩٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 160, 300, 14, 24),
     ),
@@ -1336,10 +1349,10 @@ InsightsData _produce(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(700 * m).toInt()} د.أ', change: '+٦٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(700 * m).toInt()} د.أ', change: '+٦٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(160 * m).toInt()}', change: '+٨٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٤.٤ د.أ', change: '+٢٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(220 * m ~/ 4).toInt()}', change: '+١٢', trend: TrendDirection.up, icon: 'users'),
@@ -1352,7 +1365,7 @@ InsightsData _produce(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٦٪ ${period.comparisonLabelAr}',
+      comparison: '+٦٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 70, 130, 18, 28),
     ),
@@ -1384,10 +1397,10 @@ InsightsData _pharmacy(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(1300 * m).toInt()} د.أ', change: '+٨٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(1300 * m).toInt()} د.أ', change: '+٨٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(170 * m).toInt()}', change: '+١٢٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٧.٦ د.أ', change: '+٣٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(250 * m ~/ 4).toInt()}', change: '+٢٠', trend: TrendDirection.up, icon: 'users'),
@@ -1400,7 +1413,7 @@ InsightsData _pharmacy(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+٨٪ ${period.comparisonLabelAr}',
+      comparison: '+٨٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 130, 240, 18, 30),
     ),
@@ -1432,10 +1445,10 @@ InsightsData _electronicsStore(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
-        InsightCardData(id: 'revenue', label: 'الإيرادات ${period.periodLabelAr}', value: '${(5500 * m).toInt()} د.أ', change: '+١٨٪', trend: TrendDirection.up, icon: 'banknote'),
+        InsightCardData(id: 'revenue', label: 'الإيرادات ${_periodLabelAr(period)}', value: '${(5500 * m).toInt()} د.أ', change: '+١٨٪', trend: TrendDirection.up, icon: 'banknote'),
         InsightCardData(id: 'orders', label: 'الطلبات', value: '${(65 * m).toInt()}', change: '+١٥٪', trend: TrendDirection.up, icon: 'package'),
         InsightCardData(id: 'avg_order', label: 'متوسط الطلب', value: '٨٤.٦ د.أ', change: '+٨٪', trend: TrendDirection.up, icon: 'trending-up'),
         InsightCardData(id: 'active_customers', label: 'العملاء النشطين', value: '${(150 * m ~/ 4).toInt()}', change: '+٢٠', trend: TrendDirection.up, icon: 'users'),
@@ -1448,7 +1461,7 @@ InsightsData _electronicsStore(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٨٪ ${period.comparisonLabelAr}',
+      comparison: '+١٨٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 500, 1000, 5, 12),
     ),
@@ -1480,7 +1493,7 @@ InsightsData _photographer(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'revenue', label: 'الإيرادات', value: '${(1800 * m ~/ 4).toInt()} د.أ', change: '+١٢٪', trend: TrendDirection.up, icon: 'banknote'),
@@ -1502,7 +1515,7 @@ InsightsData _photographer(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٢٪ ${period.comparisonLabelAr}',
+      comparison: '+١٢٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 0, 350, 0, 3),
     ),
@@ -1525,7 +1538,7 @@ InsightsData _eventVenue(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'occupancy', label: 'نسبة الإشغال', value: '٦٥٪', change: '+٨٪', trend: TrendDirection.up, icon: 'home'),
@@ -1546,7 +1559,7 @@ InsightsData _eventVenue(String pageId, String type, String archetype,
     revenueChart: RevenueChartData(
       label: labels.revenueLabel, summaryLabel: labels.summaryLabel,
       ordersTooltip: labels.ordersTooltip,
-      comparison: '+١٥٪ ${period.comparisonLabelAr}',
+      comparison: '+١٥٪ ${_comparisonLabelAr(period)}',
       comparisonTrend: TrendDirection.up,
       data: _generateRevenueData(period, 0, 1200, 0, 2),
     ),
@@ -1574,7 +1587,7 @@ InsightsData _bank(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'التفاعل', cards: [
         InsightCardData(id: 'reach', label: 'الوصول', value: '${(3500 * m).toInt()}', change: '+٢٢٪', trend: TrendDirection.up, icon: 'eye'),
@@ -1615,7 +1628,7 @@ InsightsData _directory(String pageId, String type, String archetype,
   final m = _periodMultiplier(period);
   return InsightsData(
     pageId: pageId, businessType: type, archetype: archetype,
-    period: period.name, periodLabel: period.periodLabelAr,
+    period: period.name, periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'tenants', label: 'المستأجرون', value: '٤٥', icon: 'home'),
@@ -1649,7 +1662,7 @@ InsightsData _fallbackGenerator(String pageId, String type, String archetype,
     businessType: type,
     archetype: archetype,
     period: period.name,
-    periodLabel: period.periodLabelAr,
+    periodLabel: _periodLabelAr(period),
     kpiSections: [
       InsightSectionData(title: 'نظرة عامة', cards: [
         InsightCardData(id: 'views', label: 'مشاهدات الصفحة', value: '—', icon: 'eye'),

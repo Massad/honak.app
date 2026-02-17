@@ -124,7 +124,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                               color: const Color(0xFFFEF2F2),
                               borderRadius: AppRadius.pill,
                             ),
-                            child: Text('لم يحضر',
+                            child: Text(context.l10n.queueNoShowLabel,
                                 style: context.textTheme.labelSmall?.copyWith(
                                     color: const Color(0xFFE53935),
                                     fontSize: 10)),
@@ -265,7 +265,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                 startedAt: entry.startedAt!,
                 durationMin: entry.estimatedDurationMin)
           else
-            Text('~${entry.estimatedDurationMin} د',
+            Text(context.l10n.queueEstimatedWaitMin(entry.estimatedDurationMin),
                 style: context.textTheme.labelSmall
                     ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         ],
@@ -434,8 +434,8 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
             ),
             child: Text(
               entry.discount!.type == 'percentage'
-                  ? 'خصم ${(entry.discount!.value / 100).round()}%'
-                  : 'خصم ${Money(entry.discount!.amount).toFormattedArabic()}',
+                  ? context.l10n.queueDiscountPercent((entry.discount!.value / 100).round())
+                  : '${context.l10n.queueDiscountLabel} ${Money(entry.discount!.amount).toFormattedArabic()}',
               style: context.textTheme.labelSmall
                   ?.copyWith(color: _amber, fontSize: 9),
             ),
@@ -445,7 +445,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
               style: context.textTheme.labelSmall
                   ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         if (entry.addOns.isNotEmpty)
-          Text('+${entry.addOns.length} إضافة',
+          Text(context.l10n.queueAddOnCount(entry.addOns.length),
               style: context.textTheme.labelSmall
                   ?.copyWith(color: _blue, fontSize: 10)),
       ],
@@ -461,7 +461,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
         children: [
           Expanded(
             child: PhotoToggleButton(
-              label: 'صورة قبل',
+              label: context.l10n.queuePhotoBefore,
               icon: Icons.camera_alt_outlined,
               hasPhoto: entry.photosBefore.isNotEmpty,
             ),
@@ -469,7 +469,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: PhotoToggleButton(
-              label: 'صورة بعد',
+              label: context.l10n.queuePhotoAfter,
               icon: Icons.image_outlined,
               hasPhoto: entry.photosAfter.isNotEmpty,
             ),
@@ -501,7 +501,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                     style: context.textTheme.bodySmall
                         ?.copyWith(color: context.colorScheme.onSurfaceVariant)),
                 const Spacer(),
-                Text('اتصال',
+                Text(context.l10n.queueCall,
                     style: context.textTheme.labelSmall
                         ?.copyWith(color: _blue, fontSize: 10)),
               ],
@@ -524,7 +524,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                       const Icon(Icons.sticky_note_2_outlined,
                           size: 10, color: _amber),
                       const SizedBox(width: AppSpacing.xs),
-                      Text('ملاحظات',
+                      Text(context.l10n.queueExpandedNotes,
                           style: context.textTheme.labelSmall
                               ?.copyWith(color: _amber, fontSize: 10)),
                     ],
@@ -539,7 +539,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
             const SizedBox(height: 8),
           ],
           if (entry.addOns.isNotEmpty) ...[
-            Text('إضافات:',
+            Text(context.l10n.queueExpandedAddOns,
                 style: context.textTheme.labelSmall
                     ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
             const SizedBox(height: AppSpacing.xs),
@@ -561,7 +561,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
             const SizedBox(height: 8),
           ],
           Text(
-              'وقت الوصول: ${_formatCheckinTime(entry.checkedInAt)}',
+              context.l10n.queueCheckinTime(_formatCheckinTime(entry.checkedInAt)),
               style: context.textTheme.labelSmall
                   ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         ],
@@ -619,7 +619,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                       Icon(Icons.block_rounded,
                           size: 12, color: context.colorScheme.onSurfaceVariant),
                       const SizedBox(width: AppSpacing.xs),
-                      Text('لم يحضر',
+                      Text(context.l10n.queueNoShowLabel,
                           style: context.textTheme.labelSmall
                               ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
                     ],

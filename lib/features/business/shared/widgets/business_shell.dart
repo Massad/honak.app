@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/config/archetype.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/dashboard/presentation/pages/business_home_page.dart';
 import 'package:honak/features/business/insights/presentation/pages/insights_page.dart';
@@ -91,16 +92,16 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
 
   List<_TabDef> _buildFullTabs(BusinessContext ctx) {
     return [
-      const _TabDef(
+      _TabDef(
         icon: Icons.home_outlined,
         selectedIcon: Icons.home,
-        label: 'الرئيسية',
+        label: context.l10n.bizNavHome,
         tab: NavTab.home,
       ),
-      const _TabDef(
+      _TabDef(
         icon: Icons.bar_chart_outlined,
         selectedIcon: Icons.bar_chart,
-        label: 'إحصائيات',
+        label: context.l10n.bizNavInsights,
         tab: NavTab.insights,
       ),
       _TabDef(
@@ -110,16 +111,16 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
         isCenter: true,
         tab: NavTab.orders,
       ),
-      const _TabDef(
+      _TabDef(
         icon: Icons.chat_outlined,
         selectedIcon: Icons.chat,
-        label: 'المحادثات',
+        label: context.l10n.bizNavChat,
         tab: NavTab.chat,
       ),
-      const _TabDef(
+      _TabDef(
         icon: Icons.settings_outlined,
         selectedIcon: Icons.settings,
-        label: 'الصفحة',
+        label: context.l10n.bizNavAccount,
         tab: NavTab.account,
       ),
     ];
@@ -140,21 +141,21 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
   // ──────────────────────────────────────────────────────
 
   List<_TabDef> _buildReducedTabs() {
-    return const [
+    return [
       _TabDef(
         icon: Icons.home_outlined,
         selectedIcon: Icons.home,
-        label: 'الرئيسية',
+        label: context.l10n.bizNavHome,
       ),
       _TabDef(
         icon: Icons.bar_chart_outlined,
         selectedIcon: Icons.bar_chart,
-        label: 'إحصائيات',
+        label: context.l10n.bizNavInsights,
       ),
       _TabDef(
         icon: Icons.settings_outlined,
         selectedIcon: Icons.settings,
-        label: 'الصفحة',
+        label: context.l10n.bizNavAccount,
       ),
     ];
   }

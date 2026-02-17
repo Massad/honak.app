@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/presentation/providers/provider.dart';
@@ -18,13 +19,13 @@ import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/receipt_sheet.dart';
 
-/// Arabic labels for request types.
-const _typeLabels = {
-  'order': 'طلب شراء',
-  'booking': 'حجز خدمة',
-  'inspection': 'طلب معاينة',
-  'inquiry': 'استفسار',
-  'reservation': 'حجز',
+/// Localized labels for request types.
+Map<String, String> _typeLabels(AppLocalizations l10n) => {
+  'order': l10n.bizReqTypeOrder,
+  'booking': l10n.bizReqTypeBooking,
+  'inspection': l10n.bizReqTypeInspection,
+  'inquiry': l10n.bizReqTypeInquiry,
+  'reservation': l10n.bizReqTypeReservation,
 };
 
 class RequestDetailPage extends ConsumerStatefulWidget {
@@ -56,11 +57,11 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
           _request = _request.copyWith(status: 'accepted');
           _isLoading = false;
         });
-        context.showSnackBar('تم قبول الطلب');
+        context.showSnackBar(context.l10n.bizReqAccepted);
       }
     } catch (e) {
       if (mounted) {
-        context.showSnackBar('حدث خطأ', isError: true);
+        context.showSnackBar(context.l10n.bizReqError, isError: true);
         setState(() => _isLoading = false);
       }
     }
@@ -75,7 +76,7 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
       setState(() {
         _request = _request.copyWith(status: 'declined');
       });
-      context.showSnackBar('تم رفض الطلب');
+      context.showSnackBar(context.l10n.bizReqDeclined);
     }
   }
 
@@ -85,7 +86,7 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
       builder: (_) => AlternativeSheet(requestId: _request.id),
     );
     if (result == true && mounted) {
-      context.showSnackBar('تم إرسال الاقتراح');
+      context.showSnackBar(context.l10n.bizReqSuggestionSent);
     }
   }
 
@@ -99,12 +100,13 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
           _request = _request.copyWith(status: newStatus);
           _isLoading = false;
         });
-        final label = requestStatusLabel(newStatus);
-        context.showSnackBar('تم تحديث الحالة: $label');
+        final l10n = context.l10n;
+        final label = requestStatusLabel(newStatus, l10n);
+        context.showSnackBar(l10n.bizReqStatusUpdated(label));
       }
     } catch (e) {
       if (mounted) {
-        context.showSnackBar('حدث خطأ', isError: true);
+        context.showSnackBar(context.l10n.bizReqError, isError: true);
         setState(() => _isLoading = false);
       }
     }
@@ -130,7 +132,7 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
               ))
           .toList(),
       totalCents: _request.total?.cents ?? 0,
-      statusLabel: requestStatusLabel(_request.status),
+      statusLabel: requestStatusLabel(_request.status, context.l10n),
       date: dateStr,
       time: timeStr,
       notes: _request.note,
@@ -166,8 +168,9 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final typeLabel =
-        _typeLabels[_request.type] ?? _typeLabels['order']!;
+    final l10n = context.l10n;
+    final labels = _typeLabels(l10n);
+    final typeLabel = labels[_request.type] ?? labels['order']!;
     final dt = DateTime.fromMillisecondsSinceEpoch(_request.createdAt * 1000);
     final createdStr = DateFormat('yyyy/MM/dd — h:mm a', 'ar').format(dt);
 
@@ -177,7 +180,7 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
         backgroundColor: const Color(0xFFF5F5F5),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text('تفاصيل الطلب'),
+          title: Text(l10n.bizReqDetailTitle),
           centerTitle: true,
           actions: [
             IconButton(
@@ -231,7 +234,7 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
                   bottom: BorderSide(color: Color(0xFFF3F4F6)),
                 ),
               ),
-              child: const TabBar(
+              child: TabBar(
                 labelColor: Color(0xFF1A73E8),
                 unselectedLabelColor: Color(0xFF9CA3AF),
                 labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
@@ -239,8 +242,8 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
                 indicatorColor: Color(0xFF1A73E8),
                 indicatorWeight: 2,
                 tabs: [
-                  Tab(text: 'الملخص'),
-                  Tab(text: 'السجل'),
+                  Tab(text: l10n.bizReqSummaryTab),
+                  Tab(text: l10n.bizReqLogTab),
                 ],
               ),
             ),
@@ -343,7 +346,7 @@ class _SummaryTab extends StatelessWidget {
         if (request.status == 'pending') ...[
           Button(
             onPressed: onAlternative,
-            label: 'اقتراح بديل',
+            label: context.l10n.bizReqSuggestAlternative,
             icon: const ButtonIcon(Icons.swap_horiz),
             variant: Variant.outlined,
             size: ButtonSize.large,
@@ -384,7 +387,7 @@ class _MessageCustomerButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Button(
       onPressed: onOpenChat,
-      label: 'مراسلة ${request.customer.name}',
+      label: context.l10n.bizReqMessageCustomer(request.customer.name),
       icon: const ButtonIcon(Icons.chat_outlined),
       variant: Variant.outlined,
       size: ButtonSize.large,

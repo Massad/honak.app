@@ -131,11 +131,10 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
             Expanded(child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('وصف العقار', style: TextStyle(fontSize: 16,
+                Text(context.l10n.propFeatTitle, style: TextStyle(fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: context.colorScheme.onSurface)),
-                Text('${_categories.length} تصنيف · '
-                    '$_totalEnabled مفعّل من $_totalItems',
+                Text(context.l10n.propFeatSummary(_categories.length, _totalEnabled, _totalItems),
                     style: const TextStyle(
                         fontSize: 10, color: AppColors.textHint)),
               ],
@@ -155,13 +154,13 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
                 child: _saved
-                    ? const Row(mainAxisSize: MainAxisSize.min, children: [
-                        Icon(Icons.check, size: 12, color: Colors.white),
-                        SizedBox(width: 4),
-                        Text('تم الحفظ', style: TextStyle(
+                    ? Row(mainAxisSize: MainAxisSize.min, children: [
+                        const Icon(Icons.check, size: 12, color: Colors.white),
+                        const SizedBox(width: 4),
+                        Text(context.l10n.availSaved, style: const TextStyle(
                             fontSize: 12, color: Colors.white)),
                       ])
-                    : const Text('حفظ', style: TextStyle(
+                    : Text(context.l10n.save, style: const TextStyle(
                         fontSize: 12, color: Colors.white)),
               ),
             ),
@@ -183,7 +182,7 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                       color: _reorderMode
                           ? Colors.white : AppColors.textHint),
                   const SizedBox(width: 4),
-                  Text(_reorderMode ? 'تم' : 'ترتيب',
+                  Text(_reorderMode ? context.l10n.propFeatReorderDone : context.l10n.propFeatReorder,
                       style: TextStyle(fontSize: 10,
                           color: _reorderMode
                               ? Colors.white : AppColors.textHint)),
@@ -191,7 +190,7 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
               ),
             ),
             const Spacer(),
-            const Text('أضف تصنيفات وعناصر لوصف العقار بالكامل',
+            Text(context.l10n.propFeatHint,
                 style: TextStyle(fontSize: 10, color: AppColors.textHint)),
           ]),
         ],
@@ -307,7 +306,7 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                       children: [
                         Text(cat.name, style: TextStyle(fontSize: 14,
                             color: context.colorScheme.onSurface)),
-                        Text('${cat.enabledCount} / ${cat.items.length} عنصر',
+                        Text(context.l10n.propFeatItemCount(cat.enabledCount, cat.items.length),
                             style: const TextStyle(
                                 fontSize: 9, color: AppColors.textHint)),
                       ],
@@ -391,12 +390,12 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                           color: context.colorScheme.outlineVariant,
                           style: BorderStyle.solid),
                     ),
-                    child: const Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.min, children: [
-                      Icon(Icons.auto_awesome, size: 10,
+                      const Icon(Icons.auto_awesome, size: 10,
                           color: AppColors.textHint),
-                      SizedBox(width: 4),
-                      Text('اقتراحات', style: TextStyle(
+                      const SizedBox(width: 4),
+                      Text(context.l10n.propFeatSuggestionsBtn, style: const TextStyle(
                           fontSize: 10, color: AppColors.textHint)),
                     ]),
                   ),
@@ -417,12 +416,12 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                         color: context.colorScheme.outlineVariant,
                         style: BorderStyle.solid),
                   ),
-                  child: const Row(
+                  child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                    Icon(Icons.add, size: 10, color: AppColors.textHint),
-                    SizedBox(width: 4),
-                    Text('إضافة عنصر', style: TextStyle(
+                    const Icon(Icons.add, size: 10, color: AppColors.textHint),
+                    const SizedBox(width: 4),
+                    Text(context.l10n.propFeatAddItem, style: const TextStyle(
                         fontSize: 10, color: AppColors.textHint)),
                   ]),
                 ),
@@ -447,10 +446,10 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
         Icon(Icons.label_outlined, size: 24,
             color: AppColors.divider),
         const SizedBox(height: AppSpacing.sm),
-        const Text('لا توجد عناصر بعد',
-            style: TextStyle(fontSize: 12, color: AppColors.textHint)),
-        const Text('أضف عناصر لوصف هذا التصنيف',
-            style: TextStyle(fontSize: 10, color: AppColors.divider)),
+        Text(context.l10n.propFeatNoItems,
+            style: const TextStyle(fontSize: 12, color: AppColors.textHint)),
+        Text(context.l10n.propFeatNoItemsHint,
+            style: const TextStyle(fontSize: 10, color: AppColors.divider)),
       ]),
     );
   }
@@ -472,7 +471,7 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
             textAlign: TextAlign.right,
             style: const TextStyle(fontSize: 12),
             decoration: InputDecoration(
-              hintText: 'اسم التصنيف الجديد...',
+              hintText: context.l10n.propFeatNewCategoryHint,
               filled: true,
               fillColor: AppColors.surfaceVariant,
               border: OutlineInputBorder(
@@ -496,12 +495,12 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add, size: 12, color: Colors.white),
-                    SizedBox(width: 4),
-                    Text('إضافة تصنيف', style: TextStyle(
+                    const Icon(Icons.add, size: 12, color: Colors.white),
+                    const SizedBox(width: 4),
+                    Text(context.l10n.propFeatAddCategory, style: const TextStyle(
                         fontSize: 12, color: Colors.white)),
                   ],
                 ),
@@ -520,7 +519,7 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                   color: AppColors.surfaceVariant,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
-                child: const Text('إلغاء', style: TextStyle(
+                child: Text(context.l10n.cancel, style: const TextStyle(
                     fontSize: 12, color: AppColors.textSecondary)),
               ),
             ),
@@ -540,13 +539,13 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
               color: context.colorScheme.outlineVariant,
               style: BorderStyle.solid),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('إضافة تصنيف جديد', style: TextStyle(
+            Text(context.l10n.propFeatAddNewCategory, style: const TextStyle(
                 fontSize: 12, color: AppColors.textHint)),
-            SizedBox(width: AppSpacing.sm),
-            Icon(Icons.create_new_folder_outlined, size: 14,
+            const SizedBox(width: AppSpacing.sm),
+            const Icon(Icons.create_new_folder_outlined, size: 14,
                 color: AppColors.textHint),
           ],
         ),
@@ -562,10 +561,9 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
         borderRadius: BorderRadius.circular(AppRadius.md),
         border: Border.all(color: const Color(0xFFBBDEFB)),
       ),
-      child: const Text(
-        'أضف تصنيفات مثل "المرافق الترفيهية" أو "خدمات إضافية" '
-        'ثم أضف العناصر داخلها. يمكنك ترتيب التصنيفات والعناصر حسب الأهمية.',
-        style: TextStyle(fontSize: 10, color: AppColors.primary),
+      child: Text(
+        context.l10n.propFeatTip,
+        style: const TextStyle(fontSize: 10, color: AppColors.primary),
         textAlign: TextAlign.center,
       ),
     );

@@ -106,7 +106,7 @@ class _CreatorToolbarState extends ConsumerState<CreatorToolbar> {
     return Center(
       child: _ActionPill(
         icon: Icons.check_rounded,
-        label: 'تم',
+        label: context.l10n.storyDone,
         isActive: true,
         activeColor: const Color(0xFF1A73E8),
         expand: false,
@@ -124,20 +124,20 @@ class _CreatorToolbarState extends ConsumerState<CreatorToolbar> {
     StoryCreatorNotifier notifier,
     bool hasSelection,
   ) {
-    void hint() => context.showSnackBar('أضف نصاً أو اختر نصاً أولاً');
+    void hint() => context.showSnackBar(context.l10n.storySelectTextHint);
 
     return Row(
       children: [
         _ActionPill(
           icon: Icons.color_lens_outlined,
-          label: 'خلفية',
+          label: context.l10n.storyBackground,
           isActive: _expandedPanel == 'bg',
           onTap: () => _toggle('bg'),
         ),
         const SizedBox(width: 6),
         _ActionPill(
           icon: Icons.add,
-          label: 'نص جديد',
+          label: context.l10n.storyNewText,
           onTap: () {
             setState(() => _expandedPanel = null);
             notifier.addTextLayer();
@@ -146,7 +146,7 @@ class _CreatorToolbarState extends ConsumerState<CreatorToolbar> {
         const SizedBox(width: 6),
         _ActionPill(
           icon: Icons.format_bold,
-          label: 'الخط',
+          label: context.l10n.storyFont,
           isActive: _expandedPanel == 'font',
           dimmed: !hasSelection,
           onTap: hasSelection ? () => _toggle('font') : hint,
@@ -154,7 +154,7 @@ class _CreatorToolbarState extends ConsumerState<CreatorToolbar> {
         const SizedBox(width: 6),
         _ActionPill(
           icon: Icons.palette_outlined,
-          label: 'اللون',
+          label: context.l10n.storyTextColor,
           isActive: _expandedPanel == 'color',
           dimmed: !hasSelection,
           onTap: hasSelection ? () => _toggle('color') : hint,
@@ -163,7 +163,7 @@ class _CreatorToolbarState extends ConsumerState<CreatorToolbar> {
           const SizedBox(width: 6),
           _ActionPill(
             icon: Icons.delete_outline,
-            label: 'حذف',
+            label: context.l10n.storyDeleteAction,
             color: const Color(0xFFEF5350),
             onTap: () {
               setState(() => _expandedPanel = null);
@@ -485,12 +485,13 @@ class _FontPanel extends StatelessWidget {
   const _FontPanel({required this.layer, required this.onUpdate});
 
   static const _fonts = ['default', 'bold', 'elegant', 'light', 'mono'];
-  static const _fontLabels = {
-    'default': 'عادي',
-    'bold': 'عريض',
-    'elegant': 'مزخرف',
-    'light': 'رفيع',
-    'mono': 'آلة كاتبة',
+
+  static Map<String, String> _fontLabels(BuildContext context) => {
+    'default': context.l10n.storyFontDefault,
+    'bold': context.l10n.storyFontBold,
+    'elegant': context.l10n.storyFontElegant,
+    'light': context.l10n.storyFontLight,
+    'mono': context.l10n.storyFontMono,
   };
   static const _sizes = [16.0, 20.0, 28.0, 36.0];
   // Visual أ preview sizes (proportional to actual sizes)
@@ -517,7 +518,7 @@ class _FontPanel extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      _fontLabels[f]!,
+                      _fontLabels(context)[f]!,
                       style: TextStyle(
                         color: isSel
                             ? const Color(0xFF111827)

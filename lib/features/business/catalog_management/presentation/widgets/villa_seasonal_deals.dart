@@ -34,9 +34,8 @@ class VillaHolidaysContent extends StatelessWidget {
             color: const Color(0xFFFFF8E1),
             borderRadius: BorderRadius.circular(AppRadius.sm),
           ),
-          child: const Text(
-            'رسوم الأعياد تُضاف فوق سعر الموسم تلقائياً. '
-            'مثال: سعر الصيف ٢٥٠ + عيد الفطر ٣٠% = ٣٢٥ د.أ/ليلة',
+          child: Text(
+            context.l10n.villaHolidaySurchargeInfo,
             style: TextStyle(fontSize: 9, color: Color(0xFFB45309)),
             textAlign: TextAlign.right,
           ),
@@ -130,10 +129,10 @@ class VillaDiscountContent extends StatelessWidget {
         seasonalToggleRow(toggleLabel, active, onToggleActive, color),
         if (active) ...[
           const SizedBox(height: AppSpacing.md),
-          seasonalChipPicker('الحجز قبل (أيام)', dayOptions,
-              daysAhead, color, onDaysChanged, suffix: 'يوم'),
+          seasonalChipPicker(context.l10n.villaBookingBefore, dayOptions,
+              daysAhead, color, onDaysChanged, suffix: context.l10n.villaDay),
           const SizedBox(height: AppSpacing.md),
-          seasonalChipPicker('نسبة الخصم', [5, 10, 15, 20],
+          seasonalChipPicker(context.l10n.villaDiscountPercent, [5, 10, 15, 20],
               discountPercent, color, onPercentChanged, suffix: '٪'),
           const SizedBox(height: AppSpacing.md),
           seasonalInfoBox(color, infoText),

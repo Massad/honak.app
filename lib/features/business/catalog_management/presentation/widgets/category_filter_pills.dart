@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
@@ -28,7 +29,7 @@ class CategoryFilterPills extends StatelessWidget {
         children: [
           // "All" pill
           _FilterPill(
-            label: 'الكل',
+            label: context.l10n.all,
             isActive: activeCategoryId == null,
             onTap: () => onCategoryChanged(null),
           ),

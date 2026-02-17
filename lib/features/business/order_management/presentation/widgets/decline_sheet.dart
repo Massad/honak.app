@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/presentation/providers/provider.dart';
@@ -20,11 +21,11 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
   final _customController = TextEditingController();
   bool _isLoading = false;
 
-  static const _presetReasons = [
-    'غير متوفر',
-    'خارج نطاق التوصيل',
-    'مشغولون حالياً',
-    'السعر تغيّر',
+  List<String> _presetReasons(AppLocalizations l10n) => [
+    l10n.bizReqDeclineNotAvailable,
+    l10n.bizReqDeclineOutOfRange,
+    l10n.bizReqDeclineBusy,
+    l10n.bizReqDeclinePriceChanged,
   ];
 
   @override
@@ -60,7 +61,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
       }
     } catch (e) {
       if (mounted) {
-        context.showSnackBar('حدث خطأ أثناء الرفض', isError: true);
+        context.showSnackBar(context.l10n.bizReqDeclineError, isError: true);
         setState(() => _isLoading = false);
       }
     }
@@ -95,7 +96,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
             Align(
               alignment: AlignmentDirectional.centerEnd,
               child: Text(
-                'سبب الرفض',
+                context.l10n.bizReqDeclineTitle,
                 style: context.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -110,7 +111,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                 spacing: AppSpacing.sm,
                 runSpacing: AppSpacing.sm,
                 textDirection: TextDirection.rtl,
-                children: _presetReasons.map((reason) {
+                children: _presetReasons(context.l10n).map((reason) {
                   final isSelected = _selectedReason == reason;
                   return GestureDetector(
                     onTap: () => setState(() {
@@ -161,7 +162,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    'سبب آخر',
+                    context.l10n.bizReqDeclineOtherReason,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: _selectedReason == 'custom'
@@ -194,7 +195,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
                 maxLines: 2,
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
-                  hintText: 'اكتب السبب...',
+                  hintText: context.l10n.bizReqDeclineWriteReason,
                   hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
@@ -219,7 +220,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
             // Confirm button
             Button(
               onPressed: _canSubmit ? _handleDecline : null,
-              label: 'رفض الطلب',
+              label: context.l10n.bizReqDeclineConfirm,
               style: Style.danger,
               size: ButtonSize.large,
               expand: true,

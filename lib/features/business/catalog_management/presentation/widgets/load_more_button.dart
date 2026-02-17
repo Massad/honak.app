@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 
 class LoadMoreButton extends StatelessWidget {
@@ -33,7 +34,7 @@ class LoadMoreButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
-              'عرض المزيد ($nextBatch من $remaining متبقي)',
+              context.l10n.catalogShowMore(nextBatch, remaining),
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,

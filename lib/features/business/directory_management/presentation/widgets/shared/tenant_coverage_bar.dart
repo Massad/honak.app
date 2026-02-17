@@ -32,11 +32,11 @@ class TenantCoverageBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'تغطية المستأجرين $combinedPercent%',
+              context.l10n.dirCoverageTitle(combinedPercent),
               style: context.textTheme.titleSmall,
             ),
             Text(
-              '${stats.claimed} مربوط',
+              context.l10n.dirCoverageLinked(stats.claimed),
               style: context.textTheme.bodySmall?.copyWith(
                 color: const Color(0xFF16A34A),
                 fontWeight: FontWeight.w500,
@@ -82,19 +82,22 @@ class TenantCoverageBar extends StatelessWidget {
           children: [
             _LegendDot(
               color: const Color(0xFF16A34A),
-              label: '${stats.claimed} مربوط',
+              label: context.l10n.dirCoverageLinked(stats.claimed),
             ),
             const SizedBox(width: AppSpacing.lg),
             if (stats.invited > 0) ...[
               _LegendDot(
                 color: const Color(0xFFF59E0B),
-                label: '${stats.invited} مدعو',
+                label: context.l10n.dirCoverageInvited(stats.invited),
               ),
               const SizedBox(width: AppSpacing.lg),
             ],
             const Spacer(),
             Text(
-              '${stats.claimed + stats.invited} من $total وحدة',
+              context.l10n.dirCoverageOfTotal(
+                stats.claimed + stats.invited,
+                total,
+              ),
               style: context.textTheme.labelSmall?.copyWith(
                 color: context.colorScheme.onSurfaceVariant,
               ),

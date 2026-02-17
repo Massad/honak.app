@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
@@ -32,7 +33,7 @@ class DeliveryRouteSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                '$completed/$total مكتمل',
+                context.l10n.bizDeliveryCompleted(completed, total),
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -128,7 +129,7 @@ class LowStockSection extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'تنبيه المخزون',
+                  context.l10n.bizStockAlert,
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -165,7 +166,7 @@ class LowStockSection extends StatelessWidget {
                 children: [
                   // Remaining count
                   Text(
-                    '${remaining.toInt()} متبقي',
+                    AppLocalizations.of(context).bizStockRemaining(remaining.toInt()),
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
@@ -233,7 +234,7 @@ class RecurringTomorrowSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
-            '$totalCustomers عميل · $totalUnits وحدة',
+            context.l10n.bizRecurringSummary(totalCustomers as int, totalUnits as int),
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
@@ -308,7 +309,7 @@ class RecurringTomorrowSection extends StatelessWidget {
         }),
         const SizedBox(height: AppSpacing.xs),
         Text(
-          'يتم إنشاء الدور تلقائياً بناءً على جداول التوصيل المتكررة',
+          context.l10n.bizRecurringNote,
           style: TextStyle(
             fontSize: 10,
             color: Theme.of(context).colorScheme.onSurfaceVariant,

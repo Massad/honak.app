@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:honak/core/l10n/arb/app_localizations.dart';
+
 /// Trend direction for KPI change badges.
 enum TrendDirection { up, down, neutral }
 
@@ -167,21 +169,21 @@ enum InsightPeriod {
   month,
   year;
 
-  String get labelAr => switch (this) {
-        week => 'أسبوعي',
-        month => 'شهري',
-        year => 'سنوي',
+  String label(AppLocalizations l10n) => switch (this) {
+        week => l10n.insightsPeriodWeekly,
+        month => l10n.insightsPeriodMonthly,
+        year => l10n.insightsPeriodYearly,
       };
 
-  String get periodLabelAr => switch (this) {
-        week => 'هذا الأسبوع',
-        month => 'هذا الشهر',
-        year => 'هذه السنة',
+  String periodLabel(AppLocalizations l10n) => switch (this) {
+        week => l10n.insightsPeriodThisWeek,
+        month => l10n.insightsPeriodThisMonth,
+        year => l10n.insightsPeriodThisYear,
       };
 
-  String get comparisonLabelAr => switch (this) {
-        week => 'مقارنة بالأسبوع الماضي',
-        month => 'مقارنة بالشهر الماضي',
-        year => 'مقارنة بالسنة الماضية',
+  String comparisonLabel(AppLocalizations l10n) => switch (this) {
+        week => l10n.insightsComparedToLastWeek,
+        month => l10n.insightsComparedToLastMonth,
+        year => l10n.insightsComparedToLastYear,
       };
 }

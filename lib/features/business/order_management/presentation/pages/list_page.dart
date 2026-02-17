@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/config/business_type_config.dart';
@@ -54,21 +55,22 @@ class _BusinessRequestsPageState extends ConsumerState<BusinessRequestsPage> {
         bizContext.config?.features.contains('delivery_zones') ?? false;
     final labels = bizContext.config?.orderLabels;
 
+    final l10n = context.l10n;
     final statusFilters = [
       _FilterDef(
-        label: labels?.incoming ?? 'طلبات جديدة',
+        label: labels?.incoming ?? l10n.bizReqNewRequests,
         status: 'pending',
       ),
       _FilterDef(
-        label: labels?.accepted ?? 'طلبات مقبولة',
+        label: labels?.accepted ?? l10n.bizReqAcceptedRequests,
         status: 'accepted',
       ),
       _FilterDef(
-        label: 'قيد التنفيذ',
+        label: l10n.bizReqInProgress,
         status: 'in_progress',
       ),
       _FilterDef(
-        label: labels?.completed ?? 'طلبات مكتملة',
+        label: labels?.completed ?? l10n.bizReqCompletedRequests,
         status: 'completed',
       ),
     ];
@@ -85,7 +87,7 @@ class _BusinessRequestsPageState extends ConsumerState<BusinessRequestsPage> {
       children: [
         // Header with title
         _Header(
-          title: 'إدارة الطلبات',
+          title: l10n.bizReqManageTitle,
           approvalMode: bizContext.config?.defaultOrderApproval,
         ),
 
@@ -228,7 +230,7 @@ class _ApprovalBadge extends StatelessWidget {
           ),
           const SizedBox(width: 3),
           Text(
-            isAuto ? 'قبول تلقائي' : 'قبول يدوي',
+            isAuto ? context.l10n.bizReqAutoApproval : context.l10n.bizReqManualApproval,
             style: TextStyle(
               fontSize: 9,
               fontWeight: FontWeight.w600,
@@ -564,7 +566,7 @@ class _EmptyRequestState extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              'لا توجد $label',
+              context.l10n.bizReqNoRequestsLabel(label),
               style: context.textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,
@@ -572,7 +574,7 @@ class _EmptyRequestState extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              'ستظهر الطلبات هنا عند وصولها',
+              context.l10n.bizReqOrdersAppearHere,
               style: TextStyle(
                 fontSize: 12,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -610,7 +612,7 @@ class _ErrorState extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              'حدث خطأ في تحميل الطلبات',
+              context.l10n.bizReqLoadError,
               style: context.textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
@@ -618,7 +620,7 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             Button(
               onPressed: onRetry,
-              label: 'إعادة المحاولة',
+              label: context.l10n.retry,
               icon: const ButtonIcon(Icons.refresh),
               variant: Variant.text,
             ),

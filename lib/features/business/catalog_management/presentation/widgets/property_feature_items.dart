@@ -394,7 +394,7 @@ class _AddItemFormState extends State<AddItemForm> {
             textAlign: TextAlign.right,
             style: const TextStyle(fontSize: 12),
             decoration: InputDecoration(
-              hintText: 'اسم العنصر...',
+              hintText: context.l10n.propFeatureItemName,
               filled: true,
               fillColor: context.colorScheme.surface,
               border: OutlineInputBorder(
@@ -409,14 +409,14 @@ class _AddItemFormState extends State<AddItemForm> {
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(children: [
-            Expanded(child: _typeChip('تبديل (نعم/لا)', 'toggle')),
+            Expanded(child: _typeChip(context.l10n.propFeatureToggle, 'toggle')),
             const SizedBox(width: AppSpacing.sm),
-            Expanded(child: _typeChip('عدد (رقم)', 'count')),
+            Expanded(child: _typeChip(context.l10n.propFeatureCount, 'count')),
           ]),
           if (_type == 'count') ...[
             const SizedBox(height: AppSpacing.sm),
             Row(children: [
-              const Text('العدد:', style: TextStyle(
+              Text(context.l10n.propFeatureCountLabel, style: const TextStyle(
                   fontSize: 10, color: AppColors.textSecondary)),
               const SizedBox(width: AppSpacing.sm),
               SizedBox(
@@ -453,12 +453,12 @@ class _AddItemFormState extends State<AddItemForm> {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add, size: 12, color: Colors.white),
-                    SizedBox(width: 4),
-                    Text('إضافة', style: TextStyle(
+                    const Icon(Icons.add, size: 12, color: Colors.white),
+                    const SizedBox(width: 4),
+                    Text(context.l10n.propFeatureAdd, style: const TextStyle(
                         fontSize: 12, color: Colors.white)),
                   ],
                 ),
@@ -474,7 +474,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   color: AppColors.surfaceVariant,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
-                child: const Text('إلغاء', style: TextStyle(
+                child: Text(context.l10n.cancel, style: const TextStyle(
                     fontSize: 12, color: AppColors.textSecondary)),
               ),
             ),
@@ -536,8 +536,8 @@ class SuggestionsPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          const Text('اختر لإضافة سريعة:',
-              style: TextStyle(fontSize: 9, color: Color(0xFFB45309))),
+          Text(context.l10n.propFeatureSuggestions,
+              style: const TextStyle(fontSize: 9, color: Color(0xFFB45309))),
           const SizedBox(height: AppSpacing.sm),
           Wrap(
             spacing: 6, runSpacing: 6,

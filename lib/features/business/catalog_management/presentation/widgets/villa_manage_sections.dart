@@ -55,7 +55,7 @@ class VillaSectionToggle extends StatelessWidget {
             Text(title, style: TextStyle(
                 fontSize: 14, color: context.colorScheme.onSurface)),
             if (count != null)
-              Text('$count عنصر', style: const TextStyle(
+              Text(context.l10n.villaItemCount(count!), style: const TextStyle(
                   fontSize: 10, color: AppColors.textHint)),
           ]),
           const SizedBox(width: AppSpacing.md),
@@ -136,7 +136,7 @@ class VillaPriceCard extends StatelessWidget {
         const SizedBox(height: AppSpacing.xxs),
         Text(Money(cents).toJodString(), style: TextStyle(
             fontSize: 18, color: textColor)),
-        const Text('د.أ/ليلة', style: TextStyle(
+        Text(context.l10n.villaPricePerNight, style: const TextStyle(
             fontSize: 9, color: AppColors.textHint)),
       ]),
     );
@@ -321,10 +321,10 @@ class _VillaRulesSectionState extends State<VillaRulesSection> {
               controller: widget.ruleCtrl,
               textAlign: TextAlign.right,
               style: const TextStyle(fontSize: 12),
-              decoration: const InputDecoration(
-                hintText: 'أضف قانوناً جديداً...',
+              decoration: InputDecoration(
+                hintText: context.l10n.villaAddRule,
                 border: InputBorder.none, isDense: true,
-                contentPadding: EdgeInsets.symmetric(vertical: 8),
+                contentPadding: const EdgeInsets.symmetric(vertical: 8),
               ),
               onSubmitted: (_) => widget.onAdd(),
             )),
@@ -405,7 +405,7 @@ class _VillaGallerySectionState extends State<VillaGallerySection> {
                 Icon(Icons.swap_vert, size: 10,
                     color: _reorderMode ? Colors.white : AppColors.textHint),
                 const SizedBox(width: 4),
-                Text(_reorderMode ? 'تم الترتيب' : 'ترتيب',
+                Text(_reorderMode ? context.l10n.villaReorderDone : context.l10n.villaReorderMode,
                     style: TextStyle(fontSize: 10,
                         color: _reorderMode ? Colors.white : AppColors.textHint)),
               ]),
@@ -423,11 +423,11 @@ class _VillaGallerySectionState extends State<VillaGallerySection> {
               color: AppColors.success,
               borderRadius: BorderRadius.circular(AppRadius.sm),
             ),
-            child: const Row(
+            child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-              Text('تم حفظ الترتيب الجديد',
-                  style: TextStyle(fontSize: 10, color: Colors.white)),
+              Text(context.l10n.villaReorderSaved,
+                  style: const TextStyle(fontSize: 10, color: Colors.white)),
               SizedBox(width: 4),
               Icon(Icons.check_circle, size: 12, color: Colors.white),
             ]),
@@ -484,7 +484,7 @@ class _VillaGallerySectionState extends State<VillaGallerySection> {
                 decoration: BoxDecoration(
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(4)),
-                child: const Text('رئيسية',
+                child: Text(context.l10n.villaPrimary,
                     style: TextStyle(fontSize: 7, color: Colors.white)),
               ),
             ],
@@ -514,11 +514,11 @@ class _VillaGallerySectionState extends State<VillaGallerySection> {
         borderRadius: BorderRadius.circular(AppRadius.md),
         border: Border.all(color: context.colorScheme.outlineVariant, width: 2),
       ),
-      child: const Column(
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-        Icon(Icons.add, size: 20, color: AppColors.textHint),
-        Text('إضافة', style: TextStyle(fontSize: 9, color: AppColors.textHint)),
+        const Icon(Icons.add, size: 20, color: AppColors.textHint),
+        Text(context.l10n.villaAdd, style: const TextStyle(fontSize: 9, color: AppColors.textHint)),
       ]),
     );
   }
@@ -560,8 +560,8 @@ class _VillaGallerySectionState extends State<VillaGallerySection> {
             decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(4)),
-            child: const Text('رئيسية',
-                style: TextStyle(fontSize: 8, color: Colors.white)),
+            child: Text(context.l10n.villaPrimary,
+                style: const TextStyle(fontSize: 8, color: Colors.white)),
           ),
         ),
     ]);
@@ -609,7 +609,7 @@ Widget villaSaveCancelRow({
           color: AppColors.surfaceVariant,
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),
-        child: const Text('إلغاء', style: TextStyle(
+        child: Text(context.l10n.cancel, style: const TextStyle(
             fontSize: 12, color: AppColors.textSecondary)),
       ),
     ),
@@ -623,10 +623,10 @@ Widget villaSaveCancelRow({
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(AppRadius.sm),
           ),
-          child: const Row(
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-            Text('حفظ', style: TextStyle(fontSize: 12,
+            Text(context.l10n.save, style: const TextStyle(fontSize: 12,
                 fontWeight: FontWeight.w500, color: Colors.white)),
             SizedBox(width: 4),
             Icon(Icons.check, size: 14, color: Colors.white),

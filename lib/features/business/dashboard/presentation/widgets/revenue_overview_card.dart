@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
 /// Revenue data for the overview card.
@@ -55,16 +56,16 @@ class RevenueOverviewCard extends StatefulWidget {
 class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
   _RevenuePeriod _period = _RevenuePeriod.today;
 
-  static const _periodLabels = {
-    _RevenuePeriod.today: 'اليوم',
-    _RevenuePeriod.week: 'هذا الأسبوع',
-    _RevenuePeriod.month: 'هذا الشهر',
+  Map<_RevenuePeriod, String> _periodLabels(BuildContext context) => {
+    _RevenuePeriod.today: context.l10n.bizRevenuePeriodToday,
+    _RevenuePeriod.week: context.l10n.bizRevenuePeriodWeek,
+    _RevenuePeriod.month: context.l10n.bizRevenuePeriodMonth,
   };
 
-  static const _prevLabels = {
-    _RevenuePeriod.today: 'أمس',
-    _RevenuePeriod.week: 'الأسبوع الماضي',
-    _RevenuePeriod.month: 'الشهر الماضي',
+  Map<_RevenuePeriod, String> _prevLabels(BuildContext context) => {
+    _RevenuePeriod.today: context.l10n.bizRevenuePrevToday,
+    _RevenuePeriod.week: context.l10n.bizRevenuePrevWeek,
+    _RevenuePeriod.month: context.l10n.bizRevenuePrevMonth,
   };
 
   int _amount() => switch (_period) {
@@ -152,6 +153,7 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
   }
 
   Widget _buildPeriodTabs() {
+    final labels = _periodLabels(context);
     return Row(
       children: _RevenuePeriod.values.map((p) {
         final selected = _period == p;
@@ -171,7 +173,7 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
                 borderRadius: BorderRadius.circular(999),
               ),
               child: Text(
-                _periodLabels[p]!,
+                labels[p]!,
                 style: TextStyle(
                   fontSize: 10,
                   color: selected
@@ -188,6 +190,8 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
   }
 
   Widget _buildAmountRow(int amount, int previous, int delta, bool isUp) {
+    final periodLabel = _periodLabels(context)[_period]!;
+    final prevLabel = _prevLabels(context)[_period]!;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -197,7 +201,7 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              _periodLabels[_period]!,
+              periodLabel,
               style: TextStyle(
                 fontSize: 10,
                 color: Colors.white.withValues(alpha: 0.6),
@@ -219,7 +223,7 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'د.أ',
+                  context.l10n.bizRevenueCurrency,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white.withValues(alpha: 0.6),
@@ -259,7 +263,7 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
             ),
             const SizedBox(height: 2),
             Text(
-              '${_prevLabels[_period]}: ${_formatJod(previous)} د.أ',
+              context.l10n.bizRevenuePrevAmount(prevLabel, _formatJod(previous)),
               style: TextStyle(
                 fontSize: 9,
                 color: Colors.white.withValues(alpha: 0.4),
@@ -289,14 +293,14 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '$orders طلب',
+            context.l10n.bizRevenueOrderCount(orders),
             style: TextStyle(
               fontSize: 10,
               color: Colors.white.withValues(alpha: 0.5),
             ),
           ),
           Text(
-            'متوسط: $avg د.أ/طلب',
+            context.l10n.bizRevenueAvgOrder(avg),
             style: TextStyle(
               fontSize: 10,
               color: Colors.white.withValues(alpha: 0.5),
@@ -321,7 +325,7 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'طرق الدفع اليوم',
+            context.l10n.bizRevenuePaymentMethods,
             style: TextStyle(
               fontSize: 9,
               color: Colors.white.withValues(alpha: 0.4),
@@ -333,14 +337,14 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
               _PaymentChip(
                 icon: Icons.payments_outlined,
                 iconColor: const Color(0xFF81C784), // green-300
-                label: 'كاش',
+                label: context.l10n.bizRevenuePayCash,
                 amount: _formatJod(breakdown.cash),
               ),
               const SizedBox(width: AppSpacing.md),
               _PaymentChip(
                 icon: Icons.smartphone_outlined,
                 iconColor: const Color(0xFFCE93D8), // purple-300
-                label: 'CliQ',
+                label: context.l10n.bizRevenuePayCliq,
                 amount: _formatJod(breakdown.cliq),
               ),
               if (breakdown.bank > 0) ...[
@@ -348,7 +352,7 @@ class _RevenueOverviewCardState extends State<RevenueOverviewCard> {
                 _PaymentChip(
                   icon: Icons.credit_card_outlined,
                   iconColor: const Color(0xFF90CAF9), // blue-200
-                  label: 'تحويل',
+                  label: context.l10n.bizRevenuePayBank,
                   amount: _formatJod(breakdown.bank),
                 ),
               ],

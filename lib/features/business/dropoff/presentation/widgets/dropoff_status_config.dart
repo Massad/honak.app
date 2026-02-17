@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_status.dart';
 import 'package:honak/features/business/shared/entities/status_config.dart';
 
@@ -17,6 +18,7 @@ class DropoffStatusConfig extends StatusConfig {
   });
 
   /// Status config map keyed by [DropoffStatus].
+  /// Labels here are Arabic fallbacks; use [ofLocalized] for l10n-aware labels.
   static const Map<DropoffStatus, DropoffStatusConfig> _configs = {
     DropoffStatus.received: DropoffStatusConfig._(
       color: Color(0xFF1A73E8),
@@ -55,8 +57,23 @@ class DropoffStatusConfig extends StatusConfig {
     ),
   };
 
-  /// Get config for a specific status.
+  /// Get config for a specific status (fallback Arabic label).
   static DropoffStatusConfig of(DropoffStatus status) => _configs[status]!;
+
+  /// Get config with a localized label.
+  static DropoffStatusConfig ofLocalized(
+    DropoffStatus status,
+    BuildContext context,
+  ) {
+    final base = _configs[status]!;
+    return DropoffStatusConfig._(
+      color: base.color,
+      bgColor: base.bgColor,
+      borderColor: base.borderColor,
+      icon: base.icon,
+      label: status.label(context),
+    );
+  }
 
   /// The standard status flow (excludes cancelled).
   static const List<DropoffStatus> statusFlow = [
@@ -69,7 +86,7 @@ class DropoffStatusConfig extends StatusConfig {
   /// All statuses including cancelled.
   static const List<DropoffStatus> allStatuses = DropoffStatus.values;
 
-  /// Next action config for advance buttons.
+  /// Next action config for advance buttons (fallback Arabic labels).
   static const Map<DropoffStatus, ({String label, DropoffStatus next})>
       nextAction = {
     DropoffStatus.received: (
@@ -85,4 +102,18 @@ class DropoffStatusConfig extends StatusConfig {
       next: DropoffStatus.delivered,
     ),
   };
+
+  /// Localized next action label.
+  static String? nextActionLabel(
+    DropoffStatus status,
+    BuildContext context,
+  ) {
+    final l10n = AppLocalizations.of(context);
+    return switch (status) {
+      DropoffStatus.received => l10n.dropoffNextStartProcessing,
+      DropoffStatus.processing => l10n.dropoffNextReadyForPickup,
+      DropoffStatus.ready => l10n.dropoffNextDelivered,
+      _ => null,
+    };
+  }
 }

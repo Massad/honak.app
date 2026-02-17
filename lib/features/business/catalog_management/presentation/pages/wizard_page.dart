@@ -148,12 +148,12 @@ class _ItemWizardPageState extends ConsumerState<ItemWizardPage> {
       ref.invalidate(bizItemsProvider(widget.pageId));
 
       if (mounted) {
-        context.showSnackBar('تم الحفظ');
+        context.showSnackBar(context.l10n.wizardSaved);
         Navigator.pop(context);
       }
     } catch (e) {
       if (mounted) {
-        context.showSnackBar('حدث خطأ أثناء الحفظ', isError: true);
+        context.showSnackBar(context.l10n.wizardSaveError, isError: true);
       }
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -207,8 +207,8 @@ class _ItemWizardPageState extends ConsumerState<ItemWizardPage> {
   @override
   Widget build(BuildContext context) {
     final isEdit = widget.isEdit;
-    final itemLabel = _cfg?.itemLabelAr ?? 'عنصر';
-    final title = isEdit ? 'تعديل $itemLabel' : 'إضافة $itemLabel';
+    final itemLabel = _cfg?.itemLabelAr ?? context.l10n.catalogSelectedItem;
+    final title = isEdit ? context.l10n.wizardEditItem(itemLabel) : context.l10n.wizardAddItem(itemLabel);
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,

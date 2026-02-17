@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
@@ -109,7 +110,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                 children: [
                   Expanded(
                     child: Text(
-                      'تصفية ${widget.itemsLabelAr}',
+                      context.l10n.catalogFilterItems(widget.itemsLabelAr),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -138,8 +139,8 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
               // Category filter
               if (widget.categories.isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.xl),
-                const Text(
-                  'التصنيف',
+                Text(
+                  context.l10n.wizardCategory,
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -151,7 +152,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                   runSpacing: AppSpacing.sm,
                   children: [
                     _Chip(
-                      label: 'الكل',
+                      label: context.l10n.all,
                       isActive: _categoryId.isEmpty,
                       onTap: () => setState(() => _categoryId = ''),
                     ),
@@ -166,8 +167,8 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
 
               // Status filter
               const SizedBox(height: AppSpacing.xl),
-              const Text(
-                'الحالة',
+              Text(
+                context.l10n.catalogStatus,
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
@@ -179,22 +180,22 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                 runSpacing: AppSpacing.sm,
                 children: [
                   _Chip(
-                    label: 'الكل',
+                    label: context.l10n.all,
                     isActive: _status == 'all',
                     onTap: () => setState(() => _status = 'all'),
                   ),
                   _Chip(
-                    label: 'متوفر',
+                    label: context.l10n.catalogStatusAvailable,
                     isActive: _status == 'active',
                     onTap: () => setState(() => _status = 'active'),
                   ),
                   _Chip(
-                    label: 'غير متوفر',
+                    label: context.l10n.catalogStatusOutOfStock,
                     isActive: _status == 'out_of_stock',
                     onTap: () => setState(() => _status = 'out_of_stock'),
                   ),
                   _Chip(
-                    label: 'مخفي',
+                    label: context.l10n.catalogStatusHidden,
                     isActive: _status == 'hidden',
                     onTap: () => setState(() => _status = 'hidden'),
                   ),
@@ -221,8 +222,8 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                   if (_hasActiveFilters)
                     GestureDetector(
                       onTap: _reset,
-                      child: const Text(
-                        'إعادة ضبط',
+                      child: Text(
+                        context.l10n.catalogResetFilters,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -241,7 +242,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
                   widget.onApply(_categoryId, _status);
                   Navigator.pop(context);
                 },
-                label: 'عرض النتائج ($_filteredCount)',
+                label: context.l10n.catalogShowResults(_filteredCount),
                 size: btn.ButtonSize.large,
                 expand: true,
               ),

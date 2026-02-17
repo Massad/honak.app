@@ -25,11 +25,11 @@ class UnlinkTenantSheet extends StatefulWidget {
 class _UnlinkTenantSheetState extends State<UnlinkTenantSheet> {
   String? _selectedReason;
 
-  static const _reasons = [
-    'لم يعد مستأجراً',
-    'خطأ في الربط',
-    'أخرى',
-  ];
+  List<String> _reasons(BuildContext context) => [
+        context.l10n.dirUnlinkReasonNotTenant,
+        context.l10n.dirUnlinkReasonWrongLink,
+        context.l10n.dirUnlinkReasonOther,
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _UnlinkTenantSheetState extends State<UnlinkTenantSheet> {
       mainAxisSize: MainAxisSize.min,
       children: [
         AppSheetHeader(
-          title: 'إلغاء ربط "${widget.tenant.name}"',
+          title: context.l10n.dirUnlinkTitle(widget.tenant.name),
           onClose: () => Navigator.pop(context),
         ),
 
@@ -50,7 +50,7 @@ class _UnlinkTenantSheetState extends State<UnlinkTenantSheet> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'لماذا تريد إلغاء الربط؟',
+                context.l10n.dirUnlinkReason,
                 style: context.textTheme.bodySmall?.copyWith(
                   color: context.colorScheme.onSurfaceVariant,
                 ),
@@ -58,7 +58,7 @@ class _UnlinkTenantSheetState extends State<UnlinkTenantSheet> {
               const SizedBox(height: AppSpacing.md),
 
               // Reason options
-              for (final reason in _reasons) ...[
+              for (final reason in _reasons(context)) ...[
                 GestureDetector(
                   onTap: () => setState(() => _selectedReason = reason),
                   child: Container(
@@ -102,7 +102,7 @@ class _UnlinkTenantSheetState extends State<UnlinkTenantSheet> {
                 onPressed: _selectedReason != null
                     ? () => widget.onConfirm(_selectedReason!)
                     : null,
-                label: 'إلغاء الربط',
+                label: context.l10n.dirUnlinkConfirmBtn,
                 style: btn.Style.danger,
                 size: btn.ButtonSize.large,
                 expand: true,

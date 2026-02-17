@@ -42,7 +42,7 @@ class QueueDashboardWidget extends StatelessWidget {
               bgColor: const Color(0xFFFFF8E1),
               value: '$waiting',
               valueColor: const Color(0xFFFF9800),
-              label: 'بالانتظار',
+              label: context.l10n.queueLabelWaiting,
             ),
             const SizedBox(width: AppSpacing.sm),
             _StatTile(
@@ -51,7 +51,7 @@ class QueueDashboardWidget extends StatelessWidget {
               bgColor: const Color(0xFFE3F2FD),
               value: '$inProgress',
               valueColor: AppColors.primary,
-              label: 'قيد الخدمة',
+              label: context.l10n.queueInProgress,
             ),
             const SizedBox(width: AppSpacing.sm),
             _StatTile(
@@ -60,7 +60,7 @@ class QueueDashboardWidget extends StatelessWidget {
               bgColor: const Color(0xFFE8F5E9),
               value: '$completed',
               valueColor: AppColors.success,
-              label: 'مكتمل',
+              label: context.l10n.queueCompleted,
             ),
             const SizedBox(width: AppSpacing.sm),
             _StatTile(
@@ -69,7 +69,7 @@ class QueueDashboardWidget extends StatelessWidget {
               bgColor: const Color(0xFFF3E5F5),
               value: Money(revenueTodayCents).toJodString(),
               valueColor: const Color(0xFF9C27B0),
-              label: 'إيراد (د.أ)',
+              label: context.l10n.queueRevenueJod,
             ),
           ],
         ),
@@ -99,7 +99,7 @@ class QueueDashboardWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: AppSpacing.xs + 2),
                     Text(
-                      'وقت الانتظار الحالي',
+                      context.l10n.queueCurrentWaitTime,
                       style: context.textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 12,
@@ -109,7 +109,7 @@ class QueueDashboardWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                '~$avgWaitMin دقيقة',
+                context.l10n.queueApproxMinutes(avgWaitMin),
                 style: context.textTheme.bodySmall?.copyWith(
                   color: AppColors.primary,
                   fontSize: 12,

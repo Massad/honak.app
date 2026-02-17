@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Reusable header for account sub-screens.
 ///
@@ -44,7 +45,7 @@ class SubScreenHeader extends StatelessWidget implements PreferredSizeWidget {
               IconButton(
                 onPressed: onBack ?? () => Navigator.of(context).pop(),
                 icon: Icon(
-                  Icons.arrow_forward,
+                  AppDirection.backIcon(context),
                   size: 22,
                   color: context.colorScheme.onSurfaceVariant,
                 ),

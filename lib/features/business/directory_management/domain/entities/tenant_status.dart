@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 
 enum TenantStatus {
   claimed,
@@ -6,12 +7,12 @@ enum TenantStatus {
   invited,
   unclaimed;
 
-  String get label {
+  String localizedLabel(AppLocalizations l10n) {
     return switch (this) {
-      TenantStatus.claimed => 'مربوط',
-      TenantStatus.newTenant => 'جديد',
-      TenantStatus.invited => 'مدعو',
-      TenantStatus.unclaimed => 'غير مربوط',
+      TenantStatus.claimed => l10n.dirStatusClaimed,
+      TenantStatus.newTenant => l10n.dirStatusNew,
+      TenantStatus.invited => l10n.dirStatusInvited,
+      TenantStatus.unclaimed => l10n.dirStatusUnclaimed,
     };
   }
 

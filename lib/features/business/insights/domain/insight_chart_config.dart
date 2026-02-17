@@ -67,10 +67,16 @@ const Map<String, ArchetypeChartVisibility> _visibilityMap = {
 };
 
 /// Chart labels resolved per business type.
+/// Note: These labels are mock data (simulating server responses) and use
+/// Arabic strings directly. In production, labels come from the API.
 ChartLabels getChartLabels(String typeId, InsightPeriod period) {
   final base = _labelsMap[typeId] ?? _labelsMap['water_delivery']!;
   // Replace period placeholder in revenue label
-  final periodStr = period.periodLabelAr;
+  final periodStr = switch (period) {
+    InsightPeriod.week => 'هذا الأسبوع',
+    InsightPeriod.month => 'هذا الشهر',
+    InsightPeriod.year => 'هذه السنة',
+  };
   return ChartLabels(
     revenueLabel: base.revenueLabel.replaceAll('هذا الأسبوع', periodStr),
     topItemsLabel: base.topItemsLabel,

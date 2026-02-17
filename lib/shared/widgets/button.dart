@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Button visual style (color scheme).
 enum Style {
@@ -312,19 +313,6 @@ class Button extends StatelessWidget {
 
   /// Flip directional icons in RTL.
   static IconData _resolveIcon(IconData icon, bool isRtl) {
-    if (!isRtl) return icon;
-    final flipped = _flipIcon(icon);
-    return flipped ?? icon;
-  }
-
-  static IconData? _flipIcon(IconData icon) {
-    if (icon == Icons.arrow_forward) return Icons.arrow_back;
-    if (icon == Icons.arrow_back) return Icons.arrow_forward;
-    if (icon == Icons.arrow_forward_ios) return Icons.arrow_back_ios_new;
-    if (icon == Icons.arrow_back_ios) return Icons.arrow_forward_ios;
-    if (icon == Icons.arrow_back_ios_new) return Icons.arrow_forward_ios;
-    if (icon == Icons.chevron_right) return Icons.chevron_left;
-    if (icon == Icons.chevron_left) return Icons.chevron_right;
-    return null;
+    return AppDirection.resolveDirectionalIcon(icon, isRtl: isRtl);
   }
 }

@@ -1,4 +1,7 @@
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 
 part 'ticket_activity.freezed.dart';
 part 'ticket_activity.g.dart';
@@ -25,6 +28,21 @@ enum TicketActivityAction {
         noteAdded => 'ملاحظة',
         itemModified => 'تعديل القطع',
       };
+
+  String label(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return switch (this) {
+      ticketCreated => l10n.dropoffActionTicketCreated,
+      statusChanged => l10n.dropoffActionStatusChanged,
+      photoBefore => l10n.dropoffActionPhotoBefore,
+      photoAfter => l10n.dropoffActionPhotoAfter,
+      infoRequested => l10n.dropoffActionInfoRequested,
+      infoReceived => l10n.dropoffActionInfoReceived,
+      paymentMarked => l10n.dropoffActionPaymentMarked,
+      noteAdded => l10n.dropoffActionNoteAdded,
+      itemModified => l10n.dropoffActionItemModified,
+    };
+  }
 }
 
 @freezed

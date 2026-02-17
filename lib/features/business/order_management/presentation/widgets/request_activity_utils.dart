@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_request.dart';
 import 'package:honak/features/business/shared/entities/activity_action_config.dart';
@@ -99,34 +100,41 @@ ActivityActionConfig _statusConfig(String status) {
   };
 }
 
-/// Arabic labels for request statuses (used in activity log entries).
-String _statusLabelAr(String status) {
+/// Localized labels for request statuses (used in activity log entries).
+String _statusLabel(String status, AppLocalizations l10n) {
   return switch (status) {
-    'pending' => 'معلق',
-    'accepted' => 'مقبول',
-    'in_progress' => 'قيد التنفيذ',
-    'preparing' => 'قيد التحضير',
-    'ready' => 'جاهز',
-    'delivered' => 'تم التسليم',
-    'completed' => 'مكتمل',
-    'declined' => 'مرفوض',
+    'pending' => l10n.bizReqStatusPending,
+    'accepted' => l10n.bizReqStatusAccepted,
+    'in_progress' => l10n.bizReqStatusInProgress,
+    'preparing' => l10n.bizReqStatusPreparing,
+    'ready' => l10n.bizReqStatusReady,
+    'delivered' => l10n.bizReqStatusDelivered,
+    'completed' => l10n.bizReqStatusCompleted,
+    'declined' => l10n.bizReqStatusDeclined,
     _ => status,
   };
 }
 
-/// Mock staff names with roles for realistic activity entries.
-const _staffPool = [
-  ('محمد', 'مدير'),
-  ('أحمد', 'موظف'),
-  ('فاطمة', 'موظفة'),
-  ('خالد', 'مشرف'),
-  ('سارة', 'موظفة'),
-];
+/// Mock staff names with role keys for realistic activity entries.
+/// Names stay as-is (proper nouns), roles are resolved via l10n.
+const _staffNames = ['محمد', 'أحمد', 'فاطمة', 'خالد', 'سارة'];
+const _staffRoleKeys = [0, 1, 2, 3, 2]; // indices into _roleLabel()
+
+String _roleLabel(int idx, AppLocalizations l10n) {
+  return switch (idx) {
+    0 => l10n.bizReqActivityManager,
+    1 => l10n.bizReqActivityEmployee,
+    2 => l10n.bizReqActivityEmployeeFemale,
+    3 => l10n.bizReqActivitySupervisor,
+    _ => l10n.bizReqActivityEmployee,
+  };
+}
 
 /// Pick a deterministic staff member based on request ID + entry index.
-(String name, String role) _pickStaff(String requestId, int idx) {
+(String name, String role) _pickStaff(String requestId, int idx, AppLocalizations l10n) {
   final hash = requestId.hashCode.abs();
-  return _staffPool[(hash + idx) % _staffPool.length];
+  final poolIdx = (hash + idx) % _staffNames.length;
+  return (_staffNames[poolIdx], _roleLabel(_staffRoleKeys[poolIdx], l10n));
 }
 
 /// Ordered status chain for computing intermediate transitions.
@@ -145,7 +153,7 @@ const _statusChain = [
 /// Uses the request's current state (status, note, declineReason, etc.)
 /// to build a realistic timeline. Follows the same pattern as
 /// [generateMockActivity] in dropoff.
-List<ActivityLogEntry> generateRequestActivity(BizRequest request) {
+List<ActivityLogEntry> generateRequestActivity(BizRequest request, AppLocalizations l10n) {
   final entries = <ActivityLogEntry>[];
   var idx = 0;
 
@@ -156,35 +164,35 @@ List<ActivityLogEntry> generateRequestActivity(BizRequest request) {
   entries.add(buildActivityLogEntry(
     id: 'ract_${request.id}_${idx++}',
     timestamp: createdDt.toIso8601String(),
-    label: 'تم إرسال الطلب',
+    label: l10n.bizReqActivityCreated,
     config: requestActionConfigs[RequestActivityAction.requestCreated]!,
     actorName: request.customer.name,
-    actorRole: 'عميل',
+    actorRole: l10n.bizReqActivityCustomer,
   ));
 
   // 2. Status chain — add transitions up to current status
   if (request.status == 'declined') {
     // Declined path: pending → declined
-    final staff = _pickStaff(request.id, idx);
+    final staff = _pickStaff(request.id, idx, l10n);
     final declinedAt = createdDt.add(Duration(minutes: 15 + idx * 7));
     entries.add(buildActivityLogEntry(
       id: 'ract_${request.id}_${idx++}',
       timestamp: declinedAt.toIso8601String(),
-      label: 'تم تغيير الحالة',
+      label: l10n.bizReqActivityStatusChanged,
       config: _statusConfig('declined'),
       actorName: staff.$1,
       actorRole: staff.$2,
-      from: _statusLabelAr('pending'),
-      to: _statusLabelAr('declined'),
+      from: _statusLabel('pending', l10n),
+      to: _statusLabel('declined', l10n),
     ));
 
     // Decline reason
     if (request.declineReason != null) {
-      final noter = _pickStaff(request.id, idx);
+      final noter = _pickStaff(request.id, idx, l10n);
       entries.add(buildActivityLogEntry(
         id: 'ract_${request.id}_${idx++}',
         timestamp: declinedAt.add(const Duration(seconds: 30)).toIso8601String(),
-        label: 'تم إضافة سبب الرفض',
+        label: l10n.bizReqActivityDeclineReason,
         config: requestActionConfigs[RequestActivityAction.declineReasonAdded]!,
         actorName: noter.$1,
         actorRole: noter.$2,
@@ -196,17 +204,17 @@ List<ActivityLogEntry> generateRequestActivity(BizRequest request) {
     final currentIdx = _statusChain.indexOf(request.status);
     if (currentIdx > 0) {
       for (var i = 0; i < currentIdx; i++) {
-        final staff = _pickStaff(request.id, idx);
+        final staff = _pickStaff(request.id, idx, l10n);
         final transitionAt = createdDt.add(Duration(minutes: 15 + i * 20));
         entries.add(buildActivityLogEntry(
           id: 'ract_${request.id}_${idx++}',
           timestamp: transitionAt.toIso8601String(),
-          label: 'تم تغيير الحالة',
+          label: l10n.bizReqActivityStatusChanged,
           config: _statusConfig(_statusChain[i + 1]),
           actorName: staff.$1,
           actorRole: staff.$2,
-          from: _statusLabelAr(_statusChain[i]),
-          to: _statusLabelAr(_statusChain[i + 1]),
+          from: _statusLabel(_statusChain[i], l10n),
+          to: _statusLabel(_statusChain[i + 1], l10n),
         ));
       }
     }
@@ -217,10 +225,10 @@ List<ActivityLogEntry> generateRequestActivity(BizRequest request) {
     entries.add(buildActivityLogEntry(
       id: 'ract_${request.id}_${idx++}',
       timestamp: createdDt.add(const Duration(minutes: 2)).toIso8601String(),
-      label: 'ملاحظة من العميل',
+      label: l10n.bizReqActivityCustomerNote,
       config: requestActionConfigs[RequestActivityAction.noteAdded]!,
       actorName: request.customer.name,
-      actorRole: 'عميل',
+      actorRole: l10n.bizReqActivityCustomer,
       note: request.note,
     ));
   }
@@ -228,16 +236,16 @@ List<ActivityLogEntry> generateRequestActivity(BizRequest request) {
   // 4. Payment (for completed/delivered)
   if ((request.status == 'completed' || request.status == 'delivered') &&
       request.total != null) {
-    final payer = _pickStaff(request.id, idx);
+    final payer = _pickStaff(request.id, idx, l10n);
     entries.add(buildActivityLogEntry(
       id: 'ract_${request.id}_${idx++}',
       timestamp: createdDt.add(Duration(minutes: 60 + idx * 5)).toIso8601String(),
-      label: 'تم تسجيل الدفع',
+      label: l10n.bizReqActivityPaymentRecorded,
       config: requestActionConfigs[RequestActivityAction.paymentMarked]!,
       actorName: payer.$1,
       actorRole: payer.$2,
       amount: request.total!.cents,
-      method: 'نقدي',
+      method: l10n.bizReqActivityCash,
     ));
   }
 

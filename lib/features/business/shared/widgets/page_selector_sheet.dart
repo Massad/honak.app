@@ -49,7 +49,7 @@ class PageSelectorSheet extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    'صفحاتي التجارية',
+                    context.l10n.bizMyPages,
                     style: context.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -86,7 +86,7 @@ class PageSelectorSheet extends ConsumerWidget {
                   Navigator.pop(context);
                   ref.read(appModeProvider.notifier).switchToCustomerMode();
                 },
-                label: 'العودة لوضع العميل',
+                label: context.l10n.bizBackToCustomerMode,
                 icon: btn.ButtonIcon(Icons.store_outlined),
                 variant: btn.Variant.outlined,
                 size: btn.ButtonSize.large,

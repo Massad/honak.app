@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
-import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/features/business/post_create/presentation/providers/provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/button.dart';
 
 class PostFormPage extends ConsumerStatefulWidget {
   final String postTypeKey;
@@ -74,12 +74,12 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
       await repo.createPost(bizContext.page.id, data);
 
       if (mounted) {
-        context.showSnackBar('تم النشر');
+        context.showSnackBar(context.l10n.postPublished);
         Navigator.of(context).pop();
       }
     } catch (e) {
       if (mounted) {
-        context.showSnackBar('حدث خطأ أثناء النشر', isError: true);
+        context.showSnackBar(context.l10n.postPublishError, isError: true);
         setState(() => _isPublishing = false);
       }
     }
@@ -170,8 +170,8 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
         onChanged: (_) => setState(() {}),
         decoration: InputDecoration(
           hintText: _isStatusType
-              ? 'اكتب حالتك...'
-              : 'اكتب وصف المنشور...',
+              ? context.l10n.postStatusHint
+              : context.l10n.postCaptionHint,
           hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
           filled: true,
           fillColor: Theme.of(context).colorScheme.surface,
@@ -191,7 +191,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
 
   Widget _buildImagePlaceholder() {
     return GestureDetector(
-      onTap: () => context.showSnackBar('قريباً: إضافة صورة'),
+      onTap: () => context.showSnackBar(context.l10n.postAddPhotoComingSoon),
       child: Container(
         height: 120,
         decoration: BoxDecoration(
@@ -218,7 +218,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  'إضافة صورة',
+                  context.l10n.postAddPhoto,
                   style: TextStyle(
                     fontSize: 13,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -250,7 +250,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            'لون الحالة',
+            context.l10n.postStatusColor,
             style: context.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w600,
             ),
@@ -319,7 +319,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          'معاينة',
+          context.l10n.postPreview,
           style: context.textTheme.bodySmall?.copyWith(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontWeight: FontWeight.w500,
@@ -413,7 +413,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
   Widget _buildPublishButton() {
     return Button(
       onPressed: _canPublish ? _handlePublish : null,
-      label: 'نشر',
+      label: context.l10n.postPublish,
       size: ButtonSize.large,
       expand: true,
       isLoading: _isPublishing,

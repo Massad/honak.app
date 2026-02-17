@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class AccountMenuItem extends StatelessWidget {
   final IconData icon;
@@ -32,7 +33,7 @@ class AccountMenuItem extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 18,
                 color: context.colorScheme.outline,
               ),

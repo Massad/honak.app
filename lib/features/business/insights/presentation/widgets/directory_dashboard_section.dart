@@ -52,7 +52,7 @@ class _StatsGrid extends StatelessWidget {
           children: [
             Expanded(
               child: _StatCard(
-                label: 'مشاهدات الصفحة',
+                label: context.l10n.insightsPageViews,
                 value: '${pageViews['value'] ?? 0}',
                 change: (pageViews['change'] as num?)?.toInt(),
               ),
@@ -60,7 +60,7 @@ class _StatsGrid extends StatelessWidget {
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: _StatCard(
-                label: 'متابعون جدد',
+                label: context.l10n.insightsNewFollowers,
                 value: '${newFollowers['value'] ?? 0}',
                 change: (newFollowers['change'] as num?)?.toInt(),
               ),
@@ -72,14 +72,14 @@ class _StatsGrid extends StatelessWidget {
           children: [
             Expanded(
               child: _StatCard(
-                label: 'مستأجرون مربوطون',
+                label: context.l10n.insightsClaimedTenants,
                 value: '${claimed['claimed'] ?? 0}/${claimed['total'] ?? 0}',
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: _StatCard(
-                label: 'جدد هذا الأسبوع',
+                label: context.l10n.insightsNewThisWeek,
                 value: '${newWeek['value'] ?? 0}',
               ),
             ),
@@ -171,7 +171,7 @@ class _RecentlyLinkedSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'ربط مؤخراً',
+              context.l10n.insightsRecentlyLinked,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: context.colorScheme.onSurface,

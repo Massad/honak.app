@@ -441,6 +441,23 @@
       "total": {"type": "int"}
     }
   },
+  "storyDone": "Done",
+  "storySelectTextHint": "Add text or select text first",
+  "storyNewText": "New Text",
+  "storyDeleteAction": "Delete",
+  "storyFontDefault": "Default",
+  "storyFontBold": "Bold",
+  "storyFontElegant": "Elegant",
+  "storyFontLight": "Light",
+  "storyFontMono": "Typewriter",
+  "storyHintEditing": "Type directly on preview",
+  "storyHintSelected": "Drag to move - double tap to edit",
+  "storyHintTapToSelect": "Tap text to select it",
+  "storyTypeHere": "Type here...",
+  "storyWhoSees": "Who sees the story?",
+  "storyScheduledInfo": "Story will auto-publish at the scheduled time and disappear after 24 hours",
+  "storyNowInfo": "Story appears immediately and disappears after 24 hours",
+  "storyScheduleAction": "Schedule Story",
 
   "bizTabDashboard": "Dashboard",
   "bizTabManage": "Manage",
@@ -529,6 +546,27 @@
   "ordersEmptyUpcoming": "No upcoming appointments",
   "ordersEmptyHistory": "No order history",
   "ordersEmptySubscriptions": "No subscriptions yet",
+  "ordersLoadError": "Error loading orders",
+  "ordersItemsCount": "{count} items",
+  "@ordersItemsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "ordersPlaceReservation": "Place reservation",
+  "ordersViewDetails": "Details",
+  "ordersDetailSnackbar": "Details: {id}",
+  "@ordersDetailSnackbar": {
+    "placeholders": {
+      "id": {"type": "String"}
+    }
+  },
+  "ordersGuestsCount": "{count} guests",
+  "@ordersGuestsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
   "deliveryEta": "Delivery in {minutes} min",
   "@deliveryEta": {
     "placeholders": {
@@ -750,5 +788,2448 @@
   "bizInviteSummarySubscribed": "Subscribed",
   "bizInviteConversionRate": "Conversion",
   "bizInviteSelectPackage": "Select package",
-  "bizInviteDirectActivateLabel": "Activate subscription immediately (cash payment)"
+  "bizInviteDirectActivateLabel": "Activate subscription immediately (cash payment)",
+
+  "dirManageTitle": "Directory Management",
+  "dirUnitCount": "{count} units",
+  "@dirUnitCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirAddUnit": "Add unit",
+  "dirNoTenantsYet": "No tenants yet",
+  "dirNoTenantsHint": "Add tenants to build your mall directory",
+  "dirAddTenant": "Add tenant",
+  "dirNoResults": "No results",
+  "dirClearFilter": "Clear filter",
+  "dirLoadError": "Error loading directory data",
+  "dirEditTenant": "Edit tenant",
+  "dirUnlink": "Unlink",
+  "dirResendInvite": "Resend invite",
+  "dirCancelInvite": "Cancel invite",
+  "dirInviteCancelled": "Invite cancelled",
+  "dirSendInvite": "Send invite",
+  "dirTenantUnlinked": "{name} unlinked",
+  "@dirTenantUnlinked": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "dirTenantDeleted": "{name} deleted",
+  "@dirTenantDeleted": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "dirViewPage": "View {name}'s page",
+  "@dirViewPage": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "dirFloorsUpdated": "Floors updated",
+  "dirCategoriesUpdated": "Categories updated",
+  "dirAmenitiesUpdated": "Amenities updated",
+  "dirFeaturedUpdated": "Featured updated",
+  "dirTenantAdded": "Tenant added",
+  "dirTenantUpdated": "{name} updated",
+  "@dirTenantUpdated": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "dirStatsTotal": "Total",
+
+  "dirStatusClaimed": "Linked",
+  "dirStatusNew": "New",
+  "dirStatusInvited": "Invited",
+  "dirStatusUnclaimed": "Unlinked",
+
+  "dirChipFloors": "Floors",
+  "dirChipCategories": "Categories",
+  "dirChipAmenities": "Amenities",
+  "dirChipFeatured": "Featured",
+  "dirChipMaps": "Maps",
+
+  "dirFilterAll": "All",
+  "dirSearchHint": "Search store or unit number...",
+
+  "dirCoverageTitle": "Tenant coverage {percent}%",
+  "@dirCoverageTitle": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "dirCoverageLinked": "{count} linked",
+  "@dirCoverageLinked": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirCoverageInvited": "{count} invited",
+  "@dirCoverageInvited": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirCoverageOfTotal": "{filled} of {total} units",
+  "@dirCoverageOfTotal": {
+    "placeholders": {
+      "filled": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "dirStatusLinkedAt": "Linked · {time}",
+  "@dirStatusLinkedAt": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "dirStatusPendingInvite": "Pending invite · {time}",
+  "@dirStatusPendingInvite": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "dirTimeAgoMonths": "{count} months ago",
+  "@dirTimeAgoMonths": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirTimeAgoDays": "{count} days ago",
+  "@dirTimeAgoDays": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirTimeAgoHours": "{count} hours ago",
+  "@dirTimeAgoHours": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirTimeAgoNow": "Just now",
+
+  "dirTenantEdit": "Edit",
+  "dirTenantViewPage": "View page",
+  "dirTenantResendInvite": "Resend invite",
+  "dirTenantSendInvite": "Send invite",
+  "dirTenantCount": "{count} tenants",
+  "@dirTenantCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "dirOpenStatus": "Open",
+  "dirClosedStatus": "Temporarily closed",
+
+  "dirFloorManagerTitle": "Manage Floors",
+  "dirFloorEdit": "Edit floor",
+  "dirFloorNew": "New floor",
+  "dirFloorNameHint": "Floor name (e.g. Ground Floor)",
+  "dirFloorLabelHint": "Short label (optional, e.g. GF)",
+  "dirFloorUpdate": "Update",
+  "dirFloorAdd": "Add",
+  "dirFloorEmpty": "No floors",
+  "dirFloorAddBtn": "Add floor",
+  "dirFloorCannotDelete": "Cannot delete \"{name}\" — has tenants",
+  "@dirFloorCannotDelete": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+
+  "dirCategoryManagerTitle": "Manage Categories",
+  "dirCategoryEdit": "Edit category",
+  "dirCategoryNew": "New category",
+  "dirCategoryNameHint": "Category name",
+  "dirCategoryUpdate": "Update",
+  "dirCategoryAdd": "Add",
+  "dirCategoryEmpty": "No categories",
+  "dirCategoryAddBtn": "Add category",
+  "dirCategoryCannotDelete": "Cannot delete \"{name}\" — has {count} tenants",
+  "@dirCategoryCannotDelete": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+
+  "dirAmenityTitle": "Mall Amenities",
+  "dirAmenitySelectedCount": "{count} selected",
+  "@dirAmenitySelectedCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirAmenityParking": "Parking",
+  "dirAmenityWifi": "Wi-Fi",
+  "dirAmenityPrayerRoom": "Prayer room",
+  "dirAmenityRestrooms": "Restrooms",
+  "dirAmenityElevator": "Elevator",
+  "dirAmenityAC": "Air conditioning",
+  "dirAmenityKidsArea": "Kids area",
+  "dirAmenityWheelchair": "Wheelchair access",
+  "dirAmenityATM": "ATM",
+  "dirAmenitySecurity": "Security",
+  "dirAmenityCCTV": "CCTV",
+  "dirAmenityCustomerService": "Customer service",
+  "dirAmenitySmokingArea": "Smoking area",
+  "dirAmenityEVCharging": "EV charging",
+  "dirAmenityPharmacy": "Pharmacy",
+
+  "dirFeaturedTitle": "Featured Tenants",
+  "dirFeaturedCount": "{selected}/{max} featured",
+  "@dirFeaturedCount": {
+    "placeholders": {
+      "selected": {"type": "int"},
+      "max": {"type": "int"}
+    }
+  },
+  "dirFeaturedNoLinked": "No linked tenants",
+
+  "dirMapsTitle": "Floor Maps",
+  "dirMapsAddFloorsFirst": "Add floors first",
+  "dirMapsUpload": "Upload floor map",
+  "dirMapsFileHint": "PNG, JPG — up to 5 MB",
+
+  "dirTenantFormEditTitle": "Edit tenant",
+  "dirTenantFormAddTitle": "Add tenant",
+  "dirTenantFormSearchHint": "Search for a page on Honak...",
+  "dirTenantFormSearchEmpty": "Search for a page to link as tenant",
+  "dirTenantFormCreateNew": "Or create new tenant",
+  "dirTenantFormPageAlreadyLinked": "This page is already linked",
+  "dirTenantFormChange": "Change",
+  "dirTenantFormUnitLabel": "Unit number",
+  "dirTenantFormUnitHint": "e.g. A-12",
+  "dirTenantFormFloorLabel": "Floor",
+  "dirTenantFormCategoryLabel": "Category",
+  "dirTenantFormSearchForPage": "Search for a page",
+  "dirTenantFormNameLabel": "Tenant name",
+  "dirTenantFormNameHint": "Store or business name",
+  "dirTenantFormDuplicateName": "A tenant with this name already exists",
+  "dirTenantFormPhoneLabel": "Phone number (optional)",
+  "dirTenantFormPhoneHint": "07XXXXXXXX",
+  "dirTenantFormInYourMall": "In your mall",
+  "dirTenantFormFollowers": "{count} followers",
+  "@dirTenantFormFollowers": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "dirTenantFormInviteBtn": "Invite",
+
+  "dirInviteSheetTitle": "Send Invite",
+  "dirInviteMessage": "Hello, you're invited to join the {mallName} directory on Honak!\nUnit: {unit}\nCategory: {category}\n\nJoin now: https://honak.app/invite/mock",
+  "@dirInviteMessage": {
+    "placeholders": {
+      "mallName": {"type": "String"},
+      "unit": {"type": "String"},
+      "category": {"type": "String"}
+    }
+  },
+  "dirInviteWhatsApp": "WhatsApp",
+  "dirInviteSMS": "SMS",
+  "dirInviteCopy": "Copy",
+  "dirInviteWhatsAppSoon": "Coming soon — WhatsApp",
+  "dirInviteSMSSoon": "Coming soon — SMS",
+  "dirInviteCopied": "Invite copied",
+
+  "dirUnlinkTitle": "Unlink \"{name}\"",
+  "@dirUnlinkTitle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "dirUnlinkReason": "Why do you want to unlink?",
+  "dirUnlinkReasonNotTenant": "No longer a tenant",
+  "dirUnlinkReasonWrongLink": "Wrong link",
+  "dirUnlinkReasonOther": "Other",
+  "dirUnlinkConfirmBtn": "Unlink",
+
+  "dirDeleteTitle": "Delete \"{name}\"",
+  "@dirDeleteTitle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "dirDeleteWarning": "This tenant will be permanently deleted from the directory. This action cannot be undone.",
+  "dirDeleteConfirmBtn": "Delete permanently",
+
+  "dirInviteConfirmTitle": "Are you sure?",
+  "dirInviteConfirmDesc": "An invite will be sent to this page to join your mall directory",
+  "dirInviteConfirmCancel": "No, go back",
+  "dirInviteConfirmYes": "Yes, invite them",
+
+  "queueBoard": "Queue Board",
+  "queueWaiting": "Waiting",
+  "queueInProgress": "In Progress",
+  "queueCompleted": "Completed",
+  "queueWaitTime": "Wait Time",
+  "queueEstimatedWaitMin": "~{min} min",
+  "@queueEstimatedWaitMin": {
+    "placeholders": {
+      "min": {"type": "int"}
+    }
+  },
+  "queuePaused": "Queue Paused",
+  "queuePauseQueue": "Pause Queue",
+  "queuePausedTemporarily": "Queue Paused Temporarily",
+  "queuePauseCustomerNotice": "Customers cannot join the queue at this time",
+  "queueResume": "Resume",
+  "queueNoOneWaiting": "No one waiting",
+  "queueNoVehiclesInProgress": "No vehicles in progress",
+  "queueNoVehiclesReady": "No vehicles ready",
+  "queueStartService": "Start Service",
+  "queueReadyCheck": "Ready",
+  "queuePickedUp": "Picked Up",
+  "queueReadyForPickup": "Ready for Pickup",
+  "queueCompletedToday": "Completed Today ({count})",
+  "@queueCompletedToday": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "queueNoCompletedToday": "No completed orders today",
+  "queueDaySummary": "Today's Summary",
+  "queueTotalVehicles": "Total Vehicles",
+  "queueCompletedRevenueJod": "Completed Revenue (JOD)",
+  "queuePendingRevenueJod": "Pending Revenue (JOD)",
+  "queueRevenueJod": "Revenue (JOD)",
+  "queueCurrentWaitTime": "Current Wait Time",
+  "queueApproxMinutes": "~{min} minutes",
+  "@queueApproxMinutes": {
+    "placeholders": {
+      "min": {"type": "int"}
+    }
+  },
+  "queueStatusUpdated": "Status updated",
+  "queueNoShowRecorded": "No-show recorded",
+  "queueEntryRemoved": "Removed",
+  "queueEntryAdded": "Added to queue",
+  "queueChatComingSoon": "Chat coming soon",
+  "queueStatusWaiting": "Waiting",
+  "queueStatusOnTheWay": "On the Way",
+  "queueStatusInProgress": "In Progress",
+  "queueStatusReady": "Ready for Pickup",
+  "queueStatusCompleted": "Completed",
+  "queueStatusNoShow": "No Show",
+  "queueLabelWaiting": "Waiting",
+  "queueLabelInProgress": "In Progress",
+  "queueLabelReady": "Ready",
+  "queueLabelCompleted": "Completed",
+  "queueLabelNoShow": "No Show",
+  "queueLabelOnTheWay": "On the Way",
+  "queueSubscriber": "Subscriber",
+  "queueArrival": "Arrival",
+  "queueCustomer": "Customer",
+  "queueCall": "Call",
+  "queueChat": "Chat",
+  "queueVehicle": "Vehicle",
+  "queueService": "Service",
+  "queueEstimatedDuration": "Estimated duration: ~{min} min",
+  "@queueEstimatedDuration": {
+    "placeholders": {
+      "min": {"type": "int"}
+    }
+  },
+  "queueAddOns": "Add-ons",
+  "queueSubtotalBeforeDiscount": "Subtotal before discount",
+  "queueDiscountLabel": "Discount",
+  "queueDiscountPercent": "Discount {percent}%",
+  "@queueDiscountPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "queueGrandTotal": "Grand Total",
+  "queueDocPhotos": "Documentation Photos",
+  "queuePhotoBefore": "Before Photo",
+  "queuePhotoAfter": "After Photo",
+  "queuePhotoCaptured": "Captured",
+  "queueNotes": "Notes",
+  "queueTimings": "Timings",
+  "queueTimingArrival": "Arrival",
+  "queueTimingServiceStart": "Service Start",
+  "queueTimingCompleted": "Completed",
+  "queueTimingReady": "Ready",
+  "queueActivityLog": "Activity Log",
+  "queueSourceReserve": "Reserved",
+  "queueSourcePhone": "Phone",
+  "queueSourceWalkIn": "Walk-in",
+  "queueOnTheWayBadge": "On way",
+  "queueMinRemaining": "{min} min left",
+  "@queueMinRemaining": {
+    "placeholders": {
+      "min": {"type": "int"}
+    }
+  },
+  "queueMinOvertime": "+{min} min overtime",
+  "@queueMinOvertime": {
+    "placeholders": {
+      "min": {"type": "int"}
+    }
+  },
+  "queueNoShowLabel": "No Show",
+  "queueChangeStatus": "Change Order Status",
+  "queueAddOnCount": "+{count} add-on",
+  "@queueAddOnCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "queueCheckinTime": "Check-in time: {time}",
+  "@queueCheckinTime": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "queueExpandedNotes": "Notes",
+  "queueExpandedAddOns": "Add-ons:",
+  "queueElapsedMinutes": "{elapsed} min elapsed of ~{total} min",
+  "@queueElapsedMinutes": {
+    "placeholders": {
+      "elapsed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "queueSelectService": "Select Service",
+  "queueCustomerDetails": "Customer Details",
+  "queueCustomerName": "Customer Name *",
+  "queueCustomerNameHint": "e.g. Ahmad",
+  "queuePhoneOptional": "Phone Number (optional)",
+  "queueVehicleType": "Vehicle Type",
+  "queueVehicleTypeHint": "Enter vehicle type...",
+  "queueVehicleColor": "Vehicle Color",
+  "queueVehicleColorHint": "Enter vehicle color...",
+  "queuePlateOptional": "Plate Number (optional)",
+  "queueNotesOptional": "Notes (optional)",
+  "queueNotesHint": "Any special notes...",
+  "queueAddToQueue": "Add to Queue",
+  "queueAddDiscount": "Add Discount",
+  "queueDiscountFixed": "Fixed Amount (JOD)",
+  "queueDiscountPercentage": "Percentage (%)",
+  "queueDiscountReason": "Discount Reason",
+  "queueDiscountReasonHint": "Discount reason...",
+  "queueAfterDiscount": "After Discount",
+  "queueRemoveDiscount": "Remove Discount",
+  "queueOther": "Other",
+  "queueMostPopular": "Most Popular",
+  "queueChange": "Change",
+  "queueActivityEntryCreated": "Added to queue",
+  "queueActivityStatusChanged": "Status changed",
+  "queueActivityPhotoBefore": "Before photo",
+  "queueActivityPhotoAfter": "After photo",
+  "queueActivityNoShow": "No show",
+  "queueActivityPaymentMarked": "Payment marked",
+  "queueActivityNoteAdded": "Note added",
+  "queueActivityOnTheWay": "Customer on the way",
+  "queueActivityCustomerRole": "Customer",
+  "queueActivityPaymentCash": "Cash",
+  "queueCurrentQueue": "Current Queue",
+  "queueWaitMinutes": "min wait",
+  "queueCarReady": "Your car is ready!",
+  "queuePayOnPickup": "Pay on pickup — {methods}",
+  "@queuePayOnPickup": {
+    "placeholders": {
+      "methods": {"type": "String"}
+    }
+  },
+  "queueTotal": "Total",
+  "queueYouAreInQueue": "You're in queue",
+  "queueYourPosition": "Your position",
+  "queueAheadCount": "Ahead of you",
+  "queueWaitTimeLabel": "Wait time",
+  "queueImOnMyWay": "I'm on my way",
+  "queueOnMyWayConfirmed": "You're on your way",
+  "queueRequestModification": "Request Modification",
+  "queueCancelReservation": "Cancel Reservation",
+  "queueWorkingOnCar": "Working on your car",
+  "queueMinutesPassed": "{min} min elapsed",
+  "@queueMinutesPassed": {
+    "placeholders": {
+      "min": {"type": "int"}
+    }
+  },
+  "queueOutOfMinutes": "of {min} min",
+  "@queueOutOfMinutes": {
+    "placeholders": {
+      "min": {"type": "int"}
+    }
+  },
+  "queueCannotCancelNotice": "Cannot cancel after service starts — use chat instead",
+  "queueTodayByQueue": "Today — By Queue",
+  "queueTodayByQueueSubtitle": "Reserve your spot and come when it's your turn",
+  "queueBookLater": "Book Later",
+  "queueBookLaterSubtitle": "Choose a day and time that suits you",
+  "queueQueueSizeWaiting": "{count} waiting",
+  "@queueQueueSizeWaiting": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "queueOptionalAddOns": "Optional Add-ons",
+  "queueReserveSpot": "Reserve Your Spot",
+  "queueModifyRequest": "Request Modification",
+  "queueWhatToModify": "What would you like to change?",
+  "queueChangeService": "Change Service",
+  "queueModifyAddOns": "Modify Add-ons",
+  "queueAddNote": "Add a Note",
+  "queueSelectNewService": "Select New Service",
+  "queueNoteLabel": "Note",
+  "queueNoteHint": "Write your note here...",
+  "queueSubmitModification": "Submit Modification Request",
+  "queueModificationSent": "Modification request sent",
+  "queueModificationNotice": "You'll be notified when it's reviewed",
+  "queueCancelConfirmTitle": "Cancel Reservation?",
+  "queueNoChargeNotice": "No charges will be applied.",
+  "queueConfirmCancel": "Yes, Cancel Reservation",
+  "queueStayInQueue": "No, Stay in Queue",
+  "queueServiceCompleted": "Service completed successfully",
+  "queueServiceSummary": "{pkg} • {price} • {min} min",
+  "@queueServiceSummary": {
+    "placeholders": {
+      "pkg": {"type": "String"},
+      "price": {"type": "String"},
+      "min": {"type": "int"}
+    }
+  },
+  "queueRebook": "Book Again",
+  "queueDetails": "Details",
+  "queueNoShowBanner": "Did not show up",
+  "queueRebookNew": "Book Again",
+  "queueBookingCancelled": "Reservation cancelled",
+  "queueVehicleSedan": "Sedan",
+  "queueVehicleSuv": "SUV",
+  "queueVehicleHatchback": "Hatchback",
+  "queueVehiclePickup": "Pickup",
+  "queueVehicleMiniTruck": "Mini Truck",
+  "queueVehicleVan": "Van",
+  "queueColorWhite": "White",
+  "queueColorBlack": "Black",
+  "queueColorSilver": "Silver",
+  "queueColorGray": "Gray",
+  "queueColorRed": "Red",
+  "queueColorBlue": "Blue",
+  "queueColorNavy": "Navy",
+  "queueColorBeige": "Beige",
+  "queueColorGreen": "Green",
+  "queueAddOnLeatherCleaning": "Leather Seat Cleaning",
+  "queueAddOnTirePolish": "Tire Polish",
+  "queueAddOnPetHairRemoval": "Pet Hair Removal",
+  "queueAddOnPremiumFragrance": "Premium Fragrance",
+  "queueAddOnTrunkCleaning": "Trunk Cleaning",
+  "queueDiscountReasonVip": "VIP Customer",
+  "queueDiscountReasonCompensation": "Service compensation",
+  "queueDiscountReasonSpecialOffer": "Special offer",
+  "queueDiscountReasonSubscription": "Subscription",
+  "queueDiscountReasonFirstVisit": "First visit",
+  "queueDiscountReasonOther": "Other",
+
+  "bizReqManageTitle": "Order Management",
+  "bizReqNewRequests": "New requests",
+  "bizReqAcceptedRequests": "Accepted requests",
+  "bizReqInProgress": "In progress",
+  "bizReqCompletedRequests": "Completed requests",
+  "bizReqAutoApproval": "Auto approval",
+  "bizReqManualApproval": "Manual approval",
+  "bizReqNoRequestsLabel": "No {label}",
+  "@bizReqNoRequestsLabel": {
+    "placeholders": {
+      "label": {"type": "String"}
+    }
+  },
+  "bizReqOrdersAppearHere": "Orders will appear here when received",
+  "bizReqLoadError": "Error loading orders",
+
+  "bizReqStatusPending": "Pending",
+  "bizReqStatusAccepted": "Accepted",
+  "bizReqStatusInProgress": "In progress",
+  "bizReqStatusPreparing": "Preparing",
+  "bizReqStatusReady": "Ready",
+  "bizReqStatusDelivered": "Delivered",
+  "bizReqStatusCompleted": "Completed",
+  "bizReqStatusDeclined": "Declined",
+
+  "bizReqTimeNow": "Now",
+  "bizReqTimeMinutes": "{count}m ago",
+  "@bizReqTimeMinutes": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqTimeHours": "{count}h ago",
+  "@bizReqTimeHours": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqTimeDays": "{count}d ago",
+  "@bizReqTimeDays": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqTimeWeeks": "{count}w ago",
+  "@bizReqTimeWeeks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "bizReqItemsCount": "{count} items",
+  "@bizReqItemsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqItems": "Items",
+  "bizReqTotal": "Total",
+  "bizReqCustomerNote": "Customer note",
+  "bizReqDeclineReason": "Decline reason",
+
+  "bizReqAccept": "Accept",
+  "bizReqAlternative": "Alternative",
+  "bizReqDecline": "Decline",
+  "bizReqAcceptOrder": "Accept order",
+  "bizReqStartExecution": "Start execution",
+  "bizReqMarkDelivered": "Delivered",
+  "bizReqReadyForDelivery": "Ready for delivery",
+  "bizReqChat": "Chat",
+  "bizReqSendReceipt": "Send receipt",
+
+  "bizReqAccepted": "Order accepted",
+  "bizReqDeclined": "Order declined",
+  "bizReqSuggestionSent": "Suggestion sent",
+  "bizReqStatusUpdated": "Status updated: {label}",
+  "@bizReqStatusUpdated": {
+    "placeholders": {
+      "label": {"type": "String"}
+    }
+  },
+  "bizReqError": "An error occurred",
+
+  "bizReqDetailTitle": "Order Details",
+  "bizReqSummaryTab": "Summary",
+  "bizReqLogTab": "Log",
+  "bizReqSuggestAlternative": "Suggest alternative",
+  "bizReqMessageCustomer": "Message {name}",
+  "@bizReqMessageCustomer": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+
+  "bizReqTypeOrder": "Purchase order",
+  "bizReqTypeBooking": "Service booking",
+  "bizReqTypeInspection": "Inspection request",
+  "bizReqTypeInquiry": "Inquiry",
+  "bizReqTypeReservation": "Reservation",
+
+  "bizReqPendingBanner": "Customer sent a request — waiting for your response",
+  "bizReqPendingBannerHint": "You can accept or decline the order",
+  "bizReqAcceptedBanner": "Order accepted — awaiting execution",
+  "bizReqNoLogYet": "No activity log yet",
+
+  "bizReqActivityCreated": "Request submitted",
+  "bizReqActivityCustomer": "Customer",
+  "bizReqActivityStatusChanged": "Status changed",
+  "bizReqActivityDeclineReason": "Decline reason added",
+  "bizReqActivityCustomerNote": "Customer note",
+  "bizReqActivityPaymentRecorded": "Payment recorded",
+  "bizReqActivityCash": "Cash",
+  "bizReqActivityManager": "Manager",
+  "bizReqActivityEmployee": "Employee",
+  "bizReqActivityEmployeeFemale": "Employee",
+  "bizReqActivitySupervisor": "Supervisor",
+
+  "bizReqDeclineNotAvailable": "Not available",
+  "bizReqDeclineOutOfRange": "Out of delivery range",
+  "bizReqDeclineBusy": "Currently busy",
+  "bizReqDeclinePriceChanged": "Price changed",
+  "bizReqDeclineTitle": "Decline reason",
+  "bizReqDeclineOtherReason": "Other reason",
+  "bizReqDeclineWriteReason": "Write reason...",
+  "bizReqDeclineConfirm": "Decline order",
+  "bizReqDeclineError": "Error while declining",
+
+  "bizReqAltTitle": "Suggest alternative",
+  "bizReqAltChooseType": "Choose suggestion type",
+  "bizReqAltAvailable": "Alternative available",
+  "bizReqAltSuggestOther": "We suggest other options",
+  "bizReqAltTextOnly": "Text note only",
+  "bizReqAltChooseItems": "Choose suggested alternatives",
+  "bizReqAltPickItems": "Pick alternatives",
+  "bizReqAltSelectProducts": "Select from products",
+  "bizReqAltAddMore": "Add more",
+  "bizReqAltSuggestedCount": "Suggested alternatives ({count})",
+  "@bizReqAltSuggestedCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqAltAddNote": "Add a note for the customer",
+  "bizReqAltNoteHint": "e.g. Item unavailable, but a similar alternative exists...",
+  "bizReqAltSend": "Send suggestion",
+
+  "bizReqTrucks": "Trucks",
+  "bizReqTrucksActive": "{count} active",
+  "@bizReqTrucksActive": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqTrucksStats": "{delivered} delivered · {remaining} remaining",
+  "@bizReqTrucksStats": {
+    "placeholders": {
+      "delivered": {"type": "int"},
+      "remaining": {"type": "int"}
+    }
+  },
+  "bizReqTruckOnRoute": "On route",
+  "bizReqTruckNotStarted": "Not started",
+  "bizReqTruckComplete": "Complete",
+  "bizReqTruckOffToday": "Day off",
+  "bizReqTruckOrdersDeferred": "Orders will carry over to next delivery day",
+
+  "bizReqInvFull": "Full",
+  "bizReqInvEmpty": "Empty",
+  "bizReqInvReserved": "Reserved",
+  "bizReqInvFullCount": "{count} full",
+  "@bizReqInvFullCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqInvEmptyCount": "{count} empty",
+  "@bizReqInvEmptyCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqInvReservedCount": "{count} reserved",
+  "@bizReqInvReservedCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqInvLoadedOf": "of {capacity} loaded",
+  "@bizReqInvLoadedOf": {
+    "placeholders": {
+      "capacity": {"type": "int"}
+    }
+  },
+  "bizReqInvCollectedToday": "Collected today",
+  "bizReqInvAvailableNew": "{count} available for new orders",
+  "@bizReqInvAvailableNew": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqInvReservedUpcoming": "{count} reserved for upcoming orders",
+  "@bizReqInvReservedUpcoming": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqInvEmptyWarning": "Truck is empty — needs reloading",
+  "bizReqInvShortageWarning": "Insufficient stock — {count} orders may need deferral",
+  "@bizReqInvShortageWarning": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bizReqInvLowWarning": "Low stock — consider reloading",
+
+  "bizReqWalkUpTitle": "Quick order",
+  "bizReqWalkUpSource": "Order source",
+  "bizReqWalkUpSourceWalkUp": "Walk-up",
+  "bizReqWalkUpSourcePhone": "Phone",
+  "bizReqWalkUpSourceWhatsapp": "WhatsApp",
+  "bizReqWalkUpWho": "Who?",
+  "bizReqWalkUpCustomerName": "Customer name",
+  "bizReqWalkUpPhoneOptional": "Phone number (optional)",
+  "bizReqWalkUpDefaultCustomer": "Walk-up customer",
+  "bizReqWalkUpGpsPoint": "GPS point",
+  "bizReqWalkUpEmpties": "Empties to collect",
+  "bizReqWalkUpPayment": "Payment",
+  "bizReqWalkUpPayCash": "Cash",
+  "bizReqWalkUpPayCredits": "Credits",
+  "bizReqWalkUpPayOnAccount": "On account",
+  "bizReqWalkUpNoteHint": "Note (optional)",
+  "bizReqWalkUpAddDeliver": "Add & deliver now",
+  "bizReqWalkUpAddQueue": "Add to queue",
+
+  "bizReqDmExit": "Exit",
+  "bizReqDmDeliveredToast": "Delivered order for {name}",
+  "@bizReqDmDeliveredToast": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmSkippedToast": "Skipped {name}",
+  "@bizReqDmSkippedToast": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmWalkUpDelivered": "Delivered order for {name}",
+  "@bizReqDmWalkUpDelivered": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmAddedToQueue": "Added {name} to queue",
+  "@bizReqDmAddedToQueue": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmReloaded": "Reloaded — fresh start",
+  "bizReqDmNotified": "Notified {name} — heading out",
+  "@bizReqDmNotified": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmCancelledNav": "Navigation cancelled — pick next",
+  "bizReqDmUndone": "Undone delivery for {name}",
+  "@bizReqDmUndone": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmEditSaved": "Edited delivery for {name}",
+  "@bizReqDmEditSaved": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmHeadingTo": "Heading to",
+  "bizReqDmNewCustomer": "New",
+  "bizReqDmCreditsLabel": "Credits: {count}",
+  "@bizReqDmCreditsLabel": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqDmMap": "Map",
+  "bizReqDmCall": "Call",
+  "bizReqDmSkip": "Skip",
+  "bizReqDmCancel": "Cancel",
+  "bizReqDmSwipeDeliver": "Swipe to deliver",
+  "bizReqDmRouteComplete": "Route complete!",
+  "bizReqDmAllDelivered": "All orders delivered",
+  "bizReqDmQueueRemaining": "Queue ({count} remaining)",
+  "@bizReqDmQueueRemaining": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqDmPickNext": "Pick next ({count} remaining)",
+  "@bizReqDmPickNext": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqDmBottle": "bottle",
+  "bizReqDmSwipeStart": "Swipe to start delivery",
+  "bizReqDmSwapCurrent": "Swap with current order",
+  "bizReqDmSwapped": "Swapped — {name} is next",
+  "@bizReqDmSwapped": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqDmQuickOrder": "Quick order",
+  "bizReqDmReload": "Reload",
+  "bizReqDmEndRoute": "End",
+  "bizReqDmComingSoon": "Coming soon",
+
+  "bizReqSheetPayCash": "Cash",
+  "bizReqSheetPayCredits": "Credits",
+  "bizReqSheetPayOnAccount": "On account",
+  "bizReqSheetSourceAuto": "Auto",
+  "bizReqSheetSourceApp": "App order",
+  "bizReqSheetSourceWalkUp": "Walk-up",
+  "bizReqSheetSourcePhone": "Call",
+  "bizReqSheetSourceWhatsapp": "WhatsApp",
+  "bizReqSheetSourceAdHoc": "Manual",
+  "bizReqSheetDelivered": "Delivered ({count})",
+  "@bizReqSheetDelivered": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqSheetUnit": "unit",
+  "bizReqSheetUnitCount": "{count} units",
+  "@bizReqSheetUnitCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqSheetEmptyCount": "{count} empty",
+  "@bizReqSheetEmptyCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqSheetEditData": "Edit data",
+  "bizReqSheetUndo": "Undo",
+  "bizReqSheetExpired": "More than 30 min — can't edit",
+  "bizReqSheetEditTitle": "Edit delivery data",
+  "bizReqSheetEditSubtitle": "Modify quantities or payment method",
+  "bizReqSheetEditWarning": "Edit will be logged in activity with time and original values",
+  "bizReqSheetFullDelivered": "Full delivered",
+  "bizReqSheetEmptiesCollected": "Empties collected",
+  "bizReqSheetNoteHint": "Note (optional)",
+  "bizReqSheetSaveEdit": "Save changes",
+  "bizReqSheetConfirmTitle": "Confirm delivery",
+  "bizReqSheetExchangeDiff": "Exchange difference",
+  "bizReqSheetExchange": "Exchange (empty \u2194 full)",
+  "bizReqSheetNewNoEmpty": "New (no empty)",
+  "bizReqSheetPaymentChanged": "Payment changed from {from} to {to}",
+  "@bizReqSheetPaymentChanged": { "placeholders": { "from": {"type": "String"}, "to": {"type": "String"} } },
+  "bizReqSheetCreditsAfter": "Credits: {before} \u2190 {after} after confirm",
+  "@bizReqSheetCreditsAfter": { "placeholders": { "before": {"type": "int"}, "after": {"type": "int"} } },
+  "bizReqSheetConfirmDelivery": "Confirm delivery",
+  "bizReqSheetSkipTitle": "Skip delivery?",
+  "bizReqSheetSkipReasonHint": "Reason...",
+  "bizReqSheetMoveTo": "Move to:",
+  "bizReqSheetSkipConfirm": "Skip & next",
+  "bizReqSheetReloadTitle": "New reload",
+  "bizReqSheetReloadSubtitle": "Returned to depot and loaded truck",
+  "bizReqSheetFullLoaded": "Full loaded",
+  "bizReqSheetEmptiesDropped": "Empties dropped off",
+  "bizReqSheetReloadConfirm": "Confirm — fresh start",
+
+  "bizReqSkipNotHome": "Customer not home",
+  "bizReqSkipCantAccess": "Can't access location",
+  "bizReqSkipCustomerDelay": "Customer asked to defer",
+  "bizReqSkipOutOfStock": "Out of stock",
+  "bizReqSkipOther": "Other reason",
+  "bizReqSkipDestEndOfQueue": "End of today's queue",
+  "bizReqSkipDestTomorrow": "Tomorrow's queue",
+  "bizReqSkipDestRemove": "Remove from queue",
+
+  "bizReqSumTitle": "Route summary",
+  "bizReqSumDuration": "Duration: {hours} hours",
+  "@bizReqSumDuration": { "placeholders": { "hours": {"type": "int"} } },
+  "bizReqSumDurationMinutes": "Duration: {hours}h {minutes}m",
+  "@bizReqSumDurationMinutes": { "placeholders": { "hours": {"type": "int"}, "minutes": {"type": "int"} } },
+  "bizReqSumDelivered": "Delivered",
+  "bizReqSumSkipped": "Skipped",
+  "bizReqSumNotDelivered": "Not delivered",
+  "bizReqSumInventory": "Inventory",
+  "bizReqSumStartedWith": "Started with",
+  "bizReqSumFullCount": "{count} full",
+  "@bizReqSumFullCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqSumReloads": "Reloads",
+  "bizReqSumReloadTimes": "+{count} times",
+  "@bizReqSumReloadTimes": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqSumDeliveredCount": "-{count} full",
+  "@bizReqSumDeliveredCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqSumRemaining": "Remaining",
+  "bizReqSumEmptiesCollected": "Empties collected",
+  "bizReqSumRevenue": "Revenue",
+  "bizReqSumPrepaid": "Prepaid credits",
+  "bizReqSumCash": "Cash",
+  "bizReqSumOnAccount": "On account",
+  "bizReqSumTotalUnits": "Total units",
+  "bizReqSumPaymentChanges": "Payment method changes:",
+  "bizReqSumDriverNotes": "Driver notes:",
+  "bizReqSumSources": "Order sources",
+  "bizReqSumSkippedList": "Skipped:",
+  "bizReqSumTomorrow": "Tomorrow",
+  "bizReqSumRemoved": "Removed",
+  "bizReqSumEndRoute": "End route",
+
+  "bizReqTdOffToday": "Off today",
+  "bizReqTdUnknown": "Unknown",
+  "bizReqTdOverview": "Overview",
+  "bizReqTdActivity": "Activity",
+  "bizReqTdRouteProgress": "Route progress",
+  "bizReqTdDeliveryCount": "{delivered}/{total} delivered",
+  "@bizReqTdDeliveryCount": { "placeholders": { "delivered": {"type": "int"}, "total": {"type": "int"} } },
+  "bizReqTdCurrent": "Current",
+  "bizReqTdRemaining": "Remaining",
+  "bizReqTdSkipCount": "Skipped",
+  "bizReqTdInventoryTitle": "Inventory",
+  "bizReqTdEmptyCollected": "Empty collected",
+  "bizReqTdFullOf": "Full (of {capacity})",
+  "@bizReqTdFullOf": { "placeholders": { "capacity": {"type": "int"} } },
+  "bizReqTdTruckOffToday": "Truck is off today",
+  "bizReqTdOrdersMoveTo": "Orders will move to {day}",
+  "@bizReqTdOrdersMoveTo": { "placeholders": { "day": {"type": "String"} } },
+  "bizReqTdNoDeliveryDays": "No delivery days set",
+  "bizReqTdPendingDeferred": "{count} orders will auto-defer to {day}",
+  "@bizReqTdPendingDeferred": { "placeholders": { "count": {"type": "int"}, "day": {"type": "String"} } },
+  "bizReqTdNoPending": "No pending orders",
+  "bizReqTdDriver": "Driver",
+  "bizReqTdCoverageZones": "Coverage zones",
+  "bizReqTdAreaKm2": "{area} km\u00B2",
+  "@bizReqTdAreaKm2": { "placeholders": { "area": {"type": "String"} } },
+  "bizReqTdSchedule": "Schedule",
+  "bizReqTdWorkHours": "Work hours",
+  "bizReqTdCapacity": "Capacity",
+  "bizReqTdEmpties": "Empties",
+  "bizReqTdStartRoute": "Start route",
+  "bizReqTdContinueRoute": "Continue route",
+  "bizReqTdViewSummary": "View summary",
+  "bizReqTdStartDespiteOff": "Start route despite off day",
+  "bizReqTdExceptionalOp": "Exceptional operation — this is a truck off day",
+  "bizReqTdSystemUser": "System user",
+  "bizReqTdTodayActivity": "Today's activity",
+  "bizReqTdRouteNotStarted": "Route not started yet",
+  "bizReqTdExceptionalOpLog": "Exceptional operation on off day",
+  "bizReqTdActivatedBy": "Activated by {name}",
+  "@bizReqTdActivatedBy": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqTdRouteStart": "Route start",
+  "bizReqTdLoadedUnits": "Loaded {count} units",
+  "@bizReqTdLoadedUnits": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqTdDelivery": "Delivery — {name}",
+  "@bizReqTdDelivery": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqTdDeliveryDetail": "{full} units \u00B7 {empty} empty{extra}",
+  "@bizReqTdDeliveryDetail": { "placeholders": { "full": {"type": "int"}, "empty": {"type": "int"}, "extra": {"type": "String"} } },
+  "bizReqTdSkipLabel": "Skip — {name}",
+  "@bizReqTdSkipLabel": { "placeholders": { "name": {"type": "String"} } },
+  "bizReqTdRouteEnd": "Route end",
+  "bizReqTdRouteEndDetail": "{delivered} delivered \u00B7 {empty} empty",
+  "@bizReqTdRouteEndDetail": { "placeholders": { "delivered": {"type": "int"}, "empty": {"type": "int"} } },
+  "bizReqTdRescheduledTomorrow": "\u2190 Deferred to tomorrow",
+  "bizReqTdRescheduledTo": "\u2190 Deferred to {dest}",
+  "@bizReqTdRescheduledTo": { "placeholders": { "dest": {"type": "String"} } },
+  "bizReqTdPreviousRoutes": "Previous routes ({count})",
+  "@bizReqTdPreviousRoutes": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqTdDeliveryBadge": "{count} delivered",
+  "@bizReqTdDeliveryBadge": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqTdSkipBadge": "{count} skipped",
+  "@bizReqTdSkipBadge": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqTdNewNoEmpty": "{count} new (no empty)",
+  "@bizReqTdNewNoEmpty": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqTdExtraEmpty": "{count} extra empty",
+  "@bizReqTdExtraEmpty": { "placeholders": { "count": {"type": "int"} } },
+  "bizReqTdNoExchange": "No exchange",
+  "bizReqTdDaySat": "Sat",
+  "bizReqTdDaySun": "Sun",
+  "bizReqTdDayMon": "Mon",
+  "bizReqTdDayTue": "Tue",
+  "bizReqTdDayWed": "Wed",
+  "bizReqTdDayThu": "Thu",
+  "bizReqTdDayFri": "Fri",
+  "bizReqTdRouteTime": "{start} – {end} ({hours}h {mins}m)",
+  "bizReqDmDistMeters": "{meters}m",
+  "bizReqDmDistKm": "{km}km",
+
+  "bizReqCqDelivered": "Delivered",
+  "bizReqCqDeliveredAt": "Delivered at {time}",
+  "bizReqCqDeliveredAtBy": "Delivered at {time} by {driver}",
+  "bizReqCqDeliveredQty": "{qty} bottles delivered",
+  "bizReqCqDeliveredQtyEmpties": "{qty} bottles delivered · {empties} empties collected",
+  "bizReqCqCreditsDeducted": "Credits: {before} → {after} (auto-deducted)",
+  "bizReqCqSkipped": "Delivery skipped",
+  "bizReqCqRescheduled": "Rescheduled: {date}",
+  "bizReqCqQueued": "Your order is on today's route",
+  "bizReqCqQueuedEta": "Estimated: {min} — {max} minutes",
+  "bizReqCqQueuedToday": "Delivery today",
+  "bizReqCqOnRoute": "Driver in the area",
+  "bizReqCqOnRouteApproaching": "Driver approaching",
+  "bizReqCqNext": "Driver is on the way to you!",
+  "bizReqCqNextEta": "Estimated: 5 — 10 minutes",
+  "bizReqCqPrepare": "Get ready:",
+  "bizReqCqDriverLabel": "Driver: {name}",
+  "bizReqCqCall": "Call",
+
+  "bizReqEstTrackingType": "Tracking type",
+  "bizReqEstCustomerSees": "What does the customer see?",
+  "bizReqEstQueuePosition": "Queue position",
+  "bizReqEstQueuePositionDesc": "Example: You are #3 on today's route",
+  "bizReqEstDriverContact": "Driver name & phone",
+  "bizReqEstDriverContactDesc": "Customer can call the driver directly",
+  "bizReqEstLiveTracking": "Live tracking",
+  "bizReqEstLiveTrackingDesc": "Live truck map (coming soon)",
+  "bizReqEstDeliveryWindow": "Typical delivery time",
+  "bizReqEstDeliveryWindowHint": "Example: 1-2 hours after route start",
+  "bizReqEstDeliveryDays": "Delivery days",
+  "bizReqEstDeliveryDaysHint": "Example: Sun, Tue, Thu",
+  "bizReqEstOffDayMessage": "Off-day message",
+  "bizReqEstOffDayMessageHint": "Example: Next delivery: Sunday morning",
+  "bizReqEstModeRoute": "Route-based",
+  "bizReqEstModeRouteDesc": "Customer sees queue position and remaining stops",
+  "bizReqEstModeTime": "Time estimate",
+  "bizReqEstModeTimeDesc": "Shows \"within 30-60 minutes\" without queue details",
+  "bizReqEstModeNextDay": "Next delivery day",
+  "bizReqEstModeNextDayDesc": "Customer sees next delivery day only (no tracking)",
+  "bizReqEstComingSoon": "Coming soon",
+  "bizReqEstPreviewTitle": "How the customer sees it",
+  "bizReqEstPreviewDriver": "Mahmoud",
+
+  "bizReqDepTitle": "Deposit & Payments",
+  "bizReqDepSummary": "{deposited} / {required} deposit · Total {total}",
+  "bizReqDepPayments": "Payments",
+  "bizReqDepRefunds": "Refunds",
+  "bizReqDepRefund": "Refund",
+  "bizReqDepRecordPayment": "Record payment",
+  "bizReqDepRequired": "Required",
+  "bizReqDepReceived": "Received",
+  "bizReqDepRemaining": "Remaining",
+  "bizReqDepFormTitle": "Record payment",
+  "bizReqDepAmountHint": "Amount (JOD)",
+  "bizReqDepCliqAccount": "CliQ account name",
+  "bizReqDepBankName": "Bank name",
+  "bizReqDepAttachReceipt": "Attach receipt photo",
+  "bizReqDepNotesHint": "Notes (optional)",
+  "bizReqDepCancel": "Cancel",
+  "bizReqDepRecordedBy": "Page owner",
+  "bizReqDepSave": "Save",
+  "bizReqDepRefundTitle": "Refund amount",
+  "bizReqDepRefundMax": "Maximum: {amount}",
+  "bizReqDepRefundReasonHint": "Refund reason (required)",
+  "bizReqDepConfirmRefund": "Confirm refund",
+
+  "bizReqGjTitle": "Booking stages",
+  "bizReqGjDone": "Done",
+  "bizReqGjSpaceDefault": "Space",
+  "bizReqGjViewMap": "View location on map",
+  "bizReqGjSendNotification": "Send notification",
+  "bizReqGjConfirmStage": "Confirm {stage}",
+
+  "bizReqSnapTitle": "Locked booking terms",
+  "bizReqSnapReference": "Reference",
+  "bizReqSnapCapturedAt": "Locked on {date}",
+  "bizReqSnapInfoBanner": "This is a locked snapshot of the booking terms at the time of request submission. It cannot be edited and serves as a reference in case of dispute.",
+  "bizReqSnapPricing": "Pricing at booking",
+  "bizReqSnapPricePerNight": "Price per night",
+  "bizReqSnapNights": "Number of nights",
+  "bizReqSnapCleaningFee": "Cleaning fee",
+  "bizReqSnapDiscount": "Discount",
+  "bizReqSnapTotal": "Total",
+  "bizReqSnapDeposit": "Deposit required",
+  "bizReqSnapCancelKeepDeposit": "Late cancellation: deposit retained",
+  "bizReqSnapCancelPercent": "Late cancellation: {percent}% of total",
+  "bizReqSnapCancelFixed": "Late cancellation: {amount}",
+  "bizReqSnapCancelPolicy": "Cancellation policy at booking",
+  "bizReqSnapNoCancelPolicy": "No cancellation policy",
+  "bizReqSnapHouseRules": "House rules at booking",
+  "bizReqSnapDisclaimers": "Safety & liability terms ({ack}/{total} acknowledged)",
+  "bizReqSnapAcknowledged": "Agreed ✓",
+  "bizReqSnapQuestions": "Customer answers ({count})",
+  "bizReqSnapPaymentMethods": "Payment methods at booking",
+
+  "bizReqPropCheckIn": "Property condition — Check-in",
+  "bizReqPropDocumented": "Documented · {count} photos",
+  "bizReqPropNotDocumented": "Not documented yet",
+  "bizReqPropDone": "Done",
+  "bizReqPropCheckOut": "Property condition — Check-out",
+  "bizReqPropDamages": "Damage reports",
+  "bizReqPropNoDamages": "No damages reported",
+  "bizReqPropDamageCount": "{count} damage(s) reported",
+  "bizReqPropInventory": "Inventory checklist",
+  "bizReqPropNoInventory": "No inventory set up",
+  "bizReqPropItemCount": "{count} item(s)",
+  "bizReqPropNotes": "Notes",
+  "bizReqPropNotAvailable": "Not available currently",
+  "bizReqPropStartCheckIn": "Start check-in documentation",
+  "bizReqPropAddDamage": "Report damage",
+  "bizReqPropEstimated": "{amount} estimated",
+  "bizReqPropDamageFormTitle": "Report damage",
+  "bizReqPropDamageDescHint": "Describe the damage...",
+  "bizReqPropLocation": "Location",
+  "bizReqPropSeverity": "Severity",
+  "bizReqPropCost": "Cost",
+  "bizReqPropCostHint": "JOD",
+  "bizReqPropAttachPhotos": "Attach damage photos",
+  "bizReqPropCancel": "Cancel",
+  "bizReqPropRecord": "Record",
+  "bizReqPropEmptyInventory": "No inventory set up — add items you want to check",
+  "bizReqPropAddItemHint": "Add inventory item... (towels, keys, tools)",
+
+  "catalogFilterItems": "Filter {items}",
+  "@catalogFilterItems": {
+    "placeholders": {
+      "items": {"type": "String"}
+    }
+  },
+  "catalogStatusAvailable": "Available",
+  "catalogStatusOutOfStock": "Out of stock",
+  "catalogStatusHidden": "Hidden",
+  "catalogStatus": "Status",
+  "catalogShowResults": "Show Results ({count})",
+  "@catalogShowResults": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "catalogResetFilters": "Reset",
+  "catalogCountOfTotal": "{filtered} of {total} {label}",
+  "@catalogCountOfTotal": {
+    "placeholders": {
+      "filtered": {"type": "int"},
+      "total": {"type": "int"},
+      "label": {"type": "String"}
+    }
+  },
+  "catalogSelectedItem": "item selected",
+  "catalogDiscountLabel": "Discount",
+  "catalogHide": "Hide",
+  "catalogAssignBranches": "Assign branches",
+  "catalogChangeCategory": "Change category",
+  "catalogAssignTeam": "Assign team",
+  "catalogApplyDiscountOn": "Apply discount on {count} {label}",
+  "@catalogApplyDiscountOn": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "label": {"type": "String"}
+    }
+  },
+  "catalogDiscountPercent": "Discount %",
+  "catalogApplyDiscount": "Apply discount",
+  "catalogAssignTeamFor": "Assign team for {count} {label}",
+  "@catalogAssignTeamFor": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "label": {"type": "String"}
+    }
+  },
+  "catalogApply": "Apply",
+  "catalogDeselectAll": "Deselect all",
+  "catalogSelectAll": "Select all",
+  "catalogAssignedSpecialists": "Assigned specialists ({selected}/{total})",
+  "@catalogAssignedSpecialists": {
+    "placeholders": {
+      "selected": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "catalogNoSpecialistWarning": "No specialist assigned — customers won't be able to choose a service provider",
+  "catalogReorder": "Reorder",
+  "catalogSelect": "Select",
+  "catalogStock": "Stock",
+  "catalogCategoriesCount": "Categories ({count})",
+  "@catalogCategoriesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "catalogSelectedCount": "{count} selected",
+  "@catalogSelectedCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "catalogDragToReorder": "Drag to reorder",
+  "catalogReorderInfo": "Use arrows to reorder items — the order appears as-is on your page",
+  "catalogNoItemsYet": "No {label} yet",
+  "@catalogNoItemsYet": {
+    "placeholders": {
+      "label": {"type": "String"}
+    }
+  },
+  "catalogAddItemsHint": "Add {label} to show on your page",
+  "@catalogAddItemsHint": {
+    "placeholders": {
+      "label": {"type": "String"}
+    }
+  },
+  "catalogNoResultsFor": "No results for \"{query}\"",
+  "@catalogNoResultsFor": {
+    "placeholders": {
+      "query": {"type": "String"}
+    }
+  },
+  "catalogNoFilterResults": "No items match this filter",
+  "catalogClearFilter": "Clear filter",
+  "catalogLoadError": "Error loading {label}",
+  "@catalogLoadError": {
+    "placeholders": {
+      "label": {"type": "String"}
+    }
+  },
+  "catalogPriceChangeApplied": "Price change applied",
+  "catalogPriceChangeStopped": "Price change stopped",
+  "catalogStatusUpdated": "Updated status of {count} items",
+  "@catalogStatusUpdated": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "catalogItemsDeleted": "Deleted {count} items",
+  "@catalogItemsDeleted": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "catalogDiscountApplied": "Applied {percent}% discount",
+  "@catalogDiscountApplied": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "catalogTeamAssigned": "Assigned {teamCount} members to {itemCount} items",
+  "@catalogTeamAssigned": {
+    "placeholders": {
+      "teamCount": {"type": "int"},
+      "itemCount": {"type": "int"}
+    }
+  },
+  "catalogNoTeamMembers": "No team members",
+  "catalogSearchIn": "Search {label}...",
+  "@catalogSearchIn": {
+    "placeholders": {
+      "label": {"type": "String"}
+    }
+  },
+  "catalogShowMore": "Show more ({next} of {remaining} remaining)",
+  "@catalogShowMore": {
+    "placeholders": {
+      "next": {"type": "int"},
+      "remaining": {"type": "int"}
+    }
+  },
+
+  "stockUpdateTitle": "Update Stock",
+  "stockEditCount": "{count} edits",
+  "@stockEditCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "stockSearchHint": "Search products...",
+  "stockFilterAll": "All",
+  "stockFilterLow": "Low stock",
+  "stockFilterOut": "Out",
+  "stockStatusOut": "Out",
+  "stockStatusLow": "Low",
+  "stockError": "Error: {error}",
+  "@stockError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "stockNoLowProducts": "No low-stock products",
+  "stockNoOutProducts": "No out-of-stock products",
+  "stockNoProducts": "No products",
+  "stockNewQuantity": "New quantity",
+  "stockConfirm": "Confirm",
+  "stockMinThreshold": "Min threshold:",
+  "stockWasValue": "(was {value})",
+  "@stockWasValue": {
+    "placeholders": {
+      "value": {"type": "int"}
+    }
+  },
+  "stockQuantityLabel": "Qty: ",
+  "stockThresholdLabel": "Threshold: ",
+  "stockUndo": "Undo",
+  "stockSaveChanges": "Save changes ({count})",
+  "@stockSaveChanges": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "stockUpdated": "Stock updated ({count} changes)",
+  "@stockUpdated": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "wizardItemName": "Name *",
+  "wizardItemNameHint": "Item name",
+  "wizardCategory": "Category",
+  "wizardImage": "Image",
+  "wizardImageComingSoon": "Coming soon: image upload",
+  "wizardAddImage": "Add image",
+  "wizardDescription": "Description",
+  "wizardDescriptionHint": "Short description...",
+  "wizardPriceJod": "Price (JOD)",
+  "wizardDiscountPercent": "Discount (%)",
+  "wizardAvailableQty": "Available quantity",
+  "wizardUncategorized": "Uncategorized",
+  "wizardMinutes": "minutes",
+  "wizardAddMore": "Add...",
+  "wizardSaved": "Saved",
+  "wizardSaveError": "Error while saving",
+  "wizardEditItem": "Edit {item}",
+  "@wizardEditItem": {
+    "placeholders": {
+      "item": {"type": "String"}
+    }
+  },
+  "wizardAddItem": "Add {item}",
+  "@wizardAddItem": {
+    "placeholders": {
+      "item": {"type": "String"}
+    }
+  },
+
+  "pcStepValue": "Value",
+  "pcStepScope": "Scope",
+  "pcStepSchedule": "Schedule",
+  "pcStepAnnouncement": "Announcement",
+  "pcStepConfirm": "Confirm",
+  "pcStepOf": "{step} of {total}",
+  "@pcStepOf": {
+    "placeholders": {
+      "step": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "pcConfirmAndApply": "Confirm & Apply",
+  "pcPriceChanges": "Price Changes",
+  "pcNewChange": "New Change",
+  "pcAffectedItem": "affected item",
+  "pcPublic": "Public",
+  "pcPrivate": "Private",
+  "pcDayRemaining": "day remaining",
+  "pcStopNow": "Stop Now",
+  "pcStartsInDays": "Starts in {days} days",
+  "@pcStartsInDays": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "pcHistoryTitle": "Price Change History",
+  "pcHistoryCount": "Price Change History ({count})",
+  "@pcHistoryCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "pcStatusActive": "Active",
+  "pcStatusScheduled": "Scheduled",
+  "pcStatusEnded": "Ended",
+  "pcStatusCancelled": "Cancelled",
+  "pcAllItems": "All items",
+  "pcActiveNow": "Active now",
+  "pcScheduledLabel": "Scheduled",
+  "pcPrevious": "Previous",
+  "pcNoChangesYet": "No price changes yet",
+  "pcOpenEnded": "Open-ended",
+  "pcView": "View",
+  "pcStop": "Stop",
+  "pcDetailTitle": "Price Change Details",
+  "pcPeriod": "Period",
+  "pcDuration": "Duration",
+  "pcDays": "days",
+  "pcAffectedItems": "Affected items",
+  "pcVisibility": "Visibility",
+  "pcPublicToCustomers": "Public to customers",
+  "pcPrivateInternal": "Private (internal)",
+  "pcReuseChange": "Reuse this change",
+  "pcDirection": "Change direction",
+  "pcDecrease": "Decrease",
+  "pcIncrease": "Increase",
+  "pcMethod": "Change method",
+  "pcPercentage": "Percentage",
+  "pcFixedAmount": "Fixed amount",
+  "pcValue": "Value",
+  "pcScopeAll": "All items",
+  "pcScopeCategory": "By category",
+  "pcScopeSpecific": "Specific items",
+  "pcSearchHint": "Search...",
+  "pcStartTime": "Start time",
+  "pcStartNow": "Now",
+  "pcScheduleLater": "Schedule later",
+  "pcStartDateTime": "Start date & time",
+  "pcEndTime": "End time",
+  "pcSpecificDate": "Specific date",
+  "pcNoEnd": "No end date",
+  "pcEndDateTime": "End date & time",
+  "pcDurationApprox": "Duration: ~{days} days",
+  "@pcDurationApprox": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "pcPublicAnnouncement": "Public announcement",
+  "pcPublicDesc": "Visible to customers on your page — they know it's a sale",
+  "pcPrivateDesc": "Not visible to customers — price changes silently",
+  "pcReasonOptional": "Change reason (optional)",
+  "pcReasonHint": "e.g. Summer sale...",
+  "pcPreview": "Preview",
+  "pcScopeAllInfo": "Change will apply to all {items} ({count})",
+  "@pcScopeAllInfo": {
+    "placeholders": {
+      "items": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "pcEndBeforeStartError": "End date must be after start date.",
+  "pcScheduleTip": "Most seasonal changes last 1-4 weeks. You can edit or cancel the change at any time.",
+  "pcPublicCustomerView": "Customers will see:\n• Original price crossed out\n• New price highlighted\n• Change percentage\n• Reason for change (if provided)",
+  "pcPrivateUpdateDesc": "Prices will update silently. Customers won't see the old price or change percentage.",
+  "pcConfirmPreview": "Preview ({count} of {total})",
+  "@pcConfirmPreview": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "pcOneChangeNote": "Only one change allowed at a time. Any new change will replace the current one.",
+  "pcDurationDaysAndHours": "Duration: ~{days} days and {hours} hours",
+  "@pcDurationDaysAndHours": {
+    "placeholders": {
+      "days": {"type": "int"},
+      "hours": {"type": "int"}
+    }
+  },
+  "pcDurationHoursOnly": "Duration: ~{hours} hours",
+  "@pcDurationHoursOnly": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "pcScopeAllCount": "All items ({count})",
+  "@pcScopeAllCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "pcCategoriesLabel": "Categories: {names}",
+  "@pcCategoriesLabel": {
+    "placeholders": {
+      "names": {"type": "String"}
+    }
+  },
+  "pcSpecificItemsCount": "{count} specific items",
+  "@pcSpecificItemsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "pcImmediate": "Immediate",
+  "pcSilentChange": "Silent change",
+  "pcEdit": "Edit",
+  "pcAffectedItemCount": "{count} affected items",
+  "@pcAffectedItemCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "pcDayRemainingCount": "{count} days remaining",
+  "@pcDayRemainingCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "pcStatus": "Status",
+  "pcAffectedItemsCount": "{count} items",
+  "@pcAffectedItemsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "pcScopeSpecificCount": "{count} items",
+  "@pcScopeSpecificCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "pkgEditTitle": "Edit Package",
+  "pkgAddTitle": "Add Package",
+  "pkgName": "Package name",
+  "pkgDescription": "Description",
+  "pkgPriceJod": "Price (JOD)",
+  "pkgSubscriptionModel": "Subscription model",
+  "pkgLimitedCredits": "Limited credits",
+  "pkgEndDate": "End date",
+  "pkgCreditsCount": "Credit count",
+  "pkgDurationMonths": "Subscription duration (months)",
+  "pkgModelVisitsAndDate": "Subscription ends when credits run out or when period expires — whichever comes first",
+  "pkgModelVisitsOnly": "Subscription ends only when credits run out — no expiry date",
+  "pkgModelDateOnly": "Time-based subscription — customer uses unlimited during the period",
+  "pkgSaveChanges": "Save changes",
+  "pkgAddPackage": "Add package",
+  "pkgDeletePackage": "Delete package",
+  "pkgSaveSoon": "Coming soon — save package",
+  "pkgDeleteSoon": "Coming soon — delete package",
+
+  "scheduleWorkDays": "Working days per week · Tap a day to edit hours",
+  "scheduleClosed": "Closed",
+  "scheduleFirstShift": "First shift",
+  "scheduleExtraShift": "Extra shift {index}",
+  "@scheduleExtraShift": {
+    "placeholders": {
+      "index": {"type": "int"}
+    }
+  },
+  "scheduleCopyToAll": "Copy to all working days",
+  "scheduleAddShift": "Add shift",
+
+  "villaItemCount": "{count} items",
+  "@villaItemCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "villaPricePerNight": "JOD/night",
+  "villaAddRule": "Add a new rule...",
+  "villaPrimary": "Primary",
+  "villaReorderSaved": "New order saved",
+  "villaReorderMode": "Reorder",
+  "villaReorderDone": "Reorder done",
+  "villaAdd": "Add",
+
+  "villaSeasons": "Seasons",
+  "villaActive": "Active",
+  "villaHolidaySurcharges": "Holiday & Event Surcharges",
+  "villaEarlyBirdDiscount": "Early Bird Discount",
+  "villaEnableDiscount": "Enable discount",
+  "villaLastMinuteDeals": "Last Minute Deals",
+  "villaEnableDeal": "Enable deal",
+  "villaNoActiveSeason": "No active season currently",
+  "villaBasePriceApplied": "Your base prices are applied",
+  "villaActiveNow": "Active now",
+  "villaWeekdays": "Weekdays",
+  "villaWeekend": "Weekend",
+  "villaTimeline12Months": "Price timeline — 12 months",
+  "villaNow": "Now",
+  "villaWeekdayPriceJod": "Weekday price (JOD/night)",
+  "villaWeekendPriceJod": "Weekend price (JOD/night)",
+  "villaSaveSeasonalPricing": "Save seasonal pricing",
+  "villaHolidaySurchargeInfo": "Holiday surcharges are added on top of seasonal prices automatically...",
+  "villaBookingBefore": "Book before (days)",
+  "villaDay": "day",
+  "villaDiscountPercent": "Discount %",
+  "villaEarlyBirdInfo": "Customer gets {percent}% discount when booking {days} days or more before arrival",
+  "@villaEarlyBirdInfo": { "placeholders": { "percent": {"type": "int"}, "days": {"type": "int"} } },
+  "villaLastMinuteInfo": "Customer gets {percent}% discount when booking {days} days or less before arrival",
+  "@villaLastMinuteInfo": { "placeholders": { "percent": {"type": "int"}, "days": {"type": "int"} } },
+
+  "catMgrTitle": "Manage Categories",
+  "catMgrDuplicateName": "A category with this name already exists",
+  "catMgrAdded": "Added category \"{name}\"",
+  "@catMgrAdded": { "placeholders": { "name": {"type": "String"} } },
+  "catMgrRenamed": "Renamed \"{oldName}\" to \"{newName}\"",
+  "@catMgrRenamed": { "placeholders": { "oldName": {"type": "String"}, "newName": {"type": "String"} } },
+  "catMgrDeleted": "Deleted category \"{name}\"",
+  "@catMgrDeleted": { "placeholders": { "name": {"type": "String"} } },
+  "catMgrDeleteTitle": "Delete category \"{name}\"",
+  "@catMgrDeleteTitle": { "placeholders": { "name": {"type": "String"} } },
+  "catMgrDeleteHasItems": "There are {count} {label} in this category. Choose a category to move them to:",
+  "@catMgrDeleteHasItems": { "placeholders": { "count": {"type": "int"}, "label": {"type": "String"} } },
+  "catMgrDeleteEmpty": "This category is empty and can be deleted directly.",
+  "catMgrUncategorized": "Uncategorized",
+  "catMgrDeleteBtn": "Delete category",
+  "catMgrCategoryCount": "{count} categories",
+  "@catMgrCategoryCount": { "placeholders": { "count": {"type": "int"} } },
+  "catMgrNewCategory": "New category",
+  "catMgrNewCategoryName": "New category name",
+  "catMgrNewCategoryHint": "Example: Haircuts, Main courses...",
+  "catMgrNoCategories": "No categories yet",
+  "catMgrAddCategory": "Add category",
+
+  "blockReasonOptional": "Reason (optional)",
+  "blockReasonHint": "Example: Eid holiday, maintenance...",
+  "blockAdd": "Add",
+  "blockChooseDay": "Choose day",
+  "blockRecurringInfo": "Every {day} will be automatically blocked",
+  "@blockRecurringInfo": { "placeholders": { "day": {"type": "String"} } },
+  "blockDate": "Date",
+  "blockChooseDate": "Choose date",
+  "blockFrom": "From",
+  "blockStartDate": "Start date",
+  "blockTo": "To",
+  "blockEndDate": "End date",
+  "blockViewBlockedDates": "View blocked dates",
+  "blockLegendRange": "Range",
+  "blockLegendSpecific": "Specific",
+  "blockLegendWeekly": "Weekly",
+  "blockWeekly": "Weekly day",
+  "blockSpecific": "Specific day",
+  "blockRange": "Date range",
+  "blockNoBlocked": "No blocked dates",
+  "blockNoBlockedHint": "Add blocks for days or periods when you don't accept requests",
+  "blockInfoBox": "Blocked dates override the weekly schedule — customers won't be able to book during these times.",
+  "blockEveryDay": "Every {day}",
+  "@blockEveryDay": { "placeholders": { "day": {"type": "String"} } },
+
+  "availTitle": "Availability Management",
+  "availSubtitle": "Weekly schedule and date blocking",
+  "availSaved": "Saved",
+  "availScheduleTab": "Weekly Schedule",
+  "availBlockTab": "Block Dates",
+
+  "propFeatureItemName": "Item name...",
+  "propFeatureAdd": "Add",
+  "propFeatureToggle": "Toggle (Yes/No)",
+  "propFeatureCount": "Count (number)",
+  "propFeatureCountLabel": "Count:",
+  "propFeatureSuggestions": "Tap to add quickly:",
+
+  "propFeatTitle": "Property Description",
+  "propFeatSummary": "{catCount} categories · {enabled} enabled of {total}",
+  "@propFeatSummary": { "placeholders": { "catCount": {"type": "int"}, "enabled": {"type": "int"}, "total": {"type": "int"} } },
+  "propFeatReorderDone": "Done",
+  "propFeatReorder": "Reorder",
+  "propFeatHint": "Add categories and items to fully describe the property",
+  "propFeatItemCount": "{enabled} / {total} items",
+  "@propFeatItemCount": { "placeholders": { "enabled": {"type": "int"}, "total": {"type": "int"} } },
+  "propFeatNoItems": "No items yet",
+  "propFeatNoItemsHint": "Add items to describe this category",
+  "propFeatSuggestionsBtn": "Suggestions",
+  "propFeatAddItem": "Add item",
+  "propFeatNewCategoryHint": "New category name...",
+  "propFeatAddCategory": "Add category",
+  "propFeatAddNewCategory": "Add new category",
+  "propFeatTip": "Add categories like \"Entertainment facilities\" or \"Extra services\" then add items inside them. You can reorder categories and items by importance.",
+
+  "truckSummary": "{count} trucks · Manage drivers, capacity and delivery days",
+  "@truckSummary": { "placeholders": { "count": {"type": "int"} } },
+  "truckAddTruck": "Add truck",
+  "truckAddNewTruck": "Add new truck",
+  "truckNoTrucks": "No trucks added yet",
+  "truckCapFull": "Full capacity",
+  "truckZones": "Zones",
+  "truckDays": "Days",
+  "truckOffToday": "Off today",
+  "truckName": "Truck name",
+  "truckDriversTeam": "Drivers (from team)",
+  "truckCapFullLabel": "Capacity — Full",
+  "truckCapEmptyLabel": "Capacity — Empty",
+  "truckDeliveryDays": "Delivery days",
+  "truckRouteStart": "Route start",
+  "truckRouteEnd": "Route end",
+  "truckCoverageZones": "Coverage zones",
+  "truckNoZones": "No zones drawn yet — coming soon in the app",
+  "truckZoneCount": "{count} zones",
+  "@truckZoneCount": { "placeholders": { "count": {"type": "int"} } },
+  "truckEditTitle": "Edit Truck",
+  "truckAddTitle": "Add Truck",
+  "truckDeleted": "Truck deleted",
+  "truckAdded": "Truck added",
+  "truckSaved": "Changes saved",
+  "truckLoadError": "Error loading trucks",
+  "truckRetry": "Retry",
+  "truckNewName": "New Truck",
+  "truckAreaKm2": "{area} km²",
+  "@truckAreaKm2": { "placeholders": { "area": {"type": "String"} } },
+
+  "pkgSectionTitle": "Packages & Subscriptions",
+  "pkgAddBtn": "Add package",
+  "pkgEmptyHint": "Add a package or subscription for your customers",
+  "pkgActive": "Active",
+  "pkgHidden": "Hidden",
+  "pkgStatusChange": "Coming soon — change status",
+  "pkgModelVisitsDate": "Visits + Date",
+  "pkgModelVisits": "Visit count",
+  "pkgModelTime": "Time subscription",
+
+  "postCreateTitle": "Create Post",
+  "postCreateSubtitle": "Choose the type of post to create",
+  "postTypeUpdateDesc": "Announcement or news",
+  "postTypeDailySpecial": "Daily Special",
+  "postTypeDailySpecialDesc": "Special offer — pick an item at a special price",
+  "postTypeStatusDesc": "Short status (disappears in 24h)",
+  "postTypeOurWork": "Our Work",
+  "postTypeOurWorkDesc": "Completed work photos (before/after)",
+  "postTypeAlert": "Alert",
+  "postTypeAlertDesc": "Urgent or important alert for followers",
+  "postNewStory": "New Story",
+  "postNewStoryDesc": "Share moments with your followers",
+  "postPromotedComingSoon": "Coming soon: Promoted post",
+  "postPromoted": "Promoted Post",
+  "postPublished": "Published",
+  "postPublishError": "An error occurred while publishing",
+  "postStatusHint": "Write your status...",
+  "postCaptionHint": "Write post description...",
+  "postAddPhotoComingSoon": "Coming soon: Add photo",
+  "postAddPhoto": "Add photo",
+  "postStatusColor": "Status color",
+  "postPreview": "Preview",
+  "postPublish": "Publish",
+
+  "bizDashQuickActions": "Quick Actions",
+  "bizDashNoData": "No data yet",
+  "bizDashSetupSoon": "Coming soon: Setup {stepId}",
+  "@bizDashSetupSoon": { "placeholders": { "stepId": {"type": "String"} } },
+  "bizDashQuickActionSoon": "Coming soon: {action}",
+  "@bizDashQuickActionSoon": { "placeholders": { "action": {"type": "String"} } },
+
+  "bizRevenuePeriodToday": "Today",
+  "bizRevenuePeriodWeek": "This Week",
+  "bizRevenuePeriodMonth": "This Month",
+  "bizRevenuePrevToday": "Yesterday",
+  "bizRevenuePrevWeek": "Last Week",
+  "bizRevenuePrevMonth": "Last Month",
+  "bizRevenueCurrency": "JOD",
+  "bizRevenuePrevAmount": "{label}: {amount} JOD",
+  "@bizRevenuePrevAmount": { "placeholders": { "label": {"type": "String"}, "amount": {"type": "String"} } },
+  "bizRevenueOrderCount": "{count} orders",
+  "@bizRevenueOrderCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizRevenueAvgOrder": "Avg: {avg} JOD/order",
+  "@bizRevenueAvgOrder": { "placeholders": { "avg": {"type": "String"} } },
+  "bizRevenuePaymentMethods": "Payment methods today",
+  "bizRevenuePayCash": "Cash",
+  "bizRevenuePayCliq": "CliQ",
+  "bizRevenuePayBank": "Transfer",
+
+  "bizSetupTitle": "Complete your page setup",
+  "bizSetupProgress": "{done} of {total} steps completed",
+  "@bizSetupProgress": { "placeholders": { "done": {"type": "int"}, "total": {"type": "int"} } },
+  "bizSetupStepLogo": "Add logo / page image",
+  "bizSetupStepLocation": "Set your location on the map",
+  "bizSetupStepHours": "Add working hours",
+  "bizSetupStepProducts": "Add your page content",
+  "bizSetupStepProductsMenu": "Add menu items",
+  "bizSetupStepProductsService": "Add your services",
+  "bizSetupStepProductsCatalog": "Add your products",
+  "bizSetupStepPayment": "Set accepted payment methods",
+  "bizSetupStepTeam": "Add your team",
+  "bizSetupActionAdd": "Add",
+  "bizSetupActionSet": "Set",
+  "bizSetupMotivationStart": "Complete setup in 3 minutes and start receiving orders!",
+  "bizSetupMotivationAlmost": "Almost there! Just 2 steps and your page is ready",
+  "bizSetupMotivationDone": "Excellent! Your page is ready to receive customers",
+
+  "bizSummaryCompleted": "Completed",
+  "bizSummaryUpcoming": "Upcoming",
+  "bizSummaryCancelled": "Cancelled",
+  "bizSummaryTodayRevenue": "Today's revenue",
+  "bizRevenueServicesCount": "{count} services",
+  "@bizRevenueServicesCount": { "placeholders": { "count": {"type": "int"} } },
+
+  "bizAppointmentWith": "With {provider}",
+  "@bizAppointmentWith": { "placeholders": { "provider": {"type": "String"} } },
+
+  "bizQuoteStatusPending": "Awaiting price",
+  "bizQuoteStatusQuoted": "Quoted",
+  "bizQuoteStatusAccepted": "Accepted",
+
+  "bizDeliveryCompleted": "{completed}/{total} completed",
+  "@bizDeliveryCompleted": { "placeholders": { "completed": {"type": "int"}, "total": {"type": "int"} } },
+  "bizStockAlert": "Stock Alert",
+  "bizStockRemaining": "{count} remaining",
+  "@bizStockRemaining": { "placeholders": { "count": {"type": "int"} } },
+  "bizRecurringSummary": "{customers} customers · {units} units",
+  "@bizRecurringSummary": { "placeholders": { "customers": {"type": "int"}, "units": {"type": "int"} } },
+  "bizRecurringNote": "Routes are auto-generated based on recurring delivery schedules",
+
+  "bizQueueWaiting": "Waiting",
+
+  "bizUnavailableItems": "{count} items unavailable",
+  "@bizUnavailableItems": { "placeholders": { "count": {"type": "int"} } },
+  "bizUnavailableReactivate": "Reactivate",
+
+  "bizOccupancyBookedOf": "{booked} nights booked of {total}",
+  "@bizOccupancyBookedOf": { "placeholders": { "booked": {"type": "int"}, "total": {"type": "int"} } },
+  "bizOccupancyCheckinToday": "Check-in today:",
+  "bizOccupancyCheckoutToday": "Check-out today:",
+
+  "bizLinkedNeedsReview": "Needs review",
+  "bizLinkedViewPage": "View Page",
+  "bizLinkedApprove": "Approve",
+  "bizLinkedReviewed": "Reviewed",
+
+  "bizRecurringCustomers": "Recurring Customers",
+  "bizRecurringViewAll": "View All",
+  "bizRecurringViewAllSoon": "Coming soon — View All",
+  "bizRecurringActiveCount": "{count} active",
+  "@bizRecurringActiveCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizRecurringAutoCount": "{count} auto",
+  "@bizRecurringAutoCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizRecurringRemindCount": "{count} reminders",
+  "@bizRecurringRemindCount": { "placeholders": { "count": {"type": "int"} } },
+  "bizRecurringAutoOrdersToday": "Today's auto orders",
+  "bizRecurringAutoOrder": "Auto order — {qty} bottles",
+  "@bizRecurringAutoOrder": { "placeholders": { "qty": {"type": "int"} } },
+  "bizRecurringConfirm": "Confirm",
+  "bizRecurringSkip": "Skip",
+  "bizRecurringConfirmed": "Confirmed order for {name}",
+  "@bizRecurringConfirmed": { "placeholders": { "name": {"type": "String"} } },
+  "bizRecurringSkipped": "Skipped order for {name}",
+  "@bizRecurringSkipped": { "placeholders": { "name": {"type": "String"} } },
+  "bizRecurringLowCredit": "Low credit",
+  "bizRecurringCreditLeft": "{remaining} of {total} deliveries left",
+  "@bizRecurringCreditLeft": { "placeholders": { "remaining": {"type": "int"}, "total": {"type": "int"} } },
+  "bizRecurringRemind": "Remind",
+  "bizRecurringReminderSent": "Reminder sent to {name}",
+  "@bizRecurringReminderSent": { "placeholders": { "name": {"type": "String"} } },
+
+  "bizNavHome": "Home",
+  "bizNavInsights": "Insights",
+  "bizNavChat": "Chats",
+  "bizNavAccount": "Page",
+  "bizAppBarCustomer": "Customer",
+  "bizNotificationsComingSoon": "Coming soon: Notifications",
+  "bizMyPages": "My Business Pages",
+  "bizBackToCustomerMode": "Back to Customer Mode",
+  "bizRecentActions": "Recent Actions",
+  "bizViewFullLog": "View Full Log",
+  "bizNoActivityYet": "No activity yet",
+  "bizPaymentCash": "Cash",
+  "bizTimeNow": "Now",
+  "bizTimeMinutesAgo": "{minutes}m ago",
+  "@bizTimeMinutesAgo": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "bizTimeHoursAgo": "{hours}h ago",
+  "@bizTimeHoursAgo": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "bizTimeYesterday": "Yesterday",
+  "bizTimeDaysAgo": "{days}d ago",
+  "@bizTimeDaysAgo": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "bizCurrentStatus": "Current Status",
+  "bizCurrentLabel": "Current",
+  "bizMoveTo": "Move to",
+  "bizRevert": "Revert",
+  "bizItemMinutes": "min",
+  "bizItemAvailable": "Available",
+  "bizItemOutOfStock": "Out of stock",
+  "bizItemHidden": "Hidden",
+  "bizItemUnknown": "Unknown",
+  "bizItemLimited": "Limited",
+  "bizItemSoldOut": "Sold out",
+  "bizDateMonth1": "January",
+  "bizDateMonth2": "February",
+  "bizDateMonth3": "March",
+  "bizDateMonth4": "April",
+  "bizDateMonth5": "May",
+  "bizDateMonth6": "June",
+  "bizDateMonth7": "July",
+  "bizDateMonth8": "August",
+  "bizDateMonth9": "September",
+  "bizDateMonth10": "October",
+  "bizDateMonth11": "November",
+  "bizDateMonth12": "December",
+  "bizDateDayMonth": "{month} {day}",
+  "@bizDateDayMonth": {
+    "placeholders": {
+      "day": {"type": "int"},
+      "month": {"type": "String"}
+    }
+  },
+
+  "insightsTitle": "Insights",
+  "insightsLoadError": "Error loading insights",
+  "insightsDataLoadError": "Error loading data",
+  "insightsPeriodWeekly": "Weekly",
+  "insightsPeriodMonthly": "Monthly",
+  "insightsPeriodYearly": "Yearly",
+  "insightsPeriodThisWeek": "This Week",
+  "insightsPeriodThisMonth": "This Month",
+  "insightsPeriodThisYear": "This Year",
+  "insightsComparedToLastWeek": "Compared to last week",
+  "insightsComparedToLastMonth": "Compared to last month",
+  "insightsComparedToLastYear": "Compared to last year",
+  "insightsNoData": "No data",
+  "insightsInsufficientData": "Insufficient data",
+  "insightsSubscriptions": "Subscriptions",
+  "insightsSmartTips": "Smart Tips",
+  "insightsBookingSchedule": "Booking Schedule",
+  "insightsCurrentWeek": "Current Week",
+  "insightsDaySat": "Sat",
+  "insightsDaySun": "Sun",
+  "insightsDayMon": "Mon",
+  "insightsDayTue": "Tue",
+  "insightsDayWed": "Wed",
+  "insightsDayThu": "Thu",
+  "insightsDayFri": "Fri",
+  "insightsModifierAnalysis": "Modifier Analysis",
+  "insightsModifierSubtitle": "Most requested additions & modifications",
+  "insightsTimesCount": "{count} times",
+  "@insightsTimesCount": { "placeholders": { "count": {"type": "int"} } },
+  "insightsUnavailable": "Insights unavailable",
+  "insightsPageUnclaimed": "This page has not been claimed yet",
+  "insightsEnableOrdersAdvanced": "Enable orders to view advanced insights",
+  "insightsVisibilityOnly": "Your page is currently in visibility-only mode",
+  "insightsEnableOrders": "Enable Orders",
+  "insightsTotalTenants": "Total Tenants",
+  "insightsClaimedUnclaimed": "{claimed} claimed · {unclaimed} unclaimed",
+  "@insightsClaimedUnclaimed": { "placeholders": { "claimed": {"type": "int"}, "unclaimed": {"type": "int"} } },
+  "insightsFollowerGrowth": "Follower Growth",
+  "insightsThisMonth": "+{count} this month",
+  "@insightsThisMonth": { "placeholders": { "count": {"type": "int"} } },
+  "insightsOpenNow": "Open Now",
+  "insightsOpenOfTotal": "{open} of {total} open now",
+  "@insightsOpenOfTotal": { "placeholders": { "open": {"type": "int"}, "total": {"type": "int"} } },
+  "insightsFloorVisits": "Floor Visits",
+  "insightsDirectoryViews": "Directory Views",
+  "insightsViewsThisWeek": "{count} views this week",
+  "@insightsViewsThisWeek": { "placeholders": { "count": {"type": "int"} } },
+  "insightsTenantClicks": "Tenant Clicks",
+  "insightsTopFloors": "Most Active Floors",
+  "insightsPageViews": "Page Views",
+  "insightsNewFollowers": "New Followers",
+  "insightsClaimedTenants": "Claimed Tenants",
+  "insightsNewThisWeek": "New This Week",
+  "insightsRecentlyLinked": "Recently Linked",
+  "insightsTimeAgoMonths": "{count} months ago",
+  "@insightsTimeAgoMonths": { "placeholders": { "count": {"type": "int"} } },
+  "insightsTimeAgoDays": "{count} days ago",
+  "@insightsTimeAgoDays": { "placeholders": { "count": {"type": "int"} } },
+  "insightsTimeAgoHours": "{count} hours ago",
+  "@insightsTimeAgoHours": { "placeholders": { "count": {"type": "int"} } },
+  "insightsTimeAgoNow": "Just now",
+  "insightsAddTenant": "Add Tenant",
+  "insightsEditFeatured": "Edit Featured",
+  "insightsNewPost": "New Post",
+  "insightsCurrencyJod": "JOD",
+
+  "dropoffActivityLog": "Activity Log",
+  "dropoffChangeTicketStatus": "Change Ticket Status",
+  "dropoffStatusReceived": "Received",
+  "dropoffStatusProcessing": "Processing",
+  "dropoffStatusReady": "Ready for Pickup",
+  "dropoffStatusDelivered": "Delivered",
+  "dropoffStatusCancelled": "Cancelled",
+  "dropoffNextStartProcessing": "Start Processing",
+  "dropoffNextReadyForPickup": "Ready for Pickup",
+  "dropoffNextDelivered": "Delivered",
+  "dropoffActionTicketCreated": "Ticket Created",
+  "dropoffActionStatusChanged": "Status Changed",
+  "dropoffActionPhotoBefore": "Photo Before",
+  "dropoffActionPhotoAfter": "Photo After",
+  "dropoffActionInfoRequested": "Info Requested",
+  "dropoffActionInfoReceived": "Customer Reply",
+  "dropoffActionPaymentMarked": "Payment Marked",
+  "dropoffActionNoteAdded": "Note",
+  "dropoffActionItemModified": "Items Modified",
+  "dropoffTicketCreatedNote": "Ticket {ticketNumber} created",
+  "@dropoffTicketCreatedNote": { "placeholders": { "ticketNumber": {"type": "String"} } },
+  "dropoffInfoExtraPhoto": "Additional photo",
+  "dropoffInfoProblemDetails": "Problem details",
+  "dropoffInfoSentToChat": "Request sent to chat",
+  "dropoffPaymentCash": "Cash",
+  "dropoffTrackYourItems": "Track Your Items",
+  "dropoffNoItemsProcessing": "No items currently being processed",
+  "dropoffBringItemsHint": "Bring your items to the shop and we'll track them here",
+  "dropoffItemsCount": "{count} items",
+  "@dropoffItemsCount": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffMoreItems": "+{count} more items",
+  "@dropoffMoreItems": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffEstimatedDate": "Estimated: {date}",
+  "@dropoffEstimatedDate": { "placeholders": { "date": {"type": "String"} } },
+  "dropoffTotalWithAmount": "Total: {amount}",
+  "@dropoffTotalWithAmount": { "placeholders": { "amount": {"type": "String"} } },
+  "dropoffPaid": "Paid",
+  "dropoffStatusMsgReceived": "Your items have been received and are awaiting processing",
+  "dropoffStatusMsgProcessing": "Your items are being processed",
+  "dropoffStatusMsgReady": "Ready for pickup!",
+  "dropoffPastOrders": "Past orders ({count})",
+  "@dropoffPastOrders": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffBoardTitle": "Tracking Board",
+  "dropoffActiveTickets": "{count} active tickets",
+  "@dropoffActiveTickets": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffOverdueCount": "{count} overdue",
+  "@dropoffOverdueCount": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffNewReceipt": "New Receipt",
+  "dropoffSearchHint": "Search by name or ticket number...",
+  "dropoffStatsReceived": "Received",
+  "dropoffStatsProcessing": "Processing",
+  "dropoffStatsReady": "Ready",
+  "dropoffStatsDelivered": "Delivered",
+  "dropoffFilterAll": "All",
+  "dropoffNoTicketsSearch": "No results",
+  "dropoffNoTickets": "No tickets",
+  "dropoffDeliveredSection": "Delivered ({count})",
+  "@dropoffDeliveredSection": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffNoDeliveredToday": "No delivered tickets today",
+  "dropoffStatusUpdated": "Status updated",
+  "dropoffStatusChangedToast": "Status changed",
+  "dropoffNoInfoTemplates": "No info request templates available",
+  "dropoffInfoRequestSent": "Info request sent ({count})",
+  "@dropoffInfoRequestSent": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffTicketCreated": "Ticket created",
+  "dropoffDashboardReceived": "Received",
+  "dropoffDashboardProcessing": "Processing",
+  "dropoffDashboardReady": "Ready",
+  "dropoffDashboardDelivered": "Delivered",
+  "dropoffOverdue": "Overdue",
+  "dropoffOverdueLabel": "{count} overdue",
+  "@dropoffOverdueLabel": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffRevenueToday": "Today's Revenue",
+  "dropoffTicketTitle": "Ticket #{ticketNumber}",
+  "@dropoffTicketTitle": { "placeholders": { "ticketNumber": {"type": "String"} } },
+  "dropoffUrgent": "Urgent",
+  "dropoffCustomer": "Customer",
+  "dropoffChat": "Chat",
+  "dropoffItemsCountPiece": "Items ({count} pieces)",
+  "@dropoffItemsCountPiece": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffPhotoBeforeExists": "Photo before ✓",
+  "dropoffPhotoBeforeNone": "No photo before",
+  "dropoffPhotoAfterExists": "Photo after ✓",
+  "dropoffPhotoAfterNone": "No photo after",
+  "dropoffPayment": "Payment",
+  "dropoffPaidWithMethod": "Paid ({method})",
+  "@dropoffPaidWithMethod": { "placeholders": { "method": {"type": "String"} } },
+  "dropoffNotPaid": "Not paid yet",
+  "dropoffTotalLabel": "Total",
+  "dropoffNotes": "Notes",
+  "dropoffTimingTitle": "Timing",
+  "dropoffTimingDropoff": "Drop-off",
+  "dropoffTimingEstimated": "Estimated Ready",
+  "dropoffTimingOverdue": " (overdue)",
+  "dropoffTimingStarted": "Processing Started",
+  "dropoffTimingCompleted": "Work Completed",
+  "dropoffTimingPickedUp": "Customer Pickup",
+  "dropoffActivityLogCount": "Activity Log ({count} actions)",
+  "@dropoffActivityLogCount": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffShowAll": "Show All",
+  "dropoffSendReceipt": "Send Receipt",
+  "dropoffShopName": "Shop",
+  "dropoffNoActivity": "No activity yet",
+  "dropoffPhotoBefore": "Photo Before",
+  "dropoffPhotoAfter": "Photo After",
+  "dropoffRequestInfo": "Request Info",
+  "dropoffItemPiece": "{count} pieces",
+  "@dropoffItemPiece": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffMoreOther": "+{count} more",
+  "@dropoffMoreOther": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffReceiptTime": "Received: {time}",
+  "@dropoffReceiptTime": { "placeholders": { "time": {"type": "String"} } },
+  "dropoffEstimatedShort": "Due: {date}",
+  "@dropoffEstimatedShort": { "placeholders": { "date": {"type": "String"} } },
+  "dropoffTimeMinutes": "{count}m",
+  "@dropoffTimeMinutes": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffTimeHours": "{count}h",
+  "@dropoffTimeHours": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffTimeDays": "{count}d",
+  "@dropoffTimeDays": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffCurrencyJod": "JOD",
+  "dropoffStepCustomer": "Customer Info",
+  "dropoffStepItems": "Add Items",
+  "dropoffStepReview": "Review Order",
+  "dropoffCustomerName": "Customer Name *",
+  "dropoffCustomerNameHint": "e.g. Ahmad",
+  "dropoffPhoneOptional": "Phone Number (optional)",
+  "dropoffPhoneHint": "07XXXXXXXX",
+  "dropoffNextAddItems": "Next — Add Items",
+  "dropoffSelectService": "Select Service",
+  "dropoffItemType": "Item Type",
+  "dropoffOther": "Other",
+  "dropoffEnterItemType": "Enter item type",
+  "dropoffQuantity": "Quantity",
+  "dropoffItemNotesOptional": "Item notes (optional)",
+  "dropoffItemNotesHint": "Stain on the front, for example...",
+  "dropoffAddItemToTicket": "Add item to ticket",
+  "dropoffAddedItems": "Added items ({count})",
+  "@dropoffAddedItems": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffReviewOrder": "Review order ({count} items — {total})",
+  "@dropoffReviewOrder": { "placeholders": { "count": {"type": "int"}, "total": {"type": "String"} } },
+  "dropoffEnterAttribute": "Enter {label}",
+  "@dropoffEnterAttribute": { "placeholders": { "label": {"type": "String"} } },
+  "dropoffEditCustomer": "Edit",
+  "dropoffItemsList": "Items ({count})",
+  "@dropoffItemsList": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffEstimatedReadyTitle": "Estimated Ready Date",
+  "dropoffInDays": "In {count} {label}",
+  "@dropoffInDays": { "placeholders": { "count": {"type": "int"}, "label": {"type": "String"} } },
+  "dropoffDay": "day",
+  "dropoffDays": "days",
+  "dropoffUrgentService": "Urgent Service",
+  "dropoffUrgentPriority": "Higher processing priority",
+  "dropoffGeneralNotes": "General notes (optional)",
+  "dropoffGeneralNotesHint": "Any notes on the order...",
+  "dropoffCreateTicket": "Create ticket {ticketNumber}",
+  "@dropoffCreateTicket": { "placeholders": { "ticketNumber": {"type": "String"} } },
+  "dropoffInfoRequestTitle": "Request Info",
+  "dropoffAdditionalNotes": "Additional notes (optional)",
+  "dropoffAdditionalNotesHint": "Any extra clarification...",
+  "dropoffSend": "Send",
+  "dropoffSendCount": "Send ({count})",
+  "@dropoffSendCount": { "placeholders": { "count": {"type": "int"} } },
+  "dropoffPastItemsSummary": "{count} items · {price}",
+  "@dropoffPastItemsSummary": { "placeholders": { "count": {"type": "int"}, "price": {"type": "String"} } },
+
+  "pageContactPromptIntro": "When you talk to ",
+  "pageContactPromptMention": ", tell them you found them on ",
+  "pageContactPromptHelp": "This helps them activate their page and reach more customers",
+  "pageContactCall": "Call",
+  "pageContactOpenWhatsApp": "Open WhatsApp",
+  "pageContactWhatsApp": "WhatsApp",
+  "pageContactDirectCall": "Direct call",
+
+  "pageHighlightsCurated": "We show highlights only — more available in store",
+  "pageHighlightsAskAvailability": "Ask about availability",
+
+  "pagePackageBookNow": "Book Now",
+  "pagePackageOrderNow": "Order Now",
+  "pagePackageSubscribe": "Subscribe",
+  "pagePackageBuy": "Buy Package",
+  "pagePackageSave": "Save {percent}%",
+  "@pagePackageSave": { "placeholders": { "percent": {"type": "int"} } },
+
+  "pageContactSectionTitle": "Contact",
+  "pageContactCliqLabel": "CliQ: {alias}",
+  "@pageContactCliqLabel": { "placeholders": { "alias": {"type": "String"} } },
+  "pageContactCliqCopied": "CliQ ID copied",
+
+  "pageCoverageTitle": "Coverage Areas",
+  "pageCoverageAreaCount": "{count} areas",
+  "@pageCoverageAreaCount": { "placeholders": { "count": {"type": "int"} } },
+
+  "pageReturnPolicyTitle": "Return Policy",
+  "pageReturnRefund": "Refund",
+  "pageReturnExchange": "Exchange",
+  "pageReturnBoth": "Refund & Exchange",
+  "pageReturnAccepts": "Accepts {type}",
+  "@pageReturnAccepts": { "placeholders": { "type": {"type": "String"} } },
+  "pageReturnWithinDays": "Within {days} days",
+  "@pageReturnWithinDays": { "placeholders": { "days": {"type": "int"} } },
+  "pageReturnCost": "Cost: {cost}",
+  "@pageReturnCost": { "placeholders": { "cost": {"type": "String"} } },
+  "pageReturnNoReturns": "No returns or exchanges accepted",
+
+  "pageStatsFollower": "follower",
+  "pageStatsMemberSince": "Member since",
+
+  "pageCancellationPolicy": "Cancellation Policy",
+
+  "pageDaySunday": "Sunday",
+  "pageDayMonday": "Monday",
+  "pageDayTuesday": "Tuesday",
+  "pageDayWednesday": "Wednesday",
+  "pageDayThursday": "Thursday",
+  "pageDayFriday": "Friday",
+  "pageDaySaturday": "Saturday",
+
+  "pageCoverageNotInArea": "Does not cover your area ({area})",
+  "@pageCoverageNotInArea": { "placeholders": { "area": {"type": "String"} } },
+
+  "pagePortfolioEmpty": "No portfolio items yet",
+  "pagePortfolioShowMore": "Show more ({visible} of {total})",
+  "@pagePortfolioShowMore": { "placeholders": { "visible": {"type": "int"}, "total": {"type": "int"} } },
+  "pagePortfolioCustomWork": "Need custom work?",
+  "pagePortfolioSendInquiry": "Send your inquiry and we'll get back to you",
+  "pagePortfolioInquiryButton": "Send Inquiry",
+  "pagePortfolioInquiryNow": "Inquire Now",
+  "pagePortfolioRequestSent": "Request sent successfully — you'll hear back soon",
+
+  "pageEmptyContentProducts": "Products",
+  "pageEmptyContentMenu": "Menu",
+  "pageEmptyContentServices": "Services",
+  "pageEmptyContentPortfolio": "Portfolio",
+  "pageEmptyContentSpaces": "Spaces",
+  "pageEmptyAutoRegistered": "Auto-registered page",
+  "pageEmptyAutoRegisteredDesc": "This page was created from public data to help find {name}.\n{content} are not available yet.",
+  "@pageEmptyAutoRegisteredDesc": { "placeholders": { "name": {"type": "String"}, "content": {"type": "String"} } },
+  "pageEmptyClaimCta": "Is this your business? Claim ownership",
+  "pageEmptyFollowHint": "Follow this page — we'll notify you when the owner activates it",
+
+  "pageFollowOnlyAlerts": "Alerts",
+  "pageFollowOnlyAbout": "About",
+  "pageFollowOnlyServicesLinks": "Services & Links",
+  "pageFollowOnlyTitle": "This is a follow-only page",
+  "pageFollowOnlySubtitle": "Follow for the latest news and updates",
+  "pageFollowOnlyButton": "Follow",
+
+  "pageTeamTitle": "Team",
+
+  "pageQuoteServicesTitle": "Services Offered",
+  "pageQuoteGeneralMaintenance": "General Maintenance",
+  "pageQuoteGeneralMaintenanceDesc": "Repair and maintenance for all issues",
+  "pageQuoteInstallation": "Installation & Setup",
+  "pageQuoteInstallationDesc": "Install new equipment and devices",
+  "pageQuoteInspection": "Inspection & Diagnosis",
+  "pageQuoteInspectionDesc": "Full inspection and problem identification",
+  "pageQuoteEmergency": "Emergency Work",
+  "pageQuoteEmergencyDesc": "Quick service for urgent situations",
+  "pageQuoteCoverageTitle": "Coverage Areas",
+  "pageQuoteCoverageArea": "Coverage Area",
+  "pageQuoteCoverageDefault": "Amman and surrounding areas",
+  "pageQuotePricing": "Pricing",
+  "pageQuoteStartingPrice": "Starting from 15 JOD",
+  "pageQuoteRequestCta": "Request a Quote",
+  "pageQuoteRequestSent": "Request sent successfully — you'll hear back soon",
+
+  "pageBookingTitle": "Book Appointment",
+  "pageSendOrder": "Send Order",
+
+  "pageReservationEmpty": "No spaces available",
+  "pageReservationShowMore": "Show more ({visible} of {total})",
+  "@pageReservationShowMore": { "placeholders": { "visible": {"type": "int"}, "total": {"type": "int"} } },
+  "pageReservationBooked": "Booked",
+
+  "pageServiceUnavailable": "Unavailable",
+  "pageServiceBook": "Book",
+
+  "pageFilterTitle": "Filter",
+  "pageFilterReset": "Reset",
+  "pageFilterPriceRange": "Price Range (JOD)",
+  "pageFilterPriceFrom": "From",
+  "pageFilterPriceTo": "To",
+  "pageFilterAvailability": "Availability",
+  "pageFilterAll": "All",
+  "pageFilterInStockOnly": "In stock only",
+  "pageFilterDuration": "Duration",
+  "pageFilterDurationQuick": "Quick (<30 min)",
+  "pageFilterDurationMedium": "Medium (30-60 min)",
+  "pageFilterDurationLong": "Long (60+ min)",
+  "pageFilterSortTitle": "Sort",
+  "pageFilterSortDefault": "Default",
+  "pageFilterSortPriceLow": "Price: Low to High",
+  "pageFilterSortPriceHigh": "Price: High to Low",
+  "pageFilterSortNewest": "Newest",
+  "pageFilterSortPopular": "Most Popular",
+  "pageFilterCategories": "Categories",
+  "pageFilterApply": "Apply",
+
+  "pageVillaCheckIn": "Check-in {time}",
+  "@pageVillaCheckIn": { "placeholders": { "time": {"type": "String"} } },
+  "pageVillaCheckOut": "Check-out {time}",
+  "@pageVillaCheckOut": { "placeholders": { "time": {"type": "String"} } },
+  "pageVillaAmenities": "Amenities",
+  "pageVillaHouseRules": "House Rules",
+  "pageVillaWeekdays": "Weekdays",
+  "pageVillaWeekend": "Weekend",
+  "pageVillaCurrentSeason": "Current Season",
+  "pageVillaHolidaySurcharge": "{percent}% surcharge — {name}",
+  "@pageVillaHolidaySurcharge": { "placeholders": { "percent": {"type": "int"}, "name": {"type": "String"} } },
+  "pageVillaEarlyBird": "Book {days} days ahead and save {percent}%",
+  "@pageVillaEarlyBird": { "placeholders": { "days": {"type": "int"}, "percent": {"type": "int"} } },
+  "pageVillaLastMinute": "{percent}% off",
+  "@pageVillaLastMinute": { "placeholders": { "percent": {"type": "int"} } },
+  "pageVillaSeasonTimeline": "Season Timeline",
+  "pageVillaFromPrice": "From {price}",
+  "@pageVillaFromPrice": { "placeholders": { "price": {"type": "String"} } },
+  "pageVillaMonthJan": "Jan",
+  "pageVillaMonthFeb": "Feb",
+  "pageVillaMonthMar": "Mar",
+  "pageVillaMonthApr": "Apr",
+  "pageVillaMonthMay": "May",
+  "pageVillaMonthJun": "Jun",
+  "pageVillaMonthJul": "Jul",
+  "pageVillaMonthAug": "Aug",
+  "pageVillaMonthSep": "Sep",
+  "pageVillaMonthOct": "Oct",
+  "pageVillaMonthNov": "Nov",
+  "pageVillaMonthDec": "Dec",
+
+  "pagePkgIncludes": "Package includes:",
+  "pagePkgRegularPrice": "Regular price: {credits} x {singlePrice} =",
+  "@pagePkgRegularPrice": { "placeholders": { "credits": {"type": "int"}, "singlePrice": {"type": "String"} } },
+  "pagePkgPackagePrice": "Package price:",
+  "pagePkgSavings": "You save:",
+  "pagePkgSingleSession": "Single session: {price}",
+  "@pagePkgSingleSession": { "placeholders": { "price": {"type": "String"} } },
+  "pagePkgBreakEven": "Saves after {count} visits",
+  "@pagePkgBreakEven": { "placeholders": { "count": {"type": "int"} } },
+  "pagePkgHowItWorks": "How it works:",
+  "pagePkgDisclaimerBundle": "Subscription is for this business only. Non-refundable.",
+  "pagePkgDisclaimerCredits": "Credits are for this business only.{validity} Non-refundable.",
+  "@pagePkgDisclaimerCredits": { "placeholders": { "validity": {"type": "String"} } },
+  "pagePkgValidityMonths": " Valid for {months} months.",
+  "@pagePkgValidityMonths": { "placeholders": { "months": {"type": "int"} } },
+  "pagePkgCreditsLabel": "credits",
+  "pagePkgExistingSubscription": "You have an existing subscription",
+  "pagePkgCreditsAddedNote": "Upon purchase, {credits} {label} will be added to your current balance ({existing} {label} remaining)",
+  "@pagePkgCreditsAddedNote": { "placeholders": { "credits": {"type": "int"}, "label": {"type": "String"}, "existing": {"type": "int"} } },
+  "pagePkgCreditsAfterPurchase": "Balance after purchase: {total} {label}",
+  "@pagePkgCreditsAfterPurchase": { "placeholders": { "total": {"type": "int"}, "label": {"type": "String"} } },
+  "pagePkgComingSoon": "Coming soon — Buy packages",
+  "pagePkgValidOneMonth": "Valid for 1 month from purchase",
+  "pagePkgValidMonths": "Valid for {months} months from purchase",
+  "@pagePkgValidMonths": { "placeholders": { "months": {"type": "int"} } },
+  "pagePkgNoExpiry": "No expiry — use at your own pace",
+  "pagePkgCtaBookWithPrice": "Book Now — {price}",
+  "@pagePkgCtaBookWithPrice": { "placeholders": { "price": {"type": "String"} } },
+  "pagePkgCtaOrderWithPrice": "Order Now — {price}",
+  "@pagePkgCtaOrderWithPrice": { "placeholders": { "price": {"type": "String"} } },
+  "pagePkgCtaSubscribeWithPrice": "Subscribe — {price}",
+  "@pagePkgCtaSubscribeWithPrice": { "placeholders": { "price": {"type": "String"} } },
+  "pagePkgCtaBuyWithPrice": "Buy Package — {price}",
+  "@pagePkgCtaBuyWithPrice": { "placeholders": { "price": {"type": "String"} } },
+  "pagePkgHowBundleStep1": "Buy this package",
+  "pagePkgHowBundleStep2": "Get {credits} {label} credits",
+  "@pagePkgHowBundleStep2": { "placeholders": { "credits": {"type": "int"}, "label": {"type": "String"} } },
+  "pagePkgHowBundleStep3": "Each order or booking deducts from your balance automatically",
+  "pagePkgHowBundleStep4": "Track your balance anytime",
+  "pagePkgHowUnlimitedStep1": "Buy this package",
+  "pagePkgHowUnlimitedStep2": "Get {credits} {label} credits — no expiry",
+  "@pagePkgHowUnlimitedStep2": { "placeholders": { "credits": {"type": "int"}, "label": {"type": "String"} } },
+  "pagePkgHowUnlimitedStep3": "Each order deducts from your balance automatically",
+  "pagePkgHowUnlimitedStep4": "Use at your own pace",
+  "pagePkgHowDateOnlyStep1": "Subscribe to this package",
+  "pagePkgHowDateOnlyStep2": "Book unlimited sessions during your subscription",
+  "pagePkgHowDateOnlyStep3": "Every booking is covered — no extra fees",
+  "pagePkgHowDateOnlyStep4": "Renew or let the subscription expire",
+  "pagePkgHowDefaultStep1": "Order the package and the business will contact you",
+  "pagePkgHowDefaultStep2": "Schedule is coordinated directly",
+  "pagePkgHowDefaultStep3": "All listed items are included in the price",
+
+  "pageModificationRequestSent": "Modification request sent",
+  "pageActiveBookingTitle": "You have an active booking",
+  "pageActiveBookingMessage": "You have an active booking in queue. Cancel the current one first to book a new service.",
+
+  "claimStepIntro": "Intro",
+  "claimStepInfo": "Your Info",
+  "claimStepVerify": "Verify",
+  "claimStepReview": "Review",
+  "claimRoleOwner": "Business Owner",
+  "claimRoleOwnerDesc": "I am the actual owner of this business",
+  "claimRoleManager": "Manager",
+  "claimRoleManagerDesc": "I manage this business on behalf of the owner",
+  "claimRoleRepresentative": "Authorized Representative",
+  "claimRoleRepresentativeDesc": "I have official authorization to manage this page",
+  "claimMethodInPerson": "In-person Visit",
+  "claimMethodInPersonDesc": "Our team visits your location — we verify and help you activate your page",
+  "claimMethodDocument": "Official Document",
+  "claimMethodDocumentDesc": "Upload business registration, license, lease, or authorization",
+  "claimMethodVideoCall": "Video Call",
+  "claimMethodVideoCallDesc": "Short call from your location — we verify the location directly",
+  "claimDocCommercialReg": "Commercial Registration",
+  "claimDocCommercialRegDesc": "Issued by the Ministry of Industry and Trade",
+  "claimDocProfessionLicense": "Professional License",
+  "claimDocProfessionLicenseDesc": "Issued by the municipality",
+  "claimDocLeaseAgreement": "Lease Agreement",
+  "claimDocLeaseAgreementDesc": "Valid lease agreement in your name",
+  "claimDocAuthorization": "Authorization Letter",
+  "claimDocAuthorizationDesc": "Authorization from owner or parent company",
+  "claimVisitMorning": "Morning (9 AM - 2 PM)",
+  "claimVisitMorningDesc": "Sunday - Thursday",
+  "claimVisitAfternoon": "Afternoon (2 - 4 PM)",
+  "claimVisitAfternoonDesc": "Sunday - Thursday",
+  "claimVisitEvening": "Evening (4 - 8 PM)",
+  "claimVisitEveningDesc": "Every day",
+  "claimVisitWeekend": "Friday or Saturday",
+  "claimVisitWeekendDesc": "Weekend",
+  "claimPageTitle": "Claim Ownership",
+  "claimSubmitButton": "Submit Ownership Claim",
+  "claimStartButton": "Start Verification",
+  "claimSuccessTitle": "Request submitted successfully",
+  "claimSuccessVisitMessage": "We'll contact you to confirm the visit appointment.\nOur team will help you fully activate your page.",
+  "claimSuccessReviewMessage": "The honak.app team will review your request within 24 hours.\nWe'll contact you via your registered number.",
+  "claimWhatsNext": "What's next?",
+  "claimNextStepVisit2": "Our team visits your location to verify",
+  "claimNextStepVisit3": "We activate your page and help you set it up",
+  "claimNextStepDoc2": "We may contact you to verify additional information",
+  "claimNextStepDoc3": "After approval, you'll have full control of the page",
+  "claimStatusReview": "Under Review",
+  "claimBackToPage": "Back to Page",
+  "claimIntroTitle": "Claim ownership of this page",
+  "claimIntroDesc": "This page was automatically created from public data.\nIf you own or are authorized to manage this business,\nyou can verify ownership for full control.",
+  "claimIntroBenefitsTitle": "After verification you can:",
+  "claimBenefitManagePage": "Manage and update page information",
+  "claimBenefitAddProducts": "Add your products, services, or menu",
+  "claimBenefitOrders": "Enable receiving orders via honak.app",
+  "claimBenefitTeam": "Manage team members and permissions",
+  "claimVisitUsTitle": "We'll visit you!",
+  "claimVisitUsDesc": "Our team visits businesses to help owners activate their pages.\nWe verify you in person and help you set up everything.",
+  "claimSimpleProcess": "Simple and free process",
+  "claimSimpleProcessDesc": "Your info + phone verification + simple proof = your page is ready.",
+  "claimPersonalInfoTitle": "Personal Information",
+  "claimPersonalInfoSubtitle": "Tell us about yourself and your relationship to this business",
+  "claimFullName": "Full Name",
+  "claimFullNameHint": "As shown on your ID",
+  "claimPhoneNumber": "Phone Number",
+  "claimResendOtp": "Resend",
+  "claimSendOtp": "Send code",
+  "claimOtpVerified": "Done",
+  "claimEnterOtp": "Enter the code sent to {phone}",
+  "@claimEnterOtp": { "placeholders": { "phone": {"type": "String"} } },
+  "claimVerifyOtp": "Verify",
+  "claimOtpDemoNote": "Demo mode: any 6 digits are accepted",
+  "claimPhoneVerified": "Phone verified successfully",
+  "claimRelationship": "Your role",
+  "claimVerificationTitle": "Ownership Verification",
+  "claimVerificationSubtitle": "Choose a verification method that works for you",
+  "claimGpsTitle": "Location",
+  "claimGpsDesc": "Share your current location to confirm you're at the business. This step is required.",
+  "claimGpsCapturing": "Detecting location...",
+  "claimGpsShare": "Share your location",
+  "claimGpsCaptured": "Location detected — 50m from registered address",
+  "claimChooseMethod": "Choose verification method",
+  "claimRecommended": "Recommended",
+  "claimWhenToVisit": "When should we visit?",
+  "claimVisitConfirmNote": "We'll call you before the visit to confirm the exact time",
+  "claimChooseDocType": "Choose document type",
+  "claimUploadDoc": "Upload {docType}",
+  "@claimUploadDoc": { "placeholders": { "docType": {"type": "String"} } },
+  "claimUploadPrompt": "Tap to upload image or document",
+  "claimUploadSuccess": "Upload successful",
+  "claimVideoCallTitle": "Short Video Call",
+  "claimVideoCallDesc": "We'll video call you while you're at the business. We check the location and verify your identity — 2-3 minutes only.",
+  "claimVideoCallNote": "We'll contact you to schedule after submitting the request",
+  "claimAdditionalNotes": "Additional Notes",
+  "claimNotesHint": "Any information that helps...",
+  "claimVisitTimeMorning": "Morning",
+  "claimVisitTimeAfternoon": "Afternoon",
+  "claimVisitTimeEvening": "Evening",
+  "claimVisitTimeWeekend": "Weekend",
+  "claimReviewTitle": "Review & Submit",
+  "claimReviewSubtitle": "Verify all information before submitting",
+  "claimReviewPageSection": "Requested Page",
+  "claimReviewInfoSection": "Your Info",
+  "claimReviewName": "Name",
+  "claimReviewPhone": "Phone",
+  "claimReviewRole": "Role",
+  "claimReviewVerifySection": "Verification",
+  "claimReviewGps": "Location (GPS)",
+  "claimReviewGpsDone": "Detected",
+  "claimReviewGpsNotDone": "Not detected",
+  "claimReviewMethod": "Verification method",
+  "claimReviewDocument": "Document",
+  "claimReviewVisitTime": "Visit time",
+  "claimReviewNotes": "Notes",
+  "claimEditInfo": "Edit info",
+  "claimEditVerification": "Edit verification",
+  "claimAgreementText": "I confirm that the information provided is accurate and that I am the owner of or officially authorized to manage this business. I agree to the ",
+  "claimTermsOfService": "Terms of Service",
+  "claimPrivacyPolicy": "Privacy Policy",
+  "claimFraudWarning": "Providing false information to claim a page that doesn't belong to you is a violation and will result in permanent account ban with possible legal action.",
+  "claimVisitTimeline": "We'll contact you within 24 hours to confirm the visit",
+  "claimReviewTimeline": "Review time: 24 hours",
+
+  "add": "Add",
+  "previous": "Previous"
 }

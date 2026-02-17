@@ -85,7 +85,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
               status == TenantStatus.newTenant) ...[
             _MenuTile(
               icon: Icons.edit_outlined,
-              label: 'تعديل',
+              label: context.l10n.edit,
               onTap: () {
                 Navigator.pop(context);
                 _openEditTenant(tenant);
@@ -93,7 +93,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
             ),
             _MenuTile(
               icon: Icons.link_off,
-              label: 'إلغاء الربط',
+              label: context.l10n.dirUnlink,
               onTap: () {
                 Navigator.pop(context);
                 _showUnlinkSheet(tenant);
@@ -103,7 +103,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
           if (status == TenantStatus.invited) ...[
             _MenuTile(
               icon: Icons.send,
-              label: 'إعادة إرسال الدعوة',
+              label: context.l10n.dirResendInvite,
               onTap: () {
                 Navigator.pop(context);
                 _showInviteSheet(tenant);
@@ -111,7 +111,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
             ),
             _MenuTile(
               icon: Icons.edit_outlined,
-              label: 'تعديل',
+              label: context.l10n.edit,
               onTap: () {
                 Navigator.pop(context);
                 _openEditTenant(tenant);
@@ -119,18 +119,18 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
             ),
             _MenuTile(
               icon: Icons.cancel_outlined,
-              label: 'إلغاء الدعوة',
+              label: context.l10n.dirCancelInvite,
               color: AppColors.error,
               onTap: () {
                 Navigator.pop(context);
-                _showToast('تم إلغاء الدعوة');
+                _showToast(context.l10n.dirInviteCancelled);
               },
             ),
           ],
           if (status == TenantStatus.unclaimed) ...[
             _MenuTile(
               icon: Icons.mail_outline,
-              label: 'إرسال دعوة',
+              label: context.l10n.dirSendInvite,
               onTap: () {
                 Navigator.pop(context);
                 _showInviteSheet(tenant);
@@ -138,7 +138,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
             ),
             _MenuTile(
               icon: Icons.edit_outlined,
-              label: 'تعديل',
+              label: context.l10n.edit,
               onTap: () {
                 Navigator.pop(context);
                 _openEditTenant(tenant);
@@ -146,7 +146,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
             ),
             _MenuTile(
               icon: Icons.delete_outline,
-              label: 'حذف',
+              label: context.l10n.delete,
               color: AppColors.error,
               onTap: () {
                 Navigator.pop(context);
@@ -175,7 +175,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
         tenant: tenant,
         onConfirm: (reason) {
           Navigator.pop(context);
-          _showToast('تم إلغاء ربط ${tenant.name}');
+          _showToast(context.l10n.dirTenantUnlinked(tenant.name));
         },
       ),
     );
@@ -188,7 +188,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
         tenant: tenant,
         onConfirm: () {
           Navigator.pop(context);
-          _showToast('تم حذف ${tenant.name}');
+          _showToast(context.l10n.dirTenantDeleted(tenant.name));
         },
       ),
     );
@@ -257,7 +257,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
                 horizontal: AppSpacing.lg,
               ),
               child: Text(
-                'إدارة الدليل',
+                context.l10n.dirManageTitle,
                 style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -323,7 +323,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
               child: Row(
                 children: [
                   Text(
-                    '${filtered.length} وحدة',
+                    context.l10n.dirUnitCount(filtered.length),
                     style: context.textTheme.bodySmall?.copyWith(
                       color: context.colorScheme.onSurfaceVariant,
                     ),
@@ -337,7 +337,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
                         Icon(Icons.add, size: 16, color: AppColors.primary),
                         const SizedBox(width: 2),
                         Text(
-                          'إضافة وحدة',
+                          context.l10n.dirAddUnit,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -377,7 +377,8 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
                     onTap: () => _openEditTenant(tenant),
                     onMenuAction: () => _showTenantMenu(tenant),
                     onViewPage: tenant.pageId != null
-                        ? () => _showToast('عرض صفحة ${tenant.name}')
+                        ? () => _showToast(
+                            context.l10n.dirViewPage(tenant.name))
                         : null,
                     onEdit: () => _openEditTenant(tenant),
                     onInvite: () => _showInviteSheet(tenant),
@@ -399,7 +400,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
         onClose: _closeOverlay,
         onSave: (floors) {
           _closeOverlay();
-          _showToast('تم تحديث الطوابق');
+          _showToast(context.l10n.dirFloorsUpdated);
         },
       );
     }
@@ -410,7 +411,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
         onClose: _closeOverlay,
         onSave: (categories) {
           _closeOverlay();
-          _showToast('تم تحديث التصنيفات');
+          _showToast(context.l10n.dirCategoriesUpdated);
         },
       );
     }
@@ -420,7 +421,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
         onClose: _closeOverlay,
         onSave: (amenities) {
           _closeOverlay();
-          _showToast('تم تحديث المرافق');
+          _showToast(context.l10n.dirAmenitiesUpdated);
         },
       );
     }
@@ -431,7 +432,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
         onClose: _closeOverlay,
         onSave: (ids) {
           _closeOverlay();
-          _showToast('تم تحديث المميزون');
+          _showToast(context.l10n.dirFeaturedUpdated);
         },
       );
     }
@@ -449,7 +450,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
         onClose: _closeOverlay,
         onSave: (tenantData) {
           _closeOverlay();
-          _showToast('تم إضافة المستأجر');
+          _showToast(context.l10n.dirTenantAdded);
         },
       );
     }
@@ -465,7 +466,7 @@ class _TenantDirectoryState extends ConsumerState<TenantDirectory> {
           onClose: _closeOverlay,
           onSave: (tenantData) {
             _closeOverlay();
-            _showToast('تم تحديث ${tenant.name}');
+            _showToast(context.l10n.dirTenantUpdated(tenant.name));
           },
         );
       }
@@ -534,15 +535,15 @@ class _EmptyState extends StatelessWidget {
             Icon(Icons.search_off, size: 32, color: Theme.of(context).colorScheme.outlineVariant),
             const SizedBox(height: AppSpacing.md),
             Text(
-              'لا توجد نتائج',
+              context.l10n.dirNoResults,
               style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: AppSpacing.md),
             GestureDetector(
               onTap: onClearFilters,
-              child: const Text(
-                'مسح التصفية',
-                style: TextStyle(fontSize: 12, color: AppColors.primary),
+              child: Text(
+                context.l10n.dirClearFilter,
+                style: const TextStyle(fontSize: 12, color: AppColors.primary),
               ),
             ),
           ],
@@ -573,7 +574,7 @@ class _EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(
-            'لا يوجد مستأجرين بعد',
+            context.l10n.dirNoTenantsYet,
             style: context.textTheme.bodyMedium?.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
@@ -581,7 +582,7 @@ class _EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            'أضف مستأجرين لبناء دليل مولك',
+            context.l10n.dirNoTenantsHint,
             style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -597,7 +598,7 @@ class _EmptyState extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
-                'إضافة مستأجر',
+                context.l10n.dirAddTenant,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.surface,
                   fontSize: 13,
@@ -632,7 +633,7 @@ class _ErrorState extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              'خطأ في تحميل بيانات الدليل',
+              context.l10n.dirLoadError,
               style: context.textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
@@ -640,7 +641,7 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             btn.Button(
               onPressed: onRetry,
-              label: 'إعادة المحاولة',
+              label: context.l10n.retry,
               icon: const btn.ButtonIcon(Icons.refresh),
               variant: btn.Variant.text,
             ),

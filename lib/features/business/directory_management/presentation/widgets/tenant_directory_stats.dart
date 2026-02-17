@@ -25,35 +25,35 @@ class TenantDirectoryStats extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       _StatItem(
-        label: TenantStatus.newTenant.label,
+        label: TenantStatus.newTenant.localizedLabel(context.l10n),
         count: stats.newThisWeek,
         color: TenantStatus.newTenant.color,
         bgColor: TenantStatus.newTenant.color.withValues(alpha: 0.08),
         filterKey: 'new',
       ),
       _StatItem(
-        label: TenantStatus.unclaimed.label,
+        label: TenantStatus.unclaimed.localizedLabel(context.l10n),
         count: stats.unclaimed,
         color: TenantStatus.unclaimed.color,
         bgColor: TenantStatus.unclaimed.color.withValues(alpha: 0.08),
         filterKey: 'unclaimed',
       ),
       _StatItem(
-        label: TenantStatus.invited.label,
+        label: TenantStatus.invited.localizedLabel(context.l10n),
         count: stats.invited,
         color: TenantStatus.invited.color,
         bgColor: TenantStatus.invited.color.withValues(alpha: 0.08),
         filterKey: 'invited',
       ),
       _StatItem(
-        label: TenantStatus.claimed.label,
+        label: TenantStatus.claimed.localizedLabel(context.l10n),
         count: stats.claimed,
         color: TenantStatus.claimed.color,
         bgColor: TenantStatus.claimed.color.withValues(alpha: 0.08),
         filterKey: 'claimed',
       ),
       _StatItem(
-        label: 'إجمالي',
+        label: context.l10n.dirStatsTotal,
         count: stats.total,
         color: context.colorScheme.onSurface,
         bgColor: context.colorScheme.surfaceContainerHighest,

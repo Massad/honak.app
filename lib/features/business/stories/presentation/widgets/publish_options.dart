@@ -58,9 +58,9 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
           const SizedBox(height: 20),
 
           // Audience
-          const Text(
-            'من يشاهد القصة؟',
-            style: TextStyle(color: Colors.white60, fontSize: 12),
+          Text(
+            context.l10n.storyWhoSees,
+            style: const TextStyle(color: Colors.white60, fontSize: 12),
           ),
           const SizedBox(height: 8),
           Row(
@@ -78,7 +78,7 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
               Expanded(
                 child: _OptionCard(
                   icon: Icons.public,
-                  label: 'الجميع',
+                  label: context.l10n.storyAudienceAll,
                   selected: state.audience == 'all',
                   color: const Color(0xFFFF9800),
                   onTap: () => notifier.setAudience('all'),
@@ -89,9 +89,9 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
           const SizedBox(height: 16),
 
           // Timing
-          const Text(
-            'وقت النشر',
-            style: TextStyle(color: Colors.white60, fontSize: 12),
+          Text(
+            context.l10n.storyPublishTime,
+            style: const TextStyle(color: Colors.white60, fontSize: 12),
           ),
           const SizedBox(height: 8),
           Row(
@@ -99,7 +99,7 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
               Expanded(
                 child: _OptionCard(
                   icon: Icons.send,
-                  label: 'الآن',
+                  label: context.l10n.storyNow,
                   selected: !isScheduled,
                   color: const Color(0xFF43A047),
                   onTap: () => notifier.setSchedule(null),
@@ -158,8 +158,8 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
               Expanded(
                 child: Text(
                   isScheduled
-                      ? 'القصة ستُنشر تلقائياً في الوقت المحدد وتختفي بعد ٢٤ ساعة'
-                      : 'القصة تظهر فوراً وتختفي بعد ٢٤ ساعة',
+                      ? context.l10n.storyScheduledInfo
+                      : context.l10n.storyNowInfo,
                   style: const TextStyle(
                     color: Colors.white38,
                     fontSize: 10,
@@ -178,7 +178,7 @@ class _PublishContentState extends ConsumerState<_PublishContent> {
               context.showSnackBar(context.l10n.storyPublished);
               Navigator.of(context).pop(true);
             },
-            label: isScheduled ? 'جدولة القصة' : 'نشر الآن',
+            label: isScheduled ? context.l10n.storyScheduleAction : context.l10n.storyPublishNow,
             icon: ButtonIcon(
               isScheduled ? Icons.schedule : Icons.send,
               size: 16,

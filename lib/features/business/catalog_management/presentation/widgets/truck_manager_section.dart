@@ -98,7 +98,7 @@ class _TruckList extends ConsumerWidget {
           child: Row(
             children: [
               Text(
-                '${trucks.length} شاحنة · إدارة السائقين والسعة وأيام التوصيل',
+                context.l10n.truckSummary(trucks.length),
                 style: TextStyle(
                   fontSize: 10,
                   color: context.colorScheme.onSurfaceVariant,
@@ -116,14 +116,14 @@ class _TruckList extends ConsumerWidget {
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.add, size: 14, color: Colors.white),
-                      SizedBox(width: 4),
+                      const Icon(Icons.add, size: 14, color: Colors.white),
+                      const SizedBox(width: 4),
                       Text(
-                        'إضافة شاحنة',
-                        style: TextStyle(
+                        context.l10n.truckAddTruck,
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -175,7 +175,7 @@ class _TruckList extends ConsumerWidget {
                   Icon(Icons.add, size: 14, color: context.colorScheme.onSurfaceVariant),
                   const SizedBox(width: 6),
                   Text(
-                    'إضافة شاحنة جديدة',
+                    context.l10n.truckAddNewTruck,
                     style: TextStyle(
                       fontSize: 12,
                       color: context.colorScheme.onSurfaceVariant,
@@ -227,8 +227,8 @@ class _TruckCard extends StatelessWidget {
     final truckColor = _parseColor(truck.color);
     final isOffToday = !truck.deliveryDays.contains(todayDay);
     final (statusLabel, statusColor) = isOffToday
-        ? ('عطلة اليوم', const Color(0xFF9E9E9E))
-        : (_statusMap[truck.today.status] ?? ('لم يبدأ', const Color(0xFF9E9E9E)));
+        ? (context.l10n.truckOffToday, const Color(0xFF9E9E9E))
+        : (_statusMap[truck.today.status] ?? (context.l10n.bizReqTdUnknown, const Color(0xFF9E9E9E)));
 
     return GestureDetector(
       onTap: onTap,
@@ -340,17 +340,17 @@ class _TruckCard extends StatelessWidget {
                       children: [
                         _StatBox(
                           value: '${truck.capacityFull}',
-                          label: 'سعة ممتلئ',
+                          label: context.l10n.truckCapFull,
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         _StatBox(
                           value: '${truck.zones.length}',
-                          label: 'مناطق',
+                          label: context.l10n.truckZones,
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         _StatBox(
                           value: '${truck.deliveryDays.length}',
-                          label: 'أيام',
+                          label: context.l10n.truckDays,
                         ),
                       ],
                     ),
@@ -525,7 +525,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
               ),
               const Spacer(),
               Text(
-                widget.isNew ? 'إضافة شاحنة' : 'تعديل الشاحنة',
+                widget.isNew ? context.l10n.truckAddTitle : context.l10n.truckEditTitle,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -544,7 +544,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
             padding: const EdgeInsets.all(AppSpacing.lg),
             children: [
               // Name
-              _FieldLabel('اسم الشاحنة'),
+              _FieldLabel(context.l10n.truckName),
               const SizedBox(height: AppSpacing.xs),
               TextFormField(
                 initialValue: _name,
@@ -570,7 +570,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
 
               // Team member drivers (if available)
               if (teamMembers.isNotEmpty) ...[
-                _FieldLabel('السائقون (من الفريق)'),
+                _FieldLabel(context.l10n.truckDriversTeam),
                 const SizedBox(height: AppSpacing.sm),
                 ...teamMembers.map((m) => _TeamMemberRow(
                   member: m,
@@ -591,7 +591,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                 children: [
                   Expanded(
                     child: _CapacityControl(
-                      label: 'سعة — ممتلئ',
+                      label: context.l10n.truckCapFullLabel,
                       value: _capacityFull,
                       onChanged: (v) => setState(() => _capacityFull = v),
                     ),
@@ -599,7 +599,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: _CapacityControl(
-                      label: 'سعة — فارغ',
+                      label: context.l10n.truckCapEmptyLabel,
                       value: _capacityEmpty,
                       onChanged: (v) => setState(() => _capacityEmpty = v),
                     ),
@@ -609,7 +609,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
               const SizedBox(height: AppSpacing.lg),
 
               // Delivery days
-              _FieldLabel('أيام التوصيل'),
+              _FieldLabel(context.l10n.truckDeliveryDays),
               const SizedBox(height: AppSpacing.sm),
               Row(
                 children: [
@@ -662,7 +662,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _FieldLabel('بداية المسار'),
+                        _FieldLabel(context.l10n.truckRouteStart),
                         const SizedBox(height: AppSpacing.xs),
                         _TimeField(
                           value: _routeStart,
@@ -676,7 +676,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _FieldLabel('نهاية المسار'),
+                        _FieldLabel(context.l10n.truckRouteEnd),
                         const SizedBox(height: AppSpacing.xs),
                         _TimeField(
                           value: _routeEnd,
@@ -702,7 +702,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                     Row(
                       children: [
                         Text(
-                          '${widget.truck?.zones.length ?? 0} مناطق',
+                          context.l10n.truckZoneCount(widget.truck?.zones.length ?? 0),
                           style: TextStyle(
                             fontSize: 10,
                             color: context.colorScheme.onSurfaceVariant,
@@ -713,7 +713,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'مناطق التغطية',
+                              context.l10n.truckCoverageZones,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: context.colorScheme.onSurfaceVariant,
@@ -732,7 +732,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                         Row(
                           children: [
                             Text(
-                              '${z.approximateAreaKm2} كم²',
+                              context.l10n.truckAreaKm2(z.approximateAreaKm2.toString()),
                               style: TextStyle(
                                 fontSize: 10,
                                 color: context.colorScheme.onSurfaceVariant,
@@ -752,7 +752,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                     if (widget.truck?.zones.isEmpty ?? true) ...[
                       const SizedBox(height: AppSpacing.sm),
                       Text(
-                        'لم يتم رسم مناطق بعد — سيتوفر في التطبيق قريباً',
+                        context.l10n.truckNoZones,
                         style: TextStyle(
                           fontSize: 10,
                           color: context.colorScheme.onSurfaceVariant,
@@ -773,7 +773,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
-                        _showToast('تم حذف الشاحنة');
+                        _showToast(context.l10n.truckDeleted);
                       },
                       child: Container(
                         padding: const EdgeInsets.all(AppSpacing.md),
@@ -792,10 +792,10 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
                           : () {
                               Navigator.pop(context);
                               _showToast(widget.isNew
-                                  ? 'تمت إضافة الشاحنة'
-                                  : 'تم حفظ التغييرات');
+                                  ? context.l10n.truckAdded
+                                  : context.l10n.truckSaved);
                             },
-                      label: 'حفظ',
+                      label: context.l10n.save,
                       icon: const btn.ButtonIcon(Icons.check, size: 14),
                       size: btn.ButtonSize.large,
                       expand: true,
@@ -1106,7 +1106,7 @@ class _EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(
-            'لم تضف شاحنات بعد',
+            context.l10n.truckNoTrucks,
             style: TextStyle(
               fontSize: 12,
               color: context.colorScheme.onSurfaceVariant,
@@ -1115,7 +1115,7 @@ class _EmptyState extends StatelessWidget {
           const SizedBox(height: AppSpacing.xl),
           btn.Button(
             onPressed: onAdd,
-            label: 'إضافة شاحنة',
+            label: context.l10n.truckAddTruck,
             icon: const btn.ButtonIcon(Icons.add, size: 14),
           ),
         ],
@@ -1146,13 +1146,13 @@ class _ErrorState extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(
-            'خطأ في تحميل الشاحنات',
+            context.l10n.truckLoadError,
             style: TextStyle(color: context.colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.lg),
           btn.Button(
             onPressed: onRetry,
-            label: 'إعادة المحاولة',
+            label: context.l10n.truckRetry,
             icon: const btn.ButtonIcon(Icons.refresh, size: 18),
             variant: btn.Variant.text,
           ),

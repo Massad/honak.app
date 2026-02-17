@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
 import 'package:honak/features/business/shared/entities/status_config.dart';
 
@@ -16,52 +17,77 @@ class QueueStatusConfig extends StatusConfig {
     required super.label,
   });
 
+  /// Returns a localized config. Call when [BuildContext] is available.
+  static QueueStatusConfig ofLocalized(
+    QueueStatus status,
+    BuildContext context,
+  ) {
+    final base = _configs[status]!;
+    final l10n = context.l10n;
+    final label = switch (status) {
+      QueueStatus.waiting => l10n.queueStatusWaiting,
+      QueueStatus.onTheWay => l10n.queueStatusOnTheWay,
+      QueueStatus.inProgress => l10n.queueStatusInProgress,
+      QueueStatus.ready => l10n.queueStatusReady,
+      QueueStatus.completed => l10n.queueStatusCompleted,
+      QueueStatus.noShow => l10n.queueStatusNoShow,
+    };
+    return QueueStatusConfig._(
+      color: base.color,
+      bgColor: base.bgColor,
+      borderColor: base.borderColor,
+      icon: base.icon,
+      label: label,
+    );
+  }
+
   static const Map<QueueStatus, QueueStatusConfig> _configs = {
     QueueStatus.waiting: QueueStatusConfig._(
       color: Color(0xFFFF9800),
       bgColor: Color(0xFFFFF8E1),
       borderColor: Color(0xFFFF9800),
       icon: Icons.schedule_rounded,
-      label: 'في الانتظار',
+      label: '', // placeholder — use ofLocalized() at runtime
     ),
     QueueStatus.onTheWay: QueueStatusConfig._(
       color: Color(0xFF43A047),
       bgColor: Color(0xFFF0FDF4),
       borderColor: Color(0xFF43A047),
       icon: Icons.navigation_rounded,
-      label: 'في الطريق',
+      label: '',
     ),
     QueueStatus.inProgress: QueueStatusConfig._(
       color: Color(0xFF1A73E8),
       bgColor: Color(0xFFEFF6FF),
       borderColor: Color(0xFF1A73E8),
       icon: Icons.play_arrow_rounded,
-      label: 'قيد الخدمة',
+      label: '',
     ),
     QueueStatus.ready: QueueStatusConfig._(
       color: Color(0xFF43A047),
       bgColor: Color(0xFFF0FDF4),
       borderColor: Color(0xFF43A047),
       icon: Icons.check_circle_outline_rounded,
-      label: 'جاهز للاستلام',
+      label: '',
     ),
     QueueStatus.completed: QueueStatusConfig._(
       color: Color(0xFF6B7280),
       bgColor: Color(0xFFF9FAFB),
       borderColor: Color(0xFF9CA3AF),
       icon: Icons.local_shipping_rounded,
-      label: 'مكتمل',
+      label: '',
     ),
     QueueStatus.noShow: QueueStatusConfig._(
       color: Color(0xFFE53935),
       bgColor: Color(0xFFFEF2F2),
       borderColor: Color(0xFFE53935),
       icon: Icons.block_rounded,
-      label: 'لم يحضر',
+      label: '',
     ),
   };
 
-  /// Get config for a specific status.
+  /// Get config for a specific status (colors + icon only; label is empty).
+  /// Prefer [ofLocalized] when a [BuildContext] is available.
   static QueueStatusConfig of(QueueStatus status) => _configs[status]!;
 
   /// Canonical status ordering for forward/backward detection.

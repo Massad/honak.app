@@ -8,7 +8,7 @@ class RtlAware extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: child,
     );
   }

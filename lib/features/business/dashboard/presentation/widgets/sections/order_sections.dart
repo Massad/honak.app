@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
@@ -43,7 +44,7 @@ class ActiveQueueSection extends StatelessWidget {
                 Text(
                   isPreparing
                       ? (m['time'] as String? ?? '')
-                      : 'بانتظار',
+                      : context.l10n.bizQueueWaiting,
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -108,7 +109,7 @@ class UnavailableItemsSection extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '${items.length} أصناف متوقفة',
+                  AppLocalizations.of(context).bizUnavailableItems(items.length),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -149,7 +150,7 @@ class UnavailableItemsSection extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'إعادة تفعيل',
+            AppLocalizations.of(context).bizUnavailableReactivate,
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,

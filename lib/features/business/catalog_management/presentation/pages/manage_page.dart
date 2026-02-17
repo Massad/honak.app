@@ -143,12 +143,12 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
   void _applyMassStatus(String status) {
     // Mock — in real app, batch API call
     _exitSelectMode();
-    _showToast('تم تحديث حالة ${_selected.length} عنصر');
+    _showToast(context.l10n.catalogStatusUpdated(_selected.length));
   }
 
   void _applyMassDelete() {
     _exitSelectMode();
-    _showToast('تم حذف ${_selected.length} عنصر');
+    _showToast(context.l10n.catalogItemsDeleted(_selected.length));
   }
 
   // ── Pagination ────────────────────────────────────────────────
@@ -188,9 +188,9 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
     }
     if (_filterStatus != 'all') {
       final label = switch (_filterStatus) {
-        'active' => 'متوفر',
-        'out_of_stock' => 'غير متوفر',
-        'hidden' => 'مخفي',
+        'active' => context.l10n.catalogStatusAvailable,
+        'out_of_stock' => context.l10n.catalogStatusOutOfStock,
+        'hidden' => context.l10n.catalogStatusHidden,
         _ => _filterStatus,
       };
       filters.add(ActiveFilter(
@@ -263,7 +263,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
           editChange: editChange,
           onComplete: (change) {
             ref.read(priceChangeProvider.notifier).applyChange(change);
-            _showToast('تم تطبيق تغيير الأسعار');
+            _showToast(context.l10n.catalogPriceChangeApplied);
           },
         ),
       ),
@@ -284,7 +284,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
             onStopActive: () {
               ref.read(priceChangeProvider.notifier).stopActive();
               Navigator.of(context).pop();
-              _showToast('تم إيقاف تغيير الأسعار');
+              _showToast(context.l10n.catalogPriceChangeStopped);
             },
             onReuse: (change) {
               Navigator.of(context).pop();
@@ -294,7 +294,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                   ref.read(bizItemsProvider(pageId)).valueOrNull ?? [];
               final config = ref.read(businessContextProvider)?.config;
               final label =
-                  config?.itemManagement?.itemsLabelAr ?? 'الأصناف';
+                  config?.itemManagement?.itemsLabelAr ?? context.l10n.pcAllItems;
               _openPriceWizard(items, label);
             },
           ),
@@ -477,7 +477,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                     Icon(Icons.check, size: 11, color: AppColors.primary),
                     const SizedBox(width: 4),
                     Text(
-                      'تم',
+                      context.l10n.done,
                       style: TextStyle(
                         fontSize: 11,
                         color: AppColors.primary,
@@ -502,8 +502,8 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
             border: Border.all(
                 color: AppColors.primary.withValues(alpha: 0.15)),
           ),
-          child: const Text(
-            'استخدم الأسهم لتغيير ترتيب العناصر — الترتيب يظهر كما هو في صفحتك',
+          child: Text(
+            context.l10n.catalogReorderInfo,
             style: TextStyle(fontSize: 11, color: AppColors.primary),
             textAlign: TextAlign.center,
           ),
@@ -657,14 +657,14 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                 loading: () => [const ItemListSkeleton()],
                 error: (err, _) => [
                   _ErrorState(
-                    message: 'خطأ في تحميل $label',
+                    message: context.l10n.catalogLoadError(label),
                     onRetry: () => ref.invalidate(bizItemsProvider(pageId)),
                   ),
                 ],
                 data: (items) {
                   final categories = categoriesAsync.valueOrNull ?? [];
                   final filtered = _applyFilters(items);
-                  final addLabel = itemConfig?.addLabelAr ?? 'إضافة $label';
+                  final addLabel = itemConfig?.addLabelAr ?? '${context.l10n.add} $label';
                   final itemsLabel = itemConfig?.itemsLabelAr ?? label;
                   final itemLabel = itemConfig?.itemLabelAr ?? label;
 
@@ -709,7 +709,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         onManageCategories: () => openCategoryManager(
                           context,
                           categories: categories,
-                          itemLabelAr: itemConfig?.itemLabelAr ?? 'عنصر',
+                          itemLabelAr: itemConfig?.itemLabelAr ?? context.l10n.catalogSelectedItem,
                           onChanged: (_) {},
                         ),
                       ),
@@ -722,7 +722,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                           _searchQuery = q;
                           _resetPagination();
                         }),
-                        hintText: 'بحث في $itemsLabel...',
+                        hintText: context.l10n.catalogSearchIn(itemsLabel),
                         onFilterTap: () => showFilterSheet(
                           context,
                           categories: categories,
@@ -827,14 +827,14 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         itemLabelAr: itemConfig!.itemLabelAr,
                         onApply: (percent) {
                           _exitSelectMode();
-                          _showToast('تم تطبيق خصم $percent٪');
+                          _showToast(context.l10n.catalogDiscountApplied(percent));
                         },
                       )
                   : null,
               onOpenCategory: itemConfig?.hasCategory == true
                   ? () {
                       _exitSelectMode();
-                      _showToast('قريباً');
+                      _showToast(context.l10n.comingSoon);
                     }
                   : null,
               onOpenTeam: itemConfig?.providerAssignment == true
@@ -842,7 +842,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                       final members =
                           ref.read(teamProvider).valueOrNull ?? [];
                       if (members.isEmpty) {
-                        _showToast('لا يوجد أعضاء فريق');
+                        _showToast(context.l10n.catalogNoTeamMembers);
                         return;
                       }
                       showTeamAssignSheet(
@@ -853,7 +853,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         onApply: (teamIds) {
                           _exitSelectMode();
                           _showToast(
-                            'تم تعيين ${teamIds.length} عضو لـ ${_selected.length} عنصر',
+                            context.l10n.catalogTeamAssigned(teamIds.length, _selected.length),
                           );
                         },
                       );
@@ -890,7 +890,7 @@ class _PriceChangeBannerWrapper extends ConsumerWidget {
 
     final pageId = bizContext.page.id;
     final config = bizContext.config;
-    final itemsLabel = config?.itemManagement?.itemsLabelAr ?? 'الأصناف';
+    final itemsLabel = config?.itemManagement?.itemsLabelAr ?? context.l10n.pcAllItems;
 
     return pcAsync.when(
       loading: () => const SizedBox.shrink(),
@@ -912,8 +912,8 @@ class _PriceChangeBannerWrapper extends ConsumerWidget {
           onStop: () {
             ref.read(priceChangeProvider.notifier).stopActive();
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('تم إيقاف تغيير الأسعار'),
+              SnackBar(
+                content: Text(context.l10n.catalogPriceChangeStopped),
                 duration: Duration(seconds: 2),
               ),
             );
@@ -1100,32 +1100,32 @@ class _Toolbar extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(
         AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.md),
       child: switch (mode) {
-        _ManageMode.normal => _buildNormalToolbar(),
-        _ManageMode.select => _buildSelectToolbar(),
-        _ManageMode.reorder => _buildReorderToolbar(),
+        _ManageMode.normal => _buildNormalToolbar(context),
+        _ManageMode.select => _buildSelectToolbar(context),
+        _ManageMode.reorder => _buildReorderToolbar(context),
       },
     );
   }
 
-  Widget _buildNormalToolbar() {
+  Widget _buildNormalToolbar(BuildContext context) {
     return Row(
       children: [
         if (totalCount > 1)
           _ToolbarChip(
-            label: 'ترتيب',
+            label: context.l10n.catalogReorder,
             icon: Icons.swap_vert,
             onTap: onReorder,
           ),
         if (totalCount > 1) const SizedBox(width: 6),
         _ToolbarChip(
-          label: 'تحديد',
+          label: context.l10n.catalogSelect,
           icon: Icons.check_box_outline_blank,
           onTap: onSelect,
         ),
         if (hasStock && onStockManager != null) ...[
           const SizedBox(width: 6),
           _ToolbarChip(
-            label: 'مخزون',
+            label: context.l10n.catalogStock,
             icon: Icons.inventory_2_outlined,
             onTap: onStockManager!,
           ),
@@ -1140,7 +1140,7 @@ class _Toolbar extends StatelessWidget {
                 Icon(Icons.settings, size: 9, color: AppColors.primary),
                 const SizedBox(width: 4),
                 Text(
-                  'التصنيفات ($categoryCount)',
+                  context.l10n.catalogCategoriesCount(categoryCount),
                   style: const TextStyle(
                       fontSize: 10, color: AppColors.primary),
                 ),
@@ -1151,11 +1151,11 @@ class _Toolbar extends StatelessWidget {
     );
   }
 
-  Widget _buildSelectToolbar() {
+  Widget _buildSelectToolbar(BuildContext context) {
     return Row(
       children: [
         _ToolbarChip(
-          label: allSelected ? 'إلغاء الكل' : 'تحديد الكل',
+          label: allSelected ? context.l10n.catalogDeselectAll : context.l10n.catalogSelectAll,
           icon: allSelected
               ? Icons.check_box
               : Icons.check_box_outline_blank,
@@ -1164,7 +1164,7 @@ class _Toolbar extends StatelessWidget {
         ),
         const SizedBox(width: 6),
         _ToolbarChip(
-          label: 'إلغاء',
+          label: context.l10n.cancel,
           icon: Icons.close,
           onTap: onExitSelect,
         ),
@@ -1178,7 +1178,7 @@ class _Toolbar extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
-              '$selectedCount محدد',
+              context.l10n.catalogSelectedCount(selectedCount),
               style: const TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
@@ -1191,18 +1191,18 @@ class _Toolbar extends StatelessWidget {
     );
   }
 
-  Widget _buildReorderToolbar() {
+  Widget _buildReorderToolbar(BuildContext context) {
     return Row(
       children: [
         _ToolbarChip(
-          label: 'تم',
+          label: context.l10n.done,
           icon: Icons.check,
           onTap: onExitReorder,
           active: true,
         ),
         const Spacer(),
         Text(
-          'اسحب لتغيير الترتيب',
+          context.l10n.catalogDragToReorder,
           style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
         ),
       ],
@@ -1331,7 +1331,7 @@ class _EmptyItemState extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(
-            'لا يوجد $label بعد',
+            context.l10n.catalogNoItemsYet(label),
             style: context.textTheme.bodyMedium?.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
@@ -1339,7 +1339,7 @@ class _EmptyItemState extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            'أضف $label لتظهر في صفحتك',
+            context.l10n.catalogAddItemsHint(label),
             style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -1400,15 +1400,15 @@ class _FilteredEmptyState extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           Text(
             query.isNotEmpty
-                ? 'لا توجد نتائج لـ "$query"'
-                : 'لا يوجد عناصر بهذه التصفية',
+                ? context.l10n.catalogNoResultsFor(query)
+                : context.l10n.catalogNoFilterResults,
             style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.md),
           GestureDetector(
             onTap: onClear,
-            child: const Text(
-              'مسح التصفية',
+            child: Text(
+              context.l10n.catalogClearFilter,
               style: TextStyle(fontSize: 12, color: AppColors.primary),
             ),
           ),
@@ -1452,7 +1452,7 @@ class _ErrorState extends StatelessWidget {
           const SizedBox(height: AppSpacing.lg),
           btn.Button(
             onPressed: onRetry,
-            label: 'إعادة المحاولة',
+            label: context.l10n.retry,
             icon: const btn.ButtonIcon(Icons.refresh, size: 18),
             variant: btn.Variant.text,
           ),

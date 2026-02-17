@@ -5,6 +5,8 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
+// ignore_for_file: avoid_escaping_inner_quotes
+
 class RecurringCustomersSection extends StatelessWidget {
   const RecurringCustomersSection({super.key});
 
@@ -23,7 +25,7 @@ class RecurringCustomersSection extends StatelessWidget {
         Row(
           children: [
             Text(
-              '\u0627\u0644\u0639\u0645\u0644\u0627\u0621 \u0627\u0644\u0645\u062a\u0643\u0631\u0631\u0648\u0646',
+              context.l10n.bizRecurringCustomers,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -32,9 +34,9 @@ class RecurringCustomersSection extends StatelessWidget {
             btn.Button(
               onPressed: () => _showToast(
                 context,
-                '\u0642\u0631\u064a\u0628\u0627\u064b \u2014 \u0639\u0631\u0636 \u0627\u0644\u0643\u0644',
+                context.l10n.bizRecurringViewAllSoon,
               ),
-              label: '\u0639\u0631\u0636 \u0627\u0644\u0643\u0644',
+              label: context.l10n.bizRecurringViewAll,
               variant: btn.Variant.text,
               size: btn.ButtonSize.small,
             ),
@@ -46,17 +48,17 @@ class RecurringCustomersSection extends StatelessWidget {
         Row(
           children: [
             _StatChip(
-              text: '5 \u0641\u0639\u0651\u0627\u0644',
+              text: context.l10n.bizRecurringActiveCount(5),
               color: AppColors.primary,
             ),
             const SizedBox(width: AppSpacing.sm),
             _StatChip(
-              text: '2 \u062a\u0644\u0642\u0627\u0626\u064a',
+              text: context.l10n.bizRecurringAutoCount(2),
               color: AppColors.success,
             ),
             const SizedBox(width: AppSpacing.sm),
             _StatChip(
-              text: '3 \u062a\u0630\u0643\u064a\u0631',
+              text: context.l10n.bizRecurringRemindCount(3),
               color: Colors.purple,
             ),
           ],
@@ -65,7 +67,7 @@ class RecurringCustomersSection extends StatelessWidget {
 
         // Auto orders subtitle
         Text(
-          '\u0627\u0644\u0637\u0644\u0628\u0627\u062a \u0627\u0644\u062a\u0644\u0642\u0627\u0626\u064a\u0629 \u0627\u0644\u064a\u0648\u0645',
+          context.l10n.bizRecurringAutoOrdersToday,
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w600,
@@ -78,25 +80,24 @@ class RecurringCustomersSection extends StatelessWidget {
         _CustomerActionCard(
           initial: '\u0633',
           name: '\u0633\u0627\u0631\u0629 \u0639\u0645\u0631',
-          subtitle:
-              '\u0637\u0644\u0628 \u062a\u0644\u0642\u0627\u0626\u064a \u2014 2 \u0642\u0648\u0627\u0631\u064a\u0631',
+          subtitle: context.l10n.bizRecurringAutoOrder(2),
           avatarColor: AppColors.primary,
           actions: [
             _ActionButton(
-              label: '\u062a\u0623\u0643\u064a\u062f',
+              label: context.l10n.bizRecurringConfirm,
               icon: Icons.check,
               color: AppColors.success,
               onTap: () => _showToast(
                 context,
-                '\u062a\u0645 \u062a\u0623\u0643\u064a\u062f \u0637\u0644\u0628 \u0633\u0627\u0631\u0629',
+                context.l10n.bizRecurringConfirmed('\u0633\u0627\u0631\u0629'),
               ),
             ),
             _ActionButton(
-              label: '\u062a\u062e\u0637\u064a',
+              label: context.l10n.bizRecurringSkip,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               onTap: () => _showToast(
                 context,
-                '\u062a\u0645 \u062a\u062e\u0637\u064a \u0637\u0644\u0628 \u0633\u0627\u0631\u0629',
+                context.l10n.bizRecurringSkipped('\u0633\u0627\u0631\u0629'),
               ),
             ),
           ],
@@ -108,25 +109,24 @@ class RecurringCustomersSection extends StatelessWidget {
           initial: '\u0623',
           name:
               '\u0623\u062d\u0645\u062f \u0645\u062d\u0645\u062f',
-          subtitle:
-              '\u0637\u0644\u0628 \u062a\u0644\u0642\u0627\u0626\u064a \u2014 3 \u0642\u0648\u0627\u0631\u064a\u0631',
+          subtitle: context.l10n.bizRecurringAutoOrder(3),
           avatarColor: Colors.teal,
           actions: [
             _ActionButton(
-              label: '\u062a\u0623\u0643\u064a\u062f',
+              label: context.l10n.bizRecurringConfirm,
               icon: Icons.check,
               color: AppColors.success,
               onTap: () => _showToast(
                 context,
-                '\u062a\u0645 \u062a\u0623\u0643\u064a\u062f \u0637\u0644\u0628 \u0623\u062d\u0645\u062f',
+                context.l10n.bizRecurringConfirmed('\u0623\u062d\u0645\u062f'),
               ),
             ),
             _ActionButton(
-              label: '\u062a\u062e\u0637\u064a',
+              label: context.l10n.bizRecurringSkip,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               onTap: () => _showToast(
                 context,
-                '\u062a\u0645 \u062a\u062e\u0637\u064a \u0637\u0644\u0628 \u0623\u062d\u0645\u062f',
+                context.l10n.bizRecurringSkipped('\u0623\u062d\u0645\u062f'),
               ),
             ),
           ],
@@ -135,7 +135,7 @@ class RecurringCustomersSection extends StatelessWidget {
 
         // Low credit subtitle
         Text(
-          '\u0631\u0635\u064a\u062f \u0645\u0646\u062e\u0641\u0636',
+          context.l10n.bizRecurringLowCredit,
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w600,
@@ -149,16 +149,15 @@ class RecurringCustomersSection extends StatelessWidget {
           initial: '\u062e',
           name:
               '\u062e\u0627\u0644\u062f \u0633\u0645\u064a\u0631',
-          subtitle:
-              '\u0645\u062a\u0628\u0642\u064a 1 \u0645\u0646 10 \u062a\u0648\u0635\u064a\u0644\u0629',
+          subtitle: context.l10n.bizRecurringCreditLeft(1, 10),
           avatarColor: Colors.orange,
           actions: [
             _ActionButton(
-              label: '\u062a\u0630\u0643\u064a\u0631',
+              label: context.l10n.bizRecurringRemind,
               color: Colors.purple,
               onTap: () => _showToast(
                 context,
-                '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u062a\u0630\u0643\u064a\u0631 \u0644\u062e\u0627\u0644\u062f',
+                context.l10n.bizRecurringReminderSent('\u062e\u0627\u0644\u062f'),
               ),
             ),
           ],

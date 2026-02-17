@@ -81,7 +81,7 @@ class _QueueCancelSheet extends StatelessWidget {
                 const SizedBox(height: AppSpacing.lg),
                 // Title
                 Text(
-                  'إلغاء الحجز؟',
+                  context.l10n.queueCancelConfirmTitle,
                   style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -116,7 +116,7 @@ class _QueueCancelSheet extends StatelessWidget {
                 const SizedBox(height: AppSpacing.md),
                 // No charge notice
                 Text(
-                  'لن يتم احتساب أي رسوم.',
+                  context.l10n.queueNoChargeNotice,
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -128,7 +128,7 @@ class _QueueCancelSheet extends StatelessWidget {
                     Navigator.pop(context);
                     onConfirm();
                   },
-                  label: 'نعم، إلغاء الحجز',
+                  label: context.l10n.queueConfirmCancel,
                   style: btn.Style.danger,
                   size: btn.ButtonSize.large,
                   expand: true,
@@ -137,7 +137,7 @@ class _QueueCancelSheet extends StatelessWidget {
                 // Stay in queue button
                 btn.Button(
                   onPressed: () => Navigator.pop(context),
-                  label: 'لا، البقاء بالدور',
+                  label: context.l10n.queueStayInQueue,
                   variant: btn.Variant.outlined,
                   size: btn.ButtonSize.large,
                   expand: true,

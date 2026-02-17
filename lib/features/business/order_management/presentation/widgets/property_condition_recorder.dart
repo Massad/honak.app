@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -63,11 +64,11 @@ class _PropertyConditionRecorderState extends State<PropertyConditionRecorder> {
             icon: Icons.login,
             iconColor: AppColors.primary,
             iconBgColor: AppColors.primary.withValues(alpha: 0.1),
-            title: 'حالة العقار — الوصول',
+            title: context.l10n.bizReqPropCheckIn,
             subtitle: widget.inspection.checkIn != null
-                ? 'تم التوثيق · ${widget.inspection.checkIn!.photos.length} صور'
-                : 'لم يتم التوثيق بعد',
-            badge: widget.inspection.checkIn != null ? 'تم' : null,
+                ? context.l10n.bizReqPropDocumented(widget.inspection.checkIn!.photos.length)
+                : context.l10n.bizReqPropNotDocumented,
+            badge: widget.inspection.checkIn != null ? context.l10n.bizReqPropDone : null,
             child: _CheckRecordContent(
               record: widget.inspection.checkIn,
               canRecord: canCheckIn && !widget.readOnly,
@@ -89,11 +90,11 @@ class _PropertyConditionRecorderState extends State<PropertyConditionRecorder> {
             icon: Icons.logout,
             iconColor: AppColors.warning,
             iconBgColor: AppColors.warning.withValues(alpha: 0.1),
-            title: 'حالة العقار — المغادرة',
+            title: context.l10n.bizReqPropCheckOut,
             subtitle: widget.inspection.checkOut != null
-                ? 'تم التوثيق · ${widget.inspection.checkOut!.photos.length} صور'
-                : 'لم يتم التوثيق بعد',
-            badge: widget.inspection.checkOut != null ? 'تم' : null,
+                ? context.l10n.bizReqPropDocumented(widget.inspection.checkOut!.photos.length)
+                : context.l10n.bizReqPropNotDocumented,
+            badge: widget.inspection.checkOut != null ? context.l10n.bizReqPropDone : null,
             child: _CheckRecordContent(
               record: widget.inspection.checkOut,
               canRecord: canCheckOut && !widget.readOnly,
@@ -113,10 +114,10 @@ class _PropertyConditionRecorderState extends State<PropertyConditionRecorder> {
             icon: Icons.warning_amber_rounded,
             iconColor: AppColors.error,
             iconBgColor: AppColors.error.withValues(alpha: 0.05),
-            title: 'تقارير الأضرار',
+            title: context.l10n.bizReqPropDamages,
             subtitle: widget.inspection.damages.isEmpty
-                ? 'لا توجد أضرار مسجلة'
-                : '${widget.inspection.damages.length} ضرر مسجل',
+                ? context.l10n.bizReqPropNoDamages
+                : context.l10n.bizReqPropDamageCount(widget.inspection.damages.length),
             badgeCount: widget.inspection.damages.length,
             child: _DamageSection(
               damages: widget.inspection.damages,
@@ -139,10 +140,10 @@ class _PropertyConditionRecorderState extends State<PropertyConditionRecorder> {
             icon: Icons.checklist_rounded,
             iconColor: const Color(0xFF7C3AED), // purple
             iconBgColor: const Color(0xFF7C3AED).withValues(alpha: 0.05),
-            title: 'قائمة الجرد',
+            title: context.l10n.bizReqPropInventory,
             subtitle: widget.inspection.inventory.isEmpty
-                ? 'لم يتم إعداد قائمة جرد'
-                : '${widget.inspection.inventory.length} عنصر',
+                ? context.l10n.bizReqPropNoInventory
+                : context.l10n.bizReqPropItemCount(widget.inspection.inventory.length),
             badgeCount: widget.inspection.inventory.length,
             child: _InventorySection(
               items: widget.inspection.inventory,
@@ -400,7 +401,7 @@ class _CheckRecordContent extends StatelessWidget {
                       Icon(Icons.notes, size: 10, color: cs.onSurfaceVariant),
                       const SizedBox(width: 4),
                       Text(
-                        'ملاحظات',
+                        context.l10n.bizReqPropNotes,
                         style: TextStyle(
                           fontSize: 10,
                           color: cs.onSurfaceVariant,
@@ -427,7 +428,7 @@ class _CheckRecordContent extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
           child: Text(
-            'غير متاح حالياً',
+            context.l10n.bizReqPropNotAvailable,
             style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
           ),
         ),
@@ -455,7 +456,7 @@ class _CheckRecordContent extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              'بدء توثيق الوصول',
+              context.l10n.bizReqPropStartCheckIn,
               style: TextStyle(
                 fontSize: 12,
                 color: AppColors.primary,
@@ -499,7 +500,7 @@ class _DamageSectionState extends State<_DamageSection> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
             child: Text(
-              'لا توجد أضرار مسجلة',
+              context.l10n.bizReqPropNoDamages,
               style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
             ),
           ),
@@ -535,7 +536,7 @@ class _DamageSectionState extends State<_DamageSection> {
                   Icon(Icons.add, size: 14, color: AppColors.textHint),
                   const SizedBox(width: 4),
                   Text(
-                    'تسجيل ضرر',
+                    context.l10n.bizReqPropAddDamage,
                     style: TextStyle(
                       fontSize: 11,
                       color: AppColors.textHint,
@@ -617,7 +618,7 @@ class _DamageSectionState extends State<_DamageSection> {
                       ),
                       if (d.costEstimate > 0)
                         Text(
-                          '${d.costMoney.toFormattedArabic()} تقديري',
+                          context.l10n.bizReqPropEstimated(d.costMoney.toFormattedArabic()),
                           style: TextStyle(
                             fontSize: 9,
                             color: cs.onSurfaceVariant,
@@ -697,7 +698,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'تسجيل ضرر',
+            context.l10n.bizReqPropDamageFormTitle,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -712,7 +713,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
             maxLines: 2,
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
-              hintText: 'وصف الضرر...',
+              hintText: context.l10n.bizReqPropDamageDescHint,
               hintStyle: const TextStyle(fontSize: 13),
               filled: true,
               fillColor: cs.surface,
@@ -731,7 +732,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
 
           // Area picker
           Text(
-            'الموقع',
+            context.l10n.bizReqPropLocation,
             style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
           ),
           const SizedBox(height: 4),
@@ -778,7 +779,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'الخطورة',
+                      context.l10n.bizReqPropSeverity,
                       style: TextStyle(
                         fontSize: 10,
                         color: cs.onSurfaceVariant,
@@ -841,7 +842,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'التكلفة',
+                      context.l10n.bizReqPropCost,
                       style: TextStyle(
                         fontSize: 10,
                         color: cs.onSurfaceVariant,
@@ -853,7 +854,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
                       keyboardType: TextInputType.number,
                       textDirection: TextDirection.ltr,
                       decoration: InputDecoration(
-                        hintText: 'د.أ',
+                        hintText: context.l10n.bizReqPropCostHint,
                         hintStyle: const TextStyle(fontSize: 13),
                         filled: true,
                         fillColor: cs.surface,
@@ -899,7 +900,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
                       size: 14, color: AppColors.textHint),
                   const SizedBox(width: 6),
                   Text(
-                    'إرفاق صور الضرر',
+                    context.l10n.bizReqPropAttachPhotos,
                     style: TextStyle(
                       fontSize: 11,
                       color: AppColors.textHint,
@@ -925,7 +926,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
                   child: Text(
-                    'إلغاء',
+                    context.l10n.bizReqPropCancel,
                     style: TextStyle(
                       fontSize: 13,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -964,9 +965,9 @@ class _AddDamageFormState extends State<_AddDamageForm> {
                       children: [
                         const Icon(Icons.check, size: 14, color: Colors.white),
                         const SizedBox(width: 4),
-                        const Text(
-                          'تسجيل',
-                          style: TextStyle(
+                        Text(
+                          context.l10n.bizReqPropRecord,
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -1037,7 +1038,7 @@ class _InventorySectionState extends State<_InventorySection> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
             child: Text(
-              'لم يتم إعداد قائمة جرد — أضف العناصر التي تريد التحقق منها',
+              context.l10n.bizReqPropEmptyInventory,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
             ),
@@ -1122,7 +1123,7 @@ class _InventorySectionState extends State<_InventorySection> {
                   controller: _newItemController,
                   onSubmitted: (_) => _addItem(),
                   decoration: InputDecoration(
-                    hintText: 'أضف عنصر جرد... (مناشف، مفاتيح، أدوات)',
+                    hintText: context.l10n.bizReqPropAddItemHint,
                     hintStyle: const TextStyle(fontSize: 12),
                     filled: true,
                     fillColor: cs.surface,

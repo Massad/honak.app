@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/dashboard/presentation/widgets/sections/core_sections.dart';
@@ -130,7 +131,7 @@ class NextAppointmentSection extends StatelessWidget {
                 ),
                 if (data['provider'] != null)
                   Text(
-                    'مع ${data['provider']}',
+                    context.l10n.bizAppointmentWith(data['provider'] as String),
                     style: TextStyle(
                       fontSize: 10,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -183,7 +184,7 @@ class ActiveQuotesSection extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
-                  _statusLabel(status),
+                  _statusLabel(status, context),
                   style: TextStyle(
                     fontSize: 9,
                     fontWeight: FontWeight.w600,
@@ -194,7 +195,7 @@ class ActiveQuotesSection extends StatelessWidget {
               if (amount != null) ...[
                 const SizedBox(width: AppSpacing.sm),
                 Text(
-                  '${formatJod(amount)} د.أ',
+                  '${formatJod(amount)} ${AppLocalizations.of(context).bizRevenueCurrency}',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -255,10 +256,10 @@ class ActiveQuotesSection extends StatelessWidget {
         _ => Colors.grey.withValues(alpha: 0.15),
       };
 
-  String _statusLabel(String status) => switch (status) {
-        'pending_quote' => 'بانتظار السعر',
-        'quoted' => 'تم التسعير',
-        'accepted' => 'مقبول',
+  String _statusLabel(String status, BuildContext context) => switch (status) {
+        'pending_quote' => context.l10n.bizQuoteStatusPending,
+        'quoted' => context.l10n.bizQuoteStatusQuoted,
+        'accepted' => context.l10n.bizQuoteStatusAccepted,
         _ => status,
       };
 }

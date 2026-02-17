@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -91,7 +92,7 @@ class _DepositTrackerState extends State<DepositTracker> {
                         Row(
                           children: [
                             Text(
-                              'العربون والمدفوعات',
+                              context.l10n.bizReqDepTitle,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -107,9 +108,11 @@ class _DepositTrackerState extends State<DepositTracker> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          '${_ledger.netDepositedMoney.toFormattedArabic()} / '
-                          '${_ledger.requiredMoney.toFormattedArabic()} عربون · '
-                          'المبلغ الكلي ${_ledger.totalMoney.toFormattedArabic()}',
+                          context.l10n.bizReqDepSummary(
+                            _ledger.netDepositedMoney.toFormattedArabic(),
+                            _ledger.requiredMoney.toFormattedArabic(),
+                            _ledger.totalMoney.toFormattedArabic(),
+                          ),
                           style: TextStyle(
                             fontSize: 10,
                             color: cs.onSurfaceVariant,
@@ -149,7 +152,7 @@ class _DepositTrackerState extends State<DepositTracker> {
 
                   // Deposit records
                   if (_ledger.deposits.isNotEmpty) ...[
-                    _SectionLabel(label: 'المدفوعات'),
+                    _SectionLabel(label: context.l10n.bizReqDepPayments),
                     const SizedBox(height: AppSpacing.xs),
                     ..._ledger.deposits.map(_buildDepositRecord),
                     const SizedBox(height: AppSpacing.sm),
@@ -157,7 +160,7 @@ class _DepositTrackerState extends State<DepositTracker> {
 
                   // Refund records
                   if (_ledger.refunds.isNotEmpty) ...[
-                    _SectionLabel(label: 'المستردات'),
+                    _SectionLabel(label: context.l10n.bizReqDepRefunds),
                     const SizedBox(height: AppSpacing.xs),
                     ..._ledger.refunds.map(_buildRefundRecord),
                     const SizedBox(height: AppSpacing.sm),
@@ -195,7 +198,7 @@ class _DepositTrackerState extends State<DepositTracker> {
                         const Spacer(),
                         if (_ledger.deposits.isNotEmpty)
                           _TrackerActionButton(
-                            label: 'استرداد',
+                            label: context.l10n.bizReqDepRefund,
                             icon: Icons.undo,
                             color: AppColors.textSecondary,
                             onTap: () =>
@@ -204,7 +207,7 @@ class _DepositTrackerState extends State<DepositTracker> {
                         if (_ledger.deposits.isNotEmpty)
                           const SizedBox(width: AppSpacing.sm),
                         _TrackerActionButton(
-                          label: 'تسجيل دفعة',
+                          label: context.l10n.bizReqDepRecordPayment,
                           icon: Icons.add,
                           color: AppColors.success,
                           onTap: () =>
@@ -402,19 +405,19 @@ class _SummaryRow extends StatelessWidget {
     return Row(
       children: [
         _SummaryCard(
-          label: 'المطلوب',
+          label: context.l10n.bizReqDepRequired,
           value: ledger.requiredMoney.toFormattedArabic(),
           color: cs.onSurface,
         ),
         const SizedBox(width: AppSpacing.sm),
         _SummaryCard(
-          label: 'المستلم',
+          label: context.l10n.bizReqDepReceived,
           value: ledger.netDepositedMoney.toFormattedArabic(),
           color: AppColors.success,
         ),
         const SizedBox(width: AppSpacing.sm),
         _SummaryCard(
-          label: 'المتبقي',
+          label: context.l10n.bizReqDepRemaining,
           value: Money(ledger.requiredAmount - ledger.netDeposited)
               .toFormattedArabic(),
           color: AppColors.warning,
@@ -576,7 +579,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'تسجيل دفعة',
+            context.l10n.bizReqDepFormTitle,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -592,7 +595,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
             textDirection: TextDirection.ltr,
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
-              hintText: 'المبلغ (د.أ)',
+              hintText: context.l10n.bizReqDepAmountHint,
               hintStyle: const TextStyle(fontSize: 13),
               filled: true,
               fillColor: cs.surface,
@@ -663,8 +666,8 @@ class _AddDepositFormState extends State<_AddDepositForm> {
               controller: _detailController,
               decoration: InputDecoration(
                 hintText: _method == DepositMethod.cliq
-                    ? 'اسم حساب CliQ'
-                    : 'اسم البنك',
+                    ? context.l10n.bizReqDepCliqAccount
+                    : context.l10n.bizReqDepBankName,
                 hintStyle: const TextStyle(fontSize: 13),
                 filled: true,
                 fillColor: cs.surface,
@@ -702,7 +705,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
                     size: 20, color: AppColors.textHint),
                 const SizedBox(height: 4),
                 Text(
-                  'إرفاق صورة الإيصال',
+                  context.l10n.bizReqDepAttachReceipt,
                   style: TextStyle(fontSize: 10, color: AppColors.textHint),
                 ),
               ],
@@ -715,7 +718,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
             controller: _notesController,
             maxLines: 2,
             decoration: InputDecoration(
-              hintText: 'ملاحظات (اختياري)',
+              hintText: context.l10n.bizReqDepNotesHint,
               hintStyle: const TextStyle(fontSize: 13),
               filled: true,
               fillColor: cs.surface,
@@ -750,7 +753,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      'إلغاء',
+                      context.l10n.bizReqDepCancel,
                       style: TextStyle(
                         fontSize: 13,
                         color: cs.onSurfaceVariant,
@@ -778,7 +781,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
                             notes: _notesController.text.isEmpty
                                 ? null
                                 : _notesController.text,
-                            recordedBy: 'صاحب الصفحة',
+                            recordedBy: context.l10n.bizReqDepRecordedBy,
                           ));
                         }
                       : null,
@@ -796,9 +799,9 @@ class _AddDepositFormState extends State<_AddDepositForm> {
                       children: [
                         const Icon(Icons.check, size: 14, color: Colors.white),
                         const SizedBox(width: 4),
-                        const Text(
-                          'حفظ',
-                          style: TextStyle(
+                        Text(
+                          context.l10n.bizReqDepSave,
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -867,7 +870,7 @@ class _AddRefundFormState extends State<_AddRefundForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'استرداد مبلغ',
+            context.l10n.bizReqDepRefundTitle,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -876,7 +879,7 @@ class _AddRefundFormState extends State<_AddRefundForm> {
           ),
           const SizedBox(height: 4),
           Text(
-            'الحد الأقصى: ${Money(widget.maxAmount).toFormattedArabic()}',
+            context.l10n.bizReqDepRefundMax(Money(widget.maxAmount).toFormattedArabic()),
             style: const TextStyle(fontSize: 10, color: AppColors.warning),
           ),
           const SizedBox(height: AppSpacing.md),
@@ -887,7 +890,7 @@ class _AddRefundFormState extends State<_AddRefundForm> {
             textDirection: TextDirection.ltr,
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
-              hintText: 'المبلغ (د.أ)',
+              hintText: context.l10n.bizReqDepAmountHint,
               hintStyle: const TextStyle(fontSize: 13),
               filled: true,
               fillColor: cs.surface,
@@ -911,7 +914,7 @@ class _AddRefundFormState extends State<_AddRefundForm> {
             controller: _reasonController,
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
-              hintText: 'سبب الاسترداد (مطلوب)',
+              hintText: context.l10n.bizReqDepRefundReasonHint,
               hintStyle: const TextStyle(fontSize: 13),
               filled: true,
               fillColor: cs.surface,
@@ -945,7 +948,7 @@ class _AddRefundFormState extends State<_AddRefundForm> {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      'إلغاء',
+                      context.l10n.bizReqDepCancel,
                       style: TextStyle(
                         fontSize: 13,
                         color: cs.onSurfaceVariant,
@@ -985,9 +988,9 @@ class _AddRefundFormState extends State<_AddRefundForm> {
                       children: [
                         const Icon(Icons.check, size: 14, color: Colors.white),
                         const SizedBox(width: 4),
-                        const Text(
-                          'تأكيد الاسترداد',
-                          style: TextStyle(
+                        Text(
+                          context.l10n.bizReqDepConfirmRefund,
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,

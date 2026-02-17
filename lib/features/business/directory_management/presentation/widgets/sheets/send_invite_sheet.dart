@@ -18,11 +18,8 @@ class SendInviteSheet extends StatelessWidget {
     required this.mallName,
   });
 
-  String get _inviteMessage =>
-      'مرحباً، أنت مدعو للانضمام إلى دليل $mallName على حُنُك!\n'
-      'الوحدة: ${tenant.unit}\n'
-      'التصنيف: ${tenant.category}\n\n'
-      'انضم الآن: https://honak.app/invite/mock';
+  String _inviteMessage(BuildContext context) =>
+      context.l10n.dirInviteMessage(mallName, tenant.unit, tenant.category);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class SendInviteSheet extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         AppSheetHeader(
-          title: 'إرسال دعوة',
+          title: context.l10n.dirInviteSheetTitle,
           onClose: () => Navigator.pop(context),
         ),
 
@@ -52,7 +49,7 @@ class SendInviteSheet extends StatelessWidget {
                   border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: Text(
-                  _inviteMessage,
+                  _inviteMessage(context),
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                     height: 1.5,
@@ -68,12 +65,12 @@ class SendInviteSheet extends StatelessWidget {
                   Expanded(
                     child: _ShareButton(
                       icon: Icons.chat,
-                      label: 'واتساب',
+                      label: context.l10n.dirInviteWhatsApp,
                       color: const Color(0xFF25D366),
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('قريباً — واتساب')),
+                          SnackBar(content: Text(context.l10n.dirInviteWhatsAppSoon)),
                         );
                       },
                     ),
@@ -84,12 +81,12 @@ class SendInviteSheet extends StatelessWidget {
                   Expanded(
                     child: _ShareButton(
                       icon: Icons.sms_outlined,
-                      label: 'رسالة نصية',
+                      label: context.l10n.dirInviteSMS,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('قريباً — SMS')),
+                          SnackBar(content: Text(context.l10n.dirInviteSMSSoon)),
                         );
                       },
                     ),
@@ -100,15 +97,15 @@ class SendInviteSheet extends StatelessWidget {
                   Expanded(
                     child: _ShareButton(
                       icon: Icons.copy,
-                      label: 'نسخ',
+                      label: context.l10n.dirInviteCopy,
                       color: null,
                       onTap: () {
                         Clipboard.setData(
-                          ClipboardData(text: _inviteMessage),
+                          ClipboardData(text: _inviteMessage(context)),
                         );
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('تم نسخ الدعوة')),
+                          SnackBar(content: Text(context.l10n.dirInviteCopied)),
                         );
                       },
                     ),

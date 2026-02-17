@@ -24,7 +24,7 @@ class DeleteSlotSheet extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         AppSheetHeader(
-          title: 'حذف "${tenant.name}"',
+          title: context.l10n.dirDeleteTitle(tenant.name),
           onClose: () => Navigator.pop(context),
         ),
 
@@ -56,7 +56,7 @@ class DeleteSlotSheet extends StatelessWidget {
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
                       child: Text(
-                        'سيتم حذف هذا المستأجر نهائياً من الدليل. لا يمكن التراجع عن هذا الإجراء.',
+                        context.l10n.dirDeleteWarning,
                         style: context.textTheme.bodySmall?.copyWith(
                           color: AppColors.error,
                         ),
@@ -70,7 +70,7 @@ class DeleteSlotSheet extends StatelessWidget {
               // Delete button
               btn.Button(
                 onPressed: onConfirm,
-                label: 'حذف نهائي',
+                label: context.l10n.dirDeleteConfirmBtn,
                 style: btn.Style.danger,
                 size: btn.ButtonSize.large,
                 expand: true,

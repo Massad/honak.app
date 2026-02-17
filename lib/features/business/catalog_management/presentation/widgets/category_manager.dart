@@ -106,7 +106,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
     final name = _addController.text.trim();
     if (name.isEmpty) return;
     if (_isDuplicate(name)) {
-      _flash('يوجد تصنيف بهذا الاسم بالفعل');
+      _flash(context.l10n.catMgrDuplicateName);
       return;
     }
     final newCat = BizCategory(
@@ -120,7 +120,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
       _addMode = false;
     });
     _notifyChanged();
-    _flash('تمت إضافة تصنيف "$name"');
+    _flash(context.l10n.catMgrAdded(name));
   }
 
   void _cancelAdd() {
@@ -150,12 +150,12 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
     final oldName = _categories[idx].name;
     if (name != oldName) {
       if (_isDuplicate(name, excludeId: _editingId)) {
-        _flash('يوجد تصنيف بهذا الاسم بالفعل');
+        _flash(context.l10n.catMgrDuplicateName);
         return;
       }
       setState(() => _categories[idx] = _categories[idx].copyWith(name: name));
       _notifyChanged();
-      _flash('تم تغيير "$oldName" إلى "$name"');
+      _flash(context.l10n.catMgrRenamed(oldName, name));
     }
     setState(() => _editingId = null);
   }
@@ -184,7 +184,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                   const Icon(Icons.error_outline, color: AppColors.error, size: 18),
                   const SizedBox(width: AppSpacing.sm),
                   Text(
-                    'حذف تصنيف "${cat.name}"',
+                    context.l10n.catMgrDeleteTitle(cat.name),
                     style: context.textTheme.titleSmall,
                   ),
                 ],
@@ -192,14 +192,14 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
               const SizedBox(height: AppSpacing.lg),
               if (cat.itemCount > 0) ...[
                 Text(
-                  'يوجد ${cat.itemCount} ${widget.itemLabelAr} في هذا التصنيف. اختر تصنيفاً لنقلهم إليه:',
+                  context.l10n.catMgrDeleteHasItems(cat.itemCount, widget.itemLabelAr),
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
                 _RadioOption(
-                  label: 'بدون تصنيف',
+                  label: context.l10n.catMgrUncategorized,
                   selected: reassignTo == '',
                   onTap: () => setSheetState(() => reassignTo = ''),
                 ),
@@ -215,7 +215,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                 )),
               ] else
                 Text(
-                  'هذا التصنيف فارغ ويمكن حذفه مباشرة.',
+                  context.l10n.catMgrDeleteEmpty,
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -227,7 +227,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                   Expanded(
                     child: btn.Button(
                       onPressed: () => Navigator.pop(ctx),
-                      label: 'إلغاء',
+                      label: context.l10n.cancel,
                       variant: btn.Variant.outlined,
                       size: btn.ButtonSize.large,
                       expand: true,
@@ -240,7 +240,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                         Navigator.pop(ctx);
                         _performDelete(cat);
                       },
-                      label: 'حذف التصنيف',
+                      label: context.l10n.catMgrDeleteBtn,
                       icon: const btn.ButtonIcon(Icons.delete_outline, size: 16),
                       style: btn.Style.danger,
                       size: btn.ButtonSize.large,
@@ -260,7 +260,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
     final name = cat.name;
     setState(() => _categories.removeWhere((c) => c.id == cat.id));
     _notifyChanged();
-    _flash('تم حذف تصنيف "$name"');
+    _flash(context.l10n.catMgrDeleted(name));
   }
 
   // ── Build ────────────────────────────────────────────────────────────────
@@ -270,7 +270,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text('إدارة التصنيفات'),
+        title: Text(context.l10n.catMgrTitle),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
