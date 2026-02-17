@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/availability_data.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 // ═══════════════════════════════════════════════════════════════════
 // Mini Blocked Calendar — view-only month grid with colored blocks
@@ -65,10 +66,13 @@ class MiniBlockedCalendar extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: onPrev,
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(4),
-                  child: Icon(Icons.chevron_right, size: 16,
-                      color: AppColors.textHint),
+                  child: Icon(
+                    AppDirection.chevronEndIcon(context),
+                    size: 16,
+                    color: AppColors.textHint,
+                  ),
                 ),
               ),
               Text('${arabicMonths[month.month - 1]} ${month.year}',
@@ -77,10 +81,13 @@ class MiniBlockedCalendar extends StatelessWidget {
                       color: context.colorScheme.onSurface)),
               GestureDetector(
                 onTap: onNext,
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(4),
-                  child: Icon(Icons.chevron_left, size: 16,
-                      color: AppColors.textHint),
+                  child: Icon(
+                    AppDirection.chevronStartIcon(context),
+                    size: 16,
+                    color: AppColors.textHint,
+                  ),
                 ),
               ),
             ],

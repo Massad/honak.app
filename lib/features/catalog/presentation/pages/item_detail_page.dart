@@ -8,11 +8,13 @@ import 'package:honak/features/requests/domain/entities/cart.dart';
 import 'package:honak/features/requests/presentation/providers/cart_provider.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/item_selection/item_option_selector.dart';
 import 'package:honak/shared/widgets/money_text.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
+import 'package:honak/shared/widgets/button.dart' as btn;
 
 class ItemDetailPage extends ConsumerStatefulWidget {
   final String itemId;
@@ -69,16 +71,18 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
     final cartItem = CartItem.fromSelectedItem(si);
     final pageId = item.pageId ?? '';
 
-    ref.read(cartProvider.notifier).addItem(
+    ref
+        .read(cartProvider.notifier)
+        .addItem(
           pageId,
           '', // pageName resolved when order sheet opens from section
           null,
           cartItem,
         );
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تمت الإضافة للسلة')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('تمت الإضافة للسلة')));
     Navigator.of(context).pop();
   }
 
@@ -128,7 +132,7 @@ class _ItemDetailContent extends StatelessWidget {
   final Map<String, Set<String>> selectedOptions;
   final Map<String, String> textInputs;
   final void Function(String groupId, String optionId, String type)
-      onOptionSelected;
+  onOptionSelected;
   final void Function(String groupId, String value) onTextInput;
   final Money totalPrice;
   final VoidCallback onAddToCart;
@@ -156,10 +160,7 @@ class _ItemDetailContent extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 actions: [
                   IconButton(
-                    icon: const Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: Icon(Icons.arrow_back_ios_new, size: 20),
-                    ),
+                    icon: Icon(AppDirection.backIcon(context), size: 20),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ],
@@ -364,9 +365,11 @@ class _BottomBar extends StatelessWidget {
           ),
           SizedBox(width: AppSpacing.lg),
           Expanded(
-            child: FilledButton(
+            child: btn.Button(
               onPressed: inStock ? onAddToCart : null,
-              child: Text(context.l10n.addToCart),
+              label: context.l10n.addToCart,
+              size: btn.ButtonSize.large,
+              expand: true,
             ),
           ),
         ],

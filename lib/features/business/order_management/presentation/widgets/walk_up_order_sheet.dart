@@ -252,7 +252,7 @@ class _WalkUpOrderSheetState extends State<WalkUpOrderSheet> {
                     TextField(
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       decoration: InputDecoration(
                         hintText: context.l10n.bizReqWalkUpPhoneOptional,
                         hintStyle: TextStyle(

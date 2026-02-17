@@ -599,7 +599,7 @@ Widget villaSaveCancelRow({
   required VoidCallback onSave,
   required VoidCallback onCancel,
 }) {
-  return Row(textDirection: TextDirection.ltr, children: [
+  return Row(textDirection: Directionality.of(context), children: [
     GestureDetector(
       onTap: onCancel,
       child: Container(

@@ -14,6 +14,8 @@ import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_sta
 import 'package:honak/features/business/dropoff/domain/entities/dropoff_info_template.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_info_request_sheet.dart';
 import 'package:honak/features/business/dropoff/presentation/widgets/dropoff_status_picker.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Main tracking board view for dropoff-type businesses.
 ///
@@ -63,9 +65,11 @@ class _DropoffBoardState extends State<DropoffBoard> {
   // ── Computed properties ──
 
   List<DropoffTicket> get _active => _tickets
-      .where((t) =>
-          t.status != DropoffStatus.delivered &&
-          t.status != DropoffStatus.cancelled)
+      .where(
+        (t) =>
+            t.status != DropoffStatus.delivered &&
+            t.status != DropoffStatus.cancelled,
+      )
       .toList();
 
   List<DropoffTicket> get _delivered =>
@@ -75,18 +79,20 @@ class _DropoffBoardState extends State<DropoffBoard> {
       _tickets.where((t) => t.status == s).length;
 
   int get _overdueCount => _active.where((t) {
-        final ready = DateTime.tryParse(t.estimatedReadyAt);
-        if (ready == null) return false;
-        return DateTime.now().isAfter(ready);
-      }).length;
+    final ready = DateTime.tryParse(t.estimatedReadyAt);
+    if (ready == null) return false;
+    return DateTime.now().isAfter(ready);
+  }).length;
 
   List<DropoffTicket> get _filteredTickets {
     var list = _activeFilter == null
         ? _tickets
-            .where((t) =>
-                t.status != DropoffStatus.delivered &&
-                t.status != DropoffStatus.cancelled)
-            .toList()
+              .where(
+                (t) =>
+                    t.status != DropoffStatus.delivered &&
+                    t.status != DropoffStatus.cancelled,
+              )
+              .toList()
         : _tickets.where((t) => t.status == _activeFilter).toList();
 
     if (_searchCtrl.text.trim().isNotEmpty) {
@@ -109,12 +115,18 @@ class _DropoffBoardState extends State<DropoffBoard> {
         if (t.id != ticketId) return t;
         final now = DateTime.now().toIso8601String();
         return switch (t.status) {
-          DropoffStatus.received =>
-            t.copyWith(status: DropoffStatus.processing, startedAt: now),
-          DropoffStatus.processing =>
-            t.copyWith(status: DropoffStatus.ready, completedAt: now),
-          DropoffStatus.ready =>
-            t.copyWith(status: DropoffStatus.delivered, pickedUpAt: now),
+          DropoffStatus.received => t.copyWith(
+            status: DropoffStatus.processing,
+            startedAt: now,
+          ),
+          DropoffStatus.processing => t.copyWith(
+            status: DropoffStatus.ready,
+            completedAt: now,
+          ),
+          DropoffStatus.ready => t.copyWith(
+            status: DropoffStatus.delivered,
+            pickedUpAt: now,
+          ),
           _ => t,
         };
       }).toList();
@@ -212,10 +224,8 @@ class _DropoffBoardState extends State<DropoffBoard> {
   }
 
   void _openDetail(DropoffTicket ticket) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet<void>(
+      context,
       builder: (_) => DropoffDetailView(
         ticket: ticket,
         onAdvance: (id) {
@@ -231,7 +241,8 @@ class _DropoffBoardState extends State<DropoffBoard> {
     final filtered = _filteredTickets;
     final overdueCount = _overdueCount;
 
-    return Scaffold(
+    return AppScreen(
+      showBack: false,
       body: CustomScrollView(
         slivers: [
           // ── Sticky header ──
@@ -247,7 +258,10 @@ class _DropoffBoardState extends State<DropoffBoard> {
                     _buildStatsRow(context),
                     _buildFilterTabs(context),
                     const SizedBox(height: AppSpacing.sm),
-                    Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
+                    Divider(
+                      height: 1,
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                    ),
                   ],
                 ),
               ),
@@ -266,26 +280,27 @@ class _DropoffBoardState extends State<DropoffBoard> {
                 if (filtered.isEmpty)
                   _buildEmptyState(context)
                 else
-                  ...filtered.map((ticket) => Padding(
-                        padding: const EdgeInsetsDirectional.only(
-                          bottom: AppSpacing.md,
-                        ),
-                        child: DropoffEntryCard(
-                          ticket: ticket,
-                          onAdvance: () => _advanceStatus(ticket.id),
-                          onTap: () => _openDetail(ticket),
-                          onStatusChange: (status) =>
-                              _changeStatus(ticket.id, status),
-                          onPhotoBefore: () =>
-                              _mockPhotoCapture(ticket.id, 'before'),
-                          onPhotoAfter: () =>
-                              _mockPhotoCapture(ticket.id, 'after'),
-                          onRequestInfo: () =>
-                              _showInfoRequest(ticket.id),
-                          onActivityLog: () => _openActivityLog(ticket),
-                          activityLog: generateMockActivity(ticket),
-                        ),
-                      )),
+                  ...filtered.map(
+                    (ticket) => Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        bottom: AppSpacing.md,
+                      ),
+                      child: DropoffEntryCard(
+                        ticket: ticket,
+                        onAdvance: () => _advanceStatus(ticket.id),
+                        onTap: () => _openDetail(ticket),
+                        onStatusChange: (status) =>
+                            _changeStatus(ticket.id, status),
+                        onPhotoBefore: () =>
+                            _mockPhotoCapture(ticket.id, 'before'),
+                        onPhotoAfter: () =>
+                            _mockPhotoCapture(ticket.id, 'after'),
+                        onRequestInfo: () => _showInfoRequest(ticket.id),
+                        onActivityLog: () => _openActivityLog(ticket),
+                        activityLog: generateMockActivity(ticket),
+                      ),
+                    ),
+                  ),
 
                 // ── Delivered section (collapsible) ──
                 const SizedBox(height: AppSpacing.md),
@@ -348,10 +363,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
                       const SizedBox(width: 2),
                       Text(
                         '$overdueCount متأخرة',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: AppColors.error,
-                        ),
+                        style: TextStyle(fontSize: 10, color: AppColors.error),
                       ),
                     ],
                   ],
@@ -420,16 +432,17 @@ class _DropoffBoardState extends State<DropoffBoard> {
 
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.lg,
-      ),
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.lg),
       child: TextField(
         controller: _searchCtrl,
         onChanged: (_) => setState(() {}),
         autofocus: true,
         decoration: InputDecoration(
           hintText: 'بحث بالاسم أو رقم التذكرة...',
-          hintStyle: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.outline),
+          hintStyle: TextStyle(
+            fontSize: 13,
+            color: Theme.of(context).colorScheme.outline,
+          ),
           filled: true,
           fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
           contentPadding: const EdgeInsetsDirectional.symmetric(
@@ -438,11 +451,15 @@ class _DropoffBoardState extends State<DropoffBoard> {
           ),
           border: OutlineInputBorder(
             borderRadius: AppRadius.cardInner,
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: AppRadius.cardInner,
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: AppRadius.cardInner,
@@ -532,15 +549,11 @@ class _DropoffBoardState extends State<DropoffBoard> {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AppSpacing.lg,
-      ),
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.lg),
       child: Row(
         children: filters.map((f) {
           final isActive = _activeFilter == f.$1;
-          final count = f.$1 == null
-              ? _active.length
-              : _countByStatus(f.$1!);
+          final count = f.$1 == null ? _active.length : _countByStatus(f.$1!);
 
           return Padding(
             padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
@@ -568,15 +581,18 @@ class _DropoffBoardState extends State<DropoffBoard> {
                     Icon(
                       f.$2,
                       size: 12,
-                      color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
+                      color: isActive
+                          ? Colors.white
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: 6),
                     Text(
                       f.$3,
                       style: TextStyle(
                         fontSize: 12,
-                        color:
-                            isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
+                        color: isActive
+                            ? Colors.white
+                            : Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     if (count > 0) ...[
@@ -617,9 +633,7 @@ class _DropoffBoardState extends State<DropoffBoard> {
             ),
             const SizedBox(height: AppSpacing.md),
             Text(
-              _searchCtrl.text.isNotEmpty
-                  ? 'لا توجد نتائج'
-                  : 'لا توجد تذاكر',
+              _searchCtrl.text.isNotEmpty ? 'لا توجد نتائج' : 'لا توجد تذاكر',
               style: TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -674,7 +688,10 @@ class _DeliveredSection extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
-                child: Divider(color: Theme.of(context).colorScheme.outlineVariant, height: 1),
+                child: Divider(
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                  height: 1,
+                ),
               ),
             ],
           ),
@@ -695,12 +712,14 @@ class _DeliveredSection extends StatelessWidget {
               ),
             )
           else
-            ...tickets.map((ticket) => Padding(
-                  padding: const EdgeInsetsDirectional.only(
-                    bottom: AppSpacing.sm,
-                  ),
-                  child: DropoffEntryCard(ticket: ticket, compact: true),
-                )),
+            ...tickets.map(
+              (ticket) => Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  bottom: AppSpacing.sm,
+                ),
+                child: DropoffEntryCard(ticket: ticket, compact: true),
+              ),
+            ),
         ],
       ],
     );

@@ -95,7 +95,7 @@ class TenantInviteConfirm extends StatelessWidget {
             horizontal: AppSpacing.lg,
           ),
           child: Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               // Cancel
               Expanded(

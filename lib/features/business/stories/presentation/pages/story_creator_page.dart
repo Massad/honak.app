@@ -6,6 +6,7 @@ import 'package:honak/features/business/stories/domain/entities/my_story.dart';
 import 'package:honak/features/business/stories/presentation/providers/story_creator_provider.dart';
 import 'package:honak/features/business/stories/presentation/widgets/publish_options.dart';
 import 'package:honak/features/business/stories/presentation/widgets/text_layer_editor.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/confirm_dialog.dart';
 
@@ -94,7 +95,7 @@ class _StoryCreatorPageState extends ConsumerState<StoryCreatorPage> {
           surfaceTintColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 22),
+            icon: Icon(AppDirection.backIcon(context), size: 22),
             color: Colors.white70,
             onPressed: _handleBack,
           ),

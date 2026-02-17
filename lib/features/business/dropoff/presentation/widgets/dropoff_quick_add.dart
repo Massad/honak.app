@@ -200,7 +200,7 @@ class _DropoffQuickAddSheetState extends State<_DropoffQuickAddSheet> {
         TextField(
           controller: _phoneCtrl,
           keyboardType: TextInputType.phone,
-          textDirection: TextDirection.ltr,
+          textDirection: Directionality.of(context),
           decoration: _inputDecoration(
             hint: '07XXXXXXXX',
             prefixIcon: Icons.phone_outlined,

@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/features/pages/presentation/pages/branches_page.dart';
 import 'package:honak/features/pages/presentation/widgets/header/branch_selector.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Compact nearest-branch banner shown in the page header for all archetypes
 /// with 2+ branches. Replaces the old `BranchSelector` (order/booking only)
@@ -128,7 +129,7 @@ class NearestBranchCard extends StatelessWidget {
               Icon(
                 _isOrderArchetype
                     ? Icons.keyboard_arrow_down
-                    : Icons.chevron_left,
+                    : AppDirection.chevronStartIcon(context),
                 size: 16,
                 color: context.colorScheme.primary,
               ),

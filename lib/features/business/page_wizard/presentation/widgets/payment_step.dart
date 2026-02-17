@@ -110,10 +110,10 @@ class _PaymentStepState extends ConsumerState<PaymentStep> {
                   padding:
                       const EdgeInsetsDirectional.only(start: AppSpacing.huge),
                   child: Directionality(
-                    textDirection: TextDirection.ltr,
+                    textDirection: Directionality.of(context),
                     child: TextFormField(
                       controller: _cliqController,
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       decoration: InputDecoration(
                         hintText: 'CLiq alias',
                         border:

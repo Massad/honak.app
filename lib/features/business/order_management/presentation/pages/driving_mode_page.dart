@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
@@ -11,6 +10,8 @@ import 'package:honak/features/business/order_management/presentation/widgets/de
 import 'package:honak/features/business/order_management/presentation/widgets/driving_mode_sheets.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/swipe_button.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/walk_up_order_sheet.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// Full-screen driver interface during active delivery route.
@@ -52,7 +53,8 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         : widget.truck.capacityFull;
     _empty = widget.truck.today.currentEmpty;
     _reloads = widget.truck.today.reloads;
-    _startedAt = widget.truck.today.startedAt ?? DateTime.now().toIso8601String();
+    _startedAt =
+        widget.truck.today.startedAt ?? DateTime.now().toIso8601String();
   }
 
   @override
@@ -63,18 +65,18 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
 
   // ── Derived data ────────────────────────────────────────────
 
-  QueueItem? get _currentItem =>
-      _queue.cast<QueueItem?>().firstWhere(
-        (q) => q!.status == QueueItemStatus.current,
-        orElse: () => null,
-      );
+  QueueItem? get _currentItem => _queue.cast<QueueItem?>().firstWhere(
+    (q) => q!.status == QueueItemStatus.current,
+    orElse: () => null,
+  );
 
   List<QueueItem> get _deliveredItems =>
       _queue.where((q) => q.status == QueueItemStatus.delivered).toList();
 
   List<QueueItem> get _pendingItems {
-    final pending =
-        _queue.where((q) => q.status == QueueItemStatus.pending).toList();
+    final pending = _queue
+        .where((q) => q.status == QueueItemStatus.pending)
+        .toList();
     final ref = _referencePoint;
     pending.sort((a, b) {
       final dA = _distKm(ref, a.coordinates);
@@ -97,10 +99,10 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       if (zone.polygon.isNotEmpty) {
         final avgLat =
             zone.polygon.map((p) => p.lat).reduce((a, b) => a + b) /
-                zone.polygon.length;
+            zone.polygon.length;
         final avgLng =
             zone.polygon.map((p) => p.lng).reduce((a, b) => a + b) /
-                zone.polygon.length;
+            zone.polygon.length;
         return LatLng(lat: avgLat, lng: avgLng);
       }
     }
@@ -108,8 +110,10 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
   }
 
   int get _reserved {
-    final pendingQty =
-        _pendingItems.fold<int>(0, (s, q) => s + q.items.fold<int>(0, (a, i) => a + i.qty));
+    final pendingQty = _pendingItems.fold<int>(
+      0,
+      (s, q) => s + q.items.fold<int>(0, (a, i) => a + i.qty),
+    );
     final currentQty = _currentItem != null
         ? _currentItem!.items.fold<int>(0, (a, i) => a + i.qty)
         : 0;
@@ -117,14 +121,14 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
   }
 
   Truck get _updatedTruck => widget.truck.copyWith(
-        today: widget.truck.today.copyWith(
-          currentFull: _full,
-          currentEmpty: _empty,
-          deliveredCount: _deliveredItems.length,
-          remainingCount: _pendingItems.length + (_currentItem != null ? 1 : 0),
-          reloads: _reloads,
-        ),
-      );
+    today: widget.truck.today.copyWith(
+      currentFull: _full,
+      currentEmpty: _empty,
+      deliveredCount: _deliveredItems.length,
+      remainingCount: _pendingItems.length + (_currentItem != null ? 1 : 0),
+      reloads: _reloads,
+    ),
+  );
 
   // ── Distance helper ─────────────────────────────────────────
 
@@ -361,10 +365,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
   }
 
   void _showSheet(Widget Function(BuildContext) builder) {
-    showAppSheet(
-      context,
-      builder: builder,
-    );
+    showAppSheet(context, builder: builder);
   }
 
   // ── Build ───────────────────────────────────────────────────
@@ -375,7 +376,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
     final pending = _pendingItems;
     final delivered = _deliveredItems;
 
-    return Scaffold(
+    return AppScreen(
+      showBack: false,
+      useSafeArea: false,
       body: SafeArea(
         child: Stack(
           children: [
@@ -392,7 +395,8 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                         _buildCurrentCard(current)
                       else if (pending.isEmpty)
                         _buildRouteComplete(),
-                      if (pending.isNotEmpty) _buildQueueSection(pending, current),
+                      if (pending.isNotEmpty)
+                        _buildQueueSection(pending, current),
                       if (delivered.isNotEmpty)
                         DeliveredCollapse(
                           items: delivered,
@@ -446,7 +450,12 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
+        border: Border(
+          bottom: BorderSide(
+            color: context.colorScheme.outlineVariant,
+            width: 0.5,
+          ),
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -478,7 +487,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                 vertical: 6,
               ),
               decoration: BoxDecoration(
-                color: context.colorScheme.surfaceVariant,
+                color: context.colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
               child: Row(
@@ -492,7 +501,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                   ),
                   const SizedBox(width: 4),
                   Icon(
-                    Icons.arrow_forward,
+                    AppDirection.backIcon(context),
                     size: 12,
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -523,7 +532,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
           borderRadius: AppRadius.cardInner,
-          border: Border.all(color: context.colorScheme.outlineVariant.withAlpha(100)),
+          border: Border.all(
+            color: context.colorScheme.outlineVariant.withAlpha(100),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -534,14 +545,22 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
               AppColors.primary,
               Icons.water_drop,
             ),
-            Container(width: 1, height: 24, color: context.colorScheme.outlineVariant),
+            Container(
+              width: 1,
+              height: 24,
+              color: context.colorScheme.outlineVariant,
+            ),
             _inventoryItem(
               context.l10n.bizReqInvEmpty,
               '$_empty',
               context.colorScheme.onSurfaceVariant,
               Icons.water_drop_outlined,
             ),
-            Container(width: 1, height: 24, color: context.colorScheme.outlineVariant),
+            Container(
+              width: 1,
+              height: 24,
+              color: context.colorScheme.outlineVariant,
+            ),
             _inventoryItem(
               context.l10n.bizReqInvReservedCount(_reserved),
               '$_reserved',
@@ -554,7 +573,12 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
     );
   }
 
-  Widget _inventoryItem(String label, String value, Color color, IconData icon) {
+  Widget _inventoryItem(
+    String label,
+    String value,
+    Color color,
+    IconData icon,
+  ) {
     return Column(
       children: [
         Row(
@@ -571,7 +595,13 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
             ),
           ],
         ),
-        Text(label, style: TextStyle(fontSize: 9, color: context.colorScheme.onSurfaceVariant)),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 9,
+            color: context.colorScheme.onSurfaceVariant,
+          ),
+        ),
       ],
     );
   }
@@ -591,7 +621,10 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
         children: [
           Text(
             context.l10n.bizReqDmHeadingTo,
-            style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 10,
+              color: context.colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 8),
           Container(
@@ -627,7 +660,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           ),
                         ),
                         Text(
-                          item.items.map((i) => '${i.qty} \u00D7 ${i.name}').join(', '),
+                          item.items
+                              .map((i) => '${i.qty} \u00D7 ${i.name}')
+                              .join(', '),
                           style: TextStyle(
                             fontSize: 12,
                             color: context.colorScheme.onSurfaceVariant,
@@ -716,7 +751,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     if (item.creditsRemaining != null)
                       _chipBadge(
                         Icons.credit_card,
-                        context.l10n.bizReqDmCreditsLabel(item.creditsRemaining!),
+                        context.l10n.bizReqDmCreditsLabel(
+                          item.creditsRemaining!,
+                        ),
                         AppColors.primary,
                       ),
                   ],
@@ -736,7 +773,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     _actionBtn(
                       icon: Icons.phone,
                       label: context.l10n.bizReqDmCall,
-                      color: context.colorScheme.surfaceVariant,
+                      color: context.colorScheme.surfaceContainerHighest,
                       textColor: context.colorScheme.onSurface,
                       onTap: () => _showToast(context.l10n.bizReqDmComingSoon),
                     ),
@@ -747,10 +784,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                       color: AppColors.secondary.withAlpha(20),
                       textColor: AppColors.secondary,
                       onTap: () => _showSheet(
-                        (_) => SkipSheet(
-                          item: item,
-                          onSkip: _handleSkip,
-                        ),
+                        (_) => SkipSheet(item: item, onSkip: _handleSkip),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -805,10 +839,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
             children: [
               Icon(icon, size: 18, color: textColor),
               const SizedBox(height: 2),
-              Text(
-                label,
-                style: TextStyle(fontSize: 10, color: textColor),
-              ),
+              Text(label, style: TextStyle(fontSize: 10, color: textColor)),
             ],
           ),
         ),
@@ -854,7 +885,10 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
           const SizedBox(height: 4),
           Text(
             context.l10n.bizReqDmAllDelivered,
-            style: TextStyle(fontSize: 12, color: context.colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 12,
+              color: context.colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -878,7 +912,10 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
             current != null
                 ? context.l10n.bizReqDmQueueRemaining(pending.length)
                 : context.l10n.bizReqDmPickNext(pending.length),
-            style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 10,
+              color: context.colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 8),
           ...pending.asMap().entries.map(
@@ -913,7 +950,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     ? AppColors.primary.withAlpha(8)
                     : context.colorScheme.surface,
                 border: Border.all(
-                  color: isExpanded ? AppColors.primary : context.colorScheme.outlineVariant.withAlpha(100),
+                  color: isExpanded
+                      ? AppColors.primary
+                      : context.colorScheme.outlineVariant.withAlpha(100),
                 ),
                 borderRadius: isExpanded
                     ? const BorderRadius.vertical(
@@ -1007,7 +1046,9 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     ),
                   ),
                   Icon(
-                    isExpanded ? Icons.expand_less : Icons.chevron_right,
+                    isExpanded
+                        ? Icons.expand_less
+                        : AppDirection.chevronEndIcon(context),
                     size: 14,
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -1078,7 +1119,11 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                           AppColors.success,
                         ),
                       if (item.payment == PaymentType.credits)
-                        _chipBadge(Icons.credit_card, context.l10n.bizReqSheetPayCredits, AppColors.primary),
+                        _chipBadge(
+                          Icons.credit_card,
+                          context.l10n.bizReqSheetPayCredits,
+                          AppColors.primary,
+                        ),
                       if (item.payment == PaymentType.cash)
                         _chipBadge(
                           Icons.payments_outlined,
@@ -1099,11 +1144,13 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => _showToast(context.l10n.bizReqDmComingSoon),
+                          onTap: () =>
+                              _showToast(context.l10n.bizReqDmComingSoon),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
-                              color: context.colorScheme.surfaceVariant,
+                              color:
+                                  context.colorScheme.surfaceContainerHighest,
                               borderRadius: AppRadius.cardInner,
                             ),
                             child: Row(
@@ -1130,11 +1177,13 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => _showToast(context.l10n.bizReqDmComingSoon),
+                          onTap: () =>
+                              _showToast(context.l10n.bizReqDmComingSoon),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
-                              color: context.colorScheme.surfaceVariant,
+                              color:
+                                  context.colorScheme.surfaceContainerHighest,
                               borderRadius: AppRadius.cardInner,
                             ),
                             child: Row(
@@ -1191,16 +1240,13 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                         _showToast(
                           context.l10n.bizReqDmSwapped(item.customerName),
                         );
-                        Future.delayed(
-                          const Duration(milliseconds: 200),
-                          () {
-                            _scrollController.animateTo(
-                              0,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeOut,
-                            );
-                          },
-                        );
+                        Future.delayed(const Duration(milliseconds: 200), () {
+                          _scrollController.animateTo(
+                            0,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeOut,
+                          );
+                        });
                       },
                       child: Container(
                         width: double.infinity,
@@ -1250,7 +1296,12 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5)),
+        border: Border(
+          top: BorderSide(
+            color: context.colorScheme.outlineVariant,
+            width: 0.5,
+          ),
+        ),
       ),
       child: Row(
         children: [
@@ -1277,10 +1328,7 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                     const SizedBox(width: 6),
                     Text(
                       context.l10n.bizReqDmQuickOrder,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                      ),
+                      style: const TextStyle(fontSize: 12, color: Colors.white),
                     ),
                   ],
                 ),
@@ -1352,7 +1400,10 @@ class _DrivingModePageState extends ConsumerState<DrivingModePage> {
                   const SizedBox(width: 6),
                   Text(
                     context.l10n.bizReqDmEndRoute,
-                    style: const TextStyle(fontSize: 12, color: AppColors.white),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.white,
+                    ),
                   ),
                 ],
               ),

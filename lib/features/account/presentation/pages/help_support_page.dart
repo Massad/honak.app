@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/account/presentation/widgets/sub_screen_header.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 class HelpSupportPage extends StatefulWidget {
@@ -64,7 +65,7 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: const SubScreenHeader(title: 'المساعدة والدعم'),
       body: ListView(
@@ -177,9 +178,8 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
                         color: context.colorScheme.surfaceContainerLowest,
                       ),
                     InkWell(
-                      onTap: () => setState(
-                        () => _expandedFaq = isExpanded ? null : i,
-                      ),
+                      onTap: () =>
+                          setState(() => _expandedFaq = isExpanded ? null : i),
                       child: Padding(
                         padding: const EdgeInsets.all(AppSpacing.lg),
                         child: Row(
@@ -280,20 +280,16 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
                       fillColor: context.colorScheme.surfaceContainerLowest,
                       contentPadding: const EdgeInsets.all(AppSpacing.md),
                       border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppRadius.sm),
+                        borderRadius: BorderRadius.circular(AppRadius.sm),
                         borderSide: BorderSide(color: AppColors.divider),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppRadius.sm),
+                        borderRadius: BorderRadius.circular(AppRadius.sm),
                         borderSide: BorderSide(color: AppColors.divider),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppRadius.sm),
-                        borderSide:
-                            const BorderSide(color: AppColors.primary),
+                        borderRadius: BorderRadius.circular(AppRadius.sm),
+                        borderSide: const BorderSide(color: AppColors.primary),
                       ),
                     ),
                     style: context.textTheme.bodyMedium,
@@ -304,8 +300,7 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
                     children: [
                       Expanded(
                         child: btn.Button(
-                          onPressed: () =>
-                              setState(() => _showReport = false),
+                          onPressed: () => setState(() => _showReport = false),
                           label: 'إلغاء',
                           variant: btn.Variant.tonal,
                           size: btn.ButtonSize.large,
@@ -354,8 +349,7 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
                         height: 36,
                         decoration: BoxDecoration(
                           color: AppColors.warning.withValues(alpha: 0.1),
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.sm),
+                          borderRadius: BorderRadius.circular(AppRadius.sm),
                         ),
                         child: const Icon(
                           Icons.error_outline,
@@ -374,8 +368,7 @@ class _HelpSupportPageState extends State<HelpSupportPage> {
                             ),
                             Text(
                               'أخبرنا عن أي مشكلة تواجهك',
-                              style:
-                                  context.textTheme.labelSmall?.copyWith(
+                              style: context.textTheme.labelSmall?.copyWith(
                                 color: AppColors.textHint,
                               ),
                             ),

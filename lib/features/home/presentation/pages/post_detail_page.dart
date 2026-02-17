@@ -6,6 +6,7 @@ import 'package:honak/features/home/domain/entities/post.dart';
 import 'package:honak/features/home/presentation/providers/post_detail_provider.dart';
 import 'package:honak/features/home/presentation/providers/share_provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
@@ -18,23 +19,12 @@ class PostDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final postAsync = ref.watch(postDetailProvider(postId));
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: const Directionality(
-              textDirection: TextDirection.ltr,
-              child: Icon(Icons.arrow_back_ios_new, size: 20),
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ],
-      ),
+    return AppScreen(
+      showBack: true,
+      title: const SizedBox.shrink(),
       body: postAsync.when(
-        loading: () => const SingleChildScrollView(
-          child: SkeletonFeedPost(count: 1),
-        ),
+        loading: () =>
+            const SingleChildScrollView(child: SkeletonFeedPost(count: 1)),
         error: (error, _) => ErrorView(
           message: error.toString(),
           onRetry: () => ref.invalidate(postDetailProvider(postId)),
@@ -63,10 +53,7 @@ class _PostDetailContent extends StatelessWidget {
               _PostPageHeader(page: post.page, createdAt: post.createdAt),
               SizedBox(height: AppSpacing.lg),
               if (post.content.isNotEmpty)
-                Text(
-                  post.content,
-                  style: context.textTheme.bodyLarge,
-                ),
+                Text(post.content, style: context.textTheme.bodyLarge),
             ],
           ),
         ),
@@ -126,11 +113,7 @@ class _PostPageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        AppImage.avatar(
-          url: page.avatarUrl,
-          name: page.name,
-          radius: 24,
-        ),
+        AppImage.avatar(url: page.avatarUrl, name: page.name, radius: 24),
         SizedBox(width: AppSpacing.md),
         Expanded(
           child: Column(

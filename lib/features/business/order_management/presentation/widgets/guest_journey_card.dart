@@ -349,7 +349,7 @@ class _GuestJourneyCardState extends State<GuestJourneyCard> {
           // Action buttons
           const SizedBox(height: AppSpacing.sm),
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               const Spacer(),
               // Send notification button

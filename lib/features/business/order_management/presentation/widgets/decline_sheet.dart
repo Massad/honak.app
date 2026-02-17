@@ -110,7 +110,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
               child: Wrap(
                 spacing: AppSpacing.sm,
                 runSpacing: AppSpacing.sm,
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 children: _presetReasons(context.l10n).map((reason) {
                   final isSelected = _selectedReason == reason;
                   return GestureDetector(
@@ -190,7 +190,7 @@ class _DeclineSheetState extends ConsumerState<DeclineSheet> {
               const SizedBox(height: AppSpacing.sm),
               TextField(
                 controller: _customController,
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 textAlign: TextAlign.right,
                 maxLines: 2,
                 onChanged: (_) => setState(() {}),

@@ -60,7 +60,7 @@ class ShareSection extends StatelessWidget {
                   Icon(Icons.copy, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   const Spacer(),
                   Directionality(
-                    textDirection: TextDirection.ltr,
+                    textDirection: Directionality.of(context),
                     child: Text(
                       'honak.app/@${page.slug}',
                       style: TextStyle(

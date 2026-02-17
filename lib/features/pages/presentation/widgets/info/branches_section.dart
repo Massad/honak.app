@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/pages/domain/entities/page_sub_entities.dart';
 import 'package:honak/features/pages/presentation/pages/branches_page.dart';
 import 'package:honak/shared/entities/location.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Displays location info: single address or multiple branch cards.
@@ -282,7 +283,7 @@ class _BranchesSummaryCard extends StatelessWidget {
                 ),
                 SizedBox(width: AppSpacing.xs),
                 Icon(
-                  Icons.chevron_left,
+                  AppDirection.chevronStartIcon(context),
                   size: 18,
                   color: context.colorScheme.primary,
                 ),

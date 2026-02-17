@@ -84,7 +84,7 @@ class _ReviewStep extends StatelessWidget {
                     if (customerPhone != null)
                       Text(
                         customerPhone!,
-                        textDirection: TextDirection.ltr,
+                        textDirection: Directionality.of(context),
                         style: TextStyle(
                           fontSize: 10,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,

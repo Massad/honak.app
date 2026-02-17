@@ -6,6 +6,8 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/queue/domain/entities/available_add_on.dart';
 import 'package:honak/features/business/queue/domain/entities/service_package.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Shows the "queue or schedule" bottom sheet.
@@ -22,10 +24,8 @@ Future<void> showQueueOrScheduleSheet({
   required void Function(String packageId, List<String>? addOnIds) onJoinQueue,
   required VoidCallback onBookLater,
 }) {
-  return showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet<void>(
+    context,
     builder: (_) => _QueueOrScheduleSheet(
       queuePackage: queuePackage,
       availableAddOns: availableAddOns,
@@ -78,35 +78,16 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: context.screenHeight * 0.85,
-      ),
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: Column(
+    return AppSheetScaffold(
+      title: null,
+      showBodyDivider: false,
+      scrollable: false,
+      bodyPadding: EdgeInsets.zero,
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Handle bar
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: AppSpacing.sm),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: context.colorScheme.outlineVariant,
-                borderRadius: AppRadius.pill,
-              ),
-            ),
-          ),
-          // Header with package info
           _buildHeader(context),
           const Divider(height: 1),
-          // Content
           Flexible(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppSpacing.lg),
@@ -147,12 +128,6 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
               ],
             ),
           ),
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.close, size: 20),
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
-          ),
         ],
       ),
     );
@@ -182,7 +157,9 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
         _buildOptionCard(
           context,
           icon: Icons.calendar_month,
-          iconBgColor: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.1),
+          iconBgColor: context.colorScheme.onSurfaceVariant.withValues(
+            alpha: 0.1,
+          ),
           iconColor: context.colorScheme.onSurfaceVariant,
           borderColor: context.colorScheme.outlineVariant,
           bgColor: null,
@@ -258,13 +235,10 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                       ],
                     ),
                   ),
-                  Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Icon(
-                      Icons.chevron_left,
-                      size: 20,
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
+                  Icon(
+                    AppDirection.chevronStartIcon(context),
+                    size: 20,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -385,8 +359,9 @@ class _QueueOrScheduleSheetState extends State<_QueueOrScheduleSheet> {
                 decoration: BoxDecoration(
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
-                    color:
-                        isSelected ? AppColors.primary : context.colorScheme.outlineVariant,
+                    color: isSelected
+                        ? AppColors.primary
+                        : context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(

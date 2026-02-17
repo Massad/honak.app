@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/settings_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/button.dart';
 
 class PageStatusSettings extends ConsumerStatefulWidget {
@@ -63,8 +64,8 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
   }
 
   void _showPermanentCloseConfirmation() {
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (ctx) => AlertDialog(
         title: const Text('تأكيد الإغلاق النهائي', textAlign: TextAlign.end),
         content: const Text(
@@ -73,7 +74,7 @@ class _PageStatusSettingsState extends ConsumerState<PageStatusSettings> {
         ),
         actions: [
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Button(
                 onPressed: () => Navigator.pop(ctx),

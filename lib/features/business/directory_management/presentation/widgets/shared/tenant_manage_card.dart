@@ -134,7 +134,7 @@ class TenantManageCard extends StatelessWidget {
 
             // Action buttons row
             Row(
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               children: [
                 // Menu icon (far left in LTR = far right in RTL)
                 SizedBox(

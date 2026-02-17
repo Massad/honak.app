@@ -157,7 +157,7 @@ class _QuestionField extends StatelessWidget {
     return TextFormField(
       initialValue: value,
       onChanged: onChanged,
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       decoration: InputDecoration(
         hintText: 'اكتب إجابتك...',
         hintStyle: theme.textTheme.bodySmall?.copyWith(
@@ -192,7 +192,7 @@ class _QuestionField extends StatelessWidget {
       initialValue: value,
       onChanged: onChanged,
       keyboardType: TextInputType.number,
-      textDirection: TextDirection.ltr,
+      textDirection: Directionality.of(context),
       decoration: InputDecoration(
         hintText: '0',
         hintStyle: theme.textTheme.bodySmall?.copyWith(

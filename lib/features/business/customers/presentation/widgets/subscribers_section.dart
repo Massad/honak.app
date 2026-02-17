@@ -295,7 +295,7 @@ class _AutoOrderCard extends StatelessWidget {
             if (isPending) ...[
               const SizedBox(height: AppSpacing.sm),
               Row(
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 children: [
                   // Chat button
                   Container(
@@ -538,7 +538,7 @@ class _SubscriberCard extends StatelessWidget {
                         children: [
                           if (c.phone != null)
                             Directionality(
-                              textDirection: TextDirection.ltr,
+                              textDirection: Directionality.of(context),
                               child: Text(
                                 c.phone!,
                                 style: const TextStyle(

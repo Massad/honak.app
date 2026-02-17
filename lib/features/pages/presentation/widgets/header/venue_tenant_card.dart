@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Card showing the venue location for tenant pages.
 /// Matches Figma: blue card with venue name, floor + unit, building icon.
@@ -51,7 +52,7 @@ class VenueTenantCard extends StatelessWidget {
             children: [
               // Chevron (start side — right in RTL)
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 18,
                 color: context.colorScheme.primary,
               ),

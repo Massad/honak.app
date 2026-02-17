@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class PromoBannerCarousel extends StatefulWidget {
   const PromoBannerCarousel({super.key});
@@ -223,7 +224,7 @@ class _BannerCard extends StatelessWidget {
                             ),
                             SizedBox(width: AppSpacing.xs),
                             Icon(
-                              isRtl ? Icons.arrow_back : Icons.arrow_forward,
+                              AppDirection.forwardIcon(context),
                               size: isCompact ? 11 : 12,
                               color: Colors.white,
                             ),

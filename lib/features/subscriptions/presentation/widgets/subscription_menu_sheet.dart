@@ -9,6 +9,8 @@ import 'package:honak/features/subscriptions/presentation/widgets/cancel_subscri
 import 'package:honak/features/subscriptions/presentation/widgets/credit_history_sheet.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/pause_subscription_sheet.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/renewal_request_sheet.dart';
+import 'package:honak/shared/widgets/app_list_item.dart';
+import 'package:honak/shared/widgets/app_section_header.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 
 void showSubscriptionMenuSheet(
@@ -30,78 +32,82 @@ class _SubscriptionMenuSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final policy = subscription.policy;
 
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(
-        0,
+    return AppSheetScaffold(
+      title: null,
+      showBodyDivider: false,
+      showFooterDivider: false,
+      bodyPadding: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.md,
         AppSpacing.sm,
-        0,
-        AppSpacing.sm,
+        AppSpacing.md,
+        AppSpacing.md,
       ),
-      child: Column(
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 36,
-            height: 4,
-            decoration: BoxDecoration(
-              color: context.colorScheme.outline,
-              borderRadius: BorderRadius.circular(2),
+          AppSectionHeader(
+            title: subscription.packageName,
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.sm,
+              0,
+              AppSpacing.sm,
+              AppSpacing.sm,
             ),
           ),
-          const SizedBox(height: AppSpacing.md),
-          Text(
-            subscription.packageName,
-            style: context.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          ListTile(
+          AppListItem(
             leading: const Icon(Icons.refresh, color: AppColors.primary),
-            title: const Text('تجديد الاشتراك'),
+            title: 'تجديد الاشتراك',
+            affordance: AppListItemAffordance.chevron,
             onTap: () {
               Navigator.pop(context);
               showRenewalRequestSheet(context, subscription);
             },
           ),
           if (policy?.canPause == true)
-            ListTile(
+            AppListItem(
               leading: Icon(
                 Icons.pause_circle_outline,
                 color: AppColors.warning,
               ),
-              title: const Text('إيقاف مؤقت'),
+              title: 'إيقاف مؤقت',
+              affordance: AppListItemAffordance.chevron,
               onTap: () {
                 Navigator.pop(context);
                 showPauseSubscriptionSheet(context, subscription);
               },
             ),
           if (policy?.canCancel == true)
-            ListTile(
-              leading: const Icon(Icons.cancel_outlined, color: AppColors.error),
-              title: const Text('إلغاء الاشتراك'),
+            AppListItem(
+              leading: const Icon(
+                Icons.cancel_outlined,
+                color: AppColors.error,
+              ),
+              title: 'إلغاء الاشتراك',
+              affordance: AppListItemAffordance.chevron,
               onTap: () {
                 Navigator.pop(context);
                 showCancelSubscriptionSheet(context, subscription);
               },
             ),
-          ListTile(
+          AppListItem(
             leading: Icon(
               Icons.receipt_long_outlined,
               color: context.colorScheme.onSurfaceVariant,
             ),
-            title: const Text('سجل الاستخدام'),
+            title: 'سجل الاستخدام',
+            affordance: AppListItemAffordance.chevron,
             onTap: () {
               Navigator.pop(context);
               showCreditHistorySheet(context, subscription);
             },
           ),
-          ListTile(
+          AppListItem(
             leading: Icon(
               Icons.open_in_new,
               color: context.colorScheme.onSurfaceVariant,
             ),
-            title: const Text('زيارة الصفحة'),
+            title: 'زيارة الصفحة',
+            affordance: AppListItemAffordance.chevron,
             onTap: () {
               Navigator.pop(context);
               context.push(Routes.pagePath(subscription.pageId));

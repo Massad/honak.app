@@ -15,6 +15,7 @@ import 'package:honak/features/business/order_management/presentation/widgets/re
 import 'package:honak/features/business/shared/domain/entities/entities.dart';
 import 'package:honak/features/chat/domain/entities/conversation.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/receipt_sheet.dart';
@@ -125,11 +126,13 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
       customerPhone: _request.customer.phone,
       referenceNumber: _request.id,
       items: _request.items
-          .map((i) => ReceiptLineItem(
-                name: i.name,
-                quantity: i.quantity,
-                priceCents: i.price?.cents ?? 0,
-              ))
+          .map(
+            (i) => ReceiptLineItem(
+              name: i.name,
+              quantity: i.quantity,
+              priceCents: i.price?.cents ?? 0,
+            ),
+          )
           .toList(),
       totalCents: _request.total?.cents ?? 0,
       statusLabel: requestStatusLabel(_request.status, context.l10n),
@@ -142,7 +145,8 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
   void _openChat() {
     final bizCtx = ref.read(businessContextProvider);
     final conversation = Conversation(
-      id: _request.conversationId ??
+      id:
+          _request.conversationId ??
           'conv_${_request.customer.id}_${_request.id}',
       pageId: bizCtx?.page.id ?? '',
       pageName: bizCtx?.page.name ?? '',
@@ -160,10 +164,7 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
       status: 'active',
       type: 'request',
     );
-    context.push(
-      Routes.chatDetailPath(conversation.id),
-      extra: conversation,
-    );
+    context.push(Routes.chatDetailPath(conversation.id), extra: conversation);
   }
 
   @override
@@ -176,22 +177,10 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
 
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
+      child: AppScreen(
+        title: Text(l10n.bizReqDetailTitle),
+        showBack: true,
         backgroundColor: const Color(0xFFF5F5F5),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(l10n.bizReqDetailTitle),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Directionality(
-                textDirection: TextDirection.ltr,
-                child: Icon(Icons.arrow_back_ios_new, size: 20),
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ],
-        ),
         body: Column(
           children: [
             // Header: type + ID + timestamp
@@ -201,9 +190,7 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
                 horizontal: AppSpacing.lg,
                 vertical: AppSpacing.md,
               ),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
+              decoration: const BoxDecoration(color: Colors.white),
               child: Column(
                 children: [
                   Text(
@@ -230,14 +217,15 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
             Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
-                border: Border(
-                  bottom: BorderSide(color: Color(0xFFF3F4F6)),
-                ),
+                border: Border(bottom: BorderSide(color: Color(0xFFF3F4F6))),
               ),
               child: TabBar(
                 labelColor: Color(0xFF1A73E8),
                 unselectedLabelColor: Color(0xFF9CA3AF),
-                labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                labelStyle: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
                 unselectedLabelStyle: TextStyle(fontSize: 12),
                 indicatorColor: Color(0xFF1A73E8),
                 indicatorWeight: 2,
@@ -259,11 +247,13 @@ class _RequestDetailPageState extends ConsumerState<RequestDetailPage> {
                     onDecline: _handleDecline,
                     onAlternative: _handleAlternative,
                     onUpdateStatus: _handleUpdateStatus,
-                    onReceipt: (_request.status == 'completed' ||
+                    onReceipt:
+                        (_request.status == 'completed' ||
                             _request.status == 'delivered')
                         ? _showReceipt
                         : null,
-                    onChat: (_request.status == 'completed' ||
+                    onChat:
+                        (_request.status == 'completed' ||
                             _request.status == 'delivered')
                         ? _openChat
                         : null,
@@ -320,25 +310,18 @@ class _SummaryTab extends StatelessWidget {
           createdAt: request.createdAt,
         ),
         const SizedBox(height: AppSpacing.sm),
-        _MessageCustomerButton(
-          request: request,
-          onOpenChat: onOpenChat,
-        ),
+        _MessageCustomerButton(request: request, onOpenChat: onOpenChat),
         const SizedBox(height: AppSpacing.lg),
         RequestStatusBadge(status: request.status),
         const SizedBox(height: AppSpacing.lg),
-        RequestItemsList(
-          items: request.items,
-          itemsCount: request.itemsCount,
-        ),
+        RequestItemsList(items: request.items, itemsCount: request.itemsCount),
         const SizedBox(height: AppSpacing.lg),
         RequestTotalRow(total: request.total),
         if (request.note != null && request.note!.isNotEmpty) ...[
           const SizedBox(height: AppSpacing.lg),
           RequestNoteSection(note: request.note!),
         ],
-        if (request.status == 'declined' &&
-            request.declineReason != null) ...[
+        if (request.status == 'declined' && request.declineReason != null) ...[
           const SizedBox(height: AppSpacing.lg),
           RequestDeclineReasonSection(reason: request.declineReason!),
         ],
@@ -368,7 +351,6 @@ class _SummaryTab extends StatelessWidget {
     );
   }
 }
-
 
 // ═══════════════════════════════════════════════════════════════
 // Message Customer Button (preserved from original)

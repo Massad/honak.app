@@ -8,6 +8,7 @@ import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
@@ -145,7 +146,7 @@ class _PageTile extends StatelessWidget {
                   )
                 else
                   Icon(
-                    Icons.chevron_left,
+                    AppDirection.chevronStartIcon(context),
                     size: 18,
                     color: Theme.of(context).colorScheme.outline,
                   ),

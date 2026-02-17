@@ -105,7 +105,7 @@ class ReservationDetailsStep extends StatelessWidget {
                   : null,
           onChanged: onGuestCountChanged,
           keyboardType: TextInputType.number,
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           decoration: InputDecoration(
             hintText: 'أدخل عدد آخر...',
             hintStyle: theme.textTheme.bodySmall
@@ -194,7 +194,7 @@ class ReservationDetailsStep extends StatelessWidget {
         TextFormField(
           controller: noteController,
           maxLines: 3,
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           decoration: InputDecoration(
             hintText: 'أي طلبات خاصة أو استفسارات...',
             hintStyle: theme.textTheme.labelSmall

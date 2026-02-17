@@ -9,6 +9,7 @@ import 'package:honak/features/business/page_settings/presentation/providers/tea
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_item.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 
 /// Full-screen wizard for creating or editing a BizItem.
 ///
@@ -80,19 +81,19 @@ class _ItemWizardPageState extends ConsumerState<ItemWizardPage> {
     for (final prop in _cfg?.properties ?? <ItemPropertyConfig>[]) {
       final existing = item?.properties[prop.id];
       if (prop.type == ItemPropertyType.chipList) {
-        _chipSelections[prop.id] =
-            existing is List ? List<String>.from(existing) : [];
+        _chipSelections[prop.id] = existing is List
+            ? List<String>.from(existing)
+            : [];
       } else {
-        _propertyControllers[prop.id] =
-            TextEditingController(text: existing?.toString() ?? '');
+        _propertyControllers[prop.id] = TextEditingController(
+          text: existing?.toString() ?? '',
+        );
       }
     }
 
     // Step 3
     _status = item?.status ?? 'active';
-    _stockCtrl = TextEditingController(
-      text: item?.stock?.toString() ?? '',
-    );
+    _stockCtrl = TextEditingController(text: item?.stock?.toString() ?? '');
     _assignedTeamIds = List.from(item?.assignedTeamIds ?? []);
   }
 
@@ -185,8 +186,7 @@ class _ItemWizardPageState extends ConsumerState<ItemWizardPage> {
       if (_stockCtrl.text.trim().isNotEmpty)
         'stock': int.tryParse(_stockCtrl.text.trim()),
       'properties': properties,
-      if (_assignedTeamIds.isNotEmpty)
-        'assigned_team_ids': _assignedTeamIds,
+      if (_assignedTeamIds.isNotEmpty) 'assigned_team_ids': _assignedTeamIds,
     };
   }
 
@@ -208,9 +208,11 @@ class _ItemWizardPageState extends ConsumerState<ItemWizardPage> {
   Widget build(BuildContext context) {
     final isEdit = widget.isEdit;
     final itemLabel = _cfg?.itemLabelAr ?? context.l10n.catalogSelectedItem;
-    final title = isEdit ? context.l10n.wizardEditItem(itemLabel) : context.l10n.wizardAddItem(itemLabel);
+    final title = isEdit
+        ? context.l10n.wizardEditItem(itemLabel)
+        : context.l10n.wizardAddItem(itemLabel);
 
-    return Scaffold(
+    return AppScreen(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -224,45 +226,43 @@ class _ItemWizardPageState extends ConsumerState<ItemWizardPage> {
           ),
         ],
       ),
+      showBack: false,
       body: Column(
         children: [
-          StepIndicator(
-            currentStep: _currentStep,
-            totalSteps: 3,
-          ),
+          StepIndicator(currentStep: _currentStep, totalSteps: 3),
           Expanded(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
               child: switch (_currentStep) {
                 0 => WizardStepBasics(
-                    key: const ValueKey(0),
-                    nameCtrl: _nameCtrl,
-                    selectedCategoryId: _selectedCategoryId,
-                    categories: widget.categories,
-                    config: _cfg,
-                    onCategoryChanged: (id) =>
-                        setState(() => _selectedCategoryId = id),
-                  ),
+                  key: const ValueKey(0),
+                  nameCtrl: _nameCtrl,
+                  selectedCategoryId: _selectedCategoryId,
+                  categories: widget.categories,
+                  config: _cfg,
+                  onCategoryChanged: (id) =>
+                      setState(() => _selectedCategoryId = id),
+                ),
                 1 => WizardStepDetails(
-                    key: const ValueKey(1),
-                    config: _cfg,
-                    descCtrl: _descCtrl,
-                    priceCtrl: _priceCtrl,
-                    discountCtrl: _discountCtrl,
-                    propertyControllers: _propertyControllers,
-                    chipSelections: _chipSelections,
-                    onChipChanged: (propId, chips) =>
-                        setState(() => _chipSelections[propId] = chips),
-                  ),
+                  key: const ValueKey(1),
+                  config: _cfg,
+                  descCtrl: _descCtrl,
+                  priceCtrl: _priceCtrl,
+                  discountCtrl: _discountCtrl,
+                  propertyControllers: _propertyControllers,
+                  chipSelections: _chipSelections,
+                  onChipChanged: (propId, chips) =>
+                      setState(() => _chipSelections[propId] = chips),
+                ),
                 _ => WizardStepAvailability(
-                    key: const ValueKey(2),
-                    config: _cfg,
-                    status: _status,
-                    stockCtrl: _stockCtrl,
-                    onStatusChanged: (s) => setState(() => _status = s),
-                    assignedTeamIds: _assignedTeamIds,
-                    onTeamAssignTap: _openTeamPicker,
-                  ),
+                  key: const ValueKey(2),
+                  config: _cfg,
+                  status: _status,
+                  stockCtrl: _stockCtrl,
+                  onStatusChanged: (s) => setState(() => _status = s),
+                  assignedTeamIds: _assignedTeamIds,
+                  onTeamAssignTap: _openTeamPicker,
+                ),
               },
             ),
           ),

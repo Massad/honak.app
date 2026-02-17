@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/post_create/presentation/pages/form_page.dart';
 import 'package:honak/features/business/stories/presentation/pages/story_creator_page.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class CreatePostPage extends ConsumerWidget {
   const CreatePostPage({super.key});
@@ -173,7 +174,7 @@ class _StoryButton extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 18,
                 color: Colors.white.withValues(alpha: 0.7),
               ),
@@ -256,7 +257,7 @@ class _PostTypeCard extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 16,
                 color: Theme.of(context).colorScheme.outline,
               ),

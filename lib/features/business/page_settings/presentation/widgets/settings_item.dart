@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class SettingsItem extends StatelessWidget {
   final IconData icon;
@@ -39,7 +40,7 @@ class SettingsItem extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.arrow_back_ios,
+                AppDirection.chevronStartIcon(context),
                 size: 14,
                 color: Theme.of(context).colorScheme.outline,
               ),

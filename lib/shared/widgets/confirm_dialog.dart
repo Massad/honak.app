@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/app_dialog_templates.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Reusable confirmation dialog with two actions.
@@ -40,17 +41,17 @@ class ConfirmDialog extends StatelessWidget {
     String? cancelLabel,
     bool isDestructive = false,
   }) async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (_) => ConfirmDialog(
-        title: title,
-        message: message,
-        confirmLabel: confirmLabel,
-        cancelLabel: cancelLabel,
-        isDestructive: isDestructive,
-      ),
+    final result = await showAppConfirmDialog(
+      context,
+      title: title,
+      message: message,
+      confirmLabel: confirmLabel,
+      cancelLabel: cancelLabel,
+      confirmStyle: isDestructive
+          ? btn.Style.danger
+          : btn.Style.primary,
     );
-    return result ?? false;
+    return result;
   }
 
   @override
@@ -70,7 +71,6 @@ class ConfirmDialog extends StatelessWidget {
           style: isDestructive ? btn.Style.danger : btn.Style.primary,
         ),
       ],
-      // Keep Cancel left, Confirm right regardless of RTL
       actionsAlignment: MainAxisAlignment.end,
       actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
     );

@@ -11,6 +11,7 @@ import 'package:honak/shared/providers/nav_badge_provider.dart';
 import 'package:honak/features/subscriptions/domain/entities/entities.dart';
 import 'package:honak/features/subscriptions/presentation/providers/subscription_providers.dart';
 import 'package:honak/features/subscriptions/presentation/widgets/subscriptions_tab.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Customer "My Orders" page — "طلباتي" with 4 tabs.
@@ -44,23 +45,20 @@ class _OrdersPageState extends ConsumerState<OrdersPage>
     final requestsAsync = ref.watch(myRequestsProvider(null));
     final activeSubs = ref.watch(activeSubscriptionsProvider);
 
-    return Scaffold(
-      
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(context.l10n.myOrders),
-        actions: [
-          IconButton(
-            icon: Icon(_showSearch ? Icons.close : Icons.search, size: 22),
-            onPressed: () {
-              setState(() {
-                _showSearch = !_showSearch;
-                if (!_showSearch) _searchQuery = '';
-              });
-            },
-          ),
-        ],
-      ),
+    return AppScreen(
+      title: Text(context.l10n.myOrders),
+      showBack: false,
+      actions: [
+        IconButton(
+          icon: Icon(_showSearch ? Icons.close : Icons.search, size: 22),
+          onPressed: () {
+            setState(() {
+              _showSearch = !_showSearch;
+              if (!_showSearch) _searchQuery = '';
+            });
+          },
+        ),
+      ],
       body: requestsAsync.when(
         loading: () => const OrdersSkeleton(),
         error: (error, _) => _ErrorState(
@@ -107,31 +105,31 @@ class _OrdersBody extends StatelessWidget {
     if (searchQuery.isEmpty) return list;
     final q = searchQuery.toLowerCase();
     return list
-        .where((r) =>
-            r.businessName.toLowerCase().contains(q) ||
-            (r.summary ?? '').toLowerCase().contains(q))
+        .where(
+          (r) =>
+              r.businessName.toLowerCase().contains(q) ||
+              (r.summary ?? '').toLowerCase().contains(q),
+        )
         .toList();
   }
 
   List<CustomerRequest> get _activeRequests => _filter(
-        requests
-            .where((r) => activeRequestStatuses.contains(r.status))
-            .toList(),
-      );
+    requests.where((r) => activeRequestStatuses.contains(r.status)).toList(),
+  );
 
   List<CustomerRequest> get _upcomingRequests => _filter(
-        requests
-            .where((r) =>
-                r.isSchedulable &&
-                (r.status == 'accepted' || r.status == 'rescheduled'))
-            .toList(),
-      );
+    requests
+        .where(
+          (r) =>
+              r.isSchedulable &&
+              (r.status == 'accepted' || r.status == 'rescheduled'),
+        )
+        .toList(),
+  );
 
   List<CustomerRequest> get _historyRequests => _filter(
-        requests
-            .where((r) => _completedStatuses.contains(r.status))
-            .toList(),
-      );
+    requests.where((r) => _completedStatuses.contains(r.status)).toList(),
+  );
 
   static const _completedStatuses = {
     'completed',
@@ -169,11 +167,15 @@ class _OrdersBody extends StatelessWidget {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
+                  borderSide: BorderSide(
+                    color: context.colorScheme.outlineVariant,
+                  ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: context.colorScheme.outlineVariant),
+                  borderSide: BorderSide(
+                    color: context.colorScheme.outlineVariant,
+                  ),
                 ),
               ),
               onChanged: onSearchChanged,
@@ -252,9 +254,18 @@ class _OrdersTabBar extends StatelessWidget {
       ),
       tabs: [
         _TabWithBadge(label: context.l10n.ordersTabActive, count: activeCount),
-        _TabWithBadge(label: context.l10n.ordersTabUpcoming, count: upcomingCount),
-        _TabWithBadge(label: context.l10n.ordersTabHistory, count: historyCount),
-        _TabWithBadge(label: context.l10n.ordersTabSubscriptions, count: subscriptionCount),
+        _TabWithBadge(
+          label: context.l10n.ordersTabUpcoming,
+          count: upcomingCount,
+        ),
+        _TabWithBadge(
+          label: context.l10n.ordersTabHistory,
+          count: historyCount,
+        ),
+        _TabWithBadge(
+          label: context.l10n.ordersTabSubscriptions,
+          count: subscriptionCount,
+        ),
       ],
     );
   }
@@ -310,19 +321,22 @@ class _SubscriptionsTabWrapper extends ConsumerWidget {
 
     return subsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, _) => _ErrorState(
-        onRetry: () => ref.invalidate(mySubscriptionsProvider),
-      ),
+      error: (error, _) =>
+          _ErrorState(onRetry: () => ref.invalidate(mySubscriptionsProvider)),
       data: (subs) {
         final active = subs
-            .where((s) =>
-                s.status == SubscriptionStatus.active ||
-                s.status == SubscriptionStatus.paused)
+            .where(
+              (s) =>
+                  s.status == SubscriptionStatus.active ||
+                  s.status == SubscriptionStatus.paused,
+            )
             .toList();
         final inactive = subs
-            .where((s) =>
-                s.status != SubscriptionStatus.active &&
-                s.status != SubscriptionStatus.paused)
+            .where(
+              (s) =>
+                  s.status != SubscriptionStatus.active &&
+                  s.status != SubscriptionStatus.paused,
+            )
             .toList();
 
         return RefreshIndicator(

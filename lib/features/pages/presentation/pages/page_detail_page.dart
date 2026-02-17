@@ -24,12 +24,12 @@ import 'package:honak/features/pages/presentation/widgets/page_tab_bar.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/sections.dart';
 import 'package:honak/features/pages/presentation/widgets/sections/directory_tab.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/shared.dart';
+import 'package:honak/shared/widgets/app_dialog_templates.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 import 'package:honak/features/pages/presentation/pages/claim_request_page.dart';
 import 'package:honak/shared/widgets/coverage_banner.dart';
 import 'package:honak/shared/widgets/error_view.dart';
-import 'package:honak/shared/widgets/button.dart' as btn;
 
 class PageDetailPage extends ConsumerStatefulWidget {
   final String handle;
@@ -117,45 +117,45 @@ List<({String id, String label})> getPageTabs(
 }) {
   final allTabs = switch (archetype) {
     Archetype.followOnly => [
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
     Archetype.directory => [
-        (id: 'main', label: '\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629'),
-        (id: 'directory', label: '\u0627\u0644\u062f\u0644\u064a\u0644'),
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'main', label: '\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629'),
+      (id: 'directory', label: '\u0627\u0644\u062f\u0644\u064a\u0644'),
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
     Archetype.menuOrder => [
-        (id: 'main', label: '\u0627\u0644\u0642\u0627\u0626\u0645\u0629'),
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'main', label: '\u0627\u0644\u0642\u0627\u0626\u0645\u0629'),
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
     Archetype.catalogOrder => [
-        (id: 'main', label: '\u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a'),
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'main', label: '\u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a'),
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
     Archetype.serviceBooking => [
-        (id: 'main', label: '\u0627\u0644\u062e\u062f\u0645\u0627\u062a'),
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'main', label: '\u0627\u0644\u062e\u062f\u0645\u0627\u062a'),
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
     Archetype.portfolioInquiry => [
-        (id: 'main', label: '\u0627\u0644\u0623\u0639\u0645\u0627\u0644'),
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'main', label: '\u0627\u0644\u0623\u0639\u0645\u0627\u0644'),
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
     Archetype.reservation => [
-        (id: 'main', label: '\u0627\u0644\u0623\u0645\u0627\u0643\u0646'),
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'main', label: '\u0627\u0644\u0623\u0645\u0627\u0643\u0646'),
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
     Archetype.quoteRequest => [
-        (id: 'main', label: '\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629'),
-        (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
-        (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
-      ],
+      (id: 'main', label: '\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629'),
+      (id: 'activity', label: '\u0646\u0634\u0627\u0637'),
+      (id: 'info', label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a'),
+    ],
   };
 
   if (isUnclaimed) {
@@ -200,18 +200,19 @@ class _PageDetailContentState extends State<_PageDetailContent> {
     final page = widget.page;
     final archetype = widget.archetype;
     final showNearestBranch = page.branches.length >= 2;
-    final hasCoverage = page.coverageZones.isNotEmpty ||
+    final hasCoverage =
+        page.coverageZones.isNotEmpty ||
         page.coverageZonesStructured.isNotEmpty;
     final hasMiddleElements = showNearestBranch || hasCoverage;
 
     final coverageAreas = hasCoverage
         ? [
             ...page.coverageZones,
-            ...page.coverageZonesStructured
-                .expand((z) => z.areas.map((a) => a.name)),
+            ...page.coverageZonesStructured.expand(
+              (z) => z.areas.map((a) => a.name),
+            ),
           ]
         : <String>[];
-
 
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -309,11 +310,11 @@ class _PageDetailContentState extends State<_PageDetailContent> {
     return switch (tabId) {
       'main' => _buildMainSection(context, page, archetype),
       'activity' => ActivityTab(
-          pageId: page.id,
-          pageSlug: page.slug,
-          archetype: archetype,
-          pinnedPosts: page.pinnedPosts,
-        ),
+        pageId: page.id,
+        pageSlug: page.slug,
+        archetype: archetype,
+        pinnedPosts: page.pinnedPosts,
+      ),
       'info' => SingleChildScrollView(child: InfoTab(page: page)),
       'directory' => DirectoryTab(pageId: page.id, page: page),
       _ => const SizedBox.shrink(),
@@ -329,7 +330,10 @@ class _PageDetailContentState extends State<_PageDetailContent> {
   }
 
   Widget _buildMainSection(
-      BuildContext context, PageDetail page, Archetype archetype) {
+    BuildContext context,
+    PageDetail page,
+    Archetype archetype,
+  ) {
     if (page.claimStatus == 'unclaimed' && archetype != Archetype.directory) {
       return SingleChildScrollView(
         child: SectionEmptyState(
@@ -341,26 +345,28 @@ class _PageDetailContentState extends State<_PageDetailContent> {
     }
 
     return switch (archetype) {
-      Archetype.catalogOrder =>
-        CatalogSection(pageId: page.id, page: page),
-      Archetype.menuOrder =>
-        MenuSection(pageId: page.id, page: page),
-      Archetype.serviceBooking => isQueueType(page.businessTypeId)
-          ? _ServiceBookingWithQueue(page: page)
-          : isDropoffType(page.businessTypeId)
-              ? _ServiceBookingWithDropoff(page: page)
-              : ServiceBookingSection(
-                  pageId: page.id,
-                  pageName: page.name,
-                  teamMembersCount: page.teamMembersCount,
-                  packages: page.packages,
-                ),
-      Archetype.quoteRequest =>
-        QuoteRequestSection(pageId: page.id, page: page),
-      Archetype.portfolioInquiry =>
-        PortfolioSection(pageId: page.id, pageName: page.name),
-      Archetype.reservation =>
-        ReservationSection(pageId: page.id, page: page),
+      Archetype.catalogOrder => CatalogSection(pageId: page.id, page: page),
+      Archetype.menuOrder => MenuSection(pageId: page.id, page: page),
+      Archetype.serviceBooking =>
+        isQueueType(page.businessTypeId)
+            ? _ServiceBookingWithQueue(page: page)
+            : isDropoffType(page.businessTypeId)
+            ? _ServiceBookingWithDropoff(page: page)
+            : ServiceBookingSection(
+                pageId: page.id,
+                pageName: page.name,
+                teamMembersCount: page.teamMembersCount,
+                packages: page.packages,
+              ),
+      Archetype.quoteRequest => QuoteRequestSection(
+        pageId: page.id,
+        page: page,
+      ),
+      Archetype.portfolioInquiry => PortfolioSection(
+        pageId: page.id,
+        pageName: page.name,
+      ),
+      Archetype.reservation => ReservationSection(pageId: page.id, page: page),
       Archetype.followOnly => FollowOnlySection(page: page),
       Archetype.directory => DirectorySection(pageId: page.id, page: page),
     };
@@ -387,9 +393,7 @@ class _ServiceBookingWithDropoff extends ConsumerWidget {
           child: dropoffAsync.when(
             data: (data) => Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
-              child: CustomerDropoffView(
-                tickets: data.tickets,
-              ),
+              child: CustomerDropoffView(tickets: data.tickets),
             ),
             loading: () => const Padding(
               padding: EdgeInsets.all(AppSpacing.xl),
@@ -430,10 +434,12 @@ class _ServiceBookingWithQueueState
   @override
   Widget build(BuildContext context) {
     final queueAsync = ref.watch(customerQueueDataProvider(widget.page.id));
-    final activeEntryAsync =
-        ref.watch(customerActiveQueueProvider(widget.page.id));
-    final recentEntryAsync =
-        ref.watch(recentQueueEntryProvider(widget.page.id));
+    final activeEntryAsync = ref.watch(
+      customerActiveQueueProvider(widget.page.id),
+    );
+    final recentEntryAsync = ref.watch(
+      recentQueueEntryProvider(widget.page.id),
+    );
 
     return queueAsync.when(
       loading: () => const Center(
@@ -451,8 +457,9 @@ class _ServiceBookingWithQueueState
       data: (data) {
         // Active entry: local demo override takes precedence over API result
         final activeEntry = _demoEntry ?? activeEntryAsync.valueOrNull;
-        final recentEntry =
-            _recentDismissed ? null : recentEntryAsync.valueOrNull;
+        final recentEntry = _recentDismissed
+            ? null
+            : recentEntryAsync.valueOrNull;
 
         return ServiceBookingSection(
           pageId: widget.page.id,
@@ -490,9 +497,7 @@ class _ServiceBookingWithQueueState
                     // Demo: show snackbar confirming modification request
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('تم إرسال طلب التعديل'),
-                        ),
+                        const SnackBar(content: Text('تم إرسال طلب التعديل')),
                       );
                     }
                   },
@@ -523,24 +528,15 @@ class _ServiceBookingWithQueueState
     final itemName = item.nameAr as String;
 
     // If there's already an active queue entry, block and show dialog
-    final activeEntry = _demoEntry ??
+    final activeEntry =
+        _demoEntry ??
         ref.read(customerActiveQueueProvider(widget.page.id)).valueOrNull;
     if (activeEntry != null) {
-      showDialog<void>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('لديك حجز قائم'),
-          content: const Text(
-            'لديك حجز قائم بالدور. الغِ الحالي أولاً لحجز خدمة جديدة.',
-          ),
-          actions: [
-            btn.Button(
-              onPressed: () => Navigator.pop(ctx),
-              label: 'حسناً',
-              variant: btn.Variant.text,
-            ),
-          ],
-        ),
+      showAppInfoDialog(
+        context,
+        title: 'لديك حجز قائم',
+        message: 'لديك حجز قائم بالدور. الغِ الحالي أولاً لحجز خدمة جديدة.',
+        okLabel: 'حسناً',
       );
       return;
     }

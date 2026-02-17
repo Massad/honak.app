@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_item.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
@@ -185,7 +186,7 @@ class ItemCard extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.only(
                         start: AppSpacing.sm),
                     child: Icon(
-                      Icons.chevron_left,
+                      AppDirection.chevronStartIcon(context),
                       size: 20,
                       color: Theme.of(context).colorScheme.outline,
                     ),

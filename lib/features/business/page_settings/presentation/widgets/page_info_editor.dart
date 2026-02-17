@@ -5,6 +5,8 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/data/settings_repository.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/button.dart';
 
 final _pageInfoProvider = FutureProvider<Map<String, dynamic>>((ref) async {
@@ -106,7 +108,7 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
               const SizedBox(width: AppSpacing.sm),
               IconButton(
                 onPressed: widget.onClose,
-                icon: const Icon(Icons.arrow_forward, size: 20),
+                icon: Icon(AppDirection.backIcon(context), size: 20),
               ),
             ],
           ),
@@ -334,8 +336,8 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
 
   void _showAddCustomPaymentDialog(BuildContext context) {
     final controller = TextEditingController();
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (ctx) => AlertDialog(
         title: const Align(
           alignment: AlignmentDirectional.centerEnd,
@@ -372,7 +374,7 @@ class _PageInfoEditorState extends ConsumerState<PageInfoEditor> {
         ),
         actions: [
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Button(
                 onPressed: () => Navigator.of(ctx).pop(),

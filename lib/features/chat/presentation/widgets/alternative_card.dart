@@ -258,7 +258,7 @@ class _AlternativeCardState extends State<AlternativeCard> {
         bottom: AppSpacing.md,
       ),
       child: Row(
-        textDirection: TextDirection.ltr,
+        textDirection: Directionality.of(context),
         children: [
           Expanded(
             child: Button(

@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
 import 'package:honak/features/chat/presentation/providers/message_action_provider.dart';
+import 'package:honak/shared/widgets/app_popup.dart';
 
 /// Shows a centered modal menu with contextual actions for a message.
 void showMessageActionsMenu(
@@ -20,12 +21,12 @@ void showMessageActionsMenu(
   final ageMinutes = (now - message.createdAt) / 60;
   final isText = message.type == 'text';
 
-  showGeneralDialog(
-    context: context,
+  showAppPopup<void>(
+    context,
     barrierDismissible: true,
     barrierLabel: 'message_actions',
     barrierColor: Colors.black26,
-    pageBuilder: (_, __, ___) {
+    builder: (_) {
       return Center(
         child: Material(
           color: Colors.transparent,

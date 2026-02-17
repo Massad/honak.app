@@ -104,7 +104,7 @@ class StepValue extends StatelessWidget {
           child: SizedBox(
             width: 180,
             child: Directionality(
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               child: TextField(
                 controller: controller,
                 textAlign: TextAlign.center,

@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/user.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 /// Profile card showing user avatar, name, and phone.
@@ -40,7 +41,7 @@ class AccountProfileCard extends StatelessWidget {
               Row(
                 children: [
                   Icon(
-                    Icons.chevron_left,
+                    AppDirection.chevronStartIcon(context),
                     size: 16,
                     color: Theme.of(context).colorScheme.outline,
                   ),
@@ -159,7 +160,7 @@ class AccountPageItem extends StatelessWidget {
                 )
               else
                 Icon(
-                  Icons.chevron_left,
+                  AppDirection.chevronStartIcon(context),
                   size: 16,
                   color: Theme.of(context).colorScheme.outline,
                 ),

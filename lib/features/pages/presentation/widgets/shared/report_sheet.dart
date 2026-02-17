@@ -597,7 +597,7 @@ class _CorrectionFields extends StatelessWidget {
                 child: TextField(
                   controller: phoneController,
                   keyboardType: TextInputType.phone,
-                  textDirection: TextDirection.ltr,
+                  textDirection: Directionality.of(context),
                   style: const TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     hintText:

@@ -12,6 +12,7 @@ import 'package:honak/features/chat/presentation/pages/business_chat_list_page.d
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/shared/providers/nav_badge_provider.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 
 // Business bottom navigation matching Figma MVP:
 //
@@ -40,7 +41,8 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
 
     // Still loading the page selection — show brief spinner
     if (bizPageAsync.isLoading) {
-      return const Scaffold(
+      return const AppScreen(
+        showBack: false,
         body: Center(child: CircularProgressIndicator()),
       );
     }
@@ -57,21 +59,17 @@ class _BusinessShellState extends ConsumerState<BusinessShell> {
     final tabs = isReducedNav
         ? _buildReducedTabs()
         : _buildFullTabs(bizContext);
-    final pages = isReducedNav
-        ? _buildReducedPages()
-        : _buildFullPages();
+    final pages = isReducedNav ? _buildReducedPages() : _buildFullPages();
 
     if (_currentIndex >= tabs.length) {
       _currentIndex = 0;
     }
 
-    return Scaffold(
+    return AppScreen(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
       appBar: const BusinessAppBar(),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: pages,
-      ),
+      showBack: false,
+      body: IndexedStack(index: _currentIndex, children: pages),
       bottomNavigationBar: _BusinessBottomNav(
         tabs: tabs,
         currentIndex: _currentIndex,
@@ -218,6 +216,32 @@ class _BusinessBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final centerIdx = _centerIndex;
+    final isLtr = Directionality.of(context) == TextDirection.ltr;
+    final navItems = List.generate(tabs.length, (i) {
+      final tab = tabs[i];
+      final isSelected = i == currentIndex;
+
+      if (tab.isCenter) {
+        // Invisible placeholder to keep spacing
+        return GestureDetector(
+          onTap: () => onTabChanged(i),
+          behavior: HitTestBehavior.opaque,
+          child: const SizedBox(width: 56, height: 48),
+        );
+      }
+
+      final badgeCount = tab.tab != null ? badges[tab.tab!] : 0;
+
+      return _BottomNavItem(
+        icon: tab.icon,
+        selectedIcon: tab.selectedIcon,
+        label: tab.label,
+        isSelected: isSelected,
+        badge: badgeCount,
+        onTap: () => onTabChanged(i),
+      );
+    });
+    final visualItems = isLtr ? navItems.reversed.toList() : navItems;
 
     return Container(
       decoration: BoxDecoration(
@@ -239,31 +263,7 @@ class _BusinessBottomNav extends StatelessWidget {
               // Regular row of nav items (center slot is a transparent placeholder)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(tabs.length, (i) {
-                  final tab = tabs[i];
-                  final isSelected = i == currentIndex;
-
-                  if (tab.isCenter) {
-                    // Invisible placeholder to keep spacing
-                    return GestureDetector(
-                      onTap: () => onTabChanged(i),
-                      behavior: HitTestBehavior.opaque,
-                      child: const SizedBox(width: 56, height: 48),
-                    );
-                  }
-
-                  final badgeCount =
-                      tab.tab != null ? badges[tab.tab!] : 0;
-
-                  return _BottomNavItem(
-                    icon: tab.icon,
-                    selectedIcon: tab.selectedIcon,
-                    label: tab.label,
-                    isSelected: isSelected,
-                    badge: badgeCount,
-                    onTap: () => onTabChanged(i),
-                  );
-                }),
+                children: visualItems,
               ),
 
               // Raised center button — positioned above the row
@@ -335,7 +335,10 @@ class _CenterNavButton extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: _centerOrange,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Theme.of(context).colorScheme.surface, width: 3),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.surface,
+                    width: 3,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: _centerOrange.withValues(alpha: 0.3),
@@ -435,8 +438,9 @@ class _BottomNavItem extends StatelessWidget {
                   child: Icon(
                     isSelected ? selectedIcon : icon,
                     size: 24,
-                    color:
-                        isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: isSelected
+                        ? AppColors.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 if (badge > 0)
@@ -446,8 +450,7 @@ class _BottomNavItem extends StatelessWidget {
                     child: Container(
                       constraints: const BoxConstraints(minWidth: 18),
                       height: 18,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
                       decoration: BoxDecoration(
                         color: AppColors.error,
                         borderRadius: BorderRadius.circular(9),

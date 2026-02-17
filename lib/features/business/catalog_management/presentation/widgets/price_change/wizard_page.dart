@@ -6,6 +6,8 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/domain/entities/price_change.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/price_change/wizard_steps.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_item.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full-screen 5-step wizard for creating / editing a price change.
@@ -83,8 +85,8 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
     _valueController = TextEditingController(
       text: _value > 0
           ? (_value == _value.truncateToDouble()
-              ? _value.toInt().toString()
-              : _value.toString())
+                ? _value.toInt().toString()
+                : _value.toString())
           : '',
     );
   }
@@ -108,7 +110,9 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
         if (_hasEndDate && _endsAt == null) return false;
         // Validate start is before end
         if (_hasEndDate && _endsAt != null) {
-          final start = _startsNow ? DateTime.now() : (_startsAt ?? DateTime.now());
+          final start = _startsNow
+              ? DateTime.now()
+              : (_startsAt ?? DateTime.now());
           if (!start.isBefore(_endsAt!)) return false;
         }
         return true;
@@ -170,7 +174,8 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
+      showBack: false,
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
@@ -193,7 +198,11 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
-        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
+        border: Border(
+          bottom: BorderSide(
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
+        ),
       ),
       child: Column(
         children: [
@@ -204,7 +213,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
                     ? () => Navigator.of(context).pop()
                     : _onBack,
                 icon: Icon(
-                  _step == 0 ? Icons.close : Icons.arrow_forward,
+                  _step == 0 ? Icons.close : AppDirection.backIcon(context),
                   size: 20,
                 ),
               ),
@@ -217,8 +226,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
               ),
               const Spacer(),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.only(end: AppSpacing.md),
+                padding: const EdgeInsetsDirectional.only(end: AppSpacing.md),
                 child: Text(
                   context.l10n.pcStepOf(_step + 1, 5),
                   style: context.textTheme.bodySmall?.copyWith(
@@ -236,9 +244,7 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
               return Expanded(
                 child: Container(
                   height: 3,
-                  margin: EdgeInsetsDirectional.only(
-                    end: i < 4 ? 3 : 0,
-                  ),
+                  margin: EdgeInsetsDirectional.only(end: i < 4 ? 3 : 0),
                   decoration: BoxDecoration(
                     color: isFilled
                         ? AppColors.primary
@@ -257,80 +263,79 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
   Widget _buildStep() {
     return switch (_step) {
       0 => StepValue(
-          direction: _direction,
-          method: _method,
-          value: _value,
-          controller: _valueController,
-          onDirectionChanged: (d) => setState(() => _direction = d),
-          onMethodChanged: (m) => setState(() {
-            _method = m;
-            _value = 0;
-            _valueController.clear();
-          }),
-          onValueChanged: (v) => setState(() {
-            _value = v;
-            final text = v > 0
-                ? (v == v.truncateToDouble()
+        direction: _direction,
+        method: _method,
+        value: _value,
+        controller: _valueController,
+        onDirectionChanged: (d) => setState(() => _direction = d),
+        onMethodChanged: (m) => setState(() {
+          _method = m;
+          _value = 0;
+          _valueController.clear();
+        }),
+        onValueChanged: (v) => setState(() {
+          _value = v;
+          final text = v > 0
+              ? (v == v.truncateToDouble()
                     ? v.toInt().toString()
                     : v.toString())
-                : '';
-            if (_valueController.text != text) {
-              _valueController.text = text;
-            }
-          }),
-        ),
+              : '';
+          if (_valueController.text != text) {
+            _valueController.text = text;
+          }
+        }),
+      ),
       1 => StepScope(
-          scope: _scope,
-          categoryNames: _categoryNames,
-          itemIds: _itemIds,
-          items: widget.items,
-          itemsLabel: widget.itemsLabel,
-          onScopeChanged: (s) => setState(() {
-            _scope = s;
-            _categoryNames = [];
-            _itemIds = [];
-          }),
-          onCategoryNamesChanged: (c) =>
-              setState(() => _categoryNames = c),
-          onItemIdsChanged: (ids) => setState(() => _itemIds = ids),
-        ),
+        scope: _scope,
+        categoryNames: _categoryNames,
+        itemIds: _itemIds,
+        items: widget.items,
+        itemsLabel: widget.itemsLabel,
+        onScopeChanged: (s) => setState(() {
+          _scope = s;
+          _categoryNames = [];
+          _itemIds = [];
+        }),
+        onCategoryNamesChanged: (c) => setState(() => _categoryNames = c),
+        onItemIdsChanged: (ids) => setState(() => _itemIds = ids),
+      ),
       2 => StepSchedule(
-          startsNow: _startsNow,
-          startsAt: _startsAt,
-          hasEndDate: _hasEndDate,
-          endsAt: _endsAt,
-          onStartsNowChanged: (v) => setState(() {
-            _startsNow = v;
-            if (v) _startsAt = null;
-          }),
-          onStartsAtChanged: (d) => setState(() => _startsAt = d),
-          onHasEndDateChanged: (v) => setState(() {
-            _hasEndDate = v;
-            if (!v) _endsAt = null;
-          }),
-          onEndsAtChanged: (d) => setState(() => _endsAt = d),
-        ),
+        startsNow: _startsNow,
+        startsAt: _startsAt,
+        hasEndDate: _hasEndDate,
+        endsAt: _endsAt,
+        onStartsNowChanged: (v) => setState(() {
+          _startsNow = v;
+          if (v) _startsAt = null;
+        }),
+        onStartsAtChanged: (d) => setState(() => _startsAt = d),
+        onHasEndDateChanged: (v) => setState(() {
+          _hasEndDate = v;
+          if (!v) _endsAt = null;
+        }),
+        onEndsAtChanged: (d) => setState(() => _endsAt = d),
+      ),
       3 => StepVisibility(
-          isPublic: _isPublic,
-          reason: _reason,
-          onPublicChanged: (v) => setState(() => _isPublic = v),
-          onReasonChanged: (r) => setState(() => _reason = r),
-        ),
+        isPublic: _isPublic,
+        reason: _reason,
+        onPublicChanged: (v) => setState(() => _isPublic = v),
+        onReasonChanged: (r) => setState(() => _reason = r),
+      ),
       4 => StepConfirm(
-          direction: _direction,
-          method: _method,
-          value: _value,
-          scope: _scope,
-          categoryNames: _categoryNames,
-          itemIds: _itemIds,
-          startsNow: _startsNow,
-          startsAt: _startsAt,
-          hasEndDate: _hasEndDate,
-          endsAt: _endsAt,
-          isPublic: _isPublic,
-          reason: _reason,
-          items: widget.items,
-        ),
+        direction: _direction,
+        method: _method,
+        value: _value,
+        scope: _scope,
+        categoryNames: _categoryNames,
+        itemIds: _itemIds,
+        startsNow: _startsNow,
+        startsAt: _startsAt,
+        hasEndDate: _hasEndDate,
+        endsAt: _endsAt,
+        isPublic: _isPublic,
+        reason: _reason,
+        items: widget.items,
+      ),
       _ => const SizedBox.shrink(),
     };
   }
@@ -348,10 +353,12 @@ class _PriceChangeWizardPageState extends State<PriceChangeWizardPage> {
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
-        border: Border(top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
+        border: Border(
+          top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
+        ),
       ),
       child: Row(
-        textDirection: TextDirection.ltr,
+        textDirection: Directionality.of(context),
         children: [
           btn.Button(
             onPressed: _onBack,

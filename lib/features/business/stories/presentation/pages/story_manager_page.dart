@@ -9,6 +9,7 @@ import 'package:honak/features/business/stories/presentation/widgets/publish_opt
 import 'package:honak/features/business/stories/presentation/widgets/story_list_item.dart';
 import 'package:honak/features/business/stories/presentation/widgets/story_preview_strip.dart';
 import 'package:honak/features/business/stories/presentation/widgets/story_stats_card.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/shimmer_loading.dart';
@@ -36,7 +37,7 @@ class _StoryManagerPageState extends ConsumerState<StoryManagerPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(AppDirection.backIcon(context)),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(context.l10n.storyManager),

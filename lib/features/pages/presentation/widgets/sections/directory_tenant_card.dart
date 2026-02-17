@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/catalog/domain/entities/item.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 /// Card displaying a single tenant in the directory listing.
@@ -126,7 +127,7 @@ class DirectoryTenantCard extends StatelessWidget {
               ),
               if (_isClaimed)
                 Icon(
-                  Icons.chevron_left,
+                  AppDirection.chevronStartIcon(context),
                   color: context.colorScheme.onSurfaceVariant,
                 ),
             ],

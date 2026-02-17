@@ -7,6 +7,7 @@ import 'package:honak/features/chat/data/chat_info_template_store.dart';
 import 'package:honak/features/chat/domain/entities/chat_info_template_item.dart';
 import 'package:honak/features/chat/domain/entities/power_chat_types.dart';
 import 'package:honak/features/chat/presentation/widgets/ask_info_edit_widgets.dart';
+import 'package:honak/shared/widgets/app_dialog_templates.dart';
 import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/selectable_tile.dart';
 
@@ -60,10 +61,7 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
         height: 200,
         child: Center(child: CircularProgressIndicator()),
       ),
-      error: (e, _) => SizedBox(
-        height: 200,
-        child: Center(child: Text('$e')),
-      ),
+      error: (e, _) => SizedBox(height: 200, child: Center(child: Text('$e'))),
       data: (items) => _isEditMode
           ? _buildEditMode(context, items)
           : _buildSendMode(context, items),
@@ -74,7 +72,10 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
   // Send Mode
   // ═══════════════════════════════════════════════════════════════
 
-  Widget _buildSendMode(BuildContext context, List<ChatInfoTemplateItem> items) {
+  Widget _buildSendMode(
+    BuildContext context,
+    List<ChatInfoTemplateItem> items,
+  ) {
     final validItems = items.where((item) => item.isValid).toList();
     final invalidCount = items.length - validItems.length;
     final filtered = _applySearch(validItems);
@@ -98,11 +99,15 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
                 if (invalidCount > 0)
                   Padding(
                     padding: const EdgeInsetsDirectional.only(
-                        bottom: AppSpacing.sm),
+                      bottom: AppSpacing.sm,
+                    ),
                     child: Row(
                       children: [
-                        const Icon(Icons.info_outline,
-                            size: 14, color: AppColors.error),
+                        const Icon(
+                          Icons.info_outline,
+                          size: 14,
+                          color: AppColors.error,
+                        ),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           '$invalidCount عنصر يحتاج تعديل',
@@ -205,7 +210,11 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
           ),
           Button(
             onPressed: () => Navigator.pop(context),
-            icon: ButtonIcon(Icons.close, size: 20, color: context.colorScheme.onSurfaceVariant),
+            icon: ButtonIcon(
+              Icons.close,
+              size: 20,
+              color: context.colorScheme.onSurfaceVariant,
+            ),
             variant: Variant.text,
             size: ButtonSize.small,
           ),
@@ -219,7 +228,8 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
     final icon = infoItemTypeIcon(item.type);
 
     // Show description, or comma-separated options as fallback for choice items.
-    final descText = item.descriptionAr ??
+    final descText =
+        item.descriptionAr ??
         (item.type == 'choice' && item.optionsAr != null
             ? item.optionsAr!.join('، ')
             : null);
@@ -296,7 +306,7 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
       child: Button(
         onPressed: canSend ? () => _send(context) : null,
         label: 'إرسال',
-        icon: ButtonIcon(Icons.arrow_back),
+        icon: ButtonIcon.backArrow(),
         style: Style.warning,
         size: ButtonSize.large,
         expand: true,
@@ -308,8 +318,9 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
     final items = ref.read(pageInfoTemplatesProvider(_familyKey)).valueOrNull;
     if (items == null || _selectedId == null) return;
 
-    final selectedItem =
-        items.where((item) => item.id == _selectedId).firstOrNull;
+    final selectedItem = items
+        .where((item) => item.id == _selectedId)
+        .firstOrNull;
     if (selectedItem == null) return;
 
     // Validate selected item.
@@ -337,12 +348,13 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
   // ═══════════════════════════════════════════════════════════════
 
   Widget _buildEditMode(
-      BuildContext context, List<ChatInfoTemplateItem> items) {
+    BuildContext context,
+    List<ChatInfoTemplateItem> items,
+  ) {
     final filtered = _applySearch(items);
     final visible = _applyLoadMore(filtered);
     final hasMore = filtered.length > visible.length;
-    final notifier =
-        ref.read(pageInfoTemplatesProvider(_familyKey).notifier);
+    final notifier = ref.read(pageInfoTemplatesProvider(_familyKey).notifier);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -423,23 +435,17 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
     return GestureDetector(
       onTap: () {
         final id = 'tpl_${DateTime.now().millisecondsSinceEpoch}';
-        notifier.addItem(ChatInfoTemplateItem(
-          id: id,
-          labelAr: '',
-          type: 'text',
-        ));
+        notifier.addItem(
+          ChatInfoTemplateItem(id: id, labelAr: '', type: 'text'),
+        );
         // If user had collapsed extra items, expand them to see the new one.
         setState(() => _showAll = true);
       },
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsetsDirectional.symmetric(
-          vertical: AppSpacing.md,
-        ),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: AppSpacing.md),
         decoration: BoxDecoration(
-          border: Border.all(
-            color: AppColors.primary.withValues(alpha: 0.3),
-          ),
+          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -465,29 +471,14 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
     return Center(
       child: GestureDetector(
         onTap: () async {
-          final confirmed = await showDialog<bool>(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: const Text('استعادة الافتراضي؟'),
-              content: const Text(
-                'سيتم إرجاع القائمة للعناصر الافتراضية وحذف أي تعديلات.',
-              ),
-              actions: [
-                Button(
-                  onPressed: () => Navigator.pop(ctx, false),
-                  label: 'إلغاء',
-                  variant: Variant.text,
-                ),
-                Button(
-                  onPressed: () => Navigator.pop(ctx, true),
-                  label: 'استعادة',
-                  variant: Variant.text,
-                  style: Style.danger,
-                ),
-              ],
-            ),
+          final confirmed = await showAppDangerConfirmDialog(
+            context,
+            title: 'استعادة الافتراضي؟',
+            message: 'سيتم إرجاع القائمة للعناصر الافتراضية وحذف أي تعديلات.',
+            confirmLabel: 'استعادة',
+            cancelLabel: 'إلغاء',
           );
-          if (confirmed == true) {
+          if (confirmed) {
             await notifier.resetToDefaults();
           }
         },
@@ -568,17 +559,11 @@ class _AskInfoSheetState extends ConsumerState<AskInfoSheet> {
       onTap: () => setState(() => _showAll = true),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsetsDirectional.symmetric(
-          vertical: AppSpacing.sm,
-        ),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: AppSpacing.sm),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.expand_more,
-              size: 18,
-              color: AppColors.primary,
-            ),
+            Icon(Icons.expand_more, size: 18, color: AppColors.primary),
             const SizedBox(width: AppSpacing.xs),
             Text(
               'عرض المزيد',

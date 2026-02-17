@@ -101,7 +101,7 @@ class DropoffEntryCard extends StatelessWidget {
                       children: [
                         Text(
                           ticket.ticketNumber,
-                          textDirection: TextDirection.ltr,
+                          textDirection: Directionality.of(context),
                           style: context.textTheme.bodySmall?.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
@@ -216,7 +216,7 @@ class DropoffEntryCard extends StatelessWidget {
             ),
             child: Text(
               '#${ticket.ticketNumber}',
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
@@ -416,7 +416,7 @@ class DropoffEntryCard extends StatelessWidget {
                 if (ticket.customerPhone != null)
                   Text(
                     ticket.customerPhone!,
-                    textDirection: TextDirection.ltr,
+                    textDirection: Directionality.of(context),
                     style: TextStyle(
                       fontSize: 10,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,

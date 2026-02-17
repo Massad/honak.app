@@ -852,7 +852,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
                     TextField(
                       controller: _costController,
                       keyboardType: TextInputType.number,
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       decoration: InputDecoration(
                         hintText: context.l10n.bizReqPropCostHint,
                         hintStyle: const TextStyle(fontSize: 13),
@@ -914,7 +914,7 @@ class _AddDamageFormState extends State<_AddDamageForm> {
 
           // Buttons
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               GestureDetector(
                 onTap: widget.onCancel,

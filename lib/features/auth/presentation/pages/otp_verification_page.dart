@@ -10,6 +10,8 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 class OtpVerificationPage extends ConsumerStatefulWidget {
@@ -124,8 +126,9 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surface,
+      useSafeArea: false,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -149,7 +152,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                     ),
                     alignment: Alignment.center,
                     child: Icon(
-                      Icons.arrow_back,
+                      AppDirection.backIcon(context),
                       size: 20,
                       color: context.colorScheme.onSurface,
                     ),
@@ -185,7 +188,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                         color: context.colorScheme.onSurfaceVariant,
                         fontWeight: FontWeight.normal,
                       ),
-                      textDirection: TextDirection.rtl,
+                      textDirection: Directionality.of(context),
                     ),
                     const SizedBox(height: AppSpacing.xxxl),
 
@@ -198,8 +201,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                           color: _focusNode.hasFocus
                               ? AppColors.white
                               : context.colorScheme.surfaceContainerLowest,
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.md),
+                          borderRadius: BorderRadius.circular(AppRadius.md),
                           border: Border.all(
                             color: _focusNode.hasFocus
                                 ? AppColors.primary
@@ -224,12 +226,12 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                           ],
                           decoration: InputDecoration(
                             hintText: '______',
-                            hintStyle:
-                                context.textTheme.headlineMedium?.copyWith(
-                              color: context.colorScheme.onSurfaceVariant,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 16,
-                            ),
+                            hintStyle: context.textTheme.headlineMedium
+                                ?.copyWith(
+                                  color: context.colorScheme.onSurfaceVariant,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 16,
+                                ),
                             border: InputBorder.none,
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: AppSpacing.lg,

@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/availability_data.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/blocked_dates_tab.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/weekly_schedule_tab.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 // ═══════════════════════════════════════════════════════════════════
 // Availability Overlay — full-screen overlay for managing
@@ -110,8 +111,11 @@ class _AvailabilityOverlayState extends State<AvailabilityOverlay> {
                     color: AppColors.surfaceVariant,
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
-                  child: const Icon(Icons.arrow_forward_ios,
-                      size: 14, color: AppColors.textSecondary),
+                  child: Icon(
+                    AppDirection.backIcon(context),
+                    size: 14,
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ),
               const SizedBox(width: AppSpacing.md),

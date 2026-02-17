@@ -183,7 +183,7 @@ class _AddBlockFormState extends State<AddBlockForm> {
 
           // Actions
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Expanded(
                 child: GestureDetector(
@@ -354,7 +354,7 @@ class _AddBlockFormState extends State<AddBlockForm> {
                 size: 14, color: AppColors.textHint),
             const Spacer(),
             Text(label,
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 style: TextStyle(
                     fontSize: 13,
                     color: hasValue

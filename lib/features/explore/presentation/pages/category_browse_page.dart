@@ -9,6 +9,7 @@ import 'package:honak/features/explore/presentation/providers/explore_providers.
 import 'package:honak/features/explore/presentation/widgets/browse_card.dart';
 import 'package:honak/features/explore/presentation/widgets/sort_sheet.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
 class CategoryBrowsePage extends ConsumerStatefulWidget {
@@ -26,8 +27,7 @@ class CategoryBrowsePage extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<CategoryBrowsePage> createState() =>
-      _CategoryBrowsePageState();
+  ConsumerState<CategoryBrowsePage> createState() => _CategoryBrowsePageState();
 }
 
 class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
@@ -55,21 +55,9 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
   Widget build(BuildContext context) {
     final pagesAsync = ref.watch(categoryPagesProvider(widget.categorySlug));
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(widget.categoryName),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Directionality(
-              textDirection: TextDirection.ltr,
-              child: Icon(Icons.arrow_back_ios_new, size: 20),
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ],
-      ),
+    return AppScreen(
+      title: Text(widget.categoryName),
+      showBack: true,
       body: pagesAsync.when(
         loading: () => Padding(
           padding: AppSpacing.screenPadding,
@@ -88,8 +76,7 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
   Widget _buildContent(BuildContext context, List<PageSummary> allPages) {
     final filtered = _applyFilters(allPages);
 
-    final hasProvidedTypes =
-        widget.types != null && widget.types!.isNotEmpty;
+    final hasProvidedTypes = widget.types != null && widget.types!.isNotEmpty;
 
     // Build type counts from all pages (not filtered) — fallback path
     // Use businessTypeId as key so selectedTypeId can match
@@ -128,8 +115,7 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
                   itemCount: filtered.length,
                   separatorBuilder: (_, __) =>
                       const SizedBox(height: AppSpacing.md),
-                  itemBuilder: (_, index) =>
-                      BrowseCard(page: filtered[index]),
+                  itemBuilder: (_, index) => BrowseCard(page: filtered[index]),
                 ),
         ),
       ],
@@ -142,9 +128,11 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
     // Type filter — always use businessTypeId for consistency
     if (_activeType != 'الكل') {
       result = result
-          .where((p) =>
-              p.businessTypeId == _activeType ||
-              p.businessTypeName == _activeType)
+          .where(
+            (p) =>
+                p.businessTypeId == _activeType ||
+                p.businessTypeName == _activeType,
+          )
           .toList();
     }
 
@@ -152,18 +140,22 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
     if (_searchQuery.isNotEmpty) {
       final q = _searchQuery.toLowerCase();
       result = result
-          .where((p) =>
-              p.name.toLowerCase().contains(q) ||
-              (p.businessTypeName?.toLowerCase().contains(q) ?? false) ||
-              (p.subCategory?.toLowerCase().contains(q) ?? false))
+          .where(
+            (p) =>
+                p.name.toLowerCase().contains(q) ||
+                (p.businessTypeName?.toLowerCase().contains(q) ?? false) ||
+                (p.subCategory?.toLowerCase().contains(q) ?? false),
+          )
           .toList();
     }
 
     // Sort
     switch (_sortBy) {
       case CategorySortBy.nearest:
-        result.sort((a, b) => _parseDistance(a.distance)
-            .compareTo(_parseDistance(b.distance)));
+        result.sort(
+          (a, b) =>
+              _parseDistance(a.distance).compareTo(_parseDistance(b.distance)),
+        );
       case CategorySortBy.popular:
         result.sort((a, b) => b.followersCount.compareTo(a.followersCount));
       case CategorySortBy.alphabetical:
@@ -187,7 +179,9 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
+        border: Border(
+          bottom: BorderSide(color: context.colorScheme.outlineVariant),
+        ),
       ),
       child: TextField(
         controller: _searchController,
@@ -204,7 +198,11 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
           ),
           suffixIcon: _searchQuery.isNotEmpty
               ? IconButton(
-                  icon: Icon(Icons.close, size: 14, color: context.colorScheme.outline),
+                  icon: Icon(
+                    Icons.close,
+                    size: 14,
+                    color: context.colorScheme.outline,
+                  ),
                   onPressed: () {
                     _searchController.clear();
                     setState(() => _searchQuery = '');
@@ -235,9 +233,10 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
   }
 
   Widget _buildFallbackTypeChips(
-      BuildContext context,
-      Map<String, ({String name, int count})> typeCounts,
-      int totalCount) {
+    BuildContext context,
+    Map<String, ({String name, int count})> typeCounts,
+    int totalCount,
+  ) {
     final sortedTypes = typeCounts.entries.toList()
       ..sort((a, b) => b.value.count.compareTo(a.value.count));
 
@@ -248,7 +247,9 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
+        border: Border(
+          bottom: BorderSide(color: context.colorScheme.outlineVariant),
+        ),
       ),
       child: SizedBox(
         height: 30,
@@ -261,12 +262,14 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
               isActive: _activeType == 'الكل',
               onTap: () => setState(() => _activeType = 'الكل'),
             ),
-            ...sortedTypes.map((e) => _TypeChip(
-                  label: e.value.name,
-                  count: e.value.count,
-                  isActive: _activeType == e.key,
-                  onTap: () => setState(() => _activeType = e.key),
-                )),
+            ...sortedTypes.map(
+              (e) => _TypeChip(
+                label: e.value.name,
+                count: e.value.count,
+                isActive: _activeType == e.key,
+                onTap: () => setState(() => _activeType = e.key),
+              ),
+            ),
           ],
         ),
       ),
@@ -274,7 +277,9 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
   }
 
   Widget _buildProvidedTypeChips(
-      BuildContext context, List<PageSummary> allPages) {
+    BuildContext context,
+    List<PageSummary> allPages,
+  ) {
     final typeList = widget.types!;
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -283,7 +288,9 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        border: Border(bottom: BorderSide(color: context.colorScheme.outlineVariant)),
+        border: Border(
+          bottom: BorderSide(color: context.colorScheme.outlineVariant),
+        ),
       ),
       child: SizedBox(
         height: 30,
@@ -297,8 +304,9 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
               onTap: () => setState(() => _activeType = 'الكل'),
             ),
             ...typeList.map((type) {
-              final count =
-                  allPages.where((p) => p.businessTypeId == type.id).length;
+              final count = allPages
+                  .where((p) => p.businessTypeId == type.id)
+                  .length;
               return _TypeChip(
                 label: type.name,
                 count: count,
@@ -313,7 +321,10 @@ class _CategoryBrowsePageState extends ConsumerState<CategoryBrowsePage> {
   }
 
   Widget _buildResultBar(
-      BuildContext context, int filteredCount, int totalCount) {
+    BuildContext context,
+    int filteredCount,
+    int totalCount,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,

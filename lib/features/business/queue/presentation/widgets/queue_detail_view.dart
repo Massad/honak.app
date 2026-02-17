@@ -386,7 +386,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                           ),
                           const SizedBox(width: 4),
                           Directionality(
-                            textDirection: TextDirection.ltr,
+                            textDirection: Directionality.of(context),
                             child: Text(
                               entry.customerPhone!,
                               style: TextStyle(
@@ -519,7 +519,7 @@ class _QueueDetailViewState extends State<QueueDetailView> {
                   if (entry.plateNumber != null) ...[
                     const SizedBox(height: 2),
                     Directionality(
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       child: Text(
                         entry.plateNumber!,
                         style: TextStyle(

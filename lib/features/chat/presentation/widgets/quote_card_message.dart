@@ -333,7 +333,7 @@ class _QuoteCardMessageState extends State<QuoteCardMessage> {
         bottom: AppSpacing.sm,
       ),
       child: Row(
-        textDirection: TextDirection.ltr,
+        textDirection: Directionality.of(context),
         children: [
           Expanded(
             child: Button(

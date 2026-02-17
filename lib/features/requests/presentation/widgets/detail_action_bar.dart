@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
@@ -155,7 +156,7 @@ class DetailBusinessCard extends StatelessWidget {
             ),
           ),
           Icon(
-            Icons.chevron_right,
+            AppDirection.chevronEndIcon(context),
             size: 20,
             color: cs.onSurfaceVariant,
           ),

@@ -264,7 +264,7 @@ class _MemberHeader extends StatelessWidget {
               ),
               if (phone != null)
                 Directionality(
-                  textDirection: TextDirection.ltr,
+                  textDirection: Directionality.of(context),
                   child: Text(
                     phone!,
                     style: TextStyle(

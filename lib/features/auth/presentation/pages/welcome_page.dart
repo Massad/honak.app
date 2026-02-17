@@ -12,6 +12,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/api/mock_api_client.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class _DemoAccount {
@@ -79,13 +80,15 @@ const _demoAccounts = [
 
 /// Loads business page names for demo accounts from user fixtures.
 /// Single source of truth — same fixtures used by MockApiClient on login.
-final _demoAccountPagesProvider =
-    FutureProvider<Map<String, List<String>>>((ref) async {
+final _demoAccountPagesProvider = FutureProvider<Map<String, List<String>>>((
+  ref,
+) async {
   final result = <String, List<String>>{};
   for (final entry in MockApiClient.phoneToUserFixture.entries) {
     try {
-      final json =
-          await rootBundle.loadString('assets/api/${entry.value}.json');
+      final json = await rootBundle.loadString(
+        'assets/api/${entry.value}.json',
+      );
       final data = jsonDecode(json) as Map<String, dynamic>;
       final userData = data['data'] as Map<String, dynamic>;
       final pages =
@@ -121,8 +124,9 @@ class WelcomePage extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     final pagesMap = ref.watch(_demoAccountPagesProvider).valueOrNull ?? {};
 
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surface,
+      useSafeArea: false,
       body: Stack(
         children: [
           // Background blob top-left
@@ -255,16 +259,14 @@ class WelcomePage extends ConsumerWidget {
                         // Account cards
                         ..._demoAccounts.map(
                           (account) => Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: AppSpacing.sm),
+                            padding: const EdgeInsets.only(
+                              bottom: AppSpacing.sm,
+                            ),
                             child: _DemoAccountCard(
                               account: account,
                               businessNames:
                                   pagesMap[account.phone] ?? const [],
-                              onTap: () => _loginWithDemoAccount(
-                                ref,
-                                account,
-                              ),
+                              onTap: () => _loginWithDemoAccount(ref, account),
                             ),
                           ),
                         ),
@@ -386,10 +388,7 @@ class _DashedBorderPainter extends CustomPainter {
       double distance = 0;
       while (distance < metric.length) {
         final end = (distance + dashWidth).clamp(0, metric.length).toDouble();
-        dashPath.addPath(
-          metric.extractPath(distance, end),
-          Offset.zero,
-        );
+        dashPath.addPath(metric.extractPath(distance, end), Offset.zero);
         distance += dashWidth + dashSpace;
       }
     }
@@ -428,8 +427,7 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
   Widget build(BuildContext context) {
     final account = widget.account;
     final names = widget.businessNames;
-    final visibleNames =
-        _isExpanded ? names : names.take(_maxVisible).toList();
+    final visibleNames = _isExpanded ? names : names.take(_maxVisible).toList();
     final hasMore = names.length > _maxVisible && !_isExpanded;
     final remaining = names.length - _maxVisible;
 
@@ -583,8 +581,7 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
                         ...visibleNames.map((biz) => _BusinessPill(name: biz)),
                         if (hasMore)
                           GestureDetector(
-                            onTap: () =>
-                                setState(() => _isExpanded = true),
+                            onTap: () => setState(() => _isExpanded = true),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: AppSpacing.sm,
@@ -592,8 +589,9 @@ class _DemoAccountCardState extends State<_DemoAccountCard> {
                               ),
                               decoration: BoxDecoration(
                                 color: context.colorScheme.surfaceContainerLow,
-                                borderRadius:
-                                    BorderRadius.circular(AppRadius.xs),
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.xs,
+                                ),
                               ),
                               child: Text(
                                 '+$remaining أخرى',
@@ -635,19 +633,9 @@ class _BusinessPill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            Icons.storefront,
-            size: 9,
-            color: AppColors.primary,
-          ),
+          Icon(Icons.storefront, size: 9, color: AppColors.primary),
           const SizedBox(width: AppSpacing.xs),
-          Text(
-            name,
-            style: TextStyle(
-              fontSize: 10,
-              color: AppColors.primary,
-            ),
-          ),
+          Text(name, style: TextStyle(fontSize: 10, color: AppColors.primary)),
         ],
       ),
     );

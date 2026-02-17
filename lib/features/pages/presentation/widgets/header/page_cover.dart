@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Cover image with gradient overlay and glass-morphic action buttons.
 class PageCover extends StatelessWidget {
@@ -50,22 +51,19 @@ class PageCover extends StatelessWidget {
             bottom: false,
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _GlassButton(
-                      icon: Icons.arrow_back_ios_new,
-                      onTap: onBack,
-                    ),
-                    _GlassButton(
-                      icon: Icons.share_outlined,
-                      onTap: onShare,
-                    ),
-                  ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _GlassButton(
+                    icon: AppDirection.backIcon(context),
+                    onTap: onBack,
+                  ),
+                  _GlassButton(
+                    icon: Icons.share_outlined,
+                    onTap: onShare,
+                  ),
+                ],
                 ),
-              ),
             ),
           ),
         ],

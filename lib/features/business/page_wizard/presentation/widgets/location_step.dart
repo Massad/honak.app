@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_wizard/presentation/providers/wizard_provider.dart';
@@ -20,8 +19,9 @@ class _LocationStepState extends ConsumerState<LocationStep> {
   @override
   void initState() {
     super.initState();
-    _addressController =
-        TextEditingController(text: ref.read(wizardProvider).address);
+    _addressController = TextEditingController(
+      text: ref.read(wizardProvider).address,
+    );
   }
 
   @override
@@ -60,11 +60,18 @@ class _LocationStepState extends ConsumerState<LocationStep> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.place, size: 36, color: context.colorScheme.onSurfaceVariant),
+                Icon(
+                  Icons.place,
+                  size: 36,
+                  color: context.colorScheme.onSurfaceVariant,
+                ),
                 SizedBox(height: AppSpacing.sm),
                 Text(
                   'الخريطة ستظهر هنا',
-                  style: TextStyle(color: context.colorScheme.onSurfaceVariant, fontSize: 13),
+                  style: TextStyle(
+                    color: context.colorScheme.onSurfaceVariant,
+                    fontSize: 13,
+                  ),
                 ),
               ],
             ),
@@ -76,11 +83,15 @@ class _LocationStepState extends ConsumerState<LocationStep> {
             onPressed: state.isOnlineOnly
                 ? null
                 : () {
-                    _addressController.text = '\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646';
-                    notifier.setAddress('\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646');
+                    _addressController.text =
+                        '\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646';
+                    notifier.setAddress(
+                      '\u0639\u0628\u062f\u0648\u0646\u060c \u0639\u0645\u0651\u0627\u0646',
+                    );
                   },
             icon: const btn.ButtonIcon(Icons.my_location, size: 18),
-            label: '\u0627\u0633\u062a\u062e\u062f\u0645 \u0645\u0648\u0642\u0639\u064a \u0627\u0644\u062d\u0627\u0644\u064a',
+            label:
+                '\u0627\u0633\u062a\u062e\u062f\u0645 \u0645\u0648\u0642\u0639\u064a \u0627\u0644\u062d\u0627\u0644\u064a',
             variant: btn.Variant.outlined,
             expand: true,
           ),
@@ -105,22 +116,17 @@ class _LocationStepState extends ConsumerState<LocationStep> {
 
           // Online-only option
           Center(
-            child: TextButton(
+            child: btn.Button(
               onPressed: () {
                 final newValue = !state.isOnlineOnly;
                 notifier.setOnlineOnly(newValue);
                 if (newValue) _addressController.clear();
               },
-              child: Text(
-                state.isOnlineOnly
-                    ? '\u2714 نشاط عبر الإنترنت فقط'
-                    : 'تخطي \u2014 نشاط عبر الإنترنت فقط',
-                style: TextStyle(
-                  color: state.isOnlineOnly
-                      ? AppColors.primary
-                      : context.colorScheme.onSurfaceVariant,
-                ),
-              ),
+              label: state.isOnlineOnly
+                  ? '\u2714 نشاط عبر الإنترنت فقط'
+                  : 'تخطي \u2014 نشاط عبر الإنترنت فقط',
+              style: state.isOnlineOnly ? btn.Style.primary : btn.Style.info,
+              variant: btn.Variant.text,
             ),
           ),
         ],

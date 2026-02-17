@@ -35,7 +35,7 @@ class QuoteDescriptionSection extends StatelessWidget {
         TextFormField(
           controller: controller,
           maxLines: 5,
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           onChanged: (_) => onChanged(),
           decoration: InputDecoration(
             hintText:

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class GuestWelcomeBanner extends StatelessWidget {
   const GuestWelcomeBanner({super.key});
@@ -101,7 +102,7 @@ class GuestWelcomeBanner extends StatelessWidget {
                           ),
                           SizedBox(width: AppSpacing.xs),
                           Icon(
-                            isRtl ? Icons.arrow_back : Icons.arrow_forward,
+                            AppDirection.forwardIcon(context),
                             size: 12,
                             color: Colors.white,
                           ),

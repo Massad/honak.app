@@ -8,6 +8,7 @@ import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/button.dart';
 
 import 'account_tab_cards.dart';
@@ -194,8 +195,8 @@ class AccountTab extends ConsumerWidget {
   }
 
   void _showLogoutConfirmation(BuildContext context, WidgetRef ref) {
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (ctx) => AlertDialog(
         title: const Align(
           alignment: AlignmentDirectional.centerEnd,
@@ -207,7 +208,7 @@ class AccountTab extends ConsumerWidget {
         ),
         actions: [
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Button(
                 onPressed: () => Navigator.pop(ctx),

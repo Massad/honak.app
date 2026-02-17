@@ -41,8 +41,7 @@ class BusinessManagePage extends ConsumerStatefulWidget {
   const BusinessManagePage({super.key});
 
   @override
-  ConsumerState<BusinessManagePage> createState() =>
-      _BusinessManagePageState();
+  ConsumerState<BusinessManagePage> createState() => _BusinessManagePageState();
 }
 
 class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
@@ -169,21 +168,24 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
       _filterStatus != 'all';
 
   int get _activeFilterCount =>
-      (_filterCategoryId.isNotEmpty ? 1 : 0) +
-      (_filterStatus != 'all' ? 1 : 0);
+      (_filterCategoryId.isNotEmpty ? 1 : 0) + (_filterStatus != 'all' ? 1 : 0);
 
   List<ActiveFilter> _buildActiveFilters(List<BizCategory> categories) {
     final filters = <ActiveFilter>[];
     if (_filterCategoryId.isNotEmpty) {
-      final name =
-          categories.where((c) => c.id == _filterCategoryId).firstOrNull?.name;
+      final name = categories
+          .where((c) => c.id == _filterCategoryId)
+          .firstOrNull
+          ?.name;
       if (name != null) {
-        filters.add(ActiveFilter(
-          key: 'category',
-          label: name,
-          bgColor: AppColors.primary.withValues(alpha: 0.08),
-          textColor: AppColors.primary,
-        ));
+        filters.add(
+          ActiveFilter(
+            key: 'category',
+            label: name,
+            bgColor: AppColors.primary.withValues(alpha: 0.08),
+            textColor: AppColors.primary,
+          ),
+        );
       }
     }
     if (_filterStatus != 'all') {
@@ -193,12 +195,14 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
         'hidden' => context.l10n.catalogStatusHidden,
         _ => _filterStatus,
       };
-      filters.add(ActiveFilter(
-        key: 'status',
-        label: label,
-        bgColor: Colors.orange.shade50,
-        textColor: Colors.orange.shade700,
-      ));
+      filters.add(
+        ActiveFilter(
+          key: 'status',
+          label: label,
+          bgColor: Colors.orange.shade50,
+          textColor: Colors.orange.shade700,
+        ),
+      );
     }
     return filters;
   }
@@ -224,8 +228,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
     var result = items;
 
     if (_filterCategoryId.isNotEmpty) {
-      result =
-          result.where((i) => i.categoryId == _filterCategoryId).toList();
+      result = result.where((i) => i.categoryId == _filterCategoryId).toList();
     }
 
     if (_filterStatus == 'active') {
@@ -270,34 +273,27 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
     );
   }
 
-  void _openPriceHistory(
-    PriceChange? active,
-    List<PriceChange> history,
-  ) {
+  void _openPriceHistory(PriceChange? active, List<PriceChange> history) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => Scaffold(
-          body: PriceChangeHistory(
-            activePriceChange: active,
-            history: history,
-            onClose: () => Navigator.of(context).pop(),
-            onStopActive: () {
-              ref.read(priceChangeProvider.notifier).stopActive();
-              Navigator.of(context).pop();
-              _showToast(context.l10n.catalogPriceChangeStopped);
-            },
-            onReuse: (change) {
-              Navigator.of(context).pop();
-              final pageId =
-                  ref.read(businessContextProvider)?.page.id ?? '';
-              final items =
-                  ref.read(bizItemsProvider(pageId)).valueOrNull ?? [];
-              final config = ref.read(businessContextProvider)?.config;
-              final label =
-                  config?.itemManagement?.itemsLabelAr ?? context.l10n.pcAllItems;
-              _openPriceWizard(items, label);
-            },
-          ),
+        builder: (_) => PriceChangeHistory(
+          activePriceChange: active,
+          history: history,
+          onClose: () => Navigator.of(context).pop(),
+          onStopActive: () {
+            ref.read(priceChangeProvider.notifier).stopActive();
+            Navigator.of(context).pop();
+            _showToast(context.l10n.catalogPriceChangeStopped);
+          },
+          onReuse: (change) {
+            Navigator.of(context).pop();
+            final pageId = ref.read(businessContextProvider)?.page.id ?? '';
+            final items = ref.read(bizItemsProvider(pageId)).valueOrNull ?? [];
+            final config = ref.read(businessContextProvider)?.config;
+            final label =
+                config?.itemManagement?.itemsLabelAr ?? context.l10n.pcAllItems;
+            _openPriceWizard(items, label);
+          },
         ),
       ),
     );
@@ -366,19 +362,24 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
     List<BizCategory> categories,
   ) {
     return items
-        .map((item) => Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
-              child: ItemCard(
-                item: item,
-                config: config,
-                isSelected: _selected.contains(item.id),
-                selectModeActive: _mode == _ManageMode.select,
-                onTap: () =>
-                    _handleItemTap(item, config, pageId, categories),
-                onLongPress: () => _handleLongPress(item.id),
-              ),
-            ))
+        .map(
+          (item) => Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.lg,
+              0,
+              AppSpacing.lg,
+              AppSpacing.sm,
+            ),
+            child: ItemCard(
+              item: item,
+              config: config,
+              isSelected: _selected.contains(item.id),
+              selectModeActive: _mode == _ManageMode.select,
+              onTap: () => _handleItemTap(item, config, pageId, categories),
+              onLongPress: () => _handleLongPress(item.id),
+            ),
+          ),
+        )
         .toList();
   }
 
@@ -420,33 +421,45 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
 
       if (sortedKeys.length > 1 && catName != null) {
         if (i > 0) widgets.add(const SizedBox(height: AppSpacing.lg));
-        widgets.add(Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(
-            AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
-          child: Text(
-            catName,
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+        widgets.add(
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.lg,
+              0,
+              AppSpacing.lg,
+              AppSpacing.sm,
+            ),
+            child: Text(
+              catName,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
-        ));
+        );
       }
 
       for (final item in catItems) {
-        widgets.add(Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(
-            AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
-          child: ItemCard(
-            item: item,
-            config: config,
-            isSelected: _selected.contains(item.id),
-            selectModeActive: _mode == _ManageMode.select,
-            onTap: () => _handleItemTap(item, config, pageId, categories),
-            onLongPress: () => _handleLongPress(item.id),
+        widgets.add(
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.lg,
+              0,
+              AppSpacing.lg,
+              AppSpacing.sm,
+            ),
+            child: ItemCard(
+              item: item,
+              config: config,
+              isSelected: _selected.contains(item.id),
+              selectModeActive: _mode == _ManageMode.select,
+              onTap: () => _handleItemTap(item, config, pageId, categories),
+              onLongPress: () => _handleLongPress(item.id),
+            ),
           ),
-        ));
+        );
       }
     }
     return widgets;
@@ -459,14 +472,20 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
       // Done button
       Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(
-          AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+          AppSpacing.lg,
+          AppSpacing.sm,
+          AppSpacing.lg,
+          AppSpacing.sm,
+        ),
         child: Row(
           children: [
             GestureDetector(
               onTap: _exitReorderMode,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(8),
@@ -478,10 +497,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                     const SizedBox(width: 4),
                     Text(
                       context.l10n.done,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: AppColors.primary,
-                      ),
+                      style: TextStyle(fontSize: 11, color: AppColors.primary),
                     ),
                   ],
                 ),
@@ -493,14 +509,19 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
       // Info banner
       Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(
-          AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.md),
+          AppSpacing.lg,
+          0,
+          AppSpacing.lg,
+          AppSpacing.md,
+        ),
         child: Container(
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
             color: AppColors.primary.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-                color: AppColors.primary.withValues(alpha: 0.15)),
+              color: AppColors.primary.withValues(alpha: 0.15),
+            ),
           ),
           child: Text(
             context.l10n.catalogReorderInfo,
@@ -513,13 +534,19 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
         final item = _reorderItems[index];
         return Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(
-            AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
+            AppSpacing.lg,
+            0,
+            AppSpacing.lg,
+            AppSpacing.sm,
+          ),
           child: Container(
             padding: const EdgeInsets.all(AppSpacing.sm),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.03),
@@ -549,7 +576,11 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                Icon(Icons.drag_handle, size: 16, color: Theme.of(context).colorScheme.outline),
+                Icon(
+                  Icons.drag_handle,
+                  size: 16,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Column(
@@ -569,7 +600,9 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                           item.categoryName!,
                           style: TextStyle(
                             fontSize: 10,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                         ),
                     ],
@@ -613,8 +646,9 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
     final config = bizContext.config;
     final itemConfig = config?.itemManagement;
     final int clampedTab = _activeTab.clamp(0, max(manageTabs.length - 1, 0));
-    final activeTabId =
-        manageTabs.isNotEmpty ? manageTabs[clampedTab].id : 'items';
+    final activeTabId = manageTabs.isNotEmpty
+        ? manageTabs[clampedTab].id
+        : 'items';
     final label = manageTabs.isNotEmpty
         ? manageTabs[clampedTab].labelAr
         : bizContext.manageTabLabel;
@@ -664,7 +698,8 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                 data: (items) {
                   final categories = categoriesAsync.valueOrNull ?? [];
                   final filtered = _applyFilters(items);
-                  final addLabel = itemConfig?.addLabelAr ?? '${context.l10n.add} $label';
+                  final addLabel =
+                      itemConfig?.addLabelAr ?? '${context.l10n.add} $label';
                   final itemsLabel = itemConfig?.itemsLabelAr ?? label;
                   final itemLabel = itemConfig?.itemLabelAr ?? label;
 
@@ -673,8 +708,10 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                     return _buildReorderItems(itemConfig);
                   }
 
-                  final visible =
-                      filtered.sublist(0, min(_visibleCount, filtered.length));
+                  final visible = filtered.sublist(
+                    0,
+                    min(_visibleCount, filtered.length),
+                  );
                   final remaining = filtered.length - visible.length;
 
                   return [
@@ -698,10 +735,8 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         hasStock: items.any((i) => i.stock != null),
                         onReorder: () => _enterReorderMode(items),
                         onSelect: _enterSelectMode,
-                        onStockManager: () => showStockManagerSheet(
-                          context,
-                          pageId: pageId,
-                        ),
+                        onStockManager: () =>
+                            showStockManagerSheet(context, pageId: pageId),
                         onExitReorder: _exitReorderMode,
                         onToggleAll: () => _toggleAll(items),
                         allSelected: _selected.length == items.length,
@@ -709,7 +744,9 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         onManageCategories: () => openCategoryManager(
                           context,
                           categories: categories,
-                          itemLabelAr: itemConfig?.itemLabelAr ?? context.l10n.catalogSelectedItem,
+                          itemLabelAr:
+                              itemConfig?.itemLabelAr ??
+                              context.l10n.catalogSelectedItem,
                           onChanged: (_) {},
                         ),
                       ),
@@ -750,8 +787,9 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         child: ActiveFilterStrip(
                           filters: _buildActiveFilters(categories),
                           onRemove: _removeFilter,
-                          onClearAll:
-                              _activeFilterCount > 1 ? _clearAllFilters : null,
+                          onClearAll: _activeFilterCount > 1
+                              ? _clearAllFilters
+                              : null,
                         ),
                       ),
 
@@ -759,14 +797,20 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                     if (_isFiltering)
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                          AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
+                          AppSpacing.lg,
+                          0,
+                          AppSpacing.lg,
+                          AppSpacing.sm,
+                        ),
                         child: Text(
                           filtered.length == items.length
                               ? '${items.length} $itemLabel'
                               : '${filtered.length} من ${items.length} $itemLabel',
                           style: TextStyle(
                             fontSize: 11,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -791,7 +835,8 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         categories: categories,
                         config: itemConfig,
                         pageId: pageId,
-                        grouped: (config?.itemManagement?.hasCategory ?? false) &&
+                        grouped:
+                            (config?.itemManagement?.hasCategory ?? false) &&
                             categories.isNotEmpty,
                       ),
                       // Load more
@@ -822,14 +867,16 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
               onDelete: _applyMassDelete,
               onOpenDiscount: itemConfig?.canDiscount == true
                   ? () => showMassDiscountSheet(
-                        context,
-                        selectedCount: _selected.length,
-                        itemLabelAr: itemConfig!.itemLabelAr,
-                        onApply: (percent) {
-                          _exitSelectMode();
-                          _showToast(context.l10n.catalogDiscountApplied(percent));
-                        },
-                      )
+                      context,
+                      selectedCount: _selected.length,
+                      itemLabelAr: itemConfig!.itemLabelAr,
+                      onApply: (percent) {
+                        _exitSelectMode();
+                        _showToast(
+                          context.l10n.catalogDiscountApplied(percent),
+                        );
+                      },
+                    )
                   : null,
               onOpenCategory: itemConfig?.hasCategory == true
                   ? () {
@@ -839,8 +886,7 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                   : null,
               onOpenTeam: itemConfig?.providerAssignment == true
                   ? () {
-                      final members =
-                          ref.read(teamProvider).valueOrNull ?? [];
+                      final members = ref.read(teamProvider).valueOrNull ?? [];
                       if (members.isEmpty) {
                         _showToast(context.l10n.catalogNoTeamMembers);
                         return;
@@ -853,7 +899,10 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
                         onApply: (teamIds) {
                           _exitSelectMode();
                           _showToast(
-                            context.l10n.catalogTeamAssigned(teamIds.length, _selected.length),
+                            context.l10n.catalogTeamAssigned(
+                              teamIds.length,
+                              _selected.length,
+                            ),
                           );
                         },
                       );
@@ -872,10 +921,13 @@ class _BusinessManagePageState extends ConsumerState<BusinessManagePage> {
 
 class _PriceChangeBannerWrapper extends ConsumerWidget {
   final void Function(
-          List<BizItem> items, String label, PriceChange? editChange)
-      onOpenWizard;
+    List<BizItem> items,
+    String label,
+    PriceChange? editChange,
+  )
+  onOpenWizard;
   final void Function(PriceChange? active, List<PriceChange> history)
-      onOpenHistory;
+  onOpenHistory;
 
   const _PriceChangeBannerWrapper({
     required this.onOpenWizard,
@@ -890,7 +942,8 @@ class _PriceChangeBannerWrapper extends ConsumerWidget {
 
     final pageId = bizContext.page.id;
     final config = bizContext.config;
-    final itemsLabel = config?.itemManagement?.itemsLabelAr ?? context.l10n.pcAllItems;
+    final itemsLabel =
+        config?.itemManagement?.itemsLabelAr ?? context.l10n.pcAllItems;
 
     return pcAsync.when(
       loading: () => const SizedBox.shrink(),
@@ -900,13 +953,11 @@ class _PriceChangeBannerWrapper extends ConsumerWidget {
           activePriceChange: pcState.active,
           historyCount: pcState.history.length,
           onCreateNew: () {
-            final items =
-                ref.read(bizItemsProvider(pageId)).valueOrNull ?? [];
+            final items = ref.read(bizItemsProvider(pageId)).valueOrNull ?? [];
             onOpenWizard(items, itemsLabel, null);
           },
           onEdit: () {
-            final items =
-                ref.read(bizItemsProvider(pageId)).valueOrNull ?? [];
+            final items = ref.read(bizItemsProvider(pageId)).valueOrNull ?? [];
             onOpenWizard(items, itemsLabel, pcState.active);
           },
           onStop: () {
@@ -918,8 +969,7 @@ class _PriceChangeBannerWrapper extends ConsumerWidget {
               ),
             );
           },
-          onViewHistory: () =>
-              onOpenHistory(pcState.active, pcState.history),
+          onViewHistory: () => onOpenHistory(pcState.active, pcState.history),
         );
       },
     );
@@ -945,28 +995,39 @@ class _ManageTabStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.xs),
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.xs,
+      ),
       child: Row(
         children: List.generate(tabs.length, (i) {
           final isActive = i == activeIndex;
           return Padding(
-            padding:
-                EdgeInsetsDirectional.only(start: i > 0 ? AppSpacing.sm : 0),
+            padding: EdgeInsetsDirectional.only(
+              start: i > 0 ? AppSpacing.sm : 0,
+            ),
             child: GestureDetector(
               onTap: () => onTabChanged(i),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 7,
+                ),
                 decoration: BoxDecoration(
-                  color: isActive ? AppColors.primary : Theme.of(context).colorScheme.surfaceContainerLow,
+                  color: isActive
+                      ? AppColors.primary
+                      : Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   tabs[i].labelAr,
                   style: TextStyle(
                     fontSize: 12,
-                    color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: isActive
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                     fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
                   ),
                 ),
@@ -1002,26 +1063,33 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+        AppSpacing.lg,
+        AppSpacing.sm,
+        AppSpacing.lg,
+        AppSpacing.sm,
+      ),
       child: Row(
         children: [
           Text(
             label,
-            style: context.textTheme.titleSmall
-                ?.copyWith(fontWeight: FontWeight.w600),
+            style: context.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
           ),
           if (count > 0) ...[
             const SizedBox(width: AppSpacing.sm),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
                 '$count',
-                style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ),
           ],
@@ -1030,8 +1098,10 @@ class _SectionHeader extends StatelessWidget {
             GestureDetector(
               onTap: onAdd,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(8),
@@ -1098,7 +1168,11 @@ class _Toolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.md),
+        AppSpacing.lg,
+        0,
+        AppSpacing.lg,
+        AppSpacing.md,
+      ),
       child: switch (mode) {
         _ManageMode.normal => _buildNormalToolbar(context),
         _ManageMode.select => _buildSelectToolbar(context),
@@ -1142,7 +1216,9 @@ class _Toolbar extends StatelessWidget {
                 Text(
                   context.l10n.catalogCategoriesCount(categoryCount),
                   style: const TextStyle(
-                      fontSize: 10, color: AppColors.primary),
+                    fontSize: 10,
+                    color: AppColors.primary,
+                  ),
                 ),
               ],
             ),
@@ -1155,10 +1231,10 @@ class _Toolbar extends StatelessWidget {
     return Row(
       children: [
         _ToolbarChip(
-          label: allSelected ? context.l10n.catalogDeselectAll : context.l10n.catalogSelectAll,
-          icon: allSelected
-              ? Icons.check_box
-              : Icons.check_box_outline_blank,
+          label: allSelected
+              ? context.l10n.catalogDeselectAll
+              : context.l10n.catalogSelectAll,
+          icon: allSelected ? Icons.check_box : Icons.check_box_outline_blank,
           onTap: onToggleAll,
           active: true,
         ),
@@ -1171,8 +1247,7 @@ class _Toolbar extends StatelessWidget {
         if (selectedCount > 0) ...[
           const SizedBox(width: 6),
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(12),
@@ -1238,15 +1313,21 @@ class _ToolbarChip extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon,
-                size: 11,
-                color: active ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant),
+            Icon(
+              icon,
+              size: 11,
+              color: active
+                  ? AppColors.primary
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
             const SizedBox(width: 4),
             Text(
               label,
               style: TextStyle(
                 fontSize: 11,
-                color: active ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                color: active
+                    ? AppColors.primary
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -1286,7 +1367,9 @@ class _ArrowButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 14,
-          color: enabled ? AppColors.primary : Theme.of(context).colorScheme.outlineVariant,
+          color: enabled
+              ? AppColors.primary
+              : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
     );
@@ -1312,7 +1395,9 @@ class _EmptyItemState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.xxl, vertical: AppSpacing.xxxl),
+        horizontal: AppSpacing.xxl,
+        vertical: AppSpacing.xxxl,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1340,7 +1425,10 @@ class _EmptyItemState extends StatelessWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             context.l10n.catalogAddItemsHint(label),
-            style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: AppSpacing.xl),
           Material(
@@ -1351,7 +1439,9 @@ class _EmptyItemState extends StatelessWidget {
               onTap: onAdd,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xl, vertical: AppSpacing.md),
+                  horizontal: AppSpacing.xl,
+                  vertical: AppSpacing.md,
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -1380,10 +1470,7 @@ class _FilteredEmptyState extends StatelessWidget {
   final String query;
   final VoidCallback onClear;
 
-  const _FilteredEmptyState({
-    required this.query,
-    required this.onClear,
-  });
+  const _FilteredEmptyState({required this.query, required this.onClear});
 
   @override
   Widget build(BuildContext context) {
@@ -1402,7 +1489,10 @@ class _FilteredEmptyState extends StatelessWidget {
             query.isNotEmpty
                 ? context.l10n.catalogNoResultsFor(query)
                 : context.l10n.catalogNoFilterResults,
-            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 14,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: AppSpacing.md),
           GestureDetector(
@@ -1426,10 +1516,7 @@ class _ErrorState extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
 
-  const _ErrorState({
-    required this.message,
-    required this.onRetry,
-  });
+  const _ErrorState({required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -1446,8 +1533,9 @@ class _ErrorState extends StatelessWidget {
           const SizedBox(height: AppSpacing.lg),
           Text(
             message,
-            style: context.textTheme.bodyMedium
-                ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: context.textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: AppSpacing.lg),
           btn.Button(

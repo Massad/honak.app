@@ -29,7 +29,7 @@ class CompactCta extends StatelessWidget {
       return btn.Button(
         onPressed: onPressed,
         label: label,
-        icon: const btn.ButtonIcon(Icons.arrow_forward),
+        icon: btn.ButtonIcon.forwardArrow(),
         variant: btn.Variant.outlined,
         size: btn.ButtonSize.small,
       );
@@ -39,7 +39,7 @@ class CompactCta extends StatelessWidget {
       return btn.Button(
         onPressed: onPressed,
         label: label,
-        icon: const btn.ButtonIcon(Icons.arrow_forward),
+        icon: btn.ButtonIcon.forwardArrow(),
         expand: true,
       );
     }
@@ -47,7 +47,7 @@ class CompactCta extends StatelessWidget {
     return btn.Button(
       onPressed: onPressed,
       label: label,
-      icon: const btn.ButtonIcon(Icons.arrow_forward),
+      icon: btn.ButtonIcon.forwardArrow(),
       size: btn.ButtonSize.small,
     );
   }

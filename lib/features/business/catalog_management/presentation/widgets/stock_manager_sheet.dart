@@ -8,6 +8,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/presentation/providers/provider.dart';
 import 'package:honak/features/business/catalog_management/presentation/providers/stock_manager_provider.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_item.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
@@ -729,8 +730,8 @@ class _StockStepper extends ConsumerWidget {
 
   void _showDirectInput(BuildContext context, WidgetRef ref) {
     final controller = TextEditingController(text: '$currentStock');
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (ctx) => AlertDialog(
         title: Text(
           item.name,

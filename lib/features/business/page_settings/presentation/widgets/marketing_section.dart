@@ -5,6 +5,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/user.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class MarketingSection extends StatelessWidget {
   final UserPage page;
@@ -59,7 +60,7 @@ class MarketingSection extends StatelessWidget {
                   Icon(Icons.copy, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   const Spacer(),
                   Directionality(
-                    textDirection: TextDirection.ltr,
+                    textDirection: Directionality.of(context),
                     child: Text(
                       'honak.app/@${page.slug}',
                       style: TextStyle(
@@ -123,7 +124,7 @@ class MarketingSection extends StatelessWidget {
               children: [
                 if (!page.isVerified)
                   Icon(
-                    Icons.chevron_left,
+                    AppDirection.chevronStartIcon(context),
                     size: 16,
                     color: Theme.of(context).colorScheme.outline,
                   ),

@@ -210,7 +210,7 @@ class _RelocationSettingsState extends State<RelocationSettings> {
 
         // Action buttons — Cancel left, Confirm right (LTR row)
         Row(
-          textDirection: TextDirection.ltr,
+          textDirection: Directionality.of(context),
           children: [
             Expanded(
               child: Button(

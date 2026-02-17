@@ -54,7 +54,7 @@ class _DeliveryEstimationConfigWidgetState
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

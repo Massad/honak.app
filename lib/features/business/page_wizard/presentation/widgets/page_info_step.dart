@@ -141,10 +141,10 @@ class _PageInfoStepState extends ConsumerState<PageInfoStep> {
         ),
         const SizedBox(height: AppSpacing.sm),
         Directionality(
-          textDirection: TextDirection.ltr,
+          textDirection: Directionality.of(context),
           child: TextFormField(
             controller: _phoneController,
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               hintText: '+962 7X XXX XXXX',

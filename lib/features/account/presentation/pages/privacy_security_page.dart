@@ -4,6 +4,9 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/account/presentation/widgets/sub_screen_header.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 class PrivacySecurityPage extends StatefulWidget {
@@ -21,10 +24,8 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
   ];
 
   void _showDeleteConfirmation() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet<void>(
+      context,
       builder: (ctx) => _DeleteAccountSheet(
         onCancel: () => Navigator.of(ctx).pop(),
         onConfirm: () {
@@ -37,7 +38,7 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: const SubScreenHeader(title: 'الخصوصية والأمان'),
       body: ListView(
@@ -58,8 +59,10 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('إخفاء حالة النشاط',
-                          style: context.textTheme.bodyMedium),
+                      Text(
+                        'إخفاء حالة النشاط',
+                        style: context.textTheme.bodyMedium,
+                      ),
                       Text(
                         'لن تظهر آخر مرة كنت متصلاً فيها',
                         style: context.textTheme.labelSmall?.copyWith(
@@ -74,9 +77,7 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
                   onChanged: (val) {
                     setState(() => _activityVisible = !val);
                     context.showSnackBar(
-                      val
-                          ? 'تم إخفاء حالة النشاط'
-                          : 'تم إظهار حالة النشاط',
+                      val ? 'تم إخفاء حالة النشاط' : 'تم إظهار حالة النشاط',
                     );
                   },
                   activeTrackColor: AppColors.primary,
@@ -129,7 +130,8 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
                                 border: Border(
                                   top: BorderSide(
                                     color: context
-                                        .colorScheme.surfaceContainerLowest,
+                                        .colorScheme
+                                        .surfaceContainerLowest,
                                   ),
                                 ),
                               )
@@ -141,8 +143,9 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
                               height: 36,
                               decoration: BoxDecoration(
                                 color: AppColors.error.withValues(alpha: 0.1),
-                                borderRadius:
-                                    BorderRadius.circular(AppRadius.sm),
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.sm,
+                                ),
                               ),
                               child: const Icon(
                                 Icons.block,
@@ -155,14 +158,14 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(page.name,
-                                      style: context.textTheme.bodyMedium),
+                                  Text(
+                                    page.name,
+                                    style: context.textTheme.bodyMedium,
+                                  ),
                                   Text(
                                     page.handle,
-                                    style:
-                                        context.textTheme.labelSmall?.copyWith(
-                                      color: AppColors.textHint,
-                                    ),
+                                    style: context.textTheme.labelSmall
+                                        ?.copyWith(color: AppColors.textHint),
                                   ),
                                 ],
                               ),
@@ -311,7 +314,7 @@ class _PrivacySecurityPageState extends State<PrivacySecurityPage> {
                 ),
               ),
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 16,
                 color: AppColors.textHint,
               ),
@@ -328,11 +331,7 @@ class _BlockedPage {
   final String name;
   final String handle;
 
-  _BlockedPage({
-    required this.id,
-    required this.name,
-    required this.handle,
-  });
+  _BlockedPage({required this.id, required this.name, required this.handle});
 }
 
 // ── Delete Account Bottom Sheet ──
@@ -341,10 +340,7 @@ class _DeleteAccountSheet extends StatelessWidget {
   final VoidCallback onCancel;
   final VoidCallback onConfirm;
 
-  const _DeleteAccountSheet({
-    required this.onCancel,
-    required this.onConfirm,
-  });
+  const _DeleteAccountSheet({required this.onCancel, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {
@@ -373,11 +369,7 @@ class _DeleteAccountSheet extends StatelessWidget {
               Text('حذف الحساب', style: theme.textTheme.titleSmall),
               IconButton(
                 onPressed: onCancel,
-                icon: Icon(
-                  Icons.close,
-                  size: 18,
-                  color: AppColors.textHint,
-                ),
+                icon: Icon(Icons.close, size: 18, color: AppColors.textHint),
               ),
             ],
           ),
@@ -426,7 +418,7 @@ class _DeleteAccountSheet extends StatelessWidget {
 
           // Buttons
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Expanded(
                 child: btn.Button(

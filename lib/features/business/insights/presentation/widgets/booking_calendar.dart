@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/l10n/arb/app_localizations.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Weekly calendar view showing bookings by day.
 /// Only for service_booking and reservation archetypes.
@@ -47,12 +48,20 @@ class BookingCalendar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(Icons.chevron_right, size: 20, color: Color(0xFF9CA3AF)),
+              Icon(
+                AppDirection.chevronEndIcon(context),
+                size: 20,
+                color: const Color(0xFF9CA3AF),
+              ),
               Text(
                 context.l10n.insightsCurrentWeek,
                 style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
               ),
-              const Icon(Icons.chevron_left, size: 20, color: Color(0xFF9CA3AF)),
+              Icon(
+                AppDirection.chevronStartIcon(context),
+                size: 20,
+                color: const Color(0xFF9CA3AF),
+              ),
             ],
           ),
           const SizedBox(height: 12),

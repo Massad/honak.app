@@ -131,7 +131,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                     children: [
                       Text(
                         'تذكرة #${ticket.ticketNumber}',
-                        textDirection: TextDirection.rtl,
+                        textDirection: Directionality.of(context),
                         style: context.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: context.colorScheme.onSurface,
@@ -462,7 +462,7 @@ class _DropoffDetailViewState extends State<DropoffDetailView> {
                           const SizedBox(width: 4),
                           Text(
                             ticket.customerPhone!,
-                            textDirection: TextDirection.ltr,
+                            textDirection: Directionality.of(context),
                             style: TextStyle(
                               fontSize: 11,
                               color: Theme.of(context).colorScheme.onSurfaceVariant,

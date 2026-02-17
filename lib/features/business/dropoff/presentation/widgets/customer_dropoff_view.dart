@@ -204,7 +204,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                       ),
                       child: Text(
                         ticket.ticketNumber,
-                        textDirection: TextDirection.ltr,
+                        textDirection: Directionality.of(context),
                         style: context.textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 12,
@@ -506,7 +506,7 @@ class _CustomerDropoffViewState extends State<CustomerDropoffView> {
                   children: [
                     Text(
                       ticket.ticketNumber,
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       style: context.textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),

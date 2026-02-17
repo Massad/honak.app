@@ -7,8 +7,9 @@ import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/entities/user.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
+import 'package:honak/shared/widgets/app_dialog_templates.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
-import 'package:honak/shared/widgets/button.dart' as btn;
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -44,57 +45,48 @@ class ProfilePage extends ConsumerWidget {
                 _MenuItem(
                   icon: Icons.favorite_outline,
                   label: 'المحفوظات',
-                  onTap: () =>
-                      context.showSnackBar('قريباً: المحفوظات'),
+                  onTap: () => context.showSnackBar('قريباً: المحفوظات'),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 _MenuItem(
                   icon: Icons.location_on_outlined,
                   label: 'عناويني',
-                  onTap: () =>
-                      context.showSnackBar('قريباً: عناويني'),
+                  onTap: () => context.showSnackBar('قريباً: عناويني'),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 _MenuItem(
                   icon: Icons.person_outline,
                   label: 'معلومات الحساب',
-                  onTap: () =>
-                      context.showSnackBar('قريباً: معلومات الحساب'),
+                  onTap: () => context.showSnackBar('قريباً: معلومات الحساب'),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 _MenuItem(
                   icon: Icons.notifications_outlined,
                   label: 'إشعاراتي',
-                  onTap: () =>
-                      context.showSnackBar('قريباً: إشعاراتي'),
+                  onTap: () => context.showSnackBar('قريباً: إشعاراتي'),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 _MenuItem(
                   icon: Icons.shield_outlined,
                   label: 'الخصوصية والأمان',
-                  onTap: () =>
-                      context.showSnackBar('قريباً: الخصوصية والأمان'),
+                  onTap: () => context.showSnackBar('قريباً: الخصوصية والأمان'),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 _MenuItem(
                   icon: Icons.language,
                   label: 'اللغة',
                   subtitle: 'العربية',
-                  onTap: () =>
-                      context.showSnackBar('قريباً: اللغة'),
+                  onTap: () => context.showSnackBar('قريباً: اللغة'),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 _MenuItem(
                   icon: Icons.help_outline,
                   label: 'المساعدة والدعم',
-                  onTap: () =>
-                      context.showSnackBar('قريباً: المساعدة والدعم'),
+                  onTap: () => context.showSnackBar('قريباً: المساعدة والدعم'),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 // Sign out
-                _SignOutButton(
-                  onTap: () => _confirmLogout(context, ref),
-                ),
+                _SignOutButton(onTap: () => _confirmLogout(context, ref)),
                 const SizedBox(height: AppSpacing.huge),
               ],
             ),
@@ -105,28 +97,16 @@ class ProfilePage extends ConsumerWidget {
   }
 
   void _confirmLogout(BuildContext context, WidgetRef ref) {
-    showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(context.l10n.logout),
-        content: Text(context.l10n.logoutConfirm),
-        actions: [
-          btn.Button(
-            onPressed: () => Navigator.pop(ctx),
-            label: context.l10n.cancel,
-            variant: btn.Variant.text,
-          ),
-          btn.Button(
-            onPressed: () {
-              Navigator.pop(ctx);
-              ref.read(authProvider.notifier).logout();
-            },
-            label: context.l10n.logout,
-            style: btn.Style.danger,
-          ),
-        ],
-      ),
-    );
+    showAppDangerConfirmDialog(
+      context,
+      title: context.l10n.logout,
+      message: context.l10n.logoutConfirm,
+      confirmLabel: context.l10n.logout,
+      cancelLabel: context.l10n.cancel,
+    ).then((confirmed) {
+      if (!confirmed) return;
+      ref.read(authProvider.notifier).logout();
+    });
   }
 }
 
@@ -154,8 +134,7 @@ class _ProfileHeader extends StatelessWidget {
         children: [
           // Settings icon
           IconButton(
-            onPressed: () =>
-                context.showSnackBar('قريباً: الإعدادات'),
+            onPressed: () => context.showSnackBar('قريباً: الإعدادات'),
             icon: Icon(
               Icons.settings_outlined,
               color: context.colorScheme.onSurfaceVariant,
@@ -168,9 +147,7 @@ class _ProfileHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                isGuest
-                    ? 'وضع الزائر'
-                    : (user?.name ?? ''),
+                isGuest ? 'وضع الزائر' : (user?.name ?? ''),
                 style: context.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -208,11 +185,7 @@ class _ProfileHeader extends StatelessWidget {
             ),
             child: ClipOval(
               child: user?.avatarUrl != null
-                  ? AppImage(
-                      url: user!.avatarUrl,
-                      width: 60,
-                      height: 60,
-                    )
+                  ? AppImage(url: user!.avatarUrl, width: 60, height: 60)
                   : Icon(
                       isGuest ? Icons.person_outline : Icons.person,
                       size: 32,
@@ -258,27 +231,23 @@ class _MyPagesSection extends ConsumerWidget {
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
-              Icon(
-                Icons.store,
-                size: 16,
-                color: AppColors.primary,
-              ),
+              Icon(Icons.store, size: 16, color: AppColors.primary),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
 
           // Page cards
-          ...pages.map((page) => Padding(
-                padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                child: _PageCard(
-                  page: page,
-                  onTap: () {
-                    ref
-                        .read(appModeProvider.notifier)
-                        .switchToBusinessMode(page);
-                  },
-                ),
-              )),
+          ...pages.map(
+            (page) => Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: _PageCard(
+                page: page,
+                onTap: () {
+                  ref.read(appModeProvider.notifier).switchToBusinessMode(page);
+                },
+              ),
+            ),
+          ),
 
           // Create new page
           Material(
@@ -286,13 +255,10 @@ class _MyPagesSection extends ConsumerWidget {
             borderRadius: BorderRadius.circular(14),
             child: InkWell(
               borderRadius: BorderRadius.circular(14),
-              onTap: () =>
-                  context.showSnackBar('قريباً: إنشاء صفحة جديدة'),
+              onTap: () => context.showSnackBar('قريباً: إنشاء صفحة جديدة'),
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                  vertical: AppSpacing.md,
-                ),
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
@@ -371,11 +337,7 @@ class _PageCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    const Icon(
-                      Icons.store,
-                      size: 12,
-                      color: Colors.white,
-                    ),
+                    const Icon(Icons.store, size: 12, color: Colors.white),
                   ],
                 ),
               ),
@@ -437,11 +399,7 @@ class _PageCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: page.avatarUrl != null
-                      ? AppImage(
-                          url: page.avatarUrl,
-                          width: 44,
-                          height: 44,
-                        )
+                      ? AppImage(url: page.avatarUrl, width: 44, height: 44)
                       : Icon(
                           Icons.store,
                           color: context.colorScheme.onSurfaceVariant,
@@ -489,7 +447,7 @@ class _MenuItem extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 18,
                 color: context.colorScheme.outline,
               ),
@@ -511,11 +469,7 @@ class _MenuItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
-              Icon(
-                icon,
-                size: 20,
-                color: context.colorScheme.onSurfaceVariant,
-              ),
+              Icon(icon, size: 20, color: context.colorScheme.onSurfaceVariant),
             ],
           ),
         ),
@@ -557,11 +511,7 @@ class _SignOutButton extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
-              Icon(
-                Icons.logout,
-                size: 20,
-                color: AppColors.error,
-              ),
+              Icon(Icons.logout, size: 20, color: AppColors.error),
             ],
           ),
         ),

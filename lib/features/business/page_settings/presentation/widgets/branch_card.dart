@@ -8,6 +8,7 @@ import 'package:honak/features/business/page_settings/domain/entities/branch.dar
 import 'package:honak/features/business/page_settings/presentation/providers/branch_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/venue_search_provider.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart';
 
@@ -113,8 +114,8 @@ class _BranchCardState extends ConsumerState<BranchCard> {
   }
 
   void _deleteBranch() {
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (ctx) => AlertDialog(
         title: const Text('حذف الفرع', textAlign: TextAlign.end),
         content: Text(
@@ -123,7 +124,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
         ),
         actions: [
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Button(
                 onPressed: () => Navigator.pop(ctx),
@@ -285,7 +286,7 @@ class _BranchCardState extends ConsumerState<BranchCard> {
                     controller: _phoneController,
                     label: 'رقم الهاتف',
                     keyboardType: TextInputType.phone,
-                    textDirection: TextDirection.ltr,
+                    textDirection: Directionality.of(context),
                     onChanged: (_) => _saveChanges(),
                   ),
                   const SizedBox(height: AppSpacing.md),

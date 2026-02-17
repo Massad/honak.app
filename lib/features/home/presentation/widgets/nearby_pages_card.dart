@@ -8,6 +8,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/nearby_page.dart';
 import 'package:honak/features/home/presentation/providers/follow_provider.dart';
 import 'package:honak/features/pages/presentation/widgets/shared/follow_button.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 class NearbyPagesCard extends StatelessWidget {
@@ -73,9 +74,7 @@ class NearbyPagesCard extends StatelessWidget {
                       ),
                       SizedBox(width: AppSpacing.xs),
                       Icon(
-                        context.isRtl
-                            ? Icons.arrow_back_ios_new
-                            : Icons.arrow_forward_ios,
+                        AppDirection.forwardIcon(context),
                         size: 12,
                         color: context.colorScheme.primary,
                       ),

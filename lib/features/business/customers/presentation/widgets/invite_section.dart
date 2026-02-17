@@ -7,6 +7,7 @@ import 'package:honak/features/business/customers/domain/entities/customer_invit
 import 'package:honak/features/business/customers/presentation/providers/customers_provider.dart';
 import 'package:honak/features/business/customers/presentation/widgets/invite_card.dart';
 import 'package:honak/features/business/customers/presentation/widgets/invites_list_overlay.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// InviteSection — invite new customers with phone, name, optional package.
 /// Matches Figma InviteSection.tsx.
@@ -219,7 +220,7 @@ class _InviteSectionState extends State<InviteSection> {
 
               // Action buttons
               Row(
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 children: [
                   // Copy button
                   GestureDetector(
@@ -316,7 +317,7 @@ class _InviteSectionState extends State<InviteSection> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Directionality(
-                  textDirection: TextDirection.ltr,
+                  textDirection: Directionality.of(context),
                   child: Text(
                     _inviteUrl,
                     style: TextStyle(
@@ -385,7 +386,7 @@ class _InviteInput extends StatelessWidget {
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       style: const TextStyle(fontSize: 14),
       decoration: InputDecoration(
         hintText: hint,
@@ -481,7 +482,7 @@ class _PackagePicker extends StatelessWidget {
                   turns: expanded ? 0.25 : 0,
                   duration: const Duration(milliseconds: 200),
                   child: Icon(
-                    Icons.chevron_left,
+                    AppDirection.chevronEndIcon(context),
                     size: 14,
                     color: selected != null
                         ? AppColors.primary
@@ -772,8 +773,8 @@ class _RecentInvitesPreview extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 2),
-                    const Icon(
-                      Icons.chevron_left,
+                    Icon(
+                      AppDirection.chevronEndIcon(context),
                       size: 10,
                       color: AppColors.primary,
                     ),

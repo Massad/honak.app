@@ -5,6 +5,7 @@ import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 // ═══════════════════════════════════════════════════════════════
 // Activity Log — Shared Components
@@ -57,15 +58,10 @@ void showActivityLogSheet(
   required String subtitle,
   required List<ActivityLogEntry> entries,
 }) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
-    builder: (_) => _ActivityLogSheet(
-      title: title,
-      subtitle: subtitle,
-      entries: entries,
-    ),
+  showAppSheet<void>(
+    context,
+    builder: (_) =>
+        _ActivityLogSheet(title: title, subtitle: subtitle, entries: entries),
   );
 }
 
@@ -110,10 +106,7 @@ class ActivityLogPreview extends StatelessWidget {
               onTap: onViewFull,
               child: Text(
                 context.l10n.bizViewFullLog,
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: Color(0xFF1A73E8),
-                ),
+                style: const TextStyle(fontSize: 10, color: Color(0xFF1A73E8)),
               ),
             ),
           ],
@@ -217,147 +210,108 @@ class _ActivityLogSheet extends StatelessWidget {
       (grouped[dateKey] ??= []).add(e);
     }
 
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.85,
-      ),
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag handle
-            Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.only(top: AppSpacing.sm),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.outlineVariant,
-                borderRadius: BorderRadius.circular(2),
-              ),
+    return AppSheetScaffold(
+      title: null,
+      showBodyDivider: false,
+      showFooterDivider: false,
+      scrollable: false,
+      bodyPadding: EdgeInsets.zero,
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(
+              AppSpacing.lg,
+              AppSpacing.md,
+              AppSpacing.lg,
+              AppSpacing.md,
             ),
-
-            // Header
+            child: Row(
+              children: [
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFEFF6FF),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.receipt_long_rounded,
+                    size: 16,
+                    color: Color(0xFF1A73E8),
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: context.textTheme.titleSmall?.copyWith(
+                          color: context.colorScheme.onSurface,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle,
+                        textDirection: Directionality.of(context),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            height: 1,
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
+          if (sorted.isEmpty)
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                AppSpacing.lg,
-                AppSpacing.md,
-                AppSpacing.lg,
-                AppSpacing.md,
-              ),
-              child: Row(
+              padding: const EdgeInsetsDirectional.all(AppSpacing.xxl),
+              child: Column(
                 children: [
-                  // Icon
-                  Container(
-                    width: 32,
-                    height: 32,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFEFF6FF), // blue-50
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.receipt_long_rounded,
-                      size: 16,
-                      color: Color(0xFF1A73E8),
-                    ),
+                  Icon(
+                    Icons.receipt_long_rounded,
+                    size: 40,
+                    color: Theme.of(context).colorScheme.outlineVariant,
                   ),
-                  const SizedBox(width: AppSpacing.sm),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: context.textTheme.titleSmall?.copyWith(
-                            color: context.colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          subtitle,
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainerLow,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.close,
-                        size: 16,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    context.l10n.bizNoActivityYet,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
               ),
-            ),
-
-            Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
-
-            // Activity timeline
-            if (sorted.isEmpty)
-              Padding(
-                padding: const EdgeInsetsDirectional.all(AppSpacing.xxl),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.receipt_long_rounded,
-                      size: 40,
-                      color: Theme.of(context).colorScheme.outlineVariant,
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Text(
-                      context.l10n.bizNoActivityYet,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+            )
+          else
+            Flexible(
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
+                children: [
+                  for (final MapEntry(key: dateLabel, value: dayEntries)
+                      in grouped.entries) ...[
+                    _DateSeparator(label: dateLabel),
+                    for (var i = 0; i < dayEntries.length; i++)
+                      _TimelineEntry(
+                        entry: dayEntries[i],
+                        isLast: i == dayEntries.length - 1,
                       ),
-                    ),
                   ],
-                ),
-              )
-            else
-              Flexible(
-                child: ListView(
-                  shrinkWrap: true,
-                  padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
-                  children: [
-                    for (final MapEntry(key: dateLabel, value: dayEntries)
-                        in grouped.entries) ...[
-                      // Date separator
-                      _DateSeparator(label: dateLabel),
-                      // Timeline entries for this date
-                      for (var i = 0; i < dayEntries.length; i++)
-                        _TimelineEntry(
-                          entry: dayEntries[i],
-                          isLast: i == dayEntries.length - 1,
-                        ),
-                    ],
-                  ],
-                ),
+                ],
               ),
-
-            const SizedBox(height: AppSpacing.md),
-          ],
-        ),
+            ),
+          const SizedBox(height: AppSpacing.md),
+        ],
       ),
     );
   }
@@ -396,7 +350,10 @@ class _DateSeparator extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
+            child: Divider(
+              height: 1,
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
         ],
       ),
@@ -409,10 +366,7 @@ class _DateSeparator extends StatelessWidget {
 // ═══════════════════════════════════════════════════════════════
 
 class _TimelineEntry extends StatelessWidget {
-  const _TimelineEntry({
-    required this.entry,
-    required this.isLast,
-  });
+  const _TimelineEntry({required this.entry, required this.isLast});
 
   final ActivityLogEntry entry;
   final bool isLast;
@@ -494,14 +448,18 @@ class _TimelineEntry extends StatelessWidget {
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surfaceContainerLow,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.surfaceContainerLow,
                           borderRadius: AppRadius.pill,
                         ),
                         child: Text(
                           entry.actorRole!,
                           style: TextStyle(
                             fontSize: 9,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -611,14 +569,8 @@ class _StatusPill extends StatelessWidget {
         horizontal: 6,
         vertical: 2,
       ),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: AppRadius.pill,
-      ),
-      child: Text(
-        label,
-        style: TextStyle(fontSize: 9, color: color),
-      ),
+      decoration: BoxDecoration(color: bgColor, borderRadius: AppRadius.pill),
+      child: Text(label, style: TextStyle(fontSize: 9, color: color)),
     );
   }
 }

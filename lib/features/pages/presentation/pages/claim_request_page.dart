@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:flutter/services.dart';
 import 'package:honak/features/pages/domain/entities/page_detail.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 // ── Constants ────────────────────────────────────────────────
@@ -247,15 +248,16 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
         children: [
           // Title row (LTR: back on left, title center)
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               GestureDetector(
                 onTap: _handleBack,
                 child: Padding(
                   padding: const EdgeInsets.all(4),
-                  child: Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Icon(Icons.arrow_back_ios_new, size: 20, color: context.colorScheme.onSurfaceVariant),
+                  child: Icon(
+                    AppDirection.backIcon(context),
+                    size: 20,
+                    color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -347,7 +349,13 @@ class _ClaimRequestPageState extends State<ClaimRequestPage> {
                   ),
                   if (_step > 1 && _step < 4) ...[
                     const SizedBox(width: 4),
-                    Icon(Icons.chevron_left, size: 16, color: _canProceed ? Colors.white : context.colorScheme.onSurfaceVariant),
+                    Icon(
+                      AppDirection.forwardIcon(context),
+                      size: 16,
+                      color: _canProceed
+                          ? Colors.white
+                          : context.colorScheme.onSurfaceVariant,
+                    ),
                   ],
                 ],
               ),
@@ -843,7 +851,7 @@ class _StepInfo extends StatelessWidget {
           Text('رقم الهاتف', style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface)),
           const SizedBox(height: 8),
           Directionality(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             child: Row(
               children: [
                 Expanded(
@@ -923,7 +931,7 @@ class _StepInfo extends StatelessWidget {
           if (otpSent && !otpVerified) ...[
             const SizedBox(height: 12),
             Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: Directionality.of(context),
               child: Text(
                 'أدخل الرمز المرسل إلى ${phoneController.text}',
                 style: TextStyle(fontSize: 11, color: context.colorScheme.onSurfaceVariant),
@@ -931,7 +939,7 @@ class _StepInfo extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Directionality(
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               child: Row(
                 children: [
                   Expanded(
@@ -986,7 +994,7 @@ class _StepInfo extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: Directionality.of(context),
               child: Text(
                 'في النسخة التجريبية: أي ٦ أرقام مقبولة',
                 style: TextStyle(fontSize: 10, color: context.colorScheme.onSurfaceVariant),

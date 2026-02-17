@@ -166,7 +166,7 @@ class BookingTimePreference extends StatelessWidget {
           TextFormField(
             controller: otherTextController,
             maxLines: 2,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             decoration: InputDecoration(
               hintText: 'حدد الوقت المفضل...',
               hintStyle: theme.textTheme.bodySmall

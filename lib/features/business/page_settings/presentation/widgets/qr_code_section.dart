@@ -126,7 +126,10 @@ class _QrCodeSectionState extends State<QrCodeSection> {
                         height: 200,
                         child: CustomPaint(
                           size: const Size(200, 200),
-                          painter: _QrCodePainter(url: _qrUrl),
+                          painter: _QrCodePainter(
+                            url: _qrUrl,
+                            textDirection: Directionality.of(context),
+                          ),
                         ),
                       ),
                     ),
@@ -350,8 +353,9 @@ class _ActionButton extends StatelessWidget {
 
 class _QrCodePainter extends CustomPainter {
   final String url;
+  final TextDirection textDirection;
 
-  _QrCodePainter({required this.url});
+  _QrCodePainter({required this.url, required this.textDirection});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -426,7 +430,7 @@ class _QrCodePainter extends CustomPainter {
           height: 1,
         ),
       ),
-      textDirection: TextDirection.rtl,
+      textDirection: textDirection,
     )..layout();
 
     textPainter.paint(

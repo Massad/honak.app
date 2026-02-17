@@ -193,7 +193,7 @@ class _DepositTrackerState extends State<DepositTracker> {
                       !_showRefundForm) ...[
                     const SizedBox(height: AppSpacing.sm),
                     Row(
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       children: [
                         const Spacer(),
                         if (_ledger.deposits.isNotEmpty)
@@ -592,7 +592,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
           TextField(
             controller: _amountController,
             keyboardType: TextInputType.number,
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
               hintText: context.l10n.bizReqDepAmountHint,
@@ -740,7 +740,7 @@ class _AddDepositFormState extends State<_AddDepositForm> {
 
           // Buttons
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Expanded(
                 child: GestureDetector(
@@ -887,7 +887,7 @@ class _AddRefundFormState extends State<_AddRefundForm> {
           TextField(
             controller: _amountController,
             keyboardType: TextInputType.number,
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
               hintText: context.l10n.bizReqDepAmountHint,
@@ -935,7 +935,7 @@ class _AddRefundFormState extends State<_AddRefundForm> {
           const SizedBox(height: AppSpacing.md),
 
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Expanded(
                 child: GestureDetector(

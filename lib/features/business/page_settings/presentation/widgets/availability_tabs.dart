@@ -128,7 +128,7 @@ class _DayRow extends StatelessWidget {
                       ),
                     const SizedBox(width: 4),
                     Directionality(
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       child: Text(
                         '${hours.shifts[i].open} - ${hours.shifts[i].close}',
                         style: TextStyle(

@@ -5,6 +5,8 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_dialog_templates.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/features/account/presentation/pages/account_info_page.dart';
 import 'package:honak/features/account/presentation/pages/help_support_page.dart';
@@ -31,7 +33,8 @@ class AccountPage extends ConsumerWidget {
       return _GuestView();
     }
 
-    return Scaffold(
+    return AppScreen(
+      showBack: false,
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -56,11 +59,10 @@ class AccountPage extends ConsumerWidget {
               children: [
                 AccountMenuItem(
                   icon: Icons.favorite_outline,
-                  label: '\u0627\u0644\u0645\u062d\u0641\u0648\u0638\u0627\u062a',
+                  label:
+                      '\u0627\u0644\u0645\u062d\u0641\u0648\u0638\u0627\u062a',
                   onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const SavedPagesPage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const SavedPagesPage()),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
@@ -68,19 +70,16 @@ class AccountPage extends ConsumerWidget {
                   icon: Icons.location_on_outlined,
                   label: '\u0639\u0646\u0627\u0648\u064a\u0646\u064a',
                   onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const MyAddressesPage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const MyAddressesPage()),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
                   icon: Icons.person_outline,
-                  label: '\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u062d\u0633\u0627\u0628',
+                  label:
+                      '\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u062d\u0633\u0627\u0628',
                   onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const AccountInfoPage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const AccountInfoPage()),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
@@ -96,7 +95,8 @@ class AccountPage extends ConsumerWidget {
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
                   icon: Icons.shield_outlined,
-                  label: '\u0627\u0644\u062e\u0635\u0648\u0635\u064a\u0629 \u0648\u0627\u0644\u0623\u0645\u0627\u0646',
+                  label:
+                      '\u0627\u0644\u062e\u0635\u0648\u0635\u064a\u0629 \u0648\u0627\u0644\u0623\u0645\u0627\u0646',
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (_) => const PrivacySecurityPage(),
@@ -113,18 +113,15 @@ class AccountPage extends ConsumerWidget {
                 const SizedBox(height: AppSpacing.sm),
                 AccountMenuItem(
                   icon: Icons.help_outline,
-                  label: '\u0627\u0644\u0645\u0633\u0627\u0639\u062f\u0629 \u0648\u0627\u0644\u062f\u0639\u0645',
+                  label:
+                      '\u0627\u0644\u0645\u0633\u0627\u0639\u062f\u0629 \u0648\u0627\u0644\u062f\u0639\u0645',
                   onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const HelpSupportPage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const HelpSupportPage()),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 // Sign out
-                _SignOutButton(
-                  onTap: () => _confirmLogout(context, ref),
-                ),
+                _SignOutButton(onTap: () => _confirmLogout(context, ref)),
                 const SizedBox(height: AppSpacing.huge),
               ],
             ),
@@ -135,27 +132,16 @@ class AccountPage extends ConsumerWidget {
   }
 
   void _confirmLogout(BuildContext context, WidgetRef ref) {
-    showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(context.l10n.logout),
-        content: Text(context.l10n.logoutConfirm),
-        actions: [
-          btn.Button(
-            onPressed: () => Navigator.pop(ctx),
-            label: context.l10n.cancel,
-            variant: btn.Variant.text,
-          ),
-          btn.Button(
-            onPressed: () {
-              Navigator.pop(ctx);
-              ref.read(authProvider.notifier).logout();
-            },
-            label: context.l10n.logout,
-          ),
-        ],
-      ),
-    );
+    showAppConfirmDialog(
+      context,
+      title: context.l10n.logout,
+      message: context.l10n.logoutConfirm,
+      confirmLabel: context.l10n.logout,
+      cancelLabel: context.l10n.cancel,
+    ).then((confirmed) {
+      if (!confirmed) return;
+      ref.read(authProvider.notifier).logout();
+    });
   }
 }
 
@@ -164,7 +150,8 @@ class AccountPage extends ConsumerWidget {
 class _GuestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
+      showBack: false,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxxl),
@@ -202,7 +189,8 @@ class _GuestView extends StatelessWidget {
               const SizedBox(height: AppSpacing.xxl),
               btn.Button(
                 onPressed: () => context.go(Routes.welcome),
-                label: '\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644',
+                label:
+                    '\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644',
                 expand: true,
                 size: btn.ButtonSize.large,
               ),
@@ -245,11 +233,7 @@ class _SignOutButton extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
-              const Icon(
-                Icons.logout,
-                size: 20,
-                color: AppColors.error,
-              ),
+              const Icon(Icons.logout, size: 20, color: AppColors.error),
             ],
           ),
         ),

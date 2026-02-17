@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class ModificationItemRow extends StatelessWidget {
   final Map<String, dynamic> change;
@@ -55,15 +56,12 @@ class ModificationItemRow extends StatelessWidget {
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsetsDirectional.symmetric(horizontal: 4),
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: Icon(
-                        Icons.arrow_forward,
-                        size: 12,
-                        color: AppColors.warning,
-                      ),
+                    child: Icon(
+                      AppDirection.forwardIcon(context),
+                      size: 12,
+                      color: AppColors.warning,
                     ),
                   ),
                   Text(

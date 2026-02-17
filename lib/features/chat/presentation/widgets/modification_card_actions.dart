@@ -24,7 +24,7 @@ class ModificationPendingFooter extends StatelessWidget {
         bottom: AppSpacing.md,
       ),
       child: Row(
-        textDirection: TextDirection.ltr,
+        textDirection: Directionality.of(context),
         children: [
           Expanded(
             child: Button(

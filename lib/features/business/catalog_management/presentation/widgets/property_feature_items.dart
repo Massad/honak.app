@@ -284,7 +284,7 @@ class FeatureItemRow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 6),
         child: Text('${item.count}', style: TextStyle(fontSize: 13,
             color: context.colorScheme.onSurface),
-            textDirection: TextDirection.ltr),
+            textDirection: Directionality.of(context)),
       ),
       _stepBtn(context, '+', () => onCountChange(item.count + 1)),
     ]);
@@ -424,7 +424,7 @@ class _AddItemFormState extends State<AddItemForm> {
                 child: TextField(
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
-                  textDirection: TextDirection.ltr,
+                  textDirection: Directionality.of(context),
                   style: const TextStyle(fontSize: 12),
                   decoration: InputDecoration(
                     filled: true,

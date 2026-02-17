@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_shadows.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/domain/entities/truck.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 // ═══════════════════════════════════════════════════════════════
 // TruckStatusCards — compact truck status display for orders page
@@ -179,7 +180,7 @@ class _TruckCard extends StatelessWidget {
                         children: [
                           // Status badge + chevron
                           Icon(
-                            Icons.chevron_left,
+                            AppDirection.chevronEndIcon(context),
                             size: 12,
                             color: context.colorScheme.onSurfaceVariant,
                           ),

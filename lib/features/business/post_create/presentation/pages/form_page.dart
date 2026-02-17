@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/post_create/presentation/providers/provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/button.dart';
 
 class PostFormPage extends ConsumerStatefulWidget {
@@ -107,10 +108,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
         // Back button always on the left — in RTL, actions = left side
         actions: [
           IconButton(
-            icon: const Directionality(
-              textDirection: TextDirection.ltr,
-              child: Icon(Icons.arrow_back_ios_new, size: 20),
-            ),
+            icon: Icon(AppDirection.backIcon(context), size: 20),
             onPressed: () => Navigator.pop(context),
           ),
         ],
@@ -162,7 +160,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
       ),
       child: TextField(
         controller: _captionController,
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         textAlign: TextAlign.right,
         maxLines: 5,
         minLines: 3,
@@ -398,7 +396,7 @@ class _PostFormPageState extends ConsumerState<PostFormPage> {
                 ),
               Text(
                 caption,
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 style: context.textTheme.bodyMedium?.copyWith(
                   height: 1.5,
                 ),

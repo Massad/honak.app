@@ -156,7 +156,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
               // Name
               TextField(
             controller: _nameCtrl,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             decoration: InputDecoration(
               labelText: context.l10n.pkgName,
               border: OutlineInputBorder(
@@ -169,7 +169,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
           // Description
           TextField(
             controller: _descCtrl,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             maxLines: 3,
             decoration: InputDecoration(
               labelText: context.l10n.pkgDescription,
@@ -184,7 +184,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
           TextField(
             controller: _priceCtrl,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             decoration: InputDecoration(
               labelText: context.l10n.pkgPriceJod,
               border: OutlineInputBorder(
@@ -246,7 +246,7 @@ class _PackageFormContentState extends State<_PackageFormContent> {
             TextField(
               controller: _creditsCtrl,
               keyboardType: TextInputType.number,
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               decoration: InputDecoration(
                 labelText: context.l10n.pkgCreditsCount,
                 border: OutlineInputBorder(

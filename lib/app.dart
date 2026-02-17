@@ -13,12 +13,21 @@ class HonakApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    final locale = ref.watch(localeProvider).valueOrNull ?? const Locale('ar');
-    final themeMode =
-        ref.watch(themeModeProvider).valueOrNull ?? ThemeMode.system;
+    final localeState = ref.watch(localeProvider);
+    final themeModeState = ref.watch(themeModeProvider);
+
+    if (localeState.isLoading || themeModeState.isLoading) {
+      return const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(body: SizedBox.shrink()),
+      );
+    }
+
+    final locale = localeState.valueOrNull ?? const Locale('ar');
+    final themeMode = themeModeState.valueOrNull ?? ThemeMode.system;
 
     return MaterialApp.router(
-      title: 'هناك.app',
+      onGenerateTitle: (ctx) => AppLocalizations.of(ctx).appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),

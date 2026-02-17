@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
 
@@ -168,8 +169,11 @@ class UpdateCardBody extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: AppSpacing.xxs),
-                          Icon(Icons.arrow_back,
-                              size: 12, color: context.colorScheme.primary),
+                          Icon(
+                            AppDirection.forwardIcon(context),
+                            size: 12,
+                            color: context.colorScheme.primary,
+                          ),
                         ],
                       ),
                     ),

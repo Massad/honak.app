@@ -767,7 +767,7 @@ class _TruckEditSheetState extends ConsumerState<_TruckEditSheet> {
 
               // Save / Delete buttons
               Row(
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 children: [
                   if (!widget.isNew)
                     GestureDetector(

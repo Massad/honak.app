@@ -12,6 +12,7 @@ import 'package:honak/features/business/page_wizard/presentation/widgets/page_in
 import 'package:honak/features/business/page_wizard/presentation/widgets/payment_step.dart';
 import 'package:honak/features/business/page_wizard/presentation/widgets/type_picker_step.dart';
 import 'package:honak/features/business/page_wizard/presentation/widgets/wizard_done.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 class WizardPage extends ConsumerWidget {
@@ -37,18 +38,15 @@ class WizardPage extends ConsumerWidget {
         ),
         centerTitle: true,
         actions: [
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-              onPressed: () {
-                if (state.step > 1) {
-                  notifier.prevStep();
-                } else {
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
+          IconButton(
+            icon: Icon(AppDirection.backIcon(context), size: 20),
+            onPressed: () {
+              if (state.step > 1) {
+                notifier.prevStep();
+              } else {
+                Navigator.of(context).pop();
+              }
+            },
           ),
         ],
       ),

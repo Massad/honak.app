@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 import 'post_card_helpers.dart';
@@ -158,7 +159,11 @@ class StatusCardBody extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: AppSpacing.xxs),
-                      Icon(Icons.arrow_back, size: 10, color: ctaColor),
+                      Icon(
+                        AppDirection.forwardIcon(context),
+                        size: 10,
+                        color: ctaColor,
+                      ),
                     ],
                   ),
                 ),

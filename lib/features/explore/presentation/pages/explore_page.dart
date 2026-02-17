@@ -17,6 +17,7 @@ import 'package:honak/features/stories/presentation/providers/stories_provider.d
 import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 
@@ -28,10 +29,9 @@ class ExplorePage extends ConsumerWidget {
     // Pre-load story content so avatar taps can open viewer
     ref.watch(storyContentProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.explore),
-      ),
+    return AppScreen(
+      title: Text(context.l10n.explore),
+      showBack: false,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,16 +107,14 @@ class _FilterTriggerBar extends ConsumerWidget {
     final sortLabel = filterState.sortBy == ExploreSortBy.nearest
         ? context.l10n.closestFirst
         : filterState.sortBy == ExploreSortBy.popular
-            ? context.l10n.mostActiveSort
-            : context.l10n.closestFirst;
+        ? context.l10n.mostActiveSort
+        : context.l10n.closestFirst;
 
     return Padding(
       padding: AppSpacing.paddingH(AppSpacing.lg),
       child: GestureDetector(
-        onTap: () => showAppSheet(
-          context,
-          builder: (_) => const ExploreFilterSheet(),
-        ),
+        onTap: () =>
+            showAppSheet(context, builder: (_) => const ExploreFilterSheet()),
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(
@@ -342,9 +340,7 @@ class _CategoryTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: context.colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(16), // rounded-2xl
-              border: Border.all(
-                color: context.colorScheme.outlineVariant,
-              ),
+              border: Border.all(color: context.colorScheme.outlineVariant),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.03),
@@ -475,7 +471,9 @@ class _NearbyCard extends ConsumerWidget {
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: context.colorScheme.outlineVariant), // gray-100
+          border: Border.all(
+            color: context.colorScheme.outlineVariant,
+          ), // gray-100
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.04),
@@ -518,8 +516,7 @@ class _NearbyCard extends ConsumerWidget {
                               Flexible(
                                 child: Text(
                                   page.name,
-                                  style:
-                                      context.textTheme.titleSmall?.copyWith(
+                                  style: context.textTheme.titleSmall?.copyWith(
                                     fontSize: 14,
                                     color: context.colorScheme.onSurface,
                                   ),
@@ -815,10 +812,7 @@ class _TrendingOverlayCard extends StatelessWidget {
                       ),
                       child: Text(
                         page.businessTypeName!,
-                        style: TextStyle(
-                          fontSize: 9,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 9, color: Colors.white),
                       ),
                     ),
                   ),

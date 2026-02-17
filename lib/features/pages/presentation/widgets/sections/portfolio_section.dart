@@ -6,6 +6,7 @@ import 'package:honak/features/catalog/domain/entities/item.dart';
 import 'package:honak/features/pages/presentation/providers/page_detail_providers.dart';
 import 'package:honak/features/requests/presentation/widgets/inquiry_request_sheet.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/error_view.dart';
 import 'package:honak/shared/widgets/auth_gate.dart';
 import 'package:honak/shared/extensions/sort_extensions.dart';
@@ -77,8 +78,8 @@ class _PortfolioSectionState extends ConsumerState<PortfolioSection> {
 
   void _openImageViewer(BuildContext context, Item item) {
     if (item.images.isEmpty) return;
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (context) => _PortfolioImageViewer(item: item),
     );
   }

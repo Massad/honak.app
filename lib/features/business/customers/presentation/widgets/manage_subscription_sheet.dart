@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/customers/domain/entities/business_customer.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 
@@ -75,7 +76,7 @@ class _ManageSubscriptionContent extends StatelessWidget {
                         ),
                         if (customer.phone != null)
                           Directionality(
-                            textDirection: TextDirection.ltr,
+                            textDirection: Directionality.of(context),
                             child: Text(
                               '${customer.phone}'
                               '${customer.area != null ? ' · ${customer.area}' : ''}',
@@ -234,7 +235,7 @@ class _ActionRow extends StatelessWidget {
           children: [
             // Chevron trailing (visually leading in RTL)
             Icon(
-              Icons.chevron_left,
+              AppDirection.chevronEndIcon(context),
               size: 16,
               color: AppColors.textHint.withValues(alpha: 0.5),
             ),
@@ -415,7 +416,7 @@ class _ActionConfirmContent extends StatelessWidget {
                         ),
                         if (customer.phone != null)
                           Directionality(
-                            textDirection: TextDirection.ltr,
+                            textDirection: Directionality.of(context),
                             child: Text(
                               customer.phone!,
                               style: const TextStyle(
@@ -537,7 +538,7 @@ class _ActionConfirmContent extends StatelessWidget {
 
               // ── Action buttons ──
               Row(
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 children: [
                   // Cancel / back
                   Expanded(

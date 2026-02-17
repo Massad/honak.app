@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/directory_floor.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant.dart';
 import 'package:honak/features/business/directory_management/presentation/widgets/sheets/tenant_invite_confirm.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
@@ -355,8 +356,11 @@ class _TenantFormOverlayState extends State<TenantFormOverlay> {
             onTap: () => setState(() => _mode = _FormMode.search),
             child: Row(
               children: [
-                const Icon(Icons.arrow_back, size: 16,
-                    color: AppColors.primary),
+                Icon(
+                  AppDirection.backIcon(context),
+                  size: 16,
+                  color: AppColors.primary,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
                   context.l10n.dirTenantFormSearchForPage,

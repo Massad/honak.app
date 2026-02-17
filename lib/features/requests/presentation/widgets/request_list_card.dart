@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/requests/domain/entities/entities.dart';
 import 'package:honak/features/requests/presentation/widgets/request_status_config.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 /// Reusable request card for the customer's orders page.
@@ -282,7 +283,7 @@ class _BottomRow extends StatelessWidget {
           // Chat + chevron
           Icon(Icons.chat_bubble_outline, size: 16, color: context.colorScheme.onSurfaceVariant),
           const SizedBox(width: AppSpacing.sm),
-          Icon(Icons.chevron_left, size: 18, color: context.colorScheme.outline),
+          Icon(AppDirection.chevronEndIcon(context), size: 18, color: context.colorScheme.outline),
         ],
       ),
     );

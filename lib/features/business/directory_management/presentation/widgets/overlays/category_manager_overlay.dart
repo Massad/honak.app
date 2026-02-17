@@ -174,7 +174,7 @@ class _CategoryManagerOverlayState extends State<CategoryManagerOverlay> {
                     ),
                     const SizedBox(height: AppSpacing.md),
                     Row(
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       children: [
                         btn.Button(
                           onPressed: _cancelEdit,

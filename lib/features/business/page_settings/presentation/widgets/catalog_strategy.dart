@@ -242,7 +242,7 @@ class _CategoryPills extends StatelessWidget {
     return Wrap(
       spacing: AppSpacing.sm,
       runSpacing: AppSpacing.sm,
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       children: available.map((cat) {
         final isSelected = selected.contains(cat);
         return GestureDetector(

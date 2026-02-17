@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/home/domain/entities/post.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 
 // ── Promoted → Compact slate card: thumbnail + content ──────────────────────
@@ -144,8 +145,11 @@ class PromotedCardBody extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: AppSpacing.xxs),
-                      Icon(Icons.arrow_back,
-                          size: 9, color: const Color(0xFF374151)),
+                      Icon(
+                        AppDirection.forwardIcon(context),
+                        size: 9,
+                        color: const Color(0xFF374151),
+                      ),
                     ],
                   ),
                 ),

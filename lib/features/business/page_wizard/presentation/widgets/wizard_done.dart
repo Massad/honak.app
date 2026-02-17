@@ -70,7 +70,7 @@ class WizardDone extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Directionality(
-                        textDirection: TextDirection.ltr,
+                        textDirection: Directionality.of(context),
                         child: Text(
                           link,
                           style: theme.textTheme.titleMedium?.copyWith(

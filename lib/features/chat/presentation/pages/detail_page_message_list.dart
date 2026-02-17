@@ -198,9 +198,7 @@ class _RequestBanner extends StatelessWidget {
             ],
             const Spacer(),
             Icon(
-              Directionality.of(context) == TextDirection.rtl
-                  ? Icons.chevron_left
-                  : Icons.chevron_right,
+              AppDirection.chevronEndIcon(context),
               size: 14,
               color: context.colorScheme.onSurfaceVariant,
             ),

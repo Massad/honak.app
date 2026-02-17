@@ -144,7 +144,7 @@ class ReservationSheetFooter extends StatelessWidget {
             child: btn.Button(
               onPressed: onBack,
               label: 'رجوع',
-              icon: const btn.ButtonIcon(Icons.arrow_forward),
+              icon: btn.ButtonIcon.backArrow(),
               variant: btn.Variant.outlined,
               size: btn.ButtonSize.large,
             ),
@@ -153,7 +153,7 @@ class ReservationSheetFooter extends StatelessWidget {
           child: btn.Button(
             onPressed: canAdvance ? onNext : null,
             label: 'التالي',
-            icon: const btn.ButtonIcon(Icons.chevron_left),
+            icon: btn.ButtonIcon.forwardArrow(),
             size: btn.ButtonSize.large,
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/directory_management/domain/entities/tenant.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Customer-facing tenant card used in directory browsing.
 ///
@@ -68,7 +69,7 @@ class TenantCard extends StatelessWidget {
             if (hasPage) ...[
               const SizedBox(width: AppSpacing.xs),
               Icon(
-                Icons.chevron_right,
+                AppDirection.chevronEndIcon(context),
                 size: 20,
                 color: context.colorScheme.onSurfaceVariant,
               ),

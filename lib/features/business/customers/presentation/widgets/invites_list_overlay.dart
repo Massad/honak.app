@@ -120,7 +120,7 @@ class _InvitesListContentState extends State<_InvitesListContent> {
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
           child: TextField(
             onChanged: (v) => setState(() => _search = v),
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             style: const TextStyle(fontSize: 14),
             decoration: InputDecoration(
               hintText: l10n.bizInviteSearchHint,

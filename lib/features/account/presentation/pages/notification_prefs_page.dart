@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/account/presentation/widgets/sub_screen_header.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 
 class NotificationPrefsPage extends StatefulWidget {
   const NotificationPrefsPage({super.key});
@@ -66,7 +67,7 @@ class _NotificationPrefsPageState extends State<NotificationPrefsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: const SubScreenHeader(title: 'إشعاراتي'),
       body: ListView(
@@ -110,16 +111,13 @@ class _NotificationPrefsPageState extends State<NotificationPrefsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'الإشعارات',
-                        style: context.textTheme.bodyMedium,
-                      ),
+                      Text('الإشعارات', style: context.textTheme.bodyMedium),
                       Text(
                         _allDisabled
                             ? 'جميع الإشعارات مغلقة'
                             : _allEnabled
-                                ? 'جميع الإشعارات مفعّلة'
-                                : 'بعض الإشعارات مفعّلة',
+                            ? 'جميع الإشعارات مفعّلة'
+                            : 'بعض الإشعارات مفعّلة',
                         style: context.textTheme.labelSmall?.copyWith(
                           color: AppColors.textHint,
                         ),
@@ -177,8 +175,7 @@ class _NotificationPrefsPageState extends State<NotificationPrefsPage> {
                       height: 36,
                       decoration: BoxDecoration(
                         color: context.colorScheme.surfaceContainerLowest,
-                        borderRadius:
-                            BorderRadius.circular(AppRadius.sm),
+                        borderRadius: BorderRadius.circular(AppRadius.sm),
                       ),
                       child: Icon(
                         group.icon,

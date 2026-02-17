@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 class SubScreenAppBar extends StatelessWidget {
   final String title;
@@ -46,7 +47,7 @@ class SubScreenAppBar extends StatelessWidget {
           const SizedBox(width: AppSpacing.sm),
           IconButton(
             onPressed: onClose,
-            icon: const Icon(Icons.arrow_forward, size: 20),
+            icon: Icon(AppDirection.backIcon(context), size: 20),
           ),
         ],
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:honak/core/extensions/context_ext.dart';
-import 'package:honak/core/l10n/arb/app_localizations.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/order_management/presentation/widgets/request_card_sections.dart';
@@ -365,7 +364,7 @@ class RequestNoteSection extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             note,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).colorScheme.onSurface,
@@ -422,7 +421,7 @@ class RequestDeclineReasonSection extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             reason,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).colorScheme.onSurface,

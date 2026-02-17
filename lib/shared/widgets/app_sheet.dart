@@ -40,13 +40,9 @@ class AppSheetOverlay extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: context.colorScheme.surface,
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 ),
-                child: SafeArea(
-                  top: false,
-                  child: child,
-                ),
+                child: SafeArea(top: false, child: child),
               ),
             ),
           ],
@@ -66,12 +62,7 @@ class AppSheetHeader extends StatelessWidget {
   final Widget? leading;
   final VoidCallback? onClose;
 
-  const AppSheetHeader({
-    super.key,
-    this.title,
-    this.leading,
-    this.onClose,
-  });
+  const AppSheetHeader({super.key, this.title, this.leading, this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +133,99 @@ class AppSheetHeader extends StatelessWidget {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// AppSheetScaffold — standard sheet structure
+// ═══════════════════════════════════════════════════════════════
+
+/// Standardized sheet layout with optional header and sticky footer.
+class AppSheetScaffold extends StatelessWidget {
+  final String? title;
+  final Widget body;
+  final Widget? footer;
+  final Widget? leading;
+  final VoidCallback? onClose;
+  final EdgeInsetsGeometry bodyPadding;
+  final EdgeInsetsGeometry footerPadding;
+  final bool scrollable;
+  final bool showHeader;
+  final bool showBodyDivider;
+  final bool showFooterDivider;
+  final bool keyboardSafe;
+  final double maxHeightFraction;
+
+  const AppSheetScaffold({
+    super.key,
+    this.title,
+    required this.body,
+    this.footer,
+    this.leading,
+    this.onClose,
+    this.bodyPadding = const EdgeInsetsDirectional.fromSTEB(
+      AppSpacing.lg,
+      0,
+      AppSpacing.lg,
+      AppSpacing.lg,
+    ),
+    this.footerPadding = const EdgeInsetsDirectional.fromSTEB(
+      AppSpacing.lg,
+      0,
+      AppSpacing.lg,
+      AppSpacing.lg,
+    ),
+    this.scrollable = true,
+    this.showHeader = true,
+    this.showBodyDivider = false,
+    this.showFooterDivider = true,
+    this.keyboardSafe = true,
+    this.maxHeightFraction = 0.9,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final keyboardBottomInset = keyboardSafe
+        ? mediaQuery.viewInsets.bottom
+        : 0.0;
+    final header = showHeader
+        ? AppSheetHeader(
+            title: title,
+            leading: leading,
+            onClose: onClose ?? () => Navigator.of(context).pop(),
+          )
+        : null;
+
+    final bodyContent = scrollable
+        ? SingleChildScrollView(padding: bodyPadding, child: body)
+        : Padding(padding: bodyPadding, child: body);
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: mediaQuery.size.height * maxHeightFraction,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (header != null) header,
+          if (showBodyDivider && header != null) const Divider(height: 1),
+          Flexible(fit: FlexFit.loose, child: bodyContent),
+          if (footer != null) ...[
+            if (showFooterDivider) const Divider(height: 1),
+            AnimatedPadding(
+              duration: const Duration(milliseconds: 180),
+              curve: Curves.easeOut,
+              padding: EdgeInsets.only(bottom: keyboardBottomInset),
+              child: SafeArea(
+                top: false,
+                child: Padding(padding: footerPadding, child: footer),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
 // showAppSheet — modal bottom sheet with consistent styling
 // ═══════════════════════════════════════════════════════════════
 
@@ -181,10 +265,7 @@ Future<T?> showAppSheet<T>(
                 top: Radius.circular(AppRadius.xxl),
               ),
             ),
-            child: SafeArea(
-              top: false,
-              child: builder(ctx),
-            ),
+            child: SafeArea(top: false, child: builder(ctx)),
           ),
         ),
       );

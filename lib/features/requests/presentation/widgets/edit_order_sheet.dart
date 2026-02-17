@@ -164,7 +164,7 @@ class _EditOrderSheetState extends State<EditOrderSheet> {
             TextField(
               controller: _noteController,
               maxLines: 3,
-              textDirection: TextDirection.rtl,
+              textDirection: Directionality.of(context),
               decoration: InputDecoration(
                 hintText: 'أضف ملاحظة للمتجر...',
                 hintStyle: textTheme.bodySmall

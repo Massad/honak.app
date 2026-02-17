@@ -81,7 +81,7 @@ class _MemberServicesTabState extends ConsumerState<MemberServicesTab> {
               ),
               child: TextField(
                 onChanged: (v) => setState(() => _search = v),
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 decoration: InputDecoration(
                   hintText: 'بحث...',
                   hintStyle: TextStyle(

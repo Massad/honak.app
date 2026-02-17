@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 class ProfileSetupPage extends ConsumerStatefulWidget {
@@ -53,8 +54,9 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surface,
+      useSafeArea: false,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -111,7 +113,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                         focusNode: _focusNode,
                         textCapitalization: TextCapitalization.words,
                         autofocus: true,
-                        textDirection: TextDirection.rtl,
+                        textDirection: Directionality.of(context),
                         style: context.textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,

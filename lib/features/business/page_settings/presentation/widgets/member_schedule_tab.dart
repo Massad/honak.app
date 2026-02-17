@@ -100,7 +100,7 @@ class _DayRow extends StatelessWidget {
           // Status
           if (hours.open && hours.shifts.isNotEmpty)
             Directionality(
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               child: Text(
                 hours.shifts
                     .map((s) => '${s.open} - ${s.close}')

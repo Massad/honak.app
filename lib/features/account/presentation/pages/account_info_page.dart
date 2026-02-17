@@ -8,6 +8,7 @@ import 'package:honak/features/account/presentation/widgets/sub_screen_header.da
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -59,7 +60,7 @@ class _AccountInfoPageState extends ConsumerState<AccountInfoPage> {
     final authState = ref.watch(authProvider).valueOrNull;
     final user = authState is Authenticated ? authState.user : null;
 
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: SubScreenHeader(
         title: 'معلومات الحساب',
@@ -169,11 +170,7 @@ class _AccountInfoPageState extends ConsumerState<AccountInfoPage> {
                   ),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.phone,
-                        size: 14,
-                        color: AppColors.textHint,
-                      ),
+                      Icon(Icons.phone, size: 14, color: AppColors.textHint),
                       const SizedBox(width: AppSpacing.sm),
                       Expanded(
                         child: Directionality(
@@ -304,9 +301,9 @@ class _FieldCard extends StatelessWidget {
         children: [
           Text(
             label,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: AppColors.textHint,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(color: AppColors.textHint),
           ),
           const SizedBox(height: AppSpacing.sm),
           child,

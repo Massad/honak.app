@@ -7,6 +7,7 @@ import 'package:honak/features/business/queue/domain/entities/available_add_on.d
 import 'package:honak/features/business/queue/domain/entities/customer_queue_entry.dart';
 import 'package:honak/features/business/queue/domain/entities/service_package.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Modification request sent from the customer.
@@ -33,10 +34,8 @@ Future<void> showQueueModifySheet({
   required bool isInProgress,
   required void Function(QueueModificationRequest) onSubmit,
 }) {
-  return showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet<void>(
+    context,
     builder: (_) => _QueueModifySheet(
       entry: entry,
       packages: packages,
@@ -99,97 +98,50 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: context.screenHeight * 0.85,
-      ),
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.xxl),
-        ),
-      ),
-      child: _submitted ? _buildSuccessState(context) : _buildForm(context),
-    );
+    return _submitted ? _buildSuccessState(context) : _buildForm(context);
   }
 
   Widget _buildForm(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // Handle bar
-        Center(
-          child: Container(
-            margin: const EdgeInsets.only(top: AppSpacing.sm),
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: context.colorScheme.outlineVariant,
-              borderRadius: AppRadius.pill,
+    return AppSheetScaffold(
+      title: context.l10n.queueModifyRequest,
+      showBodyDivider: true,
+      scrollable: false,
+      bodyPadding: EdgeInsets.zero,
+      footer: _selectedType == null
+          ? null
+          : btn.Button(
+              onPressed: _canSubmit ? _handleSubmit : null,
+              label: context.l10n.queueSubmitModification,
+              size: btn.ButtonSize.large,
+              expand: true,
             ),
-          ),
-        ),
-        // Header
-        Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  context.l10n.queueModifyRequest,
-                  style: context.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.close, size: 20),
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-              ),
-            ],
-          ),
-        ),
-        const Divider(height: 1),
-        // Current selection summary
-        _buildCurrentSummary(context),
-        const Divider(height: 1),
-        // Modification options
-        Flexible(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (!widget.isInProgress) ...[
-                  _buildModTypeSelection(context),
-                  const SizedBox(height: AppSpacing.lg),
-                ],
-                if (_selectedType == 'change_package')
-                  _buildPackageList(context),
-                if (_selectedType == 'change_addons')
-                  _buildAddOnList(context),
-                if (_selectedType == 'add_note' || widget.isInProgress)
-                  _buildNoteInput(context),
-              ],
-            ),
-          ),
-        ),
-        // Submit button
-        if (_selectedType != null)
-          SafeArea(
-            child: Padding(
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildCurrentSummary(context),
+          const Divider(height: 1),
+          Flexible(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppSpacing.lg),
-              child: btn.Button(
-                onPressed: _canSubmit ? _handleSubmit : null,
-                label: context.l10n.queueSubmitModification,
-                size: btn.ButtonSize.large,
-                expand: true,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (!widget.isInProgress) ...[
+                    _buildModTypeSelection(context),
+                    const SizedBox(height: AppSpacing.lg),
+                  ],
+                  if (_selectedType == 'change_package')
+                    _buildPackageList(context),
+                  if (_selectedType == 'change_addons')
+                    _buildAddOnList(context),
+                  if (_selectedType == 'add_note' || widget.isInProgress)
+                    _buildNoteInput(context),
+                ],
               ),
             ),
           ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -307,8 +259,9 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                 decoration: BoxDecoration(
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
-                    color:
-                        isSelected ? AppColors.primary : context.colorScheme.outlineVariant,
+                    color: isSelected
+                        ? AppColors.primary
+                        : context.colorScheme.outlineVariant,
                   ),
                   color: isSelected
                       ? AppColors.primary.withValues(alpha: 0.05)
@@ -391,8 +344,9 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
                 decoration: BoxDecoration(
                   borderRadius: AppRadius.cardInner,
                   border: Border.all(
-                    color:
-                        isSelected ? AppColors.primary : context.colorScheme.outlineVariant,
+                    color: isSelected
+                        ? AppColors.primary
+                        : context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Row(
@@ -483,8 +437,9 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
   void _handleSubmit() {
     final request = QueueModificationRequest(
       type: _selectedType!,
-      newPackageId:
-          _selectedType == 'change_package' ? _selectedPackageId : null,
+      newPackageId: _selectedType == 'change_package'
+          ? _selectedPackageId
+          : null,
       newAddOnIds: _selectedType == 'change_addons'
           ? _selectedAddOnIds.toList()
           : null,
@@ -497,12 +452,25 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
   }
 
   Widget _buildSuccessState(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppSpacing.xxl),
-      child: Column(
+    return AppSheetScaffold(
+      showBodyDivider: false,
+      showFooterDivider: false,
+      scrollable: false,
+      bodyPadding: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.xxl,
+        AppSpacing.xl,
+        AppSpacing.xxl,
+        AppSpacing.md,
+      ),
+      footerPadding: const EdgeInsetsDirectional.fromSTEB(
+        AppSpacing.xxl,
+        AppSpacing.sm,
+        AppSpacing.xxl,
+        AppSpacing.xxl,
+      ),
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: AppSpacing.lg),
           Container(
             width: 56,
             height: 56,
@@ -531,14 +499,13 @@ class _QueueModifySheetState extends State<_QueueModifySheet> {
               color: context.colorScheme.onSurfaceVariant,
             ),
           ),
-          const SizedBox(height: AppSpacing.xxl),
-          btn.Button(
-            onPressed: () => Navigator.pop(context),
-            label: context.l10n.done,
-            size: btn.ButtonSize.large,
-            expand: true,
-          ),
         ],
+      ),
+      footer: btn.Button(
+        onPressed: () => Navigator.pop(context),
+        label: context.l10n.done,
+        size: btn.ButtonSize.large,
+        expand: true,
       ),
     );
   }
@@ -569,7 +536,9 @@ class _ModTypeOption extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: AppRadius.cardInner,
           border: Border.all(
-            color: selected ? AppColors.primary : context.colorScheme.outlineVariant,
+            color: selected
+                ? AppColors.primary
+                : context.colorScheme.outlineVariant,
           ),
           color: selected ? AppColors.primary.withValues(alpha: 0.05) : null,
         ),
@@ -578,14 +547,18 @@ class _ModTypeOption extends StatelessWidget {
             Icon(
               icon,
               size: 20,
-              color: selected ? AppColors.primary : context.colorScheme.onSurfaceVariant,
+              color: selected
+                  ? AppColors.primary
+                  : context.colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(
               child: Text(
                 label,
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: selected ? AppColors.primary : context.colorScheme.onSurface,
+                  color: selected
+                      ? AppColors.primary
+                      : context.colorScheme.onSurface,
                   fontWeight: selected ? FontWeight.w500 : null,
                 ),
               ),

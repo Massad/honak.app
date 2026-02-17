@@ -208,7 +208,7 @@ class _FloorManagerOverlayState extends State<FloorManagerOverlay> {
                     ),
                     const SizedBox(height: AppSpacing.md),
                     Row(
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       children: [
                         btn.Button(
                           onPressed: _cancelEdit,

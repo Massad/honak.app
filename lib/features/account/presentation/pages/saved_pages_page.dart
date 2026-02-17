@@ -10,6 +10,7 @@ import 'package:honak/features/account/presentation/widgets/sub_screen_header.da
 import 'package:honak/features/saved/domain/entities/saved_page.dart';
 import 'package:honak/features/saved/presentation/providers/saved_provider.dart';
 import 'package:honak/shared/widgets/app_image.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 
 class SavedPagesPage extends ConsumerWidget {
   const SavedPagesPage({super.key});
@@ -18,7 +19,7 @@ class SavedPagesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final savedPages = ref.watch(savedPagesProvider);
 
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: const SubScreenHeader(title: 'المحفوظات'),
       body: savedPages.when(
@@ -55,8 +56,7 @@ class SavedPagesPage extends ConsumerWidget {
               ...pages.asMap().entries.map((entry) {
                 return Padding(
                   padding: EdgeInsets.only(
-                    bottom:
-                        entry.key < pages.length - 1 ? AppSpacing.sm : 0,
+                    bottom: entry.key < pages.length - 1 ? AppSpacing.sm : 0,
                   ),
                   child: _SavedPageCard(
                     page: entry.value,
@@ -203,11 +203,7 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.bookmark_outline,
-              size: 40,
-              color: AppColors.divider,
-            ),
+            Icon(Icons.bookmark_outline, size: 40, color: AppColors.divider),
             const SizedBox(height: AppSpacing.md),
             Text(
               'لا توجد صفحات محفوظة',

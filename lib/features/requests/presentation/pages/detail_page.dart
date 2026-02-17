@@ -11,6 +11,7 @@ import 'package:honak/features/requests/presentation/widgets/reschedule_sheet.da
 import 'package:honak/features/requests/presentation/widgets/status_timeline.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/core/extensions/context_ext.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full request detail page (customer view).
@@ -24,8 +25,7 @@ class CustomerRequestDetailPage extends StatefulWidget {
       _CustomerRequestDetailPageState();
 }
 
-class _CustomerRequestDetailPageState
-    extends State<CustomerRequestDetailPage> {
+class _CustomerRequestDetailPageState extends State<CustomerRequestDetailPage> {
   late CustomerRequest _request;
 
   @override
@@ -71,32 +71,20 @@ class _CustomerRequestDetailPageState
         ('بانتظار الرد', const Color(0xFFFF8F00));
     final typeLabel = _typeLabels[_request.type] ?? 'طلب';
 
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Column(
-          children: [
-            Text('تفاصيل الطلب', style: textTheme.titleSmall),
-            Text(
-              '$typeLabel #${_request.id}',
-              style: textTheme.labelSmall?.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
+      title: Column(
+        children: [
+          Text('تفاصيل الطلب', style: textTheme.titleSmall),
+          Text(
+            '$typeLabel #${_request.id}',
+            style: textTheme.labelSmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
             ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Directionality(
-              textDirection: TextDirection.ltr,
-              child: Icon(Icons.arrow_back_ios_new, size: 20),
-            ),
-            onPressed: () => Navigator.pop(context),
           ),
         ],
       ),
+      showBack: true,
       body: ListView(
         padding: const EdgeInsetsDirectional.only(
           start: AppSpacing.lg,
@@ -117,8 +105,7 @@ class _CustomerRequestDetailPageState
           const SizedBox(height: AppSpacing.md),
 
           // Decline / cancellation reason
-          if (_request.status == 'declined' &&
-              _request.declineReason != null)
+          if (_request.status == 'declined' && _request.declineReason != null)
             DetailDeclineCard(reason: _request.declineReason!),
           if (_request.status == 'cancelled_by_business' &&
               _request.declineReason != null)
@@ -170,116 +157,128 @@ class _CustomerRequestDetailPageState
     final isSchedulable = _request.isSchedulable;
 
     if (status == 'pending' || status == 'pending_review') {
-      return DetailActionBar(children: [
-        if (_request.isOrderType)
-          DetailOutlinedAction(
-            icon: Icons.edit_outlined,
-            label: 'تعديل الطلب',
-            onPressed: _showEditOrder,
-          ),
-        DetailTextAction(
-          icon: Icons.cancel_outlined,
-          label: 'إلغاء الطلب',
-          color: AppColors.error,
-          onPressed: _showCancel,
-        ),
-      ]);
-    }
-
-    if (status == 'accepted') {
-      return DetailActionBar(children: [
-        if (isSchedulable && _request.canReschedule)
-          DetailOutlinedAction(
-            icon: Icons.calendar_today,
-            label: 'إعادة جدولة',
-            onPressed: _showReschedule,
-          ),
-        if (_request.isOrderType && _request.canEdit)
-          DetailOutlinedAction(
-            icon: Icons.edit_outlined,
-            label: 'تعديل الطلب',
-            onPressed: _showEditOrder,
-          ),
-        if (_request.canCancel)
+      return DetailActionBar(
+        children: [
+          if (_request.isOrderType)
+            DetailOutlinedAction(
+              icon: Icons.edit_outlined,
+              label: 'تعديل الطلب',
+              onPressed: _showEditOrder,
+            ),
           DetailTextAction(
             icon: Icons.cancel_outlined,
-            label: 'إلغاء',
+            label: 'إلغاء الطلب',
             color: AppColors.error,
             onPressed: _showCancel,
           ),
-      ]);
+        ],
+      );
+    }
+
+    if (status == 'accepted') {
+      return DetailActionBar(
+        children: [
+          if (isSchedulable && _request.canReschedule)
+            DetailOutlinedAction(
+              icon: Icons.calendar_today,
+              label: 'إعادة جدولة',
+              onPressed: _showReschedule,
+            ),
+          if (_request.isOrderType && _request.canEdit)
+            DetailOutlinedAction(
+              icon: Icons.edit_outlined,
+              label: 'تعديل الطلب',
+              onPressed: _showEditOrder,
+            ),
+          if (_request.canCancel)
+            DetailTextAction(
+              icon: Icons.cancel_outlined,
+              label: 'إلغاء',
+              color: AppColors.error,
+              onPressed: _showCancel,
+            ),
+        ],
+      );
     }
 
     if (status == 'in_progress' || status == 'preparing') {
-      return DetailActionBar(children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-          child: Text(
-            'لا يمكن الإلغاء بعد بدء التنفيذ',
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
+      return DetailActionBar(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+            child: Text(
+              'لا يمكن الإلغاء بعد بدء التنفيذ',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+            ),
           ),
-        ),
-      ]);
+        ],
+      );
     }
 
     if (status == 'completed') {
-      return DetailActionBar(children: [
-        btn.Button(
-          onPressed: () {},
-          label: _reorderLabels[_request.type] ?? 'إعادة الطلب',
-          icon: const btn.ButtonIcon(Icons.replay),
-          style: btn.Style.success,
-          size: btn.ButtonSize.large,
-          expand: true,
-        ),
-      ]);
+      return DetailActionBar(
+        children: [
+          btn.Button(
+            onPressed: () {},
+            label: _reorderLabels[_request.type] ?? 'إعادة الطلب',
+            icon: const btn.ButtonIcon(Icons.replay),
+            style: btn.Style.success,
+            size: btn.ButtonSize.large,
+            expand: true,
+          ),
+        ],
+      );
     }
 
     if (status == 'cancelled_by_customer') {
-      return DetailActionBar(children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-          child: Text(
-            'تم إلغاء هذا الطلب',
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
+      return DetailActionBar(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+            child: Text(
+              'تم إلغاء هذا الطلب',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+            ),
           ),
-        ),
-      ]);
+        ],
+      );
     }
 
     if (status == 'pending_reschedule') {
-      return DetailActionBar(children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsetsDirectional.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFFF8E1),
-            border: Border.all(color: const Color(0xFFFFE082)),
-            borderRadius: AppRadius.cardInner,
+      return DetailActionBar(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsetsDirectional.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF8E1),
+              border: Border.all(color: const Color(0xFFFFE082)),
+              borderRadius: AppRadius.cardInner,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.access_time,
+                  size: 16,
+                  color: Color(0xFFFF8F00),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Text(
+                  'بانتظار موافقة المتجر على الموعد الجديد',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: const Color(0xFFFF8F00),
+                  ),
+                ),
+              ],
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.access_time,
-                size: 16,
-                color: Color(0xFFFF8F00),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Text(
-                'بانتظار موافقة المتجر على الموعد الجديد',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: const Color(0xFFFF8F00),
-                    ),
-              ),
-            ],
-          ),
-        ),
-      ]);
+        ],
+      );
     }
 
     return null;
@@ -299,8 +298,7 @@ class _CustomerRequestDetailPageState
                 TimelineEvent(
                   status: 'cancelled_by_customer',
                   label: 'ملغي من العميل',
-                  timestamp:
-                      DateTime.now().millisecondsSinceEpoch ~/ 1000,
+                  timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
                   actor: 'customer',
                 ),
               ],
@@ -332,11 +330,9 @@ class _CustomerRequestDetailPageState
                 TimelineEvent(
                   status: 'pending_reschedule',
                   label: 'طلب إعادة جدولة — $newTime',
-                  timestamp:
-                      DateTime.now().millisecondsSinceEpoch ~/ 1000,
+                  timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
                   actor: 'customer',
-                  detail:
-                      reason.isNotEmpty ? 'السبب: $reason' : null,
+                  detail: reason.isNotEmpty ? 'السبب: $reason' : null,
                 ),
               ],
             );
@@ -363,8 +359,7 @@ class _CustomerRequestDetailPageState
                 TimelineEvent(
                   status: 'modification_requested',
                   label: 'طلب تعديل مرسل',
-                  timestamp:
-                      DateTime.now().millisecondsSinceEpoch ~/ 1000,
+                  timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
                   actor: 'customer',
                 ),
               ],
@@ -399,9 +394,9 @@ class _StatusBadge extends StatelessWidget {
         child: Text(
           label,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: color,
-                fontWeight: FontWeight.w500,
-              ),
+            color: color,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );

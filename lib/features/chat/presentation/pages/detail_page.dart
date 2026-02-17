@@ -32,6 +32,7 @@ import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 import 'package:honak/features/chat/presentation/widgets/quote_card_message.dart';
 import 'package:honak/features/chat/presentation/widgets/system_message.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
 import 'package:honak/features/stories/presentation/utils/story_launcher.dart';
@@ -388,7 +389,7 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
         ),
         Button(
           onPressed: () => Navigator.pop(context),
-          icon: ButtonIcon(Icons.arrow_forward_ios, size: 20),
+          icon: ButtonIcon.forwardArrow(size: 20),
           variant: Variant.text,
           size: ButtonSize.small,
         ),

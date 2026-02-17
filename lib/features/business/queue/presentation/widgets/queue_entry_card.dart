@@ -497,7 +497,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                 Icon(Icons.phone_outlined, size: 12, color: context.colorScheme.onSurfaceVariant),
                 const SizedBox(width: AppSpacing.sm),
                 Text(entry.customerPhone!,
-                    textDirection: TextDirection.ltr,
+                    textDirection: Directionality.of(context),
                     style: context.textTheme.bodySmall
                         ?.copyWith(color: context.colorScheme.onSurfaceVariant)),
                 const Spacer(),
@@ -706,7 +706,7 @@ class _QueueEntryCardState extends State<QueueEntryCard> {
                 style: context.textTheme.labelSmall
                     ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
           Text(entry.plateNumber!,
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               style: context.textTheme.labelSmall
                   ?.copyWith(color: context.colorScheme.onSurfaceVariant, fontSize: 10)),
         ],

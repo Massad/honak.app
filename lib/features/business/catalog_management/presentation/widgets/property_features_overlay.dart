@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/property_feature_items.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Full-screen overlay for managing property features (categories + items).
 /// Matches Figma PropertyFeatures.tsx pixel-for-pixel.
@@ -123,8 +124,11 @@ class _PropertyFeaturesOverlayState extends State<PropertyFeaturesOverlay> {
                   color: AppColors.surfaceVariant,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
-                child: const Icon(Icons.arrow_forward_ios, size: 14,
-                    color: AppColors.textSecondary),
+                child: Icon(
+                  AppDirection.backIcon(context),
+                  size: 14,
+                  color: AppColors.textSecondary,
+                ),
               ),
             ),
             const SizedBox(width: AppSpacing.md),

@@ -443,7 +443,7 @@ class _InteractiveTextLayerState extends State<_InteractiveTextLayer> {
                         maxLines: null,
                         maxLength: 200,
                         textAlign: textAlign,
-                        textDirection: TextDirection.rtl,
+                        textDirection: Directionality.of(context),
                         style: style,
                         cursorColor: color,
                         buildCounter: (_, {required currentLength, required isFocused, maxLength}) => null,
@@ -466,7 +466,7 @@ class _InteractiveTextLayerState extends State<_InteractiveTextLayer> {
                 : Text(
                     layer.text,
                     textAlign: textAlign,
-                    textDirection: TextDirection.rtl,
+                    textDirection: Directionality.of(context),
                     style: style,
                   ),
           ),

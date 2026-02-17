@@ -9,6 +9,8 @@ import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 class PhoneInputPage extends ConsumerStatefulWidget {
@@ -70,10 +72,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
       if (mounted) {
         context.push(
           Routes.loginVerify,
-          extra: {
-            'phone': _fullPhone,
-            'request_id': requestId,
-          },
+          extra: {'phone': _fullPhone, 'request_id': requestId},
         );
       }
     } catch (e) {
@@ -87,8 +86,9 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surface,
+      useSafeArea: false,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -118,7 +118,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                     ),
                     alignment: Alignment.center,
                     child: Icon(
-                      Icons.arrow_back,
+                      AppDirection.backIcon(context),
                       size: 20,
                       color: context.colorScheme.onSurface,
                     ),
@@ -170,11 +170,8 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                             ),
                             decoration: BoxDecoration(
                               color: context.colorScheme.surfaceContainerLowest,
-                              borderRadius:
-                                  BorderRadius.circular(AppRadius.md),
-                              border: Border.all(
-                                color: Colors.transparent,
-                              ),
+                              borderRadius: BorderRadius.circular(AppRadius.md),
+                              border: Border.all(color: Colors.transparent),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -186,8 +183,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                                 const SizedBox(width: AppSpacing.sm),
                                 Text(
                                   '+962',
-                                  style:
-                                      context.textTheme.bodyLarge?.copyWith(
+                                  style: context.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: context.colorScheme.onSurface,
                                   ),
@@ -203,9 +199,12 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                               decoration: BoxDecoration(
                                 color: _focusNode.hasFocus
                                     ? AppColors.white
-                                    : context.colorScheme.surfaceContainerLowest,
-                                borderRadius:
-                                    BorderRadius.circular(AppRadius.md),
+                                    : context
+                                          .colorScheme
+                                          .surfaceContainerLowest,
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.md,
+                                ),
                                 border: Border.all(
                                   color: _focusNode.hasFocus
                                       ? AppColors.primary
@@ -228,15 +227,16 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
                                 ],
                                 decoration: InputDecoration(
                                   hintText: '79 000 0000',
-                                  hintStyle:
-                                      context.textTheme.bodyLarge?.copyWith(
-                                    color: context.colorScheme.onSurfaceVariant,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
+                                  hintStyle: context.textTheme.bodyLarge
+                                      ?.copyWith(
+                                        color: context
+                                            .colorScheme
+                                            .onSurfaceVariant,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
                                   border: InputBorder.none,
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: AppSpacing.lg,
                                   ),
                                 ),
@@ -265,8 +265,7 @@ class _PhoneInputPageState extends ConsumerState<PhoneInputPage> {
 
                     // Help text
                     Padding(
-                      padding:
-                          const EdgeInsets.only(bottom: AppSpacing.xxl),
+                      padding: const EdgeInsets.only(bottom: AppSpacing.xxl),
                       child: Text(
                         'للتجربة: استخدم أحد الأرقام في صفحة الدخول',
                         style: context.textTheme.bodySmall?.copyWith(

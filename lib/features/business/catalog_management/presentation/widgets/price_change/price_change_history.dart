@@ -5,6 +5,8 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/domain/entities/price_change.dart';
 import 'package:honak/features/business/catalog_management/presentation/widgets/price_change/price_change_banner.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 
 // ── Status helpers ───────────────────────────────────────────────────────────
 
@@ -41,10 +43,9 @@ String _statusLabel(String status, BuildContext context) {
 Color _directionColor(String direction) =>
     direction == 'decrease' ? AppColors.success : AppColors.warning;
 
-IconData _directionIcon(String direction) =>
-    direction == 'decrease'
-        ? Icons.arrow_circle_down_outlined
-        : Icons.arrow_circle_up_outlined;
+IconData _directionIcon(String direction) => direction == 'decrease'
+    ? Icons.arrow_circle_down_outlined
+    : Icons.arrow_circle_up_outlined;
 
 String _valueText(PriceChange change) {
   final sign = change.direction == 'decrease' ? '-' : '+';
@@ -106,8 +107,8 @@ class _PriceChangeHistoryState extends State<PriceChangeHistory> {
         .toList();
     final isEmpty = activeOrScheduled == null && pastChanges.isEmpty;
 
-    return Scaffold(
-
+    return AppScreen(
+      showBack: false,
       body: Column(
         children: [
           SubScreenAppBar(
@@ -150,8 +151,7 @@ class _PriceChangeHistoryState extends State<PriceChangeHistory> {
                             ),
                             child: _ChangeCard(
                               change: c,
-                              onView: () =>
-                                  setState(() => _selectedDetail = c),
+                              onView: () => setState(() => _selectedDetail = c),
                             ),
                           ),
                         ),
@@ -174,11 +174,18 @@ class _EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.local_offer_outlined, size: 48, color: Theme.of(context).colorScheme.outline),
+          Icon(
+            Icons.local_offer_outlined,
+            size: 48,
+            color: Theme.of(context).colorScheme.outline,
+          ),
           const SizedBox(height: AppSpacing.md),
           Text(
             context.l10n.pcNoChangesYet,
-            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 14,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -213,11 +220,7 @@ class _ChangeCard extends StatelessWidget {
   final VoidCallback onView;
   final VoidCallback? onStop;
 
-  const _ChangeCard({
-    required this.change,
-    required this.onView,
-    this.onStop,
-  });
+  const _ChangeCard({required this.change, required this.onView, this.onStop});
 
   @override
   Widget build(BuildContext context) {
@@ -260,10 +263,7 @@ class _ChangeCard extends StatelessWidget {
               ),
               // Status badge
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 3,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: statusCol.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -284,21 +284,30 @@ class _ChangeCard extends StatelessWidget {
             const SizedBox(height: AppSpacing.xs),
             Text(
               change.reason,
-              style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
+              style: TextStyle(
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
           const SizedBox(height: AppSpacing.sm),
           // Date range + visibility
           Row(
             children: [
-              Icon(Icons.calendar_today_outlined,
-                  size: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
+              Icon(
+                Icons.calendar_today_outlined,
+                size: 11,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               const SizedBox(width: 4),
               Text(
                 change.endsAt != null
                     ? '${formatDateAr(change.startsAt)} - ${formatDateAr(change.endsAt!)}'
                     : '${formatDateAr(change.startsAt)} - ${context.l10n.pcOpenEnded}',
-                style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const Spacer(),
               Icon(
@@ -310,8 +319,13 @@ class _ChangeCard extends StatelessWidget {
               ),
               const SizedBox(width: 2),
               Text(
-                change.isPublic ? context.l10n.pcPublic : context.l10n.pcPrivate,
-                style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                change.isPublic
+                    ? context.l10n.pcPublic
+                    : context.l10n.pcPrivate,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ],
           ),
@@ -363,8 +377,7 @@ class _ChangeDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = _directionColor(change.direction);
     final statusCol = _statusColor(change.status);
-    final canReuse =
-        change.status == 'expired' || change.status == 'cancelled';
+    final canReuse = change.status == 'expired' || change.status == 'cancelled';
 
     // Calculate duration in days
     String durationText = context.l10n.pcOpenEnded;
@@ -375,8 +388,8 @@ class _ChangeDetail extends StatelessWidget {
       durationText = '$days ${context.l10n.pcDays}';
     }
 
-    return Scaffold(
-
+    return AppScreen(
+      showBack: false,
       body: Column(
         children: [
           // Header
@@ -390,7 +403,9 @@ class _ChangeDetail extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               border: Border(
-                bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
+                bottom: BorderSide(
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
               ),
             ),
             child: Row(
@@ -399,14 +414,14 @@ class _ChangeDetail extends StatelessWidget {
                 const Spacer(),
                 Text(
                   context.l10n.pcDetailTitle,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 IconButton(
                   onPressed: onBack,
-                  icon: const Icon(Icons.arrow_forward, size: 20),
+                  icon: Icon(AppDirection.backIcon(context), size: 20),
                 ),
               ],
             ),
@@ -501,11 +516,16 @@ class _ChangeDetail extends StatelessWidget {
                           : '${formatDateAr(change.startsAt)} - ${context.l10n.pcOpenEnded}',
                     ),
                     _DetailDivider(),
-                    _DetailRow(label: context.l10n.pcDuration, value: durationText),
+                    _DetailRow(
+                      label: context.l10n.pcDuration,
+                      value: durationText,
+                    ),
                     _DetailDivider(),
                     _DetailRow(
                       label: context.l10n.pcAffectedItems,
-                      value: context.l10n.pcAffectedItemsCount(change.affectedCount),
+                      value: context.l10n.pcAffectedItemsCount(
+                        change.affectedCount,
+                      ),
                     ),
                     _DetailDivider(),
                     _DetailRow(
@@ -518,11 +538,15 @@ class _ChangeDetail extends StatelessWidget {
                                 ? Icons.visibility_outlined
                                 : Icons.visibility_off_outlined,
                             size: 14,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            change.isPublic ? context.l10n.pcPublicToCustomers : context.l10n.pcPrivateInternal,
+                            change.isPublic
+                                ? context.l10n.pcPublicToCustomers
+                                : context.l10n.pcPrivateInternal,
                             style: TextStyle(
                               fontSize: 13,
                               color: Theme.of(context).colorScheme.onSurface,
@@ -604,7 +628,10 @@ class _DetailRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 13,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           child ??
               Text(
@@ -626,7 +653,10 @@ class _DetailRow extends StatelessWidget {
 class _DetailDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant);
+    return Divider(
+      height: 1,
+      color: Theme.of(context).colorScheme.outlineVariant,
+    );
   }
 }
 

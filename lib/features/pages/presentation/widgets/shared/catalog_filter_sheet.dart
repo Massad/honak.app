@@ -512,7 +512,7 @@ class _PriceInput extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
-      textDirection: TextDirection.ltr,
+      textDirection: Directionality.of(context),
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hint,

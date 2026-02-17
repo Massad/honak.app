@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/customers/domain/entities/business_customer.dart';
 import 'package:honak/features/business/customers/presentation/providers/customers_provider.dart';
 import 'package:honak/features/business/customers/presentation/widgets/customer_detail_sheet.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 
@@ -137,7 +138,7 @@ class _SearchInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: onChanged,
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       style: const TextStyle(fontSize: 14), // text-sm
       decoration: InputDecoration(
         hintText: hint,
@@ -301,7 +302,7 @@ class _CustomerCard extends StatelessWidget {
                 top: AppSpacing.sm,
               ),
               child: Icon(
-                Icons.chevron_left,
+                AppDirection.chevronEndIcon(context),
                 size: 14,
                 color: AppColors.textHint.withValues(alpha: 0.5),
               ),
@@ -353,7 +354,7 @@ class _CustomerCard extends StatelessWidget {
                     children: [
                       if (c.phone != null) ...[
                         Directionality(
-                          textDirection: TextDirection.ltr,
+                          textDirection: Directionality.of(context),
                           child: Text(
                             c.phone!,
                             style: const TextStyle(

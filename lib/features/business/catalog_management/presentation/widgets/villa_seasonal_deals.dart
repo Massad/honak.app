@@ -267,7 +267,7 @@ Widget seasonalEditInput(BuildContext context, String label,
       TextField(
         controller: ctrl,
         textAlign: TextAlign.center,
-        textDirection: TextDirection.ltr,
+        textDirection: Directionality.of(context),
         keyboardType: TextInputType.number,
         style: const TextStyle(fontSize: 13),
         onChanged: onChanged,

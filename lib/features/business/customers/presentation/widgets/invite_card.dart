@@ -77,7 +77,7 @@ class InviteCard extends StatelessWidget {
                     ),
                     if (inv.name.isNotEmpty)
                       Directionality(
-                        textDirection: TextDirection.ltr,
+                        textDirection: Directionality.of(context),
                         child: Text(
                           inv.phone,
                           style: const TextStyle(

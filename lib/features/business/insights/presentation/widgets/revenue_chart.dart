@@ -64,7 +64,7 @@ class RevenueChart extends StatelessWidget {
         : <FlSpot>[];
 
     return Directionality(
-      textDirection: TextDirection.ltr,
+      textDirection: Directionality.of(context),
       child: LineChart(
         LineChartData(
           minY: 0,
@@ -139,7 +139,7 @@ class RevenueChart extends StatelessWidget {
                           ? const Color(0xFF1A73E8)
                           : const Color(0xFF43A047),
                     ),
-                    textDirection: TextDirection.rtl,
+                    textDirection: Directionality.of(context),
                   );
                 }).toList();
               },

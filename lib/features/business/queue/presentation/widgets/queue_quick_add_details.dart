@@ -249,7 +249,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         TextField(
           controller: _phoneCtrl,
           keyboardType: TextInputType.phone,
-          textDirection: TextDirection.ltr,
+          textDirection: Directionality.of(context),
           decoration: _inputDecoration(context,
             hint: '07XXXXXXXX',
             prefixIcon: Icons.phone_outlined,
@@ -304,7 +304,7 @@ class _DetailsStepState extends State<_DetailsStep> {
         const SizedBox(height: AppSpacing.xs),
         TextField(
           controller: _plateCtrl,
-          textDirection: TextDirection.ltr,
+          textDirection: Directionality.of(context),
           decoration: _inputDecoration(context, hint: '42-12345'),
         ),
         const SizedBox(height: AppSpacing.lg),
@@ -505,7 +505,7 @@ class _DetailsStepState extends State<_DetailsStep> {
             controller: _discountValueCtrl,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: (_) => setState(() {}),
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             decoration: _inputDecoration(context,
               hint: _discountType == 'percentage' ? '10' : '1.5',
               prefixIcon: _discountType == 'percentage'

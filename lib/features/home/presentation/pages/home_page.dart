@@ -20,6 +20,7 @@ import 'package:honak/shared/auth/auth_state.dart';
 import 'package:honak/shared/auth/auth_provider.dart';
 import 'package:honak/shared/widgets/empty_state.dart';
 import 'package:honak/shared/widgets/error_view.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/skeleton/skeleton.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -35,48 +36,40 @@ class HomePage extends ConsumerWidget {
     final authState = ref.watch(authProvider).valueOrNull;
     final isGuest = authState is AuthGuest;
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Directionality(
-          textDirection: TextDirection.ltr,
-          child: AppBar(
-            centerTitle: true,
-            title: SvgPicture.asset(
-              Theme.of(context).brightness == Brightness.dark
-                  ? 'assets/icons/icon_dark.svg'
-                  : 'assets/icons/icon_light.svg',
-              height: 28,
-            ),
-            actions: [
-              Stack(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.notifications_outlined),
-                    onPressed: () => context.push(Routes.notifications),
-                  ),
-                  Positioned(
-                    top: 12,
-                    right: 12,
-                    child: Container(
-                      width: 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: context.colorScheme.primary,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: context.colorScheme.surface,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+    return AppScreen(
+      title: SvgPicture.asset(
+        Theme.of(context).brightness == Brightness.dark
+            ? 'assets/icons/icon_dark.svg'
+            : 'assets/icons/icon_light.svg',
+        height: 28,
       ),
+      showBack: false,
+      actions: [
+        Stack(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.notifications_outlined),
+              onPressed: () => context.push(Routes.notifications),
+            ),
+            Positioned(
+              top: 12,
+              right: 12,
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primary,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: context.colorScheme.surface,
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
       body: RefreshIndicator(
         onRefresh: () async {
           ref.invalidate(feedPostsProvider);
@@ -160,9 +153,7 @@ class HomePage extends ConsumerWidget {
                   ),
 
                 // 3. Quick categories
-                const SliverToBoxAdapter(
-                  child: QuickCategories(),
-                ),
+                const SliverToBoxAdapter(child: QuickCategories()),
 
                 // 4. Promo banner carousel
                 SliverToBoxAdapter(
@@ -178,36 +169,33 @@ class HomePage extends ConsumerWidget {
                 // 5. First batch of posts (0-2)
                 if (posts.isNotEmpty)
                   SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final post = posts[index].post;
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppSpacing.lg,
-                          ),
-                          child: Column(
-                            children: [
-                              PostCard(
-                                post: post,
-                                onPageTap: () => context
-                                    .push(Routes.pagePath(post.page.slug)),
-                                onPostTap: () =>
-                                    context.push(Routes.postPath(post.id)),
-                                onProductTap:
-                                    post.metadata?['item_id'] != null
-                                        ? () => context.push(
-                                            Routes.productPath(
-                                                post.metadata!['item_id']
-                                                    as String))
-                                        : null,
-                              ),
-                              SizedBox(height: AppSpacing.md),
-                            ],
-                          ),
-                        );
-                      },
-                      childCount: posts.length < 3 ? posts.length : 3,
-                    ),
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final post = posts[index].post;
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppSpacing.lg,
+                        ),
+                        child: Column(
+                          children: [
+                            PostCard(
+                              post: post,
+                              onPageTap: () =>
+                                  context.push(Routes.pagePath(post.page.slug)),
+                              onPostTap: () =>
+                                  context.push(Routes.postPath(post.id)),
+                              onProductTap: post.metadata?['item_id'] != null
+                                  ? () => context.push(
+                                      Routes.productPath(
+                                        post.metadata!['item_id'] as String,
+                                      ),
+                                    )
+                                  : null,
+                            ),
+                            SizedBox(height: AppSpacing.md),
+                          ],
+                        ),
+                      );
+                    }, childCount: posts.length < 3 ? posts.length : 3),
                   ),
 
                 // 6. Nearby pages card (if exists)
@@ -224,42 +212,37 @@ class HomePage extends ConsumerWidget {
                 // 7. Remaining posts (3+)
                 if (posts.length > 3)
                   SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final post = posts[index + 3].post;
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppSpacing.lg,
-                          ),
-                          child: Column(
-                            children: [
-                              PostCard(
-                                post: post,
-                                onPageTap: () => context
-                                    .push(Routes.pagePath(post.page.slug)),
-                                onPostTap: () =>
-                                    context.push(Routes.postPath(post.id)),
-                                onProductTap:
-                                    post.metadata?['item_id'] != null
-                                        ? () => context.push(
-                                            Routes.productPath(
-                                                post.metadata!['item_id']
-                                                    as String))
-                                        : null,
-                              ),
-                              SizedBox(height: AppSpacing.md),
-                            ],
-                          ),
-                        );
-                      },
-                      childCount: posts.length - 3,
-                    ),
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final post = posts[index + 3].post;
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppSpacing.lg,
+                        ),
+                        child: Column(
+                          children: [
+                            PostCard(
+                              post: post,
+                              onPageTap: () =>
+                                  context.push(Routes.pagePath(post.page.slug)),
+                              onPostTap: () =>
+                                  context.push(Routes.postPath(post.id)),
+                              onProductTap: post.metadata?['item_id'] != null
+                                  ? () => context.push(
+                                      Routes.productPath(
+                                        post.metadata!['item_id'] as String,
+                                      ),
+                                    )
+                                  : null,
+                            ),
+                            SizedBox(height: AppSpacing.md),
+                          ],
+                        ),
+                      );
+                    }, childCount: posts.length - 3),
                   ),
 
                 // Bottom padding
-                SliverToBoxAdapter(
-                  child: SizedBox(height: AppSpacing.xxl),
-                ),
+                SliverToBoxAdapter(child: SizedBox(height: AppSpacing.xxl)),
               ],
             );
           },
@@ -274,8 +257,6 @@ class _FeedSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: SkeletonFeedPost(count: 4),
-    );
+    return const SingleChildScrollView(child: SkeletonFeedPost(count: 4));
   }
 }

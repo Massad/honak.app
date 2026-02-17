@@ -8,6 +8,8 @@ import 'package:honak/features/requests/domain/entities/entities.dart';
 import 'package:honak/features/requests/presentation/providers/provider.dart';
 import 'package:honak/features/requests/presentation/widgets/request_list_card.dart';
 import 'package:honak/features/requests/presentation/widgets/request_list_skeleton.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Customer "My Requests" page — "\u0637\u0644\u0628\u0627\u062a\u064a".
@@ -25,7 +27,8 @@ class _RequestListPageState extends ConsumerState<RequestListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
+      useSafeArea: false,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
@@ -33,12 +36,9 @@ class _RequestListPageState extends ConsumerState<RequestListPage> {
             automaticallyImplyLeading: false,
             title: const Text('\u0637\u0644\u0628\u0627\u062a\u064a'),
             actions: [
-              Directionality(
-                textDirection: TextDirection.ltr,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-                  onPressed: () => Navigator.of(context).maybePop(),
-                ),
+              IconButton(
+                icon: Icon(AppDirection.backIcon(context), size: 20),
+                onPressed: () => Navigator.of(context).maybePop(),
               ),
             ],
             bottom: PreferredSize(
@@ -72,7 +72,10 @@ class _FilterTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm,
+        AppSpacing.lg,
+        0,
+        AppSpacing.lg,
+        AppSpacing.sm,
       ),
       child: Row(
         children: [
@@ -120,13 +123,17 @@ class _TabChip extends StatelessWidget {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : context.colorScheme.surfaceContainerLow,
+          color: isSelected
+              ? AppColors.primary
+              : context.colorScheme.surfaceContainerLow,
           borderRadius: AppRadius.pill,
         ),
         child: Text(
           label,
           style: context.textTheme.bodySmall?.copyWith(
-            color: isSelected ? Colors.white : context.colorScheme.onSurfaceVariant,
+            color: isSelected
+                ? Colors.white
+                : context.colorScheme.onSurfaceVariant,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
             fontSize: 12,
           ),
@@ -146,10 +153,10 @@ class _RequestList extends ConsumerWidget {
   const _RequestList({required this.tab});
 
   String? get _statusFilter => switch (tab) {
-        _Tab.active => 'active',
-        _Tab.completed => 'completed',
-        _Tab.all => null,
-      };
+    _Tab.active => 'active',
+    _Tab.completed => 'completed',
+    _Tab.all => null,
+  };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -171,15 +178,15 @@ class _RequestList extends ConsumerWidget {
           child: ListView.separated(
             padding: const EdgeInsets.all(AppSpacing.lg),
             itemCount: filtered.length,
-            separatorBuilder: (_, __) =>
-                const SizedBox(height: AppSpacing.md),
+            separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.md),
             itemBuilder: (context, index) {
               final request = filtered[index];
               return RequestListCard(
                 request: request,
                 onTap: () {
                   context.showSnackBar(
-                      '\u062a\u0641\u0627\u0635\u064a\u0644 \u0627\u0644\u0637\u0644\u0628: ${request.id}');
+                    '\u062a\u0641\u0627\u0635\u064a\u0644 \u0627\u0644\u0637\u0644\u0628: ${request.id}',
+                  );
                 },
               );
             },
@@ -192,8 +199,7 @@ class _RequestList extends ConsumerWidget {
   List<CustomerRequest> _filterByTab(List<CustomerRequest> requests) {
     return switch (tab) {
       _Tab.active => requests.where((r) => _isActive(r.status)).toList(),
-      _Tab.completed =>
-        requests.where((r) => _isCompleted(r.status)).toList(),
+      _Tab.completed => requests.where((r) => _isCompleted(r.status)).toList(),
       _Tab.all => requests,
     };
   }
@@ -233,8 +239,11 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.shopping_bag_outlined,
-                size: 48, color: context.colorScheme.outline),
+            Icon(
+              Icons.shopping_bag_outlined,
+              size: 48,
+              color: context.colorScheme.outline,
+            ),
             const SizedBox(height: AppSpacing.lg),
             Text(
               '\u0644\u0627 \u062a\u0648\u062c\u062f \u0637\u0644\u0628\u0627\u062a',
@@ -262,7 +271,11 @@ class _ErrorState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline, size: 48, color: context.colorScheme.outline),
+            Icon(
+              Icons.error_outline,
+              size: 48,
+              color: context.colorScheme.outline,
+            ),
             const SizedBox(height: AppSpacing.lg),
             Text(
               '\u062d\u062f\u062b \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0637\u0644\u0628\u0627\u062a',
@@ -273,7 +286,8 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             btn.Button(
               onPressed: onRetry,
-              label: '\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629',
+              label:
+                  '\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629',
               icon: const btn.ButtonIcon(Icons.refresh),
               variant: btn.Variant.text,
             ),

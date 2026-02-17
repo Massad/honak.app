@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
@@ -173,7 +174,10 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSheetState) => Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(
-            AppSpacing.xl, AppSpacing.xl, AppSpacing.xl, AppSpacing.xxxl,
+            AppSpacing.xl,
+            AppSpacing.xl,
+            AppSpacing.xl,
+            AppSpacing.xxxl,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -181,7 +185,11 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.error_outline, color: AppColors.error, size: 18),
+                  const Icon(
+                    Icons.error_outline,
+                    color: AppColors.error,
+                    size: 18,
+                  ),
                   const SizedBox(width: AppSpacing.sm),
                   Text(
                     context.l10n.catMgrDeleteTitle(cat.name),
@@ -192,7 +200,10 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
               const SizedBox(height: AppSpacing.lg),
               if (cat.itemCount > 0) ...[
                 Text(
-                  context.l10n.catMgrDeleteHasItems(cat.itemCount, widget.itemLabelAr),
+                  context.l10n.catMgrDeleteHasItems(
+                    cat.itemCount,
+                    widget.itemLabelAr,
+                  ),
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -204,15 +215,19 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                   onTap: () => setSheetState(() => reassignTo = ''),
                 ),
                 const SizedBox(height: AppSpacing.xs),
-                ...others.map((c) => Padding(
-                  padding: const EdgeInsetsDirectional.only(top: AppSpacing.xs),
-                  child: _RadioOption(
-                    label: c.name,
-                    trailing: '${c.itemCount} ${widget.itemLabelAr}',
-                    selected: reassignTo == c.id,
-                    onTap: () => setSheetState(() => reassignTo = c.id),
+                ...others.map(
+                  (c) => Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      top: AppSpacing.xs,
+                    ),
+                    child: _RadioOption(
+                      label: c.name,
+                      trailing: '${c.itemCount} ${widget.itemLabelAr}',
+                      selected: reassignTo == c.id,
+                      onTap: () => setSheetState(() => reassignTo = c.id),
+                    ),
                   ),
-                )),
+                ),
               ] else
                 Text(
                   context.l10n.catMgrDeleteEmpty,
@@ -222,7 +237,7 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                 ),
               const SizedBox(height: AppSpacing.lg),
               Row(
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 children: [
                   Expanded(
                     child: btn.Button(
@@ -241,7 +256,10 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                         _performDelete(cat);
                       },
                       label: context.l10n.catMgrDeleteBtn,
-                      icon: const btn.ButtonIcon(Icons.delete_outline, size: 16),
+                      icon: const btn.ButtonIcon(
+                        Icons.delete_outline,
+                        size: 16,
+                      ),
                       style: btn.Style.danger,
                       size: btn.ButtonSize.large,
                       expand: true,
@@ -267,12 +285,9 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      appBar: AppBar(
-        title: Text(context.l10n.catMgrTitle),
-        centerTitle: true,
-      ),
+    return AppScreen(
+      title: Text(context.l10n.catMgrTitle),
+      showBack: true,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
@@ -292,31 +307,33 @@ class _CategoryManagerPageState extends State<_CategoryManagerPage> {
                 onCancel: _cancelAdd,
               ),
             for (var index = 0; index < _categories.length; index++) ...[
-              Builder(builder: (context) {
-                final cat = _categories[index];
-                final isEditing = _editingId == cat.id;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                  child: _CategoryCard(
-                    category: cat,
-                    index: index,
-                    totalCount: _categories.length,
-                    itemLabelAr: widget.itemLabelAr,
-                    isEditing: isEditing,
-                    editController: isEditing ? _editController : null,
-                    onEdit: () => _startEdit(cat),
-                    onConfirmEdit: _confirmEdit,
-                    onCancelEdit: _cancelEdit,
-                    onDelete: () => _showDeleteSheet(cat),
-                    onMoveUp: index > 0
-                        ? () => _moveCategory(index, -1)
-                        : null,
-                    onMoveDown: index < _categories.length - 1
-                        ? () => _moveCategory(index, 1)
-                        : null,
-                  ),
-                );
-              }),
+              Builder(
+                builder: (context) {
+                  final cat = _categories[index];
+                  final isEditing = _editingId == cat.id;
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                    child: _CategoryCard(
+                      category: cat,
+                      index: index,
+                      totalCount: _categories.length,
+                      itemLabelAr: widget.itemLabelAr,
+                      isEditing: isEditing,
+                      editController: isEditing ? _editController : null,
+                      onEdit: () => _startEdit(cat),
+                      onConfirmEdit: _confirmEdit,
+                      onCancelEdit: _cancelEdit,
+                      onDelete: () => _showDeleteSheet(cat),
+                      onMoveUp: index > 0
+                          ? () => _moveCategory(index, -1)
+                          : null,
+                      onMoveDown: index < _categories.length - 1
+                          ? () => _moveCategory(index, 1)
+                          : null,
+                    ),
+                  );
+                },
+              ),
             ],
             if (_categories.isEmpty && !_addMode)
               _EmptyState(onAdd: () => setState(() => _addMode = true)),

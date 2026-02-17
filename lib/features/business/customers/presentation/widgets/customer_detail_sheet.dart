@@ -103,7 +103,7 @@ class _CustomerDetailContentState extends State<_CustomerDetailContent> {
 
                 // ── Action buttons ──
                 Row(
-                  textDirection: TextDirection.ltr,
+                  textDirection: Directionality.of(context),
                   children: [
                     Expanded(
                       child: _ActionButton(
@@ -199,7 +199,7 @@ class _IdentityCard extends StatelessWidget {
             if (c.phone != null) ...[
               const SizedBox(height: 2),
               Directionality(
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 child: Text(
                   c.phone!,
                   style: const TextStyle(
@@ -694,7 +694,7 @@ class _NotesSection extends StatelessWidget {
           maxLines: 3,
           minLines: 2,
           style: const TextStyle(fontSize: 12),
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           decoration: InputDecoration(
             hintText: l10n.bizCustomerNotesHint,
             hintStyle: const TextStyle(

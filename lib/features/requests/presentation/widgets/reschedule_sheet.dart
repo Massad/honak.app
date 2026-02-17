@@ -190,7 +190,7 @@ class _RescheduleSheetState extends State<RescheduleSheet> {
     return TextField(
       controller: controller,
       maxLines: maxLines,
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hint,

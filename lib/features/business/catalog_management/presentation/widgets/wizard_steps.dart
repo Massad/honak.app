@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/domain/entities/biz_category.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 import 'package:honak/shared/widgets/selection_sheet.dart';
 
@@ -318,7 +319,7 @@ class WizardStepAvailability extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(
-                    Icons.chevron_left,
+                    AppDirection.chevronStartIcon(context),
                     size: 18,
                     color: AppColors.primary.withValues(alpha: 0.4),
                   ),
@@ -403,7 +404,7 @@ class WizardBottomNav extends StatelessWidget {
         border: Border(top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
       ),
       child: Row(
-        textDirection: TextDirection.ltr,
+        textDirection: Directionality.of(context),
         children: [
           // Back / Cancel
           btn.Button(

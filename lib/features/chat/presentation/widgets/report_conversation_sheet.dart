@@ -3,6 +3,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart';
 
@@ -233,7 +234,7 @@ class _ReportConversationSheetState extends State<ReportConversationSheet> {
               child: Padding(
                 padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
                 child: Icon(
-                  Icons.arrow_forward_ios,
+                  AppDirection.backIcon(context),
                   size: 16,
                   color: context.colorScheme.onSurfaceVariant,
                 ),
@@ -777,7 +778,7 @@ class _ScopeOption extends StatelessWidget {
               ),
             ),
             Icon(
-              Icons.chevron_left,
+              AppDirection.chevronStartIcon(context),
               size: 16,
               color: context.colorScheme.outlineVariant,
             ),

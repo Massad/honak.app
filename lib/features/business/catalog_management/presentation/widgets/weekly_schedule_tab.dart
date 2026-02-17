@@ -415,7 +415,7 @@ class WeeklyScheduleTab extends StatelessWidget {
               .map((t) => DropdownMenuItem(
                     value: t,
                     child: Text(t,
-                        textDirection: TextDirection.ltr,
+                        textDirection: Directionality.of(context),
                         style: const TextStyle(fontSize: 13)),
                   ))
               .toList(),

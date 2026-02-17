@@ -112,7 +112,7 @@ class BookingNoteField extends StatelessWidget {
         TextFormField(
           controller: controller,
           maxLines: 2,
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           decoration: InputDecoration(
             hintText: 'أي ملاحظات إضافية...',
             hintStyle: theme.textTheme.bodySmall

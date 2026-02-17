@@ -17,6 +17,7 @@ import 'package:honak/features/business/insights/presentation/widgets/ranked_lis
 import 'package:honak/features/business/insights/presentation/widgets/revenue_chart.dart';
 import 'package:honak/features/business/insights/presentation/widgets/smart_tips_section.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BusinessInsightsPage extends ConsumerWidget {
@@ -62,7 +63,8 @@ class _FullInsightsScreen extends ConsumerWidget {
     final period = ref.watch(insightsPeriodProvider);
     final insightsAsync = ref.watch(insightsDataProvider(pageId));
 
-    return Scaffold(
+    return AppScreen(
+      showBack: false,
       backgroundColor: const Color(0xFFF5F5F5),
       body: Column(
         children: [
@@ -77,13 +79,10 @@ class _FullInsightsScreen extends ConsumerWidget {
           Expanded(
             child: insightsAsync.when(
               loading: () => const _InsightsSkeleton(),
-              error: (_, __) => Center(
-                child: Text(context.l10n.insightsLoadError),
-              ),
-              data: (data) => _InsightsContent(
-                data: data,
-                archetypeKey: archetypeKey,
-              ),
+              error: (_, __) =>
+                  Center(child: Text(context.l10n.insightsLoadError)),
+              data: (data) =>
+                  _InsightsContent(data: data, archetypeKey: archetypeKey),
             ),
           ),
         ],
@@ -137,11 +136,18 @@ class _StickyHeader extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.bar_chart_rounded, size: 16, color: Color(0xFF1A73E8)),
+                  const Icon(
+                    Icons.bar_chart_rounded,
+                    size: 16,
+                    color: Color(0xFF1A73E8),
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     typeNameAr,
-                    style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF6B7280),
+                    ),
                   ),
                 ],
               ),
@@ -157,7 +163,10 @@ class _StickyHeader extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () => onPeriodChanged(p),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? const Color(0xFF1A73E8)
@@ -168,7 +177,9 @@ class _StickyHeader extends StatelessWidget {
                       p.label(context.l10n),
                       style: TextStyle(
                         fontSize: 12,
-                        color: isSelected ? Colors.white : const Color(0xFF6B7280),
+                        color: isSelected
+                            ? Colors.white
+                            : const Color(0xFF6B7280),
                       ),
                     ),
                   ),
@@ -190,10 +201,7 @@ class _InsightsContent extends StatelessWidget {
   final InsightsData data;
   final String archetypeKey;
 
-  const _InsightsContent({
-    required this.data,
-    required this.archetypeKey,
-  });
+  const _InsightsContent({required this.data, required this.archetypeKey});
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +251,8 @@ class _InsightsContent extends StatelessWidget {
         ],
 
         // 8. Booking Calendar (service_booking + reservation)
-        if (archetypeKey == 'service_booking' || archetypeKey == 'reservation') ...[
+        if (archetypeKey == 'service_booking' ||
+            archetypeKey == 'reservation') ...[
           const SizedBox(height: 20),
           const BookingCalendar(),
         ],
@@ -273,17 +282,21 @@ class _InsightsSkeleton extends StatelessWidget {
           // KPI grid skeleton (2x2)
           _shimmerBox(height: 14, width: 80),
           const SizedBox(height: 8),
-          Row(children: [
-            Expanded(child: _shimmerBox(height: 90)),
-            const SizedBox(width: 8),
-            Expanded(child: _shimmerBox(height: 90)),
-          ]),
+          Row(
+            children: [
+              Expanded(child: _shimmerBox(height: 90)),
+              const SizedBox(width: 8),
+              Expanded(child: _shimmerBox(height: 90)),
+            ],
+          ),
           const SizedBox(height: 8),
-          Row(children: [
-            Expanded(child: _shimmerBox(height: 90)),
-            const SizedBox(width: 8),
-            Expanded(child: _shimmerBox(height: 90)),
-          ]),
+          Row(
+            children: [
+              Expanded(child: _shimmerBox(height: 90)),
+              const SizedBox(width: 8),
+              Expanded(child: _shimmerBox(height: 90)),
+            ],
+          ),
           const SizedBox(height: 20),
           // Chart skeleton
           _shimmerBox(height: 260),
@@ -294,11 +307,13 @@ class _InsightsSkeleton extends StatelessWidget {
           // More KPI skeleton
           _shimmerBox(height: 14, width: 100),
           const SizedBox(height: 8),
-          Row(children: [
-            Expanded(child: _shimmerBox(height: 90)),
-            const SizedBox(width: 8),
-            Expanded(child: _shimmerBox(height: 90)),
-          ]),
+          Row(
+            children: [
+              Expanded(child: _shimmerBox(height: 90)),
+              const SizedBox(width: 8),
+              Expanded(child: _shimmerBox(height: 90)),
+            ],
+          ),
         ],
       ),
     );
@@ -331,9 +346,7 @@ class _DirectoryInsightsContent extends ConsumerWidget {
 
     return dashData.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => Center(
-        child: Text(context.l10n.insightsDataLoadError),
-      ),
+      error: (_, __) => Center(child: Text(context.l10n.insightsDataLoadError)),
       data: (data) {
         return ListView(
           padding: const EdgeInsets.all(AppSpacing.lg),

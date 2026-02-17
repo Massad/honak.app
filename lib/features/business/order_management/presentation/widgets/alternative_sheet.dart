@@ -7,6 +7,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/shared/entities/money.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/widgets/app_sheet.dart';
 import 'package:honak/shared/widgets/button.dart';
 import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
@@ -359,7 +360,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
 
         TextField(
           controller: _noteController,
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           textAlign: TextAlign.right,
           maxLines: 3,
           onChanged: (_) => setState(() {}),
@@ -415,7 +416,7 @@ class _AlternativeSheetState extends ConsumerState<AlternativeSheet> {
             ),
             const SizedBox(width: 4),
             Icon(
-              Icons.arrow_forward_ios,
+              AppDirection.backIcon(context),
               size: 12,
               color: AppColors.primary,
             ),

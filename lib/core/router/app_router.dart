@@ -64,7 +64,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       final auth = ref.read(authProvider).valueOrNull;
       final location = state.matchedLocation;
 
-      final isAuthRoute = location == Routes.welcome ||
+      final isAuthRoute =
+          location == Routes.welcome ||
           location == Routes.login ||
           location == Routes.loginVerify ||
           location == Routes.loginProfile;
@@ -240,8 +241,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.checkout,
-        builder: (context, state) =>
-            const _PlaceholderPage(title: 'Checkout'),
+        builder: (context, state) => const _PlaceholderPage(title: 'Checkout'),
       ),
       GoRoute(
         path: Routes.orderDetail,
@@ -395,6 +395,54 @@ class _CustomerBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentIndex = navigationShell.currentIndex;
+    final isLtr = Directionality.of(context) == TextDirection.ltr;
+    final navItems = <Widget>[
+      _NavItem(
+        index: 0,
+        currentIndex: currentIndex,
+        icon: Icons.home_outlined,
+        activeIcon: Icons.home,
+        label: 'الرئيسية',
+        onTap: () =>
+            navigationShell.goBranch(0, initialLocation: currentIndex == 0),
+      ),
+      _NavItem(
+        index: 1,
+        currentIndex: currentIndex,
+        icon: Icons.explore_outlined,
+        activeIcon: Icons.explore,
+        label: 'استكشاف',
+        onTap: () =>
+            navigationShell.goBranch(1, initialLocation: currentIndex == 1),
+      ),
+      _CenterTab(
+        isActive: currentIndex == 2,
+        badgeCount: badges[NavTab.orders],
+        onTap: () =>
+            navigationShell.goBranch(2, initialLocation: currentIndex == 2),
+      ),
+      _NavItem(
+        index: 3,
+        currentIndex: currentIndex,
+        icon: Icons.chat_outlined,
+        activeIcon: Icons.chat,
+        label: 'المحادثات',
+        badgeCount: badges[NavTab.chat],
+        onTap: () =>
+            navigationShell.goBranch(3, initialLocation: currentIndex == 3),
+      ),
+      _NavItem(
+        index: 4,
+        currentIndex: currentIndex,
+        icon: Icons.person_outlined,
+        activeIcon: Icons.person,
+        label: 'حسابي',
+        badgeCount: badges[NavTab.account],
+        onTap: () =>
+            navigationShell.goBranch(4, initialLocation: currentIndex == 4),
+      ),
+    ];
+    final visualItems = isLtr ? navItems.reversed.toList() : navItems;
 
     return Container(
       decoration: BoxDecoration(
@@ -416,62 +464,7 @@ class _CustomerBottomNav extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _NavItem(
-                index: 0,
-                currentIndex: currentIndex,
-                icon: Icons.home_outlined,
-                activeIcon: Icons.home,
-                label: 'الرئيسية',
-                onTap: () => navigationShell.goBranch(
-                  0,
-                  initialLocation: currentIndex == 0,
-                ),
-              ),
-              _NavItem(
-                index: 1,
-                currentIndex: currentIndex,
-                icon: Icons.explore_outlined,
-                activeIcon: Icons.explore,
-                label: 'استكشاف',
-                onTap: () => navigationShell.goBranch(
-                  1,
-                  initialLocation: currentIndex == 1,
-                ),
-              ),
-              _CenterTab(
-                isActive: currentIndex == 2,
-                badgeCount: badges[NavTab.orders],
-                onTap: () => navigationShell.goBranch(
-                  2,
-                  initialLocation: currentIndex == 2,
-                ),
-              ),
-              _NavItem(
-                index: 3,
-                currentIndex: currentIndex,
-                icon: Icons.chat_outlined,
-                activeIcon: Icons.chat,
-                label: 'المحادثات',
-                badgeCount: badges[NavTab.chat],
-                onTap: () => navigationShell.goBranch(
-                  3,
-                  initialLocation: currentIndex == 3,
-                ),
-              ),
-              _NavItem(
-                index: 4,
-                currentIndex: currentIndex,
-                icon: Icons.person_outlined,
-                activeIcon: Icons.person,
-                label: 'حسابي',
-                badgeCount: badges[NavTab.account],
-                onTap: () => navigationShell.goBranch(
-                  4,
-                  initialLocation: currentIndex == 4,
-                ),
-              ),
-            ],
+            children: visualItems,
           ),
         ),
       ),

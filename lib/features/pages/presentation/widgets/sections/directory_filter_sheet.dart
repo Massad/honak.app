@@ -282,7 +282,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent> {
               ),
               const SizedBox(height: AppSpacing.md),
               Row(
-                textDirection: TextDirection.ltr,
+                textDirection: Directionality.of(context),
                 children: [
                   Expanded(
                     child: btn.Button(

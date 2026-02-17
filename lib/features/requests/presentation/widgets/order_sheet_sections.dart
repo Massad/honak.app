@@ -210,7 +210,7 @@ class OrderNoteField extends StatelessWidget {
         TextFormField(
           controller: controller,
           maxLines: 3,
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           decoration: InputDecoration(
             hintText: 'مثال: الرجاء التوصيل الصباح...',
             hintStyle: theme.textTheme.bodySmall

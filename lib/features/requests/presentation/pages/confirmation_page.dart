@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/button.dart' as btn;
 
 /// Full-screen success page shown after submitting a request.
@@ -35,12 +36,12 @@ class RequestConfirmationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isAlwaysManual =
-        _manualApprovalTypes.contains(requestType);
+    final isAlwaysManual = _manualApprovalTypes.contains(requestType);
     final showPending = !isAutoApproved || isAlwaysManual;
     final typeLabel = _typeLabels[requestType] ?? 'الطلب';
 
-    return Scaffold(
+    return AppScreen(
+      useSafeArea: false,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -58,8 +59,8 @@ class RequestConfirmationPage extends StatelessWidget {
                 Text(
                   showPending ? 'تم الإرسال!' : 'تم التأكيد!',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
 
@@ -67,15 +68,15 @@ class RequestConfirmationPage extends StatelessWidget {
                 Text(
                   'تم إرسال $typeLabel إلى',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   businessName,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.primary,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(color: AppColors.primary),
                 ),
                 const SizedBox(height: AppSpacing.lg),
 
@@ -89,8 +90,8 @@ class RequestConfirmationPage extends StatelessWidget {
                       ? 'ستصلك إشعار عندما يردون على طلبك'
                       : 'ستصلك إشعار عندما يكون طلبك جاهز',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.xxl),
 
@@ -105,7 +106,7 @@ class RequestConfirmationPage extends StatelessWidget {
                 btn.Button(
                   onPressed: onBackToPage,
                   label: 'العودة للصفحة',
-                  icon: const btn.ButtonIcon(Icons.arrow_back),
+                  icon: btn.ButtonIcon.backArrow(),
                   variant: btn.Variant.outlined,
                   size: btn.ButtonSize.large,
                   expand: true,
@@ -148,15 +149,11 @@ class _StatusCard extends StatelessWidget {
   final bool showPending;
   final String requestType;
 
-  const _StatusCard({
-    required this.showPending,
-    required this.requestType,
-  });
+  const _StatusCard({required this.showPending, required this.requestType});
 
   @override
   Widget build(BuildContext context) {
-    final isServiceType =
-        const {'quote', 'inquiry'}.contains(requestType);
+    final isServiceType = const {'quote', 'inquiry'}.contains(requestType);
 
     if (showPending) {
       return Container(
@@ -184,9 +181,9 @@ class _StatusCard extends StatelessWidget {
                 Text(
                   'بانتظار الموافقة',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: const Color(0xFFFF8F00),
-                        fontWeight: FontWeight.w500,
-                      ),
+                    color: const Color(0xFFFF8F00),
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),
@@ -195,9 +192,9 @@ class _StatusCard extends StatelessWidget {
               isServiceType
                   ? 'سيقوم صاحب الخدمة بمراجعة طلبك والرد عليك'
                   : 'سيقوم صاحب المتجر بمراجعة طلبك وتأكيده',
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: const Color(0xFFFFB300),
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelSmall?.copyWith(color: const Color(0xFFFFB300)),
               textAlign: TextAlign.center,
             ),
           ],
@@ -213,9 +210,7 @@ class _StatusCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: AppColors.success.withValues(alpha: 0.05),
-        border: Border.all(
-          color: AppColors.success.withValues(alpha: 0.3),
-        ),
+        border: Border.all(color: AppColors.success.withValues(alpha: 0.3)),
         borderRadius: AppRadius.cardInner,
       ),
       child: Column(
@@ -223,18 +218,14 @@ class _StatusCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.bolt,
-                size: 14,
-                color: AppColors.success,
-              ),
+              const Icon(Icons.bolt, size: 14, color: AppColors.success),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'تم تأكيد طلبك تلقائياً',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.success,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  color: AppColors.success,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -242,8 +233,8 @@ class _StatusCard extends StatelessWidget {
           Text(
             'طلبك مؤكد وجاري التحضير',
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.success.withValues(alpha: 0.7),
-                ),
+              color: AppColors.success.withValues(alpha: 0.7),
+            ),
             textAlign: TextAlign.center,
           ),
         ],

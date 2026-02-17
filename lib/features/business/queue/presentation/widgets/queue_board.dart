@@ -8,6 +8,8 @@ import 'package:honak/features/business/queue/domain/entities/queue_stats.dart';
 import 'package:honak/features/business/queue/domain/entities/queue_status.dart';
 import 'package:honak/features/business/queue/presentation/widgets/queue_entry_card.dart';
 import 'package:honak/shared/entities/money.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 import 'queue_activity_utils.dart';
 import 'queue_detail_view.dart';
@@ -50,27 +52,32 @@ class _QueueBoardState extends State<QueueBoard> {
 
   // ── Grouped entries ──
 
-  List<QueueEntry> get _waiting => _queue
-      .where((e) =>
-          e.status == QueueStatus.waiting ||
-          e.status == QueueStatus.onTheWay)
-      .toList()
-    ..sort((a, b) => a.position.compareTo(b.position));
+  List<QueueEntry> get _waiting =>
+      _queue
+          .where(
+            (e) =>
+                e.status == QueueStatus.waiting ||
+                e.status == QueueStatus.onTheWay,
+          )
+          .toList()
+        ..sort((a, b) => a.position.compareTo(b.position));
 
-  List<QueueEntry> get _inProgress => _queue
-      .where((e) => e.status == QueueStatus.inProgress)
-      .toList()
-    ..sort((a, b) => (a.startedAt ?? 0).compareTo(b.startedAt ?? 0));
+  List<QueueEntry> get _inProgress =>
+      _queue.where((e) => e.status == QueueStatus.inProgress).toList()
+        ..sort((a, b) => (a.startedAt ?? 0).compareTo(b.startedAt ?? 0));
 
   List<QueueEntry> get _ready =>
       _queue.where((e) => e.status == QueueStatus.ready).toList();
 
-  List<QueueEntry> get _completed => _queue
-      .where((e) =>
-          e.status == QueueStatus.completed ||
-          e.status == QueueStatus.noShow)
-      .toList()
-    ..sort((a, b) => (b.completedAt ?? 0).compareTo(a.completedAt ?? 0));
+  List<QueueEntry> get _completed =>
+      _queue
+          .where(
+            (e) =>
+                e.status == QueueStatus.completed ||
+                e.status == QueueStatus.noShow,
+          )
+          .toList()
+        ..sort((a, b) => (b.completedAt ?? 0).compareTo(a.completedAt ?? 0));
 
   // ── Live stats ──
 
@@ -78,9 +85,11 @@ class _QueueBoardState extends State<QueueBoard> {
       .where((e) => e.status == QueueStatus.completed)
       .fold(0, (sum, e) => sum + e.totalPrice);
 
-  int get _pendingRevenue =>
-      [..._waiting, ..._inProgress, ..._ready]
-          .fold(0, (sum, e) => sum + e.totalPrice);
+  int get _pendingRevenue => [
+    ..._waiting,
+    ..._inProgress,
+    ..._ready,
+  ].fold(0, (sum, e) => sum + e.totalPrice);
 
   int get _estimatedWaitMin {
     final ahead = _waiting.length;
@@ -99,13 +108,18 @@ class _QueueBoardState extends State<QueueBoard> {
         if (e.id != entryId) return e;
         final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
         return switch (e.status) {
-          QueueStatus.waiting ||
-          QueueStatus.onTheWay =>
-            e.copyWith(status: QueueStatus.inProgress, startedAt: now),
-          QueueStatus.inProgress =>
-            e.copyWith(status: QueueStatus.ready, completedAt: now),
-          QueueStatus.ready =>
-            e.copyWith(status: QueueStatus.completed, completedAt: now),
+          QueueStatus.waiting || QueueStatus.onTheWay => e.copyWith(
+            status: QueueStatus.inProgress,
+            startedAt: now,
+          ),
+          QueueStatus.inProgress => e.copyWith(
+            status: QueueStatus.ready,
+            completedAt: now,
+          ),
+          QueueStatus.ready => e.copyWith(
+            status: QueueStatus.completed,
+            completedAt: now,
+          ),
           _ => e,
         };
       }).toList();
@@ -153,11 +167,12 @@ class _QueueBoardState extends State<QueueBoard> {
         if (e.id != entryId) return e;
         final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
         return switch (newStatus) {
-          QueueStatus.inProgress =>
-            e.copyWith(status: newStatus, startedAt: now),
+          QueueStatus.inProgress => e.copyWith(
+            status: newStatus,
+            startedAt: now,
+          ),
           QueueStatus.completed ||
-          QueueStatus.noShow =>
-            e.copyWith(status: newStatus, completedAt: now),
+          QueueStatus.noShow => e.copyWith(status: newStatus, completedAt: now),
           _ => e.copyWith(status: newStatus),
         };
       }).toList();
@@ -166,10 +181,8 @@ class _QueueBoardState extends State<QueueBoard> {
   }
 
   void _openDetailView(QueueEntry entry) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+    showAppSheet<void>(
+      context,
       builder: (_) => QueueDetailView(
         entry: entry,
         onChangeStatus: (newStatus) {
@@ -178,11 +191,14 @@ class _QueueBoardState extends State<QueueBoard> {
               if (e.id != entry.id) return e;
               final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
               return switch (newStatus) {
-                QueueStatus.inProgress =>
-                  e.copyWith(status: newStatus, startedAt: now),
-                QueueStatus.completed ||
-                QueueStatus.noShow =>
-                  e.copyWith(status: newStatus, completedAt: now),
+                QueueStatus.inProgress => e.copyWith(
+                  status: newStatus,
+                  startedAt: now,
+                ),
+                QueueStatus.completed || QueueStatus.noShow => e.copyWith(
+                  status: newStatus,
+                  completedAt: now,
+                ),
                 _ => e.copyWith(status: newStatus),
               };
             }).toList();
@@ -200,11 +216,12 @@ class _QueueBoardState extends State<QueueBoard> {
     final inProgress = _inProgress;
     final ready = _ready;
     final completed = _completed;
-    final completedCount =
-        completed.where((e) => e.status == QueueStatus.completed).length;
+    final completedCount = completed
+        .where((e) => e.status == QueueStatus.completed)
+        .length;
 
-    return Scaffold(
-
+    return AppScreen(
+      showBack: false,
       body: CustomScrollView(
         slivers: [
           // ── Sticky header ──
@@ -216,8 +233,7 @@ class _QueueBoardState extends State<QueueBoard> {
               completedCount: completedCount,
               estimatedWaitMin: _estimatedWaitMin,
               isPaused: _pauseQueue,
-              onTogglePause: () =>
-                  setState(() => _pauseQueue = !_pauseQueue),
+              onTogglePause: () => setState(() => _pauseQueue = !_pauseQueue),
               onAdd: widget.onAdd,
               activeFilter: _activeFilter,
               onFilterChanged: (filter) => setState(() {
@@ -265,7 +281,8 @@ class _QueueBoardState extends State<QueueBoard> {
                     onRemove: _removeEntry,
                     onOpenDetail: _openDetailView,
                     onChangeStatus: _changeStatus,
-                    onOpenChat: () => _showToast(context.l10n.queueChatComingSoon),
+                    onOpenChat: () =>
+                        _showToast(context.l10n.queueChatComingSoon),
                   ),
                 ],
 
@@ -290,7 +307,8 @@ class _QueueBoardState extends State<QueueBoard> {
                     onRemove: _removeEntry,
                     onOpenDetail: _openDetailView,
                     onChangeStatus: _changeStatus,
-                    onOpenChat: () => _showToast(context.l10n.queueChatComingSoon),
+                    onOpenChat: () =>
+                        _showToast(context.l10n.queueChatComingSoon),
                   ),
                 ],
 
@@ -314,7 +332,8 @@ class _QueueBoardState extends State<QueueBoard> {
                     onRemove: _removeEntry,
                     onOpenDetail: _openDetailView,
                     onChangeStatus: _changeStatus,
-                    onOpenChat: () => _showToast(context.l10n.queueChatComingSoon),
+                    onOpenChat: () =>
+                        _showToast(context.l10n.queueChatComingSoon),
                   ),
                 ],
 
@@ -325,7 +344,8 @@ class _QueueBoardState extends State<QueueBoard> {
                   _CompletedSection(
                     entries: completed,
                     isExpanded:
-                        _showCompleted || _activeFilter == _QueueFilter.completed,
+                        _showCompleted ||
+                        _activeFilter == _QueueFilter.completed,
                     onToggle: () =>
                         setState(() => _showCompleted = !_showCompleted),
                   ),

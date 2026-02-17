@@ -152,7 +152,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                     TextField(
                       controller: _phoneCtrl,
                       keyboardType: TextInputType.phone,
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       textAlign: TextAlign.right,
                       onChanged: (_) => setState(() {}),
                       decoration: InputDecoration(
@@ -198,7 +198,7 @@ class _AddMemberContentState extends State<_AddMemberContent> {
                       Wrap(
                         spacing: AppSpacing.sm,
                         runSpacing: AppSpacing.sm,
-                        textDirection: TextDirection.rtl,
+                        textDirection: Directionality.of(context),
                         children: _suggestedRoles.map((role) {
                           final isSelected =
                               _selectedRoleLabel == role.labelAr;

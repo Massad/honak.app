@@ -6,6 +6,7 @@ import 'package:honak/features/business/page_settings/domain/entities/tenant.dar
 import 'package:honak/features/business/page_settings/presentation/providers/tenant_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
 import 'package:honak/shared/widgets/app_badge.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/button.dart';
 
 class TenantManager extends ConsumerWidget {
@@ -129,8 +130,8 @@ class _TenantBody extends ConsumerWidget {
     final typeCtrl = TextEditingController();
     var status = 'active';
 
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setS) => AlertDialog(
           title: const Text('إضافة مستأجر', textAlign: TextAlign.right, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
@@ -168,7 +169,7 @@ class _TenantBody extends ConsumerWidget {
           ),
           actions: [
             Row(
-              textDirection: TextDirection.ltr,
+              textDirection: Directionality.of(context),
               children: [
                 Button(
                   onPressed: () => Navigator.pop(ctx),

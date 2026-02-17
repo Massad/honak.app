@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/chat/domain/entities/message.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/app_image.dart';
 import 'package:honak/shared/widgets/button.dart';
 
@@ -78,8 +79,8 @@ class ImageMessage extends StatelessWidget {
   }
 
   void _showFullScreen(BuildContext context) {
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (context) => Dialog(
         backgroundColor: Colors.transparent,
         insetPadding: EdgeInsets.zero,

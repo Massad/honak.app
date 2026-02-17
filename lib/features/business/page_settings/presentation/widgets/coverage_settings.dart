@@ -5,6 +5,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/coverage_zone.dart';
 import 'package:honak/features/business/page_settings/presentation/providers/coverage_provider.dart';
 import 'package:honak/features/business/page_settings/presentation/widgets/sub_screen_app_bar.dart';
+import 'package:honak/shared/widgets/app_dialog.dart';
 import 'package:honak/shared/widgets/button.dart';
 
 class CoverageSettings extends ConsumerWidget {
@@ -274,8 +275,8 @@ class _NeighborhoodItem extends ConsumerWidget {
     final controller = TextEditingController(
       text: zone.deliveryFee?.toString() ?? '',
     );
-    showDialog(
-      context: context,
+    showAppDialog<void>(
+      context,
       builder: (ctx) => AlertDialog(
         title: Text(
           'رسوم توصيل — ${zone.name}',
@@ -301,7 +302,7 @@ class _NeighborhoodItem extends ConsumerWidget {
         ),
         actions: [
           Row(
-            textDirection: TextDirection.ltr,
+            textDirection: Directionality.of(context),
             children: [
               Button(
                 onPressed: () {

@@ -9,6 +9,7 @@ import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/account/domain/entities/address.dart';
 import 'package:honak/features/account/presentation/widgets/address_form.dart';
 import 'package:honak/features/account/presentation/widgets/sub_screen_header.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 
 class MyAddressesPage extends StatefulWidget {
   const MyAddressesPage({super.key});
@@ -28,10 +29,14 @@ class _MyAddressesPageState extends State<MyAddressesPage> {
   }
 
   Future<void> _loadAddresses() async {
-    final jsonStr = await rootBundle.loadString('assets/api/auth/addresses.json');
+    final jsonStr = await rootBundle.loadString(
+      'assets/api/auth/addresses.json',
+    );
     final list = jsonDecode(jsonStr) as List;
     setState(() {
-      _addresses = list.map((e) => Address.fromJson(e as Map<String, dynamic>)).toList();
+      _addresses = list
+          .map((e) => Address.fromJson(e as Map<String, dynamic>))
+          .toList();
       _loading = false;
     });
   }
@@ -108,41 +113,39 @@ class _MyAddressesPageState extends State<MyAddressesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScreen(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
       appBar: const SubScreenHeader(title: 'عناويني'),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : _addresses!.isEmpty
-              ? _EmptyState(onAdd: _openAddForm)
-              : ListView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.lg,
-                    vertical: AppSpacing.lg,
-                  ),
-                  children: [
-                    ..._addresses!.asMap().entries.map((entry) {
-                      final i = entry.key;
-                      final addr = entry.value;
-                      return Padding(
-                        padding: EdgeInsets.only(
-                          bottom: i < _addresses!.length - 1
-                              ? AppSpacing.md
-                              : 0,
-                        ),
-                        child: _AddressCard(
-                          address: addr,
-                          iconData: _iconForLabel(addr.labelIcon),
-                          onSetDefault: () => _setDefault(i),
-                          onEdit: () => _openEditForm(i),
-                          onDelete: () => _delete(i),
-                        ),
-                      );
-                    }),
-                    const SizedBox(height: AppSpacing.md),
-                    _AddButton(onTap: _openAddForm),
-                  ],
-                ),
+          ? _EmptyState(onAdd: _openAddForm)
+          : ListView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.lg,
+              ),
+              children: [
+                ..._addresses!.asMap().entries.map((entry) {
+                  final i = entry.key;
+                  final addr = entry.value;
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      bottom: i < _addresses!.length - 1 ? AppSpacing.md : 0,
+                    ),
+                    child: _AddressCard(
+                      address: addr,
+                      iconData: _iconForLabel(addr.labelIcon),
+                      onSetDefault: () => _setDefault(i),
+                      onEdit: () => _openEditForm(i),
+                      onDelete: () => _delete(i),
+                    ),
+                  );
+                }),
+                const SizedBox(height: AppSpacing.md),
+                _AddButton(onTap: _openAddForm),
+              ],
+            ),
     );
   }
 }
@@ -221,14 +224,12 @@ class _AddressCard extends StatelessWidget {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color:
-                                  AppColors.primary.withValues(alpha: 0.1),
+                              color: AppColors.primary.withValues(alpha: 0.1),
                               borderRadius: AppRadius.pill,
                             ),
                             child: Text(
                               'افتراضي',
-                              style:
-                                  context.textTheme.labelSmall?.copyWith(
+                              style: context.textTheme.labelSmall?.copyWith(
                                 fontSize: 9,
                                 color: AppColors.primary,
                               ),
@@ -338,10 +339,7 @@ class _ActionBtn extends StatelessWidget {
           children: [
             Icon(icon, size: 10, color: color),
             const SizedBox(width: AppSpacing.xs),
-            Text(
-              label,
-              style: TextStyle(fontSize: 10, color: color),
-            ),
+            Text(label, style: TextStyle(fontSize: 10, color: color)),
           ],
         ),
       ),
@@ -422,11 +420,7 @@ class _AddButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.add,
-                size: 18,
-                color: AppColors.textSecondary,
-              ),
+              Icon(Icons.add, size: 18, color: AppColors.textSecondary),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 'إضافة عنوان جديد',

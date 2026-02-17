@@ -1598,7 +1598,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     required VoidCallback onCancel,
   }) {
     return Row(
-      textDirection: TextDirection.ltr,
+      textDirection: Directionality.of(context),
       children: [
         GestureDetector(
           onTap: onCancel,
@@ -1656,7 +1656,7 @@ class _VillaSettingsState extends ConsumerState<VillaSettings> {
     return TextField(
       controller: controller,
       textAlign: TextAlign.center,
-      textDirection: TextDirection.ltr,
+      textDirection: Directionality.of(context),
       keyboardType: TextInputType.number,
       style: const TextStyle(fontSize: 13),
       decoration: InputDecoration(

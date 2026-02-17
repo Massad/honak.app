@@ -6,6 +6,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/page_settings/domain/entities/team_member.dart';
+import 'package:honak/shared/widgets/app_direction.dart';
 
 /// Tappable summary card for a non-owner team member.
 /// Navigates to [MemberDetailScreen] on tap.
@@ -49,7 +50,7 @@ class TeamMemberCard extends StatelessWidget {
             children: [
               // Chevron + active dot
               Icon(
-                Icons.chevron_left,
+                AppDirection.chevronStartIcon(context),
                 size: 20,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
@@ -114,7 +115,7 @@ class TeamMemberCard extends StatelessWidget {
                   ),
                   if (member.phone != null)
                     Directionality(
-                      textDirection: TextDirection.ltr,
+                      textDirection: Directionality.of(context),
                       child: Text(
                         member.phone!,
                         style: TextStyle(

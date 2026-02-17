@@ -4,6 +4,7 @@ import 'package:honak/core/theme/app_colors.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/catalog_management/domain/entities/price_change.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:honak/shared/widgets/app_direction.dart';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -510,7 +511,11 @@ class _HistoryLink extends StatelessWidget {
               style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(width: 2),
-            Icon(Icons.chevron_left, size: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            Icon(
+              AppDirection.chevronEndIcon(context),
+              size: 10,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ],
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:honak/core/router/routes.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/explore/domain/entities/page_summary.dart';
 import 'package:honak/features/explore/presentation/providers/explore_providers.dart';
+import 'package:honak/shared/widgets/app_screen.dart';
 import 'package:honak/shared/widgets/story_ring_avatar.dart';
 
 class ExploreSearchPage extends ConsumerStatefulWidget {
@@ -27,33 +28,30 @@ class _ExploreSearchPageState extends ConsumerState<ExploreSearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0,
-        title: TextField(
-          controller: _controller,
-          autofocus: true,
-          onChanged: (value) => setState(() => _query = value),
-          decoration: InputDecoration(
-            hintText: context.l10n.exploreSearchHint,
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.md,
-            ),
+    return AppScreen(
+      title: TextField(
+        controller: _controller,
+        autofocus: true,
+        onChanged: (value) => setState(() => _query = value),
+        decoration: InputDecoration(
+          hintText: context.l10n.exploreSearchHint,
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.md,
           ),
         ),
-        actions: [
-          if (_query.isNotEmpty)
-            IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                _controller.clear();
-                setState(() => _query = '');
-              },
-            ),
-        ],
       ),
+      actions: [
+        if (_query.isNotEmpty)
+          IconButton(
+            icon: const Icon(Icons.clear),
+            onPressed: () {
+              _controller.clear();
+              setState(() => _query = '');
+            },
+          ),
+      ],
       body: _query.isEmpty
           ? _RecentSearches(
               onTap: (term) {
@@ -127,9 +125,7 @@ class _SearchResults extends ConsumerWidget {
 
     return pagesAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(
-        child: Text(context.l10n.searchNoResults(query)),
-      ),
+      error: (e, _) => Center(child: Text(context.l10n.searchNoResults(query))),
       data: (pages) {
         if (pages.isEmpty) {
           return Center(
@@ -208,7 +204,11 @@ class _PageResultsList extends StatelessWidget {
               ),
               if (page.isVerified) ...[
                 SizedBox(width: AppSpacing.xxs),
-                Icon(Icons.verified, size: 16, color: context.colorScheme.primary),
+                Icon(
+                  Icons.verified,
+                  size: 16,
+                  color: context.colorScheme.primary,
+                ),
               ],
             ],
           ),

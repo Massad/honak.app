@@ -234,7 +234,7 @@ class _OwnerCard extends StatelessWidget {
               ),
               if (owner.phone != null)
                 Directionality(
-                  textDirection: TextDirection.ltr,
+                  textDirection: Directionality.of(context),
                   child: Text(
                     owner.phone!,
                     style: TextStyle(

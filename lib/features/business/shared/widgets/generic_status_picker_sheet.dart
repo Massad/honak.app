@@ -4,6 +4,7 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 import 'package:honak/features/business/shared/entities/status_config.dart';
+import 'package:honak/shared/widgets/app_sheet.dart';
 
 /// A single option in the status picker.
 class StatusOption<T> {
@@ -30,10 +31,8 @@ Future<T?> showGenericStatusPicker<T>(
   required List<StatusOption<T>> availableStatuses,
   Widget? activityLogPreview,
 }) {
-  return showModalBottomSheet<T>(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+  return showAppSheet<T>(
+    context,
     builder: (_) => _GenericStatusPickerSheet<T>(
       title: title,
       subtitle: subtitle,
@@ -107,12 +106,12 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           subtitle,
-                          textDirection: TextDirection.rtl,
+                          textDirection: Directionality.of(context),
                           style: TextStyle(
                             fontSize: 10,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurfaceVariant,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -124,17 +123,15 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerLow,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.surfaceContainerLow,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.close,
                         size: 16,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurfaceVariant,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -143,8 +140,9 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
             ),
 
             Divider(
-                height: 1,
-                color: Theme.of(context).colorScheme.outlineVariant),
+              height: 1,
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
 
             // Current status highlight
             Padding(
@@ -161,9 +159,7 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                     context.l10n.bizCurrentStatus,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurfaceVariant,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
@@ -201,8 +197,7 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                           context.l10n.bizCurrentLabel,
                           style: TextStyle(
                             fontSize: 10,
-                            color:
-                                Theme.of(context).colorScheme.outline,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                         ),
                       ],
@@ -227,38 +222,32 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                     context.l10n.bizMoveTo,
                     style: TextStyle(
                       fontSize: 10,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurfaceVariant,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   ...availableStatuses.map((option) {
                     return Padding(
-                      padding:
-                          const EdgeInsetsDirectional.only(bottom: 6),
+                      padding: const EdgeInsetsDirectional.only(bottom: 6),
                       child: GestureDetector(
-                        onTap: () => Navigator.pop(
-                            context, option.status),
+                        onTap: () => Navigator.pop(context, option.status),
                         child: Container(
                           width: double.infinity,
-                          padding:
-                              const EdgeInsetsDirectional.symmetric(
+                          padding: const EdgeInsetsDirectional.symmetric(
                             horizontal: AppSpacing.md,
                             vertical: 10,
                           ),
                           decoration: BoxDecoration(
                             color: option.isBackward
-                                ? const Color(0xFFFFF8E1)
-                                    .withValues(alpha: 0.5)
+                                ? const Color(0xFFFFF8E1).withValues(alpha: 0.5)
                                 : context.colorScheme.surface,
                             borderRadius: AppRadius.cardInner,
                             border: Border.all(
                               color: option.isBackward
                                   ? const Color(0xFFFFE082)
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .surfaceContainerLow,
+                                  : Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceContainerLow,
                             ),
                           ),
                           child: Row(
@@ -281,11 +270,10 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
                               if (option.isBackward)
                                 Container(
                                   padding:
-                                      const EdgeInsetsDirectional
-                                          .symmetric(
-                                    horizontal: 6,
-                                    vertical: 2,
-                                  ),
+                                      const EdgeInsetsDirectional.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFFFF3E0),
                                     borderRadius: AppRadius.pill,
@@ -311,12 +299,11 @@ class _GenericStatusPickerSheet<T> extends StatelessWidget {
             // Optional activity log preview
             if (activityLogPreview != null) ...[
               Divider(
-                  height: 1,
-                  color:
-                      Theme.of(context).colorScheme.outlineVariant),
+                height: 1,
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.all(AppSpacing.lg),
+                padding: const EdgeInsetsDirectional.all(AppSpacing.lg),
                 child: activityLogPreview!,
               ),
             ],
