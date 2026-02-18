@@ -51,23 +51,21 @@ class ProductCardData {
       description: item.description,
       category: item.categoryName,
       status: status,
-      optionsSummary:
-          item.optionsSummary.isNotEmpty ? item.optionsSummary : null,
+      optionsSummary: item.optionsSummary.isNotEmpty
+          ? item.optionsSummary
+          : null,
       quantity: item.quantity > 1 ? item.quantity : null,
-      unitPriceCents:
-          item.unitPriceCents != item.basePriceCents
-              ? item.unitPriceCents
-              : null,
-      totalPriceCents:
-          item.totalPriceCents != item.basePriceCents
-              ? item.totalPriceCents
-              : null,
+      unitPriceCents: item.unitPriceCents != item.basePriceCents
+          ? item.unitPriceCents
+          : null,
+      totalPriceCents: item.totalPriceCents != item.basePriceCents
+          ? item.totalPriceCents
+          : null,
     );
   }
 
   factory ProductCardData.fromMetadata(Map<String, dynamic> metadata) {
-    final product =
-        metadata['product'] as Map<String, dynamic>? ?? metadata;
+    final product = metadata['product'] as Map<String, dynamic>? ?? metadata;
     return ProductCardData(
       id: product['id'] as String? ?? '',
       name: product['name'] as String? ?? '',
@@ -180,8 +178,7 @@ class QuoteData {
   });
 
   factory QuoteData.fromMetadata(Map<String, dynamic> metadata) {
-    final quote =
-        metadata['quote'] as Map<String, dynamic>? ?? metadata;
+    final quote = metadata['quote'] as Map<String, dynamic>? ?? metadata;
     final rawItems = quote['items'] as List? ?? [];
     return QuoteData(
       id: quote['id'] as String? ?? '',
@@ -266,4 +263,232 @@ class AskInfoResult {
   final String? note;
 
   const AskInfoResult({required this.selectedItem, this.note});
+}
+
+class UpdateCardData {
+  final String title;
+  final String body;
+  final String status;
+
+  const UpdateCardData({
+    required this.title,
+    required this.body,
+    this.status = 'info',
+  });
+
+  factory UpdateCardData.fromMetadata(Map<String, dynamic> metadata) {
+    return UpdateCardData(
+      title: metadata['title'] as String? ?? 'تحديث',
+      body: metadata['body'] as String? ?? '',
+      status: metadata['status'] as String? ?? 'info',
+    );
+  }
+}
+
+class PortfolioCardData {
+  final String? id;
+  final String title;
+  final String? subtitle;
+  final String? imageUrl;
+  final List<String> images;
+  final String? caption;
+  final String? category;
+  final String? ctaLabel;
+
+  const PortfolioCardData({
+    this.id,
+    required this.title,
+    this.subtitle,
+    this.imageUrl,
+    this.images = const [],
+    this.caption,
+    this.category,
+    this.ctaLabel,
+  });
+
+  String? get primaryImage {
+    if (images.isNotEmpty) return images.first;
+    return imageUrl;
+  }
+
+  factory PortfolioCardData.fromMetadata(Map<String, dynamic> metadata) {
+    final portfolio =
+        metadata['portfolio'] as Map<String, dynamic>? ?? metadata;
+    final rawImages =
+        (portfolio['images'] as List?)
+            ?.map((e) => e.toString())
+            .where((e) => e.isNotEmpty)
+            .toList() ??
+        const <String>[];
+    final fallbackImage = portfolio['image_url'] as String?;
+    return PortfolioCardData(
+      id: portfolio['id'] as String?,
+      title: portfolio['title'] as String? ?? '',
+      subtitle: portfolio['subtitle'] as String?,
+      imageUrl: fallbackImage,
+      images: rawImages,
+      caption: portfolio['caption'] as String?,
+      category: portfolio['category'] as String?,
+      ctaLabel: portfolio['cta_label'] as String?,
+    );
+  }
+}
+
+class ServiceSuggestionData {
+  final String id;
+  final String serviceName;
+  final int priceCents;
+  final int? durationMinutes;
+  final String? category;
+  final String? teamMemberName;
+  final String? teamMemberRole;
+  final String dateLabel;
+  final String timeLabel;
+  final String status;
+
+  const ServiceSuggestionData({
+    required this.id,
+    required this.serviceName,
+    required this.priceCents,
+    this.durationMinutes,
+    this.category,
+    this.teamMemberName,
+    this.teamMemberRole,
+    required this.dateLabel,
+    required this.timeLabel,
+    this.status = 'pending',
+  });
+
+  factory ServiceSuggestionData.fromMetadata(Map<String, dynamic> metadata) {
+    final suggestion =
+        metadata['suggestion'] as Map<String, dynamic>? ??
+        metadata['suggestion_data'] as Map<String, dynamic>? ??
+        metadata;
+    final service = suggestion['service'] as Map<String, dynamic>? ?? const {};
+    final team = suggestion['team_member'] as Map<String, dynamic>?;
+    final priceCents =
+        (service['price_cents'] as int?) ??
+        (((service['price'] as num?)?.toDouble() ?? 0) * 100).round();
+
+    return ServiceSuggestionData(
+      id: (suggestion['id'] as String?) ?? '',
+      serviceName: (service['name'] as String?) ?? '',
+      priceCents: priceCents,
+      durationMinutes: service['duration_minutes'] as int?,
+      category: service['category'] as String?,
+      teamMemberName: team?['name'] as String?,
+      teamMemberRole: team?['role'] as String?,
+      dateLabel: suggestion['date'] as String? ?? '',
+      timeLabel: suggestion['time'] as String? ?? '',
+      status: metadata['status'] as String? ?? 'pending',
+    );
+  }
+}
+
+class LocationCardData {
+  final String title;
+  final String address;
+  final String? phone;
+  final String? hours;
+  final String? mapUrl;
+  final String? mode;
+  final String? branchId;
+  final double? latitude;
+  final double? longitude;
+
+  const LocationCardData({
+    required this.title,
+    required this.address,
+    this.phone,
+    this.hours,
+    this.mapUrl,
+    this.mode,
+    this.branchId,
+    this.latitude,
+    this.longitude,
+  });
+
+  factory LocationCardData.fromMetadata(Map<String, dynamic> metadata) {
+    final location = metadata['location'] as Map<String, dynamic>? ?? metadata;
+    final rawMapUrl = location['map_url'] ?? location['url'];
+    final normalizedMapUrl = rawMapUrl?.toString().trim();
+    return LocationCardData(
+      title: location['title'] as String? ?? 'الموقع',
+      address: location['address'] as String? ?? '',
+      phone: location['phone'] as String?,
+      hours: location['hours'] as String?,
+      mapUrl: normalizedMapUrl == null || normalizedMapUrl.isEmpty
+          ? null
+          : normalizedMapUrl,
+      mode: location['mode'] as String?,
+      branchId: location['branch_id'] as String?,
+      latitude:
+          (location['latitude'] as num?)?.toDouble() ??
+          (location['lat'] as num?)?.toDouble(),
+      longitude:
+          (location['longitude'] as num?)?.toDouble() ??
+          (location['lng'] as num?)?.toDouble(),
+    );
+  }
+}
+
+class ReceiptLineItem {
+  final String label;
+  final int quantity;
+  final int unitPriceCents;
+
+  const ReceiptLineItem({
+    required this.label,
+    required this.quantity,
+    required this.unitPriceCents,
+  });
+
+  int get totalCents => quantity * unitPriceCents;
+
+  factory ReceiptLineItem.fromJson(Map<String, dynamic> json) {
+    return ReceiptLineItem(
+      label: json['label'] as String? ?? '',
+      quantity: json['quantity'] as int? ?? 1,
+      unitPriceCents: json['unit_price_cents'] as int? ?? 0,
+    );
+  }
+}
+
+class ReceiptCardData {
+  final String title;
+  final List<ReceiptLineItem> items;
+  final int subtotalCents;
+  final int discountCents;
+  final int deliveryFeeCents;
+  final int totalCents;
+  final String paymentMethod;
+  final String status;
+
+  const ReceiptCardData({
+    required this.title,
+    required this.items,
+    required this.subtotalCents,
+    required this.discountCents,
+    required this.deliveryFeeCents,
+    required this.totalCents,
+    required this.paymentMethod,
+    this.status = 'paid',
+  });
+
+  factory ReceiptCardData.fromMetadata(Map<String, dynamic> metadata) {
+    final receipt = metadata['receipt'] as Map<String, dynamic>? ?? metadata;
+    final rawItems = receipt['items'] as List? ?? [];
+    return ReceiptCardData(
+      title: receipt['title'] as String? ?? 'إيصال',
+      items: rawItems
+          .map((e) => ReceiptLineItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      subtotalCents: receipt['subtotal_cents'] as int? ?? 0,
+      discountCents: receipt['discount_cents'] as int? ?? 0,
+      deliveryFeeCents: receipt['delivery_fee_cents'] as int? ?? 0,
+      totalCents: receipt['total_cents'] as int? ?? 0,
+      paymentMethod: receipt['payment_method'] as String? ?? 'cash',
+      status: receipt['status'] as String? ?? 'paid',
+    );
+  }
 }

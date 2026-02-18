@@ -56,14 +56,55 @@ class AppFormSheet extends StatelessWidget {
   final String? title;
   final Widget body;
   final Widget? footer;
+  final Widget? leading;
+  final VoidCallback? onClose;
+  final AppSheetVariant variant;
+  final bool headerCompact;
+  final bool showBodyDivider;
+  final bool showFooterDivider;
+  final bool scrollable;
+  final EdgeInsetsGeometry bodyPadding;
+  final EdgeInsetsGeometry footerPadding;
 
-  const AppFormSheet({super.key, this.title, required this.body, this.footer});
+  const AppFormSheet({
+    super.key,
+    this.title,
+    required this.body,
+    this.footer,
+    this.leading,
+    this.onClose,
+    this.variant = AppSheetVariant.standard,
+    this.headerCompact = false,
+    this.showBodyDivider = true,
+    this.showFooterDivider = true,
+    this.scrollable = true,
+    this.bodyPadding = const EdgeInsetsDirectional.fromSTEB(
+      AppSpacing.lg,
+      0,
+      AppSpacing.lg,
+      AppSpacing.lg,
+    ),
+    this.footerPadding = const EdgeInsetsDirectional.fromSTEB(
+      AppSpacing.lg,
+      0,
+      AppSpacing.lg,
+      AppSpacing.lg,
+    ),
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppSheetScaffold(
       title: title,
-      showBodyDivider: title != null,
+      leading: leading,
+      onClose: onClose,
+      variant: variant,
+      headerCompact: headerCompact,
+      showBodyDivider: showBodyDivider && title != null,
+      showFooterDivider: showFooterDivider,
+      scrollable: scrollable,
+      bodyPadding: bodyPadding,
+      footerPadding: footerPadding,
       body: body,
       footer: footer,
     );

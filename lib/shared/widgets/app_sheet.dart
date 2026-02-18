@@ -3,6 +3,16 @@ import 'package:honak/core/extensions/context_ext.dart';
 import 'package:honak/core/theme/app_radius.dart';
 import 'package:honak/core/theme/app_spacing.dart';
 
+enum AppSheetVariant { standard, compact, fullscreen }
+
+double _variantMaxHeight(AppSheetVariant variant) {
+  return switch (variant) {
+    AppSheetVariant.standard => 0.9,
+    AppSheetVariant.compact => 0.8,
+    AppSheetVariant.fullscreen => 0.95,
+  };
+}
+
 // ═══════════════════════════════════════════════════════════════
 // AppSheetOverlay — inline overlay positioned above bottom nav
 // ═══════════════════════════════════════════════════════════════
@@ -61,18 +71,39 @@ class AppSheetHeader extends StatelessWidget {
   final String? title;
   final Widget? leading;
   final VoidCallback? onClose;
+  final bool compact;
 
-  const AppSheetHeader({super.key, this.title, this.leading, this.onClose});
+  const AppSheetHeader({
+    super.key,
+    this.title,
+    this.leading,
+    this.onClose,
+    this.compact = false,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final titleStyle = context.textTheme.titleSmall?.copyWith(
+      fontWeight: FontWeight.w700,
+      color: context.colorScheme.onSurface,
+    );
+    final handleBottom = compact ? AppSpacing.sm : AppSpacing.md;
+    final padding = compact
+        ? const EdgeInsetsDirectional.fromSTEB(
+            AppSpacing.lg,
+            AppSpacing.sm,
+            AppSpacing.lg,
+            AppSpacing.sm,
+          )
+        : const EdgeInsetsDirectional.fromSTEB(
+            AppSpacing.lg,
+            AppSpacing.md,
+            AppSpacing.lg,
+            AppSpacing.md,
+          );
+
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg,
-        AppSpacing.sm,
-        AppSpacing.lg,
-        AppSpacing.md,
-      ),
+      padding: padding,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -80,51 +111,71 @@ class AppSheetHeader extends StatelessWidget {
           Container(
             width: 36,
             height: 4,
-            margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+            margin: EdgeInsets.only(bottom: handleBottom),
             decoration: BoxDecoration(
-              color: context.colorScheme.outline,
+              color: context.colorScheme.outlineVariant,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
 
           // Title row
           if (title != null || leading != null || onClose != null)
-            Row(
-              children: [
-                if (leading != null) ...[
-                  leading!,
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: Row(
+                children: [
+                  if (onClose != null)
+                    GestureDetector(
+                      onTap: onClose,
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.surfaceContainerHigh,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.close,
+                          size: 18,
+                          color: context.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    )
+                  else
+                    const SizedBox(width: 32),
                   const SizedBox(width: AppSpacing.sm),
-                ],
-                if (title != null)
                   Expanded(
-                    child: Text(
-                      title!,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  )
-                else
-                  const Spacer(),
-                if (onClose != null)
-                  GestureDetector(
-                    onTap: onClose,
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: context.colorScheme.surfaceContainerLow,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.close,
-                        size: 18,
-                        color: context.colorScheme.onSurfaceVariant,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.sizeOf(context).width * 0.62,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (title != null)
+                              Flexible(
+                                child: Text(
+                                  title!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.right,
+                                  style: titleStyle,
+                                ),
+                              ),
+                            if (leading != null) ...[
+                              if (title != null)
+                                const SizedBox(width: AppSpacing.xs),
+                              leading!,
+                            ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-              ],
+                ],
+              ),
             ),
         ],
       ),
@@ -150,7 +201,9 @@ class AppSheetScaffold extends StatelessWidget {
   final bool showBodyDivider;
   final bool showFooterDivider;
   final bool keyboardSafe;
-  final double maxHeightFraction;
+  final double? maxHeightFraction;
+  final AppSheetVariant variant;
+  final bool headerCompact;
 
   const AppSheetScaffold({
     super.key,
@@ -176,12 +229,15 @@ class AppSheetScaffold extends StatelessWidget {
     this.showBodyDivider = false,
     this.showFooterDivider = true,
     this.keyboardSafe = true,
-    this.maxHeightFraction = 0.9,
+    this.maxHeightFraction,
+    this.variant = AppSheetVariant.standard,
+    this.headerCompact = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
+    final effectiveMaxHeight = maxHeightFraction ?? _variantMaxHeight(variant);
     final keyboardBottomInset = keyboardSafe
         ? mediaQuery.viewInsets.bottom
         : 0.0;
@@ -190,6 +246,7 @@ class AppSheetScaffold extends StatelessWidget {
             title: title,
             leading: leading,
             onClose: onClose ?? () => Navigator.of(context).pop(),
+            compact: headerCompact || variant == AppSheetVariant.compact,
           )
         : null;
 
@@ -199,7 +256,7 @@ class AppSheetScaffold extends StatelessWidget {
 
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: mediaQuery.size.height * maxHeightFraction,
+        maxHeight: mediaQuery.size.height * effectiveMaxHeight,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -242,13 +299,16 @@ Future<T?> showAppSheet<T>(
   required WidgetBuilder builder,
   bool isDismissible = true,
   bool enableDrag = true,
-  double maxHeightFraction = 0.9,
+  double? maxHeightFraction,
+  AppSheetVariant variant = AppSheetVariant.standard,
 }) {
+  final effectiveMaxHeight = maxHeightFraction ?? _variantMaxHeight(variant);
   return showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
     isDismissible: isDismissible,
     enableDrag: enableDrag,
+    showDragHandle: false,
     backgroundColor: Colors.transparent,
     builder: (ctx) {
       final viewInsets = MediaQuery.of(ctx).viewInsets;
@@ -256,7 +316,7 @@ Future<T?> showAppSheet<T>(
         padding: EdgeInsets.only(bottom: viewInsets.bottom),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(ctx).size.height * maxHeightFraction,
+            maxHeight: MediaQuery.of(ctx).size.height * effectiveMaxHeight,
           ),
           child: Container(
             decoration: BoxDecoration(

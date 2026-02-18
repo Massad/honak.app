@@ -27,11 +27,21 @@ import 'package:honak/features/chat/presentation/widgets/message_input.dart';
 import 'package:honak/features/chat/presentation/widgets/modification_card.dart';
 import 'package:honak/features/chat/presentation/widgets/power_chat_menu.dart';
 import 'package:honak/features/chat/presentation/widgets/product_card_message.dart';
+import 'package:honak/features/chat/presentation/widgets/portfolio_picker_sheet.dart';
 import 'package:honak/features/chat/presentation/widgets/quote_builder_sheet.dart';
+import 'package:honak/features/chat/presentation/widgets/receipt_builder_sheet.dart';
+import 'package:honak/features/chat/presentation/widgets/location_card_message.dart';
+import 'package:honak/features/chat/presentation/widgets/portfolio_card_message.dart';
+import 'package:honak/features/chat/presentation/widgets/receipt_card_message.dart';
+import 'package:honak/features/chat/presentation/widgets/location_picker_sheet.dart';
 import 'package:honak/shared/entities/selected_item.dart';
 import 'package:honak/shared/widgets/item_selection/item_picker_sheet.dart';
 import 'package:honak/features/chat/presentation/widgets/quote_card_message.dart';
+import 'package:honak/features/chat/presentation/widgets/service_suggestion_card_message.dart';
 import 'package:honak/features/chat/presentation/widgets/system_message.dart';
+import 'package:honak/features/chat/presentation/widgets/update_builder_sheet.dart';
+import 'package:honak/features/chat/presentation/widgets/update_card_message.dart';
+import 'package:honak/features/business/page_settings/presentation/providers/branch_provider.dart';
 import 'package:honak/shared/widgets/app_direction.dart';
 import 'package:honak/shared/providers/app_mode_provider.dart';
 import 'package:honak/shared/providers/business_page_provider.dart';
@@ -66,22 +76,20 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    final messagesAsync =
-        ref.watch(conversationMessagesProvider(_conv.id));
-    final localMsgs =
-        ref.watch(localMessagesProvider)[_conv.id] ?? const [];
+    final messagesAsync = ref.watch(conversationMessagesProvider(_conv.id));
+    final localMsgs = ref.watch(localMessagesProvider)[_conv.id] ?? const [];
 
     final mode = ref.watch(appModeProvider).valueOrNull;
     final isBusinessMode = mode == AppMode.business;
     final bizCtx = ref.watch(businessContextProvider);
-    final showZap = isBusinessMode &&
+    final showZap =
+        isBusinessMode &&
         bizCtx != null &&
         hasPowerChatActions(bizCtx.archetype);
 
     final selectedIds = ref.watch(selectedMessagesProvider);
     final selectionPurpose = ref.watch(selectionPurposeProvider);
-    final isSelectionMode =
-        selectionPurpose != null || selectedIds.isNotEmpty;
+    final isSelectionMode = selectionPurpose != null || selectedIds.isNotEmpty;
     final isReportSelection = selectionPurpose == 'report';
     final editingMsg = ref.watch(editingMessageProvider);
     final undoableMsg = ref.watch(undoableMessageProvider);
@@ -89,15 +97,15 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
     return Scaffold(
       appBar: isSelectionMode
           ? _buildSelectionAppBar(
-              context, selectedIds.length, isReportSelection)
+              context,
+              selectedIds.length,
+              isReportSelection,
+            )
           : _buildAppBar(context),
       body: Column(
         children: [
           if (_conv.requestId != null && _isActiveRequest(_conv))
-            _RequestBanner(
-              conversation: _conv,
-              isBusinessMode: isBusinessMode,
-            ),
+            _RequestBanner(conversation: _conv, isBusinessMode: isBusinessMode),
           Expanded(
             child: messagesAsync.when(
               loading: () => const ChatDetailSkeleton(),
@@ -135,13 +143,11 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
                     message,
                     isMine,
                     ref,
-                    onReport: () =>
-                        _enterReportSelectionMode(message.id),
+                    onReport: () => _enterReportSelectionMode(message.id),
                   );
                 },
                 onTapInSelectionMode: (messageId) {
-                  final notifier =
-                      ref.read(selectedMessagesProvider.notifier);
+                  final notifier = ref.read(selectedMessagesProvider.notifier);
                   final current = notifier.state;
                   if (current.contains(messageId)) {
                     notifier.state = current.difference({messageId});
@@ -153,10 +159,7 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
             ),
           ),
           if (undoableMsg != null)
-            _UndoBanner(
-              messageType: undoableMsg.type,
-              onUndo: _undoLastAction,
-            ),
+            _UndoBanner(messageType: undoableMsg.type, onUndo: _undoLastAction),
           if (isReportSelection)
             _ReportSelectionFooter(
               selectedCount: selectedIds.length,
@@ -204,8 +207,11 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
                 color: Colors.red.shade50,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.flag_rounded,
-                  size: 13, color: Colors.red.shade500),
+              child: Icon(
+                Icons.flag_rounded,
+                size: 13,
+                color: Colors.red.shade500,
+              ),
             ),
             const SizedBox(width: AppSpacing.sm),
             Text(
@@ -222,8 +228,7 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
             child: Container(
               width: 32,
               height: 32,
-              margin:
-                  const EdgeInsetsDirectional.only(end: AppSpacing.md),
+              margin: const EdgeInsetsDirectional.only(end: AppSpacing.md),
               decoration: BoxDecoration(
                 color: context.colorScheme.surfaceContainerHighest,
                 shape: BoxShape.circle,
@@ -246,9 +251,7 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  count > 0
-                      ? '$count رسالة محددة'
-                      : 'اختر رسالة أو أكثر',
+                  count > 0 ? '$count رسالة محددة' : 'اختر رسالة أو أكثر',
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -261,12 +264,12 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
                         .valueOrNull;
                     if (messages == null) return;
                     final selectable = messages
-                        .where((m) =>
-                            m.type == 'text' || m.type == 'image')
+                        .where((m) => m.type == 'text' || m.type == 'image')
                         .map((m) => m.id)
                         .toSet();
-                    final notifier =
-                        ref.read(selectedMessagesProvider.notifier);
+                    final notifier = ref.read(
+                      selectedMessagesProvider.notifier,
+                    );
                     if (notifier.state.length == selectable.length) {
                       notifier.state = {};
                     } else {
@@ -372,15 +375,15 @@ class _ChatDetailPageState extends ConsumerState<ChatDetailPage>
               value: 'report',
               child: Row(
                 children: [
-                  Icon(Icons.flag_outlined,
-                      size: 14, color: Colors.red.shade400),
+                  Icon(
+                    Icons.flag_outlined,
+                    size: 14,
+                    color: Colors.red.shade400,
+                  ),
                   const SizedBox(width: AppSpacing.sm),
                   Text(
                     'الإبلاغ عن المحادثة',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.red.shade500,
-                    ),
+                    style: TextStyle(fontSize: 12, color: Colors.red.shade500),
                   ),
                 ],
               ),

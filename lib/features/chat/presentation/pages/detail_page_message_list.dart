@@ -18,12 +18,18 @@ class _ReportSelectionFooter extends StatelessWidget {
     final enabled = selectedCount > 0;
     return Container(
       padding: const EdgeInsetsDirectional.fromSTEB(
-        AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.md,
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         border: Border(
-          top: BorderSide(color: context.colorScheme.outlineVariant, width: 0.5),
+          top: BorderSide(
+            color: context.colorScheme.outlineVariant,
+            width: 0.5,
+          ),
         ),
       ),
       child: SafeArea(
@@ -54,12 +60,12 @@ class _UndoBanner extends StatelessWidget {
   const _UndoBanner({required this.messageType, required this.onUndo});
 
   String get _label => switch (messageType) {
-        'product_card' => 'تم إرسال المنتج',
-        'availability_card' => 'تم إرسال الأوقات',
-        'quote_card' => 'تم إرسال عرض السعر',
-        'info_request' => 'تم إرسال طلب المعلومات',
-        _ => 'تم الإرسال',
-      };
+    'product_card' => 'تم إرسال المنتج',
+    'availability_card' => 'تم إرسال الأوقات',
+    'quote_card' => 'تم إرسال عرض السعر',
+    'info_request' => 'تم إرسال طلب المعلومات',
+    _ => 'تم الإرسال',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +77,7 @@ class _UndoBanner extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: cs.surfaceContainerLow,
-        border: Border(
-          top: BorderSide(color: cs.outlineVariant, width: 0.5),
-        ),
+        border: Border(top: BorderSide(color: cs.outlineVariant, width: 0.5)),
       ),
       child: Row(
         children: [
@@ -158,7 +162,9 @@ class _RequestBanner extends StatelessWidget {
           color: const Color(0xFFF5F8FF),
           border: Border(
             bottom: BorderSide(
-                color: context.colorScheme.outlineVariant, width: 0.5),
+              color: context.colorScheme.outlineVariant,
+              width: 0.5,
+            ),
           ),
         ),
         child: Row(
@@ -180,8 +186,7 @@ class _RequestBanner extends StatelessWidget {
             if (statusLabel.isNotEmpty) ...[
               const SizedBox(width: 6),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
                 decoration: BoxDecoration(
                   color: statusColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(6),
@@ -261,8 +266,9 @@ class _MessageList extends ConsumerWidget {
     final editedMessages = ref.watch(editedMessagesProvider);
 
     // Filter out locally-deleted messages
-    final visibleMessages =
-        messages.where((m) => !deletedForMe.contains(m.id)).toList();
+    final visibleMessages = messages
+        .where((m) => !deletedForMe.contains(m.id))
+        .toList();
 
     if (visibleMessages.isEmpty) {
       return Center(
@@ -272,8 +278,9 @@ class _MessageList extends ConsumerWidget {
             Icon(
               Icons.chat_bubble_outline_rounded,
               size: 48,
-              color:
-                  context.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+              color: context.colorScheme.onSurfaceVariant.withValues(
+                alpha: 0.5,
+              ),
             ),
             const SizedBox(height: AppSpacing.md),
             Text(
@@ -349,7 +356,8 @@ class _MessageList extends ConsumerWidget {
         );
 
         // Show date header when the next message (older) has a different date
-        final showDateHeader = index == visibleMessages.length - 1 ||
+        final showDateHeader =
+            index == visibleMessages.length - 1 ||
             !_isSameDay(
               message.createdAt,
               visibleMessages[index + 1].createdAt,
@@ -378,45 +386,53 @@ class _MessageList extends ConsumerWidget {
   }) {
     return switch (message.type) {
       'text' => MessageBubble(
-          message: message,
-          isMine: isMine,
-          displayContent: displayContent,
-          isEdited: isEdited,
-          isSelected: isSelected,
-        ),
+        message: message,
+        isMine: isMine,
+        displayContent: displayContent,
+        isEdited: isEdited,
+        isSelected: isSelected,
+      ),
       'image' => ImageMessage(message: message, isMine: isMine),
       'system' => SystemMessage(message: message),
       'alternative_suggestion' => AlternativeCard(
-          message: message,
-          isBusinessMode: isBusinessMode,
-        ),
+        message: message,
+        isBusinessMode: isBusinessMode,
+      ),
       'modification_request' => ModificationCard(
-          message: message,
-          isBusinessMode: isBusinessMode,
-        ),
+        message: message,
+        isBusinessMode: isBusinessMode,
+      ),
       'info_request' => InfoRequestCard(
-          message: message,
-          isBusinessMode: isBusinessMode,
-        ),
+        message: message,
+        isBusinessMode: isBusinessMode,
+      ),
       'product_card' => ProductCardMessage(
-          message: message,
-          isBusinessMode: isBusinessMode,
-        ),
+        message: message,
+        isBusinessMode: isBusinessMode,
+      ),
       'availability_card' => AvailabilityCardMessage(
-          message: message,
-          isBusinessMode: isBusinessMode,
-        ),
+        message: message,
+        isBusinessMode: isBusinessMode,
+      ),
       'quote_card' => QuoteCardMessage(
-          message: message,
-          isBusinessMode: isBusinessMode,
-        ),
+        message: message,
+        isBusinessMode: isBusinessMode,
+      ),
+      'service_suggestion' => ServiceSuggestionCardMessage(
+        message: message,
+        isBusinessMode: isBusinessMode,
+      ),
+      'update_card' => UpdateCardMessage(message: message),
+      'portfolio_card' => PortfolioCardMessage(message: message),
+      'location_card' => LocationCardMessage(message: message),
+      'receipt_card' => ReceiptCardMessage(message: message),
       _ => MessageBubble(
-          message: message,
-          isMine: isMine,
-          displayContent: displayContent,
-          isEdited: isEdited,
-          isSelected: isSelected,
-        ),
+        message: message,
+        isMine: isMine,
+        displayContent: displayContent,
+        isEdited: isEdited,
+        isSelected: isSelected,
+      ),
     };
   }
 

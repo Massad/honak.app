@@ -13,6 +13,11 @@ enum MessageType {
   productCard,
   availabilityCard,
   quoteCard,
+  serviceSuggestion,
+  updateCard,
+  portfolioCard,
+  locationCard,
+  receiptCard,
 }
 
 @freezed
@@ -36,14 +41,19 @@ class Message with _$Message {
       _$MessageFromJson(json);
 
   MessageType get messageType => switch (type) {
-        'alternative_suggestion' => MessageType.alternativeSuggestion,
-        'info_request' => MessageType.infoRequest,
-        'modification_request' => MessageType.modificationRequest,
-        'product_card' => MessageType.productCard,
-        'availability_card' => MessageType.availabilityCard,
-        'quote_card' => MessageType.quoteCard,
-        'image' => MessageType.image,
-        'system' => MessageType.system,
-        _ => MessageType.text,
-      };
+    'alternative_suggestion' => MessageType.alternativeSuggestion,
+    'info_request' => MessageType.infoRequest,
+    'modification_request' => MessageType.modificationRequest,
+    'product_card' => MessageType.productCard,
+    'availability_card' => MessageType.availabilityCard,
+    'quote_card' => MessageType.quoteCard,
+    'service_suggestion' => MessageType.serviceSuggestion,
+    'update_card' => MessageType.updateCard,
+    'portfolio_card' => MessageType.portfolioCard,
+    'location_card' => MessageType.locationCard,
+    'receipt_card' => MessageType.receiptCard,
+    'image' => MessageType.image,
+    'system' => MessageType.system,
+    _ => MessageType.text,
+  };
 }
